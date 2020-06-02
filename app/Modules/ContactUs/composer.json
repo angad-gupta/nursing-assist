@@ -1,0 +1,25 @@
+{
+    "name": "nwidart/contactus",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "App\\Modules\\ContactUs\\Providers\\ContactUsServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\Modules\\ContactUs\\": ""
+        }
+    }
+}

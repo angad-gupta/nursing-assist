@@ -1,0 +1,14 @@
+{
+    "name": "Reminder",
+    "alias": "reminder",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "App\\Modules\\Reminder\\Providers\\ReminderServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

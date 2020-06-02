@@ -1,0 +1,25 @@
+{
+    "name": "nwidart/reminder",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "App\\Modules\\Reminder\\Providers\\ReminderServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\Modules\\Reminder\\": ""
+        }
+    }
+}

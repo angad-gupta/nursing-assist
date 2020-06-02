@@ -1,0 +1,217 @@
+.sidebar:not(.sidebar-component) .sidebar-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.sidebar:not(.sidebar-component) .sidebar-content::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+.sidebar:not(.sidebar-component) .sidebar-content::-webkit-scrollbar-thumb {
+    background: #5e7682;
+    border-radius: 10px;
+}
+
+.sidebar:not(.sidebar-component) .sidebar-content::-webkit-scrollbar-thumb:hover {
+}
+
+.bd-media-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.bd-media-list::-webkit-scrollbar-track {
+    border-radius: 6px;
+}
+
+.bd-media-list::-webkit-scrollbar-thumb {
+    background: #eee;
+    border-radius: 6px;
+}
+
+.bd-media-list::-webkit-scrollbar-thumb:hover {
+}
+
+.content-wrapper {
+    background-color: #fcfaff;
+}
+
+.bg-gradient-one {
+    background: linear-gradient(345deg, rgba(0,0,0,1) 0%, rgba(255,0,0,0.6979166666666667) 0%, rgba(103,58,183,1) 68%, rgba(103,58,183,1) 100%);
+}
+
+.bg-gradient-two {
+    background: linear-gradient(345deg, rgba(0,0,0,1) 0%, rgba(0,255,38,1) 0%, rgba(29,199,79,1) 0%, rgba(55,120,175,1) 59%, rgba(55,120,175,1) 100%, rgba(103,58,183,1) 100%);
+}
+
+.bg-gradient-three {
+    background: linear-gradient(345deg, rgba(0,0,0,1) 0%, rgba(0,255,38,1) 0%, rgba(29,199,163,1) 0%, rgba(55,96,175,1) 59%, rgba(55,120,175,1) 100%, rgba(103,58,183,1) 100%);
+}
+
+.bg-gradient-four {
+    background: linear-gradient(345deg, rgba(0,0,0,1) 0%, rgba(0,255,38,1) 0%, rgba(199,169,29,1) 0%, rgba(55,175,151,1) 59%, rgba(55,175,151,1) 100%, rgba(103,58,183,1) 100%);
+}
+.bg-gradient-five {
+    background: linear-gradient(345deg, rgba(0,0,0,1) 0%, rgba(0,255,38,1) 0%, rgba(37,37,37,1) 0%, rgba(173,173,173,1) 59%, rgba(173,173,173,1) 100%, rgba(103,58,183,1) 100%);
+}
+.bg-gradient-six {
+    background: linear-gradient(345deg, rgba(0,0,0,1) 0%, rgba(0,65,255,1) 0%, rgba(224,224,224,1) 0%, rgba(55,127,193,1) 55%, rgba(55,127,193,1) 100%, rgba(12,102,16,1) 100%);
+}
+
+.bd-card-body .bd-card-info {
+    transition: all 200ms ease-in-out;
+}
+
+.bd-card-body:hover .bd-card-info {
+    transform: scale(1.1);
+    transition: all 200ms ease-in-out;
+}
+
+.bd-card {
+    border: 0;
+    box-shadow: 0 0 6px 2px #efefef;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.bd-equal-height {
+    height: 330px;
+}
+
+.bd-card .card-header {
+    padding: .6rem 1.25rem;
+}
+
+.bd-date {
+    border: 2px solid #42A5F5;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    border-radius: 3px;
+    width: 68px;
+}
+
+.bd-date--red {
+    border: 2px solid #EF5350;
+}
+
+.bd-date__day {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: .7rem;
+    padding: .2rem 1rem;
+    background-color: #42A5F5;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+.bd-date__day--red {
+    background-color: #EF5350;
+}
+
+.bd-date__num {
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.bd-avatar {
+    width: 46px;
+    height: 46px;
+    text-align: center;
+    line-height: 46px;
+    box-shadow: 0 0 0 1px #fff;
+    overflow: hidden;
+    border-radius: 500rem;
+}
+
+.bd-avatar__letter {
+    letter-spacing: 1px;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.bd-avatar__img {
+    width: 100%;
+}
+
+.bd-calendar {
+    background-color: #2196F3;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.bd-calendar__day {
+    font-size: .8rem;
+    background-color: #64B5F6;
+    padding: .2rem 1rem;
+}
+
+.bd-calendar__num {
+    font-size: 2rem;
+    padding: .2rem 0;
+}
+
+.bd-media-list {
+    overflow: auto;
+}
+
+.bd-media-list .media:hover {
+    background-color: #f8f8f8;
+}
+
+.ui-datepicker .ui-datepicker-calendar td.ui-datepicker-today .ui-state-highlight {
+    background-color: #0a6ebd;
+    color: #fff;
+}
+
+.ui-datepicker .ui-datepicker-calendar td.ui-datepicker-today .ui-state-highlight:after {
+    border-top: 0;
+}
+
+.task-num {
+    font-size: 1.1rem;
+}
+
+.bd-leave-form {
+    padding: 1rem;
+    background-color: rgba(41,110,180,.2);
+}
+
+.owl-nav {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.owl-prev,
+.owl-next
+{
+    background: #fff!important;
+    border-radius: 3px;
+    width: 24px;
+    height: 24px;
+}
+
+.owl-prev {
+    margin-right: .4rem;
+}
+
+.owl-prev span,
+.owl-next span
+{
+    padding: 0;
+    line-height: 20px;
+    margin: 0;
+    display: inline-block;
+    color: #666;
+}
+
+.bd-date-block {
+    border-radius: 3px;
+    overflow: hidden;
+    line-height: 1.2;
+}
+
+.bd-progress {
+}

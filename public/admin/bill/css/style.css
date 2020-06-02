@@ -1,0 +1,112 @@
+/* main.css */
+body {
+    margin: 2em;
+}
+
+.bd-bill {
+    width: 840px;
+    margin: 0 auto;
+}
+
+/* override styles when printing */
+@media print {
+    body {
+        margin: 0;
+    }
+
+}
+.custome_image {
+    width: 100px;
+}
+
+h4 {
+    color: #033ad6;
+}
+
+.p-text{
+    font-size: 14px;
+}
+
+h5 {
+    color: #033ad6;
+}
+
+.text-blue {
+    color: #033ad6;
+}
+
+.text-grey {
+    color: #666;
+}
+
+.mb-0 {
+    margin-bottom: 0!important;
+}
+
+/* table,th, td, tr {
+    border: 1px solid #033ad6 !important;
+} */
+
+table.table-border-blue th,
+table.table-border-blue td,
+table.table-border-blue tr {
+    border: 1px solid #033ad6;
+}
+
+
+header, footer, aside, nav, form, iframe, .menu, .hero, .adslot {
+    display: none;
+}
+.table td, .table th{
+    padding: .2rem;
+}
+
+p{
+    margin-bottom: 2px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.signature{
+    display: flex ;
+    width: 100%;
+}
+
+
+table.tbl-header td {
+    width: 33%;
+}
+
+.table-borderless tbody+tbody, .table-borderless tr, .table-borderless td, .table-borderless th, .table-borderless thead th {
+    border: 0 !important;
+}
+
+.company-info-address {
+    font-size: 18px;
+}
+
+.company-info-tax {
+    font-size: 14px;
+}
+
+.font-weight-semibold {
+    font-weight: 500;
+}
+
+.font-size-default {
+    font-size: 14px;
+}
+
+.table-border-blue td {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.v-a-b {
+    vertical-align: bottom !important;
+}
+
+.t-7 td.td-7 {
+    width: 8%;
+    text-align: center;
+}

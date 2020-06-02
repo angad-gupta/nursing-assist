@@ -1,0 +1,1571 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "COVID 19 (Coronavirus) Mobile API",
+        "description": "Informative application for COVID 19",
+        "contact": {
+            "email": "omprakashjagri2050@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "basePath": "/api/v1",
+    "paths": {
+        "/global/update-api": {
+            "get": {
+                "tags": [
+                    "V2 API"
+                ],
+                "summary": "Global COVID19 update",
+                "operationId": "globalUpdateApi",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "query",
+                        "description": "Language eng  or nep",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/nepal/update-api": {
+            "get": {
+                "tags": [
+                    "V2 API"
+                ],
+                "summary": "Nepal COVID19 update ",
+                "operationId": "nepalUpdateApi",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "query",
+                        "description": "Language eng  or nep",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/province/update-api": {
+            "get": {
+                "tags": [
+                    "V2 API"
+                ],
+                "summary": "province COVID19 update",
+                "operationId": "provinceUpdateApi",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "query",
+                        "description": "Language eng  or nep",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/online/bluetooth-pair": {
+            "post": {
+                "tags": [
+                    "Bluetooth Pair"
+                ],
+                "summary": "bluetooth pair",
+                "operationId": "bluetoothPairOnline",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization token <Bearer> <token>",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "access_user_unique_id",
+                        "in": "formData",
+                        "description": "unique id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "date",
+                        "in": "formData",
+                        "description": "date time Y-M-D H:M:S ",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/offline/bluetooth-pair": {
+            "post": {
+                "tags": [
+                    "Bluetooth Pair"
+                ],
+                "summary": "bluetooth pair offline",
+                "operationId": "bluetoothPairOffline",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization token <Bearer> <token>",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "data",
+                        "in": "formData",
+                        "description": "all data",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/connect/user": {
+            "get": {
+                "tags": [
+                    "Connect User"
+                ],
+                "summary": "connect user",
+                "operationId": "connectUser",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization token <Bearer> <token>",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/all-connect/user": {
+            "get": {
+                "tags": [
+                    "Connect User"
+                ],
+                "summary": "all connect user",
+                "operationId": "connectUserAll",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization token <Bearer> <token>",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "language",
+                        "in": "query",
+                        "description": "Language eng  or nep",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/global/update": {
+            "get": {
+                "tags": [
+                    "COVID-19 Update"
+                ],
+                "summary": "Global COVID19 update",
+                "operationId": "globalUpdate",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "query",
+                        "description": "Language eng  or nep",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/nepal/update": {
+            "get": {
+                "tags": [
+                    "COVID-19 Update"
+                ],
+                "summary": "Nepal COVID19 update",
+                "operationId": "nepalUpdate",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "query",
+                        "description": "Language eng  or nep",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/province/update": {
+            "get": {
+                "tags": [
+                    "COVID-19 Update"
+                ],
+                "summary": "province COVID19 update",
+                "operationId": "provinceUpdate",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "query",
+                        "description": "Language eng  or nep",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/global/country/update": {
+            "get": {
+                "tags": [
+                    "COVID-19 Update"
+                ],
+                "summary": "province COVID19 update",
+                "operationId": "globalCountryUpdate",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "query",
+                        "description": "Language eng  or nep",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/tips/information": {
+            "get": {
+                "tags": [
+                    "Informations List API"
+                ],
+                "summary": "Get List of tips information",
+                "operationId": "tipInformationList",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "query",
+                        "description": "Language eng  or nep",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/video-list": {
+            "get": {
+                "tags": [
+                    "Informations List API"
+                ],
+                "summary": "Get List of video",
+                "operationId": "videoList",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "query",
+                        "description": "Language eng  or nep",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/testimonial-message": {
+            "get": {
+                "tags": [
+                    "Informations List API"
+                ],
+                "summary": "Get List of testimonial",
+                "operationId": "testimonialList",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "query",
+                        "description": "Language eng  or nep",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/essential/center": {
+            "get": {
+                "tags": [
+                    "Informations List API"
+                ],
+                "summary": "Get List of  essentialCenter",
+                "operationId": " essentialCenter",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "query",
+                        "description": "Language eng  or nep",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/e-pass": {
+            "get": {
+                "tags": [
+                    "Informations List API"
+                ],
+                "summary": "Get Epass detail",
+                "operationId": " ePass",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "query",
+                        "description": "Language eng  or nep",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/covid-19/donate": {
+            "get": {
+                "tags": [
+                    "Informations List API"
+                ],
+                "summary": "Get List of donate information",
+                "operationId": "donateList",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "query",
+                        "description": "Language eng  or nep",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/important/directory": {
+            "get": {
+                "tags": [
+                    "Informations List API"
+                ],
+                "summary": "Get List of directory information",
+                "operationId": "importantDirectory",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "query",
+                        "description": "Language eng  or nep",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/important/directory/detail": {
+            "get": {
+                "tags": [
+                    "Informations List API"
+                ],
+                "summary": "Get detail of directory information",
+                "operationId": "importantDirectoryDetail",
+                "parameters": [
+                    {
+                        "name": "important_directory_id",
+                        "in": "query",
+                        "description": "important call direct id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/province/list": {
+            "get": {
+                "tags": [
+                    "Informations List API"
+                ],
+                "summary": "Get List of province",
+                "operationId": "provinceList",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "query",
+                        "description": "Language eng  or nep",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/country/list": {
+            "get": {
+                "tags": [
+                    "List API"
+                ],
+                "summary": "Get List of country",
+                "operationId": "countryList",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Limit",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/profession/list": {
+            "get": {
+                "tags": [
+                    "List API"
+                ],
+                "summary": "Get List of profession",
+                "operationId": "professionList",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/condition/list": {
+            "get": {
+                "tags": [
+                    "List API"
+                ],
+                "summary": "Get List of condition",
+                "operationId": "conditionList",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/blood-group/list": {
+            "get": {
+                "tags": [
+                    "List API"
+                ],
+                "summary": "Get List of blood group",
+                "operationId": "bloodGroupList",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/device/registration": {
+            "post": {
+                "tags": [
+                    "Device Register"
+                ],
+                "summary": "Device Registration",
+                "operationId": "deviceRegister",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization token <Bearer> <token>",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "identifier",
+                        "in": "formData",
+                        "description": "Identifier",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "device_type",
+                        "in": "formData",
+                        "description": "Device Type( IOS or ANDROID)",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/notification/list": {
+            "get": {
+                "tags": [
+                    "Notification"
+                ],
+                "summary": "Get Details of Notification",
+                "operationId": "notificationList",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "query",
+                        "description": "language",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/user/risk/notification": {
+            "get": {
+                "tags": [
+                    "Notification"
+                ],
+                "summary": "Get Details of Notification",
+                "operationId": "notificationList",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization token <Bearer> <token>",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/test/message": {
+            "post": {
+                "tags": [
+                    "Device Register"
+                ],
+                "summary": "Device Registration",
+                "operationId": "deviceRegisterId",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "title",
+                        "in": "formData",
+                        "description": "title",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "message",
+                        "in": "formData",
+                        "description": "message",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/terms-conditions": {
+            "get": {
+                "tags": [
+                    "Pages"
+                ],
+                "summary": "Get detail  terms and condition",
+                "operationId": "termsCondition",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "query",
+                        "description": "Language eng  or nep",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/privacy-policy": {
+            "get": {
+                "tags": [
+                    "Pages"
+                ],
+                "summary": "Get detail  privacy_policy",
+                "operationId": "privacyPolicy",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "query",
+                        "description": "Language eng  or nep",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/about-us": {
+            "get": {
+                "tags": [
+                    "Pages"
+                ],
+                "summary": "Get detail  about us",
+                "operationId": "aboutUs",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "query",
+                        "description": "Language eng  or nep",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/questions": {
+            "get": {
+                "tags": [
+                    "Questionnaire"
+                ],
+                "summary": "Get List of questions",
+                "operationId": "auestionList",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "query",
+                        "description": "Language eng  or nep",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/questions-test-api": {
+            "get": {
+                "tags": [
+                    "Questionnaire"
+                ],
+                "summary": "Get List of questions",
+                "operationId": "auestionListApi",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "query",
+                        "description": "Language eng  or nep",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/options": {
+            "get": {
+                "tags": [
+                    "Questionnaire"
+                ],
+                "summary": "Get List of options",
+                "operationId": "optionsId",
+                "parameters": [
+                    {
+                        "name": "question_id",
+                        "in": "query",
+                        "description": "question id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/submit/answer": {
+            "post": {
+                "tags": [
+                    "Questionnaire"
+                ],
+                "summary": "submit answer",
+                "operationId": "submitAnswer",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization token <Bearer> <token>",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "data",
+                        "in": "formData",
+                        "description": "question_id ,answer_id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/recommendation/list": {
+            "get": {
+                "tags": [
+                    "Recommendation Information"
+                ],
+                "summary": "Get List of recommendation",
+                "operationId": "recommendationList",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "query",
+                        "description": "language  eng or nep",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/mobile/otp": {
+            "post": {
+                "tags": [
+                    "User Register / Login"
+                ],
+                "summary": "get otp use for app",
+                "operationId": "mobileOtp",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "mobile_no",
+                        "in": "formData",
+                        "description": "mobile_no",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/user/login": {
+            "post": {
+                "tags": [
+                    "User Register / Login"
+                ],
+                "summary": "verify OTP and process to continuous",
+                "operationId": "mobileOtpVerification",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "mobile_no",
+                        "in": "formData",
+                        "description": "mobile_no",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "otp_code",
+                        "in": "formData",
+                        "description": "otp code check your mobile",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/user/register": {
+            "post": {
+                "tags": [
+                    "User Register / Login"
+                ],
+                "summary": "register new user",
+                "operationId": "registerUser",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "mobile_no",
+                        "in": "formData",
+                        "description": "mobile_no",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "otp_code",
+                        "in": "formData",
+                        "description": "otp code check your mobile",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "unique_id",
+                        "in": "formData",
+                        "description": "bluetooth devie key ",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "full_name",
+                        "in": "formData",
+                        "description": "Your full name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "gender",
+                        "in": "formData",
+                        "description": "gender Male Female Other",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "age",
+                        "in": "formData",
+                        "description": "age",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "profession",
+                        "in": "formData",
+                        "description": "get profession list api",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "province_id",
+                        "in": "formData",
+                        "description": "province_id get api",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "address",
+                        "in": "formData",
+                        "description": "address",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "country_travel_last_30_days",
+                        "in": "formData",
+                        "description": "get yes or no",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "ready_to_volunteer",
+                        "in": "formData",
+                        "description": "yes or no",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "feeling_well",
+                        "in": "formData",
+                        "description": " yes or no ",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "current_condition_state",
+                        "in": "formData",
+                        "description": "get list api condition",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/user/profile": {
+            "get": {
+                "tags": [
+                    "User Register / Login"
+                ],
+                "summary": "user profile",
+                "operationId": "userProfile",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization token <Bearer> <token>",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/user/tracking": {
+            "post": {
+                "tags": [
+                    "User Register / Login"
+                ],
+                "summary": "tracking location ",
+                "operationId": "trackingLocation",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization token <Bearer> <token>",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "longitude",
+                        "in": "formData",
+                        "description": "longitude",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "latitude",
+                        "in": "formData",
+                        "description": "latitude",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/user/risk-percentage": {
+            "get": {
+                "tags": [
+                    "User Register / Login"
+                ],
+                "summary": "user risk Percentage",
+                "operationId": "riskPercentage",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization token <Bearer> <token>",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "language",
+                        "in": "query",
+                        "description": "Language eng  or nep",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/update/profile": {
+            "post": {
+                "tags": [
+                    "User Register / Login"
+                ],
+                "summary": "update profile",
+                "operationId": "updateProfile",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization token <Bearer> <token>",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "full_name",
+                        "in": "formData",
+                        "description": "Your full name",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "blood_group",
+                        "in": "formData",
+                        "description": "blood_group list api blood group",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "emergency_number",
+                        "in": "formData",
+                        "description": "emergency_number",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "is_family_doctor",
+                        "in": "formData",
+                        "description": "is_family_doctor yes or no if yes pass value 1 no value 0",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "family_doctor",
+                        "in": "formData",
+                        "description": "family_doctor name",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "age",
+                        "in": "formData",
+                        "description": "age",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "profession",
+                        "in": "formData",
+                        "description": "get profession list api",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "address",
+                        "in": "formData",
+                        "description": "address",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "province_id",
+                        "in": "formData",
+                        "description": "province_id get api",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "ready_to_volunteer",
+                        "in": "formData",
+                        "description": "yes or no",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "feeling_well",
+                        "in": "formData",
+                        "description": " yes or no ",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "current_condition_state",
+                        "in": "formData",
+                        "description": "get list api condition",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "406": {
+                        "description": "not acceptable"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {}
+}
