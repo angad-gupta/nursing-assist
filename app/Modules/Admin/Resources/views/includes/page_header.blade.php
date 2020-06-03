@@ -6,7 +6,7 @@
 					<div class="page-title">
 						<h5>
 							<i class="icon-arrow-left52 mr-2"></i>
-							<span class="font-weight-semibold">Welcome To Nursing Education & Training Australia(NETA) CRM</span> - @yield('breadcrum')
+							<span class="font-weight-semibold">Welcome To Nursing Education & Training Australia(NETA) CMS</span> - @yield('breadcrum')
 						</h5>
 					</div>
 

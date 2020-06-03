@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="67" height="67" viewBox="0 0 67 67">
+  <g id="play" transform="translate(0 -0.056)">
+    <g id="Ellipse_1" data-name="Ellipse 1" transform="translate(0 0.056)" fill="none" stroke="#0791d4" stroke-width="1">
+      <circle cx="33.5" cy="33.5" r="33.5" stroke="none"/>
+      <circle cx="33.5" cy="33.5" r="33" fill="none"/>
+    </g>
+    <g id="baseline-play_arrow-24px" transform="translate(13.931 12.931)">
+      <path id="Path_697" data-name="Path 697" d="M8,5V28.414L26.4,16.707Z" transform="translate(5.379 3.362)" fill="#0791d4"/>
+      <path id="Path_698" data-name="Path 698" d="M0,0H40.138V40.138H0Z" fill="none"/>
+    </g>
+  </g>
+</svg>

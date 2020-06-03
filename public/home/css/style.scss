@@ -1,0 +1,37 @@
+@import "./variables";
+@import "./header";
+@import "./footer";
+@import "./index";
+@import "./neta-about";
+@import "./neta-contact";
+
+a{
+  text-decoration: none !important;
+}
+
+
+.navbar-light .navbar-nav .nav-link{
+  color: #fff;
+  text-transform: uppercase;
+  padding: 0px 12px;
+}
+
+.btn-neta{
+  transition: .5s all;
+}
+.neta-head{
+  p{
+    padding: 0 80px;
+    padding-top: 15px;
+  }
+}
+
+.neta-vid{
+  padding: 60px 0;
+}
+
+.navbar-brand{
+  img{
+    width: 180px;
+  }
+}

@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>Nursing Education & Training Australia(NETA) CRM</title>
+	<title>Nursing Education & Training Australia(NETA) CMS</title>
 
 	<!-- Global stylesheets -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
@@ -53,9 +53,9 @@
 									 @if(isset($setting))
 							            <img src="{{ asset('uploads/setting/'.$setting->company_logo)}}" alt="" width="50%" height="50%">
 							            @else
-							            <img src="{{ asset('admin/global/images/nai.jpeg')}}" alt="" width="75%" height="75%">
+							            <img src="{{ asset('admin/global/images/logo.png')}}" alt="" width="75%" height="75%">
 							            @endif
-									<h5 class="mb-0 mt-2">Login to <b class="text-success">NETA CRM</b></h5>
+									<h5 class="mb-0 mt-2">Login to <b class="text-success">NETA CMS</b></h5>
 									<span class="d-block text-muted">Your credentials</span>
 								</div>
 								
@@ -80,7 +80,7 @@
 									<button type="submit" class="btn btn-warning btn-block"><b>Proceed</b></button>
 								</div>
                                 <span class="navbar-text">
-                                    &copy; {{date('Y')}}. <a href="javascript:void(0)" class="text-blue-700">NETA CRM</a> by <a href="http://bidhee.com/" target="_blank" class="text-teal">Bidhee Pvt. Ltd</a>
+                                    &copy; {{date('Y')}}. <a href="javascript:void(0)" class="text-blue-700">NETA CMS</a> by <a href="http://bidhee.com/" target="_blank" class="text-teal">Bidhee Pvt. Ltd</a>
                                 </span>
 
 							</div>

@@ -19,5 +19,7 @@ interface PageInterface
     public function upload($filename);
 
     public function checkPageInfo($slug);
+    
+    public function getBySlug($slug);
 
 }

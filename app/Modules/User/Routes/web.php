@@ -17,7 +17,7 @@ Route::prefix('')->group(function() {
     Route::get('admin/permission-denied', ['as' => 'permission.denied', 'uses' => 'LoginController@permissionDenied']);
     
     //Login
-    Route::get('/', ['as' => 'login', 'uses' => 'LoginController@login']);
+    Route::get('cms', ['as' => 'cms', 'uses' => 'LoginController@login']);
     Route::post('login', ['as' => 'login-post', 'uses' => 'LoginController@authenticate']);
 
     //Change Password

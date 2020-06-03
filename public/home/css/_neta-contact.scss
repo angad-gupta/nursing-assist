@@ -1,0 +1,10 @@
+.neta-contact{
+    @include ttl-line();
+    &__form{
+        background:$white;
+        padding: 20px;
+        width: 100%;
+        min-height: 300px;
+        border-radius:4px
+    }
+}

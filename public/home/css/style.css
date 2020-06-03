@@ -1,0 +1,811 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+span,
+label,
+li {
+  font-family: 'Poppins', sans-serif;
+}
+
+.section-padding {
+  padding: 50px 0;
+}
+
+span,
+p {
+  font-weight: 400;
+}
+
+.header {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  background: transparent !important;
+  position: absolute;
+  z-index: 111;
+  width: 100%;
+  top: 0;
+}
+
+.header-two .navbar-light .navbar-nav .nav-link {
+  color: #000 !important;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1111;
+  -webkit-animation: smoothScroll 1s;
+          animation: smoothScroll 1s;
+  -webkit-transition: .5s all;
+  transition: .5s all;
+  background: #fff !important;
+}
+
+.sticky .nav-link {
+  color: #000 !important;
+}
+
+@-webkit-keyframes smoothScroll {
+  0% {
+    -webkit-transform: translateY(-20px);
+            transform: translateY(-20px);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+
+@keyframes smoothScroll {
+  0% {
+    -webkit-transform: translateY(-20px);
+            transform: translateY(-20px);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+
+.neta-selfcheck .container {
+  background: #B0117E;
+  padding: 60px;
+  color: #fff;
+  border-radius: 10px;
+  min-height: 220px;
+  position: relative;
+  top: 100px;
+  z-index: 1;
+  margin-top: -150px;
+}
+
+.neta-selfcheck .btn-neta {
+  background: -webkit-gradient(linear, left top, right top, color-stop(26%, #94519f), color-stop(55%, #343886), color-stop(91%, #009fe1));
+  background: linear-gradient(90deg, #94519f 26%, #343886 55%, #009fe1 91%);
+  padding: 12px 35px;
+  margin-top: 15px;
+  border: 0;
+  -webkit-transition: .5s all;
+  transition: .5s all;
+  background: #fff;
+  margin-top: 20px;
+}
+
+.neta-selfcheck .btn-neta a {
+  color: #fff;
+  font-size: 18px;
+}
+
+.neta-selfcheck .btn-neta a {
+  color: #B0117E;
+}
+
+.neta-selfcheck h3 {
+  font-weight: 600;
+}
+
+footer {
+  position: relative;
+  color: #fff;
+  background: #041936;
+  padding: 60px 0;
+  padding-top: 150px;
+}
+
+footer h5 {
+  padding-bottom: 20px;
+}
+
+footer a {
+  color: #fff;
+}
+
+footer li {
+  font-size: 14px;
+  font-weight: 200;
+  margin-bottom: 15px;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+}
+
+footer li:hover {
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+  padding-left: 6px;
+  color: #B0117E;
+}
+
+footer .copyright {
+  font-size: 13px;
+  padding-top: 30px;
+  color: #9c9c9c;
+}
+
+footer .social-links img {
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+}
+
+footer .social-links img:hover {
+  -webkit-transform: translateY(-5px);
+          transform: translateY(-5px);
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+}
+
+body {
+  background: #f6f9fb;
+  color: #000;
+}
+
+.top-nav {
+  min-height: 40px;
+  padding: 5px 0;
+  width: 100%;
+  background: #6E2F9F;
+}
+
+.top-nav span {
+  color: #fff;
+  font-size: 0.8rem;
+}
+
+.top-nav .neta-auth a {
+  color: #fff;
+  font-weight: 200;
+}
+
+.top-nav .t-f .ml-2 {
+  margin-right: 20px;
+}
+
+.top-nav .social-links img {
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+  width: 30px;
+}
+
+.top-nav .social-links img:hover {
+  -webkit-transform: translateY(-3px);
+          transform: translateY(-3px);
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+  cursor: pointer;
+}
+
+header {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  background: #fff;
+}
+
+header .avtar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 30px;
+  cursor: pointer;
+  position: relative;
+}
+
+header .avtar h6 {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  padding-left: 10px;
+}
+
+header .avtar img {
+  width: 30px;
+  height: 30px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+}
+
+header .avtar ul {
+  display: none;
+  background: #fff;
+  position: absolute;
+  top: 40px;
+  z-index: 11;
+  -webkit-box-shadow: 0 0 5px #dedede;
+          box-shadow: 0 0 5px #dedede;
+  min-width: 150px;
+  right: 0;
+}
+
+header .avtar ul a {
+  color: #000;
+}
+
+header .avtar ul li {
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+header .avtar ul li:hover {
+  background: #B0117E;
+  color: #fff;
+  -webkit-transition: 0.3s all;
+  transition: 0.3s all;
+}
+
+header .bg-light {
+  background-color: transparent !important;
+  width: 100%;
+  padding: 0;
+}
+
+header .bg-light .cart {
+  position: relative;
+}
+
+header .bg-light .cart h5 {
+  background: #b61616;
+  border-radius: 50%;
+  color: #fff;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 200;
+  line-height: 1.5;
+}
+
+header .bg-light .nav-item {
+  padding: 0 15px;
+  padding-top: 5px;
+}
+
+header .bg-light .nav-item .active {
+  color: #B0117E !important;
+  position: relative;
+}
+
+header .bg-light .nav-link {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+header .bg-light .nav-link:hover {
+  color: #B0117E !important;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+}
+
+header .bg-light .navbar-brand {
+  color: rgba(0, 0, 0, 0.9);
+  font-weight: 600;
+}
+
+header .bg-light .bf-login {
+  background: #B0117E;
+  padding: 10px 20px;
+  border-radius: 40px;
+  color: #fff;
+  border: 0;
+  -webkit-box-shadow: 0 6px 12px #dedede;
+          box-shadow: 0 6px 12px #dedede;
+  margin-left: 14px;
+}
+
+header .bg-light .bf-login img {
+  margin-top: -5px;
+  padding-right: 5px;
+}
+
+header .bg-light .bf-register {
+  background: #fff;
+  padding: 10px 25px;
+  border-radius: 40px;
+  color: #B0117E;
+  border: 0;
+  -webkit-box-shadow: 0 6px 12px #dedede;
+          box-shadow: 0 6px 12px #dedede;
+}
+
+header .bg-light .bf-register img {
+  margin-top: -5px;
+  padding-right: 5px;
+}
+
+.neta-search li {
+  margin-right: 15px;
+}
+
+.neta-search__box {
+  position: relative;
+  margin-right: 30px !important;
+}
+
+.neta-search__box img {
+  position: absolute;
+  right: 0;
+}
+
+.neta-search input {
+  border: 0;
+  border-bottom: 1px solid #000;
+  font-size: 14px;
+  font-weight: 200;
+}
+
+.neta-search input:focus {
+  outline: 0;
+}
+
+.neta-banner {
+  height: 100vh;
+  width: 100%;
+}
+
+.neta-banner .owl-dots {
+  display: none;
+}
+
+.neta-banner .owl-nav {
+  margin-top: -30px;
+  display: none;
+}
+
+.neta-banner .owl-next span {
+  font-size: 0;
+  position: absolute;
+  top: 40%;
+  right: 50px;
+}
+
+.neta-banner .owl-next span::before {
+  content: url(../img/left.svg);
+}
+
+.neta-banner .owl-prev span {
+  font-size: 0;
+  position: absolute;
+  top: 40%;
+  left: 50px;
+}
+
+.neta-banner .owl-prev span::before {
+  content: url(../img/arrow.svg);
+}
+
+.neta-banner .banner-content {
+  position: absolute;
+  top: 120px;
+}
+
+.neta-banner .banner-content {
+  color: #fff;
+}
+
+.neta-banner .btn-neta {
+  background: -webkit-gradient(linear, left top, right top, color-stop(26%, #94519f), color-stop(55%, #343886), color-stop(91%, #009fe1));
+  background: linear-gradient(90deg, #94519f 26%, #343886 55%, #009fe1 91%);
+  padding: 12px 35px;
+  margin-top: 15px;
+  border: 0;
+  -webkit-transition: .5s all;
+  transition: .5s all;
+}
+
+.neta-banner .btn-neta a {
+  color: #fff;
+  font-size: 18px;
+}
+
+.neta-banner h1 {
+  font-size: 42px;
+  font-weight: 500;
+  margin-top: 100px;
+  line-height: 1.1;
+}
+
+.neta-banner h5 {
+  font-weight: 200;
+}
+
+.neta-banner .item {
+  position: relative;
+}
+
+.neta-banner .item .img-fade {
+  background: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0.1)), to(rgba(0, 0, 0, 0.19)));
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.19));
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.neta-banner .item .neta-bg {
+  height: 100vh;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.neta-banner .item .neta-play {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-left: 40px;
+}
+
+.neta-banner .item .neta-play img {
+  width: 67px;
+  position: relative;
+  top: 10px;
+}
+
+.neta-banner .item .neta-play span {
+  padding-left: 15px;
+  padding-top: 15px;
+  color: #fff;
+}
+
+.neta-slog {
+  background: url(../img/gdt.png) center center/cover;
+  min-height: 400px;
+}
+
+.neta-slog__content {
+  font-weight: 800;
+  padding-top: 70px;
+}
+
+.neta-slog li {
+  color: #fff;
+  font-size: 62px;
+  font-weight: 600;
+}
+
+.neta-slog h2 {
+  color: #000;
+  font-weight: 600;
+  font-size: 42px;
+  margin-bottom: -10px;
+}
+
+.neta-slog p {
+  color: #fff;
+  margin-bottom: 0;
+}
+
+.neta-slog .btn-neta {
+  background: -webkit-gradient(linear, left top, right top, color-stop(26%, #94519f), color-stop(55%, #343886), color-stop(91%, #009fe1));
+  background: linear-gradient(90deg, #94519f 26%, #343886 55%, #009fe1 91%);
+  padding: 12px 35px;
+  margin-top: 15px;
+  border: 0;
+  -webkit-transition: .5s all;
+  transition: .5s all;
+  background: #fff;
+}
+
+.neta-slog .btn-neta a {
+  color: #fff;
+  font-size: 18px;
+}
+
+.neta-slog .btn-neta a {
+  color: #B0117E;
+}
+
+.neta-courses__content {
+  padding-bottom: 80px;
+}
+
+.neta-courses h5 {
+  border-left: 6px solid #B0117E;
+  padding-left: 15px;
+  margin-bottom: 30px;
+}
+
+.neta-courses .btn-neta {
+  background: -webkit-gradient(linear, left top, right top, color-stop(26%, #94519f), color-stop(55%, #343886), color-stop(91%, #009fe1));
+  background: linear-gradient(90deg, #94519f 26%, #343886 55%, #009fe1 91%);
+  padding: 12px 35px;
+  margin-top: 15px;
+  border: 0;
+  -webkit-transition: .5s all;
+  transition: .5s all;
+}
+
+.neta-courses .btn-neta a {
+  color: #fff;
+  font-size: 18px;
+}
+
+.neta-courses .course-img {
+  position: relative;
+}
+
+.neta-courses .course-img::after {
+  content: url("../img/blob.png");
+  position: absolute;
+  right: -55px;
+  top: 50px;
+  z-index: -10;
+}
+
+.neta-courses .course-img img {
+  width: 100%;
+  height: 300px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.neta-courses .course-img-rev {
+  position: relative;
+}
+
+.neta-courses .course-img-rev::after {
+  content: url("../img/blob.png");
+  position: absolute;
+  left: -55px;
+  top: 50px;
+  z-index: -10;
+}
+
+.neta-career {
+  background: #fff;
+  padding-bottom: 60px;
+}
+
+.neta-career__content {
+  position: relative;
+  width: 100%;
+  height: 188px;
+  border-radius: 4px;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.neta-career__content:hover .career-bg img {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+}
+
+.neta-career__content figure {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+}
+
+.neta-career__content figure img {
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+}
+
+.neta-career__content figure .img-fade1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: .8;
+  border-radius: 4px;
+  background: -webkit-gradient(linear, left top, right top, color-stop(30%, #2c109e), to(#00a8ae));
+  background: linear-gradient(to right, #2c109e 30%, #00a8ae);
+}
+
+.neta-career__content figure .img-fade2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: .8;
+  border-radius: 4px;
+  background: -webkit-gradient(linear, left top, right top, color-stop(30%, #00ecb4), to(#01cf38));
+  background: linear-gradient(to right, #00ecb4 30%, #01cf38);
+}
+
+.neta-career__content figure .img-fade3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: .8;
+  border-radius: 4px;
+  background: -webkit-gradient(linear, left top, right top, color-stop(30%, #93009e), to(#8815c9));
+  background: linear-gradient(to right, #93009e 30%, #8815c9);
+}
+
+.neta-career__content figure figcaption {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+}
+
+.neta-career__content figure figcaption p {
+  line-height: 1.2;
+  padding-top: 15px;
+}
+
+.neta-download {
+  background: url(../img/dl.png) center center/cover;
+  min-height: 155px;
+}
+
+.neta-download p {
+  color: #fff;
+  padding-top: 65px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.neta-download .btn-neta {
+  background: -webkit-gradient(linear, left top, right top, color-stop(26%, #94519f), color-stop(55%, #343886), color-stop(91%, #009fe1));
+  background: linear-gradient(90deg, #94519f 26%, #343886 55%, #009fe1 91%);
+  padding: 12px 35px;
+  margin-top: 15px;
+  border: 0;
+  -webkit-transition: .5s all;
+  transition: .5s all;
+  background: #fff;
+  margin-top: 55px;
+}
+
+.neta-download .btn-neta a {
+  color: #fff;
+  font-size: 18px;
+}
+
+.neta-download .btn-neta a {
+  color: #B0117E;
+}
+
+.neta-ribbon {
+  position: relative;
+  height: 200px;
+  width: 100%;
+}
+
+.neta-ribbon img {
+  height: 200px;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.neta-ribbon::after {
+  content: "";
+  background: #6E2F9F;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.8;
+}
+
+.neta-ribbon__content {
+  position: absolute;
+  top: 50px;
+  color: #fff;
+  z-index: 1;
+}
+
+.neta-ribbon__content a {
+  color: #fff;
+}
+
+.neta-about .ttl-line {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.neta-about .ttl-line:after {
+  content: '';
+  background: #6E2F9F;
+  position: absolute;
+  bottom: -15px;
+  width: 50px;
+  height: 8px;
+  left: 0;
+}
+
+.neta-contact .ttl-line {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.neta-contact .ttl-line:after {
+  content: '';
+  background: #6E2F9F;
+  position: absolute;
+  bottom: -15px;
+  width: 50px;
+  height: 8px;
+  left: 0;
+}
+
+.neta-contact__form {
+  background: #fff;
+  padding: 20px;
+  width: 100%;
+  min-height: 300px;
+  border-radius: 4px;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: #fff;
+  text-transform: uppercase;
+  padding: 0px 12px;
+}
+
+.btn-neta {
+  -webkit-transition: .5s all;
+  transition: .5s all;
+}
+
+.neta-head p {
+  padding: 0 80px;
+  padding-top: 15px;
+}
+
+.neta-vid {
+  padding: 60px 0;
+}
+
+.navbar-brand img {
+  width: 180px;
+}
+/*# sourceMappingURL=style.css.map */

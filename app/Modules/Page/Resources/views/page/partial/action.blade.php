@@ -2,6 +2,7 @@
 <fieldset class="mb-3">
     <legend class="text-uppercase font-size-sm font-weight-bold"></legend>
 
+     
 
             <div class="form-group row">
 
@@ -14,7 +15,15 @@
                                     <span class="input-group-text"><i class="icon-pencil"></i>
                                     </span>
                                 </span>
-                                 {!! Form::select('title',['About Us'=>'About Us','we_offer'=>'What we Offer','Terms & Conditions'=>'Terms & Conditions','Privacy Policy'=>'Privacy Policy'], $value = null, ['id'=>'title','class'=>'form-control' ]) !!}     
+                                 @if($is_edit)
+
+                                    {!! Form::text('title', $value = null, ['id'=>'title','class'=>'form-control','readonly']) !!}
+                                  
+                                  @else
+
+                                    {!! Form::select('title',['About Us'=>'About Us','We Offer'=>'What we Offer','Terms & Conditions'=>'Terms & Conditions','Privacy Policy'=>'Privacy Policy'], $value = null, ['id'=>'title','class'=>'form-control' ]) !!}    
+
+                                  @endif    
                             </div>
                         </div>
                     </div>

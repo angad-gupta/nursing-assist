@@ -1,0 +1,128 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+* {
+  padding: 0;
+  margin: 0;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+span,
+label,
+li {
+  font-family: 'Poppins', sans-serif;
+}
+
+.section-padding {
+  padding: 50px 0;
+}
+
+
+span,
+p {
+  font-weight: 400;
+}
+
+.header{
+    box-shadow: none;
+    background: transparent !important;
+    position: absolute;
+    z-index: 111;
+    width: 100%;
+    top: 0;
+}
+
+.header-two{
+
+  .navbar-light .navbar-nav .nav-link{
+    color: #000 !important;
+  }
+}
+.sticky{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1111;
+  animation: smoothScroll 1s;
+  transition: .5s all;
+  background:#fff !important;
+  .nav-link{
+    color: #000 !important; 
+  }
+}
+@mixin btn-neta{
+    background: $gradient;
+    padding: 12px 35px;
+    margin-top: 15px;
+    border:0;
+    transition: .5s all;
+    a{
+      color: #fff;
+      font-size: 18px;
+    }
+}
+@mixin owl-prev{
+    span {
+    font-size: 0;
+    position: absolute;
+    top: 40%;
+    left: 50px;
+    &::before{
+      content: url(../img/arrow.svg);
+     }
+}
+}
+
+@mixin owl-next{
+   span {
+   font-size: 0;
+   position: absolute;
+   top: 40%;
+   right: 50px;
+   &::before{
+    content: url(../img/left.svg);
+   }
+}
+}
+
+
+@mixin img-fade{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: .8;
+  border-radius:4px;
+}
+
+@keyframes smoothScroll{
+  0%{
+    transform: translateY(-20px);
+  }
+  100%{
+    transform: translateY(0);
+  }
+}
+
+@mixin ttl-line{
+  .ttl-line{
+    position: relative;
+    margin-bottom: 30px;
+    &:after{
+      content:'';
+      background:$purple;
+      position: absolute;
+      bottom: -15px;
+      width: 50px;
+      height: 8px;
+      left: 0;
+    }
+  }
+}

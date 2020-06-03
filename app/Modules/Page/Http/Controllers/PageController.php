@@ -105,16 +105,6 @@ class PageController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        
-        $title =$data['title'];
-        $data['slug'] = $slug = str_slug($title, '_');
-       
-        $pageInfo = $this->page->checkPageInfo($slug);  
-
-        if($pageInfo > 0){
-            alertify()->success('Page Already Created.');
-            return redirect(route('page.index'));
-         }
          
         try{
 

@@ -24,7 +24,7 @@
                 <tr class="bg-slate">
                     <th>#</th>
                     <th>Title</th>
-                    <th>Short Content</th>
+                    <th width="30%">Short Content</th>
                     <th>Image</th>
                     <th>Action</th>
                 </tr>
@@ -39,7 +39,7 @@
                 <tr>
                     <td>{{$course->firstItem() +$key}}</td>
                      <td>{{ $value->title }}</td>
-                     <td>{{ $value->short_content }}</td>
+                     <td>{!! $value->short_content !!}</td>
                     <td><a target="_blank" href="{{ $image }}"><img src="{{ $image }}" style="width: 50px;"></a></td>
                     <td>
 

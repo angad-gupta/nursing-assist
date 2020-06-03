@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="46" height="48" viewBox="0 0 46 48">
+  <g id="yt" transform="translate(0 0)">
+    <g id="Group_3" data-name="Group 3" transform="translate(0 0)">
+      <rect id="Rectangle_2" data-name="Rectangle 2" width="46" height="48" rx="4" transform="translate(0 0)" fill="none"/>
+    </g>
+    <path id="Icon_awesome-youtube" data-name="Icon awesome-youtube" d="M27.476,7.469a3.391,3.391,0,0,0-2.386-2.4C22.985,4.5,14.545,4.5,14.545,4.5S6.105,4.5,4,5.068a3.391,3.391,0,0,0-2.386,2.4,35.576,35.576,0,0,0-.564,6.539,35.576,35.576,0,0,0,.564,6.539A3.341,3.341,0,0,0,4,22.91c2.1.568,10.545.568,10.545.568s8.44,0,10.545-.568a3.341,3.341,0,0,0,2.386-2.363,35.576,35.576,0,0,0,.564-6.539A35.576,35.576,0,0,0,27.476,7.469ZM11.785,18.021V9.995l7.054,4.013Z" transform="translate(8.853 9.189)" fill="#fff"/>
+  </g>
+</svg>

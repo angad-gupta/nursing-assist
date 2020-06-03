@@ -10,7 +10,7 @@
 
     <div class="navbar-collapse collapse" id="navbar-footer">
 					<span class="navbar-text">
-						 &copy; {{date('Y')}}. <a href="javascript:void(0)" class="text-success">Nursing Education & Training Australia(NETA) CRM</a> by <a
+						 &copy; {{date('Y')}}. <a href="javascript:void(0)" class="text-success">Nursing Education & Training Australia(NETA) CMS</a> by <a
                                 href="http://bidhee.com/" target="_blank" class="text-success">Bidhee Pvt. Ltd</a>
 					</span>
     </div>

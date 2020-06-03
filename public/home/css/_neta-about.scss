@@ -1,0 +1,35 @@
+.neta-ribbon {
+    position: relative;
+    height: 200px;
+    width: 100%;
+    img {
+        height: 200px;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    &::after {
+        content: "";
+        background: $purple;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0.8;
+    }
+
+    &__content{
+        position: absolute;
+        top: 50px;
+        color:#fff;
+        z-index: 1;
+        a{
+            color: #fff;
+        }
+    }
+}
+
+.neta-about{
+        @include ttl-line();
+}

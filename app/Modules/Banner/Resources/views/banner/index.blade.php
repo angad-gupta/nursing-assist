@@ -28,6 +28,7 @@
                 <tr class="bg-slate">
                     <th>#</th>
                     <th>Title</th>
+                    <th>Sub Title</th>
                     <th>Image</th>
                     <th>Status</th>
                     <th>Action</th>
@@ -43,6 +44,7 @@
                 <tr>
                     <td>{{$banner_info->firstItem() +$key}}</td>
                      <td>{{ $value->title }}</td>
+                     <td>{{ $value->sub_title }}</td>
                     <td><a target="_blank" href="{{ $image }}"><img src="{{ $image }}" style="width: 50px;"></a></td>
                     
                     <td class="{{ ($value->status == '1') ? 'text-success font-weight-bold' :'text-danger font-weight-bold' }}">{{ ($value->status == '1') ? 'Enabled' :'Disabled' }}</td>

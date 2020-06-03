@@ -50,8 +50,8 @@ class CourseController extends Controller
         $data = $request->all();
         
          try{
-            if ($request->hasFile('profile_pic')) {
-                $data['profile_pic'] = $this->course->upload($data['profile_pic']);
+            if ($request->hasFile('image')) {
+                $data['image'] = $this->course->upload($data['image']);
             }
             $this->course->save($data);
             alertify()->success('Course Created Successfully');
@@ -95,8 +95,8 @@ class CourseController extends Controller
        $data = $request->all();
         
         try{
-            if ($request->hasFile('profile_pic')) {
-                $data['profile_pic'] = $this->course->upload($data['profile_pic']);
+            if ($request->hasFile('image')) {
+                $data['image'] = $this->course->upload($data['image']);
             }
             
             $this->course->update($id,$data);

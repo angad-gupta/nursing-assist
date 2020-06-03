@@ -54,6 +54,10 @@ class PageRepository implements PageInterface
 
     public function checkPageInfo($slug){
         return Page::where('slug','=',$slug)->count();
+    } 
+
+    public function getBySlug($slug){
+        return Page::where('slug','=',$slug)->first();
     }
 
 }

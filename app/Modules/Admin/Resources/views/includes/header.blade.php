@@ -5,7 +5,7 @@
             @if($setting != null && $setting->company_logo != null)
                 <img src="{{asset('uploads/setting/'.$setting->company_logo)}}" alt="" style="height:50px;width:auto;">
             @else
-                <img src="{{ asset('admin/global/images/nai.jpeg')}}" alt="" style="height:50px;width:auto;">
+                <img src="{{ asset('admin/global/images/logo.png')}}" alt="" style="height:50px;width:auto;">
             @endif
 
 

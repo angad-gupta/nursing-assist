@@ -19,7 +19,25 @@
                     </div>
                 </div>
 
-                   <div class="col-lg-6">
+                 <div class="col-lg-6">
+                    <div class="row">
+                        <label class="col-form-label col-lg-3">Sub Title:<span class="text-danger">*</span></label>
+                        <div class="col-lg-9 form-group-feedback form-group-feedback-right">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <span class="input-group-text"><i class="icon-hat"></i>
+                                    </span>
+                                </span>
+                                {!! Form::text('sub_title', $value = null, ['id'=>'sub_title','placeholder'=>'Enter Sub Title','class'=>'form-control']) !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+
+                <div class="col-lg-6">
                     <div class="row">
                         <label class="col-form-label col-lg-3">Banner Image:</label>
                         <div class="col-lg-9 form-group-feedback form-group-feedback-right">
@@ -32,9 +50,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="form-group row">
                  <div class="col-lg-6">
                     <div class="row">
                         <label class="col-form-label col-lg-3">Status:</label>
@@ -50,7 +66,11 @@
                     </div>
                 </div>
 
-                <div class="col-lg-6">
+            </div>
+
+            <div class="form-group row">
+
+                 <div class="col-lg-6">
                     <div class="row">
                          <label class="col-form-label col-lg-3"></label>
                         <div class="col-lg-9 form-group-feedback form-group-feedback-right">
@@ -91,7 +111,7 @@
                     </center>
                     <br>
                     <center>
-                        <h4 class="text-purple">Banner Image Size is Greater Than 1Mb. Please Upload Below 1Mb.</h4>
+                        <h4 class="text-purple">Banner Image Size is Greater Than 2Mb. Please Upload Below 1Mb.</h4>
                         <button type="button" class="btn btn-success" data-dismiss="modal">Thank You !!!</button>
                     </center>
                 </div>
@@ -108,7 +128,7 @@
          $('#banner').bind('change', function() {
             var a=(this.files[0].size);
 
-            if(a > 1000000) {
+            if(a > 2000000) {
                $('#modal_image_size').modal('show');
                $('#banner').val('');
             };
