@@ -68,7 +68,7 @@
                         </a>
                     </li>
                 @endif
-                @if($menuRoles->assignedRoles('dropdown.index') || Auth::user()->user_type == 'super_admin')
+              <!--   @if($menuRoles->assignedRoles('dropdown.index') || Auth::user()->user_type == 'super_admin')
                     <li class="nav-item">
                         <a href="{{route('dropdown.index')}}"
                            class="nav-link @if($Route[0]=='dropdown') active @endif"
@@ -78,7 +78,7 @@
                             <span>Dropdown Management</span>
                         </a>
                     </li>
-                @endif
+                @endif -->
 
                 @if($menuRoles->assignedRoles('role.index') || Auth::user()->user_type == 'super_admin')
                     <li class="nav-item">
