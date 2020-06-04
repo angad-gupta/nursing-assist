@@ -20,9 +20,8 @@
             <div class="row">
                 <div class="col-sm-12 col-md-7col-lg-8 col-xl-8">
                     <div class="top-info__list t-f d-flex align-self-center">
-                        <div class="ml-2"><a href="#"><img src="img/top-nav/call.svg" alt=""></a> <span>Tel: 01-4487981</span></div>
-                        <div class="ml-2"><a href="#"><img src="img/top-nav/mail.svg" alt=""></a> <span>Email:
-                                deepk0348@gmail.com</span></div>
+                        <div class="ml-2"><a href="#"><img src="img/top-nav/call.svg" alt=""></a> <span>Tel: {{$setting->contact_no1}}</span></div>
+                        <div class="ml-2"><a href="#"><img src="img/top-nav/mail.svg" alt=""></a> <span>Email:{{$setting->company_email}}</span></div>
                     </div>
                 </div>
 
