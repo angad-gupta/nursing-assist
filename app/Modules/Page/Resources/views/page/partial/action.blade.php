@@ -21,7 +21,7 @@
                                   
                                   @else
 
-                                    {!! Form::select('title',['About Us'=>'About Us','We Offer'=>'What we Offer','Terms & Conditions'=>'Terms & Conditions','Privacy Policy'=>'Privacy Policy'], $value = null, ['id'=>'title','class'=>'form-control' ]) !!}    
+                                    {!! Form::select('title',['About Us'=>'About Us','We Offer'=>'What we Offer','Contact Us'=>'Contact Us','Terms & Conditions'=>'Terms & Conditions','Privacy Policy'=>'Privacy Policy'], $value = null, ['id'=>'title','class'=>'form-control' ]) !!}    
 
                                   @endif    
                             </div>

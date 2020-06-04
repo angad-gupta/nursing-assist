@@ -12,20 +12,20 @@
 <tbody>
   <tr>
     <td class='text-success font-weight-bold'>First Name : </td>
-    <td>{{ $appuser->first_name }}</td>
+    <td>{{ $contactus->first_name }}</td>
     <td class='text-success font-weight-bold'>Last Name : </td>
-    <td>{{ $appuser->last_name }}</td>
+    <td>{{ $contactus->last_name }}</td>
     <td class='text-success font-weight-bold'>Email : </td>
-    <td>{{ $appuser->email }}</td>
+    <td>{{ $contactus->email }}</td>
   </tr>
 
   <tr>
     <td class='text-success font-weight-bold'>Mobile No. : </td>
-    <td>{{ $appuser->phone }}</td>
+    <td>{{ $contactus->phone }}</td>
     <td class='text-success font-weight-bold'>Enquiry : </td>
-    <td>{{ $appuser->enquiry_about }}</td>
+    <td>{{ $contactus->enquiry_about }}</td>
     <td class='text-success font-weight-bold'>Message : </td>
-    <td>{{ $appuser->message }}</td>
+    <td>{{ $contactus->message }}</td>
   </tr>
 
 </tbody>

@@ -4,10 +4,10 @@
     $Route = explode('.',$currentRoute);
 @endphp
 
-<div class="sidebar sidebar-dark sidebar-main sidebar-expand-md">
+<div class="sidebar sidebar-dark sidebar-main sidebar-expand-md" @if($setting != null)) style="background-color: {{$setting->secondary_navbar_color}};" @endif>
 
     <!-- Sidebar mobile toggler -->
-    <div class="sidebar-mobile-toggler text-center">
+    <div class="sidebar-mobile-toggler text-center"> 
         <a href="#" class="sidebar-mobile-main-toggle">
             <i class="icon-arrow-left8"></i>
         </a>

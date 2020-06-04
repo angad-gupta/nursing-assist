@@ -41,18 +41,6 @@
                                                 data-toggle="tab"><i
                                     class="text-primary-400 icon-bucket mr-2"></i><span
                                     class="text-dark">Color Setting</span></a></li>
-{{--                        <li class="nav-item"><a href="#bottom-divided-tab3"--}}
-{{--                                                class="ml-3 alpha-pink rounded-round nav-link"--}}
-{{--                                                data-toggle="tab"><i--}}
-{{--                                    class="text-green-800 icon-cash mr-2"></i><span--}}
-{{--                                    class="text-dark">Finance Setting</span></a></li>--}}
-{{--                        <li class="nav-item"><a href="#bottom-divided-tab4"--}}
-{{--                                                class="ml-3 alpha-pink rounded-round nav-link"--}}
-{{--                                                data-toggle="tab"><i--}}
-{{--                                    class="text-danger-700 icon-hammer-wrench mr-2"></i><span--}}
-{{--                                    class="text-dark">Other Setting</span></a>--}}
-{{--                        </li>--}}
-
 
                     </ul>
                     <div class="tab-content">
@@ -94,41 +82,7 @@
                             </div>
                         </div>
 
-{{--                        <div class="tab-pane fade" id="bottom-divided-tab3">--}}
 
-{{--                            <div style="margin-top: 64px;">--}}
-{{--                                --}}{{--<form action="{{ route('setting.updatebasicsetting',$setting->id) }}" method="post"--}}
-{{--                                      --}}{{--enctype="multipart/form-data">--}}
-{{--                                    --}}{{--{{csrf_field()}}--}}
-{{--                                {!! Form::model($setting,['method'=>'post','route'=>['setting.updatebasicsetting',$setting->id],'class'=>'form-horizontal','id'=>'organization_submit','role'=>'form','files'=>true]) !!}--}}
-
-{{--                                @include('setting::setting.partial.finance')--}}
-{{--                                    <div class="text-right">--}}
-{{--                                        <button type="submit" class="btn bg-teal-400"><i class="icon-plus-circle2"></i>--}}
-{{--                                            Update Finance setting--}}
-{{--                                        </button>--}}
-{{--                                    </div>--}}
-{{--                               {!! Form::close() !!}--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-
-{{--                        <div class="tab-pane fade" id="bottom-divided-tab4">--}}
-{{--                            <div style="margin-top: 64px;">--}}
-{{--                                --}}{{--<form action="{{ route('setting.updatebasicsetting',$setting->id) }}" method="post"--}}
-{{--                                      --}}{{--enctype="multipart/form-data">--}}
-{{--                                    --}}{{--{{csrf_field()}}--}}
-{{--                                {!! Form::model($setting,['method'=>'post','route'=>['setting.updatebasicsetting',$setting->id],'class'=>'form-horizontal','id'=>'organization_submit','role'=>'form','files'=>true]) !!}--}}
-
-{{--                                @include('setting::setting.partial.other',['btnType'=>'Save'])--}}
-{{--                                    <div class="text-right">--}}
-{{--                                        <button type="submit" class="btn bg-teal-400"><i--}}
-{{--                                                class="icon-database-insert"></i> Update Setting--}}
-{{--                                        </button>--}}
-{{--                                    </div>--}}
-{{--                               {!! Form::close() !!}--}}
-{{--                            </div>--}}
-
-{{--                        </div>--}}
                     </div>
 
                 </div>

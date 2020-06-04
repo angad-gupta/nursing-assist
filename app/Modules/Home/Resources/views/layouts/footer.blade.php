@@ -46,7 +46,7 @@
 			</div>
 
 			<div class="col-sm-9">
-				<p class="copyright">Legal Entity: NURSING EDUCATION & TRAINING AUSTRALIA PTY LTD 2020. All Rights Reserved ABN 88641245187</p>
+				<p class="copyright">{{$setting->company_copyright}}</p>
 			</div>
 			<div class="col-sm-3">
 				<div class="social-links">
@@ -72,7 +72,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 <script src="{{asset('home/js/wow.min.js')}}"></script>
 <script src="{{asset('home/js/v-ticker.js')}}"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+<script src="{{asset('admin/validation/contactus.js')}}"></script>
 
 <script>
 	$('.owl-carousel').owlCarousel({
