@@ -10,7 +10,7 @@ class TeamRepository implements TeamInterface
     { 
          $result =Team::when(array_keys($filter, true), function ($query) use ($filter) {
            
-        })->orderBy('sort_order', $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+        })->orderBy('id', $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
         
         return $result; 
         

@@ -1,0 +1,109 @@
+
+<head>
+    <title>NETA</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link href="{{asset('home/css/animate.css')}}" rel="stylesheet">
+    <link href="{{asset('home/css/style.css')}}" rel="stylesheet">
+    <link href="{{asset('home/css/responsive.css')}}" rel="stylesheet">
+
+</head>
+
+<div class="top-nav">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-7col-lg-8 col-xl-8">
+                    <div class="top-info__list t-f d-flex align-self-center">
+                        <div class="ml-2"><a href="#"><img src="img/top-nav/call.svg" alt=""></a> <span>Tel: 01-4487981</span></div>
+                        <div class="ml-2"><a href="#"><img src="img/top-nav/mail.svg" alt=""></a> <span>Email:
+                                deepk0348@gmail.com</span></div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="social-links">
+                        <div class="top-info__list d-flex justify-content-end">
+                            <div class="ml-2"><a href="#"><img src="img/fb.svg" alt=""></a></div>
+                            <div class="ml-2"><a href="#"><img src="img/tw.svg" alt=""></a></div>
+                            <div class="ml-2"><a href="#"><img src="img/ins.svg" alt=""></a></div>
+                            <div class="ml-2"><a href="#"><img src="img/yt.svg" alt=""></a></div>
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+
+<header class="header-two">
+    <div class="container">
+        <div class="row">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="col-md-3 col-lg-3">
+                    <a class="navbar-brand" href="index.php"><img src="img/logo.png" alt="" class="img-fluid"></a>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-8">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse float-right" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="{{ route('home') }}">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('about-us') }}">About Us</a>
+                            </li>
+                            <li class="nav-item neta-dropdown">
+                                <a class="nav-link" href="">Courses</a>
+                                <ul class="neta-dropdown__menu list-unstyled">
+                                    <li>OBA
+                                        <ul class="neta-dropdown__menu-item list-unstyled">
+                                            <a href="#"><li>Enrolment</li></a>
+                                           <li> <a href="courses.php">Intake Dates</a></li>
+                                            <a href="courses.php"><li class="dropdown-last">Courses Information
+                                                    <ul class="dropdown-last__item list-unstyled">
+                                                        <a href="nclex.php"><li>NCLEX</li></a>
+                                                        <a href="#"><li>OSCE</li></a>
+                                                    </ul>
+                                            </li></a>
+                                        </ul>
+                                    </li>
+                                    <a href="#"><li>First Year RN</li></a>
+                                    <a href="#"><li>CPD</li></a>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="">Agents</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="">Student's Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('contact-us') }}">Contact Us</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="ecm-search col-sm-12 col-md-1">
+                    <ul class="list-unstyled d-flex mt-3 float-right">
+                        <a href="login.php">
+                            <li class="user"><img src="img/user.svg" alt="">
+                            </li>
+                        </a>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+</header>

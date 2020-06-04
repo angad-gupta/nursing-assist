@@ -21,7 +21,7 @@
                                   
                                   @else
 
-                                    {!! Form::select('title',['About Us'=>'About Us','We Offer'=>'What we Offer','Terms & Conditions'=>'Terms & Conditions','Privacy Policy'=>'Privacy Policy'], $value = null, ['id'=>'title','class'=>'form-control' ]) !!}    
+                                    {!! Form::select('title',['About Us'=>'About Us','We Offer'=>'What we Offer','Contact Us'=>'Contact Us','Terms & Conditions'=>'Terms & Conditions','Privacy Policy'=>'Privacy Policy'], $value = null, ['id'=>'title','class'=>'form-control' ]) !!}    
 
                                   @endif    
                             </div>
@@ -49,10 +49,10 @@
 
                   <div class="col-lg-6">
                     <div class="row">
-                        <label class="col-form-label col-lg-3">Description:<span class="text-danger">*</span></label>
+                        <label class="col-form-label col-lg-3">Short Content:<span class="text-danger">*</span></label>
                         <div class="col-lg-9 form-group-feedback form-group-feedback-right">
                             <div class="input-group">
-                                {!! Form::textarea('description', $value = null, ['placeholder'=>'Enter Description','class'=>'form-control simple_textarea_description']) !!}
+                                {!! Form::textarea('short_content', $value = null, ['placeholder'=>'Enter Short Content','class'=>'form-control simple_textarea_description']) !!}
                             </div>
                         </div>
                     </div>
@@ -77,6 +77,21 @@
                     </div>
                 </div>
         </div>
+
+         <div class="form-group row">
+
+               <div class="col-lg-6">
+                    <div class="row">
+                        <label class="col-form-label col-lg-3">Description:<span class="text-danger">*</span></label>
+                        <div class="col-lg-9 form-group-feedback form-group-feedback-right">
+                            <div class="input-group">
+                                {!! Form::textarea('description', $value = null, ['placeholder'=>'Enter Description','class'=>'form-control simple_textarea_description']) !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+         </div>
         
 </fieldset>
 

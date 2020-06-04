@@ -1,14 +1,20 @@
 $(document).ready(function () {
-    $("#page_submit").validate({
+    $("#contactus_submit").validate({
         rules: {
-            title: "required",
-            short_content: "required",
-            description: "required",
+            first_name: "required",
+            last_name: "required",
+            email: "required",
+            phone: "required",
+            enquiry_about: "required",
+            message: "required"
         },
         messages: {
-            title: "Enter Title",
-            short_content: "Enter Short Content",
-            description: "Enter Description",
+            first_name: "Please Enter First Name",
+            last_name: "Please  Enter Last Name",
+            email: "Please Enter Email",
+            phone:"Please Enter Contact Number",
+            enquiry_about:"Please Enter Enquiry About",
+            message:"Please Enter Message"
         },
         errorElement: "em",
         errorPlacement: function (error, element) {  console.log(element)

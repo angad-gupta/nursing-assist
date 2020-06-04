@@ -9,20 +9,36 @@ use Illuminate\Routing\Controller;
 use App\Modules\Page\Repositories\PageInterface;
 use App\Modules\Banner\Repositories\BannerInterface;
 use App\Modules\Course\Repositories\CourseInterface;
+use App\Modules\Team\Repositories\TeamInterface;
+use App\Modules\ContactUs\Repositories\ContactUsInterface;
+use App\Modules\Setting\Repositories\SettingInterface;
 
 class HomeController extends Controller
 {
 
-
     protected $page;
     protected $banner;
     protected $course;
+    protected $team;
+    protected $contactus;
+    protected $setting;
     
-    public function __construct(PageInterface $page,BannerInterface $banner,CourseInterface $course)
+    public function __construct(
+            PageInterface $page,
+            BannerInterface $banner,
+            CourseInterface $course,
+            TeamInterface $team,
+            ContactUsInterface $contactus,
+            SettingInterface $setting
+        )
+
     {
         $this->page = $page;
         $this->banner = $banner;
         $this->course = $course;
+        $this->team = $team;
+        $this->contactus = $contactus;
+        $this->setting = $setting;
     }
 
     /**
@@ -35,7 +51,7 @@ class HomeController extends Controller
         $data['we_offer'] = $this->page->getBySlug('we_offer');
         $data['course'] = $this->course->findAll();
         $data['about_neta'] =$this->page->getBySlug('about_us');
-    
+        $data['setting'] = $this->setting->find(1);
         return view('home::index',$data);
     }
 
@@ -43,9 +59,26 @@ class HomeController extends Controller
      * Show the form for creating a new resource.
      * @return Response
      */
-    public function create()
+    public function AboutUs()
     {
-        return view('home::create');
+        $data['about_neta'] =$this->page->getBySlug('about_us');
+        $data['team'] =$this->team->findAll();
+        $data['setting'] = $this->setting->find(1);
+        return view('home::aboutus',$data);
+    }
+
+
+    /**
+     * Show the form for creating a new resource.
+     * @return Response
+     */
+    public function ContactUs(Request $request)
+    {
+        $input = $request->all(); 
+        $data['contact_us'] =$this->page->getBySlug('contact_us');
+        $data['message'] = ($input) ? $input['message'] : FALSE;
+        $data['setting'] = $this->setting->find(1);  
+        return view('home::contactus',$data);
     }
 
     /**
@@ -53,9 +86,20 @@ class HomeController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function storeContact(Request $request)
     {
-        //
+        $data = $request->all();
+        
+         try{
+
+            $this->contactus->save($data);
+
+            $contact['message'] = 'You Message Store  Successfully';
+        }catch(\Throwable $e){
+            $contact['message'] = 'Something Wrong With Message';
+        }
+        
+        return redirect(route('contact-us',$contact));
     }
 
     /**
