@@ -1,10 +1,52 @@
-.neta-contact{
+.neta-contact {
     @include ttl-line();
-    &__form{
-        background:$white;
-        padding: 20px;
+    margin-bottom: 30px;
+    &__form {
+        background: $white;
+        padding: 30px;
         width: 100%;
-        min-height: 300px;
-        border-radius:4px
+        border-radius: 4px;
+    }
+    span {
+        color: $primary-color;
+        padding-right: 20px;
+        i {
+            font-size: 24px;
+        }
+    }
+    li {
+        border-bottom: 1px solid #dedede;
+        padding: 15px 0;
+        display: flex;
+        p {
+            color: #1158b0;
+            padding-left: 8px;
+            margin-bottom: 0;
+        }
+    }
+    form {
+        .form-group {
+            input {
+                min-height: 52px;
+            }
+        }
+        ::placeholder {
+            color: #b1b1b1;
+        }
+        .form-group {
+            margin-bottom: 30px;
+        }
+        textarea {
+            min-height: 180px;
+        }
+        .btn-neta {
+            @include btn-neta();
+        }
+    }
+}
+
+.neta-map {
+    iframe {
+        margin-bottom: -75px;
     }
 }

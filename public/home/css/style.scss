@@ -4,9 +4,11 @@
 @import "./index";
 @import "./neta-about";
 @import "./neta-contact";
+@import "./login";
 
 a{
   text-decoration: none !important;
+  color: #000;
 }
 
 
@@ -34,4 +36,8 @@ a{
   img{
     width: 180px;
   }
+}
+
+#vticker{
+  width: 600px !important;
 }
