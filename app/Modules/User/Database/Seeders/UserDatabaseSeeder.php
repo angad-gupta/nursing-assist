@@ -25,7 +25,7 @@ class UserDatabaseSeeder extends Seeder
             'department' => '2',
             'password' => bcrypt('admin@bidhee.com'),
             'active' =>'1',
-            'first_name' =>'Adminstration',
+            'first_name' =>'Administrator',
             'parent_id' => '0'
         ]);
 

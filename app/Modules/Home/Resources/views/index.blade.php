@@ -79,24 +79,27 @@
             $image = ($banner_val->banner) ? asset($banner_val->file_full_path).'/'.$banner_val->banner : '';
         @endphp
 
+
 		<div class="item">
-			<div class="img-fade"></div>
-			<img src="{{ $image }}" alt="" class="neta-bg">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-6 banner-content">
-						<h1 class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">{{ $banner_val->title }}</h1>
-						<h5 class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".75s">{{ $banner_val->sub_title }}</h5>
-						<div class="banner-btn d-flex mt-2">
-							<button class="btn btn-neta"><a href="#">Learn More</a></button>
-							<a href="#">
-								<div class="neta-play"><img src="{{asset('home/img/play.svg')}}" alt=""><span>Watch Video</span></div>
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+             <div class="img-fade"></div>
+             <img src="{{ $image }}" alt="" class="neta-bg">
+             <div class="container">
+                 <div class="row">
+                    	<div class="banner-content">
+                         <div class="col-sm-6">
+                         <h1 class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">{{ $banner_val->title }}</h1>                         
+                         <h5 class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".75s">{{ $banner_val->sub_title }}</h5>
+                         <div class="banner-btn d-flex mt-2">
+                             <button class="btn btn-neta"><a href="#">Learn More</a></button>
+                             <a href="#">
+                                 <div class="neta-play"><img src="{{asset('home/img/play.svg')}}" alt=""><span>Watch Video</span></div>
+                             </a>
+                         </div>
+                        </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
 
 		@endforeach
 		@endif

@@ -38,45 +38,7 @@ body {
 header {
   box-shadow: none;
   background: $white;
-  .avtar {
-    display: flex;
-    margin-left: 30px;
-    cursor: pointer;
-    position: relative;
-    h6 {
-      align-self: center;
-      padding-left: 10px;
-    }
-    img {
-      width: 30px;
-      height: 30px;
-      object-fit: cover;
-      border-radius: 50%;
-    }
-    ul {
-      display: none;
-      background: #fff;
-      position: absolute;
-      top: 40px;
-      z-index: 11;
-      box-shadow: 0 0 5px #dedede;
-      min-width: 150px;
-      right: 0;
-      a {
-        color: #000;
-      }
-      li {
-        padding: 5px 10px;
-        font-size: 12px;
-
-        &:hover {
-          background: $primary-color;
-          color: #fff;
-          transition: 0.3s all;
-        }
-      }
-    }
-  }
+ 
   .bg-light {
     background-color: transparent !important;
     width: 100%;
@@ -121,34 +83,94 @@ header {
       font-weight: 600;
     }
 
-    .bf-login {
-      background: $primary-color;
-      padding: 10px 20px;
-      border-radius: 40px;
-      color: $white;
-      border: 0;
-      box-shadow: $box-shadow;
-      margin-left: 14px;
+  }
+}
 
-      img {
-        margin-top: -5px;
-        padding-right: 5px;
+.neta-dropdown{
+  position: relative;
+  &__menu{
+    position: absolute;
+    top: 65px;
+    left: 0;
+    background:#fff;
+    z-index:1;
+    opacity:0;
+    visibility:hidden;
+    transition: .5s all;
+    min-width: 150px;
+    li{
+      padding: 10px;
+      padding-bottom:15px;
+      color: #000;
+      cursor: pointer;
+      transition: .5s all;
+      a{
+        color: #000;
+      }
+
+      &:hover{
+        background:$primary-color;
+        color: #fff;
+        transition: .5s all;
+        
       }
     }
+    &-item{
+      position: absolute;
+      top: 0px;
+      right: -195px;
+      background:#fff;
+      z-index:1;
+      opacity:0;
+      visibility:hidden;
+      transition: .5s all;
+      min-width: 150px;
+    }
+    &:hover{
+      .neta-dropdown__menu-item{
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-10px);
+        transition: .5s all;
+      }
+      
+    }
 
-    .bf-register {
-      background: $white;
-      padding: 10px 25px;
-      border-radius: 40px;
-      color: $primary-color;
-      border: 0;
-      box-shadow: $box-shadow;
-
-      img {
-        margin-top: -5px;
-        padding-right: 5px;
+    
+    &:hover{
+      &__item{
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-10px);
+        transition: .5s all;
       }
     }
+  }
+  &:hover{
+    .neta-dropdown__menu{
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(-10px);
+      transition: .5s all;
+    }
+  }
+  
+  .dropdown-last__item{
+    position: absolute;
+      bottom: -50px;
+      right: -163px;
+      background:#fff;
+      z-index:1;
+      opacity:0;
+      visibility:hidden;
+      transition: .5s all;
+      min-width: 150px;
+  }
+  .dropdown-last:hover .dropdown-last__item{
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-10px);
+    transition: .5s all;
   }
 }
 
