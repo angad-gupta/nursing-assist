@@ -2,10 +2,12 @@ $(document).ready(function () {
     $("#page_submit").validate({
         rules: {
             title: "required",
+            short_content: "required",
             description: "required",
         },
         messages: {
             title: "Enter Title",
+            short_content: "Enter Short Content",
             description: "Enter Description",
         },
         errorElement: "em",

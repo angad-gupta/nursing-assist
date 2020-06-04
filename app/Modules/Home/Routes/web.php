@@ -12,3 +12,5 @@
 */
 
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
+
+Route::get('about-us', ['as' => 'about-us', 'uses' => 'HomeController@AboutUs']);

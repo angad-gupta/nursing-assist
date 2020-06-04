@@ -9,20 +9,22 @@ use Illuminate\Routing\Controller;
 use App\Modules\Page\Repositories\PageInterface;
 use App\Modules\Banner\Repositories\BannerInterface;
 use App\Modules\Course\Repositories\CourseInterface;
+use App\Modules\Team\Repositories\TeamInterface;
 
 class HomeController extends Controller
 {
 
-
     protected $page;
     protected $banner;
     protected $course;
+    protected $team;
     
-    public function __construct(PageInterface $page,BannerInterface $banner,CourseInterface $course)
+    public function __construct(PageInterface $page,BannerInterface $banner,CourseInterface $course, TeamInterface $team)
     {
         $this->page = $page;
         $this->banner = $banner;
         $this->course = $course;
+        $this->team = $team;
     }
 
     /**
@@ -43,9 +45,11 @@ class HomeController extends Controller
      * Show the form for creating a new resource.
      * @return Response
      */
-    public function create()
+    public function AboutUs()
     {
-        return view('home::create');
+        $data['about_neta'] =$this->page->getBySlug('about_us');
+        $data['team'] =$this->team->findAll();
+        return view('home::aboutus',$data);
     }
 
     /**
