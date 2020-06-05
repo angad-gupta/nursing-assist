@@ -12,6 +12,7 @@ use App\Modules\Course\Repositories\CourseInterface;
 use App\Modules\Team\Repositories\TeamInterface;
 use App\Modules\ContactUs\Repositories\ContactUsInterface;
 use App\Modules\Setting\Repositories\SettingInterface;
+use App\Modules\Enrolment\Repositories\EnrolmentInterface;
 
 class HomeController extends Controller
 {
@@ -21,6 +22,7 @@ class HomeController extends Controller
     protected $course;
     protected $team;
     protected $contactus;
+    protected $enrolment;
     protected $setting;
     
     public function __construct(
@@ -29,6 +31,7 @@ class HomeController extends Controller
             CourseInterface $course,
             TeamInterface $team,
             ContactUsInterface $contactus,
+            EnrolmentInterface $enrolment,
             SettingInterface $setting
         )
 
@@ -38,6 +41,7 @@ class HomeController extends Controller
         $this->course = $course;
         $this->team = $team;
         $this->contactus = $contactus;
+        $this->enrolment = $enrolment;
         $this->setting = $setting;
     }
 
@@ -102,44 +106,41 @@ class HomeController extends Controller
         return redirect(route('contact-us',$contact));
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        return view('home::show');
-    }
+   
 
     /**
-     * Show the form for editing the specified resource.
-     * @param int $id
+     * Show the form for creating a new resource.
      * @return Response
      */
-    public function edit($id)
+    public function Enrolment(Request $request)
     {
-        return view('home::edit');
+        $input = $request->all(); 
+        $data['message'] = ($input) ? $input['message'] : FALSE;
+        $data['setting'] = $this->setting->find(1);  
+        return view('home::enrolment',$data);
     }
 
-    /**
-     * Update the specified resource in storage.
+     /**
+     * Store a newly created resource in storage.
      * @param Request $request
-     * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function storeEnrolment(Request $request)
     {
-        //
+        $data = $request->all();
+        
+         try{
+
+            $this->enrolment->save($data);
+
+            $contact['message'] = 'You Message Store  Successfully';
+        }catch(\Throwable $e){
+            $contact['message'] = 'Something Wrong With Message';
+        }
+        
+        return redirect(route('enrolment',$contact));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+
+    
 }

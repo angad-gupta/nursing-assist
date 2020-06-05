@@ -18,3 +18,7 @@ Route::get('about-us', ['as' => 'about-us', 'uses' => 'HomeController@AboutUs'])
 Route::get('contact-us', ['as' => 'contact-us', 'uses' => 'HomeController@ContactUs']);
 
 Route::post('contactus/store', ['as' => 'contactus.store', 'uses' => 'HomeController@storeContact']);
+
+Route::get('enrolment', ['as' => 'enrolment', 'uses' => 'HomeController@Enrolment']);
+
+Route::post('enrolment/store', ['as' => 'enrolment.store', 'uses' => 'HomeController@storeEnrolment']);

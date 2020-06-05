@@ -17,57 +17,69 @@
 
 </head>
 <body>
-	<header class="header">
-		<div class="container">
-			<div class="row">
-				<nav class="navbar navbar-expand-lg navbar-light bg-light">
-					<div class="col-md-3 col-lg-3">
-						<a class="navbar-brand" href="index.php"><img src="{{asset('home/img/logo.png')}}" alt="" class="img-fluid"></a>
-					</div>
 
-					<div class="col-sm-12 col-md-12 col-lg-8">
-						<button class="navbar-toggler" type="button" data-toggle="collapse"
-						data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-						aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-					<div class="collapse navbar-collapse float-right" id="navbarSupportedContent">
-						<ul class="navbar-nav mr-auto">
-							<li class="nav-item">
-								<a class="nav-link active" href="{{ route('home') }}">Home</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="{{ route('about-us') }}">About Us</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="">Courses</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="">Agents</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="">Student's Login</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="{{ route('contact-us') }}">Contact Us</a>
-							</li>
+ <header class="header">
+        <div class="container">
+            <div class="row">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="col-md-3 col-lg-3">
+                       @if($setting != null && $setting->company_logo != null)
+                       <a class="navbar-brand" href="{{ route('home') }}"><img src="{{asset('uploads/setting/'.$setting->company_logo)}}" alt="" class="img-fluid"></a>
+                    @else
+                        <a class="navbar-brand" href="{{ route('home') }}"><img src="{{asset('home/img/logo.png')}}" alt="" class="img-fluid"></a>
+                    @endif
+                    </div>
 
-						</ul>
-					</div>
-				</div>
-				<div class="ecm-search col-sm-12 col-md-1">
-					<ul class="list-unstyled d-flex mt-3 float-right">
-						<a href="#">
-							<li class="user"><img src="{{asset('home/img/user.svg')}}" alt="">
-							</li>
-						</a>
-					</ul>
-				</div>
-			</nav>
-		</div>
-	</div>
+                    <div class="col-sm-12 col-md-12 col-lg-8">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse float-right" id="navbarSupportedContent">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="{{ route('home') }}">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('about-us') }}">About Us</a>
+                                </li>
+                                <li class="nav-item neta-dropdown">
+                                    <a class="nav-link" href="">Courses</a>
+                                    <ul class="neta-dropdown__menu list-unstyled">
+                                        <li>OBA </li>
+                                        <a href="#"><li>First Year RN</li></a>
+                                        <a href="#"><li>CPD</li></a>
+                                        <a href="{{ route('enrolment') }}"><li>Enrolment</li></a>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="">Agents</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="">Student's Login</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('contact-us') }}">Contact Us</a>
+                                </li>
 
-</header>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="ecm-search col-sm-12 col-md-1">
+                        <ul class="list-unstyled d-flex mt-3 float-right">
+                            <a href="login.php">
+                                <li class="user"><img src="{{asset('home/img/user.svg')}}" alt="">
+                                </li>
+                            </a>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+    </header>
+
 
 <section class="neta-banner">
 	<div class="owl-carousel owl-theme">

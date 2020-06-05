@@ -45,7 +45,12 @@
         <div class="row">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="col-md-3 col-lg-3">
-                    <a class="navbar-brand" href="index.php"><img src="img/logo.png" alt="" class="img-fluid"></a>
+                     @if($setting != null && $setting->company_logo != null)
+                         <a class="navbar-brand" href="{{ route('home') }}"><img src="{{asset('uploads/setting/'.$setting->company_logo)}}" alt="" class="img-fluid"></a>
+                    @else
+                        <a class="navbar-brand" href="{{ route('home') }}"><img src="{{asset('home/img/logo.png')}}" alt="" class="img-fluid"></a>
+                    @endif
+
                 </div>
                 <div class="col-sm-12 col-md-12 col-lg-8">
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -61,25 +66,15 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('about-us') }}">About Us</a>
                             </li>
-                            <li class="nav-item neta-dropdown">
-                                <a class="nav-link" href="">Courses</a>
-                                <ul class="neta-dropdown__menu list-unstyled">
-                                    <li>OBA
-                                        <ul class="neta-dropdown__menu-item list-unstyled">
-                                            <a href="#"><li>Enrolment</li></a>
-                                           <li> <a href="courses.php">Intake Dates</a></li>
-                                            <a href="courses.php"><li class="dropdown-last">Courses Information
-                                                    <ul class="dropdown-last__item list-unstyled">
-                                                        <a href="nclex.php"><li>NCLEX</li></a>
-                                                        <a href="#"><li>OSCE</li></a>
-                                                    </ul>
-                                            </li></a>
-                                        </ul>
-                                    </li>
-                                    <a href="#"><li>First Year RN</li></a>
-                                    <a href="#"><li>CPD</li></a>
-                                </ul>
-                            </li>
+                           <li class="nav-item neta-dropdown">
+                                    <a class="nav-link" href="">Courses</a>
+                                    <ul class="neta-dropdown__menu list-unstyled">
+                                        <li>OBA</li>
+                                        <a href="#"><li>First Year RN</li></a>
+                                        <a href="#"><li>CPD</li></a>
+                                        <a href="{{ route('enrolment') }}"><li>Enrolment</li></a>
+                                    </ul>
+                                </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="">Agents</a>
                             </li>

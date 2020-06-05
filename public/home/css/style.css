@@ -962,6 +962,10 @@ a {
   color: #000;
 }
 
+.bootstrap-select .dropdown-toggle:focus, .bootstrap-select > select.mobile-device:focus + .dropdown-toggle {
+  outline: 0 !important;
+}
+
 .navbar-light .navbar-nav .nav-link {
   color: #fff;
   text-transform: uppercase;
@@ -988,5 +992,13 @@ a {
 
 #vticker {
   width: 600px !important;
+}
+
+.neta-enrolment li {
+  padding: 0 !important;
+}
+
+.neta-enrolment select {
+  min-height: 52px;
 }
 /*# sourceMappingURL=style.css.map */
