@@ -89,9 +89,9 @@
                     <span class="input-group-text"><i class="icon-phone"></i></span>
                 </span>
                 @if($is_edit)
-                {!! Form::text('contact_no1',$setting->contact_no1, ['id'=>'contact_no1','placeholder'=>'Enter contact number','class'=>'form-control numeric']) !!}
+                {!! Form::text('contact_no1',$setting->contact_no1, ['id'=>'contact_no1','placeholder'=>'Enter contact number','class'=>'form-control']) !!}
                @else
-                {!! Form::text('contact_no1',$value = null, ['id'=>'contact_no1','placeholder'=>'Enter contact number','class'=>'form-control numeric']) !!}
+                {!! Form::text('contact_no1',$value = null, ['id'=>'contact_no1','placeholder'=>'Enter contact number','class'=>'form-control']) !!}
                 @endif
                     <span class="text-danger">{{ $errors->first('contact_no1') }}</span>
             </div>
@@ -103,9 +103,9 @@
                     <span class="input-group-text"><i class="icon-phone"></i></span>
                 </span>
                 @if($is_edit)
-                {!! Form::text('contact_no2',$setting->contact_no2, ['id'=>'contact_no2','placeholder'=>'Enter contact number 2','class'=>'form-control numeric']) !!}
+                {!! Form::text('contact_no2',$setting->contact_no2, ['id'=>'contact_no2','placeholder'=>'Enter contact number 2','class'=>'form-control']) !!}
                @else
-                {!! Form::text('contact_no2',$value = null, ['id'=>'contact_no2','placeholder'=>'Enter contact number 2','class'=>'form-control numeric']) !!}
+                {!! Form::text('contact_no2',$value = null, ['id'=>'contact_no2','placeholder'=>'Enter contact number 2','class'=>'form-control']) !!}
                @endif
                 <span class="text-danger">{{ $errors->first('contact_no2') }}</span>
             </div>
