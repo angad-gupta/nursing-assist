@@ -3,7 +3,8 @@
 namespace App\Modules\CourseInfo\Repositories;
 
 use App\Modules\CourseInfo\Entities\CourseInfo;
-use App\Modules\CourseInfo\Entities\CourseInfoFeature;
+use App\Modules\CourseInfo\Entities\CourseProgram;
+use App\Modules\CourseInfo\Entities\CourseStructure;
 
 
 class CourseInfoRepository implements CourseInfoInterface
@@ -38,11 +39,15 @@ class CourseInfoRepository implements CourseInfoInterface
         return CourseInfo::create($data);
     }
 
-    public function saveCourseFeature($data){
+    public function saveCourseProgramme($data){
 
-        return CourseInfoFeature::create($data);
+        return CourseProgram::create($data);
     }
 
+    public function saveCourseStructure($data){
+
+        return CourseStructure::create($data);
+    }
 
     public function update($id, $data)
     {
@@ -55,14 +60,17 @@ class CourseInfoRepository implements CourseInfoInterface
         return CourseInfo::destroy($id);
     }
 
-    public function deleteCourseFeature($id){
-        CourseInfoFeature::where('courseInfo_id','=',$id)->delete($id);
+    public function deleteCourseProgramme($id){
+        CourseProgram::where('course_info_id','=',$id)->delete($id);
+    }
+
+    public function deleteCourseStrucuture($id){
+        CourseStructure::where('course_info_id','=',$id)->delete($id);
     }
 
     public function countTotal(){
         return CourseInfo::count();
     }
-
 
     public function upload($file){
         

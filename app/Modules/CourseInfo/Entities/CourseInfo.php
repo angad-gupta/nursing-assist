@@ -3,7 +3,8 @@
 namespace App\Modules\CourseInfo\Entities;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Modules\CourseInfo\Entities\CourseInfoFeature;
+use App\Modules\CourseInfo\Entities\CourseStructure;
+use App\Modules\CourseInfo\Entities\CourseProgram;
 use App\Modules\Course\Entities\Course;
 
 class CourseInfo extends Model
@@ -14,12 +15,11 @@ class CourseInfo extends Model
     protected $fillable = [
 
     	'course_id',
-    	'title',
+    	'course_program_title',
     	'description',
     	'type',
     	'image_path',
-    	'youtube_id',
-    	'tuition_fee'
+    	'youtube_id'
 
     ];
 
@@ -32,8 +32,13 @@ class CourseInfo extends Model
         return $this->belongsTo(Course::class,'course_id','id');
     }
 
-    public function CourseFeatures()
+    public function CourseStructure()
     {
-        return $this->hasMany(CourseInfoFeature::class, 'courseInfo_id');
+        return $this->hasMany(CourseStructure::class, 'course_info_id');
+    }
+
+    public function CourseProgramme()
+    {
+        return $this->hasMany(CourseProgram::class, 'course_info_id');
     }
 }

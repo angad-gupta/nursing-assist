@@ -4,12 +4,11 @@ namespace App\Modules\CourseInfo\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CourseInfoFeature extends Model
+class CourseProgram extends Model
 {
     protected $fillable = [
 
-    	'courseInfo_id',
-    	'feature_title'
-
+    	'course_info_id',
+    	'program_detail_title'
     ];
 }

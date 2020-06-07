@@ -4,11 +4,18 @@ $(document).ready(function () {
             title: "required",
             short_content: "required",
             description: "required",
+            tuition_fee: "required",
+            mode_of_delivery: "required",
+            course_duration: "required",
         },
         messages: {
             title: "Please Enter Title",
             short_content: "Please  Enter Short Content",
-            description: "Please Enter Description"
+            description: "Please Enter Description",
+            tuition_fee: "Please Enter Tuition Fee",
+            mode_of_delivery: "Please Enter Mode of Delivery",
+            course_duration: "Please Enter Course Duration",
+
         },
         errorElement: "em",
         errorPlacement: function (error, element) {  console.log(element)

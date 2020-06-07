@@ -17,12 +17,11 @@ class CreateCourseInfosTable extends Migration
             $table->increments('id');
 
             $table->integer('course_id')->nullable();
-            $table->text('title')->nullable();
+            $table->text('course_program_title')->nullable();
             $table->text('description')->nullable();
             $table->string('type')->nullable();
             $table->text('image_path')->nullable();
             $table->string('youtube_id')->nullable();
-            $table->string('tuition_fee')->nullable();
 
             $table->timestamps();
         });

@@ -20,13 +20,13 @@
 
         <div class="col-md-6">
             <div class="form-group row">
-                <label class="col-form-label col-lg-4">Title:<span class="text-danger">*</span></label>
+                <label class="col-form-label col-lg-4">Course Program Title:<span class="text-danger">*</span></label>
                     <div class="col-lg-8">
                        <div class="input-group">
                         <span class="input-group-prepend">
                             <span class="input-group-text"><i class="icon-bookmarks"></i></span>
                         </span>
-                        {!! Form::text('title', $value = null, ['placeholder'=>'Enter Title','class'=>'title form-control']) !!}
+                        {!! Form::text('course_program_title', $value = null, ['placeholder'=>'Enter Course Program Title','class'=>'title form-control']) !!}
                         </div>
                     </div>
             </div>
@@ -51,19 +51,7 @@
 
     <div class="row">
 
-               <div class="col-md-6">
-            <div class="form-group row">
-                <label class="col-form-label col-lg-4">Tuition Fee:<span class="text-danger">*</span></label>
-                    <div class="col-lg-8">
-                       <div class="input-group">
-                        <span class="input-group-prepend">
-                            <span class="input-group-text"><i class="icon-coin-dollar "></i></span>
-                        </span>
-                        {!! Form::text('tuition_fee', $value = null, ['placeholder'=>'Enter Tuition Fee','class'=>'tuition_fee form-control']) !!}
-                        </div>
-                    </div>
-            </div>
-        </div>
+               
 
             <div class="col-md-6">
                 <div class="form-group row">
@@ -97,7 +85,7 @@
 
              <div class="col-lg-6">
                     <div class="row">
-                        <label class="col-form-label col-lg-4">Profile Pic:</label>
+                        <label class="col-form-label col-lg-4">Image:</label>
                         <div class="col-lg-8 form-group-feedback form-group-feedback-right">
                             <div class="input-group">
                                 <span class="input-group-prepend">
@@ -146,25 +134,26 @@
 
 </fieldset>
 
+
 <fieldset class="mb-3">
-    <legend class="text-uppercase font-size-sm font-weight-bold">Course Features</legend>
+    <legend class="text-uppercase font-size-sm font-weight-bold">Course Programme</legend>
 
      @if($is_edit)
-        @foreach($courseinfo->CourseFeatures as $key => $feature)
+        @foreach($courseinfo->CourseProgramme as $key => $programme)
                              
-            <div class="appendOptions">
+            <div class="appendProgramme">
                 <div class="form-group row">
 
                      <div class="col-lg-6">
                             <div class="row">
-                                <label class="col-form-label col-lg-3">Feature Title:</label>
+                                <label class="col-form-label col-lg-3">Course Programme Step:</label>
                                 <div class="col-lg-9 form-group-feedback form-group-feedback-right">
                                     <div class="input-group">
                                         <span class="input-group-prepend">
                                             <span class="input-group-text"><i class="icon-list3"></i>
                                             </span>
                                         </span>
-                                        {!! Form::text('feature_title[]', $value = $feature->feature_title, ['id'=>'feature_title','placeholder'=>'Enter Feature','class'=>'form-control']) !!}
+                                        {!! Form::text('program_detail_title[]', $value = $programme->program_detail_title, ['id'=>'program_detail_title','placeholder'=>'Enter Progrmme Step','class'=>'form-control']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -173,7 +162,7 @@
 
                     <div class="col-lg-2">
                        <div class="row">
-                             <button type="button" class="ml-2 remove_option btn bg-danger-800 btn-labeled btn-labeled-left"><b><i class="icon-pen-plus"></i></b> Remove</button>
+                             <button type="button" class="ml-2 remove_programme btn bg-danger-800 btn-labeled btn-labeled-left"><b><i class="icon-pen-plus"></i></b> Remove</button>
                         </div>
                     </div>
                 </div>
@@ -182,19 +171,19 @@
         @endforeach
     @endif
 
-        <div class="appendFeatures">
+        <div class="appendProgramme">
                 <div class="form-group row">
 
                     <div class="col-lg-6">
                         <div class="row">
-                            <label class="col-form-label col-lg-3">Feature Title:</label>
+                            <label class="col-form-label col-lg-3">Course Programme Step:</label>
                             <div class="col-lg-9 form-group-feedback form-group-feedback-right">
                                 <div class="input-group">
                                     <span class="input-group-prepend">
                                         <span class="input-group-text"><i class="icon-list3"></i>
                                         </span>
                                     </span>
-                                    {!! Form::text('feature_title[]', $value = null, ['id'=>'feature_title','placeholder'=>'Enter Feature','class'=>'form-control']) !!}
+                                    {!! Form::text('program_detail_title[]', $value = null, ['id'=>'program_detail_title','placeholder'=>'Enter Progrmme Step','class'=>'form-control']) !!}
                                 </div>
                             </div>
                         </div>
@@ -202,7 +191,72 @@
 
                     <div class="col-lg-2">
                        <div class="row">
-                                <button type="button" class="ml-2 add_feature btn bg-success-800 btn-labeled btn-labeled-left"><b><i class="icon-pen-plus"></i></b> Add Feature</button>
+                                <button type="button" class="ml-2 add_programme btn bg-success-800 btn-labeled btn-labeled-left"><b><i class="icon-pen-plus"></i></b> Add Progrmme Step</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+</fieldset>
+
+
+<fieldset class="mb-3">
+    <legend class="text-uppercase font-size-sm font-weight-bold">Course Structure</legend>
+
+     @if($is_edit)
+        @foreach($courseinfo->CourseStructure as $key => $structure)
+                             
+            <div class="appendStructure">
+                <div class="form-group row">
+
+                     <div class="col-lg-6">
+                            <div class="row">
+                                <label class="col-form-label col-lg-3">Structure Title:</label>
+                                <div class="col-lg-9 form-group-feedback form-group-feedback-right">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend">
+                                            <span class="input-group-text"><i class="icon-list3"></i>
+                                            </span>
+                                        </span>
+                                        {!! Form::text('structure_title[]', $value = $structure->structure_title, ['id'=>'structure_title','placeholder'=>'Enter Structure','class'=>'form-control']) !!}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    <div class="col-lg-2">
+                       <div class="row">
+                             <button type="button" class="ml-2 remove_structure btn bg-danger-800 btn-labeled btn-labeled-left"><b><i class="icon-pen-plus"></i></b> Remove</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        @endforeach
+    @endif
+
+        <div class="appendStructure">
+                <div class="form-group row">
+
+                    <div class="col-lg-6">
+                        <div class="row">
+                            <label class="col-form-label col-lg-3">Structure Title:</label>
+                            <div class="col-lg-9 form-group-feedback form-group-feedback-right">
+                                <div class="input-group">
+                                    <span class="input-group-prepend">
+                                        <span class="input-group-text"><i class="icon-list3"></i>
+                                        </span>
+                                    </span>
+                                    {!! Form::text('structure_title[]', $value = null, ['id'=>'structure_title','placeholder'=>'Enter Structure','class'=>'form-control']) !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2">
+                       <div class="row">
+                                <button type="button" class="ml-2 add_structure btn bg-success-800 btn-labeled btn-labeled-left"><b><i class="icon-pen-plus"></i></b> Add Structure</button>
                         </div>
                     </div>
                 </div>
@@ -269,17 +323,32 @@
             }
         });
 
-          $('.add_feature').on('click',function(){
+          $('.add_programme').on('click',function(){
             $.ajax({
                     type: 'GET',
-                    url: '/admin/courseinfo/appendFeature',
+                    url: '/admin/courseinfo/appendProgramme',
                     success: function (data) {
-                        $('.appendFeatures').last().append(data.options); 
+                        $('.appendProgramme').last().append(data.options); 
                     }
                 });
         }); 
 
-        $('.remove_feature').on('click',function(){ 
+
+          $('.add_structure').on('click',function(){
+            $.ajax({
+                    type: 'GET',
+                    url: '/admin/courseinfo/appendStructure',
+                    success: function (data) {
+                        $('.appendStructure').last().append(data.options); 
+                    }
+                });
+        }); 
+
+        $('.remove_programme').on('click',function(){ 
+            $(this).parent().parent().parent().remove();
+        });
+        
+        $('.remove_structure').on('click',function(){ 
             $(this).parent().parent().parent().remove();
         });
 

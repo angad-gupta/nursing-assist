@@ -58,11 +58,10 @@ class CourseInfoController extends Controller
 
              $courseInfoData = array(
                 'course_id' => $data['course_id'],
-                 'title' => $data['title'],
+                 'course_program_title' => $data['course_program_title'],
                 'description' => $data['description'],
                 'type' => $data['type'],
-                'youtube_id' => $data['youtube_id'],
-                'tuition_fee' => $data['tuition_fee'],
+                'youtube_id' => $data['youtube_id']
             );
 
             if ($request->hasFile('image_path')) {
@@ -72,19 +71,31 @@ class CourseInfoController extends Controller
             $courseInfo = $this->courseinfo->save($courseInfoData);
             $course_info_id = $courseInfo->id;
 
-            $feature_title = $data['feature_title'];
-            $countname = sizeof($feature_title);
+            $programme_title = $data['program_detail_title'];
+            $countname = sizeof($programme_title);
                 for($i = 0; $i < $countname; $i++){
                     
-                    if($data['feature_title'][$i]){
-                         $featuredata['courseInfo_id'] = $course_info_id;
-                         $featuredata['feature_title'] = $data['feature_title'][$i];
+                    if($data['program_detail_title'][$i]){
+                         $courseProgramedata['course_info_id'] = $course_info_id;
+                         $courseProgramedata['program_detail_title'] = $data['program_detail_title'][$i];
 
-                         $this->courseinfo->saveCourseFeature($featuredata);
+                         $this->courseinfo->saveCourseProgramme($courseProgramedata);
                     }
                 }
+
+             $structure_title = $data['structure_title'];
+            $countname = sizeof($structure_title);
+                for($i = 0; $i < $countname; $i++){
+                    
+                    if($data['structure_title'][$i]){
+                         $structuredata['course_info_id'] = $course_info_id;
+                         $structuredata['structure_title'] = $data['structure_title'][$i];
+
+                         $this->courseinfo->saveCourseStructure($structuredata);
+                    }
+                }    
            
-            alertify()->success('Course Information  Created Successfully');
+            alertify()->success('Course Information Created Successfully');
         }catch(\Throwable $e){
             alertify($e->getMessage())->error();
         }
@@ -120,11 +131,10 @@ class CourseInfoController extends Controller
 
             $courseInfoData = array(
                 'course_id' => $data['course_id'],
-                 'title' => $data['title'],
+                 'course_program_title' => $data['course_program_title'],
                 'description' => $data['description'],
                 'type' => $data['type'],
-                'youtube_id' => $data['youtube_id'],
-                'tuition_fee' => $data['tuition_fee'],
+                'youtube_id' => $data['youtube_id']
             );
 
             if ($request->hasFile('image_path')) {
@@ -134,19 +144,32 @@ class CourseInfoController extends Controller
             $courseInfo = $this->courseinfo->update($id, $courseInfoData);
             $course_info_id = $id;
             
-            $this->courseinfo->deleteCourseFeature($course_info_id);
+            $this->courseinfo->deleteCourseProgramme($course_info_id);
+            $this->courseinfo->deleteCourseStrucuture($course_info_id);
 
-            $feature_title = $data['feature_title'];
-            $countname = sizeof($feature_title);
+             $programme_title = $data['program_detail_title'];
+            $countname = sizeof($programme_title);
                 for($i = 0; $i < $countname; $i++){
                     
-                    if($data['feature_title'][$i]){
-                         $featuredata['courseInfo_id'] = $course_info_id;
-                         $featuredata['feature_title'] = $data['feature_title'][$i];
+                    if($data['program_detail_title'][$i]){
+                         $courseProgramedata['course_info_id'] = $course_info_id;
+                         $courseProgramedata['program_detail_title'] = $data['program_detail_title'][$i];
 
-                         $this->courseinfo->saveCourseFeature($featuredata);
+                         $this->courseinfo->saveCourseProgramme($courseProgramedata);
                     }
                 }
+
+             $structure_title = $data['structure_title'];
+            $countname = sizeof($structure_title);
+                for($i = 0; $i < $countname; $i++){
+                    
+                    if($data['structure_title'][$i]){
+                         $structuredata['course_info_id'] = $course_info_id;
+                         $structuredata['structure_title'] = $data['structure_title'][$i];
+
+                         $this->courseinfo->saveCourseStructure($structuredata);
+                    }
+                }    
             
             alertify()->success('Course Information Updated Successfully');
         }catch(\Throwable $e){
@@ -174,11 +197,18 @@ class CourseInfoController extends Controller
     }
 
 
-    public function appendFeature(Request $request){
+    public function appendProgramme(Request $request){
          
-         $data = view('courseinfo::courseinfo.partial.add-more-feature')->render();
+         $data = view('courseinfo::courseinfo.partial.add-more-programme')->render();
          return response()->json(['options'=>$data]);
         
-        }
+    } 
+
+    public function appendStructure(Request $request){
+         
+         $data = view('courseinfo::courseinfo.partial.add-more-structure')->render();
+         return response()->json(['options'=>$data]);
+        
+    }
 
 }

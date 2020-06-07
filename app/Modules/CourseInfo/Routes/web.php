@@ -28,5 +28,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','web','permission']],
         // Assessment Setup Delete
         Route::get('courseinfo/delete/{id}', ['as' => 'courseinfo.delete', 'uses' => 'CourseInfoController@destroy'])->where('id','[0-9]+');
       
-        Route::get('courseinfo/appendFeature', ['as' => 'courseinfo.appendFeature', 'uses' => 'CourseInfoController@appendFeature']);
+        Route::get('courseinfo/appendProgramme', ['as' => 'courseinfo.appendProgramme', 'uses' => 'CourseInfoController@appendProgramme']);
+        
+        Route::get('courseinfo/appendStructure', ['as' => 'courseinfo.appendStructure', 'uses' => 'CourseInfoController@appendStructure']);
 });     

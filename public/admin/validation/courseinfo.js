@@ -3,13 +3,12 @@ $(document).ready(function () {
         rules: {
             course_id: "required",
             title: "required",
-            tuition_fee: "required",
+           
             description: "required"
         },
         messages: {
             course_id: "Please Select Course",
             title: "Please  Enter Title",
-            tuition_fee: "Please Enter Tuition Fee",
             description:"Please Enter Description"
         },
         errorElement: "em",
