@@ -134,6 +134,7 @@
 							<li>Essential</li>
 							<li>Capable</li>
 							<li>Life savers</li>
+							<li>Your Friend</li>
 						</ul>
 					</div>
 					<p>It is the work that we do every day that makes us superheroes.</p>
@@ -312,7 +313,7 @@
 				<p>No documentation needed, no English test. Just self check – for free.To know if you are eligible, commence your self check</p>
 			</div>
 			<div class="col-sm-4">
-				<button class="btn btn-neta float-right"><a href="#">Self Check</a></button>
+				<a href="https://www.nursingmidwiferyboard.gov.au/Registration-and-Endorsement/International/Completing-the-Self-check.aspx" target="_blank"><button class="btn btn-neta float-right">Self Check</button></a>
 			</div>
 		</div>
 	</div>

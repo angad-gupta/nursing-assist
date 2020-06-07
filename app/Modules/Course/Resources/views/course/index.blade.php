@@ -24,23 +24,21 @@
                 <tr class="bg-slate">
                     <th>#</th>
                     <th>Title</th>
-                    <th width="30%">Short Content</th>
-                    <th>Image</th>
+                    <th>Course Duration</th>
+                    <th>Mode of Delivery</th>
+                    <th>tuition_fee</th>
                     <th>Action</th>
                 </tr>
             </thead>
            <tbody>
                 @if($course->total() != 0) 
                 @foreach($course as $key => $value)
- 
-                @php
-                $image = ($value->image) ? asset($value->file_full_path).'/'.$value->image : asset('admin/default.png');
-                @endphp
                 <tr>
                     <td>{{$course->firstItem() +$key}}</td>
                      <td>{{ $value->title }}</td>
-                     <td>{!! $value->short_content !!}</td>
-                    <td><a target="_blank" href="{{ $image }}"><img src="{{ $image }}" style="width: 50px;"></a></td>
+                     <td>{{ $value->course_duration }}</td>
+                     <td>{{ $value->mode_of_delivery }}</td>
+                     <td>{{ $value->tuition_fee }}</td>
                     <td>
 
                         <a class="btn bg-teal-400 btn-icon rounded-round" href="{{route('course.edit',$value->id)}}" data-popup="tooltip" data-original-title="Edit" data-placement="bottom"><i class="icon-pencil6"></i></a>

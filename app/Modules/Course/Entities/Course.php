@@ -13,6 +13,11 @@ class Course extends Model
     	'title',
  		'short_content',
     	'description',
+        'course_duration',
+        'mode_of_delivery',
+        'course_information',
+        'important_course',
+        'tuition_fee',
     	'image'
 
     ];
