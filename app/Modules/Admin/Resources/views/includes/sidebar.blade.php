@@ -145,6 +145,18 @@
                             <span>Agents Management</span>
                         </a>
                     </li>
+                    @endif  
+
+                      @if($menuRoles->assignedRoles('faq.index'))
+                    <li class="nav-item">
+                        <a href="{{route('faq.index')}}"
+                           class="nav-link @if($Route[0]=='faq') active @endif"
+                           data-popup="tooltip" data-original-title="FAQ Management"
+                           data-placement="right">
+                            <i class="icon-bubbles9"></i>
+                            <span>FAQ Management</span>
+                        </a>
+                    </li>
                     @endif   
 
                     @if($menuRoles->assignedRoles('contactus.index'))
