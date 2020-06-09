@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $("#banner_submit").validate({
+    $("#quiz_submit").validate({
         rules: {
             category: "required",
             question: "required",
