@@ -67,7 +67,7 @@
                                             <img src="{{asset('home/img/abt.png')}}" class="img-fluid" alt="">
                                         </div>
                                         <div class="col-sm-8 pt-4">
-                                            <a href="{{ route('course-info-detail',['courseinfo_id'=>$courseInfo->id]) }}"><h4>{{$courseInfo->course_program_sub_title}}</h4></a>
+                                            <a href="{{ route('course-info-detail',['courseinfo_id'=>$courseInfo->id]) }}"><h4>{{$courseInfo->course_intake_title}}</h4></a>
                                              <p>Online and Live Teleconferences</p>
                                             <ul class="list-unstyled d-flex">
 
