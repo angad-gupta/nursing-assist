@@ -775,6 +775,30 @@ header .bg-light .navbar-brand {
   left: 0;
 }
 
+.neta-about .neta-mv h6 {
+  color: #b0117e;
+  font-size: 18px;
+  margin-top: 30px;
+}
+
+.neta-about .enrol-cpd {
+  background: #b0117e;
+  color: #fff;
+  padding: 10px;
+  margin-bottom: 20px;
+  display: inline-block;
+  border-radius: 4px;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+  cursor: pointer;
+}
+
+.neta-about .enrol-cpd:hover {
+  background: #6E2F9F;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+}
+
 .neta-team .ttl-line {
   position: relative;
   margin-bottom: 30px;
@@ -791,7 +815,7 @@ header .bg-light .navbar-brand {
 }
 
 .neta-team .ttl-line::after {
-  content: '';
+  content: "";
   bottom: -15px;
 }
 
@@ -807,15 +831,15 @@ header .bg-light .navbar-brand {
 .neta-team__box:hover figcaption {
   -webkit-transform: translateY(-15px);
           transform: translateY(-15px);
-  -webkit-transition: .5s all;
-  transition: .5s all;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
 }
 
 .neta-team__box:hover img {
   -webkit-transform: scale(1.05);
           transform: scale(1.05);
-  -webkit-transition: .5s all;
-  transition: .5s all;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
 }
 
 .neta-team__box img {
@@ -824,8 +848,8 @@ header .bg-light .navbar-brand {
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 4px;
-  -webkit-transition: .5s all;
-  transition: .5s all;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
 }
 
 .neta-team__box .img-fade {
@@ -844,8 +868,8 @@ header .bg-light .navbar-brand {
   bottom: 20px;
   color: #fff;
   left: 25%;
-  -webkit-transition: .5s all;
-  transition: .5s all;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
 }
 
 .neta-team__box figcaption p {
@@ -955,6 +979,10 @@ header .bg-light .navbar-brand {
 
 .neta-login .neta-contact__form p {
   padding-bottom: 20px;
+}
+
+.courses-wrap .neta-email {
+  color: #B0117E;
 }
 
 .courses-wrap .course-iframe {
@@ -1182,12 +1210,66 @@ header .bg-light .navbar-brand {
   margin-right: 20px;
 }
 
+.neta-catlog {
+  background: #fff;
+  border-radius: 4px;
+  min-height: 300px;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+.neta-catlog img {
+  width: 100%;
+  height: 180px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.neta-catlog figcaption {
+  padding: 15px;
+}
+
+.neta-catlog figcaption p {
+  font-weight: 500;
+  line-height: 1.2;
+  display: block;
+  margin-bottom: 0;
+}
+
+.neta-catlog figcaption span {
+  font-size: 12px;
+  padding-top: 5px;
+  padding-bottom: 10px;
+}
+
+.neta-catlog .btn {
+  background: #B0117E;
+  margin-top: 30px;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+}
+
+.neta-catlog .btn a {
+  color: #fff;
+}
+
+.neta-catlog .btn:hover {
+  background: #6E2F9F;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+}
+
+.neta-catlog .btn:hover a {
+  color: #fff;
+}
+
 a {
   text-decoration: none !important;
   color: #000;
 }
 
-.bootstrap-select .dropdown-toggle:focus, .bootstrap-select > select.mobile-device:focus + .dropdown-toggle {
+.bootstrap-select .dropdown-toggle:focus,
+.bootstrap-select > select.mobile-device:focus + .dropdown-toggle {
   outline: 0 !important;
 }
 
@@ -1198,8 +1280,8 @@ a {
 }
 
 .btn-neta {
-  -webkit-transition: .5s all;
-  transition: .5s all;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
 }
 
 .neta-head p {
@@ -1225,5 +1307,32 @@ a {
 
 .neta-enrolment select {
   min-height: 52px;
+}
+
+.neta-rect:before {
+  content: "";
+  background: #b0117e;
+  width: 170px;
+  height: 170px;
+  position: absolute;
+  top: -15px;
+  left: 0px;
+  z-index: -10;
+  opacity: 0.5;
+}
+
+.b-line {
+  border-bottom: 1px solid #dedede;
+  margin-bottom: 10px;
+}
+
+.student-hub .b-line {
+  padding: 20px 0;
+}
+
+.student-hub span {
+  padding-bottom: 15px;
+  display: block;
+  color: #FEB049;
 }
 /*# sourceMappingURL=style.css.map */
