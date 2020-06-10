@@ -36,3 +36,5 @@ class CourseInfoDatabaseSeeder extends Seeder
        $country = Month::insert($months);
     }
 }
+
+
