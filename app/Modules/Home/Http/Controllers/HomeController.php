@@ -9,9 +9,9 @@ use Illuminate\Routing\Controller;
 use App\Modules\Page\Repositories\PageInterface;
 use App\Modules\Banner\Repositories\BannerInterface;
 use App\Modules\Course\Repositories\CourseInterface;
+use App\Modules\CourseInfo\Repositories\CourseInfoInterface;
 use App\Modules\Team\Repositories\TeamInterface;
 use App\Modules\ContactUs\Repositories\ContactUsInterface;
-use App\Modules\Setting\Repositories\SettingInterface;
 use App\Modules\Enrolment\Repositories\EnrolmentInterface;
 
 class HomeController extends Controller
@@ -20,29 +20,29 @@ class HomeController extends Controller
     protected $page;
     protected $banner;
     protected $course;
+    protected $courseinfo;
     protected $team;
     protected $contactus;
     protected $enrolment;
-    protected $setting;
     
     public function __construct(
             PageInterface $page,
             BannerInterface $banner,
             CourseInterface $course,
+            CourseInfoInterface $courseinfo,
             TeamInterface $team,
             ContactUsInterface $contactus,
-            EnrolmentInterface $enrolment,
-            SettingInterface $setting
+            EnrolmentInterface $enrolment
         )
 
     {
         $this->page = $page;
         $this->banner = $banner;
         $this->course = $course;
+        $this->courseinfo = $courseinfo;
         $this->team = $team;
         $this->contactus = $contactus;
         $this->enrolment = $enrolment;
-        $this->setting = $setting;
     }
 
     /**
@@ -55,7 +55,6 @@ class HomeController extends Controller
         $data['we_offer'] = $this->page->getBySlug('we_offer');
         $data['course'] = $this->course->findAll();
         $data['about_neta'] =$this->page->getBySlug('about_us');
-        $data['setting'] = $this->setting->find(1);
         return view('home::index',$data);
     }
 
@@ -67,7 +66,6 @@ class HomeController extends Controller
     {
         $data['about_neta'] =$this->page->getBySlug('about_us');
         $data['team'] =$this->team->findAll();
-        $data['setting'] = $this->setting->find(1);
         return view('home::aboutus',$data);
     }
 
@@ -81,7 +79,6 @@ class HomeController extends Controller
         $input = $request->all(); 
         $data['contact_us'] =$this->page->getBySlug('contact_us');
         $data['message'] = ($input) ? $input['message'] : FALSE;
-        $data['setting'] = $this->setting->find(1);  
         return view('home::contactus',$data);
     }
 
@@ -116,7 +113,6 @@ class HomeController extends Controller
     {
         $input = $request->all(); 
         $data['message'] = ($input) ? $input['message'] : FALSE;
-        $data['setting'] = $this->setting->find(1);  
         return view('home::enrolment',$data);
     }
 
@@ -141,6 +137,39 @@ class HomeController extends Controller
         return redirect(route('enrolment',$contact));
     }
 
+
+      /**
+     * Show the form for creating a new resource.
+     * @return Response
+     */
+    public function Course(Request $request)
+    {
+        $input = $request->all(); 
+        $data['course'] = $this->course->findAll();
+        return view('home::course',$data);
+    }
+
+    public function courseDetail(Request $request){
+        $input = $request->all();
+
+        $course_id = $input['course_id'];
+
+        $data['course_detail'] = $this->course->find($course_id);
+        $data['course_info'] = $this->courseinfo->getCourseInfoByCourse($course_id);
+
+        return view('home::course-detail',$data);
+      
+    }
+
+    public function courseInfoDetail(Request $request){
+        $input = $request->all();
+
+        $courseinfo_id = $input['courseinfo_id'];
+        $data['course_info_detail'] = $this->courseinfo->find($courseinfo_id);
+
+        return view('home::course-info-detail',$data);
+      
+    }
 
     
 }

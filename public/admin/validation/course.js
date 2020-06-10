@@ -2,17 +2,21 @@ $(document).ready(function () {
     $("#course_submit").validate({
         rules: {
             title: "required",
+            title_of_training: "required",
             short_content: "required",
             description: "required",
-            tuition_fee: "required",
+            intake_dates: "required",
+            course_fee: "required",
             mode_of_delivery: "required",
             course_duration: "required",
         },
         messages: {
             title: "Please Enter Title",
+            title_of_training: "Please Enter Title of Training",
             short_content: "Please  Enter Short Content",
             description: "Please Enter Description",
-            tuition_fee: "Please Enter Tuition Fee",
+            intake_dates: "Please Enter Intake Date",
+            course_fee: "Please Enter course Fee",
             mode_of_delivery: "Please Enter Mode of Delivery",
             course_duration: "Please Enter Course Duration",
 

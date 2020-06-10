@@ -159,6 +159,19 @@
                     </li>
                     @endif   
 
+
+                      @if($menuRoles->assignedRoles('quiz.index'))
+                    <li class="nav-item">
+                        <a href="{{route('quiz.index')}}"
+                           class="nav-link @if($Route[0]=='quiz') active @endif"
+                           data-popup="tooltip" data-original-title="Quiz Management"
+                           data-placement="right">
+                            <i class="icon-question7"></i>
+                            <span>Quiz Management</span>
+                        </a>
+                    </li>
+                    @endif   
+
                     @if($menuRoles->assignedRoles('contactus.index'))
                     <li class="nav-item">
                         <a href="{{route('contactus.index')}}"
@@ -205,18 +218,6 @@
                             <span>CourseInfo Management</span>
                         </a>
                     </li>
-                    @endif
-
-                    @if($menuRoles->assignedRoles('courseintake.index'))
-                        <li class="nav-item">
-                            <a href="{{route('courseintake.index')}}"
-                               class="nav-link @if($Route[0]=='courseintake') active @endif"
-                               data-popup="tooltip" data-original-title="Course Intake"
-                               data-placement="right">
-                                <i class="icon-stack-text"></i>
-                                <span>Course Intake</span>
-                            </a>
-                        </li>
                     @endif
 
             </ul>

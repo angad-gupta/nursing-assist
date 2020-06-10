@@ -26,7 +26,8 @@
                     <th>Title</th>
                     <th>Course Duration</th>
                     <th>Mode of Delivery</th>
-                    <th>tuition_fee</th>
+                    <th>Course Fees</th>
+                    <th>Intake Dates</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -38,7 +39,8 @@
                      <td>{{ $value->title }}</td>
                      <td>{{ $value->course_duration }}</td>
                      <td>{{ $value->mode_of_delivery }}</td>
-                     <td>{{ $value->tuition_fee }}</td>
+                     <td>{{ $value->course_fees }}</td>
+                     <td>{{ $value->intake_dates }}</td>
                     <td>
 
                         <a class="btn bg-teal-400 btn-icon rounded-round" href="{{route('course.edit',$value->id)}}" data-popup="tooltip" data-original-title="Edit" data-placement="bottom"><i class="icon-pencil6"></i></a>

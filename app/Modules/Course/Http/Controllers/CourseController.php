@@ -50,10 +50,41 @@ class CourseController extends Controller
         $data = $request->all();
         
          try{
+
+             $courseoData = array(
+                'title' => $data['title'],
+                'title_of_training' => $data['title_of_training'],
+                'course_duration' => $data['course_duration'],
+                'mode_of_delivery' => $data['mode_of_delivery'],
+                'intake_dates' => $data['intake_dates'],
+                'course_fees' => $data['course_fees'],
+                'short_content' => $data['short_content'],
+                'description' => $data['description'],
+                'enrollment_process' => $data['enrollment_process'],
+                'important_course' => $data['important_course'],
+            );
+
             if ($request->hasFile('image')) {
-                $data['image'] = $this->course->upload($data['image']);
+                $courseoData['image'] = $this->course->upload($data['image']);
             }
-            $this->course->save($data);
+
+            $courseInfo = $this->course->save($courseoData);
+            $course_id = $courseInfo->id;
+
+            $enrol_title = $data['enrol_title'];
+            $countname = sizeof($enrol_title);
+                for($i = 0; $i < $countname; $i++){
+                    
+                    if($data['enrol_title'][$i]){
+                         $courseEnrolData['course_id'] = $course_id;
+                         $courseEnrolData['enrol_title'] = $data['enrol_title'][$i];
+                         $courseEnrolData['course_fee'] = $data['course_fee'][$i];
+                         $courseEnrolData['payment_mode'] = $data['payment_mode'][$i];
+
+                         $this->course->saveCourseEnrol($courseEnrolData);
+                    }
+                }
+
             alertify()->success('Course Created Successfully');
         }catch(\Throwable $e){
             alertify($e->getMessage())->error();
@@ -95,11 +126,42 @@ class CourseController extends Controller
        $data = $request->all();
         
         try{
+            $courseoData = array(
+                'title' => $data['title'],
+                'title_of_training' => $data['title_of_training'],
+                'course_duration' => $data['course_duration'],
+                'mode_of_delivery' => $data['mode_of_delivery'],
+                'intake_dates' => $data['intake_dates'],
+                'course_fees' => $data['course_fees'],
+                'short_content' => $data['short_content'],
+                'description' => $data['description'],
+                'enrollment_process' => $data['enrollment_process'],
+                'important_course' => $data['important_course'],
+            );
+
             if ($request->hasFile('image')) {
                 $data['image'] = $this->course->upload($data['image']);
             }
+
+            $courseInfo = $this->course->update($id,$courseoData);
+            $course_id = $id;
+
+            $this->course->deleteCourseEnrol($course_id);
+
+            $enrol_title = $data['enrol_title'];
+            $countname = sizeof($enrol_title);
+                for($i = 0; $i < $countname; $i++){
+                    
+                    if($data['enrol_title'][$i]){
+                         $courseEnrolData['course_id'] = $course_id;
+                         $courseEnrolData['enrol_title'] = $data['enrol_title'][$i];
+                         $courseEnrolData['course_fee'] = $data['course_fee'][$i];
+                         $courseEnrolData['payment_mode'] = $data['payment_mode'][$i];
+
+                         $this->course->saveCourseEnrol($courseEnrolData);
+                    }
+                }
             
-            $this->course->update($id,$data);
              alertify()->success('Course Updated Successfully');
         }catch(\Throwable $e){
            alertify($e->getMessage())->error();
@@ -116,12 +178,20 @@ class CourseController extends Controller
     public function destroy($id)
     {
         try{
+            $this->course->deleteCourseEnrol($id);
             $this->course->delete($id);
              alertify()->success('Course Deleted Successfully');
         }catch(\Throwable $e){
             alertify($e->getMessage())->error();
         }
       return redirect(route('course.index'));
+    }
+
+    public function appendEnrolment(Request $request){
+     
+     $data = view('course::course.partial.add-more-enrolment')->render();
+     return response()->json(['options'=>$data]);
+        
     }
 
 }

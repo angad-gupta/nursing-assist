@@ -3,8 +3,10 @@
 namespace App\Modules\CourseInfo\Repositories;
 
 use App\Modules\CourseInfo\Entities\CourseInfo;
-use App\Modules\CourseInfo\Entities\CourseProgram;
+use App\Modules\CourseInfo\Entities\CourseModeOfDelivery;
 use App\Modules\CourseInfo\Entities\CourseStructure;
+use App\Modules\CourseInfo\Entities\CourseIntake;
+use App\Modules\CourseInfo\Entities\Month;
 
 
 class CourseInfoRepository implements CourseInfoInterface
@@ -39,14 +41,19 @@ class CourseInfoRepository implements CourseInfoInterface
         return CourseInfo::create($data);
     }
 
-    public function saveCourseProgramme($data){
+    public function saveCourseDeliery($data){
 
-        return CourseProgram::create($data);
+        return CourseModeOfDelivery::create($data);
     }
 
     public function saveCourseStructure($data){
 
         return CourseStructure::create($data);
+    }
+    
+    public function saveCourseIntake($data){
+
+        return CourseIntake::create($data);
     }
 
     public function update($id, $data)
@@ -60,12 +67,16 @@ class CourseInfoRepository implements CourseInfoInterface
         return CourseInfo::destroy($id);
     }
 
-    public function deleteCourseProgramme($id){
-        CourseProgram::where('course_info_id','=',$id)->delete($id);
+    public function deleteCourseDelivery($id){
+        CourseModeOfDelivery::where('course_info_id','=',$id)->delete($id);
     }
 
     public function deleteCourseStrucuture($id){
         CourseStructure::where('course_info_id','=',$id)->delete($id);
+    }
+
+    public function deleteCourseIntake($id){
+        CourseIntake::where('course_info_id','=',$id)->delete($id);
     }
 
     public function countTotal(){
@@ -81,5 +92,15 @@ class CourseInfoRepository implements CourseInfoInterface
 
         return $fileName;
    }
+
+    public function getMonth(){
+         $result = Month::pluck('name', 'id');
+        return $result;
+    }
+
+
+    public function getCourseInfoByCourse($id){
+        return CourseInfo::where('course_id','=',$id)->get();
+    }
 
 }

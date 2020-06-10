@@ -42,6 +42,7 @@ class CourseInfoController extends Controller
     {  
         $data['is_edit'] = false;
         $data['course']=$this->course->getList();
+        $data['month']=$this->courseinfo->getMonth();
         return view('courseinfo::courseinfo.create',$data);
     }
 
@@ -58,7 +59,11 @@ class CourseInfoController extends Controller
 
              $courseInfoData = array(
                 'course_id' => $data['course_id'],
-                 'course_program_title' => $data['course_program_title'],
+                'course_program_title' => $data['course_program_title'], 
+                'course_program_sub_title' => $data['course_program_sub_title'],
+                'course_duration_period' => $data['course_duration_period'],
+                'course_intake_title' => $data['course_intake_title'],
+                'short_content' => $data['short_content'],
                 'description' => $data['description'],
                 'type' => $data['type'],
                 'youtube_id' => $data['youtube_id']
@@ -71,19 +76,19 @@ class CourseInfoController extends Controller
             $courseInfo = $this->courseinfo->save($courseInfoData);
             $course_info_id = $courseInfo->id;
 
-            $programme_title = $data['program_detail_title'];
-            $countname = sizeof($programme_title);
+            $delivery_title = $data['delivery_title'];
+            $countname = sizeof($delivery_title);
                 for($i = 0; $i < $countname; $i++){
                     
-                    if($data['program_detail_title'][$i]){
-                         $courseProgramedata['course_info_id'] = $course_info_id;
-                         $courseProgramedata['program_detail_title'] = $data['program_detail_title'][$i];
+                    if($data['delivery_title'][$i]){
+                         $courseDeliverydata['course_info_id'] = $course_info_id;
+                         $courseDeliverydata['delivery_title'] = $data['delivery_title'][$i];
 
-                         $this->courseinfo->saveCourseProgramme($courseProgramedata);
+                         $this->courseinfo->saveCourseDeliery($courseDeliverydata);
                     }
                 }
 
-             $structure_title = $data['structure_title'];
+            $structure_title = $data['structure_title'];
             $countname = sizeof($structure_title);
                 for($i = 0; $i < $countname; $i++){
                     
@@ -93,7 +98,20 @@ class CourseInfoController extends Controller
 
                          $this->courseinfo->saveCourseStructure($structuredata);
                     }
-                }    
+                }   
+
+             $month_id = $data['month_id'];
+             $countname = sizeof($month_id);
+                for($i = 0; $i < $countname; $i++){
+                    
+                    if($data['month_id'][$i]){
+                         $intakedata['course_info_id'] = $course_info_id;
+                         $intakedata['month_id'] = $data['month_id'][$i];
+                         $intakedata['intake_date'] = $data['intake_date'][$i];
+
+                         $this->courseinfo->saveCourseIntake($intakedata);
+                    }
+                }       
            
             alertify()->success('Course Information Created Successfully');
         }catch(\Throwable $e){
@@ -114,6 +132,7 @@ class CourseInfoController extends Controller
         $data['is_edit'] = true;
         $data['courseinfo'] = $this->courseinfo->find($id);    
         $data['course']=$this->course->getList();
+         $data['month']=$this->courseinfo->getMonth();
         return view('courseinfo::courseinfo.edit',$data);
     }
 
@@ -129,9 +148,13 @@ class CourseInfoController extends Controller
 
          try{ 
 
-            $courseInfoData = array(
+             $courseInfoData = array(
                 'course_id' => $data['course_id'],
-                 'course_program_title' => $data['course_program_title'],
+                'course_program_title' => $data['course_program_title'], 
+                'course_program_sub_title' => $data['course_program_sub_title'],
+                'course_duration_period' => $data['course_duration_period'],
+                'course_intake_title' => $data['course_intake_title'],
+                'short_content' => $data['short_content'],
                 'description' => $data['description'],
                 'type' => $data['type'],
                 'youtube_id' => $data['youtube_id']
@@ -144,22 +167,23 @@ class CourseInfoController extends Controller
             $courseInfo = $this->courseinfo->update($id, $courseInfoData);
             $course_info_id = $id;
             
-            $this->courseinfo->deleteCourseProgramme($course_info_id);
+            $this->courseinfo->deleteCourseDelivery($course_info_id);
             $this->courseinfo->deleteCourseStrucuture($course_info_id);
+            $this->courseinfo->deleteCourseIntake($course_info_id);
 
-             $programme_title = $data['program_detail_title'];
-            $countname = sizeof($programme_title);
+            $delivery_title = $data['delivery_title'];
+            $countname = sizeof($delivery_title);
                 for($i = 0; $i < $countname; $i++){
                     
-                    if($data['program_detail_title'][$i]){
-                         $courseProgramedata['course_info_id'] = $course_info_id;
-                         $courseProgramedata['program_detail_title'] = $data['program_detail_title'][$i];
+                    if($data['delivery_title'][$i]){
+                         $courseDeliverydata['course_info_id'] = $course_info_id;
+                         $courseDeliverydata['delivery_title'] = $data['delivery_title'][$i];
 
-                         $this->courseinfo->saveCourseProgramme($courseProgramedata);
+                         $this->courseinfo->saveCourseDeliery($courseDeliverydata);
                     }
                 }
 
-             $structure_title = $data['structure_title'];
+            $structure_title = $data['structure_title'];
             $countname = sizeof($structure_title);
                 for($i = 0; $i < $countname; $i++){
                     
@@ -169,7 +193,20 @@ class CourseInfoController extends Controller
 
                          $this->courseinfo->saveCourseStructure($structuredata);
                     }
-                }    
+                }   
+
+             $month_id = $data['month_id'];
+             $countname = sizeof($month_id);
+                for($i = 0; $i < $countname; $i++){
+                    
+                    if($data['month_id'][$i]){
+                         $intakedata['course_info_id'] = $course_info_id;
+                         $intakedata['month_id'] = $data['month_id'][$i];
+                         $intakedata['intake_date'] = $data['intake_date'][$i];
+
+                         $this->courseinfo->saveCourseIntake($intakedata);
+                    }
+                }     
             
             alertify()->success('Course Information Updated Successfully');
         }catch(\Throwable $e){
@@ -187,7 +224,9 @@ class CourseInfoController extends Controller
     public function destroy($id)
     {
        try{
-            $this->courseinfo->deleteCourseFeature($id);
+            $this->courseinfo->deleteCourseDelivery($id);
+            $this->courseinfo->deleteCourseStrucuture($id);
+            $this->courseinfo->deleteCourseIntake($id);
             $this->courseinfo->delete($id);
             alertify()->success('Course Information Deleted Successfully');
         }catch(\Throwable $e){
@@ -197,9 +236,9 @@ class CourseInfoController extends Controller
     }
 
 
-    public function appendProgramme(Request $request){
+    public function appendDelivery(Request $request){
          
-         $data = view('courseinfo::courseinfo.partial.add-more-programme')->render();
+         $data = view('courseinfo::courseinfo.partial.add-more-delivery')->render();
          return response()->json(['options'=>$data]);
         
     } 
@@ -207,6 +246,14 @@ class CourseInfoController extends Controller
     public function appendStructure(Request $request){
          
          $data = view('courseinfo::courseinfo.partial.add-more-structure')->render();
+         return response()->json(['options'=>$data]);
+        
+    }
+
+    public function appendCourseIntake(Request $request){
+         
+         $month=$this->courseinfo->getMonth();
+         $data = view('courseinfo::courseinfo.partial.add-more-intake')->with(compact('month'))->render();
          return response()->json(['options'=>$data]);
         
     }
