@@ -26,5 +26,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','permission']], funct
     
         Route::get('course/delete/{id}', ['as' => 'course.delete', 'uses' => 'CourseController@destroy'])->where('id','[0-9]+');
         
+        Route::get('course/appendEnrolment', ['as' => 'course.appendEnrolment', 'uses' => 'CourseController@appendEnrolment']);
+        
          
 });

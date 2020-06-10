@@ -1,7 +1,7 @@
 @include('home::layouts.navbar-inner')
 
 <section class="neta-ribbon">
-    <img src="img/cc.jpg" class="img-fluid" alt="">
+    <img src="{{asset('home/img/cc.jpg')}}" class="img-fluid" alt="">
     <div class="container">
         <div class="row">
             <div class="neta-ribbon__content">

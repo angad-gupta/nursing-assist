@@ -2,14 +2,17 @@ $(document).ready(function () {
     $("#courseinfo_submit").validate({
         rules: {
             course_id: "required",
-            title: "required",
-           
-            description: "required"
+            course_program_title: "required",
+            course_program_sub_title: "required",
+            course_intake_title: "required",
+            course_duration_period: "required"
         },
         messages: {
             course_id: "Please Select Course",
-            title: "Please  Enter Title",
-            description:"Please Enter Description"
+            course_program_title: "Please  Course Program Title",
+            course_program_sub_title: "Please  Enter Course Program Sub Title",
+            course_intake_title: "Please  Enter Course Intake Title",
+            course_duration_period: "Please  Enter Duration Period"
         },
         errorElement: "em",
         errorPlacement: function (error, element) {  console.log(element)

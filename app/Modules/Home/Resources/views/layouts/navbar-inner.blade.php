@@ -12,8 +12,15 @@
     <link href="{{asset('home/css/animate.css')}}" rel="stylesheet">
     <link href="{{asset('home/css/style.css')}}" rel="stylesheet">
     <link href="{{asset('home/css/responsive.css')}}" rel="stylesheet">
+    <link href="{{asset('home/css/custom.css')}}" rel="stylesheet">
 
 </head>
+
+
+@php
+    $setting = App\Modules\Setting\Entities\Setting::getSetting(); 
+    $courseInfo = App\Modules\Course\Entities\Course::GetAllCourses();
+@endphp
 
 <div class="top-nav">
         <div class="container">
@@ -67,11 +74,13 @@
                                 <a class="nav-link" href="{{ route('about-us') }}">About Us</a>
                             </li>
                            <li class="nav-item neta-dropdown">
-                                    <a class="nav-link" href="">Courses</a>
+                                    <a class="nav-link" href="{{ route('course') }}">Courses</a>
                                     <ul class="neta-dropdown__menu list-unstyled">
-                                        <li>OBA</li>
-                                        <a href="#"><li>First Year RN</li></a>
-                                        <a href="#"><li>CPD</li></a>
+                                        @if($courseInfo)
+                                            @foreach($courseInfo as $key => $courselist)
+                                             <a href="{{ route('course-detail',['course_id'=>$key]) }}"><li>{{ $courselist }}</li></a>
+                                            @endforeach
+                                        @endif
                                         <a href="{{ route('enrolment') }}"><li>Enrolment</li></a>
                                     </ul>
                                 </li>

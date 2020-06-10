@@ -127,3 +127,20 @@ p {
     }
   }
 }
+@mixin e-btn{
+  .btn {
+    background: $primary-color;
+    margin-top: 30px;
+    transition: 0.5s all;
+    a {
+        color: #fff;
+    }
+    &:hover {
+        background: $purple;
+        transition: 0.5s all;
+        a {
+            color: #fff;
+        }
+    }
+}
+}

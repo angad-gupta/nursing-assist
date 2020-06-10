@@ -5,8 +5,8 @@
 
         <div class="col-md-6">
             <div class="form-group row">
-                <label class="col-form-label col-lg-4">Select Course:<span class="text-danger">*</span></label>
-                    <div class="col-lg-8">
+                <label class="col-form-label col-lg-3">Select Course:<span class="text-danger">*</span></label>
+                    <div class="col-lg-9">
                        <div class="input-group">
                         <span class="input-group-prepend">
                             <span class="input-group-text"><i class="icon-pen2"></i></span>
@@ -20,13 +20,13 @@
 
         <div class="col-md-6">
             <div class="form-group row">
-                <label class="col-form-label col-lg-4">Course Program Title:<span class="text-danger">*</span></label>
-                    <div class="col-lg-8">
+                <label class="col-form-label col-lg-3">Course Program Title:<span class="text-danger">*</span></label>
+                    <div class="col-lg-9">
                        <div class="input-group">
                         <span class="input-group-prepend">
                             <span class="input-group-text"><i class="icon-bookmarks"></i></span>
                         </span>
-                        {!! Form::text('course_program_title', $value = null, ['placeholder'=>'Enter Course Program Title','class'=>'title form-control']) !!}
+                        {!! Form::text('course_program_title', $value = null, ['placeholder'=>'Enter Course Program Title','class'=>'course_program_title form-control']) !!}
                         </div>
                     </div>
             </div>
@@ -34,39 +34,102 @@
 
     </div>
 
-     <div class="row">
+        <div class="row">
 
-            <div class="col-md-12">
-                <div class="form-group row">
-                    <label class="col-form-label col-lg-2">Description:<span class="text-danger">*</span></label>
-                    <div class="col-lg-10">
-                        <div class="input-group">
-                            {!! Form::textarea('description', null, ['id' => 'description','placeholder'=>'Enter Description', 'class' =>'form-control simple_full_description']) !!}                     
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-form-label col-lg-3">Course Sub Title:<span class="text-danger">*</span></label>
+                    <div class="col-lg-9">
+                       <div class="input-group">
+                        <span class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-pen2"></i></span>
+                        </span>
+                        {!! Form::text('course_program_sub_title', $value = null, ['placeholder'=>'Enter Course Sub Title','class'=>'course_program_sub_title form-control']) !!}
+
                         </div>
+                    </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-form-label col-lg-3">Course Intake Title:<span class="text-danger">*</span></label>
+                    <div class="col-lg-9">
+                       <div class="input-group">
+                        <span class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-pen2"></i></span>
+                        </span>
+                        {!! Form::text('course_intake_title', $value = null, ['placeholder'=>'Enter Course Intake Title','class'=>'course_intake_title form-control']) !!}
+
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+
+    </div>
+        <div class="row">
+
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-form-label col-lg-3">Course Duration Period:<span class="text-danger">*</span></label>
+                    <div class="col-lg-9">
+                       <div class="input-group">
+                        <span class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-pen2"></i></span>
+                        </span>
+                        {!! Form::text('course_duration_period', $value = null, ['placeholder'=>'Enter Course Duration Period','class'=>'course_duration_period form-control']) !!}
+
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+
+    </div>
+
+     <div class="form-group row">
+
+        <div class="col-md-6">
+            <div class="row">
+                <label class="col-form-label col-lg-3">Short Content:<span class="text-danger">*</span></label>
+                    <div class="col-lg-9">
+                       <div class="input-group">
+                            {!! Form::textarea('short_content', null, ['id' => 'short_content','placeholder'=>'Enter Short Content', 'class' =>'form-control simple_textarea_description']) !!}                     
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="row">
+                <label class="col-form-label col-lg-3">Description:<span class="text-danger">*</span></label>
+                <div class="col-lg-9 form-group-feedback form-group-feedback-right">
+                    <div class="input-group">
+                         {!! Form::textarea('description', null, ['id' => 'description','placeholder'=>'Enter Description', 'class' =>'form-control simple_textarea_description']) !!}
                     </div>
                 </div>
             </div>
-    </div>
+        </div>
+
+        </div>
 
 
     <div class="row">
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-form-label col-lg-3">Type:</label>
+                <div class="col-lg-9">
+                    <div class="input-group">
+                    <span class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-sort-numeric-asc"></i></span>
+                    </span>
+                    {!! Form::select('type',[ 'image'=>'Image','video'=>'Video'], $value = null, ['placeholder'=>'Select Type','id'=>'type','class'=>'form-control' ]) !!}   
 
-               
-
-            <div class="col-md-6">
-                <div class="form-group row">
-                    <label class="col-form-label col-lg-4">Type:</label>
-                    <div class="col-lg-8">
-                        <div class="input-group">
-                        <span class="input-group-prepend">
-                            <span class="input-group-text"><i class="icon-sort-numeric-asc"></i></span>
-                        </span>
-                        {!! Form::select('type',[ 'image'=>'Image','video'=>'Video'], $value = null, ['placeholder'=>'Select Type','id'=>'type','class'=>'form-control' ]) !!}   
-
-                        </div>
                     </div>
                 </div>
             </div>
+        </div>
     </div>
 
     @php
@@ -85,8 +148,8 @@
 
              <div class="col-lg-6">
                     <div class="row">
-                        <label class="col-form-label col-lg-4">Image:</label>
-                        <div class="col-lg-8 form-group-feedback form-group-feedback-right">
+                        <label class="col-form-label col-lg-3">Image:</label>
+                        <div class="col-lg-9 form-group-feedback form-group-feedback-right">
                             <div class="input-group">
                                 <span class="input-group-prepend">
                                     <span class="input-group-text"><i class="icon-images3"></i></span>
@@ -99,8 +162,8 @@
 
             <div class="col-lg-6">
                 <div class="row">
-                     <label class="col-form-label col-lg-4"></label>
-                    <div class="col-lg-8 form-group-feedback form-group-feedback-right">
+                     <label class="col-form-label col-lg-3"></label>
+                    <div class="col-lg-9 form-group-feedback form-group-feedback-right">
                         @if($is_edit)
                             @php
                                  $image = ($courseinfo->image_path) ? asset($courseinfo->file_full_path).'/'.$courseinfo->image_path : asset('admin/default.png');
@@ -119,8 +182,8 @@
             <div class="row video_type" {{ $videoType }}>
                 <div class="col-md-6">
                     <div class="form-group row">
-                        <label class="col-form-label col-lg-4">Youtube ID:<span class="text-danger">*</span></label>
-                            <div class="col-lg-8">
+                        <label class="col-form-label col-lg-3">Youtube ID:<span class="text-danger">*</span></label>
+                            <div class="col-lg-9">
                                <div class="input-group">
                                 <span class="input-group-prepend">
                                     <span class="input-group-text"><i class="icon-video-camera2 "></i></span>
@@ -136,24 +199,24 @@
 
 
 <fieldset class="mb-3">
-    <legend class="text-uppercase font-size-sm font-weight-bold">Course Programme</legend>
+    <legend class="text-uppercase font-size-sm font-weight-bold">Mode Of Delivery</legend>
 
      @if($is_edit)
-        @foreach($courseinfo->CourseProgramme as $key => $programme)
+        @foreach($courseinfo->CourseModeOfDelivery as $key => $delivery) 
                              
-            <div class="appendProgramme">
+            <div class="appendDelivery">
                 <div class="form-group row">
 
                      <div class="col-lg-6">
                             <div class="row">
-                                <label class="col-form-label col-lg-3">Course Programme Step:</label>
+                                <label class="col-form-label col-lg-3">Mode Of Delivery Step:</label>
                                 <div class="col-lg-9 form-group-feedback form-group-feedback-right">
                                     <div class="input-group">
                                         <span class="input-group-prepend">
                                             <span class="input-group-text"><i class="icon-list3"></i>
                                             </span>
                                         </span>
-                                        {!! Form::text('program_detail_title[]', $value = $programme->program_detail_title, ['id'=>'program_detail_title','placeholder'=>'Enter Progrmme Step','class'=>'form-control']) !!}
+                                        {!! Form::text('delivery_title[]', $value = $delivery->delivery_title, ['id'=>'delivery_title','placeholder'=>'Enter Title','class'=>'form-control']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -162,7 +225,7 @@
 
                     <div class="col-lg-2">
                        <div class="row">
-                             <button type="button" class="ml-2 remove_programme btn bg-danger-800 btn-labeled btn-labeled-left"><b><i class="icon-pen-plus"></i></b> Remove</button>
+                             <button type="button" class="ml-2 remove_delivery btn bg-danger-800 btn-labeled btn-labeled-left"><b><i class="icon-pen-plus"></i></b> Remove</button>
                         </div>
                     </div>
                 </div>
@@ -171,19 +234,19 @@
         @endforeach
     @endif
 
-        <div class="appendProgramme">
+        <div class="appendDelivery">
                 <div class="form-group row">
 
                     <div class="col-lg-6">
                         <div class="row">
-                            <label class="col-form-label col-lg-3">Course Programme Step:</label>
+                            <label class="col-form-label col-lg-3">Mode Of Delivery Step:</label>
                             <div class="col-lg-9 form-group-feedback form-group-feedback-right">
                                 <div class="input-group">
                                     <span class="input-group-prepend">
                                         <span class="input-group-text"><i class="icon-list3"></i>
                                         </span>
                                     </span>
-                                    {!! Form::text('program_detail_title[]', $value = null, ['id'=>'program_detail_title','placeholder'=>'Enter Progrmme Step','class'=>'form-control']) !!}
+                                    {!! Form::text('delivery_title[]', $value = null, ['id'=>'delivery_title','placeholder'=>'Enter Title','class'=>'form-control']) !!}
                                 </div>
                             </div>
                         </div>
@@ -191,7 +254,7 @@
 
                     <div class="col-lg-2">
                        <div class="row">
-                                <button type="button" class="ml-2 add_programme btn bg-success-800 btn-labeled btn-labeled-left"><b><i class="icon-pen-plus"></i></b> Add Progrmme Step</button>
+                                <button type="button" class="ml-2 add_delivery btn bg-success-800 btn-labeled btn-labeled-left"><b><i class="icon-pen-plus"></i></b> Add More</button>
                         </div>
                     </div>
                 </div>
@@ -265,6 +328,103 @@
 </fieldset>
 
 
+<fieldset class="mb-3">
+    <legend class="text-uppercase font-size-sm font-weight-bold">Course Intake</legend>
+
+     @if($is_edit)
+        @foreach($courseinfo->CourseIntake as $key => $intake)
+                             
+            <div class="appendCourseIntake">
+                <div class="form-group row">
+
+                    <div class="col-lg-4">
+                        <div class="row">
+                            <label class="col-form-label col-lg-3">Month:</label>
+                            <div class="col-lg-9 form-group-feedback form-group-feedback-right">
+                                <div class="input-group">
+                                    <span class="input-group-prepend">
+                                        <span class="input-group-text"><i class="icon-list3"></i>
+                                        </span>
+                                    </span>
+                                {!! Form::select('month_id[]',$month, $value = $intake->month_id, ['id'=>'month_id','class'=>'month_id form-control','placeholder'=>'Select Course']) !!}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="row">
+                            <label class="col-form-label col-lg-3">Intake Date Range:</label>
+                            <div class="col-lg-9 form-group-feedback form-group-feedback-right">
+                                <div class="input-group">
+                                    <span class="input-group-prepend">
+                                        <span class="input-group-text"><i class="icon-list3"></i>
+                                        </span>
+                                    </span>
+                                    {!! Form::text('intake_date[]', $value =  $intake->intake_date, ['id'=>'intake_date','placeholder'=>'Enter Intake Date Range','class'=>'form-control']) !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-2">
+                       <div class="row">
+                             <button type="button" class="ml-2 remove_intake btn bg-danger-800 btn-labeled btn-labeled-left"><b><i class="icon-pen-plus"></i></b> Remove</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        @endforeach
+    @endif
+
+        <div class="appendCourseIntake">
+                <div class="form-group row">
+
+                    <div class="col-lg-4">
+                        <div class="row">
+                            <label class="col-form-label col-lg-3">Month:</label>
+                            <div class="col-lg-9 form-group-feedback form-group-feedback-right">
+                                <div class="input-group">
+                                    <span class="input-group-prepend">
+                                        <span class="input-group-text"><i class="icon-list3"></i>
+                                        </span>
+                                    </span>
+                                {!! Form::select('month_id[]',$month, $value = null, ['id'=>'month_id','class'=>'month_id form-control','placeholder'=>'Select Course']) !!}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="row">
+                            <label class="col-form-label col-lg-3">Intake Date Range:</label>
+                            <div class="col-lg-9 form-group-feedback form-group-feedback-right">
+                                <div class="input-group">
+                                    <span class="input-group-prepend">
+                                        <span class="input-group-text"><i class="icon-list3"></i>
+                                        </span>
+                                    </span>
+                                    {!! Form::text('intake_date[]', $value = null, ['id'=>'intake_date','placeholder'=>'Enter Intake Date Range','class'=>'form-control']) !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2">
+                       <div class="row">
+                                <button type="button" class="ml-2 add_intake btn bg-success-800 btn-labeled btn-labeled-left"><b><i class="icon-pen-plus"></i></b> Add More</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+</fieldset>
+
+
 <div class="text-right">
     <button type="submit" class="ml-2 btn bg-pink-600 btn-labeled btn-labeled-left"><b><i class="icon-database-insert"></i></b> {{ $btnType }}</button>
 </div>
@@ -281,7 +441,7 @@
                     </center>
                     <br>
                     <center>
-                        <h4 class="text-purple">Image Size is Greater Than 1Mb. Please Upload Below 1Mb.</h4>
+                        <h4 class="text-purple">Image Size is Greater Than 1Mb. Please Upload Below 2Mb.</h4>
                         <button type="button" class="btn btn-success" data-dismiss="modal">Thank You !!!</button>
                     </center>
                 </div>
@@ -298,7 +458,7 @@
          $('#image_path').bind('change', function() {
             var a=(this.files[0].size);
 
-            if(a > 1000000) {
+            if(a > 2000000) {
                $('#modal_image_size').modal('show');
                $('#image_path').val('');
             };
@@ -323,12 +483,12 @@
             }
         });
 
-          $('.add_programme').on('click',function(){
+          $('.add_delivery').on('click',function(){
             $.ajax({
                     type: 'GET',
-                    url: '/admin/courseinfo/appendProgramme',
+                    url: '/admin/courseinfo/appendDelivery',
                     success: function (data) {
-                        $('.appendProgramme').last().append(data.options); 
+                        $('.appendDelivery').last().append(data.options); 
                     }
                 });
         }); 
@@ -344,11 +504,25 @@
                 });
         }); 
 
-        $('.remove_programme').on('click',function(){ 
+          $('.add_intake').on('click',function(){
+            $.ajax({
+                    type: 'GET',
+                    url: '/admin/courseinfo/appendCourseIntake',
+                    success: function (data) {
+                        $('.appendCourseIntake').last().append(data.options); 
+                    }
+                });
+        }); 
+
+        $('.remove_delivery').on('click',function(){ 
             $(this).parent().parent().parent().remove();
         });
         
         $('.remove_structure').on('click',function(){ 
+            $(this).parent().parent().parent().remove();
+        });
+
+        $('.remove_intake').on('click',function(){ 
             $(this).parent().parent().parent().remove();
         });
 

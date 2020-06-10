@@ -18,6 +18,10 @@ class CreateCourseInfosTable extends Migration
 
             $table->integer('course_id')->nullable();
             $table->text('course_program_title')->nullable();
+            $table->text('course_program_sub_title')->nullable();
+            $table->text('course_duration_period')->nullable();
+            $table->text('course_intake_title')->nullable();
+            $table->text('short_content')->nullable();
             $table->text('description')->nullable();
             $table->string('type')->nullable();
             $table->text('image_path')->nullable();

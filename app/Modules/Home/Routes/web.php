@@ -22,3 +22,10 @@ Route::post('contactus/store', ['as' => 'contactus.store', 'uses' => 'HomeContro
 Route::get('enrolment', ['as' => 'enrolment', 'uses' => 'HomeController@Enrolment']);
 
 Route::post('enrolment/store', ['as' => 'enrolment.store', 'uses' => 'HomeController@storeEnrolment']);
+
+Route::get('course', ['as' => 'course', 'uses' => 'HomeController@Course']);
+
+Route::get('course-detail', ['as' => 'course-detail', 'uses' => 'HomeController@courseDetail']);
+
+Route::get('course-info-detail', ['as' => 'course-info-detail', 'uses' => 'HomeController@courseInfoDetail']);
+

@@ -36,4 +36,8 @@ class Setting extends Model
     ];
 
     const FILE_PATH = '/uploads/setting/';
+
+    public static function getSetting(){
+          return Setting::find(1);
+    }
 }

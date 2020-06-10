@@ -12,20 +12,28 @@ interface CourseInfoInterface
 
     public function save($data);
     
-    public function saveCourseProgramme($data);
+    public function saveCourseDeliery($data);
 
     public function saveCourseStructure($data);
+
+    public function saveCourseIntake($data);
 
     public function update($id,$data);
 
     public function delete($id);
     
-    public function deleteCourseProgramme($id);
+    public function deleteCourseDelivery($id);
     
     public function deleteCourseStrucuture($id);
+    
+    public function deleteCourseIntake($id);
 
     public function countTotal();
 
     public function upload($file);
+    
+    public function getMonth();
+
+    public function getCourseInfoByCourse($id);
 
 }

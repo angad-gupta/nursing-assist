@@ -14,9 +14,15 @@
 	<link href="{{asset('home/css/animate.css')}}" rel="stylesheet">
 	<link href="{{asset('home/css/style.css')}}" rel="stylesheet">
 	<link href="{{asset('home/css/responsive.css')}}" rel="stylesheet">
-
+	<link href="{{asset('home/css/custom.css')}}" rel="stylesheet">
+	
 </head>
 <body>
+
+@php
+    $setting = App\Modules\Setting\Entities\Setting::getSetting(); 
+    $courseInfo = App\Modules\Course\Entities\Course::GetAllCourses();
+@endphp
 
  <header class="header">
         <div class="container">
@@ -45,11 +51,16 @@
                                     <a class="nav-link" href="{{ route('about-us') }}">About Us</a>
                                 </li>
                                 <li class="nav-item neta-dropdown">
-                                    <a class="nav-link" href="">Courses</a>
+                                    <a class="nav-link" href="{{ route('course') }}">Courses</a>
                                     <ul class="neta-dropdown__menu list-unstyled">
-                                        <li>OBA </li>
-                                        <a href="#"><li>First Year RN</li></a>
-                                        <a href="#"><li>CPD</li></a>
+
+                                    	@if($courseInfo)
+                                    		@foreach($courseInfo as $key => $courselist)
+                                    		<a href="{{ route('course-detail',['course_id'=>$key]) }}"><li>{{ $courselist }}</li></a>
+
+                                    		@endforeach
+                                    	@endif
+                                      
                                         <a href="{{ route('enrolment') }}"><li>Enrolment</li></a>
                                     </ul>
                                 </li>
@@ -169,7 +180,7 @@
 						<h5 class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">{{ $course_val->title }}</h5>
 						<p class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".75s">{!! $course_val->short_content !!}
 						</p>
-						<button class="btn btn-neta"><a href="#">Learn More</a></button>
+						<button class="btn btn-neta"><a href="{{ route('course-detail',['course_id'=>$course_val->id]) }}">Learn More</a></button>
 					</div>
 					<div class="col-sm-5 offset-1">
 						<div class="course-img wow animated fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">
@@ -194,7 +205,7 @@
 						<h5 class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">{{ $course_val->title }}</h5>
 						<p class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".75s">{!! $course_val->short_content !!}
 						</p>
-						<button class="btn btn-neta"><a href="#">Learn More</a></button>
+						<button class="btn btn-neta"><a href="{{ route('course-detail',['course_id'=>$course_val->id]) }}">Learn More</a></button>
 					</div>
 				</div>
 			</div>

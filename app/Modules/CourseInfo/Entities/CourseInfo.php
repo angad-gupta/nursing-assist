@@ -4,7 +4,8 @@ namespace App\Modules\CourseInfo\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Modules\CourseInfo\Entities\CourseStructure;
-use App\Modules\CourseInfo\Entities\CourseProgram;
+use App\Modules\CourseInfo\Entities\CourseModeOfDelivery;
+use App\Modules\CourseInfo\Entities\CourseIntake;
 use App\Modules\Course\Entities\Course;
 
 class CourseInfo extends Model
@@ -16,7 +17,11 @@ class CourseInfo extends Model
 
     	'course_id',
     	'course_program_title',
-    	'description',
+        'course_program_sub_title',
+        'course_duration_period',
+        'course_intake_title',
+    	'short_content',
+        'description',
     	'type',
     	'image_path',
     	'youtube_id'
@@ -37,8 +42,13 @@ class CourseInfo extends Model
         return $this->hasMany(CourseStructure::class, 'course_info_id');
     }
 
-    public function CourseProgramme()
+    public function CourseModeOfDelivery()
     {
-        return $this->hasMany(CourseProgram::class, 'course_info_id');
+        return $this->hasMany(CourseModeOfDelivery::class, 'course_info_id');
+    } 
+
+    public function courseIntake()
+    {
+        return $this->hasMany(CourseIntake::class, 'course_info_id');
     }
 }

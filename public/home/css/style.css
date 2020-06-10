@@ -957,6 +957,231 @@ header .bg-light .navbar-brand {
   padding-bottom: 20px;
 }
 
+.courses-wrap .course-iframe {
+  margin: 20px 0;
+}
+
+.courses-wrap__content {
+  border-radius: 4px;
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+.courses-wrap__content h6 {
+  color: #07264e;
+  margin-top: 30px;
+  font-size: 18px;
+}
+
+.courses-wrap__content .oba-l1 li {
+  margin-bottom: 15px;
+}
+
+.courses-wrap__content .oba-l1 li span {
+  margin-right: 10px;
+  background: #b0127e;
+  padding: 5px;
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  text-align: center;
+  color: #fff;
+  line-height: 1;
+}
+
+.courses-wrap__content .oba-l2 i {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #07264e;
+  text-align: center;
+  color: #fff;
+  line-height: 1.4;
+  padding-left: 2px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.courses-wrap__content .b-line {
+  border-bottom: 1px solid #dedede;
+  margin-bottom: 10px;
+}
+
+.courses-wrap__content .b-line:nth-last-child(1) {
+  border-bottom: 0;
+}
+
+.courses-wrap .text-highlight {
+  color: #feb049;
+}
+
+.courses-wrap .course-summary {
+  background: url("../img/cs.png") center center/cover;
+  border-radius: 4px;
+  padding: 30px;
+  color: #fff;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 100px;
+  margin-bottom: 30px;
+}
+
+.courses-wrap .course-summary P {
+  margin-bottom: 5px;
+  font-size: 14px;
+  font-weight: 200;
+}
+
+.courses-wrap .course-summary li {
+  border-bottom: 1px solid #989898;
+  margin-bottom: 5px;
+}
+
+.courses-wrap .course-summary li:nth-last-child(1) {
+  border-bottom: 0;
+}
+
+.courses-wrap .course-summary h6 {
+  padding-bottom: 15px;
+}
+
+.courses-wrap .course-summary button {
+  background: #b0127e;
+  padding: 15px 0;
+}
+
+.courses-wrap .course-summary button a {
+  color: #fff;
+}
+
+.courses-wrap .course-summary .ttl-line:after {
+  content: "";
+  background: #B0117E;
+}
+
+.courses-wrap .course-enrolment__content {
+  background: #fff;
+  text-align: center;
+  padding: 20px;
+  border-radius: 4px;
+  margin: 20px 0;
+  min-height: 200px;
+}
+
+.courses-wrap .course-enrolment__content p {
+  color: #B0117E;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.courses-wrap .course-enrolment__content h2 {
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.courses-wrap .course-enrolment__content span {
+  color: #b3abab;
+  font-size: 11px;
+}
+
+.courses-wrap .course-enrolment__content .btn {
+  background: #B0117E;
+  margin-top: 30px;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+}
+
+.courses-wrap .course-enrolment__content .btn a {
+  color: #fff;
+}
+
+.courses-wrap .course-enrolment__content .btn:hover {
+  background: #6E2F9F;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+}
+
+.courses-wrap .course-enrolment__content .btn:hover a {
+  color: #fff;
+}
+
+.courses-wrap .intake-date__content {
+  background: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+.courses-wrap .intake-date__content h4 {
+  margin-bottom: 0;
+}
+
+.courses-wrap .intake-date__content img {
+  height: 220px;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.courses-wrap .intake-date__content ul {
+  font-size: 13px;
+}
+
+.courses-wrap .intake-date__content ul p {
+  margin-bottom: 0;
+  font-weight: 500;
+}
+
+.courses-wrap .intake-date__content ul li {
+  margin-right: 15px;
+  border-right: 1px solid #dedede;
+  padding-right: 10px;
+}
+
+.courses-wrap .intake-date__content ul li:nth-last-child(1) {
+  border-right: 0;
+}
+
+.courses-wrap .intake-date__content ul span {
+  color: #aba6a6;
+}
+
+.courses-wrap .intake-date__content .btn {
+  background: #B0117E;
+  margin-top: 30px;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+}
+
+.courses-wrap .intake-date__content .btn a {
+  color: #fff;
+}
+
+.courses-wrap .intake-date__content .btn:hover {
+  background: #6E2F9F;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+}
+
+.courses-wrap .intake-date__content .btn:hover a {
+  color: #fff;
+}
+
+.courses-wrap .c-blt h6 {
+  color: #B0117E;
+}
+
+.courses-wrap .c-blt li {
+  margin-bottom: 10px;
+}
+
+.courses-wrap .c-blt li:before {
+  content: url(../img/tick.svg);
+  position: relative;
+  top: 5px;
+  margin-right: 20px;
+}
+
 a {
   text-decoration: none !important;
   color: #000;

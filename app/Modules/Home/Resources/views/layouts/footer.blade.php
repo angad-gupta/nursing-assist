@@ -1,3 +1,7 @@
+@php
+    $setting = App\Modules\Setting\Entities\Setting::getSetting(); 
+@endphp
+
 <footer>
 	<div class="container">
 		<div class="row">
