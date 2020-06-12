@@ -1,5 +1,9 @@
 @include('home::layouts.navbar-inner')
 
+@php
+    $setting = App\Modules\Setting\Entities\Setting::getSetting(); 
+@endphp
+
 <section class="neta-ribbon">
     <img src="img/bg.png" class="img-fluid" alt="">
     <div class="container">
