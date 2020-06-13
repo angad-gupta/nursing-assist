@@ -32,7 +32,7 @@ class CourseInfoRepository implements CourseInfoInterface
 
     public function getList()
     {
-        $result = CourseInfo::pluck('title', 'id');
+        $result = CourseInfo::pluck('course_program_title', 'id');
         return $result;
     }
 
