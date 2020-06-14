@@ -59,7 +59,7 @@
                     <div class="intake-date b-line">
                         <h6 class="mb-4">Intake Dates</h6>
 
-                     @if(sizeof($course_info)>0)
+                     @if(count($course_info)>0)
                             @foreach($course_info as $key => $courseInfo)
                                 <div class="intake-date__content">
                                     <div class="row">
