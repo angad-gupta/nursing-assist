@@ -284,7 +284,7 @@
 				<p>Download course summary of the OBA Preparation Class</p>
 			</div>
 			<div class="col-sm-4">
-				<button class="btn btn-neta float-right"><a href="#">Download</a></button>
+				<button class="btn btn-neta float-right"><a target="_blank" href="{{asset('admin/oba_download.pdf')}}">Download</a></button>
 			</div>
 		</div>
 	</div>
