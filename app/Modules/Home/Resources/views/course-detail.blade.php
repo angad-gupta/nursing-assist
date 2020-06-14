@@ -47,7 +47,7 @@
                                             <p>{{$enroll_val->enrol_title }}</p>
                                             <h2>${{$enroll_val->course_fee}}</h2>
                                             <span>({{$enroll_val->payment_mode }})</span>
-                                            <button class="btn w-100"><a href="#">Enroll</a></button>
+                                            <button class="btn w-100"><a href="{{ route('enrolment') }}">Enroll</a></button>
                                         </div>
                                     </div>
                              @endforeach
@@ -81,7 +81,7 @@
                                                 @endif
 
                                             </ul>
-                                            <button class="btn e-btn w-25 mt-1"><a href="#">Enroll Now</a></button>
+                                            <button class="btn e-btn w-25 mt-1"><a href="{{ route('enrolment') }}">Enroll Now</a></button>
                                         </div>
                                     </div>
                                 </div>
@@ -120,7 +120,7 @@
                             <h6>${{number_format($course_detail->course_fees,2)}}</h6>
                         </li>
                     </ul>
-                    <button class="btn w-100"><a href="#">Enroll Now</a></button>
+                    <button class="btn w-100"><a href="{{ route('enrolment') }}">Enroll Now</a></button>
                 </div>
             </div>
         </div>

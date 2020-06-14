@@ -29,3 +29,6 @@ Route::get('course-detail', ['as' => 'course-detail', 'uses' => 'HomeController@
 
 Route::get('course-info-detail', ['as' => 'course-info-detail', 'uses' => 'HomeController@courseInfoDetail']);
 
+Route::get('term-condition', ['as' => 'term-condition', 'uses' => 'HomeController@termCondition']);
+
+

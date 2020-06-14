@@ -22,18 +22,17 @@
 					<a href="#"><li>Overview</li> </a>
 					<a href="#"><li>Learning</li> </a>
 					<a href="#"><li>OBA Courses</li> </a>
-					<a href="#"><li>NCLEX</li> </a>
 				</ul>
 			</div>
 
 			<div class="col-sm-3">
 				<h5>Company</h5>
 				<ul class="list-unstyled">
-					<a href="#"><li>About Us</li> </a>
-					<a href="#"><li>Our Team</li> </a>
-					<a href="#"><li>Contact US</li> </a>
+					<a href="{{ route('about-us') }}"><li>About Us</li> </a>
+					<a href="{{ route('about-us') }}"><li>Our Team</li> </a>
+					<a href="{{ route('contact-us') }}"><li>Contact US</li> </a>
 					<a href="#"><li>Helps</li> </a>
-					<a href="#"><li>CPD Guidlines</li> </a>
+					<a href="#"><li>CPD Guidelines</li> </a>
 					<a href="#"><li>FAQ's</li> </a>
 				</ul>
 			</div>
@@ -42,10 +41,8 @@
 				<h5>Legals</h5>
 				<ul class="list-unstyled">
 					<a href="#"><li>My Account</li> </a>
-					<a href="#"><li>Privacy & Policy</li> </a>
-					<a href="#"><li>Terms & Condition</li> </a>
-					<a href="#"><li>Legals</li> </a>
-					<a href="#"><li>Help</li> </a>
+					<a href="{{ route('term-condition')}}"><li>Privacy & Policy</li> </a>
+					<a href="{{ route('term-condition')}}"><li>Terms & Condition</li> </a>
 				</ul>
 			</div>
 
@@ -55,10 +52,10 @@
 			<div class="col-sm-3">
 				<div class="social-links">
 					<div class="top-info__list d-flex pt-2">
-						<div class="ml-2"><a href="#"><img src="img/fb.svg" alt=""></a></div>
-						<div class="ml-2"><a href="#"><img src="img/tw.svg" alt=""></a></div>
-						<div class="ml-2"><a href="#"><img src="img/ins.svg" alt=""></a></div>
-						<div class="ml-2"><a href="#"><img src="img/yt.svg" alt=""></a></div>
+						<div class="ml-2"><a href="{{$setting->facebook_link}}"><img src="{{asset('home/img/fb.svg')}}" alt=""></a></div>
+                        <div class="ml-2"><a href="{{$setting->twitter_link}}"><img src="{{asset('home/img/tw.svg')}}" alt=""></a></div>
+                        <div class="ml-2"><a href="{{$setting->instagram_link}}"><img src="{{asset('home/img/ins.svg')}}" alt=""></a></div>
+                        <div class="ml-2"><a href="{{$setting->youtube_link}}"><img src="{{asset('home/img/yt.svg')}}img/" alt=""></a></div>
 					</div>
 				</div>
 			</div>
@@ -67,6 +64,7 @@
 	</div>
 </footer>
 </body>
+
 
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>

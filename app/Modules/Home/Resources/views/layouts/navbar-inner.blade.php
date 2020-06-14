@@ -35,10 +35,10 @@
                 <div class="col-sm-4">
                     <div class="social-links">
                         <div class="top-info__list d-flex justify-content-end">
-                            <div class="ml-2"><a href="#"><img src="img/fb.svg" alt=""></a></div>
-                            <div class="ml-2"><a href="#"><img src="img/tw.svg" alt=""></a></div>
-                            <div class="ml-2"><a href="#"><img src="img/ins.svg" alt=""></a></div>
-                            <div class="ml-2"><a href="#"><img src="img/yt.svg" alt=""></a></div>
+                            <div class="ml-2"><a href="{{$setting->facebook_link}}"><img src="{{asset('home/img/fb.svg')}}" alt=""></a></div>
+                            <div class="ml-2"><a href="{{$setting->twitter_link}}"><img src="{{asset('home/img/tw.svg')}}" alt=""></a></div>
+                            <div class="ml-2"><a href="{{$setting->instagram_link}}"><img src="{{asset('home/img/ins.svg')}}" alt=""></a></div>
+                            <div class="ml-2"><a href="{{$setting->youtube_link}}"><img src="{{asset('home/img/yt.svg')}}img/" alt=""></a></div>
                         </div>
                     </div>
                 </div>
@@ -85,7 +85,7 @@
                                     </ul>
                                 </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="">Agents</a>
+                                <a class="nav-link" href="{{ route('enrolment') }}">Agents</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="">Student's Login</a>

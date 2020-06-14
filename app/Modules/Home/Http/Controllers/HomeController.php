@@ -171,5 +171,17 @@ class HomeController extends Controller
       
     }
 
+    public function termCondition(Request $request){
+        $input = $request->all();
+
+        $data['terms_and_conditions'] =$this->page->getBySlug('terms_and_conditions');
+        $data['privacy_policy'] =$this->page->getBySlug('privacy_policy');
+        $data['terms_of_use'] =$this->page->getBySlug('terms_of_use');
+        $data['refund_policy'] =$this->page->getBySlug('refund_policy');
+
+        return view('home::term-condition',$data);
+      
+    }
+
     
 }
