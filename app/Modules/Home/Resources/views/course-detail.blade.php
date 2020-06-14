@@ -60,7 +60,7 @@
                         <h6 class="mb-4">Intake Dates</h6>
 
 
-                     @if(empty($course_info))
+                     @if (count($course_info) === 0) {
                       <span>No Intake Date Added</span>
                       @else
                             @foreach($course_info as $key => $courseInfo)
