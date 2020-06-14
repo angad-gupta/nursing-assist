@@ -122,7 +122,7 @@
 
                         <li>
                             <p>Course Fee :</p>
-                            <h6>${{number_format($course_detail->course_fees,2)}}</h6>
+                            <h6>${{$course_detail->course_fees}}</h6>
                         </li>
                     </ul>
                     <button class="btn w-100"><a href="{{ route('enrolment') }}">Enroll Now</a></button>
