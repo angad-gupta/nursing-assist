@@ -155,7 +155,7 @@ class HomeController extends Controller
         $course_id = $input['course_id'];
 
         $data['course_detail'] = $this->course->find($course_id);
-        $data['course_info'] = $this->courseinfo->getCourseInfoByCourse($course_id);
+        $data['course_info'] = $this->courseinfo->getCourseInfoByCourse($course_id); dd($data);
 
         return view('home::course-detail',$data);
       
