@@ -65,7 +65,7 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="">Agents</a>
+                                    <a class="nav-link" href="{{ route('enrolment') }}">Agents</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="">Student's Login</a>
@@ -113,7 +113,7 @@
                          <h1 class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">{{ $banner_val->title }}</h1>                         
                          <h5 class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".75s">{{ $banner_val->sub_title }}</h5>
                          <div class="banner-btn d-flex mt-2">
-                             <button class="btn btn-neta"><a href="#">Learn More</a></button>
+                             <button class="btn btn-neta"><a href="{{ route('course') }}">Learn More</a></button>
                              <a href="#">
                                  <div class="neta-play"><img src="{{asset('home/img/play.svg')}}" alt=""><span>Watch Video</span></div>
                              </a>
@@ -150,7 +150,7 @@
 					</div>
 					<p>It is the work that we do every day that makes us superheroes.</p>
 					<p>What is your Superpower?</p>
-					<button class="btn btn-neta"><a href="#">Find More</a></button>
+					<button class="btn btn-neta"><a href="{{ route('course') }}">Find More</a></button>
 				</div>
 			</div>
 		</div>
@@ -299,7 +299,7 @@
 						<h5 class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">About NETA</h5>
 						<p class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".75s">{!! $about_neta['short_content'] !!}
 						</p>
-						<button class="btn btn-neta"><a href="#">Learn More</a></button>
+						<button class="btn btn-neta"><a href="{{ route('about-us') }}">Learn More</a></button>
 					</div>
 					<div class="col-sm-5 offset-1">
 						<div class="course-img wow animated fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">
