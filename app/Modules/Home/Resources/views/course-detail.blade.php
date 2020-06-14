@@ -60,7 +60,7 @@
                         <h6 class="mb-4">Intake Dates</h6>
 
 
-                     @if(sizeof($course_info) !=  0)
+                     @if($course_info)
                             @foreach($course_info as $key => $courseInfo)
                                 <div class="intake-date__content">
                                     <div class="row">
