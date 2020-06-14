@@ -39,10 +39,9 @@
 </div>
 </section>
 
-<section class="neta-team section-padding">
+<!-- <section class="neta-team section-padding">
     <div class="container">
         <h2 class="ttl-line">Our Team </h2>
-        <!-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p> -->
         <div class="row">
 
             
@@ -70,7 +69,7 @@
 
         </div>
     </div>
-</section>
+</section> -->
 
 <section class="section-padding"></section>
 
