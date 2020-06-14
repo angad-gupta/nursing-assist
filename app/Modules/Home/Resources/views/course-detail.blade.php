@@ -60,7 +60,9 @@
                         <h6 class="mb-4">Intake Dates</h6>
 
 
-                     @if($course_info)
+                     @if(empty($course_info))
+                      <span>No Intake Date Added</span>
+                      @else
                             @foreach($course_info as $key => $courseInfo)
                                 <div class="intake-date__content">
                                     <div class="row">
