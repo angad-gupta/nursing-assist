@@ -59,9 +59,7 @@
                     <div class="intake-date b-line">
                         <h6 class="mb-4">Intake Dates</h6>
 
-@php
-print_r(sizeof($course_info)); die;
-@endphp
+
                      @if(sizeof($course_info) > 0)
                             @foreach($course_info as $key => $courseInfo)
                                 <div class="intake-date__content">
@@ -74,6 +72,9 @@ print_r(sizeof($course_info)); die;
                                              <p>Online and Live Teleconferences</p>
                                             <ul class="list-unstyled d-flex">
 
+                                                @php
+                                                print_r(sizeof($course_info)); die;
+                                                @endphp
                                                 @if(sizeof($courseInfo->courseIntake)>0)
                                                     @foreach($courseInfo->courseIntake as $key => $courseInfoIntake)
                                                         <li>
