@@ -7,10 +7,10 @@
         <div class="row">
             <div class="neta-ribbon__content">
                 <div class="col-sm-12">
-                    <h1 class="mb-0">Terms and  Conditions</h1>
+                    <h1 class="mb-0">Privacy Policy</h1>
                     <ul class="list-unstyled d-flex">
                         <li> <a href="{{ route('home') }}">Home  >> </a></li>
-                        <li>Terms & Conditions</li>
+                        <li>Privacy Policy</li>
                     </ul>
                 </div>
             </div>
@@ -23,13 +23,15 @@
     <div class="container section-padding">
         <div class="row">
             <div class="col-sm-12">
-                <div class="courses-wrap__content neta-about">
-                    <h2 class="ttl-line">Terms & Conditions</h2>
+
+                 <div class="courses-wrap__content neta-about">
+                    <h2 class="ttl-line">Privacy Policy</h2>
                     <div class="oba-introduction b-line">
-                       {!! ($terms_and_conditions['short_content']) ? $terms_and_conditions['short_content'] : $terms_and_conditions['description'] !!}    
+                        {!! ($privacy_policy['short_content']) ? $privacy_policy['short_content'] : $privacy_policy['description'] !!}
 
                     </div>
                 </div>
+
 
             </div>
         </div>

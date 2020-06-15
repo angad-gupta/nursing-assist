@@ -31,4 +31,8 @@ Route::get('course-info-detail', ['as' => 'course-info-detail', 'uses' => 'HomeC
 
 Route::get('term-condition', ['as' => 'term-condition', 'uses' => 'HomeController@termCondition']);
 
+Route::get('privacy-policy', ['as' => 'privacy-policy', 'uses' => 'HomeController@privacyPolicy']);
+
+Route::get('user-agreement', ['as' => 'user-agreement', 'uses' => 'HomeController@userAgreement']);
+
 

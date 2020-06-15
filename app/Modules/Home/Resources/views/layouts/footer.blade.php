@@ -41,9 +41,9 @@
 				<h5>Legals</h5>
 				<ul class="list-unstyled">
 					<a href="#"><li>My Account</li> </a>
-					<a href="{{ route('term-condition')}}"><li>Privacy & Policy</li> </a>
+					<a href="{{ route('privacy-policy')}}"><li>Privacy & Policy</li> </a>
 					<a href="{{ route('term-condition')}}"><li>Terms & Conditions</li> </a>
-					<a href="{{ route('term-condition')}}"><li>User Agreement</li> </a>
+					<a href="{{ route('user-agreement')}}"><li>User Agreement</li> </a>
 				</ul>
 			</div>
 
