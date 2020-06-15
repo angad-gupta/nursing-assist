@@ -23,10 +23,11 @@
     <div class="container section-padding">
         <div class="row">
             <div class="col-sm-12">
-                <div class="courses-wrap__content neta-about">
-                    <h2 class="ttl-line">Terms & Conditions</h2>
+
+                   <div class="courses-wrap__content neta-about">
+                    <h2 class="ttl-line">User Agreement</h2>
                     <div class="oba-introduction b-line">
-                       {!! ($terms_and_conditions['short_content']) ? $terms_and_conditions['short_content'] : $terms_and_conditions['description'] !!}    
+                        {!! ($user_agreement['short_content']) ? $user_agreement['short_content'] : $user_agreement['description'] !!}
 
                     </div>
                 </div>
