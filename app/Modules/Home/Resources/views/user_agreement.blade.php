@@ -7,10 +7,10 @@
         <div class="row">
             <div class="neta-ribbon__content">
                 <div class="col-sm-12">
-                    <h1 class="mb-0">Terms and  Conditions</h1>
+                    <h1 class="mb-0">User Agreement</h1>
                     <ul class="list-unstyled d-flex">
                         <li> <a href="{{ route('home') }}">Home  >> </a></li>
-                        <li>Terms & Conditions</li>
+                        <li>User Agreement</li>
                     </ul>
                 </div>
             </div>
