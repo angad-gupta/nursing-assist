@@ -31,7 +31,6 @@
 					<a href="{{ route('about-us') }}"><li>About Us</li> </a>
 					<a href="{{ route('about-us') }}"><li>Our Team</li> </a>
 					<a href="{{ route('contact-us') }}"><li>Contact US</li> </a>
-					<a href="#"><li>Helps</li> </a>
 					<a href="#"><li>CPD Guidelines</li> </a>
 					<a href="#"><li>FAQ's</li> </a>
 				</ul>
