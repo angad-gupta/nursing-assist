@@ -42,7 +42,7 @@
 				<ul class="list-unstyled">
 					<a href="#"><li>My Account</li> </a>
 					<a href="{{ route('term-condition')}}"><li>Privacy & Policy</li> </a>
-					<a href="{{ route('term-condition')}}"><li>Terms & Condition</li> </a>
+					<a href="{{ route('term-condition')}}"><li>Terms & Conditions</li> </a>
 					<a href="{{ route('term-condition')}}"><li>User Agreement</li> </a>
 				</ul>
 			</div>
