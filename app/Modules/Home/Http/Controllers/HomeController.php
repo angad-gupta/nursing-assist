@@ -178,6 +178,7 @@ class HomeController extends Controller
         $data['privacy_policy'] =$this->page->getBySlug('privacy_policy');
         $data['terms_of_use'] =$this->page->getBySlug('terms_of_use');
         $data['refund_policy'] =$this->page->getBySlug('refund_policy');
+        $data['user_agreement'] =$this->page->getBySlug('user_agreement');
 
         return view('home::term-condition',$data);
       

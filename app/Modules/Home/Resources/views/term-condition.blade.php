@@ -24,7 +24,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="courses-wrap__content neta-about">
-                    <h2 class="ttl-line">Term & Condition</h2>
+                    <h2 class="ttl-line">Terms & Condition</h2>
                     <div class="oba-introduction b-line">
                        {!! ($terms_and_conditions['short_content']) ? $terms_and_conditions['short_content'] : $terms_and_conditions['description'] !!}    
 
@@ -38,7 +38,7 @@
 
                     </div>
                 </div>
-<!-- 
+
                 <div class="courses-wrap__content neta-about">
                     <h2 class="ttl-line">Terms of Use</h2>
                     <div class="oba-introduction b-line">
@@ -53,7 +53,15 @@
                         {!! ($refund_policy['short_content']) ? $refund_policy['short_content'] : $refund_policy['description'] !!}
 
                     </div>
-                </div> -->
+                </div>
+
+                   <div class="courses-wrap__content neta-about">
+                    <h2 class="ttl-line">User Agreement</h2>
+                    <div class="oba-introduction b-line">
+                        {!! ($user_agreement['short_content']) ? $user_agreement['short_content'] : $user_agreement['description'] !!}
+
+                    </div>
+                </div>
 
             </div>
         </div>
