@@ -29,7 +29,7 @@ class StudentRepository implements StudentInterface
         return Student::create($data);
     }
     
-    public function update($id,$data){
+    public function update($id,$data){  
         $Student = Student::find($id);
         return $Student->update($data);
     }

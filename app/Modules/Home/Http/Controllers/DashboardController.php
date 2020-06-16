@@ -5,20 +5,49 @@ namespace App\Modules\Home\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use App\Modules\Student\Repositories\StudentInterface;
+use Illuminate\Support\Facades\Auth;
 
 
 class DashboardController extends Controller
 {
+      protected $StudentController;
+    
+    public function __construct(StudentInterface $student)
+    {
+        $this->student = $student;
+    }
     /**
      * Display a listing of the resource.
      * @return Response
      */
     public function index()
     {
-    
-        return view('home::student.dashboard');
+        $id = Auth::guard('student')->user()->id;
+        $data['student_profile'] = Auth::guard('student')->user()->find($id);
+
+        return view('home::student.dashboard',$data);
     }
 
+    public function studentProfileUpdate(Request $request,$id){
+        $data = $request->all();
+
+        try{
+
+            if ($request->hasFile('profile_pic')) {
+                $data['profile_pic'] = $this->student->upload($data['profile_pic']);
+            }
+
+
+            $this->student->update($id,$data);
+            Flash('Student Profile Updated Successfully')->success();
+        }catch(\Throwable $e){
+           alertify($e->getMessage())->error();
+        }
+        
+        return redirect(route('student-dashboard'));
+
+    }
     /**
      * Show the form for creating a new resource.
      * @return Response
