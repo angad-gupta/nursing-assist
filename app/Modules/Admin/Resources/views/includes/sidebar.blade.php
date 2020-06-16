@@ -184,6 +184,18 @@
                     </li>
                     @endif
 
+                    @if($menuRoles->assignedRoles('student.index'))
+                    <li class="nav-item">
+                        <a href="{{route('student.index')}}"
+                           class="nav-link @if($Route[0]=='student') active @endif"
+                           data-popup="tooltip" data-original-title="Student Management"
+                           data-placement="right">
+                            <i class="icon-users4"></i>
+                            <span>Student Management</span>
+                        </a>
+                    </li>
+                    @endif
+
                     @if($menuRoles->assignedRoles('enrolment.index'))
                     <li class="nav-item">
                         <a href="{{route('enrolment.index')}}"
