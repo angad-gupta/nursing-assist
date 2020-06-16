@@ -161,7 +161,7 @@
 	<div class="container">
 		<div class="neta-head text-center m-5">
 			<h4 class="mb-0">What We Offer ?</h4>
-			<p>{!! $we_offer['short_content'] !!}</p>
+			<p>{!! ($we_offer['short_content']) ? $we_offer['short_content'] : ' ' !!}</p>
 		</div>
 		<div class="row">
 
