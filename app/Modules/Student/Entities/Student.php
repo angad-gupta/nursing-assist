@@ -10,7 +10,7 @@ class Student extends Authenticatable
     const FILE_PATH = '/uploads/student/';
 
     protected $fillable = [
-
+ 
     	'username',
     	'password',
     	'email',
