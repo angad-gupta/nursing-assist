@@ -32,7 +32,7 @@
 					<a href="{{ route('about-us') }}"><li>Our Team</li> </a>
 					<a href="{{ route('contact-us') }}"><li>Contact US</li> </a>
 					<a href="#"><li>CPD Guidelines</li> </a>
-					<a href="#"><li>FAQ's</li> </a>
+					<a href="{{ route('faq')}}"><li>FAQ's</li> </a>
 				</ul>
 			</div>
 
@@ -77,6 +77,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
 <script src="{{asset('admin/validation/contactus.js')}}"></script>
 <script src="{{asset('admin/validation/enrolment.js')}}"></script>
+<script src="{{asset('admin/validation/student-register.js')}}"></script>
 
 <script>
 	$('.owl-carousel').owlCarousel({

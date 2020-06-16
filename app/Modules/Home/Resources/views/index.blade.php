@@ -65,10 +65,10 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('enrolment') }}">Agents</a>
+                                    <a class="nav-link" href="{{ route('agent') }}">Agents</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="">Student's Login</a>
+                                    <a class="nav-link" href="{{ route('student-account') }}">Student's Login</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('contact-us') }}">Contact Us</a>
@@ -79,10 +79,10 @@
                     </div>
                     <div class="ecm-search col-sm-12 col-md-1">
                         <ul class="list-unstyled d-flex mt-3 float-right">
-                            <a href="login.php">
-                                <li class="user"><img src="{{asset('home/img/user.svg')}}" alt="">
+                            <a href="{{ route('student-account') }}">
+                           		<li class="user"><img src="{{asset('home/img/user.svg')}}" alt="">
                                 </li>
-                            </a>
+                       		 </a>
                         </ul>
                     </div>
                 </nav>
