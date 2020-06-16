@@ -46,6 +46,11 @@ return [
             'provider' => 'users',
         ],
 
+        'student' => [
+            'driver' => 'session',
+            'provider' => 'students',
+        ],
+
         'customer' => [
             'driver' => 'session',
             'provider' => 'customers',
@@ -84,6 +89,11 @@ return [
         'customers' => [
             'driver' => 'eloquent',
             'model' => \App\Modules\AppUser\Entities\AppUser::class,
+        ],
+
+         'students' => [
+            'driver' => 'eloquent',
+            'model' => \App\Modules\Student\Entities\Student::class,
         ],
 
     ],

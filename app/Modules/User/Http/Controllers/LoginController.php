@@ -27,8 +27,14 @@ class LoginController extends Controller
     {
         if (Auth::check()) {
             return redirect()->intended(route('dashboard'));
-        } else {
-            return view('user::login.login');
+        }else{
+             return view('user::login.login');
+        }
+
+        if (Auth::guard('student')::check()) {
+             return redirect()->intended(route('student-dashboard'));
+        }else {
+            return view('home');
         }
     }
 

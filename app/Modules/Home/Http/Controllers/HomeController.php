@@ -5,6 +5,7 @@ namespace App\Modules\Home\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 
 use App\Modules\Page\Repositories\PageInterface;
 use App\Modules\Banner\Repositories\BannerInterface;
@@ -13,6 +14,9 @@ use App\Modules\CourseInfo\Repositories\CourseInfoInterface;
 use App\Modules\Team\Repositories\TeamInterface;
 use App\Modules\ContactUs\Repositories\ContactUsInterface;
 use App\Modules\Enrolment\Repositories\EnrolmentInterface;
+use App\Modules\Student\Repositories\StudentInterface;
+use App\Modules\FAQ\Repositories\FAQInterface;
+use App\Modules\Agent\Repositories\AgentInterface;
 
 class HomeController extends Controller
 {
@@ -24,6 +28,9 @@ class HomeController extends Controller
     protected $team;
     protected $contactus;
     protected $enrolment;
+    protected $student;
+    protected $faq;
+    protected $agent;
     
     public function __construct(
             PageInterface $page,
@@ -32,7 +39,10 @@ class HomeController extends Controller
             CourseInfoInterface $courseinfo,
             TeamInterface $team,
             ContactUsInterface $contactus,
-            EnrolmentInterface $enrolment
+            EnrolmentInterface $enrolment,
+            StudentInterface $student,
+            FAQInterface $faq,
+            AgentInterface $agent
         )
 
     {
@@ -43,6 +53,9 @@ class HomeController extends Controller
         $this->team = $team;
         $this->contactus = $contactus;
         $this->enrolment = $enrolment;
+        $this->student = $student;
+        $this->faq = $faq;
+        $this->agent = $agent;
     }
 
     /**
@@ -80,6 +93,18 @@ class HomeController extends Controller
         $data['contact_us'] =$this->page->getBySlug('contact_us');
         $data['message'] = ($input) ? $input['message'] : FALSE;
         return view('home::contactus',$data);
+    }
+
+    public function faq()
+    {
+        $data['faq'] = $this->faq->findAll();
+        return view('home::faq',$data);
+    }
+
+    public function agent()
+    {
+        $data['agent'] = $this->agent->findAll();
+        return view('home::agent',$data);
     }
 
     /**
@@ -190,6 +215,41 @@ class HomeController extends Controller
         $data['user_agreement'] =$this->page->getBySlug('user_agreement');
         return view('home::user_agreement',$data);
       
+    }
+
+    public function studentAccount(Request $request){
+         $input = $request->all(); 
+
+        if (Auth::guard('student')->check()) {
+             return redirect()->intended(route('student-dashboard'));
+        }
+
+         $data['message'] = ($input) ? $input['message'] : FALSE;
+
+         return view('home::student-login',$data);
+    }
+
+    public function studentRegister(Request $request){
+        $input = $request->all();
+
+         try{
+
+            $studentData = array(
+                'username' => $input['username'],
+                'email' => $input['email'],
+                'password' => bcrypt($input['password']),
+                'user_type' => 'student',
+                'active' => 0
+            );
+
+            $this->student->save($studentData);
+
+            $registerStudent['message'] = 'We will send a mail after reviewing your Request';
+        }catch(\Throwable $e){
+            $registerStudent['message'] = 'Something Wrong With Message';
+        }
+
+        return redirect(route('student-account',$registerStudent));
     }
 
     
