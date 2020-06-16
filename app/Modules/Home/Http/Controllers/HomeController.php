@@ -239,12 +239,12 @@ class HomeController extends Controller
                 'email' => $input['email'],
                 'password' => bcrypt($input['password']),
                 'user_type' => 'student',
-                'active' => 0
+                'active' => 1
             );
 
             $this->student->save($studentData);
 
-            $registerStudent['message'] = 'We will send a mail after reviewing your Request';
+            $registerStudent['message'] = 'You have register Successfully.';
         }catch(\Throwable $e){
             $registerStudent['message'] = 'Something Wrong With Message';
         }

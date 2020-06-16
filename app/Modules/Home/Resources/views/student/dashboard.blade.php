@@ -6,95 +6,91 @@
         <div class="row">
             <div class="neta-ribbon__content">
                 <div class="col-sm-12">
-            <h1 class="mb-0">User Dashboard</h1>
-            <ul class="list-unstyled d-flex">
-                <li> <a href="#">Home /</a></li>
-                <li> <a href="#">User Dashboard</a></li>
-            </ul>
-        </div>
-        </div>
-           
+                    <h1 class="mb-0">User Dashboard</h1>
+                    <ul class="list-unstyled d-flex">
+                        <li> <a href="#">Home /</a></li>
+                        <li> <a href="#">User Dashboard</a></li>
+                    </ul>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
 
-    <section class="neta-dashboard section-padding">
-        <div class="container">
-            <div class="profile-tab">
-                <div class="row">
-                    <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
-                        <div class="auth-box ab-1 text-center">
-                            <img src="img/nn.png" width="100" alt="">
-                            <div class="pn">
-                                <h6 class="mb-0">Alex White</h6>
-                                <p>Student</p>
-                            </div>
-                        </div>
-    
-                        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                            <a class="nav-link active" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
-                                role="tab" aria-controls="v-pills-profile" aria-selected="true">  My Account</a>
-                            <a class="nav-link" id="v-pills-book-tab" data-toggle="pill" href="#v-pills-book" role="tab"
-                                aria-controls="v-pills-book" aria-selected="false"> My Courses</a>
-                            <a class="nav-link" id="v-pills-tour-tab" data-toggle="pill" href="#v-pills-tour" role="tab"
-                                aria-controls="v-pills-tour" aria-selected="false">Message</a>
-                            <a class="nav-link" id="v-pills-notification-tab" data-toggle="pill" href="#v-pills-notification"
-                                role="tab" aria-controls="v-pills-messages" aria-selected="false">Notification</a>
-                            <a class="nav-link" id="v-pills-purchase-tab" data-toggle="pill" href="#v-pills-purchase"
-                                role="tab" aria-controls="v-pills-purchase" aria-selected="false">Purchase History</a>
-                            <a class="nav-link" href="{{ route('student-logout') }}">Logout</a>
+<section class="neta-dashboard section-padding">
+    <div class="container">
+        <div class="profile-tab">
+            <div class="row">
+                <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
+                    <div class="auth-box ab-1 text-center">
+                        <img src="img/nn.png" width="100" alt="">
+                        <div class="pn">
+                            <h6 class="mb-0">Alex White</h6>
+                            <p>Student</p>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-8 col-lg-9">
-                        <div class="tab-content" id="v-pills-tabContent">
-                            <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel"
-                                aria-labelledby="v-pills-profile-tab">
-                                <h5 class="mb-0">My Account</h5>
-                                <p>View and edit your personal info below.</p>
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-12 col-lg-12 pt-0">
-                                        <div class="row neta-field p-0">
-                                            <div class="col-sm-4">
-                                                <div class="form-group">
-                                                    <label for="">Full Name</label>
-                                                    <input type="text" class="form-control" placeholder="Deepak Shrestha">
-                                                </div>
-                                            </div>
 
-                                            <div class="col-sm-4">
-                                                <div class="form-group">
-                                                    <label for="">Gender</label>
-                                                    <select class="selectpicker">
-                                                        <option>Male</option>
-                                                        <option>Female</option>
-                                                        <option>Other</option>
-                                                    </select>
-                                                </div>
-                                            </div>
+                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <a class="nav-link active" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
+                        role="tab" aria-controls="v-pills-profile" aria-selected="true">  My Account</a>
+                        <a class="nav-link" id="v-pills-book-tab" data-toggle="pill" href="#v-pills-book" role="tab"
+                        aria-controls="v-pills-book" aria-selected="false"> My Courses</a>
+                        <a class="nav-link" id="v-pills-tour-tab" data-toggle="pill" href="#v-pills-tour" role="tab"
+                        aria-controls="v-pills-tour" aria-selected="false">Message</a>
+                        <a class="nav-link" id="v-pills-notification-tab" data-toggle="pill" href="#v-pills-notification"
+                        role="tab" aria-controls="v-pills-messages" aria-selected="false">Notification</a>
+                        <a class="nav-link" id="v-pills-purchase-tab" data-toggle="pill" href="#v-pills-purchase"
+                        role="tab" aria-controls="v-pills-purchase" aria-selected="false">Purchase History</a>
+                        <a class="nav-link" id="v-pills-password-tab" data-toggle="pill" href="#v-pills-password"
+                        role="tab" aria-controls="v-pills-password" aria-selected="false">Change Password</a>
+                        <a class="nav-link" href="{{ route('student-logout') }}">Logout</a>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-8 col-lg-9">
+                    <div class="tab-content" id="v-pills-tabContent">
+                        <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel"
+                        aria-labelledby="v-pills-profile-tab">
+                        <h5 class="mb-0">My Account</h5>
+                        <p>View and edit your personal info below.</p>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12 pt-0">
 
-                                            <div class="col-sm-4">
-                                                <div class="form-group">
-                                                    <label for="">Date of Birth</label>
-                                                    <input type="date" class="form-control" id="datepicker4"
-                                                        placeholder="Enter Date">
-                                                    <!-- <i class="material-icons">
-                                                        today
-                                                    </i> -->
+                        {!! Form::open(['route'=>'team.store','method'=>'POST','id'=>'team_submit','class'=>'form-horizontal','role'=>'form','files' => true]) !!}
+    
+                                <div class="row neta-field p-0">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="">Full Name</label>
+                                            {!! Form::text('full_name', $value = null, ['id'=>'full_name','placeholder'=>'Enter Full Name','class'=>'form-control']) !!}
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="">Gender</label>
+                                            {!! Form::select('gender',['male'=>'Male','female'=>'Female','other'=>'Other'], $value = null, ['id'=>'gender','class'=>'selectpicker' ]) !!}    
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="">Date of Birth</label>
+                                                {!! Form::text('dob', $value = null, ['id'=>'datepicker4','placeholder'=>'Enter DOB','class'=>'form-control']) !!}
                                                 </div>
                                             </div>
 
                                             <div class="col-sm-4">
                                                 <div class="form-group">
                                                     <label for="">Email Address</label>
-                                                    <input type="email" class="form-control"
-                                                        placeholder="deepk0348@gmail.com">
+                                                    {!! Form::text('email', $value = null, ['id'=>'email','placeholder'=>'Enter Email','class'=>'form-control']) !!}
                                                 </div>
                                             </div>
-    
+
                                             <div class="col-sm-4">
                                                 <div class="form-group">
                                                     <label for="">Phone Number</label>
-                                                    <input type="number" class="form-control" placeholder="9847888">
+                                                    {!! Form::text('phone_no', $value = null, ['id'=>'phone_no','placeholder'=>'Enter Phone Number' ,'class'=>'form-control']) !!}
                                                 </div>
                                             </div>
 
@@ -102,54 +98,36 @@
                                             <div class="col-sm-4">
                                                 <div class="form-group">
                                                     <label for="">Primary Address</label>
-                                                    <input type="text" class="form-control"
-                                                        placeholder="Balkot,5 Bhaktapur">
+                                                    {!! Form::text('primary_address', $value = null, ['id'=>'primary_address','placeholder'=>'Enter Primary Address','class'=>'form-control']) !!}
                                                 </div>
                                             </div>
-    
+
                                             <div class="col-sm-4">
                                                 <div class="form-group">
                                                     <label for="">Temporary Address</label>
-                                                    <input type="text" class="form-control"
-                                                        placeholder="Lalitpur,5 Kathmandu">
+                                                    {!! Form::text('temporary_address', $value = null, ['id'=>'temporary_address','placeholder'=>'Enter Temporary Address','class'=>'form-control']) !!}
+
                                                 </div>
                                             </div>
 
                                             <div class="col-sm-4">
                                                 <div class="form-group">
                                                     <label for="">Upload Profile</label>
-                                                    <input type="file" class="form-control">
+                                                    {!! Form::file('profile_pic', ['id'=>'profile_pic','class'=>'form-control']) !!}
                                                 </div>
                                             </div>
-                                           
-                                            <div class=" col-sm-12 mt-3 mb-1">
-                                                <h6>Change Password</h6>
-                                                <div class="row">
-                                                <div class="col-sm-6">  
-                                                    <div class="form-group">
-                                                        <label for="">Password</label>
-                                                        <input type="password" class="form-control" placeholder="******">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">  
-                                                    <div class="form-group">
-                                                        <label for="">Confirm Password</label>
-                                                        <input type="password" class="form-control" placeholder="******">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            </div>
-                                            
 
                                             <div class="col-sm-12 save-btn">
-                                                <button class="btn e-btn mt-3"><a href="#">
-                                                        Update Info </a></button>
+                                                <button class="btn e-btn mt-3" type="submit" style="color:white;">Update Info</button>
                                             </div>
                                         </div>
+
+                                {!! Form::close() !!}
+
                                     </div>
                                 </div>
                             </div><!-- pills-profile -->
-    
+
                             <div class="tab-pane fade" id="v-pills-book" role="tabpanel" aria-labelledby="v-pills-book-tab">
                                 <h5>My Courses</h5>
                                 <div class="tp-list">
@@ -205,7 +183,7 @@
                                             <h6>Hi!The awaited, major update for Capture One 20 was finally released earlier this week. It contains some powerful new features such....</h6>
                                             <span>3 days ago</span>
                                         </div>
-    
+
                                     </div>
                                 </div><!-- tp-list -->
 
@@ -219,7 +197,7 @@
                                             <h6> It contains some powerful new features such....</h6>
                                             <span>1 month ago</span>
                                         </div>
-    
+
                                     </div>
                                 </div><!-- tp-list -->
 
@@ -233,10 +211,10 @@
                                             <h6>Hi!The awaited, major update for Capture One 20 was finally released earlier this week. It contains some powerful new features such....</h6>
                                             <span>6 days ago</span>
                                         </div>
-    
+
                                     </div>
                                 </div><!-- tp-list -->
-    
+
                             </div><!-- tour-pills -->
 
                             <div class="tab-pane fade" id="v-pills-purchase" role="tabpanel" aria-labelledby="v-pills-purchase">
@@ -286,13 +264,55 @@
                                     </div>
                                 </div><!-- tp-list -->
                             </div>
-    
-                        </div>
+
+
+                            <div class="tab-pane fade" id="v-pills-password" role="tabpanel"
+                            aria-labelledby="v-pills-password-tab">
+                            <h5 class="mb-0">Change Password</h5>
+                            <p>For Better Security, Update Password Frequently.</p>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-12 pt-0">
+                                    <div class="row neta-field p-0">
+
+                                           <div class="col-sm-4">
+                                                <div class="form-group">
+                                                        <label for="">Old Password</label>
+                                                        <input type="password" class="form-control" placeholder="******">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label for="">New Password</label>
+                                                    <input type="password" class="form-control" placeholder="******">
+                                                </div>
+                                            </div> 
+
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label for="">Re-Type Password</label>
+                                                    <input type="password" class="form-control" placeholder="******">
+                                                </div>
+                                            </div>
+
+
+                                        <div class="col-sm-12 save-btn">
+                                            <button class="btn e-btn mt-3"><a href="#">
+                                            Update Password </a></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- pills-password -->
+
+
+
                     </div>
                 </div>
             </div>
         </div>
-        </div>
+    </div>
+</div>
 </section>
 
 <section class="section-padding"></section>
