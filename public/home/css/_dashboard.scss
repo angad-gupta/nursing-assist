@@ -1,0 +1,168 @@
+.neta-dashboard {
+    .profile-tab {
+        .neta-field {
+            label {
+                margin-bottom: 5px;
+                font-size: 14px;
+                font-weight: 500;
+            }
+            i {
+                position: absolute;
+                right: 20px;
+                top: 32px;
+                color: #b0117e;
+            }
+
+            .form-group {
+                margin-bottom: 20px;
+            }
+            .save-btn {
+                @include e-btn();
+                a {
+                    color: #fff;
+                }
+            }
+        }
+        .nav {
+            background: $white;
+            i {
+                position: relative;
+                top: 7px;
+                margin-right: 10px;
+                color: $primary-color;
+            }
+            &-link {
+                font-size: 16px;
+                font-weight: 400;
+                color: #313030;
+                padding: 15px;
+                padding-top: 8px;
+                position: relative;
+
+                &:after {
+                    content: "\f105";
+                    font-family: fontawesome;
+                    position: absolute;
+                    top: 10px;
+                    right: 15px;
+                    color: #000;
+                    font-size: 20px;
+                }
+            }
+            &-link.active {
+                background: $primary-color;
+                border-radius: 0;
+                color: #fff;
+                &:after {
+                    color: #fff;
+                }
+                i {
+                    color: $white;
+                }
+            }
+        }
+
+        .tab-content {
+            background: $white;
+            padding: 30px;
+            min-height: 475px;
+            border-radius: 4px;
+        }
+
+        .ed-profile {
+            text-align: center;
+            p {
+                margin-bottom: 15px;
+            }
+            img {
+                width: 142px;
+                height: 142px;
+                object-fit: cover;
+                border-radius: 50%;
+                margin-top: 20px;
+                position: relative;
+            }
+            input {
+                visibility: hidden;
+                &:after {
+                    content: url("../img/camera.svg");
+                    position: absolute;
+                    z-index: 1;
+                    visibility: visible;
+                    right: 15px;
+                    top: 100px;
+                }
+            }
+        }
+
+        .bf-book-field {
+            border-bottom: 0 !important;
+        }
+    }
+
+    .tp-list {
+        margin: 15px 0;
+        border-bottom: 1px solid #e8e8e8;
+        img {
+            margin: auto;
+            display: block;
+        }
+
+        thead {
+            background: #b0117e;
+            color: #fff;
+        }
+        &__desc {
+            h5 {
+                font-size: 16px;
+                margin-bottom: 0;
+            }
+            span {
+                font-size: 14px;
+                color: $primary-color;
+            }
+
+            a {
+                padding-top: 5px;
+            }
+        }
+        .col-sm-4 img {
+            height: 95px;
+            width: 100%;
+            border-radius: 4px;
+            object-fit: cover;
+        }
+    }
+
+    .change-password {
+        ul {
+            padding-left: 20px;
+            li {
+                font-weight: 200;
+                font-size: 14px;
+                padding: 2px 0;
+            }
+        }
+    }
+
+    .auth-box {
+        background: #fff;
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 15px;
+        padding: 20px;
+        border-radius: 4px;
+        img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+        P {
+            margin-bottom: 0;
+            color: #b5b5b5;
+            font-size: 14px;
+        }
+    }
+}

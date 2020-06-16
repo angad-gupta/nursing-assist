@@ -7,6 +7,9 @@
 @import "./login";
 @import "./courses-wrap";
 @import "./neta-catlog";
+@import "./dashboard";
+@import "./neta-quiz";
+@import "./agent";
 
 a {
   text-decoration: none !important;
@@ -82,6 +85,59 @@ a {
   span {
     padding-bottom: 15px;
     display: block;
-    color: #FEB049;
+    color: #feb049;
+  }
+}
+
+.nx-detail {
+  h6 {
+    color: $primary-color;
+  }
+  span{
+    padding-top: 15px;
+  }
+  .b-line {
+    padding: 0;
+  }
+  @include e-btn();
+
+  .course-day {
+    li {
+      justify-content: space-between;
+      align-items: baseline;
+      &:nth-last-child(1){
+        border-bottom:0;
+      }
+    }
+    .neta-videos{
+      margin-bottom: 15px;
+      iframe{
+        height: 180px;
+      }
+    }
+  }
+}
+
+.neta-fees{
+  h5{
+    padding-bottom: 20px;
+    span{
+      color: $primary-color;
+      font-size: 30px;
+      padding-left: 10px;
+      font-weight: 600;
+    }
+  }
+  .b-line{
+    padding-bottom: 20px;
+    p{
+      margin-bottom: 0;
+    }
+    span{
+      font-weight: 600;
+      font-size: 16px;
+      padding-top: 10px;
+      color: $primary-color;
+    }
   }
 }

@@ -1,0 +1,42 @@
+.neta-agent {
+    &__content {
+        background: #fff;
+        border-radius: 4px;
+        width: 100%;
+        min-height: 300px;
+        padding: 20px;
+        margin-bottom: 30px;
+        h5 {
+            color: $primary-color;
+            border-bottom: 1px solid #dedede;
+            padding-bottom: 15px;
+            font-size: 18px;
+        }
+        ul {
+            li {
+                border-bottom: 1px solid #dedede;
+                margin-bottom: 15px;
+                &:nth-last-child(1){
+                    border-bottom:0
+                }
+            }
+            i {
+                width: 25px;
+                height: 25px;
+                border-radius: 50%;
+                border: 1px solid #6e2f9f;
+                text-align: center;
+                line-height: 1.4;
+                color: #6e2f9f;
+                margin-right: 10px;
+                margin-bottom: 10px;
+                position: absolute;
+            }
+            span {
+                margin-left: 40px;
+                display: block;
+                margin-bottom: 10px;
+            }
+        }
+    }
+}
