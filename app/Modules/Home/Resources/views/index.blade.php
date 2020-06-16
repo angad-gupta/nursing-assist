@@ -297,7 +297,7 @@
 				<dov class="row">
 					<div class="col-sm-6">
 						<h5 class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">About NETA</h5>
-						<p class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".75s">{!! $about_neta['short_content'] !!}
+						<p class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".75s">{!! ($about_neta['short_content']) ? $about_neta['short_content'] : '' !!}
 						</p>
 						<button class="btn btn-neta"><a href="{{ route('about-us') }}">Learn More</a></button>
 					</div>
