@@ -303,7 +303,7 @@ header .bg-light .navbar-brand {
 .neta-dropdown__menu-item {
   position: absolute;
   top: 0px;
-  right: -195px;
+  right: -160px;
   background: #fff;
   z-index: 1;
   opacity: 0;
@@ -1263,6 +1263,333 @@ header .bg-light .navbar-brand {
   color: #fff;
 }
 
+.neta-dashboard .profile-tab .neta-field label {
+  margin-bottom: 5px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.neta-dashboard .profile-tab .neta-field i {
+  position: absolute;
+  right: 20px;
+  top: 32px;
+  color: #b0117e;
+}
+
+.neta-dashboard .profile-tab .neta-field .form-group {
+  margin-bottom: 20px;
+}
+
+.neta-dashboard .profile-tab .neta-field .save-btn .btn {
+  background: #B0117E;
+  margin-top: 30px;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+}
+
+.neta-dashboard .profile-tab .neta-field .save-btn .btn a {
+  color: #fff;
+}
+
+.neta-dashboard .profile-tab .neta-field .save-btn .btn:hover {
+  background: #6E2F9F;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+}
+
+.neta-dashboard .profile-tab .neta-field .save-btn .btn:hover a {
+  color: #fff;
+}
+
+.neta-dashboard .profile-tab .neta-field .save-btn a {
+  color: #fff;
+}
+
+.neta-dashboard .profile-tab .nav {
+  background: #fff;
+}
+
+.neta-dashboard .profile-tab .nav i {
+  position: relative;
+  top: 7px;
+  margin-right: 10px;
+  color: #B0117E;
+}
+
+.neta-dashboard .profile-tab .nav-link {
+  font-size: 16px;
+  font-weight: 400;
+  color: #313030;
+  padding: 15px;
+  padding-top: 8px;
+  position: relative;
+}
+
+.neta-dashboard .profile-tab .nav-link:after {
+  content: "\f105";
+  font-family: fontawesome;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: #000;
+  font-size: 20px;
+}
+
+.neta-dashboard .profile-tab .nav-link.active {
+  background: #B0117E;
+  border-radius: 0;
+  color: #fff;
+}
+
+.neta-dashboard .profile-tab .nav-link.active:after {
+  color: #fff;
+}
+
+.neta-dashboard .profile-tab .nav-link.active i {
+  color: #fff;
+}
+
+.neta-dashboard .profile-tab .tab-content {
+  background: #fff;
+  padding: 30px;
+  min-height: 475px;
+  border-radius: 4px;
+}
+
+.neta-dashboard .profile-tab .ed-profile {
+  text-align: center;
+}
+
+.neta-dashboard .profile-tab .ed-profile p {
+  margin-bottom: 15px;
+}
+
+.neta-dashboard .profile-tab .ed-profile img {
+  width: 142px;
+  height: 142px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+  margin-top: 20px;
+  position: relative;
+}
+
+.neta-dashboard .profile-tab .ed-profile input {
+  visibility: hidden;
+}
+
+.neta-dashboard .profile-tab .ed-profile input:after {
+  content: url("../img/camera.svg");
+  position: absolute;
+  z-index: 1;
+  visibility: visible;
+  right: 15px;
+  top: 100px;
+}
+
+.neta-dashboard .profile-tab .bf-book-field {
+  border-bottom: 0 !important;
+}
+
+.neta-dashboard .tp-list {
+  margin: 15px 0;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.neta-dashboard .tp-list img {
+  margin: auto;
+  display: block;
+}
+
+.neta-dashboard .tp-list thead {
+  background: #b0117e;
+  color: #fff;
+}
+
+.neta-dashboard .tp-list__desc h5 {
+  font-size: 16px;
+  margin-bottom: 0;
+}
+
+.neta-dashboard .tp-list__desc span {
+  font-size: 14px;
+  color: #B0117E;
+}
+
+.neta-dashboard .tp-list__desc a {
+  padding-top: 5px;
+}
+
+.neta-dashboard .tp-list .col-sm-4 img {
+  height: 95px;
+  width: 100%;
+  border-radius: 4px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.neta-dashboard .change-password ul {
+  padding-left: 20px;
+}
+
+.neta-dashboard .change-password ul li {
+  font-weight: 200;
+  font-size: 14px;
+  padding: 2px 0;
+}
+
+.neta-dashboard .auth-box {
+  background: #fff;
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 15px;
+  padding: 20px;
+  border-radius: 4px;
+}
+
+.neta-dashboard .auth-box img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.neta-dashboard .auth-box P {
+  margin-bottom: 0;
+  color: #b5b5b5;
+  font-size: 14px;
+}
+
+.neta-quiz .btn {
+  background: #B0117E;
+  margin-top: 30px;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+}
+
+.neta-quiz .btn a {
+  color: #fff;
+}
+
+.neta-quiz .btn:hover {
+  background: #6E2F9F;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+}
+
+.neta-quiz .btn:hover a {
+  color: #fff;
+}
+
+.neta-quiz .e-btn {
+  height: 45px;
+}
+
+.neta-quiz .d-btn {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 0 20px;
+}
+
+.neta-quiz .fs-title {
+  color: #B0117E;
+}
+
+.neta-quiz p {
+  color: #000;
+}
+
+.neta-quiz label {
+  color: #000;
+  font-size: 14px;
+}
+
+.neta-quiz .e-input {
+  margin-bottom: 15px;
+}
+
+.neta-quiz .quiz-score {
+  border: 1px solid #b0117e;
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 4px;
+}
+
+.neta-quiz .quiz-score span {
+  padding-left: 10px;
+}
+
+.neta-quiz .quiz-score h2 {
+  color: #000;
+}
+
+.neta-quiz .b-line {
+  padding-bottom: 20px;
+}
+
+.neta-quiz .answer-sheet span {
+  font-size: 14px;
+  padding-right: 0;
+  color: #000;
+  padding-bottom: 15px;
+  display: block;
+}
+
+.neta-agent__content {
+  background: #fff;
+  border-radius: 4px;
+  width: 100%;
+  min-height: 300px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.neta-agent__content h5 {
+  color: #B0117E;
+  border-bottom: 1px solid #dedede;
+  padding-bottom: 15px;
+  font-size: 18px;
+}
+
+.neta-agent__content ul li {
+  border-bottom: 1px solid #dedede;
+  margin-bottom: 15px;
+}
+
+.neta-agent__content ul li:nth-last-child(1) {
+  border-bottom: 0;
+}
+
+.neta-agent__content ul i {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 1px solid #6e2f9f;
+  text-align: center;
+  line-height: 1.4;
+  color: #6e2f9f;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  position: absolute;
+}
+
+.neta-agent__content ul span {
+  margin-left: 40px;
+  display: block;
+  margin-bottom: 10px;
+}
+
 a {
   text-decoration: none !important;
   color: #000;
@@ -1333,6 +1660,86 @@ a {
 .student-hub span {
   padding-bottom: 15px;
   display: block;
-  color: #FEB049;
+  color: #feb049;
+}
+
+.nx-detail h6 {
+  color: #B0117E;
+}
+
+.nx-detail span {
+  padding-top: 15px;
+}
+
+.nx-detail .b-line {
+  padding: 0;
+}
+
+.nx-detail .btn {
+  background: #B0117E;
+  margin-top: 30px;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+}
+
+.nx-detail .btn a {
+  color: #fff;
+}
+
+.nx-detail .btn:hover {
+  background: #6E2F9F;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+}
+
+.nx-detail .btn:hover a {
+  color: #fff;
+}
+
+.nx-detail .course-day li {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+}
+
+.nx-detail .course-day li:nth-last-child(1) {
+  border-bottom: 0;
+}
+
+.nx-detail .course-day .neta-videos {
+  margin-bottom: 15px;
+}
+
+.nx-detail .course-day .neta-videos iframe {
+  height: 180px;
+}
+
+.neta-fees h5 {
+  padding-bottom: 20px;
+}
+
+.neta-fees h5 span {
+  color: #B0117E;
+  font-size: 30px;
+  padding-left: 10px;
+  font-weight: 600;
+}
+
+.neta-fees .b-line {
+  padding-bottom: 20px;
+}
+
+.neta-fees .b-line p {
+  margin-bottom: 0;
+}
+
+.neta-fees .b-line span {
+  font-weight: 600;
+  font-size: 16px;
+  padding-top: 10px;
+  color: #B0117E;
 }
 /*# sourceMappingURL=style.css.map */

@@ -1,0 +1,53 @@
+.neta-quiz {
+    @include e-btn();
+    .e-btn {
+        height: 45px;
+    }
+
+    .d-btn {
+        justify-content: space-between;
+        padding: 0 20px;
+    }
+    .fs-title {
+        color: $primary-color;
+    }
+    p {
+        color: #000;
+    }
+    label {
+        color: #000;
+        font-size: 14px;
+    }
+
+    .e-input {
+        margin-bottom: 15px;
+    }
+
+    .quiz-score {
+        border: 1px solid #b0117e;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 4px;
+        span {
+            padding-left: 10px;
+        }
+        h2 {
+            color: #000;
+        }
+    }
+    .b-line {
+        padding-bottom: 20px;
+    }
+
+    .answer-sheet {
+        span {
+            font-size: 14px;
+            padding-right: 0;
+            color: #000;
+            padding-bottom: 15px;
+            display: block;
+        }
+    }
+}
