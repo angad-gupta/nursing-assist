@@ -1,6 +1,10 @@
 .neta-contact {
     @include ttl-line();
-    margin-bottom: 30px;
+    .error{
+        position: absolute;
+        top: 55px;
+    }
+    margin-bottom: 40px;
     &__form {
         background: $white;
         padding: 30px;

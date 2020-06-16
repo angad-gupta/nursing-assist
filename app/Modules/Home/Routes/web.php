@@ -54,5 +54,6 @@ Route::get('student-logout', ['as' => 'student-logout', 'uses' => 'StudentContro
 Route::group(['prefix' => 'student', 'middleware' => ['auth:student']], function () {
 
 	Route::get('student-dashboard', ['as' => 'student-dashboard', 'uses' => 'DashboardController@index']);
+	Route::put('studentprofile/update/{id}', ['as' => 'studentprofile.update', 'uses' => 'DashboardController@studentProfileUpdate'])->where('id','[0-9]+');
 
 });

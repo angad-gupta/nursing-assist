@@ -18,16 +18,20 @@
     </div>
 </section>
 
+ @php
+    $image = ($student_profile->profile_pic) ? asset($student_profile->file_full_path).'/'.$student_profile->profile_pic : asset('home/img/nn.png');
+ @endphp
+
 <section class="neta-dashboard section-padding">
     <div class="container">
         <div class="profile-tab">
             <div class="row">
                 <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
                     <div class="auth-box ab-1 text-center">
-                        <img src="img/nn.png" width="100" alt="">
+                        <img src="{{ $image }}" width="100" alt="">
                         <div class="pn">
-                            <h6 class="mb-0">Alex White</h6>
-                            <p>Student</p>
+                            <h6 class="mb-0">{{ ($student_profile->full_name) ? $student_profile->full_name : '' }}</h6>
+                            <p>{{ ($student_profile->email) ? $student_profile->email : '' }}</p>
                         </div>
                     </div>
 
@@ -53,10 +57,12 @@
                         aria-labelledby="v-pills-profile-tab">
                         <h5 class="mb-0">My Account</h5>
                         <p>View and edit your personal info below.</p>
+                         @include('flash::message')
                         <div class="row">
                             <div class="col-sm-12 col-md-12 col-lg-12 pt-0">
 
-                        {!! Form::open(['route'=>'team.store','method'=>'POST','id'=>'team_submit','class'=>'form-horizontal','role'=>'form','files' => true]) !!}
+                            {!! Form::model($student_profile,['method'=>'PUT','route'=>['studentprofile.update',$student_profile->id],'class'=>'form-horizontal','id'=>'team_submit','role'=>'form','files'=>true]) !!} 
+
     
                                 <div class="row neta-field p-0">
                                     <div class="col-sm-4">

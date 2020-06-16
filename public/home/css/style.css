@@ -877,7 +877,7 @@ header .bg-light .navbar-brand {
 }
 
 .neta-contact {
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .neta-contact .ttl-line {
@@ -893,6 +893,11 @@ header .bg-light .navbar-brand {
   width: 50px;
   height: 8px;
   left: 0;
+}
+
+.neta-contact .error {
+  position: absolute;
+  top: 55px;
 }
 
 .neta-contact__form {
@@ -1741,5 +1746,30 @@ a {
   font-size: 16px;
   padding-top: 10px;
   color: #B0117E;
+}
+
+.neta-bullet ul {
+  list-style: none;
+}
+
+.neta-bullet ul li {
+  position: relative;
+  padding-left: 30px;
+  padding-bottom: 15px;
+}
+
+.neta-bullet ul li:before {
+  content: '>';
+  background: #120f4a;
+  width: 20px;
+  height: 20px;
+  color: #fff;
+  text-align: center;
+  line-height: 1.4;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  padding-left: 2px;
 }
 /*# sourceMappingURL=style.css.map */

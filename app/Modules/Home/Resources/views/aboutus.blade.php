@@ -24,7 +24,7 @@
         <div class="col-sm-7">
             <h2 class="ttl-line">Welcome to <br>Nurse Education & Training Australia
                 </h2>
-                {!! ($about_neta) ? $about_neta['description'] : '' !!}          
+                <div class="neta-bullet"> {!! ($about_neta) ? $about_neta['description'] : '' !!}</div>   
         </div>
 
         @php
