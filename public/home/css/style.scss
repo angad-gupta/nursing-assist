@@ -141,3 +141,28 @@ a {
     }
   }
 }
+
+.neta-bullet{
+  ul{
+    list-style: none;
+    li{
+      position: relative;
+      padding-left: 30px;
+      padding-bottom: 15px;
+      &:before{
+        content: '>';
+        background: #120f4a;
+        width: 20px;
+        height: 20px;
+        color: #fff;
+        text-align: center;
+        line-height: 1.4;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 50%;
+        padding-left: 2px;
+      }
+    }
+  }
+}
