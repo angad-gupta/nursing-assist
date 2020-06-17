@@ -29,6 +29,15 @@ footer {
   background: #041936;
   padding: 60px 0;
   padding-top: 150px;
+  .acknowledge {
+    border-top: 1px solid #5b6067;
+    display: block;
+    padding-top: 20px;
+    p {
+      font-size: 12px;
+      color: #908e8e;
+    }
+  }
   h5 {
     padding-bottom: 20px;
   }
