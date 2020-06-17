@@ -276,6 +276,9 @@
                             aria-labelledby="v-pills-password-tab">
                             <h5 class="mb-0">Change Password</h5>
                             <p>For Better Security, Update Password Frequently.</p>
+
+
+                    {!! Form::open(['route'=>'student-update-password','method'=>'POST','class'=>'form-horizontal','role'=>'form','files' => true]) !!}
                             <div class="row">
                                 <div class="col-sm-12 col-md-12 col-lg-12 pt-0">
                                     <div class="row neta-field p-0">
@@ -283,23 +286,16 @@
                                            <div class="col-sm-4">
                                                 <div class="form-group">
                                                         <label for="">Old Password</label>
-                                                        <input type="password" class="form-control" placeholder="******">
+                                                    {!! Form::text('old_password', $value = null, ['id'=>'old_password','placeholder'=>'Old Password','class'=>'form-control']) !!}
                                                 </div>
                                             </div>
 
                                             <div class="col-sm-4">
                                                 <div class="form-group">
                                                     <label for="">New Password</label>
-                                                    <input type="password" class="form-control" placeholder="******">
+                                                        {!! Form::password('password', ['id'=>'password','placeholder'=>'New Password','class'=>'form-control']) !!}
                                                 </div>
                                             </div> 
-
-                                            <div class="col-sm-4">
-                                                <div class="form-group">
-                                                    <label for="">Re-Type Password</label>
-                                                    <input type="password" class="form-control" placeholder="******">
-                                                </div>
-                                            </div>
 
 
                                         <div class="col-sm-12 save-btn">
@@ -309,6 +305,8 @@
                                     </div>
                                 </div>
                             </div>
+                        {!! Form::close() !!}
+
                         </div><!-- pills-password -->
 
 

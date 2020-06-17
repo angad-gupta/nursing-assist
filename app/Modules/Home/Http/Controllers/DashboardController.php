@@ -45,7 +45,7 @@ class DashboardController extends Controller
            alertify($e->getMessage())->error();
         }
         
-        return redirect(route('student-dashboard'));
+        return redirect(route('student-account'));
 
     }
     /**
