@@ -159,6 +159,30 @@
                     </li>
                     @endif   
 
+                    @if($menuRoles->assignedRoles('announcement.index'))
+                    <li class="nav-item">
+                        <a href="{{route('announcement.index')}}"
+                           class="nav-link @if($Route[0]=='announcement') active @endif"
+                           data-popup="tooltip" data-original-title="Announcement Management"
+                           data-placement="right">
+                            <i class="icon-megaphone"></i>
+                            <span>Announcement Management</span>
+                        </a>
+                    </li>
+                    @endif   
+
+                    @if($menuRoles->assignedRoles('message.index'))
+                    <li class="nav-item">
+                        <a href="{{route('message.index')}}"
+                           class="nav-link @if($Route[0]=='message') active @endif"
+                           data-popup="tooltip" data-original-title="Message From Student"
+                           data-placement="right">
+                            <i class="icon-bubbles6"></i>
+                            <span>Message From Student</span>
+                        </a>
+                    </li>
+                    @endif   
+
 
                       @if($menuRoles->assignedRoles('quiz.index'))
                     <li class="nav-item">

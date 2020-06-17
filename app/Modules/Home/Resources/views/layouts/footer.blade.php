@@ -43,7 +43,7 @@
 					<a href="{{ route('privacy-policy')}}"><li>Privacy & Policy</li> </a>
 					<a href="{{ route('term-condition')}}"><li>Terms & Conditions</li> </a>
 					<a href="{{ route('user-agreement')}}"><li>User Agreement</li> </a>
-					<a href="#"><li>Payment Plan Policy</li> </a>
+					<a href="{{ route('payment-plan')}}"><li>Payment Plan Policy</li> </a>
 				</ul>
 			</div>
 
@@ -60,20 +60,25 @@
 					</div>
 				</div>
 			</div>
+  			
 
-			<div class="col-sm-12">
-				<div class="acknowledge">
-				<p>Nursing Education & Training Australia acknowledges the Traditional Owners
-					of the country throughout Australia and recognises their continuing connection
-					to land, waters and culture. We pay our respects to Elders past, present and
-					emerging</p>
-				<p>NCLEX-P ®, NCLEX-RN® are registered trademarks of the National Council of State Boards of
-					Nursing, Inc (NCSBN ®)
-					Nursing Education & Training Australia is neither endorsed by nor affiliated with AHPRA. None of the
-					trademark holders is affiliated with, and does not endorse, Nursing Education & Training Australia
-					Products.</p>
-				</div>
-			</div>
+  			 <diiv class="col-sm-12">
+                <div class="acknowledge">
+                    <p>Nursing Education & Training Australia acknowledges the Traditional Owners
+                        of the country throughout Australia and recognises their continuing connection
+                        to land, waters and culture. We pay our respects to Elders past, present and
+                        emerging
+                    </p>
+                    <p>   
+                        NCLEX-P ®, NCLEX-RN® are registered trademarks of the National Council of State Boards of
+                        Nursing, Inc (NCSBN ®)
+                        Nursing Education & Training Australia is neither endorsed by nor affiliated with AHPRA. None of the
+                        trademark holders is affiliated with, and does not endorse, Nursing Education & Training Australia
+                        Products.
+                    </p>
+                </div>
+            </diiv>
+
 
 		</div>
 	</div>
