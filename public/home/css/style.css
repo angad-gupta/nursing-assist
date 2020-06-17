@@ -125,14 +125,14 @@ footer {
 }
 
 footer .acknowledge {
-  border-top: 1px solid #5b6067;
-  display: block;
-  padding-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #9c9c9c;
 }
 
 footer .acknowledge p {
-  font-size: 12px;
-  color: #908e8e;
+  font-size: 13px;
+  color: #9c9c9c;
+  font-style: italic;
 }
 
 footer h5 {
@@ -888,7 +888,7 @@ header .bg-light .navbar-brand {
 }
 
 .neta-contact {
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .neta-contact .ttl-line {
@@ -904,11 +904,6 @@ header .bg-light .navbar-brand {
   width: 50px;
   height: 8px;
   left: 0;
-}
-
-.neta-contact .error {
-  position: absolute;
-  top: 55px;
 }
 
 .neta-contact__form {
@@ -1109,7 +1104,7 @@ header .bg-light .navbar-brand {
   padding: 20px;
   border-radius: 4px;
   margin: 20px 0;
-  min-height: 200px;
+  min-height: 270px;
 }
 
 .courses-wrap .course-enrolment__content p {
@@ -1147,6 +1142,11 @@ header .bg-light .navbar-brand {
 
 .courses-wrap .course-enrolment__content .btn:hover a {
   color: #fff;
+}
+
+.courses-wrap .course-enrolment .demo {
+  background: #575c63;
+  margin-top: 10px;
 }
 
 .courses-wrap .intake-date__content {
@@ -1759,6 +1759,10 @@ a {
   color: #B0117E;
 }
 
+.neta-fees {
+  background: #eaeaea;
+}
+
 .neta-bullet ul {
   list-style: none;
 }
@@ -1782,5 +1786,15 @@ a {
   left: 0;
   border-radius: 50%;
   padding-left: 2px;
+}
+
+.neta-eml {
+  color: #4d7ae0;
+}
+
+.neta-pplan table {
+  background: #fff;
+  -webkit-box-shadow: 0 0 20px #efefef;
+          box-shadow: 0 0 20px #efefef;
 }
 /*# sourceMappingURL=style.css.map */

@@ -7,15 +7,18 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use App\Modules\Student\Repositories\StudentInterface;
 use Illuminate\Support\Facades\Auth;
+use App\Modules\Announcement\Repositories\AnnouncementInterface;
 
 
 class DashboardController extends Controller
 {
-      protected $StudentController;
+      protected $student;
+      protected $announcement;
     
-    public function __construct(StudentInterface $student)
+    public function __construct(StudentInterface $student, AnnouncementInterface $announcement)
     {
         $this->student = $student;
+        $this->announcement = $announcement;
     }
     /**
      * Display a listing of the resource.
@@ -25,6 +28,7 @@ class DashboardController extends Controller
     {
         $id = Auth::guard('student')->user()->id;
         $data['student_profile'] = Auth::guard('student')->user()->find($id);
+        $data['announcement'] = $this->announcement->findAll($limit=5);  
 
         return view('home::student.dashboard',$data);
     }
@@ -45,7 +49,7 @@ class DashboardController extends Controller
            alertify($e->getMessage())->error();
         }
         
-        return redirect(route('student-dashboard'));
+        return redirect(route('student-account'));
 
     }
     /**

@@ -41,6 +41,8 @@ Route::get('privacy-policy', ['as' => 'privacy-policy', 'uses' => 'HomeControlle
 
 Route::get('user-agreement', ['as' => 'user-agreement', 'uses' => 'HomeController@userAgreement']);
 
+Route::get('payment-plan', ['as' => 'payment-plan', 'uses' => 'HomeController@paymentPlan']);
+
 Route::get('student-account', ['as' => 'student-account', 'uses' => 'HomeController@studentAccount']);
 
 Route::post('student-register/store', ['as' => 'student-register.store', 'uses' => 'HomeController@studentRegister']);
@@ -49,11 +51,12 @@ Route::post('student-login', ['as' => 'student-login-post', 'uses' => 'StudentCo
 
 Route::get('student-logout', ['as' => 'student-logout', 'uses' => 'StudentController@studentLogout']);
 
-
+Route::post('student-update-password',['as'=>'student-update-password','uses'=>'StudentController@updateStudentPassword']);
 
 Route::group(['prefix' => 'student', 'middleware' => ['auth:student']], function () {
 
-	Route::get('student-dashboard', ['as' => 'student-dashboard', 'uses' => 'DashboardController@index']);
-	Route::put('studentprofile/update/{id}', ['as' => 'studentprofile.update', 'uses' => 'DashboardController@studentProfileUpdate'])->where('id','[0-9]+');
+Route::get('student-dashboard', ['as' => 'student-dashboard', 'uses' => 'DashboardController@index']);
+
+Route::put('studentprofile/update/{id}', ['as' => 'studentprofile.update', 'uses' => 'DashboardController@studentProfileUpdate'])->where('id','[0-9]+');
 
 });

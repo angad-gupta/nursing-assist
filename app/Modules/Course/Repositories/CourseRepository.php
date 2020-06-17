@@ -61,4 +61,8 @@ class CourseRepository implements CourseInterface
         return Course::count();
     }
 
+    public function getCourseEnrollment(){
+        return CourseEnrollment::take(3)->get();
+    }
+
 }

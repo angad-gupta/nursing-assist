@@ -68,6 +68,9 @@ class HomeController extends Controller
         $data['we_offer'] = $this->page->getBySlug('we_offer');
         $data['course'] = $this->course->findAll();
         $data['about_neta'] =$this->page->getBySlug('about_us');
+
+        $data['course_detail'] = $this->course->getCourseEnrollment(); 
+
         return view('home::index',$data);
     }
 
@@ -214,6 +217,11 @@ class HomeController extends Controller
         $input = $request->all();
         $data['user_agreement'] =$this->page->getBySlug('user_agreement');
         return view('home::user_agreement',$data);
+      
+    }
+
+    public function paymentPlan(){
+        return view('home::payment-plan');
       
     }
 

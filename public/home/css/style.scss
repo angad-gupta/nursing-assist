@@ -142,6 +142,11 @@ a {
   }
 }
 
+.neta-fees{
+  background:#eaeaea
+}
+
+
 .neta-bullet{
   ul{
     list-style: none;
@@ -164,5 +169,16 @@ a {
         padding-left: 2px;
       }
     }
+  }
+}
+
+.neta-eml{
+  color:#4d7ae0
+}
+
+.neta-pplan{
+  table{
+    background: #fff;
+    box-shadow: 0 0 20px #efefef;
   }
 }
