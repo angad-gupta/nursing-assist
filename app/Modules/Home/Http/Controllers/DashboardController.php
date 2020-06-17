@@ -9,18 +9,21 @@ use App\Modules\Student\Repositories\StudentInterface;
 use Illuminate\Support\Facades\Auth;
 use App\Modules\Announcement\Repositories\AnnouncementInterface;
 use App\Modules\Message\Repositories\MessageInterface;
+use App\Modules\Course\Repositories\CourseInterface;
 
 class DashboardController extends Controller
 {
       protected $student;
       protected $announcement;
       protected $message;
+      protected $course;
     
-    public function __construct(StudentInterface $student, AnnouncementInterface $announcement , MessageInterface $message)
+    public function __construct(StudentInterface $student, AnnouncementInterface $announcement , MessageInterface $message,  CourseInterface $course)
     {
         $this->student = $student;
         $this->announcement = $announcement;
         $this->message = $message;
+        $this->course = $course;
     }
     /**
      * Display a listing of the resource.
@@ -46,12 +49,13 @@ class DashboardController extends Controller
             }
 
             $this->student->update($id,$data);
-            Flash('Student Profile Updated Successfully')->success();
+            Flash('Student Profile Updated Successfully')->success(); 
+            return redirect(route('student-dashboard'));
         }catch(\Throwable $e){
            Flash($e->getMessage())->error(); 
         }
         
-        return redirect(route('student-account'));
+        return redirect(route('student-dashboard'));
 
     }
 
@@ -60,7 +64,8 @@ class DashboardController extends Controller
         $message = $data['message'];
 
         if($message == null){
-            return redirect(route('student-account'));
+            Flash('Message not Enter.')->error();
+            return redirect(route('student-dashboard'));
         }
         
         $data['sent_by'] = Auth::guard('student')->user()->id;
@@ -75,8 +80,13 @@ class DashboardController extends Controller
            alertify($e->getMessage())->error();
         }
 
-        return redirect(route('student-account'));
+        return redirect(route('student-dashboard'));
 
+    }
+
+    public function studentCourse(){
+        $data['course'] = $this->course->findAll();
+        return view('home::student.courses',$data);
     }
 
     /**
