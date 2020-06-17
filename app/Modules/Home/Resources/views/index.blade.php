@@ -68,7 +68,7 @@
                                     <a class="nav-link" href="{{ route('agent') }}">Agents</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('student-account') }}">Student's Login</a>
+                               	 <a class="nav-link" href="{{ route('student-hub') }}">Student's Hub</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('contact-us') }}">Contact Us</a>
@@ -272,7 +272,7 @@
 									</div>
 									<div class="img-fade1"></div>
 									<figcaption>
-										<img src="{{  $imgfadfluid }}" class="img-fluid" alt="">
+										<img src="{{ $imgfadfluid }}" class="img-fluid" alt="">
 										<p>I want to join the {{ $course_val->title_of_training }}</p>
 									</figcaption>
 								</figure>
