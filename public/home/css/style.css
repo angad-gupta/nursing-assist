@@ -124,6 +124,17 @@ footer {
   padding-top: 150px;
 }
 
+footer .acknowledge {
+  border-top: 1px solid #5b6067;
+  display: block;
+  padding-top: 20px;
+}
+
+footer .acknowledge p {
+  font-size: 12px;
+  color: #908e8e;
+}
+
 footer h5 {
   padding-bottom: 20px;
 }

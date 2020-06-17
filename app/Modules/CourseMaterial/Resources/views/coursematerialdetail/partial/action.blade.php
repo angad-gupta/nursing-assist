@@ -5,13 +5,13 @@
 
         <div class="col-md-6">
             <div class="form-group row">
-                <label class="col-form-label col-lg-3">Course Topic :<span class="text-danger">*</span></label>
+                <label class="col-form-label col-lg-3">Lesson Title :<span class="text-danger">*</span></label>
                     <div class="col-lg-9">
                        <div class="input-group">
                         <span class="input-group-prepend">
                             <span class="input-group-text"><i class="icon-pen2"></i></span>
                         </span>
-                        {!! Form::text('material_topic', $value = null, ['placeholder'=>'Enter Course Topic','class'=>'material_topic form-control']) !!}
+                        {!! Form::text('material_topic', $value = null, ['placeholder'=>'Enter Lesson Title','class'=>'material_topic form-control']) !!}
 
                         </div>
                     </div>
@@ -38,7 +38,7 @@
 
         <div class="col-md-6">
             <div class="form-group row">
-                <label class="col-form-label col-lg-3">Topic Summary:</label>
+                <label class="col-form-label col-lg-3">Course Lesson Summary:</label>
                     <div class="col-lg-9">
                        <div class="input-group">
                         

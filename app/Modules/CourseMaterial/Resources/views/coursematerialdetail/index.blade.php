@@ -31,7 +31,7 @@
                     <th>#</th>
                     <th>Course Info</th>
                     <th>Course Material Title</th>
-                    <th>Course Topic</th>
+                    <th>Lesson Title</th>
                     <th>Course Schedule</th>
                     <th>Action</th>
                 </tr>

@@ -44,6 +44,28 @@ class StudentController extends Controller
 
     }
 
+    public function updateStudentPassword(Request $request){
+
+        $oldPassword = $request->get('old_password');
+        $newPassword = $request->get('password');
+
+        $id = Auth::guard('student')->user()->id;  
+        $users = Auth::guard('student')->user()->find($id); 
+
+        if (!(Hash::check($oldPassword, $users->password))) { 
+            Flash("Old Password Do Not Match !")->error();  
+            return redirect(route('student-dashboard'));
+        } else {
+            $data['password'] = Hash::make($newPassword);
+            $this->student->update($id, $data);
+            Flash("Password Successfully Updated. Please Login Again!")->success();
+
+        }
+        Auth::guard('student')->logout();
+        return redirect(route('student-account'));
+
+    }
+
      public function studentLogout()
     {
         Auth::guard('student')->logout();
