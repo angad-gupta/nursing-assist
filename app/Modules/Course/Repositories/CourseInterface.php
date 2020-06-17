@@ -23,5 +23,7 @@ interface CourseInterface
     public function upload($filename);
 
     public function countTotal();
+    
+    public function getCourseEnrollment();
 
 }

@@ -221,6 +221,35 @@
 	</div>
 </section>
 
+ <section class="courses-wrap neta-fees section-padding">
+     <div class="container">
+        <div class="neta-head text-center">
+            <h4 class="mb-0">Courses Fees and Structure</h4>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi blanditiis neque et deserunt est nam? Deleniti, non molestiae molestias reiciendis aperiam quae</p>
+        </div>
+            <div class="course-enrolment">
+            <div class="row">
+
+         		@if(sizeof($course_detail)>0)
+                    @foreach($course_detail as $key => $enroll_val)
+	                    <div class="col-sm-4">
+	                        <div class="course-enrolment__content m-0">
+	                            <p>{{$enroll_val->enrol_title }}</p>
+                                <h2>${{$enroll_val->course_fee}}</h2>
+                                <span>({{$enroll_val->payment_mode }})</span>
+                                <button class="btn w-100"><a href="{{ route('enrolment') }}">Enroll</a></button>
+	                            <button class="btn w-100 demo"><a href="{{ route('enrolment') }}">Take a Demo</a></button>
+	                        </div>
+	                    </div>
+                 	@endforeach
+                 @endif    
+
+            </div>
+         </div>
+     </div>
+ </section>
+
+
 <section class="neta-career">
 	<div class="container section-padding">
 		<div class="neta-head text-center m-5">
@@ -228,51 +257,37 @@
 			<p>Nursing Education and Training Australia (NETA) will help you get there!</p>
 		</div>
 		<div class="row">
-			<div class="col-sm-4">
-				<div class="neta-career__content">
-					<figure>
-						<div class="career-bg">
-							<img src="{{asset('home/img/c1.png')}}" class="img-fluid" alt="">
-						</div>
-						<div class="img-fade1"></div>
-						<figcaption>
-							<img src="{{asset('home/img/ic1.png')}}" class="img-fluid" alt="">
-							<p>I want to join the Outcome Based <br>
-							Assessment Preparation Class</p>
-						</figcaption>
-					</figure>
-				</div>
-			</div>
 
-			<div class="col-sm-4">
-				<div class="neta-career__content">
-					<figure>
-						<div class="career-bg">
-							<img src="{{asset('home/img/c2.png')}}" class="img-fluid" alt="">
-						</div>
-						<div class="img-fade2"></div>
-						<figcaption>
-							<img src="{{asset('home/img/ic2.png')}}" class="img-fluid" alt="">
-							<p>I want a successful 1st year RN</p>
-						</figcaption>
-					</figure>
-				</div>
-			</div>
+			@if($course)
+            	@foreach($course as $key => $course_val)
 
-			<div class="col-sm-4">
-				<div class="neta-career__content">
-					<figure>
-						<div class="career-bg">
-							<img src="{{asset('home/img/c3.png')}}" class="img-fluid" alt="">
+            	@php
+            	$k = $key+1;
+            		$imgfluid = asset('home/img/c' .$k. '.png'); 
+            		$imgfadfluid = asset('home/img/ic'. $k . '.png'); 
+            	@endphp
+            		<div class="col-sm-4">
+						<div class="neta-career__content">
+							
+							<a href="{{ route('course-detail',['course_id'=>$course_val->id]) }}">
+								<figure>
+									<div class="career-bg">
+										<img src="{{ $imgfluid }}" class="img-fluid" alt="">
+									</div>
+									<div class="img-fade1"></div>
+									<figcaption>
+										<img src="{{  $imgfadfluid }}" class="img-fluid" alt="">
+										<p>I want to join the {{ $course_val->title_of_training }}</p>
+									</figcaption>
+								</figure>
+							</a>
+
 						</div>
-						<div class="img-fade3"></div>
-						<figcaption>
-							<img src="{{asset('home/img/ic3.png')}}" class="img-fluid" alt="">
-							<p>I want to professionally develop <br> as a nurse</p>
-						</figcaption>
-					</figure>
-				</div>
-			</div>
+					</div>
+
+		        @endforeach
+    		@endif
+
 		</div>
 	</div>
 </section>

@@ -43,7 +43,7 @@
                         <a class="nav-link" id="v-pills-tour-tab" data-toggle="pill" href="#v-pills-tour" role="tab"
                         aria-controls="v-pills-tour" aria-selected="false">Message</a>
                         <a class="nav-link" id="v-pills-notification-tab" data-toggle="pill" href="#v-pills-notification"
-                        role="tab" aria-controls="v-pills-messages" aria-selected="false">Notification</a>
+                        role="tab" aria-controls="v-pills-messages" aria-selected="false">Announcement</a>
                         <a class="nav-link" id="v-pills-purchase-tab" data-toggle="pill" href="#v-pills-purchase"
                         role="tab" aria-controls="v-pills-purchase" aria-selected="false">Purchase History</a>
                         <a class="nav-link" id="v-pills-password-tab" data-toggle="pill" href="#v-pills-password"
@@ -177,49 +177,25 @@
                             </div>
                             
                             <div class="tab-pane fade" id="v-pills-notification" role="tabpanel" aria-labelledby="v-pills-notification">
-                                <h5 class="mb-0">Notification</h5>
-                                <p>See all the Notifications form your friends and eductors</p>
-                                <div class="tp-list">
-                                    <div class="row">
-                                        <div class="col-sm-2 col-md-2 col-lg-2 auth-box p-0">
-                                            <img src="img/nn.png" alt="" class="img-fluid">
-                                        </div>
-                                        <div class="col-sm-10 col-md-10 col-lg-10 tp-list__desc">
-                                            <p class="mb-0">See all the Notifications form your friends and eductors</p>
-                                            <h6>Hi!The awaited, major update for Capture One 20 was finally released earlier this week. It contains some powerful new features such....</h6>
-                                            <span>3 days ago</span>
-                                        </div>
+                                <h5 class="mb-0">Announcement</h5>
+                                <p>See all the Announcement form Eductors</p>
 
-                                    </div>
-                                </div><!-- tp-list -->
+                                @if(sizeof($announcement)>0)
+                                    @foreach($announcement as $key => $announcement_val)
+                                        <div class="tp-list">
+                                            <div class="row">
 
-                                <div class="tp-list">
-                                    <div class="row">
-                                        <div class="col-sm-2 col-md-2 col-lg-2 auth-box p-0">
-                                            <img src="img/nurse1.png" alt="" class="img-fluid">
-                                        </div>
-                                        <div class="col-sm-10 col-md-10 col-lg-10 tp-list__desc">
-                                            <p class="mb-0">See all the Notifications form your friends and eductors</p>
-                                            <h6> It contains some powerful new features such....</h6>
-                                            <span>1 month ago</span>
-                                        </div>
+                                                <div class="col-sm-10 col-md-10 col-lg-10 tp-list__desc">
+                                                    <p class="mb-0">{{ $announcement_val->title }}</p>
+                                                    <h6>{!! $announcement_val->content !!}</h6>
+                                                    <span>{{ $announcement_val->created_at->diffForHumans() }}</span>
+                                                </div>
 
-                                    </div>
-                                </div><!-- tp-list -->
+                                            </div>
+                                        </div><!-- tp-list -->
+                                    @endforeach
+                                @endif  
 
-                                <div class="tp-list">
-                                    <div class="row">
-                                        <div class="col-sm-2 col-md-2 col-lg-2 auth-box p-0">
-                                            <img src="img/nurse2.png" alt="" class="img-fluid">
-                                        </div>
-                                        <div class="col-sm-10 col-md-10 col-lg-10 tp-list__desc">
-                                            <p class="mb-0">See all the Notifications form your friends and eductors</p>
-                                            <h6>Hi!The awaited, major update for Capture One 20 was finally released earlier this week. It contains some powerful new features such....</h6>
-                                            <span>6 days ago</span>
-                                        </div>
-
-                                    </div>
-                                </div><!-- tp-list -->
 
                             </div><!-- tour-pills -->
 

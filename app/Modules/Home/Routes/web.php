@@ -41,6 +41,8 @@ Route::get('privacy-policy', ['as' => 'privacy-policy', 'uses' => 'HomeControlle
 
 Route::get('user-agreement', ['as' => 'user-agreement', 'uses' => 'HomeController@userAgreement']);
 
+Route::get('payment-plan', ['as' => 'payment-plan', 'uses' => 'HomeController@paymentPlan']);
+
 Route::get('student-account', ['as' => 'student-account', 'uses' => 'HomeController@studentAccount']);
 
 Route::post('student-register/store', ['as' => 'student-register.store', 'uses' => 'HomeController@studentRegister']);
