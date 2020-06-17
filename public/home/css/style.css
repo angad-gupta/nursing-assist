@@ -14,7 +14,7 @@ span,
 label,
 input,
 li {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins', sans-serif !important;
 }
 
 .section-padding {
