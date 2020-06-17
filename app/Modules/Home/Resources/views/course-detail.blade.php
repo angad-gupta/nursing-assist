@@ -39,7 +39,6 @@
                          {!! $course_detail->enrollment_process !!}
 
                         <div class="row">
-
                               @if(sizeof($course_detail->CourseEnrollment)>0)
                                 @foreach($course_detail->CourseEnrollment as $key => $enroll_val)
                                     <div class="col-sm-4">
