@@ -129,6 +129,11 @@
 
 	new WOW().init();
 
+	$("#compose").click(function(){
+	  $("#compose-field").slideToggle();
+	});
+
+
 </script>
 
 

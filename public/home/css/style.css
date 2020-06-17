@@ -14,7 +14,7 @@ span,
 label,
 input,
 li {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins', sans-serif !important;
 }
 
 .section-padding {
@@ -1279,6 +1279,27 @@ header .bg-light .navbar-brand {
   color: #fff;
 }
 
+.neta-dashboard .neta-message thead {
+  background: #f1f1f1;
+}
+
+.neta-dashboard .neta-message form {
+  display: none;
+}
+
+.neta-dashboard .neta-message .message-table {
+  clear: both;
+}
+
+.neta-dashboard .neta-message textarea {
+  height: 120px;
+}
+
+.neta-dashboard .neta-message span {
+  font-size: 14px;
+  color: #b0117e;
+}
+
 .neta-dashboard .profile-tab .neta-field label {
   margin-bottom: 5px;
   font-size: 14px;
@@ -1759,10 +1780,6 @@ a {
   color: #B0117E;
 }
 
-.neta-fees {
-  background: #eaeaea;
-}
-
 .neta-bullet ul {
   list-style: none;
 }
@@ -1796,5 +1813,9 @@ a {
   background: #fff;
   -webkit-box-shadow: 0 0 20px #efefef;
           box-shadow: 0 0 20px #efefef;
+}
+
+.my-courses {
+  margin-bottom: 30px;
 }
 /*# sourceMappingURL=style.css.map */

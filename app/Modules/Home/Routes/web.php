@@ -53,10 +53,15 @@ Route::get('student-logout', ['as' => 'student-logout', 'uses' => 'StudentContro
 
 Route::post('student-update-password',['as'=>'student-update-password','uses'=>'StudentController@updateStudentPassword']);
 
+
+
+
 Route::group(['prefix' => 'student', 'middleware' => ['auth:student']], function () {
 
-Route::get('student-dashboard', ['as' => 'student-dashboard', 'uses' => 'DashboardController@index']);
+	Route::get('student-dashboard', ['as' => 'student-dashboard', 'uses' => 'DashboardController@index']);
 
-Route::put('studentprofile/update/{id}', ['as' => 'studentprofile.update', 'uses' => 'DashboardController@studentProfileUpdate'])->where('id','[0-9]+');
+	Route::put('studentprofile/update/{id}', ['as' => 'studentprofile.update', 'uses' => 'DashboardController@studentProfileUpdate'])->where('id','[0-9]+');
+
+	Route::post('message/send', ['as' => 'message.send', 'uses' => 'DashboardController@sendMessage']);
 
 });
