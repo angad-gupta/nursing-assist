@@ -8,17 +8,19 @@ use Illuminate\Routing\Controller;
 use App\Modules\Student\Repositories\StudentInterface;
 use Illuminate\Support\Facades\Auth;
 use App\Modules\Announcement\Repositories\AnnouncementInterface;
-
+use App\Modules\Message\Repositories\MessageInterface;
 
 class DashboardController extends Controller
 {
       protected $student;
       protected $announcement;
+      protected $message;
     
-    public function __construct(StudentInterface $student, AnnouncementInterface $announcement)
+    public function __construct(StudentInterface $student, AnnouncementInterface $announcement , MessageInterface $message)
     {
         $this->student = $student;
         $this->announcement = $announcement;
+        $this->message = $message;
     }
     /**
      * Display a listing of the resource.
@@ -29,6 +31,7 @@ class DashboardController extends Controller
         $id = Auth::guard('student')->user()->id;
         $data['student_profile'] = Auth::guard('student')->user()->find($id);
         $data['announcement'] = $this->announcement->findAll($limit=5);  
+        $data['message'] = $this->message->getSendMessageByUser($id, $limit=5);  
 
         return view('home::student.dashboard',$data);
     }
@@ -42,16 +45,40 @@ class DashboardController extends Controller
                 $data['profile_pic'] = $this->student->upload($data['profile_pic']);
             }
 
-
             $this->student->update($id,$data);
             Flash('Student Profile Updated Successfully')->success();
         }catch(\Throwable $e){
-           alertify($e->getMessage())->error();
+           Flash($e->getMessage())->error(); 
         }
         
         return redirect(route('student-account'));
 
     }
+
+    public function sendMessage(Request $request){
+        $data = $request->all();
+        $message = $data['message'];
+
+        if($message == null){
+            return redirect(route('student-account'));
+        }
+        
+        $data['sent_by'] = Auth::guard('student')->user()->id;
+        $name = Auth::guard('student')->user()->full_name;
+        $data['title']= 'A Message from '. $name;
+
+        try{
+
+            $this->message->save($data);
+            Flash('Message Sent To Admin Successfully')->success();
+        }catch(\Throwable $e){
+           alertify($e->getMessage())->error();
+        }
+
+        return redirect(route('student-account'));
+
+    }
+
     /**
      * Show the form for creating a new resource.
      * @return Response

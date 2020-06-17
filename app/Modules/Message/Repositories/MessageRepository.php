@@ -39,5 +39,9 @@ class MessageRepository implements MessageInterface
         return $result->delete();
     }
 
+    public function getSendMessageByUser($id,$limit){
+         return  Message::where('sent_by','=',$id)->orderBy('id','DESC')->take(3)->get();
+    }
+
 
 }

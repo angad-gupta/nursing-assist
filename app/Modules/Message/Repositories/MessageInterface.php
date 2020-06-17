@@ -15,5 +15,7 @@ interface MessageInterface
     public function update($id,$data);
 
     public function delete($id);
+
+    public function getSendMessageByUser($id,$limit);
     
 }

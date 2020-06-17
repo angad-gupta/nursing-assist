@@ -40,8 +40,8 @@
                         role="tab" aria-controls="v-pills-profile" aria-selected="true">  My Account</a>
                         <a class="nav-link" id="v-pills-book-tab" data-toggle="pill" href="#v-pills-book" role="tab"
                         aria-controls="v-pills-book" aria-selected="false"> My Courses</a>
-                        <a class="nav-link" id="v-pills-tour-tab" data-toggle="pill" href="#v-pills-tour" role="tab"
-                        aria-controls="v-pills-tour" aria-selected="false">Message</a>
+                        <a class="nav-link" id="v-pills-message-tab" data-toggle="pill" href="#v-pills-message" role="tab"
+                        aria-controls="v-pills-message" aria-selected="false">Message</a>
                         <a class="nav-link" id="v-pills-notification-tab" data-toggle="pill" href="#v-pills-notification"
                         role="tab" aria-controls="v-pills-messages" aria-selected="false">Announcement</a>
                         <a class="nav-link" id="v-pills-purchase-tab" data-toggle="pill" href="#v-pills-purchase"
@@ -52,12 +52,13 @@
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-8 col-lg-9">
+                    @include('flash::message')
                     <div class="tab-content" id="v-pills-tabContent">
                         <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel"
                         aria-labelledby="v-pills-profile-tab">
                         <h5 class="mb-0">My Account</h5>
                         <p>View and edit your personal info below.</p>
-                         @include('flash::message')
+                         
                         <div class="row">
                             <div class="col-sm-12 col-md-12 col-lg-12 pt-0">
 
@@ -175,6 +176,50 @@
                                     </div>
                                 </div><!-- tp-list -->
                             </div>
+
+                            <div class="tab-pane fade neta-message neta-about" id="v-pills-message" role="tabpanel" aria-labelledby="v-pills-message">
+                                <h5 class="mb-0">Message</h5>
+                               <button class="btn enrol-cpd mt-3" id="compose">Compose Message</button>
+                               
+                                {!! Form::open(['route'=>'message.send','method'=>'POST','id'=>'compose-field','class'=>'mb-3','role'=>'form','files' => true]) !!}
+
+                                    <div class="form-group">
+                                        {!! Form::textarea('message', null, ['id' => 'message','placeholder'=>'Enter Message', 'class' =>'form-control']) !!}                     
+
+                                    </div>
+                                    <div class="submit float-right">
+                                        <button type="submit" class="btn btn-success">Send Message</button>
+                                    </div>
+
+                                {!! Form::close() !!}
+
+                               <div class="message-table">
+                               <h6>All Sent Message</h6>
+                               <table class="table agent-package">
+                                <thead>
+                                    <tr>
+                                        <th>Sent to</th>
+                                        <th>Message</th>
+                                        <th>Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                @if(sizeof($message)>0)
+                                    @foreach($message as $key => $msg_val)
+                                    <tr>
+                                        <td>Admin</td>
+                                        <td width="60%">{{ $msg_val->message }}</td>
+                                        <td><span>{{ $msg_val->created_at->diffForHumans() }}</span></td>
+                                    </tr>
+                                    @endforeach
+                                @endif 
+
+                                </tbody>
+                               </table>
+                             </div>
+    
+                            </div><!-- tour-pills -->
                             
                             <div class="tab-pane fade" id="v-pills-notification" role="tabpanel" aria-labelledby="v-pills-notification">
                                 <h5 class="mb-0">Announcement</h5>
