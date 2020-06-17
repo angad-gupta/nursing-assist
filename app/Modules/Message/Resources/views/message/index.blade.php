@@ -34,7 +34,7 @@
                      <td>{{ optional($value->MessageSent)->full_name }}</td>
                      <td>{{ $value->title }}</td>
                      <td>{{ $value->message }}</td>
-
+                     <td>
                     <a data-toggle="modal" data-target="#modal_theme_warning" class="btn bg-danger-400 btn-icon rounded-round delete_message" link="{{route('message.delete',$value->id)}}" data-popup="tooltip" data-original-title="Delete" data-placement="bottom"><i class="icon-bin"></i></a>
                     </td>
                 </tr>
