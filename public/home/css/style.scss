@@ -31,7 +31,7 @@ a {
 .neta-head {
   p {
     padding: 0 80px;
-    padding-top: 15px;
+    padding-top: 5px;
   }
 }
 
@@ -93,7 +93,7 @@ a {
   h6 {
     color: $primary-color;
   }
-  span{
+  span {
     padding-top: 15px;
   }
   .b-line {
@@ -105,35 +105,35 @@ a {
     li {
       justify-content: space-between;
       align-items: baseline;
-      &:nth-last-child(1){
-        border-bottom:0;
+      &:nth-last-child(1) {
+        border-bottom: 0;
       }
     }
-    .neta-videos{
+    .neta-videos {
       margin-bottom: 15px;
-      iframe{
+      iframe {
         height: 180px;
       }
     }
   }
 }
 
-.neta-fees{
-  h5{
+.neta-fees {
+  h5 {
     padding-bottom: 20px;
-    span{
+    span {
       color: $primary-color;
       font-size: 30px;
       padding-left: 10px;
       font-weight: 600;
     }
   }
-  .b-line{
+  .b-line {
     padding-bottom: 20px;
-    p{
+    p {
       margin-bottom: 0;
     }
-    span{
+    span {
       font-weight: 600;
       font-size: 16px;
       padding-top: 10px;
@@ -146,16 +146,15 @@ a {
 //   background:#eaeaea
 // }
 
-
-.neta-bullet{
-  ul{
+.neta-bullet {
+  ul {
     list-style: none;
-    li{
+    li {
       position: relative;
       padding-left: 30px;
       padding-bottom: 15px;
-      &:before{
-        content: '>';
+      &:before {
+        content: ">";
         background: #120f4a;
         width: 20px;
         height: 20px;
@@ -172,17 +171,46 @@ a {
   }
 }
 
-.neta-eml{
-  color:#4d7ae0
+.neta-eml {
+  color: #4d7ae0;
 }
 
-.neta-pplan{
-  table{
+.neta-pplan {
+  table {
     background: #fff;
     box-shadow: 0 0 20px #efefef;
   }
 }
 
-.my-courses{
+.my-courses {
   margin-bottom: 30px;
+}
+
+.neta-payment {
+  color: #000 !important;
+  table{
+    font-size:18px
+  }
+  .total{
+    font-weight: 700;
+  }
+  .payment-method{
+    img{
+      background: #929292;
+    }
+  }
+  .order-summary {
+    border-bottom: 1px solid #e4e4e4;
+    margin-bottom: 30px;
+  }
+  ul {
+    display: flex;
+    justify-content: space-between;
+    li{
+      border-bottom: 0
+    }
+  }
+  tr,td{
+    border:0
+  }
 }
