@@ -43,7 +43,7 @@
 					<a href="{{ route('privacy-policy')}}"><li>Privacy & Policy</li> </a>
 					<a href="{{ route('term-condition')}}"><li>Terms & Conditions</li> </a>
 					<a href="{{ route('user-agreement')}}"><li>User Agreement</li> </a>
-					<a href="{{ route('payment-plan')}}"><li>Payment Plan Policy</li> </a>
+					<a href="{{ route('payment-plan')}}"><li>Fees & Payment plans</li> </a>
 				</ul>
 			</div>
 
