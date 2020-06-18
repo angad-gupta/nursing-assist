@@ -75,7 +75,7 @@ html {
 } */
 
 #msform .action-button {
-    width: 100px;
+    min-width: 100px;
     background: linear-gradient(90deg, rgba(148,81,159,1) 26%, rgba(52,56,134,1) 55%, rgba(0,159,225,1) 91%);;
     color: white;
     border: 0 none;
@@ -92,7 +92,7 @@ html {
 }
 
 #msform .action-button-previous {
-    width: 100px;
+    min-width: 100px;
     background: #616161;
     font-weight: bold;
     color: white;

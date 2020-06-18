@@ -22,10 +22,19 @@ class StudentController extends Controller
 
      public function studentLogin()
     {
-        if (Auth::guard('student')::check()) {
+        if (Auth::guard('student')->check()) {
             return redirect()->intended(route('home'));
         } else {
             return view('home::student.dashboard');
+        }
+    } 
+
+    public function studenthub()
+    {
+        if (Auth::guard('student')->check()) {
+            return redirect(route('student-courses'));
+        } else {
+            return redirect(route('student-account'));
         }
     }
 
