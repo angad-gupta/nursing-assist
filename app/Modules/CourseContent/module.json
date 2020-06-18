@@ -1,0 +1,14 @@
+{
+    "name": "CourseContent",
+    "alias": "coursecontent",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "App\\Modules\\CourseContent\\Providers\\CourseContentServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
