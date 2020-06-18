@@ -157,35 +157,37 @@
 	</div>
 </section>
 
+ <section class="courses-wrap neta-fees">
+    <div class=" container course-enrolment mb-5">
+        <div class="neta-head text-center m-5">
+            <h4 class="mb-0">Browse Courses</h4>
+            <p>Courses to get you started.</p>
+        </div>
+    <div class="row">
+
+    	  @if(sizeof($course_detail)>0)
+                @foreach($course_detail as $key => $enroll_val)
+                    <div class="col-sm-4">
+                        <div class="course-enrolment__content m-0">
+                            <p>{{$enroll_val->enrol_title }}</p>
+                            <h2>${{$enroll_val->course_fee}}</h2>
+                            <span>({{$enroll_val->payment_mode }})</span>
+                            <button class="btn w-100"><a href="{{ route('enrolment') }}">Enroll</a></button>
+                            <button class="btn w-100 demo"><a href="{{ route('enrolment') }}">Take a Demo</a></button>
+                        </div>
+                    </div>
+             	@endforeach
+             @endif    
+ </div>
+</div>
+</section>
+
 <section class="neta-courses">
 	<div class="container">
 		<div class="neta-head text-center m-5">
 			<h4 class="mb-0">What We Offer ?</h4>
 			<p>{!! ($we_offer) ? $we_offer['short_content'] : ' ' !!}</p>
 		</div>
-
-
-		      <div class="courses-wrap neta-fees -padding">
-                   <div class="course-enrolment mb-5">
-                   <div class="row">
-                
-		                @if(sizeof($course_detail)>0)
-		                    @foreach($course_detail as $key => $enroll_val)
-			                    <div class="col-sm-4">
-			                        <div class="course-enrolment__content m-0">
-			                            <p>{{$enroll_val->enrol_title }}</p>
-		                                <h2>${{$enroll_val->course_fee}}</h2>
-		                                <span>({{$enroll_val->payment_mode }})</span>
-		                                <button class="btn w-100"><a href="{{ route('enrolment') }}">Enroll</a></button>
-			                            <button class="btn w-100 demo"><a href="{{ route('enrolment') }}">Take a Demo</a></button>
-			                        </div>
-			                    </div>
-		                 	@endforeach
-		                 @endif    
-
-                </div>
-            </div>
-        </div>
 
 
 		<div class="row">

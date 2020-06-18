@@ -14,7 +14,7 @@ span,
 label,
 input,
 li {
-  font-family: 'Poppins', sans-serif !important;
+  font-family: 'Poppins', sans-serif;
 }
 
 .section-padding {
@@ -1650,7 +1650,7 @@ a {
 
 .neta-head p {
   padding: 0 80px;
-  padding-top: 15px;
+  padding-top: 5px;
 }
 
 .neta-vid {
@@ -1791,7 +1791,7 @@ a {
 }
 
 .neta-bullet ul li:before {
-  content: '>';
+  content: ">";
   background: #120f4a;
   width: 20px;
   height: 20px;
@@ -1817,5 +1817,43 @@ a {
 
 .my-courses {
   margin-bottom: 30px;
+}
+
+.neta-payment {
+  color: #000 !important;
+}
+
+.neta-payment table {
+  font-size: 18px;
+}
+
+.neta-payment .total {
+  font-weight: 700;
+}
+
+.neta-payment .payment-method img {
+  background: #929292;
+}
+
+.neta-payment .order-summary {
+  border-bottom: 1px solid #e4e4e4;
+  margin-bottom: 30px;
+}
+
+.neta-payment ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.neta-payment ul li {
+  border-bottom: 0;
+}
+
+.neta-payment tr, .neta-payment td {
+  border: 0;
 }
 /*# sourceMappingURL=style.css.map */
