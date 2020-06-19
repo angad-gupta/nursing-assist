@@ -5,6 +5,7 @@ namespace App\Modules\CourseContent\Entities;
 use Illuminate\Database\Eloquent\Model;
 use App\Modules\CourseInfo\Entities\CourseInfo;
 use App\Modules\CourseContent\Entities\CoursePlan;
+use App\Modules\Syllabus\Entities\Syllabus;
 
 class CourseContent extends Model
 {
@@ -13,7 +14,7 @@ class CourseContent extends Model
     protected $fillable = [
 
     	'course_info_id',
-    	'main_topic',
+    	'syllabus_id',
     	'lesson_title',
     	'lesson_summary',
     	'content_type',
@@ -32,8 +33,12 @@ class CourseContent extends Model
         return $this->hasMany(CoursePlan::class, 'course_content_id');
     }
 
-     public function courseInfo(){
+    public function courseInfo(){
         return $this->belongsTo(CourseInfo::class,'course_info_id','id');
+    }
+
+    public function syllabus(){
+        return $this->belongsTo(Syllabus::class,'syllabus_id','id');
     }
 
 }

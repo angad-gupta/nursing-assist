@@ -17,7 +17,7 @@ class CreateCourseContentsTable extends Migration
             $table->increments('id');
 
             $table->integer('course_info_id')->nullable();
-            $table->string('main_topic')->nullable();
+            $table->integer('syllabus_id')->nullable();
             $table->string('lesson_title')->nullable();
             $table->text('lesson_summary')->nullable();
             $table->string('content_type')->nullable();
