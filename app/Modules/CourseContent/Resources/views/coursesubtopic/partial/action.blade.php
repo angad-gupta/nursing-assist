@@ -65,8 +65,13 @@
 
         $videoType = (($is_edit) && ($coursesubtopic->sub_topic_type == 'video')) ? 'style=display:block;' : 'style=display:none;';
         $linkType = (($is_edit) && ($coursesubtopic->sub_topic_type == 'link')) ? 'style=display:block;' : 'style=display:none;';
+
+        $videopath = (($is_edit) && ($coursesubtopic->sub_topic_type == 'video')) ? $coursesubtopic->sub_topic_path : '';
+        $linkpath = (($is_edit) && ($coursesubtopic->sub_topic_type == 'link')) ? $coursesubtopic->sub_topic_path : '';
    
         @endphp
+
+
         <div class="col-md-6 course_link" {{$linkType}}>
             <div class="form-group row">
                 <label class="col-form-label col-lg-3">Course Path Link:</label>
@@ -75,7 +80,7 @@
                         <span class="input-group-prepend">
                             <span class="input-group-text"><i class="icon-bookmarks"></i></span>
                         </span>
-                        {!! Form::text('sub_topic_path', $value = null, ['placeholder'=>'Enter Course Material Title','class'=>'sub_topic_path form-control']) !!}
+                        {!! Form::text('sub_link_path', $value = $linkpath, ['placeholder'=>'Enter Course Path Link','class'=>'sub_topic_path form-control']) !!}
                         </div>
                     </div>
             </div>
@@ -89,7 +94,7 @@
                         <span class="input-group-prepend">
                             <span class="input-group-text"><i class="icon-bookmarks"></i></span>
                         </span>
-                        {!! Form::text('sub_topic_path', $value = null, ['placeholder'=>'Enter Course Material Title','class'=>'sub_topic_path form-control']) !!}
+                        {!! Form::text('sub_video_path', $value = $videopath, ['placeholder'=>'Enter Youtube ID','class'=>'sub_topic_path form-control']) !!}
                         </div>
                     </div>
             </div>
