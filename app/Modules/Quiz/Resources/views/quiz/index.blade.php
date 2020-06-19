@@ -26,8 +26,9 @@
                 <tr class="bg-slate">
                     <th>#</th>
                     <th>Quiz Category</th>
+                    <th>Quiz Question< Type</th>
+                    <th>Quiz Type</th>
                     <th>Quiz Question</th>
-                    <th>Quiz Question< Type/th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -37,8 +38,9 @@
                 <tr>
                     <td>{{$quiz->firstItem() +$key}}</td>
                     <td>{{ $value->category }}</td>
-                    <td>{{ $value->question }}</td>
                     <td>{{ $value->question_type }}</td>
+                    <td>{{ $value->quiz_section }}</td>
+                    <td>{{ $value->question }}</td>
                     <td>
 
                         <a class="btn bg-info btn-icon rounded-round" href="{{ route('quiz.edit',$value->id) }}" data-popup="tooltip" data-placement="bottom" data-original-title="Edit Course Info"><i class="icon-pencil"></i></a>
