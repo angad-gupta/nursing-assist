@@ -8,7 +8,7 @@ use App\Modules\CourseContent\Entities\CourseSubTopic;
 class CourseSubTopicRepository implements CourseSubTopicInterface
 {
    
-      public function findAll($course_plan_id,$limit=null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]){
+      public function findAll($course_plan_id,$limit=null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1]){
 
         $result =CourseSubTopic::when(array_keys($filter, true), function ($query) use ($filter) {         
             
