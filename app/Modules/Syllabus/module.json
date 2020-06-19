@@ -1,0 +1,14 @@
+{
+    "name": "Syllabus",
+    "alias": "syllabus",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "App\\Modules\\Syllabus\\Providers\\SyllabusServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
