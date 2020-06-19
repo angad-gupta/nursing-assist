@@ -48,8 +48,8 @@
                     <td>{{ optional($value->courseplan)->course_session }}</td>
                     <td>{{ $value->sub_topic_title }}</td>
                     <td>
-
-                        <a class="btn bg-info btn-icon rounded-round" href="{{ route('coursesubtopic.edit',['course_content_id'=>$course_content_id,'course_plan_id'=>$course_plan_id]) }}" data-popup="tooltip" data-placement="bottom" data-original-title="Edit Course Info"><i class="icon-pencil"></i></a>
+ 
+                        <a class="btn bg-info btn-icon rounded-round" href="{{ route('coursesubtopic.edit',['course_content_id'=>$course_content_id,'course_plan_id'=>$course_plan_id,'sub_topic_id'=>$value->id]) }}" data-popup="tooltip" data-placement="bottom" data-original-title="Edit Course Info"><i class="icon-pencil"></i></a>
 
                         <a data-toggle="modal" data-target="#modal_theme_warning" class="btn bg-danger btn-icon rounded-round delete_coursesubtopic" link="{{route('coursesubtopic.delete',['course_content_id'=>$course_content_id,'course_plan_id'=>$course_plan_id,'sub_topic_id'=>$value->id])}}" data-popup="tooltip" data-placement="bottom" data-original-title="Delete"><i class="icon-bin"></i></a>
 
