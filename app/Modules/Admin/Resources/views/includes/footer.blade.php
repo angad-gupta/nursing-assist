@@ -34,6 +34,10 @@
 
         tinymce.init({
             selector: ".simple_full_description", theme: "modern", width: 1300, height: 200,
+        }); 
+
+        tinymce.init({
+            selector: ".simple_full_textarea_description", theme: "modern", width: 1600, height: 600,
         });
 
 

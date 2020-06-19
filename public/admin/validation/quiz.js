@@ -4,11 +4,13 @@ $(document).ready(function () {
             category: "required",
             question: "required",
             question_type: "required",
+            quiz_section: "required",
         },
         messages: {
             category: "Please Select Category",
             question: "Please  Enter Question",
-            question_type: "Please  Select Question Type"
+            question_type: "Please  Select Question Type",
+            quiz_section: "Please  Select Quiz Section"
         },
         errorElement: "em",
         errorPlacement: function (error, element) {  console.log(element)

@@ -18,7 +18,27 @@
             </div>
         </div>
 
-        <div class="col-md-6">
+          <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-form-label col-lg-4">Select Quiz Section:<span class="text-danger">*</span></label>
+                    <div class="col-lg-8">
+                       <div class="input-group">
+                        <span class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-toggle"></i></span>
+                        </span>
+                          {!! Form::select('quiz_section',[ 'Mockup'=>'Mockup','Practise'=>'Practise'], $value = null, ['placeholder'=>'Select Quiz Section','id'=>'quiz_section','class'=>'form-control' ]) !!}   
+
+                        </div>
+                    </div>
+            </div>
+        </div>
+       
+
+    </div>
+
+    <div class="row">
+
+         <div class="col-md-6">
             <div class="form-group row">
                 <label class="col-form-label col-lg-4">Question:<span class="text-danger">*</span></label>
                     <div class="col-lg-8">
@@ -32,9 +52,6 @@
             </div>
         </div>
 
-    </div>
-
-    <div class="row">
         <div class="col-md-6">
             <div class="form-group row">
                 <label class="col-form-label col-lg-4">Question Type:<span class="text-danger">*</span></label>
@@ -64,33 +81,8 @@
     @endphp
 
 
-        <div class="col-md-6 multiple_option" {{ $multiple }}>
-            <div class="form-group row">
-                <label class="col-form-label col-lg-4">Correct Answer:</label>
-                    <div class="col-lg-8">
-                       <div class="input-group">
-                        <span class="input-group-prepend">
-                            <span class="input-group-text"><i class="icon-checkmark4"></i></span>
-                        </span>
-                         {!! Form::select('multiple_correct_option',[ 'option_1'=>'Option 1','option_2'=>'Option 2','option_3'=>'Option 3','option_4'=>'Option 4'], $value = $multiple_value, ['placeholder'=>'Select Correct Answer','id'=>'correct_option','class'=>'form-control' ]) !!}  
-                        </div>
-                    </div>
-            </div>
-        </div>
-
-           <div class="col-md-6 true_false_option" {{ $truefalse }}>
-            <div class="form-group row">
-                <label class="col-form-label col-lg-4">Correct Answer:</label>
-                    <div class="col-lg-8">
-                       <div class="input-group">
-                        <span class="input-group-prepend">
-                            <span class="input-group-text"><i class="icon-checkmark4"></i></span>
-                        </span>
-                         {!! Form::select('single_correct_option',[ 'true'=>'True','false'=>'False'], $value = $multiple_value, ['placeholder'=>'Select Correct Answer','id'=>'correct_option','class'=>'form-control' ]) !!}  
-                        </div>
-                    </div>
-            </div>
-        </div>
+    
+          
 
     </div>
 
@@ -164,6 +156,53 @@
 
 </fieldset>
 
+<fieldset class="mb-3">
+    <legend class="text-uppercase font-size-sm font-weight-bold">Correct Option With Reason</legend>
+
+ <div class="row">
+
+     <div class="col-md-6 multiple_option" {{ $multiple }}>
+            <div class="form-group row">
+                <label class="col-form-label col-lg-4">Correct Answer:</label>
+                    <div class="col-lg-8">
+                       <div class="input-group">
+                        <span class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-checkmark4"></i></span>
+                        </span>
+                         {!! Form::select('multiple_correct_option',[ 'option_1'=>'Option 1','option_2'=>'Option 2','option_3'=>'Option 3','option_4'=>'Option 4'], $value = $multiple_value, ['placeholder'=>'Select Correct Answer','id'=>'correct_option','class'=>'form-control' ]) !!}  
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-6 true_false_option" {{ $truefalse }}>
+            <div class="form-group row">
+                <label class="col-form-label col-lg-4">Correct Answer:</label>
+                    <div class="col-lg-8">
+                       <div class="input-group">
+                        <span class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-checkmark4"></i></span>
+                        </span>
+                         {!! Form::select('single_correct_option',[ 'true'=>'True','false'=>'False'], $value = $multiple_value, ['placeholder'=>'Select Correct Answer','id'=>'correct_option','class'=>'form-control' ]) !!}  
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+        <div class="row">
+            <label class="col-form-label col-lg-3">Correct Answer Reason:</label>
+            <div class="col-lg-9 form-group-feedback form-group-feedback-right">
+                <div class="input-group">
+                    {!! Form::textarea('correct_answer_reason', null, ['id' => 'correct_answer_reason','placeholder'=>'Enter Correct Answer Reason', 'class' =>'form-control simple_textarea_description']) !!}
+                </div>
+            </div>
+        </div>
+    </div>
+
+ </div>
+</fieldset>
 
 <div class="text-right">
     <button type="submit" class="ml-2 btn bg-pink-600 btn-labeled btn-labeled-left"><b><i class="icon-database-insert"></i></b> {{ $btnType }}</button>
@@ -193,3 +232,5 @@
 
  </script>
 
+
+   

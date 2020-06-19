@@ -257,6 +257,19 @@
                     @endif
 
 
+                    @if($menuRoles->assignedRoles('coursecontent.index'))
+                    <li class="nav-item">
+                        <a href="{{route('coursecontent.index')}}"
+                           class="nav-link @if($Route[0]=='coursecontent') active @endif"
+                           data-popup="tooltip" data-original-title="Course Content Management"
+                           data-placement="right">
+                            <i class="icon-book3"></i>
+                            <span>Course Content Management</span>
+                        </a>
+                    </li>
+                    @endif
+
+<!-- 
                     @if($menuRoles->assignedRoles('coursematerial.index'))
                     <li class="nav-item">
                         <a href="{{route('coursematerial.index')}}"
@@ -267,7 +280,7 @@
                             <span>Course Material Management</span>
                         </a>
                     </li>
-                    @endif
+                    @endif -->
 
             </ul>
         </div>

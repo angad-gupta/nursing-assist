@@ -1,0 +1,25 @@
+{
+    "name": "nwidart/coursecontent",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "App\\Modules\\CourseContent\\Providers\\CourseContentServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\Modules\\CourseContent\\": ""
+        }
+    }
+}

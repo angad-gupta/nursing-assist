@@ -1,6 +1,6 @@
 @extends('admin::layout')
-@section('title')Quiz Question @stop
-@section('breadcrum')Quiz Question @stop
+@section('title')Course Plan @stop
+@section('breadcrum')Course Plan @stop
 
 @section('script')
 <script src="{{ asset('admin/global/js/plugins/pickers/daterangepicker.js')}}"></script>
@@ -9,15 +9,22 @@
 <script src="{{asset('admin/global/js/plugins/forms/selects/select2.min.js')}}"></script>
 @stop
 
-@section('content') 
+@section('content')
 
 
 <div class="card card-body">
     <div class="d-flex justify-content-between">
-        <h4>List of Quiz Question</h4>
-        <a href="{{ route('quiz.create') }}" class="btn bg-blue">
-            <i class="icon-plus2"></i> Add Quiz Question
-        </a>
+        <h4>List of Course Plan</h4> 
+      
+        <div class="text-right">
+            <a href="{{ route('courseplan.create',['course_content_id'=>$course_content_id]) }}" class="btn bg-blue">
+            <i class="icon-plus2"></i> Add Course Plan
+            </a>
+            <a href="{{ route('coursecontent.index') }}" class="btn bg-warning">
+            <b><i class="icon-esc"></i></b> 
+            </a>
+        </div>
+        
     </div>
     <div class="mb-3 mt-3"></div>
     <div class="table-responsive table-card">
@@ -25,27 +32,25 @@
             <thead>
                 <tr class="bg-slate">
                     <th>#</th>
-                    <th>Quiz Category</th>
-                    <th>Quiz Question< Type</th>
-                    <th>Quiz Type</th>
-                    <th>Quiz Question</th>
+                    <th>Course Content</th>
+                    <th>Course Topic</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                @if($quiz->total() != 0)
-                @foreach($quiz as $key => $value)
+                @if($courseplan->total() != 0)
+                @foreach($courseplan as $key => $value)
                 <tr>
-                    <td>{{$quiz->firstItem() +$key}}</td>
-                    <td>{{ $value->category }}</td>
-                    <td>{{ $value->question_type }}</td>
-                    <td>{{ $value->quiz_section }}</td>
-                    <td>{{ $value->question }}</td>
+                    <td>{{$courseplan->firstItem() +$key}}</td>
+                    <td>{{ optional($value->coursecontent)->lesson_title }}</td>
+                    <td>{{ $value->course_session }}</td>
                     <td>
 
-                        <a class="btn bg-info btn-icon rounded-round" href="{{ route('quiz.edit',$value->id) }}" data-popup="tooltip" data-placement="bottom" data-original-title="Edit Course Info"><i class="icon-pencil"></i></a>
+                         <a class="btn bg-success btn-icon rounded-round" href="{{ route('coursesubtopic.index',['course_content_id'=>$course_content_id,'course_plan_id'=>$value->id]) }}" data-popup="tooltip" data-placement="bottom" data-original-title="Course Sub Topic Setup"><i class="icon-book"></i></a>
 
-                        <a data-toggle="modal" data-target="#modal_theme_warning" class="btn bg-danger btn-icon rounded-round delete_quiz" link="{{route('quiz.delete',$value->id)}}" data-popup="tooltip" data-placement="bottom" data-original-title="Delete"><i class="icon-bin"></i></a>
+                        <a class="btn bg-info btn-icon rounded-round" href="{{ route('courseplan.edit',['course_content_id'=>$course_content_id,'course_plan_id'=>$value->id]) }}" data-popup="tooltip" data-placement="bottom" data-original-title="Edit Course Info"><i class="icon-pencil"></i></a>
+
+                        <a data-toggle="modal" data-target="#modal_theme_warning" class="btn bg-danger btn-icon rounded-round delete_course_plan" link="{{route('courseplan.delete',['course_content_id'=>$course_content_id,'course_plan_id'=>$value->id])}}" data-popup="tooltip" data-placement="bottom" data-original-title="Delete"><i class="icon-bin"></i></a>
 
                     </td>
 
@@ -53,7 +58,7 @@
             @endforeach
             @else
             <tr>
-                <td colspan="5">No Quiz Question Found !!!</td>
+                <td colspan="5">No Course Plan Found !!!</td>
             </tr>
             @endif
         </tbody>
@@ -62,7 +67,7 @@
 </div>
 <div class="col-12">
     <span class="float-right pagination align-self-end mt-3">
-        {{ $quiz->links() }}
+        {{ $courseplan->links() }}
     </span>
 </div>
 </div>
@@ -90,7 +95,7 @@
 <script type="text/javascript">
     $('document').ready(function() {
 
-        $('.delete_quiz').on('click', function() {
+        $('.delete_course_plan').on('click', function() {
             var link = $(this).attr('link');
             $('.get_link').attr('href', link);
         });
