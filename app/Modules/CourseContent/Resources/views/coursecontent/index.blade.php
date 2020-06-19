@@ -26,6 +26,7 @@
                 <tr class="bg-slate">
                     <th>#</th>
                     <th>Course Info</th>
+                    <th>Syllabus</th>
                     <th>Course Lesson Title</th>
                     <th>Action</th>
                 </tr>
@@ -36,6 +37,7 @@
                 <tr>
                     <td>{{$coursecontent->firstItem() +$key}}</td>
                     <td>{{ optional($value->courseInfo)->course_program_title }}</td>
+                    <td>{{ optional($value->syllabus)->syllabus_title }}</td>
                     <td>{{ $value->lesson_title }}</td>
                     <td>
 
