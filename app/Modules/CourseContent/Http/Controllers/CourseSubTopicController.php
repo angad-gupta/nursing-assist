@@ -54,7 +54,15 @@ class CourseSubTopicController extends Controller
      */
     public function store(Request $request)
     {
-         $data = $request->all(); 
+         $data = $request->all();
+
+         $sub_topic_type = $data['sub_topic_type'];
+
+         if($sub_topic_type == 'video'){
+            $data['sub_topic_path'] = $data['sub_video_path'];
+         }else if($sub_topic_type == 'link'){
+            $data['sub_topic_path'] = $data['sub_link_path'];
+         }
 
          $course_content_id = $data['course_content_id'];
          $course_plan_id = $data['course_plan_id'];
@@ -90,7 +98,7 @@ class CourseSubTopicController extends Controller
         $data['is_edit'] = true;
         $data['course_content_id']=$input['course_content_id'];
         $data['course_plan_id']=$input['course_plan_id'];
-        $id = $input['sub_topic_id'];
+        $id = $input['sub_topic_id']; 
         $data['coursesubtopic'] = $this->coursesubtopic->find($id);   
         return view('coursecontent::coursesubtopic.edit',$data);
     }
@@ -101,12 +109,20 @@ class CourseSubTopicController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $request)
+    public function update(Request $request,$id)
     {
         $data = $request->all(); 
         $course_content_id = $data['course_content_id'];
         $course_plan_id = $data['course_plan_id'];
-        $id = $data['sub_topic_id'];
+    
+         $sub_topic_type = $data['sub_topic_type'];
+
+         if($sub_topic_type == 'video'){
+            $data['sub_topic_path'] = $data['sub_video_path'];
+         }else if($sub_topic_type == 'link'){
+            $data['sub_topic_path'] = $data['sub_link_path'];
+         }
+
          try{ 
 
             if ($request->hasFile('content_image_path')) {
