@@ -257,6 +257,18 @@
                     @endif
 
 
+                    @if($menuRoles->assignedRoles('syllabus.index'))
+                    <li class="nav-item">
+                        <a href="{{route('syllabus.index')}}"
+                           class="nav-link @if($Route[0]=='syllabus') active @endif"
+                           data-popup="tooltip" data-original-title="Syllabus Management"
+                           data-placement="right">
+                            <i class="icon-book"></i>
+                            <span>Syllabus Management</span>
+                        </a>
+                    </li>
+                    @endif
+
                     @if($menuRoles->assignedRoles('coursecontent.index'))
                     <li class="nav-item">
                         <a href="{{route('coursecontent.index')}}"
