@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
 use App\Modules\CourseInfo\Repositories\CourseInfoInterface;
+use App\Modules\Syllabus\Repositories\SyllabusInterface;
 use App\Modules\CourseContent\Repositories\CourseContentInterface;
 use App\Modules\CourseContent\Repositories\CoursePlanInterface;
 use App\Modules\CourseContent\Repositories\CourseSubTopicInterface;
@@ -14,14 +15,16 @@ use App\Modules\CourseContent\Repositories\CourseSubTopicInterface;
 class CourseContentController extends Controller
 {
     protected $courseinfo;
+    protected $syllabus;
     
     protected $coursecontent;
     protected $courseplan;
     protected $coursesubtopic;
 
-    public function __construct(CourseInfoInterface $courseinfo,CourseContentInterface $coursecontent,CoursePlanInterface $courseplan, CourseSubTopicInterface $coursesubtopic)
+    public function __construct(CourseInfoInterface $courseinfo,SyllabusInterface $syllabus,CourseContentInterface $coursecontent,CoursePlanInterface $courseplan, CourseSubTopicInterface $coursesubtopic)
     {
         $this->courseinfo = $courseinfo;
+        $this->syllabus = $syllabus;
         $this->coursecontent = $coursecontent;
         $this->courseplan = $courseplan;
         $this->coursesubtopic = $coursesubtopic;
@@ -48,6 +51,7 @@ class CourseContentController extends Controller
     {  
         $data['is_edit'] = false;
         $data['course_info']=$this->courseinfo->getList();
+        $data['syllabus']=$this->syllabus->getList();
         return view('coursecontent::coursecontent.create',$data);
     }
 
@@ -89,6 +93,7 @@ class CourseContentController extends Controller
         $data['is_edit'] = true;
         $data['coursecontent'] = $this->coursecontent->find($id);    
         $data['course_info']=$this->courseinfo->getList();
+        $data['syllabus']=$this->syllabus->getList();
         return view('coursecontent::coursecontent.edit',$data);
     }
 

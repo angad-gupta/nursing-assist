@@ -5,7 +5,7 @@
 
         <div class="col-md-6">
             <div class="form-group row">
-                <label class="col-form-label col-lg-3">Course Topic/Session:</label>
+                <label class="col-form-label col-lg-3">Course Topic/Session:<span class="text-danger">*</span></label>
                     <div class="col-lg-9">
                        <div class="input-group">
                         <span class="input-group-prepend">

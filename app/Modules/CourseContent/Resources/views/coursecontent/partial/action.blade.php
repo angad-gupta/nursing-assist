@@ -20,14 +20,14 @@
 
         <div class="col-md-6">
             <div class="form-group row">
-                <label class="col-form-label col-lg-3">Course Main Topic:</label>
+                <label class="col-form-label col-lg-3">Select Syllabus:<span class="text-danger">*</span></label>
                     <div class="col-lg-9">
                        <div class="input-group">
                         <span class="input-group-prepend">
                             <span class="input-group-text"><i class="icon-bookmarks"></i></span>
                         </span>
-                        {!! Form::text('main_topic', $value = null, ['placeholder'=>'Enter Course Main Topic','class'=>'main_topic form-control']) !!}
-                        </div>
+                            {!! Form::select('syllabus_id',$syllabus, $value = null, ['id'=>'syllabus_id','class'=>'syllabus_id form-control','placeholder'=>'Select Syllabus']) !!}     
+                         </div>
                     </div>
             </div>
         </div>
@@ -38,7 +38,7 @@
 
         <div class="col-md-6">
             <div class="form-group row">
-                <label class="col-form-label col-lg-3">Lesson Title:</label>
+                <label class="col-form-label col-lg-3">Lesson Title:<span class="text-danger">*</span></label>
                     <div class="col-lg-9">
                        <div class="input-group">
                         
