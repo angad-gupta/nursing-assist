@@ -6,7 +6,7 @@ use App\Modules\FAQ\Entities\FAQ;
 class FAQRepository implements FAQInterface
 {
     
-    public function findAll($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1])
+    public function findAll($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1])
     {
         $result =FAQ::when(array_keys($filter, true), function ($query) use ($filter) {
            
@@ -15,7 +15,7 @@ class FAQRepository implements FAQInterface
         
     } 
 
-    public function findAllActiveFAQ($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1])
+    public function findAllActiveFAQ($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1])
     {
         $result =FAQ::when(array_keys($filter, true), function ($query) use ($filter) {
            
