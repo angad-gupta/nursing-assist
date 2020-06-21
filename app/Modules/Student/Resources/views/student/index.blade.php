@@ -44,9 +44,13 @@
                      <td class="{{ ($value->active == '1') ? 'text-success font-weight-bold' :'text-danger font-weight-bold' }}">{{ ($value->active == '1') ? 'Active' :'In-Active' }}</td>
                     <td>
 
-
                     <a data-toggle="modal" data-target="#modal_theme_status" class="btn bg-success-400 btn-icon rounded-round update_status" student_id="{{ $value->id}}" data-popup="tooltip" data-original-title="Status Update" data-placement="bottom"><i class="icon-flip-horizontal2"></i></a>
 
+                    <a class="btn bg-warning btn-icon rounded-round" href="{{ route('studentcourse.index',['student_id'=> $value->id]) }}" data-popup="tooltip" data-placement="bottom" data-original-title="My Courses"><i class="icon-package"></i></a>
+
+                    <a class="btn bg-teal btn-icon rounded-round" href="{{ route('studentpurchase.index',['student_id'=> $value->id]) }}" data-popup="tooltip" data-placement="bottom" data-original-title="Purchase History"><i class="icon-basket"></i></a>
+
+                    <a class="btn bg-info btn-icon rounded-round" href="{{ route('coursematerial.edit',$value->id) }}" data-popup="tooltip" data-placement="bottom" data-original-title="Quiz Result"><i class="icon-clipboard6"></i></a>
 
                     <a data-toggle="modal" data-target="#modal_theme_warning" class="btn bg-danger-400 btn-icon rounded-round delete_student" link="{{route('student.delete',$value->id)}}" data-popup="tooltip" data-original-title="Delete" data-placement="bottom"><i class="icon-bin"></i></a>
                     </td>

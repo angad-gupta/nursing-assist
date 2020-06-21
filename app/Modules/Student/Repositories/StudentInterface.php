@@ -18,4 +18,9 @@ interface StudentInterface
     
     public function upload($file);
 
+
+    public function getStudentCourse($student_id,$limit=null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
+
+    public function getStudentPurchase($student_id,$limit=null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
+
 }

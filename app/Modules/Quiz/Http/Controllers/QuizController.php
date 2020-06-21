@@ -87,7 +87,7 @@ class QuizController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->all(); 
+        $data = $request->all();  //dd($data);
          $question_type = $data['question_type'];
          try{ 
              if($question_type == 'multiple'){

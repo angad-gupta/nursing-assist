@@ -16,14 +16,16 @@ class CreateQuizzesTable extends Migration
         Schema::create('quizzes', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->text('category')->nullable();
+            $table->string('category')->nullable();
+            $table->text('quiz_section')->nullable();
             $table->text('question')->nullable();
-            $table->text('question_type')->nullable();
-            $table->text('option_1')->nullable();
-            $table->text('option_2')->nullable();
-            $table->text('option_3')->nullable();
-            $table->text('option_4')->nullable();
-            $table->text('correct_option')->nullable();
+            $table->string('question_type')->nullable();
+            $table->string('option_1')->nullable();
+            $table->string('option_2')->nullable();
+            $table->string('option_3')->nullable();
+            $table->string('option_4')->nullable();
+            $table->string('correct_option')->nullable();
+            $table->text('correct_answer_reason')->nullable();
 
             $table->timestamps();
         });
