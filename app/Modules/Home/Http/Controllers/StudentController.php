@@ -38,6 +38,21 @@ class StudentController extends Controller
         }
     }
 
+    public function Enrolment(Request $request)
+    {
+        if (Auth::guard('student')->check()) {
+
+            $input = $request->all();
+            $data['course_info_id'] = $input['course_info_id'];
+
+             return view('home::enrolment',$data);
+        } else {
+            return redirect(route('student-account'));
+        }
+
+    }
+
+
 
     public function studentAuthenticate(StudentLoginFormRequest $request)
     {

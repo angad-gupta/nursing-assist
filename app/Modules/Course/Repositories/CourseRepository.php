@@ -2,7 +2,6 @@
 namespace App\Modules\Course\Repositories;
 
 use App\Modules\Course\Entities\Course;
-use App\Modules\Course\Entities\CourseEnrollment;
 
 class CourseRepository implements CourseInterface
 {
@@ -29,9 +28,6 @@ class CourseRepository implements CourseInterface
         return Course::create($data);
     }
     
-    public function saveCourseEnrol($data){
-        return CourseEnrollment::create($data);
-    }
 
     public function update($id,$data){
         $result = Course::find($id);
@@ -43,10 +39,6 @@ class CourseRepository implements CourseInterface
         return $result->delete();
     }
     
-    public function deleteCourseEnrol($id){
-        CourseEnrollment::where('course_id','=',$id)->delete($id);
-    }
-
    public function upload($file){
         
         $imageName = $file->getClientOriginalName();
@@ -61,8 +53,5 @@ class CourseRepository implements CourseInterface
         return Course::count();
     }
 
-    public function getCourseEnrollment(){
-        return CourseEnrollment::take(3)->get();
-    }
 
 }

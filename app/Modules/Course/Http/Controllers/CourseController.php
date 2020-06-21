@@ -68,22 +68,8 @@ class CourseController extends Controller
                 $courseoData['image'] = $this->course->upload($data['image']);
             }
 
-            $courseInfo = $this->course->save($courseoData);
-            $course_id = $courseInfo->id;
-
-            $enrol_title = $data['enrol_title'];
-            $countname = sizeof($enrol_title);
-                for($i = 0; $i < $countname; $i++){
-                    
-                    if($data['enrol_title'][$i]){
-                         $courseEnrolData['course_id'] = $course_id;
-                         $courseEnrolData['enrol_title'] = $data['enrol_title'][$i];
-                         $courseEnrolData['course_fee'] = $data['course_fee'][$i];
-                         $courseEnrolData['payment_mode'] = $data['payment_mode'][$i];
-
-                         $this->course->saveCourseEnrol($courseEnrolData);
-                    }
-                }
+            $this->course->save($courseoData);
+            
 
             alertify()->success('Course Created Successfully');
         }catch(\Throwable $e){
@@ -143,24 +129,8 @@ class CourseController extends Controller
                 $data['image'] = $this->course->upload($data['image']);
             }
 
-            $courseInfo = $this->course->update($id,$courseoData);
-            $course_id = $id;
-
-            $this->course->deleteCourseEnrol($course_id);
-
-            $enrol_title = $data['enrol_title'];
-            $countname = sizeof($enrol_title);
-                for($i = 0; $i < $countname; $i++){
-                    
-                    if($data['enrol_title'][$i]){
-                         $courseEnrolData['course_id'] = $course_id;
-                         $courseEnrolData['enrol_title'] = $data['enrol_title'][$i];
-                         $courseEnrolData['course_fee'] = $data['course_fee'][$i];
-                         $courseEnrolData['payment_mode'] = $data['payment_mode'][$i];
-
-                         $this->course->saveCourseEnrol($courseEnrolData);
-                    }
-                }
+            $this->course->update($id,$courseoData);
+         
             
              alertify()->success('Course Updated Successfully');
         }catch(\Throwable $e){
@@ -178,7 +148,6 @@ class CourseController extends Controller
     public function destroy($id)
     {
         try{
-            $this->course->deleteCourseEnrol($id);
             $this->course->delete($id);
              alertify()->success('Course Deleted Successfully');
         }catch(\Throwable $e){

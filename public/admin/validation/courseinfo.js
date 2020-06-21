@@ -5,14 +5,21 @@ $(document).ready(function () {
             course_program_title: "required",
             course_program_sub_title: "required",
             course_intake_title: "required",
-            course_duration_period: "required"
+            course_duration_period: "required",
+            enrol_title: "required",
+            course_fee: "required",
+            payment_mode: "required",
+
         },
         messages: {
             course_id: "Please Select Course",
             course_program_title: "Please  Course Program Title",
             course_program_sub_title: "Please  Enter Course Program Sub Title",
             course_intake_title: "Please  Enter Course Intake Title",
-            course_duration_period: "Please  Enter Duration Period"
+            course_duration_period: "Please  Enter Duration Period",
+            enrol_title: "Please  Enter Enrol Title",
+            course_fee: "Please  Enter Course Fee",
+            payment_mode: "Please  Enter Payment Mode"
         },
         errorElement: "em",
         errorPlacement: function (error, element) {  console.log(element)

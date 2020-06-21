@@ -165,14 +165,14 @@
         </div>
     <div class="row">
 
-    	  @if(sizeof($course_detail)>0)
-                @foreach($course_detail as $key => $enroll_val)
+    	  @if(sizeof($course_info)>0) 
+                @foreach($course_info as $key => $course_enrol)
                     <div class="col-sm-4">
                         <div class="course-enrolment__content m-0">
-                            <p>{{$enroll_val->enrol_title }}</p>
-                            <h2>${{$enroll_val->course_fee}}</h2>
-                            <span>({{$enroll_val->payment_mode }})</span>
-                            <button class="btn w-100"><a href="{{ route('enrolment') }}">Enroll</a></button>
+                            <p>{{$course_enrol->enrol_title }}</p>
+                            <h2>${{$course_enrol->course_fee}}</h2>
+                            <span>({{$course_enrol->payment_mode }})</span>
+                            <button class="btn w-100"><a href="{{ route('enrolment',['course_info_id'=>$course_enrol->id]) }}">Enroll</a></button>
                             <button class="btn w-100 demo"><a href="{{ route('enrolment') }}">Take a Demo</a></button>
                         </div>
                     </div>

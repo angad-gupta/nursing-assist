@@ -197,6 +197,60 @@
 
 </fieldset>
 
+<fieldset class="mb-3">
+    <legend class="text-uppercase font-size-sm font-weight-bold">Course Enroment</legend>
+
+      <div class="form-group row">
+
+        <div class="col-md-6">
+            <div class="row">
+                <label class="col-form-label col-lg-3">Enrolment Title:<span class="text-danger">*</span></label>
+                    <div class="col-lg-9">
+                       <div class="input-group">
+                         <span class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-quill4"></i></span>
+                        </span>
+                            {!! Form::text('enrol_title', $value = null, ['placeholder'=>'Enter Enrolment Title','class'=>'enrol_title form-control']) !!}                 
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="row">
+                <label class="col-form-label col-lg-3">Course Fee:<span class="text-danger">*</span></label>
+                <div class="col-lg-9 form-group-feedback form-group-feedback-right">
+                    <div class="input-group">
+                         <span class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-coin-dollar"></i></span>
+                        </span>
+                         {!! Form::text('course_fee', $value = null, ['placeholder'=>'Enter Course Fee','class'=>'course_fee form-control']) !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+
+          <div class="form-group row">
+
+            <div class="col-md-6">
+                <div class="row">
+                    <label class="col-form-label col-lg-3">Payment Mode:<span class="text-danger">*</span></label>
+                        <div class="col-lg-9">
+                           <div class="input-group">
+                             <span class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-wallet"></i></span>
+                            </span>
+                               {!! Form::text('payment_mode', $value = null, ['placeholder'=>'Enter Payment Mode','class'=>'payment_mode form-control']) !!}                 
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+</fieldset>
+
 
 <fieldset class="mb-3">
     <legend class="text-uppercase font-size-sm font-weight-bold">Mode Of Delivery</legend>

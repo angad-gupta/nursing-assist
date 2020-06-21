@@ -26,7 +26,7 @@
                     <h2 class="ttl-line">{{$course_detail->title}} Courses</h2>
                     <div class="oba-introduction b-line">
                         <h6>Introduction</h6>
-                            {!! $course_detail->description !!}
+                            {!! $course_detail->description !!} 
                     </div>
 
                     <div class="why-oba b-line">
@@ -39,14 +39,14 @@
                          {!! $course_detail->enrollment_process !!}
 
                         <div class="row">
-                              @if(sizeof($course_detail->CourseEnrollment)>0)
-                                @foreach($course_detail->CourseEnrollment as $key => $enroll_val)
+                              @if(sizeof($course_info)>0)
+                                @foreach($course_info as $key => $enroll_val)
                                     <div class="col-sm-4">
                                         <div class="course-enrolment__content">
                                             <p>{{$enroll_val->enrol_title }}</p>
                                             <h2>${{$enroll_val->course_fee}}</h2>
                                             <span>({{$enroll_val->payment_mode }})</span>
-                                            <button class="btn w-100"><a href="{{ route('enrolment') }}">Enroll</a></button>
+                                            <button class="btn w-100"><a href="{{ route('enrolment',['course_info_id'=>$enroll_val->id]) }}">Enroll</a></button>
                                         </div>
                                     </div>
                              @endforeach
@@ -83,7 +83,7 @@
                                                 @endif
 
                                             </ul>
-                                            <button class="btn e-btn w-25 mt-1"><a href="{{ route('enrolment') }}">Enroll Now</a></button>
+                                            <button class="btn e-btn w-25 mt-1"><a href="{{ route('enrolment',['course_info_id'=>$courseInfo->id]) }}">Enroll Now</a></button>
                                         </div>
                                     </div>
                                 </div>
@@ -124,7 +124,6 @@
                             <h6>${{$course_detail->course_fees}}</h6>
                         </li>
                     </ul>
-                    <button class="btn w-100"><a href="{{ route('enrolment') }}">Enroll Now</a></button>
                 </div>
             </div>
         </div>

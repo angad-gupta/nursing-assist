@@ -25,10 +25,6 @@ Route::get('agent', ['as' => 'agent', 'uses' => 'HomeController@agent']);
 
 Route::post('contactus/store', ['as' => 'contactus.store', 'uses' => 'HomeController@storeContact']);
 
-Route::get('enrolment', ['as' => 'enrolment', 'uses' => 'HomeController@Enrolment']);
-
-Route::post('enrolment/store', ['as' => 'enrolment.store', 'uses' => 'HomeController@storeEnrolment']);
-
 Route::get('course', ['as' => 'course', 'uses' => 'HomeController@Course']);
 
 Route::get('course-detail', ['as' => 'course-detail', 'uses' => 'HomeController@courseDetail']);
@@ -54,6 +50,11 @@ Route::get('student-logout', ['as' => 'student-logout', 'uses' => 'StudentContro
 Route::post('student-update-password',['as'=>'student-update-password','uses'=>'StudentController@updateStudentPassword']);
 
 Route::get('student-hub', ['as' => 'student-hub', 'uses' => 'StudentController@studentHub']);
+
+Route::get('enrolment', ['as' => 'enrolment', 'uses' => 'StudentController@Enrolment']);
+
+Route::post('enrolment/store', ['as' => 'enrolment.store', 'uses' => 'HomeController@storeEnrolment']);
+
 
 
 Route::group(['prefix' => 'student', 'middleware' => ['auth:student']], function () {

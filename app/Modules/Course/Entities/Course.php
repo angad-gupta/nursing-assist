@@ -3,7 +3,6 @@
 namespace App\Modules\Course\Entities;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Modules\Course\Entities\CourseEnrollment;
 
 
 class Course extends Model
@@ -29,11 +28,6 @@ class Course extends Model
     public function getFileFullPathAttribute()
     {
         return self::FILE_PATH . $this->file_name;
-    }
-
-    public function CourseEnrollment()
-    {
-        return $this->hasMany(CourseEnrollment::class, 'course_id');
     }
 
     public static function GetAllCourses(){
