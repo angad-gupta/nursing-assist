@@ -97,11 +97,15 @@
                         </ul>
                     </div>
                 </div>
-                <div class="ecm-search col-sm-12 col-md-1">
-                    <ul class="list-unstyled d-flex mt-3 float-right">
+                <div class=" col-sm-12 col-md-1">
+                    <ul class="list-unstyled d-flex mt-3 float-right neta-user">
                         <a href="{{ route('student-account') }}">
                            <li class="user"><img src="{{asset('home/img/user.svg')}}" alt="">
-                                </li>
+                            <ul class="list-unstyled">
+                                <a href="#"><li>My Account</li></a>
+                                <a href="#"><li>Sign Out</li></a>
+                            </ul>
+                            </li>
                         </a>
                     </ul>
                 </div>

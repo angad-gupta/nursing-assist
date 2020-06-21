@@ -188,14 +188,14 @@ a {
 
 .neta-payment {
   color: #000 !important;
-  table{
-    font-size:18px
+  table {
+    font-size: 18px;
   }
-  .total{
+  .total {
     font-weight: 700;
   }
-  .payment-method{
-    img{
+  .payment-method {
+    img {
       background: #929292;
     }
   }
@@ -206,11 +206,45 @@ a {
   ul {
     display: flex;
     justify-content: space-between;
-    li{
-      border-bottom: 0
+    li {
+      border-bottom: 0;
     }
   }
-  tr,td{
-    border:0
+  tr,
+  td {
+    border: 0;
+  }
+}
+
+.neta-user {
+  position: relative;
+  .user {
+    li:hover {
+      color: $primary-color;
+    }
+    ul {
+      position: absolute;
+      width: 150px;
+      padding: 15px;
+      position: absolute;
+      left: -120px;
+      box-shadow: 0 0 5px #dedede;
+      background: #fff;
+      z-index: 1;
+      bottom: -110px;
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.5s all;
+      cursor: pointer;
+      li {
+        padding: 5px 0;
+      }
+    }
+    &:hover ul {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(-5px);
+      transition: 0.5s all;
+    }
   }
 }

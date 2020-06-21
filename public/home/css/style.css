@@ -1853,7 +1853,47 @@ a {
   border-bottom: 0;
 }
 
-.neta-payment tr, .neta-payment td {
+.neta-payment tr,
+.neta-payment td {
   border: 0;
+}
+
+.neta-user {
+  position: relative;
+}
+
+.neta-user .user li:hover {
+  color: #B0117E;
+}
+
+.neta-user .user ul {
+  position: absolute;
+  width: 150px;
+  padding: 15px;
+  position: absolute;
+  left: -120px;
+  -webkit-box-shadow: 0 0 5px #dedede;
+          box-shadow: 0 0 5px #dedede;
+  background: #fff;
+  z-index: 1;
+  bottom: -110px;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+  cursor: pointer;
+}
+
+.neta-user .user ul li {
+  padding: 5px 0;
+}
+
+.neta-user .user:hover ul {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transform: translateY(-5px);
+          transform: translateY(-5px);
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
 }
 /*# sourceMappingURL=style.css.map */
