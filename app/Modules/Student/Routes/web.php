@@ -25,5 +25,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','permission']], funct
 
     Route::post('student/status', ['as' => 'student.status', 'uses' => 'StudentController@status']);
         
-         
+    
+       
+
+   Route::get('studentcourse', ['as' => 'studentcourse.index', 'uses' => 'StudentController@studentCourse']);
+   Route::get('studentpurchase', ['as' => 'studentpurchase.index', 'uses' => 'StudentController@studentPurchase']);
+  
+
+
 });

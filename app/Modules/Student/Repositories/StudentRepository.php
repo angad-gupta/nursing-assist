@@ -2,6 +2,8 @@
 namespace App\Modules\Student\Repositories;
 
 use App\Modules\Student\Entities\Student;
+use App\Modules\Student\Entities\StudentCourse;
+use App\Modules\Student\Entities\StudentPayment;
 
 class StudentRepository implements StudentInterface
 {
@@ -48,5 +50,25 @@ class StudentRepository implements StudentInterface
 
         return $fileName;
    }
+
+
+    public function getStudentCourse($student_id,$limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1]){
+
+        $result =StudentCourse::when(array_keys($filter, true), function ($query) use ($filter) {
+                   
+                })->where('student_id','=',$student_id)->orderBy('id', $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+                
+                return $result;
+            }
+
+    public function getStudentPurchase($student_id,$limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1]){
+            
+            $result =StudentPayment::when(array_keys($filter, true), function ($query) use ($filter) {
+                   
+                })->where('student_id','=',$student_id)->orderBy('id', $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+                
+                return $result;
+        }
+
 
 }

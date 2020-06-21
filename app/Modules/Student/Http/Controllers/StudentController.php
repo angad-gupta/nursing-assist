@@ -45,6 +45,24 @@ class StudentController extends Controller
         return redirect(route('student.index'));
     }
 
+    public function studentCourse(Request $request){
+        $input = $request->all();
+        $student_id = $input['student_id']; 
+
+         $data['student_courses'] = $this->student->getStudentCourse($student_id); 
+
+         return view('student::student.student_course',$data);
+    }
+
+    public function studentPurchase(Request $request){
+        $input = $request->all();
+        $student_id = $input['student_id']; 
+
+         $data['student_purchase'] = $this->student->getStudentPurchase($student_id); 
+
+         return view('student::student.student_purchase',$data);
+    }
+
     /**
      * Remove the specified resource from storage.
      * @param int $id

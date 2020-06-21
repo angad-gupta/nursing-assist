@@ -9,13 +9,15 @@ class Quiz extends Model
     protected $fillable = [
 
     	'category',
+        'quiz_section',
     	'question',
     	'question_type',
         'option_1',
         'option_2',
         'option_3',
         'option_4',
-    	'correct_option'
+    	'correct_option',
+        'correct_answer_reason',
 
     ];
 
