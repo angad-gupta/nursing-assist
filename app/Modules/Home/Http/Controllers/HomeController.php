@@ -67,9 +67,8 @@ class HomeController extends Controller
         $data['banner'] = $this->banner->findAll();
         $data['we_offer'] = $this->page->getBySlug('we_offer');
         $data['course'] = $this->course->findAll();
-        $data['about_neta'] =$this->page->getBySlug('about_us');
-
-        $data['course_detail'] = $this->course->getCourseEnrollment(); 
+        $data['about_neta'] =$this->page->getBySlug('about_us'); 
+        $data['course_info'] = $this->courseinfo->findAll();        
 
         return view('home::index',$data);
     }
@@ -132,17 +131,6 @@ class HomeController extends Controller
     }
 
    
-
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
-    public function Enrolment(Request $request)
-    {
-        $input = $request->all(); 
-        $data['message'] = ($input) ? $input['message'] : FALSE;
-        return view('home::enrolment',$data);
-    }
 
      /**
      * Store a newly created resource in storage.

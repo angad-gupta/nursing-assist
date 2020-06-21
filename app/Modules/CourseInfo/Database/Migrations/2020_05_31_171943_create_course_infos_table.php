@@ -26,6 +26,9 @@ class CreateCourseInfosTable extends Migration
             $table->string('type')->nullable();
             $table->text('image_path')->nullable();
             $table->string('youtube_id')->nullable();
+            $table->text('enrol_title')->nullable();
+            $table->text('course_fee')->nullable();
+            $table->text('payment_mode')->nullable();
 
             $table->timestamps();
         });

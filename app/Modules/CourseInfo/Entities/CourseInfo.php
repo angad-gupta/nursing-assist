@@ -24,7 +24,10 @@ class CourseInfo extends Model
         'description',
     	'type',
     	'image_path',
-    	'youtube_id'
+    	'youtube_id',
+        'enrol_title',
+        'course_fee',
+        'payment_mode'
 
     ];
 
@@ -52,3 +55,5 @@ class CourseInfo extends Model
         return $this->hasMany(CourseIntake::class, 'course_info_id');
     }
 }
+
+

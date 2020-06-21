@@ -66,7 +66,11 @@ class CourseInfoController extends Controller
                 'short_content' => $data['short_content'],
                 'description' => $data['description'],
                 'type' => $data['type'],
-                'youtube_id' => $data['youtube_id']
+                'youtube_id' => $data['youtube_id'],
+                'enrol_title' => $data['enrol_title'],
+                'course_fee' => $data['course_fee'],
+                'payment_mode' => $data['payment_mode']
+
             );
 
             if ($request->hasFile('image_path')) {
@@ -157,7 +161,10 @@ class CourseInfoController extends Controller
                 'short_content' => $data['short_content'],
                 'description' => $data['description'],
                 'type' => $data['type'],
-                'youtube_id' => $data['youtube_id']
+                'youtube_id' => $data['youtube_id'],
+                'enrol_title' => $data['enrol_title'],
+                'course_fee' => $data['course_fee'],
+                'payment_mode' => $data['payment_mode']
             );
 
             if ($request->hasFile('image_path')) {
