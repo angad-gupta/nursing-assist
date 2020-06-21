@@ -94,6 +94,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 <script src="{{asset('home/js/wow.min.js')}}"></script>
 <script src="{{asset('home/js/v-ticker.js')}}"></script>
+<script src="{{asset('home/js/custom.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
 <script src="{{asset('admin/validation/contactus.js')}}"></script>
 <script src="{{asset('admin/validation/enrolment.js')}}"></script>
