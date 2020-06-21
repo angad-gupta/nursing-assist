@@ -11,7 +11,7 @@ use App\Modules\CourseInfo\Entities\Month;
 
 class CourseInfoRepository implements CourseInfoInterface
 {
-    public function findAll($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1])
+    public function findAll($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1])
     {
 
          $result =CourseInfo::when(array_keys($filter, true), function ($query) use ($filter) {         

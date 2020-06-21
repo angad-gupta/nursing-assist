@@ -6,7 +6,7 @@ use App\Modules\Banner\Entities\Banner;
 class BannerRepository implements BannerInterface
 {
     
-    public function findAll($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1])
+    public function findAll($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1])
     {
         $result =Banner::when(array_keys($filter, true), function ($query) use ($filter) {
            
