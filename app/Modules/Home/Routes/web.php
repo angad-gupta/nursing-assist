@@ -55,7 +55,11 @@ Route::get('enrolment', ['as' => 'enrolment', 'uses' => 'StudentController@Enrol
 
 Route::post('enrolment/store', ['as' => 'enrolment.store', 'uses' => 'HomeController@storeEnrolment']);
 
+Route::get('demo-quiz', ['as' => 'demo-quiz', 'uses' => 'HomeController@demoQuiz']);
 
+/** --------------------------------------------------------------------------------------- **/
+
+/** --------------------------------------------------------------------------------------- **/
 
 Route::group(['prefix' => 'student', 'middleware' => ['auth:student']], function () {
 

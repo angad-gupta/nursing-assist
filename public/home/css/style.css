@@ -1827,6 +1827,10 @@ a {
   font-size: 18px;
 }
 
+.neta-payment .form-group {
+  margin-bottom: 15px !important;
+}
+
 .neta-payment .total {
   font-weight: 700;
 }
@@ -1838,6 +1842,17 @@ a {
 .neta-payment .order-summary {
   border-bottom: 1px solid #e4e4e4;
   margin-bottom: 30px;
+}
+
+.neta-payment .order-summary label {
+  font-size: 14px;
+  margin-bottom: 0;
+  font-weight: 500;
+}
+
+.neta-payment .order-summary label span {
+  color: #f32929;
+  font-size: 16px;
 }
 
 .neta-payment ul {
@@ -1854,6 +1869,39 @@ a {
 }
 
 .neta-payment tr, .neta-payment td {
+  border: 0;
+}
+
+.neta-payment .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+  width: 220px;
+  margin-right: 20px;
+}
+
+.neta-payment .dropdown-toggle {
+  min-height: 52px;
+}
+
+.demo-quiz h6 {
+  padding: 10px 0;
+}
+
+.demo-quiz .form-card {
+  background: #fff;
+  padding: 15px;
+  border-radius: 4px;
+  margin: 20px 0;
+}
+
+.demo-quiz .demo-ans {
+  background: #e4e4e4;
+  min-height: 120px;
+  padding: 15px;
+  border-radius: 4px;
+  margin: 15px 0;
+  display: none;
+}
+
+.demo-quiz button {
   border: 0;
 }
 /*# sourceMappingURL=style.css.map */

@@ -60,4 +60,16 @@ class QuizRepository implements QuizInterface
         return Quiz::count();
     }
 
+    public function getDemoQuiz($limit, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1]){
+
+        $result =Quiz::when(array_keys($filter, true), function ($query) use ($filter) {         
+            
+
+        })
+            ->where('category','=','Demo')->inRandomOrder()->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+
+        return $result; 
+    }
+
+
 }

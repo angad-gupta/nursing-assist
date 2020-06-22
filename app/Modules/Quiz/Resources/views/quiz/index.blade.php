@@ -26,9 +26,9 @@
                 <tr class="bg-slate">
                     <th>#</th>
                     <th>Quiz Category</th>
-                    <th>Quiz Question< Type</th>
+                    <th>Quiz Question Type</th>
                     <th>Quiz Type</th>
-                    <th>Quiz Question</th>
+                    <th width="60%">Quiz Question</th>
                     <th>Action</th>
                 </tr>
             </thead>
