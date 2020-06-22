@@ -96,7 +96,8 @@
 		                        	@php
 		                        	if($question->question_type =='multiple'){
 		                        		$value = explode("_", $question->correct_option);
-		                        		$answer = $value[0].' '.$value[1];
+
+		                        		$answer =(array_key_exists("1",$value)) ?  $value[0].' '.$value[1] : $value[0];
 		                        	}
 		                        	$correct_answer = ($question->question_type == 'true_false') ? ucfirst($question->correct_option) : $answer; 
 		                        	@endphp
