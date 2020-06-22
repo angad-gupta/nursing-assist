@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Auth;
+use Eway\Rapid\Client;
 use App\Modules\Enrolment\Repositories\EnrolmentInterface;
+use App\Modules\Enrolment\Repositories\EnrolmentPaymentInterface;
 use App\Modules\CourseInfo\Repositories\CourseInfoInterface;
 use App\Modules\Course\Repositories\CourseInterface;
+use Illuminate\Support\Facades\Redirect;
 
 
 class EnrolmentController extends Controller
@@ -17,12 +20,15 @@ class EnrolmentController extends Controller
     protected $enrolment;
     protected $courseinfo;
     protected $course;
+    protected $enrolpayment;
     
-    public function __construct(EnrolmentInterface $enrolment, CourseInfoInterface $courseinfo, CourseInterface $course)
+    public function __construct(EnrolmentInterface $enrolment, CourseInfoInterface $courseinfo, CourseInterface $course,EnrolmentPaymentInterface $enrolpayment)
     {
         $this->enrolment = $enrolment;
          $this->courseinfo = $courseinfo;
         $this->course = $course;
+        $this->enrolpayment = $enrolpayment;
+
     }
 
     /**
@@ -76,11 +82,9 @@ class EnrolmentController extends Controller
           $data['is_id'] = 0;  
          }
          
-         $data['student_id'] = auth()->guard('student')->user()->id;
-       
-
-
-         try{ 
+         $student_detail = auth()->guard('student')->user();
+         $data['student_id'] = $student_detail->id;
+         // try{ 
 
              $enrolmentData = array(
                 'student_id'=>$data['student_id'],
@@ -103,28 +107,146 @@ class EnrolmentController extends Controller
             );
              
             if ($request->hasFile('eligible_document')) {
-
-                 $enrolmentData['eligible_document'] = $this->enrolment->upload($data['eligible_document']);
+              $enrolmentData['eligible_document'] = $this->enrolment->upload($data['eligible_document']);
              }
 
             if ($request->hasFile('identity_document')) {
                  $enrolmentData['identity_document'] = $this->enrolment->upload($data['identity_document']);
              }
           
-             $enrolment = $this->enrolment->save($enrolmentData);
+            $enrolment = $this->enrolment->save($enrolmentData);
 
-             $courseinfo_id = $this->courseinfo->where('id', $data['courseinfo_id'])->first();
-             dd($courseinfo_id);
+            $courseinfo_id = $this->courseinfo->where('id', $data['courseinfo_id'])->first();
+            $apiKey = 'A1001CP4sm20m1yh7NLt2iEDUZYorWLzZ6yignkaLKh560H16+a5s4AhwtKq6H1lAGHyUW';
+            $apiPassword = 'MMbKrf8u';
+            $apiEndpoint = \Eway\Rapid\Client::MODE_SANDBOX;
+            $client = \Eway\Rapid::createClient($apiKey, $apiPassword, $apiEndpoint);
 
+            
+
+           $transaction = [
+                'Customer' => [
+                'FirstName' => $student_detail->full_name,
+                'LastName' => 'Smith',
+                'Street1'=>$data['country'],
+                'Street2' => $data['suburb'],
+                'City' => $student_detail->primary_address,
+                'State' => 'NSW',
+                'PostalCode'=>$data['postcode'],
+                'Country' => 'au',
+                'Email' => $student_detail->email,
+                'CardNumber'=>$data['card_number'],
+                'CompanyName'=>$enrolment->company_name,
+                ],
+                'RedirectUrl' => route('enrolmentstudent.redirect',$enrolment->id),
+                'CancelUrl' => route('enrolmentstudent.cancel'),
+                'TransactionType' => \Eway\Rapid\Enum\TransactionType::PURCHASE,
+                'Payment' => [
+                'TotalAmount' =>$courseinfo_id->course_fee,
+                ]
+                ];
+           
+                // Submit data to eWAY to get a Shared Page URL
+                $response = $client->createTransaction(\Eway\Rapid\Enum\ApiMethod::RESPONSIVE_SHARED, $transaction);
+            
+                // Check for any errors
+                if (!$response->getErrors()) {
+
+                $sharedURL = $response->SharedPaymentUrl;
+                $enrolpaymentData = array(
+                'enrolment_id'=>$enrolment->id,
+                'sucess'=>0);
+               
+                $enrolpayment = $this->enrolpayment->save($enrolpaymentData);
+                return Redirect::to($sharedURL);
+                } else {
+                foreach ($response->getErrors() as $error) {
+                   // return redirect(route('enrolmentstudent.cancel'));
+                 echo "Error: ".\Eway\Rapid::getMessage($error)."";
+                }
+                die();
+                }
            
            alertify()->success('Course Information Created Successfully');
           return redirect(route('enrolment.viewUser'));
-        }
-          catch(\Throwable $e){
-            alertify($e->getMessage())->error();
-        }
+        // }
+        //   catch(\Throwable $e){
+        //     alertify($e->getMessage())->error();
+        // }
         
         return redirect(route('enrolment.viewUser'));
+    }
+
+
+    public function cancel()
+    {
+       return redirect(route('enrolment.viewUser'));
+    }
+    public function redirect($id)
+    {   
+        $id = (int)$id;
+        $enrolpayment = $this->enrolpayment->where('enrolment_id', $id)->first();
+
+        $apiKey = 'A1001CP4sm20m1yh7NLt2iEDUZYorWLzZ6yignkaLKh560H16+a5s4AhwtKq6H1lAGHyUW';
+        $apiPassword = 'MMbKrf8u';
+        $apiEndpoint = \Eway\Rapid\Client::MODE_SANDBOX;
+
+        // Create the eWAY Client
+        $client = \Eway\Rapid::createClient($apiKey, $apiPassword, $apiEndpoint);
+
+        // Query the transaction result.
+        $response = $client->queryTransaction($_GET['AccessCode']);
+
+        $transactionResponse = $response->Transactions[0];
+
+        // Display the transaction result
+        if ($transactionResponse->TransactionStatus) {
+             $customer = json_decode($transactionResponse->Customer);
+             $customer = json_encode($customer);
+
+             $shippingAddress = json_decode($transactionResponse->ShippingAddress);
+             $shippingAddress = json_encode($shippingAddress);
+
+            
+            $enrolpaymentData = array(
+                'transactionID'=>$transactionResponse->TransactionID,
+                'totalAmount'=>$transactionResponse->TotalAmount,
+                'customer'=>$customer,
+                'shippingAddress'=>$shippingAddress,
+                'sucess'=>1,
+              
+                 );   
+               
+           $enrolpayment = $this->enrolpayment->update($enrolpayment->id, $enrolpaymentData);
+       
+        'Payment successful! ID: ' .$transactionResponse->TransactionID;
+        return redirect(route('enrolmentstudent.sucess', $transactionResponse->TransactionID));
+
+        } 
+        else
+         {
+        $errors = split(', ', $transactionResponse->ResponseMessage);
+        foreach ($errors as $error) {
+        echo "Payment failed: " .
+        \Eway\Rapid::getMessage($error)."
+        ";
+        }
+        }
+    }
+
+    public function sucess($transaction_id)
+    {
+         $data['transaction_id'] = $transaction_id;
+         return view('enrolment::sucess',$data);
+
+    }
+
+
+     public function error($transaction_id)
+    {
+         $data['transaction_id'] = $transaction_id;
+         return view('enrolment::error',$data);
+
     }
 
 }

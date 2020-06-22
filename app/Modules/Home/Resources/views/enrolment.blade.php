@@ -131,10 +131,10 @@
                                                                         <input type="text"name="country" placeholder="Street ">
                                                                     </div>
                                                                     <div class="col-sm-4">
-                                                                        <input type="text" placeholder="Suburb ">
+                                                                        <input type="text" name="suburb" placeholder="Suburb ">
                                                                     </div>
                                                                     <div class="col-sm-4">
-                                                                        <input type="text" placeholder="Postcode ">
+                                                                        <input type="text" name="postcode"placeholder="Postcode ">
                                                                     </div>
                                                                 </div>
 
@@ -208,12 +208,12 @@
                                                             <table class="table">
                                                                 <tr>
                                                                     <td>Enrol NCLEX</td>
-                                                                    <td class="text-right">$2,500</td>
+                                                                    <td class="text-right">${{ $courseinfo->course_fee }}</td>
                                                                 </tr>
 
                                                                 <tr class="total">
                                                                     <td>Total</td>
-                                                                    <td class="text-right">$2,500</td>
+                                                                    <td class="text-right">${{ $courseinfo->course_fee }}</td>
                                                                 </tr>
                                                             </table>
                                                         </div>

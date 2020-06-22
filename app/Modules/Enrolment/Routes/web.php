@@ -26,3 +26,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','permission']], funct
 
         
      Route::post('enrolmentstudent/store', ['as' => 'enrolmentstudent.store', 'uses' => 'EnrolmentController@store']);
+
+     Route::get('enrolmentstudent/cancel', ['as' => 'enrolmentstudent.cancel', 'uses' => 'EnrolmentController@cancel']);
+
+     Route::get('enrolmentstudent/redirect/{id}', ['as' => 'enrolmentstudent.redirect', 'uses' => 'EnrolmentController@redirect']);
+
+     Route::get('enrolmentstudent/sucess/{transaction_id}', ['as' => 'enrolmentstudent.sucess', 'uses' => 'EnrolmentController@sucess']);
+
+     Route::get('enrolmentstudent/error/{transaction_id}', ['as' => 'enrolmentstudent.error', 'uses' => 'EnrolmentController@error']);
+
+
