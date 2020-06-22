@@ -21,4 +21,7 @@ interface QuizInterface
     public function deleteQuizOpton($id);
 
     public function countTotal();
+
+    public function getDemoQuiz($limit, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
+
 }

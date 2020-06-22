@@ -17,6 +17,7 @@ use App\Modules\Enrolment\Repositories\EnrolmentInterface;
 use App\Modules\Student\Repositories\StudentInterface;
 use App\Modules\FAQ\Repositories\FAQInterface;
 use App\Modules\Agent\Repositories\AgentInterface;
+use App\Modules\Quiz\Repositories\QuizInterface;
 
 class HomeController extends Controller
 {
@@ -31,6 +32,7 @@ class HomeController extends Controller
     protected $student;
     protected $faq;
     protected $agent;
+    protected $quiz;
     
     public function __construct(
             PageInterface $page,
@@ -42,7 +44,8 @@ class HomeController extends Controller
             EnrolmentInterface $enrolment,
             StudentInterface $student,
             FAQInterface $faq,
-            AgentInterface $agent
+            AgentInterface $agent,
+            QuizInterface $quiz
         )
 
     {
@@ -56,6 +59,7 @@ class HomeController extends Controller
         $this->student = $student;
         $this->faq = $faq;
         $this->agent = $agent;
+        $this->quiz = $quiz;
     }
 
     /**
@@ -210,6 +214,13 @@ class HomeController extends Controller
 
     public function paymentPlan(){
         return view('home::payment-plan');
+      
+    }
+
+    public function demoQuiz(){
+        $data['demo_quiz'] = $this->quiz->getDemoQuiz(5); 
+
+        return view('home::demo-quiz',$data);
       
     }
 

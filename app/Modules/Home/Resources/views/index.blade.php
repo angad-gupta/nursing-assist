@@ -173,7 +173,7 @@
                             <h2>${{$course_enrol->course_fee}}</h2>
                             <span>({{$course_enrol->payment_mode }})</span>
                             <button class="btn w-100"><a href="{{ route('enrolment',['course_info_id'=>$course_enrol->id]) }}">Enroll</a></button>
-                            <button class="btn w-100 demo"><a href="{{ route('enrolment') }}">Take a Demo</a></button>
+                            <button class="btn w-100 demo"><a href="{{ route('demo-quiz') }}">Take a Demo</a></button>
                         </div>
                     </div>
              	@endforeach

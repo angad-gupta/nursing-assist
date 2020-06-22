@@ -11,7 +11,7 @@ class Quiz extends Model
     	'category',
         'quiz_section',
     	'question',
-    	'question_type',
+    	'question_type', 
         'option_1',
         'option_2',
         'option_3',
