@@ -20,16 +20,13 @@ class Enrolment extends Model
     	'is_eligible_att',
     	'is_eligible_letter_ahpra',
     	'eligible_document',
-
     	'is_id',
     	'identity_document',
-
     	'company_name',
     	'email',
     	'contact_number',
     	'country',
-    	'message',
-    	
+    	'message',   	
     	'payment_status'
     
     ];

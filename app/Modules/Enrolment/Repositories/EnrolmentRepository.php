@@ -49,6 +49,17 @@ class EnrolmentRepository implements EnrolmentInterface
     public function countTotal(){
         return Enrolment::count();
     }
+     public function upload($file){
+        
+        $imageName = $file->getClientOriginalName();
+        $fileName = date('Y-m-d-h-i-s') . '-' . preg_replace('[ ]', '-', $imageName);
+
+        $file->move(public_path() . Enrolment::FILE_PATH, $fileName);
+
+        return $fileName;
+   }
+
+     
 
 
 }

@@ -18,4 +18,6 @@ interface EnrolmentInterface
 
     public function countTotal();
 
+     public function upload($file);
+
 }
