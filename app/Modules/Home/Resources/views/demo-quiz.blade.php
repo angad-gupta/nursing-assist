@@ -102,7 +102,7 @@
 		                        	$correct_answer = ($question->question_type == 'true_false') ? ucfirst($question->correct_option) : $answer; 
 		                        	@endphp
 		                            <div class="demo-ans1">
-		                              <p>Your Correct Answe is <span>{{ $correct_answer}}</span></p>
+		                              <p>The Correct Answer is  <span>{{ $correct_answer}}</span></p>
 		                              <h6>Explanation</h6>
 		                              <p>{!! $question->correct_answer_reason !!}</p>
 		                            </div>
