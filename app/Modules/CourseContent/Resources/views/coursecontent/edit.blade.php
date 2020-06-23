@@ -6,7 +6,7 @@
 <!-- Theme JS files -->
 <script src="{{asset('admin/global/js/plugins/forms/styling/uniform.min.js')}}"></script>
 <script src="{{asset('admin/global/js/demo_pages/form_inputs.js')}}"></script>
-<!-- <script src="{{ asset('admin/validation/coursecontent.js')}}"></script> -->
+<script src="{{ asset('admin/validation/coursecontent.js')}}"></script>
 <!-- /theme JS files -->
 
 @stop @section('content')
@@ -22,7 +22,7 @@
 
     <div class="card-body">
 
-		 {!! Form::model($coursecontent,['method'=>'PUT','route'=>['coursecontent.update',$coursecontent->id],'class'=>'form-horizontal','id'=>'coursematerial_submit','role'=>'form','files'=>true]) !!} @include('coursecontent::coursecontent.partial.action',['btnType'=>'Update']) {!! Form::close() !!}
+		 {!! Form::model($coursecontent,['method'=>'PUT','route'=>['coursecontent.update',$coursecontent->id],'class'=>'form-horizontal','id'=>'coursecontent_submit','role'=>'form','files'=>true]) !!} @include('coursecontent::coursecontent.partial.action',['btnType'=>'Update']) {!! Form::close() !!}
 
     </div>
 </div>

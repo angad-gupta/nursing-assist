@@ -3,12 +3,14 @@ $(document).ready(function () {
         rules: {
             course_info_id: "required",
             syllabus_id: "required",
-            lesson_title: "required"
+            lesson_title: "required",
+            is_related_to_quiz: "required"
         },
         messages: {
             course_info_id: "Please Select Course Info",
             syllabus_id: "Please Select Syllabus",
-            lesson_title: "Please  Enter Lesson Title"
+            lesson_title: "Please  Enter Lesson Title",
+            is_related_to_quiz: "Please Select Is Related To Quiz"
         },
         errorElement: "em",
         errorPlacement: function (error, element) {  console.log(element)

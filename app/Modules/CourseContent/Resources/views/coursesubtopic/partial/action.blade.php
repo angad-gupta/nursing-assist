@@ -28,7 +28,7 @@
                         <h5>Description</h5>
                         <div class="input-group">
                        
-                         {!! Form::textarea('sub_topic_description', null, ['id' => 'sub_topic_description','placeholder'=>'Enter Leave Summary', 'class' =>'form-control simple_full_textarea_description']) !!}
+                         {!! Form::textarea('sub_topic_description', null, ['id' => 'sub_topic_description','placeholder'=>'Enter Leave Summary', 'class' =>'form-control textarea_description']) !!}
 
                         </div>
                     </div>

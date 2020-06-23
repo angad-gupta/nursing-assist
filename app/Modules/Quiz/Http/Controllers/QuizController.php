@@ -25,6 +25,7 @@ class QuizController extends Controller
     public function index(Request $request)
     {
         $search = $request->all();
+        $course_content_id = $search['course_content_id'];
         $data['quiz'] = $this->quiz->findAll($limit= 10, $search); 
         $data['search_value']=$search;
         return view('quiz::quiz.index',$data);
