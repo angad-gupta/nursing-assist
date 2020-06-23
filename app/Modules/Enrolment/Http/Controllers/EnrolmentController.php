@@ -5,7 +5,7 @@ namespace App\Modules\Enrolment\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Eway\Rapid\Client;
 use App\Modules\Enrolment\Repositories\EnrolmentInterface;
 use App\Modules\Enrolment\Repositories\EnrolmentPaymentInterface;
@@ -14,6 +14,7 @@ use App\Modules\CourseInfo\Repositories\CourseInfoInterface;
 use App\Modules\Course\Repositories\CourseInterface;
 use Illuminate\Support\Facades\Redirect;
 use Session;
+
 class EnrolmentController extends Controller
 {
 
@@ -98,11 +99,6 @@ class EnrolmentController extends Controller
                 'contact_number' => $data['contact_number'],
                 'country' => $data['country'],
                 'message' => $data['message']
-                // 'card_holder_name' => $data['type'],
-                // 'card_number' => $data['youtube_id'],
-                // 'ccv' => $data['enrol_title'],
-                // 'card_email' => $data['course_fee'],
-                // 'card_expiry_data' => $data['payment_mode']
 
             );
             if ($request->hasFile('eligible_document')) {
@@ -154,7 +150,6 @@ class EnrolmentController extends Controller
                 return Redirect::to($sharedURL);
                 } else {
                 foreach ($response->getErrors() as $error) {
-                   // return redirect(route('enrolmentstudent.cancel'));
                  echo "Error: ".\Eway\Rapid::getMessage($error)."";
                 }
                 die();
@@ -221,8 +216,7 @@ class EnrolmentController extends Controller
          {
         $errors = split(', ', $transactionResponse->ResponseMessage);
         foreach ($errors as $error) {
-        echo "Payment failed: " .
-        \Eway\Rapid::getMessage($error)."
+        echo "Payment failed: " .\Eway\Rapid::getMessage($error)."
         ";
         }
         }

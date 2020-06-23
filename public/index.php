@@ -1,7 +1,5 @@
 <?php
 
-require('vendor/autoload.php');
-
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
