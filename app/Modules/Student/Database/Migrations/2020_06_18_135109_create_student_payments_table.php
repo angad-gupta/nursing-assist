@@ -18,6 +18,7 @@ class CreateStudentPaymentsTable extends Migration
 
             $table->integer('student_id')->nullable();
             $table->integer('courseinfo_id')->nullable();
+            $table->integer('enrolment_payment_id')->nullable();
 
             $table->timestamps();
         });

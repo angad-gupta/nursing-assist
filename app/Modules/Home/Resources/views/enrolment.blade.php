@@ -1,5 +1,28 @@
 @include('home::layouts.navbar-inner')
+@section('scripts')
+<script type="text/javascript">
+     $("#btn").click(function() {
+        if(document.getElementById("file").value != "") {
+            return true;
+        }
+         else{
+          alert('Please upload the eligble document.');
+           return false;
+         }
+        });
 
+      $("#btn_second").click(function() {
+        if(document.getElementById("file_second").value != "") {
+            return true;
+        }
+         else{
+          alert('Please upload the identity document.');
+           return false;
+         }
+        });
+
+</script>
+@endsection 
 <section class="neta-ribbon">
     <img src="{{ asset('img/bg.png') }}" class="img-fluid" alt="">
     <div class="container">
@@ -17,6 +40,7 @@
         </div>
     </div>
 </section>
+
 
 <section class="neta-enrolment neta-contact  section-padding">
     <div class="container">
@@ -48,31 +72,29 @@
                                                 <div class="form-card">
                                                     <h2 class="fs-title">Eligibility</h2>
                                                     <div class="e-input">
-                                                        <input type="radio" name="eligible_rd" value="is_eligible_mcq_osce" placeholder="Email Id" />
+                                                        <input type="radio" name="eligible_rd" value="is_eligible_mcq_osce" placeholder="Email Id" id="radio1" checked="checked" />
                                                         <label for="">I have done self-check through AHPRA that
                                                             indicates MCQ and OSCE </label>
                                                     </div>
 
                                                     <div class="e-input">
-                                                        <input type="radio" name="eligible_rd" value="is_eligible_att" placeholder="Email Id" />
+                                                        <input type="radio" name="eligible_rd" value="is_eligible_att" placeholder="Email Id"id="radio2" />
                                                         <label for="">I hold an Authority to Take (ATT) notification
                                                             from AHPRA </label>
                                                     </div>
 
                                                     <div class="e-input">
-                                                        <input type="radio" name="eligible_rd" value="is_eligible_letter_ahpra" placeholder="Email Id" />
+                                                        <input type="radio" name="eligible_rd" value="is_eligible_letter_ahpra" placeholder="Email Id" id="radio3"/>
                                                         <label for="">I have a letter from AHPRA referring me to the OBA
                                                         </label>
                                                     </div>
 
                                                     <div class="e-input">
-                                                        <input class="w-100" type="file" name="eligible_document" placeholder="" />
-
-                                                        </label>
+                                                        <input class="w-100" type="file" name="eligible_document" placeholder=""  id="file" />                                                
                                                     </div>
 
 
-                                                </div> <input type="button" name="next" class="next action-button"
+                                                </div> <input type="button" id="btn" name="next" class="next action-button"
                                                     value="Next Step" />
                                             </fieldset>
 
@@ -86,14 +108,14 @@
                                                     </div>
 
                                                     <div class="e-input">
-                                                        <input class="w-100" type="file" name="identity_document" placeholder="" />
+                                                        <input class="w-100" type="file" name="identity_document" id="file_second" placeholder="" />
 
                                                         </label>
                                                     </div>
                                                 </div> <input type="button" name="previous"
                                                     class="previous action-button-previous" value="Previous" /> 
                                                     <input type="button" name="next" class="next action-button"
-                                                    value="Next Step" />
+                                                    value="Next Step" id="btn_second"/>
                                             </fieldset>
 
                                             <fieldset>

@@ -112,7 +112,7 @@
 <script src="{{asset('admin/validation/enrolment.js')}}"></script>
 <script src="{{asset('admin/validation/student-register.js')}}"></script>
 
-
+@yield('scripts')
 <script>
 $('.owl-carousel').owlCarousel({
     loop:true,

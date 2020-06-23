@@ -4,7 +4,8 @@ namespace App\Modules\Student\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
-
+use App\Modules\Student\Repositories\StudentPaymentInterface;
+use App\Modules\Student\Repositories\StudentPaymentRepository;
 use App\Modules\Student\Repositories\StudentInterface;
 use App\Modules\Student\Repositories\StudentRepository;
 
@@ -40,12 +41,21 @@ class StudentServiceProvider extends ServiceProvider
     {
         $this->app->register(RouteServiceProvider::class);
         $this->studentRegister();
+        $this->studentPaymentRegister();
     }
 
     public function studentRegister(){
         $this->app->bind(
               StudentInterface::class,
               StudentRepository::class
+        );
+    }
+
+
+    public function studentPaymentRegister(){
+        $this->app->bind(
+              StudentPaymentInterface::class,
+              StudentPaymentRepository::class
         );
     }
 

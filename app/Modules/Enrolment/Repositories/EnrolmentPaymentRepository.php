@@ -65,6 +65,10 @@ class EnrolmentPaymentRepository implements EnrolmentPaymentInterface
         return EnrolPayment::where($field, $value);
     }
 
+    public function with($with = [])
+    {
+        return EnrolPayment::with($with);
+    }
      
 
 

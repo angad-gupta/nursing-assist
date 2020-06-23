@@ -9,11 +9,11 @@ use Auth;
 use Eway\Rapid\Client;
 use App\Modules\Enrolment\Repositories\EnrolmentInterface;
 use App\Modules\Enrolment\Repositories\EnrolmentPaymentInterface;
+use App\Modules\Student\Repositories\StudentPaymentInterface;
 use App\Modules\CourseInfo\Repositories\CourseInfoInterface;
 use App\Modules\Course\Repositories\CourseInterface;
 use Illuminate\Support\Facades\Redirect;
-
-
+use Session;
 class EnrolmentController extends Controller
 {
    
@@ -21,13 +21,15 @@ class EnrolmentController extends Controller
     protected $courseinfo;
     protected $course;
     protected $enrolpayment;
+    protected $studentpayment;
     
-    public function __construct(EnrolmentInterface $enrolment, CourseInfoInterface $courseinfo, CourseInterface $course,EnrolmentPaymentInterface $enrolpayment)
+    public function __construct(EnrolmentInterface $enrolment, CourseInfoInterface $courseinfo, CourseInterface $course,EnrolmentPaymentInterface $enrolpayment, StudentPaymentInterface $studentpayment)
     {
         $this->enrolment = $enrolment;
-         $this->courseinfo = $courseinfo;
+        $this->courseinfo = $courseinfo;
         $this->course = $course;
         $this->enrolpayment = $enrolpayment;
+        $this->studentpayment = $studentpayment;
 
     }
 
@@ -84,7 +86,7 @@ class EnrolmentController extends Controller
          
          $student_detail = auth()->guard('student')->user();
          $data['student_id'] = $student_detail->id;
-         // try{ 
+         try{ 
 
              $enrolmentData = array(
                 'student_id'=>$data['student_id'],
@@ -115,16 +117,13 @@ class EnrolmentController extends Controller
              }
           
             $enrolment = $this->enrolment->save($enrolmentData);
-
             $courseinfo_id = $this->courseinfo->where('id', $data['courseinfo_id'])->first();
-            $apiKey = 'A1001CP4sm20m1yh7NLt2iEDUZYorWLzZ6yignkaLKh560H16+a5s4AhwtKq6H1lAGHyUW';
-            $apiPassword = 'MMbKrf8u';
+            $amount = Session::put('amount', $courseinfo_id->course_fee);
+            $apiKey = env('APIKEY');
+            $apiPassword = env('PASSWORD');
             $apiEndpoint = \Eway\Rapid\Client::MODE_SANDBOX;
             $client = \Eway\Rapid::createClient($apiKey, $apiPassword, $apiEndpoint);
-
-            
-
-           $transaction = [
+            $transaction = [
                 'Customer' => [
                 'FirstName' => $student_detail->full_name,
                 'LastName' => 'Smith',
@@ -142,16 +141,13 @@ class EnrolmentController extends Controller
                 'CancelUrl' => route('enrolmentstudent.cancel'),
                 'TransactionType' => \Eway\Rapid\Enum\TransactionType::PURCHASE,
                 'Payment' => [
-                'TotalAmount' =>$courseinfo_id->course_fee,
+                'TotalAmount' =>$courseinfo_id->course_fee."00",
                 ]
                 ];
            
-                // Submit data to eWAY to get a Shared Page URL
                 $response = $client->createTransaction(\Eway\Rapid\Enum\ApiMethod::RESPONSIVE_SHARED, $transaction);
-            
-                // Check for any errors
-                if (!$response->getErrors()) {
 
+                if (!$response->getErrors()) {
                 $sharedURL = $response->SharedPaymentUrl;
                 $enrolpaymentData = array(
                 'enrolment_id'=>$enrolment->id,
@@ -169,10 +165,10 @@ class EnrolmentController extends Controller
            
            alertify()->success('Course Information Created Successfully');
           return redirect(route('enrolment.viewUser'));
-        // }
-        //   catch(\Throwable $e){
-        //     alertify($e->getMessage())->error();
-        // }
+        }
+          catch(\Throwable $e){
+            alertify($e->getMessage())->error();
+        }
         
         return redirect(route('enrolment.viewUser'));
     }
@@ -185,28 +181,20 @@ class EnrolmentController extends Controller
     public function redirect($id)
     {   
         $id = (int)$id;
-        $enrolpayment = $this->enrolpayment->where('enrolment_id', $id)->first();
-
-        $apiKey = 'A1001CP4sm20m1yh7NLt2iEDUZYorWLzZ6yignkaLKh560H16+a5s4AhwtKq6H1lAGHyUW';
-        $apiPassword = 'MMbKrf8u';
+        $enrolpayment_info = $this->enrolpayment->with('enrolmentinfo')->where('enrolment_id', $id)->first();
+        $apiKey = env('APIKEY');
+        $apiPassword = env('PASSWORD');
         $apiEndpoint = \Eway\Rapid\Client::MODE_SANDBOX;
-
-        // Create the eWAY Client
         $client = \Eway\Rapid::createClient($apiKey, $apiPassword, $apiEndpoint);
-
-        // Query the transaction result.
         $response = $client->queryTransaction($_GET['AccessCode']);
-
         $transactionResponse = $response->Transactions[0];
-
-        // Display the transaction result
         if ($transactionResponse->TransactionStatus) {
              $customer = json_decode($transactionResponse->Customer);
              $customer = json_encode($customer);
 
              $shippingAddress = json_decode($transactionResponse->ShippingAddress);
              $shippingAddress = json_encode($shippingAddress);
-
+             $totalAmount = Session::get('amount');
             
             $enrolpaymentData = array(
                 'transactionID'=>$transactionResponse->TransactionID,
@@ -217,7 +205,16 @@ class EnrolmentController extends Controller
               
                  );   
                
-           $enrolpayment = $this->enrolpayment->update($enrolpayment->id, $enrolpaymentData);
+           $enrolpayment = $this->enrolpayment->update($enrolpayment_info->id, $enrolpaymentData);
+
+           
+
+           $studentPaymentData = array(
+                'student_id'=>$enrolpayment_info->enrolmentinfo->student_id,
+                'courseinfo_id'=>$enrolpayment_info->enrolmentinfo->courseinfo_id,
+                'enrolment_payment_id'=>$enrolpayment_info->id);      
+           $studentpayment = $this->studentpayment->save($studentPaymentData);
+
        
         'Payment successful! ID: ' .$transactionResponse->TransactionID;
         return redirect(route('enrolmentstudent.sucess', $transactionResponse->TransactionID));

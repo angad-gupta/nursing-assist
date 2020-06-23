@@ -11,7 +11,8 @@ class StudentPayment extends Model
     protected $fillable = [
 
     	'student_id',
-    	'courseinfo_id'
+    	'courseinfo_id',
+        'enrolment_payment_id'
 
     ];
 
@@ -21,6 +22,10 @@ class StudentPayment extends Model
 
     public function courseInfo(){
         return $this->belongsTo(CourseInfo::class,'courseinfo_id','id');
+    }
+
+     public function enrolmentPaymentInfo(){
+        return $this->belongsTo(EnrolPayment::class,'enrolment_payment_id','id');
     }
 
 }
