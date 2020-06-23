@@ -41,6 +41,9 @@
                     <td>{{ $value->lesson_title }}</td>
                     <td>
 
+                        @if($value->is_related_to_quiz == 1)
+                            <a class="btn bg-teal btn-icon rounded-round" href="{{ route('quiz.index') }}" data-popup="tooltip" data-placement="bottom" data-original-title="Course Quiz"><i class="icon-brain"></i></a>
+                        @endif
                          <a class="btn bg-success btn-icon rounded-round" href="{{ route('courseplan.index',['course_content_id'=>$value->id]) }}" data-popup="tooltip" data-placement="bottom" data-original-title="Course Plan Setup"><i class="icon-book"></i></a>
 
                         <a class="btn bg-info btn-icon rounded-round" href="{{ route('coursecontent.edit',$value->id) }}" data-popup="tooltip" data-placement="bottom" data-original-title="Edit Course Info"><i class="icon-pencil"></i></a>

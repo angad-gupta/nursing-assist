@@ -7,15 +7,18 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
 use App\Modules\Quiz\Repositories\QuizInterface;
+use App\Modules\CourseContent\Repositories\CourseContentInterface;
 
 class QuizController extends Controller
 {
 
     protected $quiz;
+    protected $coursecontent;
     
-    public function __construct(QuizInterface $quiz)
+    public function __construct(QuizInterface $quiz,CourseContentInterface $coursecontent)
     {
         $this->quiz = $quiz;
+        $this->coursecontent = $coursecontent;
     }
 
     /**
@@ -37,6 +40,7 @@ class QuizController extends Controller
     public function create()
     {  
         $data['is_edit'] = false;
+        $data['course_lesson'] =  $this->coursecontent->getList();
         return view('quiz::quiz.create',$data);
     }
 
@@ -75,7 +79,8 @@ class QuizController extends Controller
     public function edit($id)
     {
         $data['is_edit'] = true;
-        $data['quiz'] = $this->quiz->find($id);    
+        $data['quiz'] = $this->quiz->find($id); 
+        $data['course_lesson'] =  $this->coursecontent->getList();   
         return view('quiz::quiz.edit',$data);
     }
 

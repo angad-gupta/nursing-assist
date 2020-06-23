@@ -41,12 +41,29 @@
                 <label class="col-form-label col-lg-3">Lesson Title:<span class="text-danger">*</span></label>
                     <div class="col-lg-9">
                        <div class="input-group">
-                        
+                         <span class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-bookmarks"></i></span>
+                        </span>
                         {!! Form::text('lesson_title', $value = null, ['placeholder'=>'Enter Lesson Title','class'=>'lesson_title form-control']) !!}
                         </div>
                     </div>
             </div>
         </div>
+
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-form-label col-lg-3">Is Related To Quiz ?:<span class="text-danger">*</span></label>
+                    <div class="col-lg-9">
+                       <div class="input-group">
+                         <span class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-bookmarks"></i></span>
+                        </span>
+                            {!! Form::select('is_related_to_quiz',['1'=>'Yes', '0'=>'No'], $value = null, ['id'=>'is_related_to_quiz','class'=>'is_related_to_quiz form-control', 'placeholder'=>'-Select Any-']) !!}   
+                        </div>
+                    </div>
+            </div>
+        </div>
+
     </div>
 
     <div class="row">
@@ -57,7 +74,7 @@
                         <h5>Lesson Summary</h5>
                         <div class="input-group">
                        
-                         {!! Form::textarea('lesson_summary', null, ['id' => 'lesson_summary','placeholder'=>'Enter Leave Summary', 'class' =>'form-control simple_full_textarea_description']) !!}
+                         {!! Form::textarea('lesson_summary', null, ['id' => 'lesson_summary','placeholder'=>'Enter Leave Summary', 'class' =>'form-control textarea_description']) !!}
 
                         </div>
                     </div>
@@ -65,6 +82,7 @@
             </div>
         </div>
     </div>
+
 
   <div class="row">
 
