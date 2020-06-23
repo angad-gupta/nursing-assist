@@ -27,7 +27,7 @@ class CourseSubTopicController extends Controller
         $search = $request->all();
         $course_content_id = $search['course_content_id'];
         $course_plan_id = $search['course_plan_id'];
-        $data['coursesubtopic'] = $this->coursesubtopic->findAll($course_plan_id,$limit= 10, $search); 
+        $data['coursesubtopic'] = $this->coursesubtopic->findAll($course_plan_id,$limit= 50, $search); 
         $data['search_value']=$search;
         $data['course_content_id']=$course_content_id;
         $data['course_plan_id']=$course_plan_id;
