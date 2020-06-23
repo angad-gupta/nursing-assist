@@ -1,28 +1,29 @@
 @include('home::layouts.navbar-inner')
 @section('scripts')
-<script type="text/javascript">
-     $("#btn").click(function() {
+<script type="text/javascript">    
+
+    $("#btn").click(function() {
         if(document.getElementById("file").value != "") {
             return true;
         }
          else{
-          alert('Please upload the eligble document.');
-           return false;
+           alert('Please upload the eligble document.');
+           gotothen();
          }
-        });
+        });      
 
-      $("#btn_second").click(function() {
+     $("#btn_second").click(function() {
         if(document.getElementById("file_second").value != "") {
             return true;
         }
          else{
           alert('Please upload the identity document.');
-           return false;
+          gotothen();
          }
         });
-
 </script>
-@endsection 
+@endsection
+
 <section class="neta-ribbon">
     <img src="{{ asset('img/bg.png') }}" class="img-fluid" alt="">
     <div class="container">
