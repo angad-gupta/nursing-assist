@@ -17,8 +17,9 @@ class CourseContent extends Model
     	'syllabus_id',
     	'lesson_title',
     	'lesson_summary',
+        'is_related_to_quiz',
     	'content_type',
-    	'content_path'
+    	'content_path' 
 
     ];
 

@@ -66,7 +66,7 @@ class QuizRepository implements QuizInterface
             
 
         })
-            ->where('category','=','Demo')->inRandomOrder()->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+            ->where('category','=','Demo')->orWhere('set_for_demo','=','1')->inRandomOrder()->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
 
         return $result; 
     }

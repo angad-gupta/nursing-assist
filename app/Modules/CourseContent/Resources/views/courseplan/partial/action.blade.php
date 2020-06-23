@@ -28,7 +28,7 @@
                         <h5>Course Plan Description</h5>
                         <div class="input-group">
                        
-                         {!! Form::textarea('plan_description', null, ['id' => 'plan_description','placeholder'=>'Enter Course Plan Description', 'class' =>'form-control simple_full_textarea_description']) !!}
+                         {!! Form::textarea('plan_description', null, ['id' => 'plan_description','placeholder'=>'Enter Course Plan Description', 'class' =>'form-control textarea_description']) !!}
 
                         </div>
                     </div>

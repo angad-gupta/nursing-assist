@@ -3,7 +3,7 @@
 
     <div class="row">
 
-        <div class="col-md-6">
+        <div class="col-md-6"> 
             <div class="form-group row">
                 <label class="col-form-label col-lg-4">Select Category:<span class="text-danger">*</span></label>
                     <div class="col-lg-8">
@@ -18,7 +18,7 @@
             </div>
         </div>
 
-          <div class="col-md-6">
+          <div class="col-md-6 set_quiz_demo">
             <div class="form-group row">
                 <label class="col-form-label col-lg-4">Select Quiz Section:<span class="text-danger">*</span></label>
                     <div class="col-lg-8">
@@ -27,6 +27,41 @@
                             <span class="input-group-text"><i class="icon-toggle"></i></span>
                         </span>
                           {!! Form::select('quiz_section',[ 'Mockup'=>'Mockup','Practise'=>'Practise'], $value = null, ['placeholder'=>'Select Quiz Section','id'=>'quiz_section','class'=>'form-control' ]) !!}   
+
+                        </div>
+                    </div>
+            </div>
+        </div>
+       
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6"> 
+            <div class="form-group row">
+                <label class="col-form-label col-lg-4">Select Course Lesson:<span class="text-danger">*</span></label>
+                    <div class="col-lg-8">
+                       <div class="input-group">
+                        <span class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-toggle"></i></span>
+                        </span>
+                           {!! Form::select('course_content_id',$course_lesson, $value = null, ['id'=>'course_content_id','class'=>'course_content_id form-control','placeholder'=>'Select Course Lesson']) !!}
+
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+          <div class="col-md-6 set_quiz_demo">
+            <div class="form-group row">
+                <label class="col-form-label col-lg-4">Set Quiz For Demo:<span class="text-danger">*</span></label>
+                    <div class="col-lg-8">
+                       <div class="input-group">
+                        <span class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-toggle"></i></span>
+                        </span>
+                          {!! Form::select('set_for_demo',[ '1'=>'Yes','0'=>'No'], $value = null, ['placeholder'=>'Select Quiz Section','id'=>'set_for_demo','class'=>'form-control' ]) !!}   
 
                         </div>
                     </div>
@@ -228,9 +263,22 @@
             }
         });      
 
+        $('#category').on('change',function(){
+
+            var category = $(this).val();
+
+            if(category == 'Demo'){
+                $('.set_quiz_demo').hide();
+                $('#quiz_section').val('');
+                $('#set_for_demo').val(0);
+
+            }else{
+                $('.set_quiz_demo').show();
+            }
+        });
+
+        $('#category').trigger('change');
+
     });
 
  </script>
-
-
-   

@@ -10,6 +10,8 @@ class Quiz extends Model
 
     	'category',
         'quiz_section',
+        'course_content_id',
+        'set_for_demo',
     	'question',
     	'question_type', 
         'option_1',
