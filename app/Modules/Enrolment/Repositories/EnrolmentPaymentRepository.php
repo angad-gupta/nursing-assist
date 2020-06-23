@@ -2,14 +2,14 @@
 
 namespace App\Modules\Enrolment\Repositories;
 
-use App\Modules\Enrolment\Entities\Enrolment;
+use App\Modules\Enrolment\Entities\EnrolPayment;
 
 
-class EnrolmentRepository implements EnrolmentInterface
+class EnrolmentPaymentRepository implements EnrolmentPaymentInterface
 {
     public function findAll($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1])
     {
-         $result =Enrolment::when(array_keys($filter, true), function ($query) use ($filter) {
+         $result =EnrolPayment::when(array_keys($filter, true), function ($query) use ($filter) {
         
             
         })
@@ -21,44 +21,54 @@ class EnrolmentRepository implements EnrolmentInterface
 
     public function find($id)
     {
-        return Enrolment::find($id);
+        return EnrolPayment::find($id);
     }
 
     public function getList()
     {
-        $result = Enrolment::pluck('first_name', 'id');
+        $result = EnrolPayment::pluck('first_name', 'id');
         return $result;
     }
 
     public function save($data)
     {
-        return Enrolment::create($data);
+        return EnrolPayment::create($data);
     }
 
     public function update($id, $data)
     {
-        $result = Enrolment::find($id);
+
+        $result = EnrolPayment::find($id);
         return $result->update($data);
     }
 
     public function delete($id)
     {
-        return Enrolment::destroy($id);
+        return EnrolPayment::destroy($id);
     }
 
     public function countTotal(){
-        return Enrolment::count();
+        return EnrolPayment::count();
     }
      public function upload($file){
         
         $imageName = $file->getClientOriginalName();
         $fileName = date('Y-m-d-h-i-s') . '-' . preg_replace('[ ]', '-', $imageName);
 
-        $file->move(public_path() . Enrolment::FILE_PATH, $fileName);
+        $file->move(public_path() . EnrolPayment::FILE_PATH, $fileName);
 
         return $fileName;
    }
 
+     public function where($field, $value)
+    {
+        return EnrolPayment::where($field, $value);
+    }
+
+    public function with($with = [])
+    {
+        return EnrolPayment::with($with);
+    }
      
 
 

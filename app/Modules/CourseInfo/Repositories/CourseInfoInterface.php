@@ -36,4 +36,6 @@ interface CourseInfoInterface
 
     public function getCourseInfoByCourse($id);
 
+    public function where($field, $value);
+
 }

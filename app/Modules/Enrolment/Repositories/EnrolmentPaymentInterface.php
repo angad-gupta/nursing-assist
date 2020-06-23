@@ -2,7 +2,7 @@
 
 namespace App\Modules\Enrolment\Repositories;
 
-interface EnrolmentInterface
+interface EnrolmentPaymentInterface
 {
     public function findAll($limit=null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
 
@@ -19,5 +19,9 @@ interface EnrolmentInterface
     public function countTotal();
 
      public function upload($file);
+
+     public function where($field, $value);
+     
+     public function with($with = []);
 
 }

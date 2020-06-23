@@ -12,6 +12,7 @@
         "berkayk/onesignal-laravel": "^1.0",
         "darkaonline/l5-swagger": "5.7.*",
         "doctrine/dbal": "^2.9",
+        "eway/eway-rapid-php": "^1.3",
         "fideloper/proxy": "^4.0",
         "laracasts/flash": "^3.0",
         "laravel/framework": "5.7.*",
@@ -54,9 +55,6 @@
         "classmap": [
             "database/seeds",
             "database/factories"
-        ],
-        "files": [
-            "app/helpers.php"
         ]
     },
     "autoload-dev": {

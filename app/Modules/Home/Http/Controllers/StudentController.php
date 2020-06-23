@@ -10,14 +10,20 @@ use Illuminate\Support\Facades\Hash;
 
 use App\Modules\Home\Http\Requests\StudentLoginFormRequest;
 use App\Modules\Student\Repositories\StudentInterface;
+use App\Modules\CourseInfo\Repositories\CourseInfoInterface;
+use App\Modules\Course\Repositories\CourseInterface;
 
 class StudentController extends Controller
 {
     protected $student;
+    protected $courseinfo;
+    protected $course;
     
-    public function __construct(StudentInterface $student)
+    public function __construct(StudentInterface $student,CourseInfoInterface $courseinfo, CourseInterface $course)
     {
         $this->student = $student;
+        $this->courseinfo = $courseinfo;
+        $this->course = $course;
     }
 
      public function studentLogin()
@@ -45,6 +51,8 @@ class StudentController extends Controller
             $input = $request->all();
             $data['course_info_id'] = $input['course_info_id'];
 
+            $data['courseinfo'] = $this->courseinfo->where('id', $data['course_info_id'])->first();
+          
              return view('home::enrolment',$data);
         } else {
             return redirect(route('student-account'));

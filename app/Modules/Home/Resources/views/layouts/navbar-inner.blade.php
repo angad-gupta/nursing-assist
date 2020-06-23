@@ -1,4 +1,3 @@
-
 <head>
     <title>NETA</title>
     <meta charset="UTF-8">
