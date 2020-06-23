@@ -105,8 +105,7 @@ class CourseContentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->all();  //dd($data);
-
+        $data = $request->all();  
          try{ 
 
             if ($request->hasFile('content_image_path')) {

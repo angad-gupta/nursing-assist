@@ -43,7 +43,7 @@
 
         /*---------------------------- TINYMCE EDITOR ---------------------------*/
         tinymce.init({
-            selector: ".textarea_description", theme: "modern", width: 680, height: 300,
+            selector: ".textarea_description", theme: "modern", width: 1600, height: 600,
             plugins: [
                 "advlist autolink link image lists charmap print preview hr anchor pagebreak",
                 "searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking",
@@ -55,7 +55,7 @@
             image_advtab: true,
             relative_urls: false,
             external_filemanager_path: "/tinymce/file_manager/filemanager/",
-            filemanager_title: "Responsive Filemanager",
+            filemanager_title: "Responsive Filemanager", 
             external_plugins: {"filemanager": "file_manager/filemanager/plugin.min.js"}
         });
     });
