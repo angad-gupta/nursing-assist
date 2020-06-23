@@ -85,7 +85,7 @@ class EnrolmentController extends Controller
          }
          $student_detail = auth()->guard('student')->user();
          $data['student_id'] = $student_detail->id;
-         try{
+         // try{
 
              $enrolmentData = array(
                 'student_id'=>$data['student_id'],
@@ -158,10 +158,10 @@ class EnrolmentController extends Controller
 
            alertify()->success('Course Information Created Successfully');
           return redirect(route('enrolment.viewUser'));
-        }
-          catch(\Throwable $e){
-            alertify($e->getMessage())->error();
-        }
+        // }
+        //   catch(\Throwable $e){
+        //     alertify($e->getMessage())->error();
+        // }
 
         return redirect(route('enrolment.viewUser'));
     }
