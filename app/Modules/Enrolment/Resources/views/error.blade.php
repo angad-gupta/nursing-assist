@@ -22,7 +22,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-7">
-            <h2 class="ttl-line">Error!! Your transaction id is {{ $transaction_id }}
+            <h2 class="ttl-line">Error!! Your transaction id is cancelled.
                 </h2>
      
         </div>

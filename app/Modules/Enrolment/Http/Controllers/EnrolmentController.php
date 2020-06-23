@@ -150,7 +150,8 @@ class EnrolmentController extends Controller
                 return Redirect::to($sharedURL);
                 } else {
                 foreach ($response->getErrors() as $error) {
-                 echo "Error: ".\Eway\Rapid::getMessage($error)."";
+                    return redirect(route('enrolment.viewUser'));
+                 // echo "Error: ".\Eway\Rapid::getMessage($error)."";
                 }
                 die();
                 }
@@ -216,8 +217,8 @@ class EnrolmentController extends Controller
          {
         $errors = split(', ', $transactionResponse->ResponseMessage);
         foreach ($errors as $error) {
-        echo "Payment failed: " .\Eway\Rapid::getMessage($error)."
-        ";
+          return redirect(route('enrolment.viewUser'));
+        // echo "Payment failed: " .\Eway\Rapid::getMessage($error)."";
         }
         }
     }

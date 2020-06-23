@@ -33,7 +33,6 @@ $("#btn").click(function() {
 
 @endsection 
 
-@endsection
 
 <section class="neta-ribbon">
     <img src="{{ asset('img/bg.png') }}" class="img-fluid" alt="">
