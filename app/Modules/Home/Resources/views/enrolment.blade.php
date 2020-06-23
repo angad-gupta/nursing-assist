@@ -1,15 +1,17 @@
 @include('home::layouts.navbar-inner')
 @section('scripts')
 <script type="text/javascript">
+   
      $("#btn").click(function() {
         if(document.getElementById("file").value != "") {
             return true;
         }
          else{
-          alert('Please upload the eligble document.');
-           return false;
+           alert('Please upload the eligble document.');
+           gotothen();
          }
         });
+ 
 
       $("#btn_second").click(function() {
         if(document.getElementById("file_second").value != "") {
@@ -17,11 +19,14 @@
         }
          else{
           alert('Please upload the identity document.');
-           return false;
+          gotothen();
          }
         });
 
+
+
 </script>
+
 @endsection 
 <section class="neta-ribbon">
     <img src="{{ asset('img/bg.png') }}" class="img-fluid" alt="">
@@ -31,7 +36,7 @@
                 <div class="col-sm-12">
                     <h1 class="mb-0">Enrolment</h1>
                     <ul class="list-unstyled d-flex">
-                        <li> <a href="#">Home /</a></li>
+                        <li> <a href="{{ route('home') }}">Home /</a></li>
                         <li> <a href="#">Enrolment</a></li>
                     </ul>
                 </div>
