@@ -67,7 +67,11 @@
 </div>
 <div class="col-12">
     <span class="float-right pagination align-self-end mt-3">
-        {{ $courseplan->links() }}
+         @php
+            $params = array('course_content_id' => $course_content_id);
+        @endphp
+        {{ $courseplan->appends($params)->links() }}
+
     </span>
 </div>
 </div>

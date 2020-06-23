@@ -29,7 +29,7 @@ class CoursePlanController extends Controller
     {
         $search = $request->all();
         $course_content_id = $search['course_content_id'];
-        $data['courseplan'] = $this->courseplan->findAll($course_content_id,$limit= 10, $search); 
+        $data['courseplan'] = $this->courseplan->findAll($course_content_id,$limit= 50, $search); 
         $data['search_value']=$search;
         $data['course_content_id']=$course_content_id;
         return view('coursecontent::courseplan.index',$data);

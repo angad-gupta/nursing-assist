@@ -38,7 +38,7 @@ class CourseContentController extends Controller
     public function index(Request $request)
     {
         $search = $request->all();
-        $data['coursecontent'] = $this->coursecontent->findAll($limit= 10, $search); 
+        $data['coursecontent'] = $this->coursecontent->findAll($limit= 50, $search); 
         $data['search_value']=$search;
         return view('coursecontent::coursecontent.index',$data);
     }
