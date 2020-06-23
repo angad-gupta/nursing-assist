@@ -3,7 +3,7 @@ namespace Barryvdh\Debugbar\DataCollector;
 
 use Barryvdh\Debugbar\DataFormatter\SimpleFormatter;
 use DebugBar\DataCollector\TimeDataCollector;
-use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Events\Dispatcher;
 use Illuminate\Support\Str;
 use Symfony\Component\VarDumper\Cloner\VarCloner;
 
@@ -12,20 +12,16 @@ class EventCollector extends TimeDataCollector
     /** @var Dispatcher */
     protected $events;
 
-    /** @var integer */
-    protected $previousTime;
-
     public function __construct($requestStartTime = null)
     {
         parent::__construct($requestStartTime);
-        $this->previousTime = microtime(true);
         $this->setDataFormatter(new SimpleFormatter());
     }
 
     public function onWildcardEvent($name = null, $data = [])
     {
         $params = $this->prepareParams($data);
-        $currentTime = microtime(true);
+        $time = microtime(true);
 
         // Find all listeners for the current event
         foreach ($this->events->getListeners($name) as $i => $listener) {
@@ -61,8 +57,7 @@ class EventCollector extends TimeDataCollector
 
             $params['listeners.' . $i] = $listener;
         }
-        $this->addMeasure($name, $this->previousTime, $currentTime, $params);
-        $this->previousTime = $currentTime;
+        $this->addMeasure($name, $time, $time, $params);
     }
 
     public function subscribe(Dispatcher $events)

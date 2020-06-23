@@ -76,9 +76,10 @@ const createClass = component => class extends Component {
   }
 }
 
-const Fallback = ({ 
-  name // eslint-disable-line react/prop-types
-}) => <div className="fallback">😱 <i>Could not render { name === "t" ? "this component" : name }, see the console.</i></div>
+const Fallback = ({ name }) => <div style={{ // eslint-disable-line react/prop-types
+    padding: "1em",
+    "color": "#aaa"
+  }}>😱 <i>Could not render { name === "t" ? "this component" : name }, see the console.</i></div>
 
 const wrapRender = (component) => {
   const isStateless = component => !(component.prototype && component.prototype.isReactComponent)
@@ -99,20 +100,16 @@ const wrapRender = (component) => {
   return target
 }
 
-export const getComponent = (getSystem, getStore, getComponents, componentName, container, config = {}) => {
+
+export const getComponent = (getSystem, getStore, getComponents, componentName, container) => {
 
   if(typeof componentName !== "string")
     throw new TypeError("Need a string, to fetch a component. Was given a " + typeof componentName)
 
-    // getComponent has a config object as a third, optional parameter
-    // using the config object requires the presence of the second parameter, container
-    // e.g. getComponent("JsonSchema_string_whatever", false, { failSilently: true })
   let component = getComponents(componentName)
 
   if(!component) {
-    if (!config.failSilently) {
-      getSystem().log.warn("Could not find component:", componentName)
-    }
+    getSystem().log.warn("Could not find component", componentName)
     return null
   }
 

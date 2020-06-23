@@ -3,7 +3,7 @@ import { Map, List } from "immutable"
 import PropTypes from "prop-types"
 import ImPropTypes from "react-immutable-proptypes"
 import win from "core/window"
-import { getSampleSchema, getExtensions, getCommonExtensions, numberToString, stringify, isEmptyValue } from "core/utils"
+import { getSampleSchema, getExtensions, getCommonExtensions, numberToString, stringify } from "core/utils"
 import getParameterSchema from "../../helpers/get-parameter-schema.js"
 
 export default class ParameterRow extends Component {
@@ -42,7 +42,7 @@ export default class ParameterRow extends Component {
 
     if(isOAS3) {
       let { schema } = getParameterSchema(parameterWithMeta, { isOAS3 })
-      enumValue = schema ? schema.get("enum") : undefined
+      enumValue = schema.get("enum")
     } else {
       enumValue = parameterWithMeta ? parameterWithMeta.get("enum") : undefined
     }
@@ -59,7 +59,7 @@ export default class ParameterRow extends Component {
     if ( value !== undefined && value !== paramValue ) {
       this.onChangeWrapper(numberToString(value))
     }
-    // todo: could check if schema here; if not, do not call. impact?
+
     this.setDefaultValue()
   }
 
@@ -97,17 +97,17 @@ export default class ParameterRow extends Component {
     let { specSelectors, pathMethod, rawParam, oas3Selectors } = this.props
 
     const paramWithMeta = specSelectors.parameterWithMetaByIdentity(pathMethod, rawParam) || Map()
+
     const { schema } = getParameterSchema(paramWithMeta, { isOAS3: specSelectors.isOAS3() })
+
     const parameterMediaType = paramWithMeta
       .get("content", Map())
       .keySeq()
       .first()
-
-    // getSampleSchema could return null
-    const generatedSampleValue = schema ? getSampleSchema(schema.toJS(), parameterMediaType, {
-
+    
+    const generatedSampleValue = getSampleSchema(schema.toJS(), parameterMediaType, {
       includeWriteOnly: true
-    }) : null
+    })
 
     if (!paramWithMeta || paramWithMeta.get("value") !== undefined) {
       return
@@ -121,14 +121,14 @@ export default class ParameterRow extends Component {
       if (specSelectors.isSwagger2()) {
         initialValue = paramWithMeta.get("x-example")
           || paramWithMeta.getIn(["schema", "example"])
-          || (schema && schema.getIn(["default"]))
+          || schema.getIn(["default"])
       } else if (specSelectors.isOAS3()) {
         const currentExampleKey = oas3Selectors.activeExamplesMember(...pathMethod, "parameters", this.getParamKey())
         initialValue = paramWithMeta.getIn(["examples", currentExampleKey, "value"])
           || paramWithMeta.getIn(["content", parameterMediaType, "example"])
           || paramWithMeta.get("example")
-          || (schema && schema.get("example"))
-          || (schema && schema.get("default"))
+          || schema.get("example")
+          || schema.get("default")
           || paramWithMeta.get("default") // ensures support for `parameterMacro`
       }
 
@@ -144,8 +144,8 @@ export default class ParameterRow extends Component {
       if(initialValue !== undefined) {
         this.onChangeWrapper(initialValue)
       } else if(
-        schema && schema.get("type") === "object"
-        && generatedSampleValue
+        schema.get("type") === "object" 
+        && generatedSampleValue 
         && !paramWithMeta.get("examples")
       ) {
         // Object parameters get special treatment.. if the user doesn't set any
@@ -203,7 +203,7 @@ export default class ParameterRow extends Component {
       />
 
     const ModelExample = getComponent("modelExample")
-    const Markdown = getComponent("Markdown", true)
+    const Markdown = getComponent("Markdown")
     const ParameterExt = getComponent("ParameterExt")
     const ParameterIncludeEmpty = getComponent("ParameterIncludeEmpty")
     const ExamplesSelectValueRetainer = getComponent("ExamplesSelectValueRetainer")
@@ -212,15 +212,15 @@ export default class ParameterRow extends Component {
     let { schema } = getParameterSchema(param, { isOAS3 })
     let paramWithMeta = specSelectors.parameterWithMetaByIdentity(pathMethod, rawParam) || Map()
 
-    let format = schema ? schema.get("format") : null
-    let type = schema ? schema.get("type") : null
-    let itemType = schema ? schema.getIn(["items", "type"]) : null
+    let format = param.get("format")
+    let type = schema.get("type")
     let isFormData = inType === "formData"
     let isFormDataSupported = "FormData" in win
     let required = param.get("required")
+    let itemType = schema.getIn(["items", "type"])
 
     let value = paramWithMeta ? paramWithMeta.get("value") : ""
-    let commonExt = showCommonExtensions ? getCommonExtensions(schema) : null
+    let commonExt = showCommonExtensions ? getCommonExtensions(param) : null
     let extensions = showExtensions ? getExtensions(param) : null
 
     let paramItems // undefined
@@ -229,26 +229,24 @@ export default class ParameterRow extends Component {
     let paramExample // undefined
     let isDisplayParamEnum = false
 
-    if ( param !== undefined && schema ) {
+    if ( param !== undefined ) {
       paramItems = schema.get("items")
     }
 
     if (paramItems !== undefined) {
       paramEnum = paramItems.get("enum")
       paramDefaultValue = paramItems.get("default")
-    } else if (schema) {
+    } else {
       paramEnum = schema.get("enum")
     }
 
-    if ( paramEnum && paramEnum.size && paramEnum.size > 0) {
+    if ( paramEnum !== undefined && paramEnum.size > 0) {
       isDisplayParamEnum = true
     }
 
     // Default and Example Value for readonly doc
     if ( param !== undefined ) {
-      if (schema) {
-        paramDefaultValue = schema.get("default")
-      }
+      paramDefaultValue = schema.get("default")
       if (paramDefaultValue === undefined) {
         paramDefaultValue = param.get("default")
       }
@@ -263,7 +261,7 @@ export default class ParameterRow extends Component {
         <td className="parameters-col_name">
           <div className={required ? "parameter__name required" : "parameter__name"}>
             { param.get("name") }
-            { !required ? null : <span>&nbsp;*</span> }
+            { !required ? null : <span style={{color: "red"}}>&nbsp;*</span> }
           </div>
           <div className="parameter__type">
             { type }
@@ -291,11 +289,6 @@ export default class ParameterRow extends Component {
 
           { (bodyParam || !isExecute) && paramDefaultValue !== undefined ?
             <Markdown className="parameter__default" source={"<i>Default value</i> : " + paramDefaultValue}/>
-            : null
-          }
-
-          { (bodyParam || !isExecute) && paramExample !== undefined ?
-            <Markdown source={"<i>Example</i> : " + paramExample}/>
             : null
           }
 
@@ -337,17 +330,17 @@ export default class ParameterRow extends Component {
                                                 isExecute={ isExecute }
                                                 specSelectors={ specSelectors }
                                                 schema={ schema }
-                                                example={ bodyParam }
-                                                includeWriteOnly={ true }/>
+                                                example={ bodyParam }/>
               : null
           }
 
           {
-            !bodyParam && isExecute && param.get("allowEmptyValue") ?
+            !bodyParam && isExecute ?
             <ParameterIncludeEmpty
               onChange={this.onChangeIncludeEmpty}
               isIncluded={specSelectors.parameterInclusionSettingFor(pathMethod, param.get("name"), param.get("in"))}
-              isDisabled={!isEmptyValue(value)} />
+              isDisabled={value && value.size !== 0}
+              param={param} />
             : null
           }
 
@@ -371,3 +364,4 @@ export default class ParameterRow extends Component {
   }
 
 }
+

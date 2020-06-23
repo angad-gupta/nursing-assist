@@ -44,7 +44,7 @@ export default class OperationTag extends React.Component {
     const isDeepLinkingEnabled = deepLinking && deepLinking !== "false"
 
     const Collapse = getComponent("Collapse")
-    const Markdown = getComponent("Markdown", true)
+    const Markdown = getComponent("Markdown")
     const DeepLink = getComponent("DeepLink")
     const Link = getComponent("Link")
 

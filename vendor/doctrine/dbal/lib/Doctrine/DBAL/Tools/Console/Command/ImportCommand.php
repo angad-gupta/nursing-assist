@@ -28,7 +28,9 @@ use function sprintf;
  */
 class ImportCommand extends Command
 {
-    /** @return void */
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $this

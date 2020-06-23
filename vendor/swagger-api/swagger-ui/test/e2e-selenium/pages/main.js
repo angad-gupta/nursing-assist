@@ -70,18 +70,6 @@ module.exports = {
         authorizationUrl: {
           selector: ".auth-container code"
         },
-        readPetsScope: {
-          selector: "input[data-value='read:pets']"
-        },
-        writePetsScope: {
-          selector: "input[data-value='write:pets']"
-        },
-        selectAllScopes: {
-          selector: ".auth-container h2 a[data-all]"
-        },
-        selectNoneScopes: {
-          selector: ".auth-container h2 a:not([data-all])"
-        },
         flow: {
           selector: ".flow code"
         },

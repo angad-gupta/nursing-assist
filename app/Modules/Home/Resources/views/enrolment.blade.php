@@ -1,8 +1,10 @@
 @include('home::layouts.navbar-inner')
 @section('scripts')
+<<<<<<< HEAD
 <script type="text/javascript">
    
-     $("#btn").click(function() {
+$("#btn").click(function() {
+
         if(document.getElementById("file").value != "") {
             return true;
         }
@@ -10,10 +12,12 @@
            alert('Please upload the eligble document.');
            gotothen();
          }
+
         });
  
 
-      $("#btn_second").click(function() {
+
+     $("#btn_second").click(function() {
         if(document.getElementById("file_second").value != "") {
             return true;
         }
@@ -28,6 +32,9 @@
 </script>
 
 @endsection 
+
+@endsection
+
 <section class="neta-ribbon">
     <img src="{{ asset('img/bg.png') }}" class="img-fluid" alt="">
     <div class="container">

@@ -140,8 +140,6 @@ class Configuration
      * @see   getAutoCommit
      *
      * @param bool $autoCommit True to enable auto-commit mode; false to disable it.
-     *
-     * @return void
      */
     public function setAutoCommit($autoCommit)
     {

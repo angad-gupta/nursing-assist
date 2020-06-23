@@ -107,8 +107,6 @@ class AnnotationReader implements Reader
         // PHP CodeSniffer
         'codingStandardsIgnoreStart' => true,
         'codingStandardsIgnoreEnd' => true,
-        // PHPStan
-        'template' => true, 'implements' => true, 'extends' => true, 'use' => true,
     ];
 
     /**
@@ -194,8 +192,7 @@ class AnnotationReader implements Reader
             throw AnnotationException::optimizerPlusSaveComments();
         }
 
-        // Make sure that the IgnoreAnnotation annotation is loaded
-        class_exists(IgnoreAnnotation::class);
+        AnnotationRegistry::registerFile(__DIR__ . '/Annotation/IgnoreAnnotation.php');
 
         $this->parser = $parser ?: new DocParser();
 

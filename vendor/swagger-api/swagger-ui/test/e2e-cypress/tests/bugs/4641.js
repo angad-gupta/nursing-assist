@@ -1,8 +1,10 @@
 const clickTryItOutAndExecute = () => {
   return cy
-    .get(".btn.try-out__btn") // expand "try it out"
+    .get(".opblock-summary")
     .click()
-    .get(".btn.execute") // execute request
+    .get(".try-out > .btn") // expand "try it out"
+    .click()
+    .get(".execute-wrapper > .btn") // excecute request
     .click()
 }
 
@@ -42,13 +44,12 @@ describe("#4641: The Logout button in Authorize popup not clearing API Key", () 
       .within(fillInApiKeyAndAuthorise("my_api_key"))
       .get(".close-modal") // close authorise popup button
       .click()
-      .get("#operations-default-get_4641_1") // expand the route details onClick
-      .click()
+      .get("#operations-default-get_4641_1") // expand the route details
       .within(clickTryItOutAndExecute)
-      .wait("@request")
+      .get("@request")
       .its("request")
-      .then((req) => {
-        expect(req.headers, "request headers").to.have.property("api_key_1", "my_api_key")
+      .should(request => {
+        expect(request.headers).to.have.property("api_key_1", "my_api_key")
       })
   })
 
@@ -63,13 +64,12 @@ describe("#4641: The Logout button in Authorize popup not clearing API Key", () 
       .within(clickLogoutAndReauthorise)
       .get(".close-modal") // close authorise popup button
       .click()
-      .get("#operations-default-get_4641_1") // expand the route details onClick
-      .click()
+      .get("#operations-default-get_4641_1") // expand the route details
       .within(clickTryItOutAndExecute)
-      .wait("@request")
+      .get("@request")
       .its("request")
-      .then((req) => {
-        expect(req.headers, "request headers").not.to.have.property("api_key_1")
+      .should(request => {
+        expect(request.headers).not.to.have.property("api_key_1")
       })
   })
 
@@ -86,14 +86,13 @@ describe("#4641: The Logout button in Authorize popup not clearing API Key", () 
       .within(clickLogoutAndReauthorise)
       .get(".close-modal") // close authorise popup button
       .click()
-      .get("#operations-default-get_4641_2") // expand the route details onClick
-      .click()
+      .get("#operations-default-get_4641_2") // expand the route details
       .within(clickTryItOutAndExecute)
-      .wait("@request")
+      .get("@request")
       .its("request")
-      .then((req) => {
-        expect(req.headers, "request headers").not.to.have.property("api_key_1")
-        expect(req.headers, "request headers").to.have.property("api_key_2", "my_second_api_key")
+      .should(request => {
+        expect(request.headers).not.to.have.property("api_key_1")
+        expect(request.headers).to.have.property("api_key_2", "my_second_api_key")
       })
   })
 })

@@ -19,14 +19,12 @@ export default class ObjectModel extends Component {
     isRef: PropTypes.bool,
     expandDepth: PropTypes.number,
     depth: PropTypes.number,
-    specPath: ImPropTypes.list.isRequired,
-    includeReadOnly: PropTypes.bool,
-    includeWriteOnly: PropTypes.bool,
+    specPath: ImPropTypes.list.isRequired
   }
 
   render(){
     let { schema, name, displayName, isRef, getComponent, getConfigs, depth, onToggle, expanded, specPath, ...otherProps } = this.props
-    let { specSelectors,expandDepth, includeReadOnly, includeWriteOnly} = otherProps
+    let { specSelectors,expandDepth } = otherProps
     const { isOAS3 } = specSelectors
 
     if(!schema) {
@@ -42,7 +40,7 @@ export default class ObjectModel extends Component {
     let requiredProperties = schema.get("required")
 
     const JumpToPath = getComponent("JumpToPath", true)
-    const Markdown = getComponent("Markdown", true)
+    const Markdown = getComponent("Markdown")
     const Model = getComponent("Model")
     const ModelCollapse = getComponent("ModelCollapse")
 
@@ -81,39 +79,28 @@ export default class ObjectModel extends Component {
             {
               <table className="model"><tbody>
               {
-                !description ? null : <tr className="description">
-                    <td>description:</td>
+                !description ? null : <tr style={{ color: "#666", fontWeight: "normal" }}>
+                    <td style={{ fontWeight: "bold" }}>description:</td>
                     <td>
                       <Markdown source={ description } />
                     </td>
                   </tr>
               }
               {
-                !(properties && properties.size) ? null : properties.entrySeq().filter(
-                    ([, value]) => {
-                      return (!value.get("readOnly") || includeReadOnly) &&
-                        (!value.get("writeOnly") || includeWriteOnly)
-                    }
-                ).map(
+                !(properties && properties.size) ? null : properties.entrySeq().map(
                     ([key, value]) => {
                       let isDeprecated = isOAS3() && value.get("deprecated")
                       let isRequired = List.isList(requiredProperties) && requiredProperties.contains(key)
-
-                      let classNames = ["property-row"]
-
-                      if (isDeprecated) {
-                        classNames.push("deprecated")
+                      let propertyStyle = { verticalAlign: "top", paddingRight: "0.2em" }
+                      if ( isRequired ) {
+                        propertyStyle.fontWeight = "bold"
                       }
 
-                      if (isRequired) {
-                        classNames.push("required")
-                      }
-
-                      return (<tr key={key} className={classNames.join(" ")}>
-                        <td>
-                          { key }{ isRequired && <span className="star">*</span> }
+                      return (<tr key={key} className={isDeprecated && "deprecated"}>
+                        <td style={ propertyStyle }>
+                          { key }{ isRequired && <span style={{ color: "red" }}>*</span> }
                         </td>
-                        <td>
+                        <td style={{ verticalAlign: "top" }}>
                           <Model key={ `object-${name}-${key}_${value}` } { ...otherProps }
                                  required={ isRequired }
                                  getComponent={ getComponent }
@@ -127,7 +114,7 @@ export default class ObjectModel extends Component {
               }
               {
                 // empty row befor extensions...
-                !showExtensions ? null : <tr><td>&nbsp;</td></tr>
+                !showExtensions ? null : <tr>&nbsp;</tr>
               }
               {
                 !showExtensions ? null :
@@ -139,11 +126,11 @@ export default class ObjectModel extends Component {
 
                       const normalizedValue = !value ? null : value.toJS ? value.toJS() : value
 
-                      return (<tr key={key} className="extension">
+                      return (<tr key={key} style={{ color: "#777" }}>
                         <td>
                           { key }
                         </td>
-                        <td>
+                        <td style={{ verticalAlign: "top" }}>
                           { JSON.stringify(normalizedValue) }
                         </td>
                       </tr>)

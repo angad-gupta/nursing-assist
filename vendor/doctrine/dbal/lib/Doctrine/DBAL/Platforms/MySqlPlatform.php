@@ -175,10 +175,7 @@ class MySqlPlatform extends AbstractPlatform
     }
 
     /**
-     * @param string      $table
-     * @param string|null $database
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getListTableForeignKeysSQL($table, $database = null)
     {

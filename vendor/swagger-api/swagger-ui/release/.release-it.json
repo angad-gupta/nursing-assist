@@ -1,12 +1,12 @@
 {
-  "hooks": {
-    "before:bump": [
+  "scripts": {
+    "beforeBump": [
       "./release/check-for-breaking-changes.sh ${latestVersion} ${version}",
       "npm update swagger-client",
       "npm test"
     ],
-    "after:bump": ["npm run build"],
-    "after:release": "export GIT_TAG=v${version} && echo GIT_TAG=v${version} > release/.version"
+    "beforeStage": ["npm run build"],
+    "afterRelease": "export GIT_TAG=v${version} && echo GIT_TAG=v${version} > release/.version"
   },
   "git": {
     "requireUpstream": false,

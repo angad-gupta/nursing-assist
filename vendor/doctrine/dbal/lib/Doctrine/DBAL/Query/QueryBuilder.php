@@ -3,7 +3,7 @@
 namespace Doctrine\DBAL\Query;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver\ResultStatement;
+use Doctrine\DBAL\Driver\Statement;
 use Doctrine\DBAL\ParameterType;
 use Doctrine\DBAL\Query\Expression\CompositeExpression;
 use Doctrine\DBAL\Query\Expression\ExpressionBuilder;
@@ -118,9 +118,9 @@ class QueryBuilder
     private $firstResult = null;
 
     /**
-     * The maximum number of results to retrieve or NULL to retrieve all results.
+     * The maximum number of results to retrieve.
      *
-     * @var int|null
+     * @var int
      */
     private $maxResults = null;
 
@@ -198,7 +198,7 @@ class QueryBuilder
      * Uses {@see Connection::executeQuery} for select statements and {@see Connection::executeUpdate}
      * for insert, update and delete statements.
      *
-     * @return ResultStatement|int
+     * @return Statement|int
      */
     public function execute()
     {
@@ -367,6 +367,7 @@ class QueryBuilder
 
     /**
      * Gets the position of the first result the query object was set to retrieve (the "offset").
+     * Returns NULL if {@link setFirstResult} was not applied to this QueryBuilder.
      *
      * @return int The position of the first result.
      */
@@ -378,7 +379,7 @@ class QueryBuilder
     /**
      * Sets the maximum number of results to retrieve (the "limit").
      *
-     * @param int|null $maxResults The maximum number of results to retrieve or NULL to retrieve all results.
+     * @param int $maxResults The maximum number of results to retrieve.
      *
      * @return $this This QueryBuilder instance.
      */
@@ -392,7 +393,7 @@ class QueryBuilder
 
     /**
      * Gets the maximum number of results the query object was set to retrieve (the "limit").
-     * Returns NULL if all results will be returned.
+     * Returns NULL if {@link setMaxResults} was not applied to this query builder.
      *
      * @return int The maximum number of results.
      */
@@ -1174,7 +1175,7 @@ class QueryBuilder
      *
      * @throws QueryException
      */
-    private function verifyAllAliasesAreKnown(array $knownAliases) : void
+    private function verifyAllAliasesAreKnown(array $knownAliases)
     {
         foreach ($this->sqlParts['join'] as $fromAlias => $joins) {
             if (! isset($knownAliases[$fromAlias])) {
@@ -1326,11 +1327,9 @@ class QueryBuilder
                 if (array_key_exists($join['joinAlias'], $knownAliases)) {
                     throw QueryException::nonUniqueAlias($join['joinAlias'], array_keys($knownAliases));
                 }
-                $sql .= ' ' . strtoupper($join['joinType'])
-                    . ' JOIN ' . $join['joinTable'] . ' ' . $join['joinAlias'];
-                if ($join['joinCondition'] !== null) {
-                    $sql .= ' ON ' . $join['joinCondition'];
-                }
+                $sql                             .= ' ' . strtoupper($join['joinType'])
+                    . ' JOIN ' . $join['joinTable'] . ' ' . $join['joinAlias']
+                    . ' ON ' . ((string) $join['joinCondition']);
                 $knownAliases[$join['joinAlias']] = true;
             }
 

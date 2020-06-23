@@ -55,9 +55,7 @@ class SqlitePlatform extends AbstractPlatform
     }
 
     /**
-     * @param string $type
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getNowExpression($type = 'timestamp')
     {
@@ -168,11 +166,11 @@ class SqlitePlatform extends AbstractPlatform
     {
         switch ($level) {
             case TransactionIsolationLevel::READ_UNCOMMITTED:
-                return '0';
+                return 0;
             case TransactionIsolationLevel::READ_COMMITTED:
             case TransactionIsolationLevel::REPEATABLE_READ:
             case TransactionIsolationLevel::SERIALIZABLE:
-                return '1';
+                return 1;
             default:
                 return parent::_getTransactionIsolationLevelSQL($level);
         }
@@ -224,9 +222,7 @@ class SqlitePlatform extends AbstractPlatform
     }
 
     /**
-     * @param array<string, mixed> $field
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getTinyIntTypeDeclarationSql(array $field)
     {
@@ -252,9 +248,7 @@ class SqlitePlatform extends AbstractPlatform
     }
 
     /**
-     * @param array<string, mixed> $field
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getMediumIntTypeDeclarationSql(array $field)
     {
@@ -606,7 +600,7 @@ class SqlitePlatform extends AbstractPlatform
     /**
      * {@inheritDoc}
      */
-    public function getForUpdateSQL()
+    public function getForUpdateSql()
     {
         return '';
     }
@@ -807,8 +801,6 @@ class SqlitePlatform extends AbstractPlatform
 
     /**
      * {@inheritDoc}
-     *
-     * @param int|null $createFlags
      */
     public function getCreateTableSQL(Table $table, $createFlags = null)
     {
@@ -818,10 +810,7 @@ class SqlitePlatform extends AbstractPlatform
     }
 
     /**
-     * @param string      $table
-     * @param string|null $database
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getListTableForeignKeysSQL($table, $database = null)
     {

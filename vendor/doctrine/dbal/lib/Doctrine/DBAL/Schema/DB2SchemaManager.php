@@ -178,9 +178,7 @@ class DB2SchemaManager extends AbstractSchemaManager
     }
 
     /**
-     * @param string $def
-     *
-     * @return string|null
+     * {@inheritdoc}
      */
     protected function _getPortableForeignKeyRuleDef($def)
     {
@@ -222,10 +220,7 @@ class DB2SchemaManager extends AbstractSchemaManager
         $sql      = $platform->getListTableCommentsSQL($tableName);
 
         $tableOptions = $this->_conn->fetchAssoc($sql);
-
-        if ($tableOptions !== false) {
-            $table->addOption('comment', $tableOptions['REMARKS']);
-        }
+        $table->addOption('comment', $tableOptions['REMARKS']);
 
         return $table;
     }

@@ -17,6 +17,7 @@ use function explode;
 use function extension_loaded;
 use function get_class;
 use function html_entity_decode;
+use function ini_get;
 use function ini_set;
 use function is_array;
 use function is_object;
@@ -54,11 +55,14 @@ final class Dumper
      */
     public static function dump($var, int $maxDepth = 2) : string
     {
-        $html = ini_set('html_errors', '1');
-        assert(is_string($html));
+        $html = ini_get('html_errors');
+
+        if ($html !== true) {
+            ini_set('html_errors', true);
+        }
 
         if (extension_loaded('xdebug')) {
-            ini_set('xdebug.var_display_max_depth', (string) $maxDepth);
+            ini_set('xdebug.var_display_max_depth', $maxDepth);
         }
 
         $var = self::export($var, $maxDepth);

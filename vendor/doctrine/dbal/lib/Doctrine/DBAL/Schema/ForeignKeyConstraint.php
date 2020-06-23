@@ -233,7 +233,7 @@ class ForeignKeyConstraint extends AbstractAsset implements Constraint
         $position = strrpos($name, '.');
 
         if ($position !== false) {
-            $name = substr($name, $position + 1);
+            $name = substr($name, $position);
         }
 
         return strtolower($name);
@@ -365,7 +365,7 @@ class ForeignKeyConstraint extends AbstractAsset implements Constraint
             }
         }
 
-        return null;
+        return false;
     }
 
     /**

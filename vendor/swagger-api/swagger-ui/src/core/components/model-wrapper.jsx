@@ -15,20 +15,13 @@ export default class ModelWrapper extends Component {
     specSelectors: PropTypes.object.isRequired,
     expandDepth: PropTypes.number,
     layoutActions: PropTypes.object,
-    layoutSelectors: PropTypes.object.isRequired,
-    includeReadOnly: PropTypes.bool,
-    includeWriteOnly: PropTypes.bool,
-  }
-
-  getSchemaBasePath = () => {
-    const isOAS3 = this.props.specSelectors.isOAS3()
-    return isOAS3 ? ["components", "schemas"] : ["definitions"]
+    layoutSelectors: PropTypes.object.isRequired
   }
 
   onToggle = (name,isShown) => {
     // If this prop is present, we'll have deepLinking for it
     if(this.props.layoutActions) {
-      this.props.layoutActions.show([...this.getSchemaBasePath(), name],isShown)
+      this.props.layoutActions.show(["models", name],isShown)
     }
   }
 

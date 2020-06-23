@@ -22,9 +22,6 @@ use function preg_replace;
 use function spl_object_hash;
 use function sprintf;
 
-/**
- * @psalm-immutable
- */
 class DBALException extends Exception
 {
     /**
@@ -160,7 +157,7 @@ class DBALException extends Exception
     /**
      * @return self
      */
-    private static function wrapException(Driver $driver, Throwable $driverEx, string $msg)
+    private static function wrapException(Driver $driver, Throwable $driverEx, $msg)
     {
         if ($driverEx instanceof DriverException) {
             return $driverEx;

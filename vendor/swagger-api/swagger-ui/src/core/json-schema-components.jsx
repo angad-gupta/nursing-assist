@@ -45,38 +45,30 @@ export class JsonSchemaForm extends Component {
 
   render() {
     let { schema, errors, value, onChange, getComponent, fn, disabled } = this.props
-    const format = schema && schema.get ? schema.get("format") : null
-    const type = schema && schema.get ? schema.get("type") : null
 
-    let getComponentSilently = (name) => getComponent(name, false, { failSilently: true })
-    let Comp = type ? format ?
-      getComponentSilently(`JsonSchema_${type}_${format}`) :
-      getComponentSilently(`JsonSchema_${type}`) :
-      getComponent("JsonSchema_string")
-    if (!Comp) {
-      Comp = getComponent("JsonSchema_string")
-    }
+    if(schema.toJS)
+      schema = schema.toJS()
+
+    let { type, format="" } = schema
+
+    let Comp = (format ? getComponent(`JsonSchema_${type}_${format}`) : getComponent(`JsonSchema_${type}`)) || getComponent("JsonSchema_string")
     return <Comp { ...this.props } errors={errors} fn={fn} getComponent={getComponent} value={value} onChange={onChange} schema={schema} disabled={disabled}/>
   }
+
 }
 
 export class JsonSchema_string extends Component {
   static propTypes = JsonSchemaPropShape
   static defaultProps = JsonSchemaDefaultProps
   onChange = (e) => {
-    const value = this.props.schema && this.props.schema.get("type") === "file" ? e.target.files[0] : e.target.value
+    const value = this.props.schema["type"] === "file" ? e.target.files[0] : e.target.value
     this.props.onChange(value, this.props.keyName)
   }
   onEnumChange = (val) => this.props.onChange(val)
   render() {
     let { getComponent, value, schema, errors, required, description, disabled } = this.props
-    const enumValue = schema && schema.get ? schema.get("enum") : null
-    const format = schema && schema.get ? schema.get("format") : null
-    const type = schema && schema.get ? schema.get("type") : null
-    const schemaIn = schema && schema.get ? schema.get("in") : null
-    if (!value) {
-      value = "" // value should not be null; this fixes a Debounce error
-    }
+    let enumValue = schema["enum"]
+
     errors = errors.toJS ? errors.toJS() : []
 
     if ( enumValue ) {
@@ -90,30 +82,26 @@ export class JsonSchema_string extends Component {
                       onChange={ this.onEnumChange }/>)
     }
 
-    const isDisabled = disabled || (schemaIn && schemaIn === "formData" && !("FormData" in window))
+    const isDisabled = disabled || (schema["in"] === "formData" && !("FormData" in window))
     const Input = getComponent("Input")
-    if (type && type === "file") {
-      return (
-        <Input type="file"
-          className={errors.length ? "invalid" : ""}
-          title={errors.length ? errors : ""}
-          onChange={this.onChange}
-          disabled={isDisabled} />
-      )
+    if (schema["type"] === "file") {
+      return (<Input type="file"
+                     className={ errors.length ? "invalid" : ""}
+                     title={ errors.length ? errors : ""}
+                     onChange={ this.onChange }
+                     disabled={isDisabled}/>)
     }
     else {
-      return (
-        <DebounceInput
-          type={format && format === "password" ? "password" : "text"}
-          className={errors.length ? "invalid" : ""}
-          title={errors.length ? errors : ""}
-          value={value}
-          minLength={0}
-          debounceTimeout={350}
-          placeholder={description}
-          onChange={this.onChange}
-          disabled={isDisabled} />
-      )
+      return (<DebounceInput
+                     type={ schema.format === "password" ? "password" : "text" }
+                     className={ errors.length ? "invalid" : ""}
+                     title={ errors.length ? errors : ""}
+                     value={value}
+                     minLength={0}
+                     debounceTimeout={350}
+                     placeholder={description}
+                     onChange={ this.onChange }
+                     disabled={isDisabled}/>)
     }
   }
 }
@@ -125,35 +113,35 @@ export class JsonSchema_array extends PureComponent {
 
   constructor(props, context) {
     super(props, context)
-    this.state = { value: valueOrEmptyList(props.value) }
+    this.state = { value: valueOrEmptyList(props.value)}
   }
 
   componentWillReceiveProps(props) {
     if(props.value !== this.state.value)
-      this.setState({ value: props.value })
+      this.setState({value: props.value})
   }
 
-  onChange = () => {
-    this.props.onChange(this.state.value)
-  }
+  onChange = () => this.props.onChange(this.state.value)
 
   onItemChange = (itemVal, i) => {
-    this.setState(({ value }) => ({
-      value: value.set(i, itemVal)
+    this.setState(state => ({
+      value: state.value.set(i, itemVal)
     }), this.onChange)
   }
 
   removeItem = (i) => {
-    this.setState(({ value }) => ({
-      value: value.delete(i)
+    this.setState(state => ({
+      value: state.value.remove(i)
     }), this.onChange)
   }
- 
+
   addItem = () => {
-    let newValue = valueOrEmptyList(this.state.value)
-    this.setState(() => ({
-      value: newValue.push("")
-    }), this.onChange)
+    this.setState(state => {
+      state.value = valueOrEmptyList(state.value)
+      return {
+        value: state.value.push("")
+      }
+    }, this.onChange)
   }
 
   onEnumChange = (value) => {
@@ -166,148 +154,66 @@ export class JsonSchema_array extends PureComponent {
     let { getComponent, required, schema, errors, fn, disabled } = this.props
 
     errors = errors.toJS ? errors.toJS() : []
-    const value = this.state.value // expect Im List
-    const shouldRenderValue =
-      value && value.count && value.count() > 0 ? true : false
-    const schemaItemsEnum = schema.getIn(["items", "enum"])
-    const schemaItemsType = schema.getIn(["items", "type"])
-    const schemaItemsFormat = schema.getIn(["items", "format"])
-    const schemaItemsSchema = schema.getIn(["items", "schema"])
-    let ArrayItemsComponent
-    let isArrayItemText = false
-    let isArrayItemFile = (schemaItemsType === "file" || (schemaItemsType === "string" && schemaItemsFormat === "binary")) ? true : false
-    if (schemaItemsType && schemaItemsFormat) {
-      ArrayItemsComponent = getComponent(`JsonSchema_${schemaItemsType}_${schemaItemsFormat}`)
-    } else if (schemaItemsType === "boolean" || schemaItemsType === "array" || schemaItemsType === "object") {
-      ArrayItemsComponent = getComponent(`JsonSchema_${schemaItemsType}`)
-    }
-    // if ArrayItemsComponent not assigned or does not exist,
-    // use default schemaItemsType === "string" & JsonSchemaArrayItemText component
-    if (!ArrayItemsComponent && !isArrayItemFile) {
-      isArrayItemText = true
-    }
 
-    if ( schemaItemsEnum ) {
+    let itemSchema = fn.inferSchema(schema.items)
+
+    const JsonSchemaForm = getComponent("JsonSchemaForm")
+    const Button = getComponent("Button")
+
+    let enumValue = itemSchema["enum"]
+    let value = this.state.value
+
+    if ( enumValue ) {
       const Select = getComponent("Select")
       return (<Select className={ errors.length ? "invalid" : ""}
                       title={ errors.length ? errors : ""}
                       multiple={ true }
                       value={ value }
                       disabled={disabled}
-                      allowedValues={ schemaItemsEnum }
+                      allowedValues={ enumValue }
                       allowEmptyValue={ !required }
                       onChange={ this.onEnumChange }/>)
     }
 
-    const Button = getComponent("Button")
     return (
       <div className="json-schema-array">
-        {shouldRenderValue ?
-          (value.map((item, i) => {
-            if (errors.length) {
+        { !value || !value.count || value.count() < 1 ? null :
+          value.map( (item,i) => {
+            let schema = Object.assign({}, itemSchema)
+            if ( errors.length ) {
               let err = errors.filter((err) => err.index === i)
-              if (err.length) errors = [err[0].error + i]
+              if (err.length) errors = [ err[0].error + i ]
             }
-            return (
-              <div key={i} className="json-schema-form-item">
-                {
-                  isArrayItemFile ?
-                    <JsonSchemaArrayItemFile
-                    value={item}
-                    onChange={(val)=> this.onItemChange(val, i)}
-                    disabled={disabled}
-                    errors={errors}
-                    getComponent={getComponent}
-                    />
-                    : isArrayItemText ?
-                      <JsonSchemaArrayItemText
-                        value={item}
-                        onChange={(val) => this.onItemChange(val, i)}
-                        disabled={disabled}
-                        errors={errors}
-                      />
-                      : <ArrayItemsComponent {...this.props}
-                        value={item}
-                        onChange={(val) => this.onItemChange(val, i)}
-                        disabled={disabled}
-                        errors={errors}
-                        schema={schemaItemsSchema}
-                        getComponent={getComponent}
-                        fn={fn}
-                      />
-                }
-                {!disabled ? (
-                  <Button
-                    className="btn btn-sm json-schema-form-item-remove"
-                    onClick={() => this.removeItem(i)}
-                  > - </Button>
-                ) : null}
-              </div>
+          return (
+            <div key={i} className="json-schema-form-item">
+              <JsonSchemaForm 
+                fn={fn}
+                getComponent={getComponent}
+                value={item}
+                onChange={(val) => this.onItemChange(val, i)}
+                schema={schema}
+                disabled={disabled}
+              />
+              { !disabled ? (
+                <Button
+                  className="btn btn-sm json-schema-form-item-remove"
+                  onClick={()=> this.removeItem(i)}
+                > - </Button>
+              ) : null }
+            </div>
             )
-          })
-          ) : null
+          }).toArray()
         }
-        {!disabled ? (
+        { !disabled ? (
           <Button
             className={`btn btn-sm json-schema-form-item-add ${errors.length ? "invalid" : null}`}
             onClick={this.addItem}
           >
             Add item
           </Button>
-        ) : null}
+        ) : null }
       </div>
     )
-  }
-}
-
-export class JsonSchemaArrayItemText extends Component {
-  static propTypes = JsonSchemaPropShape
-  static defaultProps = JsonSchemaDefaultProps
-
-  onChange = (e) => {
-    const value = e.target.value
-    this.props.onChange(value, this.props.keyName)
-  }
-
-  render() {
-    let { value, errors, description, disabled } = this.props
-    if (!value) {
-      value = "" // value should not be null
-    }
-    errors = errors.toJS ? errors.toJS() : []
-
-    return (<DebounceInput
-      type={"text"}
-      className={errors.length ? "invalid" : ""}
-      title={errors.length ? errors : ""}
-      value={value}
-      minLength={0}
-      debounceTimeout={350}
-      placeholder={description}
-      onChange={this.onChange}
-      disabled={disabled} />)
-  }
-}
-
-export class JsonSchemaArrayItemFile extends Component {
-  static propTypes = JsonSchemaPropShape
-  static defaultProps = JsonSchemaDefaultProps
-
-  onFileChange = (e) => {
-    const value = e.target.files[0]
-    this.props.onChange(value, this.props.keyName)
-  }
-
-  render() {
-    let { getComponent, errors, disabled } = this.props
-    const Input = getComponent("Input")
-    const isDisabled = disabled || !("FormData" in window)
-
-    return (<Input type="file"
-      className={errors.length ? "invalid" : ""}
-      title={errors.length ? errors : ""}
-      onChange={this.onFileChange}
-      disabled={isDisabled} />)
   }
 }
 
@@ -319,19 +225,15 @@ export class JsonSchema_boolean extends Component {
   render() {
     let { getComponent, value, errors, schema, required, disabled } = this.props
     errors = errors.toJS ? errors.toJS() : []
-    let enumValue = schema && schema.get ? schema.get("enum") : null
-    if (!enumValue) {
-      // in case schema.get() also returns undefined/null
-      enumValue = fromJS(["true", "false"])
-    }
+
     const Select = getComponent("Select")
 
     return (<Select className={ errors.length ? "invalid" : ""}
                     title={ errors.length ? errors : ""}
                     value={ String(value) }
-                    disabled={ disabled }
-                    allowedValues={ enumValue }
-                    allowEmptyValue={ !required }
+                    disabled={disabled}
+                    allowedValues={ fromJS(schema.enum || ["true", "false"]) }
+                    allowEmptyValue={ !schema.enum || !required }
                     onChange={ this.onEnumChange }/>)
   }
 }

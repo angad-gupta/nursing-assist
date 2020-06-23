@@ -300,8 +300,6 @@ class Table extends AbstractAsset
      * @param string $oldColumnName
      * @param string $newColumnName
      *
-     * @return void
-     *
      * @throws DBALException
      */
     public function renameColumn($oldColumnName, $newColumnName)

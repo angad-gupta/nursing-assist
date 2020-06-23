@@ -69,8 +69,6 @@ class PostgreSqlPlatform extends AbstractPlatform
      * Enables use of 'true'/'false' or otherwise 1 and 0 instead.
      *
      * @param bool $flag
-     *
-     * @return void
      */
     public function setUseBooleanTrueFalseStrings($flag)
     {
@@ -279,10 +277,7 @@ class PostgreSqlPlatform extends AbstractPlatform
     }
 
     /**
-     * @param string      $table
-     * @param string|null $database
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getListTableForeignKeysSQL($table, $database = null)
     {
@@ -372,7 +367,7 @@ SQL
             [$schema, $table] = explode('.', $table);
             $schema           = $this->quoteStringLiteral($schema);
         } else {
-            $schema = 'ANY(current_schemas(false))';
+            $schema = "ANY(string_to_array((select replace(replace(setting,'\"\$user\"',user),' ','') from pg_catalog.pg_settings where name = 'search_path'),','))";
         }
 
         $table = new Identifier($table);

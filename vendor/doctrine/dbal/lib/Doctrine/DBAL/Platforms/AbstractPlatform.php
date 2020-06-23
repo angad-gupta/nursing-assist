@@ -156,8 +156,6 @@ abstract class AbstractPlatform
 
     /**
      * Sets the EventManager used by the Platform.
-     *
-     * @return void
      */
     public function setEventManager(EventManager $eventManager)
     {
@@ -392,8 +390,6 @@ abstract class AbstractPlatform
      *
      * @param string $dbType
      * @param string $doctrineType
-     *
-     * @return void
      *
      * @throws DBALException If the type is not found.
      */
@@ -3294,8 +3290,6 @@ abstract class AbstractPlatform
 
     /**
      * @deprecated
-     *
-     * @return string
      *
      * @todo Remove in 3.0
      */
