@@ -268,15 +268,17 @@
             var category = $(this).val();
 
             if(category == 'Demo'){
-                $('.set_quiz_demo').show();
-            }else{
                 $('.set_quiz_demo').hide();
+                $('#quiz_section').val('');
+                $('#set_for_demo').val(0);
+
+            }else{
+                $('.set_quiz_demo').show();
             }
         });
+
+        $('#category').trigger('change');
 
     });
 
  </script>
-
-
-   

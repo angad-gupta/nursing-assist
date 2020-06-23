@@ -28,7 +28,6 @@ class QuizController extends Controller
     public function index(Request $request)
     {
         $search = $request->all();
-        //$course_content_id = $search['course_content_id'];
         $data['quiz'] = $this->quiz->findAll($limit= 10, $search); 
         $data['search_value']=$search;
         return view('quiz::quiz.index',$data);
@@ -80,7 +79,8 @@ class QuizController extends Controller
     public function edit($id)
     {
         $data['is_edit'] = true;
-        $data['quiz'] = $this->quiz->find($id);    
+        $data['quiz'] = $this->quiz->find($id); 
+        $data['course_lesson'] =  $this->coursecontent->getList();   
         return view('quiz::quiz.edit',$data);
     }
 
