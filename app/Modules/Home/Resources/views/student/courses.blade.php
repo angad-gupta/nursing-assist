@@ -83,7 +83,7 @@
                                     <div class="list-content">
                                     <h5>{{ $course_val->course_program_title }}</h5>
                                     <span>{{$total_syllabus}}  syllabus</span>
-                                     <p>{!! optional($my_course_val->courseInfo)->short_content !!} </p>
+                                     <p>{!! optional($course_val->courseInfo)->short_content !!} </p>
                                     <button class="btn e-btn"><a href="{{ route('enrolment',['course_info_id'=>$course_val->id]) }}">Enroll</a></button>
                                     </div>
                                 </div>
