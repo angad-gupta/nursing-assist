@@ -56,5 +56,15 @@ class CourseContentRepository implements CourseContentInterface
         return $fileName;
    }
 
+    public function getAllCourses($id){ 
+         return CourseContent::select('syllabus_id')->where('course_info_id','=',$id)->groupBy('syllabus_id')->get();
+    }
+
+    public function getAllLesson($courseinfoid, $syllabiid){
+        return CourseContent::where('course_info_id','=',$courseinfoid)->where('syllabus_id','=',$syllabiid)->orderBy('id','ASC')->get();
+    }
+
+
+
 
 }

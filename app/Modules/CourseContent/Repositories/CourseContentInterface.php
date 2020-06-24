@@ -18,5 +18,9 @@ interface CourseContentInterface
     public function delete($id);
 
     public function upload($file);
+
+    public function getAllCourses($id);
+
+    public function getAllLesson($courseinfoid, $syllabiid);
     
 }

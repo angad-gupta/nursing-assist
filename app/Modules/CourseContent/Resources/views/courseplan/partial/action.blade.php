@@ -64,6 +64,10 @@
 
         $videoType = (($is_edit) && ($courseplan->plan_type == 'video')) ? 'style=display:block;' : 'style=display:none;';
         $linkType = (($is_edit) && ($courseplan->plan_type == 'link')) ? 'style=display:block;' : 'style=display:none;';
+
+        $videopath = (($is_edit) && ($courseplan->plan_type == 'video')) ? $courseplan->plan_path : '';
+        $linkpath = (($is_edit) && ($courseplan->plan_type == 'link')) ? $courseplan->plan_path : '';
+   
    
         @endphp
         <div class="col-md-6 course_link" {{$linkType}}>
@@ -74,7 +78,7 @@
                         <span class="input-group-prepend">
                             <span class="input-group-text"><i class="icon-bookmarks"></i></span>
                         </span>
-                        {!! Form::text('plan_path', $value = null, ['placeholder'=>'Enter Course Material Title','class'=>'plan_path form-control']) !!}
+                        {!! Form::text('plan_link_path', $value = $linkpath, ['placeholder'=>'Enter Course Material Title','class'=>'plan_path form-control']) !!}
                         </div>
                     </div>
             </div>
@@ -88,7 +92,7 @@
                         <span class="input-group-prepend">
                             <span class="input-group-text"><i class="icon-bookmarks"></i></span>
                         </span>
-                        {!! Form::text('plan_path', $value = null, ['placeholder'=>'Enter Course Material Title','class'=>'plan_path form-control']) !!}
+                        {!! Form::text('plan_video_path', $value = $videopath, ['placeholder'=>'Enter Course Material Title','class'=>'plan_path form-control']) !!}
                         </div>
                     </div>
             </div>

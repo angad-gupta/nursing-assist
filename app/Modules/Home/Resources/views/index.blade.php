@@ -18,7 +18,7 @@
 	
 </head>
 <body>
-
+ 
 @php
     $setting = App\Modules\Setting\Entities\Setting::getSetting(); 
     $courseInfo = App\Modules\Course\Entities\Course::GetAllCourses();
@@ -173,13 +173,26 @@
                             <h2>${{$course_enrol->course_fee}}</h2>
                             <span>({{$course_enrol->payment_mode }})</span>
                             <button class="btn w-100"><a href="{{ route('enrolment',['course_info_id'=>$course_enrol->id]) }}">Enroll</a></button>
-                            <button class="btn w-100 demo"><a href="{{ route('demo-quiz') }}">Take a Demo</a></button>
                         </div>
                     </div>
              	@endforeach
              @endif    
  </div>
 </div>
+</section>
+
+
+<section class="neta-download neta-demo">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+                <p>Learn by taking a Demo Quiz! This quiz will give you a signal of how much you know, or do not know, about Related Courses.</p>
+            </div>
+            <div class="col-sm-4">
+                <button class="btn btn-neta float-right"><a href="{{ route('demo-quiz') }}">Take a Demo Quiz</a></button>
+            </div>
+        </div>
+    </div>
 </section>
 
 <section class="neta-courses">

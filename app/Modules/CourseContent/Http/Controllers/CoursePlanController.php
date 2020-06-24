@@ -54,9 +54,17 @@ class CoursePlanController extends Controller
      */
     public function store(Request $request)
     {
-         $data = $request->all(); 
+        $data = $request->all(); 
 
-         $course_content_id = $data['course_content_id'];
+        $course_content_id = $data['course_content_id'];
+
+        $plan_type = $data['plan_type'];
+
+         if($plan_type == 'video'){
+            $data['plan_path'] = $data['plan_video_path'];
+         }else if($plan_type == 'link'){
+            $data['plan_path'] = $data['plan_link_path'];
+         }
 
          try{ 
 
@@ -103,6 +111,15 @@ class CoursePlanController extends Controller
     {
         $data = $request->all(); 
         $course_content_id = $data['course_content_id'];
+
+         $plan_type = $data['plan_type'];
+
+         if($plan_type == 'video'){
+            $data['plan_path'] = $data['plan_video_path'];
+         }else if($plan_type == 'link'){
+            $data['plan_path'] = $data['plan_link_path'];
+         }
+         
          try{ 
 
             if ($request->hasFile('content_image_path')) {

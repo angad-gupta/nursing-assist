@@ -28,4 +28,8 @@ class CourseSubTopic extends Model
         return $this->belongsTo(CoursePlan::class,'course_plan_id','id');
     }
 
+    static function getAllSubtopic($planid){
+        return CourseSubTopic::where('course_plan_id', '=', $planid)->orderBy('id','ASC')->get();
+    }
+
 }

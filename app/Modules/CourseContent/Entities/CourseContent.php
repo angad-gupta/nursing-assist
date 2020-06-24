@@ -42,4 +42,12 @@ class CourseContent extends Model
         return $this->belongsTo(Syllabus::class,'syllabus_id','id');
     }
 
+    static function gettotalsyllabus($couseinfoid){
+        return CourseContent::where('course_info_id', '=', $couseinfoid)->groupBy('syllabus_id')->count();
+    }
+
+    static function gettotallesson($syllabus_id,$course_info_id){
+        return CourseContent::where('syllabus_id', '=', $syllabus_id)->where('course_info_id', '=', $course_info_id)->count();
+    }
+
 }

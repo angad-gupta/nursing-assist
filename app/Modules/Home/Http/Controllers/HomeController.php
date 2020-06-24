@@ -225,13 +225,25 @@ class HomeController extends Controller
     }
 
     public function studentAccount(Request $request){
-         $input = $request->all(); 
+         $input = $request->all();
 
-        if (Auth::guard('student')->check()) {
-             return redirect()->intended(route('student-dashboard'));
+         $course_info_id = (array_key_exists('course_info_id', $input)) ? $input['course_info_id'] : '';
+
+        if (Auth::guard('student')->check()) { 
+             return redirect(route('student-dashboard'));
         }
 
-         $data['message'] = ($input) ? $input['message'] : FALSE;
+         $data['message'] = (array_key_exists('message', $input)) ? $input['message'] : FALSE; 
+
+         $data['course_info_id'] = $course_info_id;
+
+         if((array_key_exists('source', $input) AND $input['source'] == 'course')){
+                $data['source'] = 'course';
+         }else if((array_key_exists('source', $input) AND $input['source'] == 'enrol')){
+                $data['source'] = 'enrol';
+         }else{
+                $data['source'] = '';
+         }
 
          return view('home::student-login',$data);
     }
@@ -261,3 +273,4 @@ class HomeController extends Controller
 
     
 }
+    

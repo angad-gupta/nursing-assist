@@ -71,6 +71,12 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth:student']], function
 
 	Route::get('student-courses', ['as' => 'student-courses', 'uses' => 'DashboardController@studentCourse']);
 
+	Route::get('syllabus-detail', ['as' => 'syllabus-detail', 'uses' => 'DashboardController@syllabusDetail']);
+
+	Route::get('lesson-detail', ['as' => 'lesson-detail', 'uses' => 'DashboardController@lessonsDetail']);
+	
+	Route::get('lesson-plan-detail', ['as' => 'lesson-plan-detail', 'uses' => 'DashboardController@lessonPlanDetail']);
+
 
 	
 

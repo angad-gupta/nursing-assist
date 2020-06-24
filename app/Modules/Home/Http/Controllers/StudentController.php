@@ -29,8 +29,10 @@ class StudentController extends Controller
      public function studentLogin()
     {
         if (Auth::guard('student')->check()) {
+
             return redirect()->intended(route('home'));
         } else {
+
             return view('home::student.dashboard');
         }
     } 
@@ -40,22 +42,26 @@ class StudentController extends Controller
         if (Auth::guard('student')->check()) {
             return redirect(route('student-courses'));
         } else {
-            return redirect(route('student-account'));
+            $param = 'course';
+            return redirect(route('student-account',['source'=>$param]));
         }
     }
 
     public function Enrolment(Request $request)
     {
+        $input = $request->all(); 
+
         if (Auth::guard('student')->check()) {
 
-            $input = $request->all();
             $data['course_info_id'] = $input['course_info_id'];
 
             $data['courseinfo'] = $this->courseinfo->where('id', $data['course_info_id'])->first();
           
              return view('home::enrolment',$data);
         } else {
-            return redirect(route('student-account'));
+            $param = 'enrol';
+            $course_info_id = $input['course_info_id'];
+            return redirect(route('student-account',['source'=>$param,'course_info_id'=> $course_info_id]));
         }
 
     }
@@ -64,11 +70,17 @@ class StudentController extends Controller
 
     public function studentAuthenticate(StudentLoginFormRequest $request)
     {
-
-        $data = $request->all('email', 'password');  
+        $data = $request->all('email', 'password','source','course_info_id');  
 
        if (Auth::guard('student')->attempt(['email' => $data['email'], 'password' => $data['password'],'active' => 1])) {
-            return redirect()->intended(route('student-dashboard'));
+
+            if($data['source'] == 'course'){
+                return redirect()->intended(route('student-hub'));
+            }else if($data['source'] == 'enrol'){
+                return redirect()->intended(route('enrolment',['course_info_id'=>$data['course_info_id']]));
+            }else{
+                return redirect()->intended(route('student-dashboard'));
+            }
         } else {
             Flash('Invalid Access')->warning();
             return redirect(route('student-account'));
