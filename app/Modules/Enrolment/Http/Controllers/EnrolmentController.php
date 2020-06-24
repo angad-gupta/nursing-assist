@@ -94,12 +94,18 @@ class EnrolmentController extends Controller
                 'is_eligible_att'=>$data['is_eligible_att'],
                 'is_eligible_letter_ahpra'=>$data['is_eligible_letter_ahpra'],
                 'is_id' => $data['is_id'],
-                'company_name' => $data['company_name'],
-                'email' => $data['email_address'],
-                'contact_number' => $data['contact_number'],
+                'title' => $data['title'],
+                'first_name' => $data['first_name'],
+                'last_name' => $data['last_name'],
+                'street1' => $data['street1'],
+                'street2' => $data['street2'],
+                'city' => $data['city'],
+                'state' => $data['state'],
+                'postalcode' => $data['postalcode'],
                 'country' => $data['country'],
-                'message' => $data['message']
-
+                'email' => $data['email'],
+                'phone' => $data['phone'],
+                'payment_status' =>0
             );
             if ($request->hasFile('eligible_document')) {
               $enrolmentData['eligible_document'] = $this->enrolment->upload($data['eligible_document']);
@@ -110,6 +116,7 @@ class EnrolmentController extends Controller
           }
 
             $enrolment = $this->enrolment->save($enrolmentData);
+
             $courseinfo_id = $this->courseinfo->where('id', $data['courseinfo_id'])->first();
             $amount = Session::put('amount', $courseinfo_id->course_fee);
             $apiKey = env('APIKEY');
@@ -118,17 +125,17 @@ class EnrolmentController extends Controller
             $client = \Eway\Rapid::createClient($apiKey, $apiPassword, $apiEndpoint);
             $transaction = [
                 'Customer' => [
-                'FirstName' => $student_detail->full_name,
-                'LastName' => 'Smith',
-                'Street1'=>$data['country'],
-                'Street2' => $data['suburb'],
-                'City' => $student_detail->primary_address,
-                'State' => 'NSW',
-                'PostalCode'=>$data['postcode'],
-                'Country' => 'au',
-                'Email' => $student_detail->email,
-                'CardNumber'=>$data['card_number'],
-                'CompanyName'=>$enrolment->company_name,
+                'Title' => $enrolment->title,
+                'FirstName' => $enrolment->first_name,
+                'LastName' => $enrolment->last_name,
+                'Street1'=>$enrolment->street1,
+                'Street2' => $enrolment->street2,
+                'City' => $enrolment->city,
+                'State' => $enrolment->state,
+                'PostalCode'=>$enrolment->postalcode,
+                'Country' =>$enrolment->country,
+                'Email' =>$enrolment->email,
+                'Phone' =>$enrolment->phone
                 ],
                 'RedirectUrl' => route('enrolmentstudent.redirect',$enrolment->id),
                 'CancelUrl' => route('enrolmentstudent.cancel'),
@@ -139,7 +146,7 @@ class EnrolmentController extends Controller
                 ];
 
                 $response = $client->createTransaction(\Eway\Rapid\Enum\ApiMethod::RESPONSIVE_SHARED, $transaction);
-
+            
                 if (!$response->getErrors()) {
                 $sharedURL = $response->SharedPaymentUrl;
                 $enrolpaymentData = array(
@@ -199,6 +206,10 @@ class EnrolmentController extends Controller
                  );
 
            $enrolpayment = $this->enrolpayment->update($enrolpayment_info->id, $enrolpaymentData);
+
+            $enrolmentData = array(
+                'payment_status'=>1,);
+            $enrolment = $this->enrolment->update($id,$enrolmentData);
 
 
 

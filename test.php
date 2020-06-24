@@ -15,6 +15,7 @@ class CreateEnrolmentsTable extends Migration
     {
         Schema::create('enrolments', function (Blueprint $table) {
             $table->increments('id');
+
             $table->integer('student_id')->nullable();
             $table->integer('courseinfo_id')->nullable();
             $table->boolean('is_eligible_mcq_osce')->default(0);
@@ -24,22 +25,16 @@ class CreateEnrolmentsTable extends Migration
             
             $table->boolean('is_id')->default(0);
             $table->text('identity_document')->nullable();
-            $table->string('title')->nullable();
-            $table->string('first_name')->nullable();
-            $table->string('last_name')->nullable();
-            $table->string('street1')->nullable();
-            $table->string('street2')->nullable();
-            $table->string('city')->nullable();
-            $table->string('state')->nullable();
-            $table->string('postalcode')->nullable();
-            $table->string('country')->nullable();
+
+            $table->string('company_name')->nullable();
             $table->string('email')->nullable();
-            $table->string('phone')->nullable();
+            $table->string('contact_number')->nullable();
+            $table->string('country')->nullable();
+            $table->text('message')->nullable();
+
             $table->string('payment_status')->nullable();
+
             $table->timestamps();
-            $table->softDeletes();
-
-
         });
     }
 
