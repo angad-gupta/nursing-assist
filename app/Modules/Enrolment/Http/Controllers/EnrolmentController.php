@@ -116,12 +116,12 @@ class EnrolmentController extends Controller
           }
 
             $enrolment = $this->enrolment->save($enrolmentData);
-
             $courseinfo_id = $this->courseinfo->where('id', $data['courseinfo_id'])->first();
             $amount = Session::put('amount', $courseinfo_id->course_fee);
             $apiKey = env('APIKEY');
             $apiPassword = env('PASSWORD');
             $apiEndpoint = \Eway\Rapid\Client::MODE_SANDBOX;
+
             $client = \Eway\Rapid::createClient($apiKey, $apiPassword, $apiEndpoint);
             $transaction = [
                 'Customer' => [
@@ -146,7 +146,7 @@ class EnrolmentController extends Controller
                 ];
 
                 $response = $client->createTransaction(\Eway\Rapid\Enum\ApiMethod::RESPONSIVE_SHARED, $transaction);
-            
+             
                 if (!$response->getErrors()) {
                 $sharedURL = $response->SharedPaymentUrl;
                 $enrolpaymentData = array(
