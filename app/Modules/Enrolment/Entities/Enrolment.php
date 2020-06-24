@@ -22,12 +22,18 @@ class Enrolment extends Model
     	'eligible_document',
     	'is_id',
     	'identity_document',
-    	'company_name',
-    	'email',
-    	'contact_number',
-    	'country',
-    	'message',   	
-    	'payment_status'
+        'title',
+        'first_name',
+        'last_name',
+        'street1',
+        'street2',
+        'city',
+        'state',
+        'postalcode',
+        'country',
+        'email',
+        'phone',
+        'payment_status'
     
     ];
 

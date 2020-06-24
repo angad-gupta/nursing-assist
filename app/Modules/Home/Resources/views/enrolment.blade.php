@@ -14,9 +14,6 @@ $("#btn").click(function() {
          }
 
         });
- 
-
-
      $("#btn_second").click(function() {
         if(document.getElementById("file_second").value != "") {
             return true;
@@ -133,51 +130,85 @@ $("#btn").click(function() {
                                                 <div class="form-card">
                                                     <h2 class="fs-title">Detail Form</h2>
                                                     <div class="row">
-                                                        <div class="col-sm-12">
+                                                        <div class="col-sm-4">
                                                             <div class="form-group">
-                                                                <label for="">Company Name <span>*</span></label>
-                                                                <input type="text" name="company_name" placeholder="Company Name"
+                                                                 <label for="">Title<span>*</span></label>
+                                                                 <select name="title" class="form-control border-0" id="title" >
+                                                                    <option value="Mr." selected="">Mr</option>
+                                                                    <option value="Ms.">Ms</option>
+                                                                    <option value="Mrs.">Mrs</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <div class="form-group">
+                                                                <label for="">First Name<span>*</span></label>
+                                                                <input type="text" name="first_name" placeholder="First Name"
                                                                     class="form-control" id="">
                                                             </div>
                                                         </div>
-                                                        <div class="col-sm-12">
+                                                        <div class="col-sm-4">
                                                             <div class="form-group">
-                                                                <label for="">Email Address <span>*</span></label>
-                                                                <input type="email" name="email_address" placeholder="Email Address"
+                                                                <label for="">Last Name <span>*</span></label>
+                                                                <input type="text" name="last_name" placeholder="Last Name"
                                                                     class="form-control" id="">
                                                             </div>
                                                         </div>
-                                                        <div class="col-sm-12">
+                                                        <div class="col-sm-6">
                                                             <div class="form-group">
-                                                                <label for="">Contact Number (include country and
-                                                                    area code) <span>*</span></label>
-                                                                <input type="text"name="contact_number" placeholder="Contact Number"
+                                                                <label for="">Street1<span>*</span></label>
+                                                                <input type="text" name="street1" placeholder="Street1"
                                                                     class="form-control" id="">
                                                             </div>
                                                         </div>
-                                                        <div class="col-sm-12">
+                                                         <div class="col-sm-6">
                                                             <div class="form-group">
-                                                                <label for="">Residential Address
-                                                                    <span>*</span></label>
-                                                                <div class="row">
-                                                                    <div class="col-sm-4">
-                                                                        <input type="text"name="country" placeholder="Street ">
-                                                                    </div>
-                                                                    <div class="col-sm-4">
-                                                                        <input type="text" name="suburb" placeholder="Suburb ">
-                                                                    </div>
-                                                                    <div class="col-sm-4">
-                                                                        <input type="text" name="postcode"placeholder="Postcode ">
-                                                                    </div>
-                                                                </div>
-
+                                                                <label for="">Street2<span>*</span></label>
+                                                                <input type="text" name="street2" placeholder="Street2"
+                                                                    class="form-control" id="">
                                                             </div>
                                                         </div>
-                                                        <div class="col-sm-12">
+                                                        <div class="col-sm-6">
                                                             <div class="form-group">
-                                                                <label for="">Referring Agency <span>*</span></label>
-                                                                <input type="text" name="message"placeholder="Agency"
-                                                                    class="form-control"></input>
+                                                                <label for="">City <span>*</span></label>
+                                                                <input type="text" name="city" placeholder="City"
+                                                                    class="form-control" id="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="">State<span>*</span></label>
+                                                                <input type="text"name="state" placeholder="State"
+                                                                    class="form-control" id="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="">Postalcode <span>*</span></label>
+                                                                <input type="text" name="postalcode" placeholder="Postalcode"
+                                                                    class="form-control" id="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="">Country<span>*</span></label>
+                                                                <input type="text"name="country" placeholder="Country"
+                                                                    class="form-control" id="">
+                                                            </div>
+                                                        </div>
+                                                       
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="">Email <span>*</span></label>
+                                                                <input type="email" name="email" placeholder="Email"
+                                                                    class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="">Contact Number <span>*</span></label>
+                                                                <input type="texts" name="phone" placeholder="Contact Number"
+                                                                    class="form-control">
                                                             </div>
                                                         </div>
                                                         <!-- <div class="col-sm-4">
@@ -195,7 +226,7 @@ $("#btn").click(function() {
                                                     <h2 class="fs-title">Payment</h2>
                                                     <div class="row justify-content-center">
                                                         <div class="col-sm-12">
-                                                            <div class="order-summary">
+                                                            <!-- <div class="order-summary">
                                                                 <div class="row">
 
                                                                 <div class="col-sm-4">
@@ -234,13 +265,13 @@ $("#btn").click(function() {
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
+                                                            </div> -->
 
 
                                                             <h5>You Order Summary</h5>
                                                             <table class="table">
                                                                 <tr>
-                                                                    <td>Enrol NCLEX</td>
+                                                                    <td>Enrol {{ $courseinfo->course_program_title }}</td>
                                                                     <td class="text-right">${{ $courseinfo->course_fee }}</td>
                                                                 </tr>
 

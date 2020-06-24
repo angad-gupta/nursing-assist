@@ -23,4 +23,10 @@ interface StudentInterface
 
     public function getStudentPurchase($student_id,$limit=null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
 
+   public function updatePaymentStatus($id,$data); 
+   
+   public function findPurchaseCourse($payment_id); 
+   
+   public function storeStudentCourse($data);  
+
 }

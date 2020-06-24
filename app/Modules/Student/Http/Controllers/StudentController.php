@@ -59,8 +59,46 @@ class StudentController extends Controller
         $student_id = $input['student_id']; 
 
          $data['student_purchase'] = $this->student->getStudentPurchase($student_id); 
+         $data['student_id'] = $student_id;
 
          return view('student::student.student_purchase',$data);
+    }
+
+    public function purchaseUpdate(Request $request){
+        $input = $request->all();
+
+        $student_id = $input['student_id'];
+        $payment_id = $input['payment_id'];
+
+        $moved_to_student = $input['moved_to_student'];
+
+        try{ 
+            $studentSData = array(
+                'moved_to_student' => $moved_to_student
+            );
+
+          $this->student->updatePaymentStatus($payment_id, $studentSData);
+
+          if($moved_to_student == '1'){
+
+           $studentPuchaseInfo =  $this->student->findPurchaseCourse($payment_id); 
+
+           $courseData = array(
+                'student_id' => $studentPuchaseInfo->student_id,
+                'courseinfo_id' =>$studentPuchaseInfo->courseinfo_id
+           );
+
+            $this->student->storeStudentCourse($courseData);
+
+
+          }
+           
+            alertify()->success('Student Payment Status Updated Successfully');
+        }catch(\Throwable $e){
+            alertify($e->getMessage())->error();
+        }
+        
+        return redirect(route('studentpurchase.index',['student_id'=> $student_id]));
     }
 
     /**

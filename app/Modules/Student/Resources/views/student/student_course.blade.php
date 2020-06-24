@@ -39,7 +39,7 @@
                     <td>{{$student_courses->firstItem() +$key}}</td>
                     <td>{{ optional($value->studentInfo)->full_name }}</td>
                     <td>{{ optional($value->courseInfo)->course_program_title }}</td>
-                    <td>{{ optional($value->courseInfo)->course_fee }}</td>
+                    <td>${{ optional($value->courseInfo)->course_fee }}</td>
                     <td>{{ date('d M, Y',strtotime($value->created_at)) }}</td>
        
                 </tr>

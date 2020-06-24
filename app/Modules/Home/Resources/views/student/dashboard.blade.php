@@ -57,7 +57,7 @@
                         <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel"
                         aria-labelledby="v-pills-profile-tab">
                         <h5 class="mb-0">My Account</h5>
-                        <p>View and edit your personal info below.</p>
+                        <p>View and edit your personal info below.</p> 
                          
                         <div class="row">
                             <div class="col-sm-12 col-md-12 col-lg-12 pt-0">
@@ -143,34 +143,27 @@
                                             <thead>
                                                 <tr>
                                                     <th>Course Name</th>
+                                                    <th>Total Syllabus</th>
                                                     <th>Date</th>
-                                                    <th>Remarks</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>Nclex Prepration v2.0</td>
-                                                    <td width="30%">2019-02-26</td>
-                                                    <td></td>
-                                                </tr>
+                                                
+                                                @if($student_course)
+                                                    @foreach($student_course as $key => $my_course_val)
+                                                    @php
+                                                    $total_syllabus = App\Modules\CourseContent\Entities\CourseContent::gettotalsyllabus($my_course_val->id);
+                                                    @endphp
+                                                    <tr>
+                                                        <td>{{ optional($my_course_val->courseInfo)->course_program_title }}</td>
+                                                        <td>{{$total_syllabus}} syllabus</td>
+                                                        <td width="30%">{{date('d M,Y',strtotime($my_course_val->created_at))}}</td>
+                                                        <td><a href="{{ route('syllabus-detail',['course_info_id'=>$my_course_val->id]) }}">Click To View Course</a></td>
+                                                    </tr>
+                                                    @endforeach
+                                                @endif
 
-                                                <tr>
-                                                    <td>Review for the NCLEX-PN Examination v2.0</td>
-                                                    <td width="30%">2019-02-26</td>
-                                                    <td></td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td>OSCE Course Practise</td>
-                                                    <td width="30%">2019-02-26</td>
-                                                    <td></td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td>Nclex Prepration v2.0</td>
-                                                    <td width="30%">2019-02-26</td>
-                                                    <td></td>
-                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -259,33 +252,18 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>Nclex Prepration v2.0</td>
-                                                    <td width="30%">2019-02-26</td>
-                                                    <td>3,500</td>
-                                                    <td>Paypal</td>
-                                                </tr>
+                                                
+                                                 @if($student_course_purchase)
+                                                    @foreach($student_course_purchase as $key => $my_coursepurchase_val)
+                                                    <tr>
+                                                        <td>{{ optional($my_coursepurchase_val->courseInfo)->course_program_title }}</td>
+                                                        <td width="30%">{{date('d M,Y',strtotime($my_course_val->created_at))}}</td>
+                                                        <td>${{ optional($my_coursepurchase_val->courseInfo)->course_fee }}</td>
+                                                        <td>eway</td>
+                                                    </tr>
+                                                    @endforeach
+                                                @endif  
 
-                                                <tr>
-                                                    <td>Nclex Prepration v2.0</td>
-                                                    <td width="30%">2019-02-26</td>
-                                                    <td>5,500</td>
-                                                    <td>Swift</td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td>OSCE Prepration v2.0</td>
-                                                    <td width="30%">2019-02-26</td>
-                                                    <td>6,500</td>
-                                                    <td>Master Card</td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td>Nclex Prepration v2.0</td>
-                                                    <td width="30%">2019-02-26</td>
-                                                    <td>3,500</td>
-                                                    <td>Paypal</td>
-                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>

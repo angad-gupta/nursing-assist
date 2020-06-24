@@ -20,11 +20,6 @@
 
 <section class="neta-courses">
     <div class="container section-padding">
-        <!-- <div class="neta-head text-center m-5">
-            <h4 class="mb-0">What We Offer ?</h4>
-            <p>Nursing Education & Training Australia delivers a range of courses that facilitates learning and
-                development of future and emerging nurses.</p>
-        </div> -->
         <div class="row">
 
            

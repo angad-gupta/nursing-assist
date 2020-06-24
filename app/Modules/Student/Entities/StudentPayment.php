@@ -12,7 +12,9 @@ class StudentPayment extends Model
 
     	'student_id',
     	'courseinfo_id',
-        'enrolment_payment_id'
+        'enrolment_payment_id',
+        'status',
+        'moved_to_student'
 
     ];
 

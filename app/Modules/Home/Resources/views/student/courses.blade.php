@@ -44,7 +44,7 @@
                                     <div class="list-content">
                                     <h5>{{ optional($my_course_val->courseInfo)->course_program_title }}</h5>
                                     <span>{{$total_syllabus}} syllabus</span>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                                    <p>{!! optional($my_course_val->courseInfo)->short_content !!} </p>
                                      <button class="btn e-btn"><a href="{{ route('syllabus-detail',['course_info_id'=>$my_course_val->id]) }}">View syllabus</a></button>
                                     </div>
                                 </div>
@@ -64,9 +64,7 @@
                 <div class="my-courses">
                     <h2 class="ttl-line">Other Courses
                     </h2>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-                        of type and scrambled it to make a type specimen book.</p>
+                    <p>Browse Online Courses including a mockup of each course.</p>
                         <div class="row">
 
                         @if($other_course)
@@ -75,15 +73,17 @@
                             @php
                             $k = $key+1;
                                 $imgfluid = asset('home/img/c' .$k. '.png'); 
+
+                                $total_syllabus = App\Modules\CourseContent\Entities\CourseContent::gettotalsyllabus($course_val->id);
                             @endphp
 
                             <div class="col-sm-4">
                                 <div class="my-courses__list">
                                     <img src="{{ $imgfluid }}" class="img-fluid" alt="">
                                     <div class="list-content">
-                                    <h5>NCLEX</h5>
-                                    <span>15 syllabus</span>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                                    <h5>{{ $course_val->course_program_title }}</h5>
+                                    <span>{{$total_syllabus}}  syllabus</span>
+                                     <p>{!! optional($my_course_val->courseInfo)->short_content !!} </p>
                                     <button class="btn e-btn"><a href="{{ route('enrolment',['course_info_id'=>$course_val->id]) }}">Enroll</a></button>
                                     </div>
                                 </div>

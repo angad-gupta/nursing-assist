@@ -70,5 +70,19 @@ class StudentRepository implements StudentInterface
                 return $result;
         }
 
+    public function updatePaymentStatus($id,$data){
+        $result = StudentPayment::find($id);
+        return $result->update($data);
+    }
+
+    public function findPurchaseCourse($payment_id){
+        return StudentPayment::find($payment_id);
+    }
+
+   public function storeStudentCourse($data){
+        return StudentCourse::create($data);
+   }  
+
+
 
 }
