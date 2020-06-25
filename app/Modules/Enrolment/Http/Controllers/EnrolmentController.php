@@ -115,6 +115,8 @@ class EnrolmentController extends Controller
                  $enrolmentData['identity_document'] = $this->enrolment->upload($data['identity_document']);
           }
 
+          dd($enrolmentData);
+
             $enrolment = $this->enrolment->save($enrolmentData);
             $enrolment_id = $enrolment->id;
             $courseinfo_id = $this->courseinfo->where('id', $data['courseinfo_id'])->first();
