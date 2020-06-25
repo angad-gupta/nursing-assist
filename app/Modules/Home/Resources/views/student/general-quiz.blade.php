@@ -110,7 +110,7 @@
 
                         <div class="card">
                             <div class="row">
-                                <h4 class="text-danger">No Practise Question Added</h4>
+                                <h4 class="text-danger">No Practice Question Added</h4>
                             </div>
                         </div>
                     @endif
