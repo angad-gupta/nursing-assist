@@ -111,8 +111,10 @@
                         <div class="card">
                             <div class="row">
                                 <h4 class="text-danger">No Practice Question Added</h4>
-                                <button onclick="history.back();" class="enrol-cpd" id="show-btn">Go Back</button>
                             </div>
+                        </div>
+                         <div class="col-sm-6 neta-about">
+                             <button onclick="history.back();" class="enrol-cpd" id="show-btn">Go Back</button>
                         </div>
                     @endif
 
