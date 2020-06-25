@@ -115,7 +115,7 @@ class EnrolmentController extends Controller
                  $enrolmentData['identity_document'] = $this->enrolment->upload($data['identity_document']);
           }
 
-          dd($enrolmentData);
+          
 
             $enrolment = $this->enrolment->save($enrolmentData);
             $enrolment_id = $enrolment->id;
@@ -149,7 +149,7 @@ class EnrolmentController extends Controller
                 ];
 
                 $response = $client->createTransaction(\Eway\Rapid\Enum\ApiMethod::RESPONSIVE_SHARED, $transaction);
-             
+             dd($response);
                 if (!$response->getErrors()) {
                 $sharedURL = $response->SharedPaymentUrl;
                 $enrolpaymentData = array(
