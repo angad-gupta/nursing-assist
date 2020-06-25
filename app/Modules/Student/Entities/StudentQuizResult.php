@@ -3,6 +3,8 @@
 namespace App\Modules\Student\Entities;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Modules\Student\Entities\Student;
+use App\Modules\CourseInfo\Entities\CourseInfo;
 
 class StudentQuizResult extends Model
 {
@@ -16,4 +18,12 @@ class StudentQuizResult extends Model
     	'percent'
 
     ];
+
+        public function studentInfo(){
+        return $this->belongsTo(Student::class,'student_id','id');
+    }
+
+    public function courseInfo(){
+        return $this->belongsTo(CourseInfo::class,'courseinfo_id','id');
+    }
 }

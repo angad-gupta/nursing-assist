@@ -30,6 +30,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','permission']], funct
 
    Route::get('studentcourse', ['as' => 'studentcourse.index', 'uses' => 'StudentController@studentCourse']);
    Route::get('studentpurchase', ['as' => 'studentpurchase.index', 'uses' => 'StudentController@studentPurchase']);
+   Route::get('studentquiz/result', ['as' => 'studentquiz.result', 'uses' => 'StudentController@studentquizResult']);
 
    Route::post('student/purchaseupdate', ['as' => 'student.purchaseupdate', 'uses' => 'StudentController@purchaseUpdate']);
    

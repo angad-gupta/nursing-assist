@@ -6,14 +6,17 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use App\Modules\Student\Repositories\StudentInterface;
+use App\Modules\Quiz\Repositories\QuizInterface;
 
 class StudentController extends Controller
 {
     protected $StudentController;
+    protected $quiz;
     
-    public function __construct(StudentInterface $student)
+    public function __construct(StudentInterface $student, QuizInterface $quiz)
     {
         $this->student = $student;
+        $this->quiz = $quiz;
     }
     /**
      * Display a listing of the resource.
@@ -62,6 +65,16 @@ class StudentController extends Controller
          $data['student_id'] = $student_id;
 
          return view('student::student.student_purchase',$data);
+    }
+
+    public function studentquizResult(Request $request){
+         $input = $request->all();
+         $student_id = $input['student_id']; 
+
+         $data['student_quiz'] = $this->student->getStudentQuizResult($student_id);   
+         $data['student_id'] = $student_id;
+
+         return view('student::student.student_quiz_result',$data);
     }
 
     public function purchaseUpdate(Request $request){

@@ -106,6 +106,13 @@ class StudentRepository implements StudentInterface
         return StudentQuizResult::create($quizdata);
    }
 
-
+    public function getStudentQuizResult($student_id,$limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1]){
+            
+        $result =StudentQuizResult::when(array_keys($filter, true), function ($query) use ($filter) {
+               
+            })->where('student_id','=',$student_id)->orderBy('id', $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+            
+            return $result;
+    }
 
 }

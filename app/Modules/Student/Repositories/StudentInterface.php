@@ -38,4 +38,6 @@ interface StudentInterface
 
    public function saveQuizResult($quizdata);
 
+   public function getStudentQuizResult($student_id,$limit=null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
+
 }
