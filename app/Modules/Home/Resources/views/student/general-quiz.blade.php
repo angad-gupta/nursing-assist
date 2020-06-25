@@ -106,24 +106,23 @@
                     </div>
 
                         @endforeach
-                        @else
+                    @else
 
                         <div class="card">
                             <div class="row">
                                 <h4 class="text-danger">No Practise Question Added</h4>
                             </div>
                         </div>
-
-                        @endif
                     @endif
 
                     {{ Form::hidden('courseinfo_id', $courseinfoId) }}
 
-    @if($general_quiz->total() != 0)
+                @if($general_quiz->total() != 0)
                      <div class="col-sm-6 neta-about">
                          <button type="submit" class="enrol-cpd" id="show-btn">Submit Your Answer</button>
                      </div>
-    @endif
+                @endif
+
                 {!! Form::close() !!}     
 
                 </div>
