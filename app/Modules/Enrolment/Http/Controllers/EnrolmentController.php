@@ -116,6 +116,7 @@ class EnrolmentController extends Controller
           }
 
             $enrolment = $this->enrolment->save($enrolmentData);
+            $enrolment_id = $enrolment->id;
             $courseinfo_id = $this->courseinfo->where('id', $data['courseinfo_id'])->first();
             $amount = Session::put('amount', $courseinfo_id->course_fee);
             $apiKey = env('APIKEY');
@@ -157,14 +158,14 @@ class EnrolmentController extends Controller
                 return Redirect::to($sharedURL);
                 } else {
                 foreach ($response->getErrors() as $error) {
-                    return redirect(route('enrolment.viewUser',['id'=>$enrolment->id]));
+                    return redirect(route('enrolment.viewUser',['id'=>$enrolment_id]));
                  // echo "Error: ".\Eway\Rapid::getMessage($error)."";
                 }
                 die();
                 }
 
            alertify()->success('Course Information Created Successfully');
-          return redirect(route('enrolment.viewUser''id'=>$enrolment->id]));
+          return redirect(route('enrolment.viewUser''id'=>$enrolment_id]));
         }
           catch(\Throwable $e){
             alertify($e->getMessage())->error();
