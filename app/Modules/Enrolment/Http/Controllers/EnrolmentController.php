@@ -165,7 +165,7 @@ class EnrolmentController extends Controller
                 }
 
            alertify()->success('Course Information Created Successfully');
-          return redirect(route('enrolment.viewUser''id'=>$enrolment_id]));
+          return redirect(route('enrolment.viewUser',['id'=>$enrolment_id]));
         }
           catch(\Throwable $e){
             alertify($e->getMessage())->error();
