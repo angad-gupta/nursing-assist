@@ -84,6 +84,9 @@ class QuizRepository implements QuizInterface
     }
 
 
+    public function checkCorrectAnswer($quiz_id,$answer){
+         return Quiz::where('id','=',$quiz_id)->where('correct_option','=',$answer)->count();
+    }
 
 }
 

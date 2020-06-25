@@ -24,158 +24,98 @@
             <div class="col-sm-12">
                 <h2 class="ttl-line">Practice Test
                 </h2>
-                <p>150 question test (3 hours). Comprehension, Analysis and Application level questions from all 8
-                    categories using the NCLEX® test plan.
-                    Complete the test in a quiet environment. </p>
+                <p>Comprehension, Analysis and Application level questions from all categories using the Related Courses. Complete the test in a quiet environment. </p>
             </div>
 
             <div class="col-sm-12">
                 <div class="accordion" id="accordionExample">
-                    <div class="card">
-                        <div class="card-header" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true">     
-                            <span class="title">1. I want to return my purchase! What do I do?</span>
-                        </div> 
-                        <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
-                            <div class="card-body demo-quiz neta-about">
-                                <div class="">
-                                     <div class="row">
-                                         <div class="col-sm-6">
-                                             <div class="e-input">
-                                                 <input type="radio" name="rd" placeholder="Email Id" />
-                                                 <label for="">A. I have done self-check through AHPRA
-                                                 </label>
-                                             </div>
-                                         </div>
-                                         <div class="col-sm-6">
-                                             <div class="e-input">
-                                                 <input type="radio" name="rd" placeholder="Email Id" />
-                                                 <label for="">B. I have done self-check through AHPRA
-                                                 </label>
-                                             </div>
-                                         </div>
-                                         <div class="col-sm-6">
-                                             <div class="e-input">
-                                                 <input type="radio" name="rd" placeholder="Email Id" />
-                                                 <label for="">C. I have done self-check through AHPRA
-                                                 </label>
-                                             </div>
-                                         </div>
-                                         <div class="col-sm-6">
-                                             <div class="e-input">
-                                                 <input type="radio" name="rd" placeholder="Email Id" />
-                                                 <label for="">D. I have done self-check through AHPRA
-                                                 </label>
-                                             </div>
-                                         </div>
-                                         <div class="col-sm-6">
-                                             <button type="button" name="next" class="enrol-cpd" id="show-btn">Next Question</button>
-                                         </div>
-                                        
-                                        
-                                         
-                                     </div>
-                 
-                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">     
-                            <span class="title">2. Can I exchange my order instead of returning it?</span>
-                          
-                        </div>
-                        <div id="collapseTwo" class="collapse" data-parent="#accordionExample">
-                            <div class="card-body demo-quiz neta-about">
-                                <div class="">
-                                     <div class="row">
-                                         <div class="col-sm-6">
-                                             <div class="e-input">
-                                                 <input type="radio" name="rd" placeholder="Email Id" />
-                                                 <label for="">A. I have done self-check through AHPRA
-                                                 </label>
-                                             </div>
-                                         </div>
-                                         <div class="col-sm-6">
-                                             <div class="e-input">
-                                                 <input type="radio" name="rd" placeholder="Email Id" />
-                                                 <label for="">B. I have done self-check through AHPRA
-                                                 </label>
-                                             </div>
-                                         </div>
-                                         <div class="col-sm-6">
-                                             <div class="e-input">
-                                                 <input type="radio" name="rd" placeholder="Email Id" />
-                                                 <label for="">C. I have done self-check through AHPRA
-                                                 </label>
-                                             </div>
-                                         </div>
-                                         <div class="col-sm-6">
-                                             <div class="e-input">
-                                                 <input type="radio" name="rd" placeholder="Email Id" />
-                                                 <label for="">D. I have done self-check through AHPRA
-                                                 </label>
-                                             </div>
-                                         </div>
-                                         <div class="col-sm-6">
-                                             <button type="button" name="next" class="enrol-cpd" id="show-btn">Next Question</button>
-                                         </div>
-                                        
-                                         
-                                     </div>
-                 
-                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false">
-                            <span class="title">3. I printed out my label and misplaced it. How can I retrieve it again?</span>
-                        
-                        </div>
-                        <div id="collapseThree" class="collapse" data-parent="#accordionExample">
-                            <div class="card-body demo-quiz neta-about">
-                                <div class="">
-                                     <div class="row">
-                                         <div class="col-sm-6">
-                                             <div class="e-input">
-                                                 <input type="radio" name="rd" placeholder="Email Id" />
-                                                 <label for="">A. I have done self-check through AHPRA
-                                                 </label>
-                                             </div>
-                                         </div>
-                                         <div class="col-sm-6">
-                                             <div class="e-input">
-                                                 <input type="radio" name="rd" placeholder="Email Id" />
-                                                 <label for="">B. I have done self-check through AHPRA
-                                                 </label>
-                                             </div>
-                                         </div>
-                                         <div class="col-sm-6">
-                                             <div class="e-input">
-                                                 <input type="radio" name="rd" placeholder="Email Id" />
-                                                 <label for="">C. I have done self-check through AHPRA
-                                                 </label>
-                                             </div>
-                                         </div>
-                                         <div class="col-sm-6">
-                                             <div class="e-input">
-                                                 <input type="radio" name="rd" placeholder="Email Id" />
-                                                 <label for="">D. I have done self-check through AHPRA
-                                                 </label>
-                                             </div>
-                                         </div>
-                                         <div class="col-sm-6">
-                                             <button type="button" name="next" class="enrol-cpd" id="show-btn">Submit</button>
-                                         </div>
-                                        
 
-                                         
+                    <script src="{{ asset('admin/validation/generalquiz.js')}}"></script>
+                    {!! Form::open(['route'=>'studentquiz.store','method'=>'POST','id'=>'generalquiz_submit','class'=>'form-horizontal','role'=>'form','files' => true]) !!}
+
+                    @if($general_quiz->total() != 0)
+                    @foreach($general_quiz as $key => $question)
+                    @php $key = $key +1; @endphp
+
+                    <div class="card">
+                        <div class="card-header" data-toggle="collapse" data-target="#collapse{{$key}}" aria-expanded="true">     
+                            <span class="title">{{$key}}. {{ $question->question }}</span>
+                        </div> 
+                        <div id="collapse{{$key}}" class="collapse show" data-parent="#accordionExample">
+                            <div class="card-body demo-quiz neta-about">
+                                <div class="">
+                                     <div class="row">
+                                        {{ Form::hidden('quiz_id[]', $question->id) }}
+
+                                         @if($question->question_type == 'multiple')
+                                         <div class="col-sm-6">
+                                             <div class="e-input">
+                                                 <input type="radio" name="question_option_{{$key}}[]" value="option_1" required />
+                                                 <label for="">A. {{ $question->option_1 }}
+                                                 </label>
+                                             </div>
+                                         </div>
+                                         <div class="col-sm-6">
+                                             <div class="e-input">
+                                                 <input type="radio" name="question_option_{{$key}}[]" value="option_2" />
+                                                 <label for="">B. {{ $question->option_2 }}
+                                                 </label>
+                                             </div>
+                                         </div>
+                                         <div class="col-sm-6">
+                                             <div class="e-input">
+                                                 <input type="radio" name="question_option_{{$key}}[]" value="option_3" />
+                                                 <label for="">C. {{ $question->option_3 }}
+                                                 </label>
+                                             </div>
+                                         </div>
+                                         <div class="col-sm-6">
+                                             <div class="e-input">
+                                                 <input type="radio" name="question_option_{{$key}}[]" value="option_4" />
+                                                 <label for="">D. {{ $question->option_4 }}
+                                                 </label>
+                                             </div>
+                                         </div>
+
+                                        @else
+
+                                           <div class="col-sm-6">
+                                                <div class="e-input">
+                                                    <input type="radio" name="question_option_{{$key}}[]" value="true" required/>
+                                                    <label for="">True
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6"></div>
+                                            <div class="col-sm-6">
+                                                <div class="e-input">
+                                                    <input type="radio" name="question_option_{{$key}}[]" value="false" />
+                                                    <label for="">False
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6"></div>
+
+                                        @endif 
+   
                                      </div>
                  
                                  </div>
                             </div>
                         </div>
                     </div>
+
+                        @endforeach
+                    @endif
+
+                    {{ Form::hidden('courseinfo_id', $courseinfoId) }}
+
+                     <div class="col-sm-6 neta-about">
+                         <button type="submit" class="enrol-cpd" id="show-btn">Submit Your Answer</button>
+                     </div>
+
+                {!! Form::close() !!}     
+
                 </div>
 
             </div>

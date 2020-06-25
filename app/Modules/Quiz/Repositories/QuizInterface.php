@@ -25,4 +25,6 @@ interface QuizInterface
     public function getDemoQuiz($limit, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
 
     public function getGeneralById($couseinfoId,$limit, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
+
+    public function checkCorrectAnswer($quiz_id,$answer);
 }

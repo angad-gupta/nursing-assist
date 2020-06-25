@@ -80,5 +80,7 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth:student']], function
 
 	Route::get('student-quiz', ['as' => 'student-quiz', 'uses' => 'DashboardController@studentQuiz']);
 
+	Route::post('studentquiz/store', ['as' => 'studentquiz.store', 'uses' => 'DashboardController@studentQuizStore']);
+
 
 });

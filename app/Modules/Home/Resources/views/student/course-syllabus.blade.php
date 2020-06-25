@@ -19,9 +19,13 @@
     </div>
 </section>
 
+
+
 <section class="neta-about student-hub section-padding">
     <div class="container">
+         @include('flash::message')
         <div class="row">
+
             <div class="col-sm-12">
                 <div class="my-courses">
                     <h2 class="ttl-line">All syllabus

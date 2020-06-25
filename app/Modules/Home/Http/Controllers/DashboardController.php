@@ -150,12 +150,93 @@ class DashboardController extends Controller
 
     public function studentQuiz(Request $request){
         $input= $request->all();
-
+        
+        $student_id = Auth::guard('student')->user()->id; 
         $courseinfoId = $input['course_info_id'];
 
+        $checkQuiz = $this->student->checkQuizForCourseInfo($student_id, $courseinfoId); 
+        if ($checkQuiz > 0) {
+            
+            Flash('Practise Test Already Taken.Please Proceed Next Course.')->success();
+            return redirect(route('syllabus-detail',['course_info_id'=>$courseinfoId]));
+
+        }
+
         $data['general_quiz'] = $this->quiz->getGeneralById($courseinfoId,10);
+        $data['courseinfoId'] = $courseinfoId;
 
        return view('home::student.general-quiz',$data);
+    }
+
+    public function studentQuizStore(Request $request){
+        $input = $request->all();
+
+        $student_id = Auth::guard('student')->user()->id; 
+        $courseinfo_id = $input['courseinfo_id'];
+
+        try{
+            $m =1;
+            $quiz_id = $input['quiz_id'];
+            $countname = sizeof($quiz_id); 
+                for($i = 0; $i < $countname; $i++){
+                   
+                    if($input['quiz_id'][$i]){
+                        
+
+                        $quiz_id =$input['quiz_id'][$i];
+                        $question_option =$input['question_option_'.$m][0];
+
+                         $quizdata['student_id'] = $student_id;
+                         $quizdata['courseinfo_id'] = $courseinfo_id;
+                         $quizdata['quiz_id'] = $input['quiz_id'][$i];
+                         $quizdata['answer'] = $input['question_option_'.$m][0];  
+
+                         $checkAnswer = $this->quiz->checkCorrectAnswer($quiz_id,$question_option);
+
+                         if($checkAnswer > 0){
+                            $quizdata['is_correct_answer'] = 1;
+                         }else{
+                            $quizdata['is_correct_answer'] = 0;
+                         }
+                      
+                            $this->student->saveQuizHistory($quizdata);
+                        $m++;
+                    }
+                }
+
+             $quiz_history = $this->student->getquizHistory($student_id,$courseinfo_id);   
+             $correct_answer = $this->student->getcorrectAnswer($student_id,$courseinfo_id);   
+
+             $total_question = count($quiz_history);
+             $correct_percent = ($correct_answer / $total_question) * 100;
+
+             $data['correct_percent'] = $correct_percent;
+             $data['quiz_history'] = $quiz_history;
+             $data['correct_answer'] = $correct_answer;
+             $data['incorrect_answer'] = $total_question - $correct_answer ;
+
+
+             $quiz_result = array(
+                    'student_id' => $student_id,
+                    'courseinfo_id'=> $courseinfo_id,    
+                    'date'=> date('Y-m-d'),
+                    'total_question'=> $total_question,
+                    'score'=> $correct_answer,
+                    'percent'=> $correct_percent
+             );
+
+             $this->student->saveQuizResult($quiz_result);
+
+             
+
+            return view('home::student.general-quiz-report',$data);
+
+        }catch(\Throwable $e){
+           alertify($e->getMessage())->error();
+        }
+
+
+
     }
   
   

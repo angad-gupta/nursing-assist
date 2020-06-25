@@ -4,6 +4,8 @@ namespace App\Modules\Student\Repositories;
 use App\Modules\Student\Entities\Student;
 use App\Modules\Student\Entities\StudentCourse;
 use App\Modules\Student\Entities\StudentPayment;
+use App\Modules\Student\Entities\StudentQuizResult;
+use App\Modules\Student\Entities\StudentQuizHistory;
 
 class StudentRepository implements StudentInterface
 {
@@ -82,6 +84,27 @@ class StudentRepository implements StudentInterface
    public function storeStudentCourse($data){
         return StudentCourse::create($data);
    }  
+
+    public function checkQuizForCourseInfo($student_id, $couseinfoid){
+        return StudentQuizResult::where('student_id','=',$student_id)->where('courseinfo_id','=',$couseinfoid)->count();
+    }
+
+    public function saveQuizHistory($quizdata){
+        return StudentQuizHistory::create($quizdata);
+    }
+
+    public function getquizHistory($student_id,$courseinfo_id){
+        return StudentQuizHistory::where('student_id','=',$student_id)->where('courseinfo_id','=',$courseinfo_id)->get();
+    }
+
+    public function getcorrectAnswer($student_id,$courseinfo_id){
+        return StudentQuizHistory::where('student_id','=',$student_id)->where('courseinfo_id','=',$courseinfo_id)->where('is_correct_answer','=','1')->count();
+    
+    }
+
+   public function saveQuizResult($quizdata){
+        return StudentQuizResult::create($quizdata);
+   }
 
 
 

@@ -16,6 +16,13 @@ class CreateStudentQuizResultsTable extends Migration
         Schema::create('student_quiz_results', function (Blueprint $table) {
             $table->increments('id');
 
+            $table->integer('student_id')->nullable();
+            $table->integer('courseinfo_id')->nullable();
+            $table->date('date')->nullable();
+            $table->double('total_question',10)->nullable();
+            $table->double('score',10)->nullable();
+            $table->double('percent')->nullable();
+
             $table->timestamps();
         });
     }

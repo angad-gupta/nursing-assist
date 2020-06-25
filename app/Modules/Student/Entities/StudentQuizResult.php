@@ -9,11 +9,11 @@ class StudentQuizResult extends Model
     protected $fillable = [
 
     	'student_id',
-    	'quiz_id',
     	'courseinfo_id',	
     	'date',
+    	'total_question',
     	'score',
-    	'remark'
+    	'percent'
 
     ];
 }

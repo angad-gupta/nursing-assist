@@ -33,7 +33,4 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','permission']], funct
 
    Route::post('student/purchaseupdate', ['as' => 'student.purchaseupdate', 'uses' => 'StudentController@purchaseUpdate']);
    
-  
-
-
 });

@@ -29,4 +29,13 @@ interface StudentInterface
    
    public function storeStudentCourse($data);  
 
+
+   public function checkQuizForCourseInfo($student_id, $couseinfoid);
+
+   public function saveQuizHistory($quizdata);
+   public function getquizHistory($student_id,$courseinfo_id);
+   public function getcorrectAnswer($student_id,$courseinfo_id);
+
+   public function saveQuizResult($quizdata);
+
 }
