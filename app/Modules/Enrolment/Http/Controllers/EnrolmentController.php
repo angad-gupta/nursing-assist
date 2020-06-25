@@ -47,7 +47,7 @@ class EnrolmentController extends Controller
 
     public function viewUser(Request $request){
         $data = $request->all();
-        $id = $data['id'];
+        $id = (array_key_exists('id', $data)) ? $data['id'] : '';
         $enrolment = $this->enrolment->find($id);
         $data = view('enrolment::enrolment.view-detail',compact('enrolment'))->render();
         return response()->json(['options'=>$data]);
@@ -97,7 +97,7 @@ class EnrolmentController extends Controller
                 'title' => $data['title'],
                 'first_name' => $data['first_name'],
                 'last_name' => $data['last_name'],
-                'street1' => $data['street1'],
+                'street1' => $data['street1'], 
                 'street2' => $data['street2'],
                 'city' => $data['city'],
                 'state' => $data['state'],
@@ -157,14 +157,14 @@ class EnrolmentController extends Controller
                 return Redirect::to($sharedURL);
                 } else {
                 foreach ($response->getErrors() as $error) {
-                    return redirect(route('enrolment.viewUser'));
+                    return redirect(route('enrolment.viewUser',['id'=>$enrolment->id]));
                  // echo "Error: ".\Eway\Rapid::getMessage($error)."";
                 }
                 die();
                 }
 
            alertify()->success('Course Information Created Successfully');
-          return redirect(route('enrolment.viewUser'));
+          return redirect(route('enrolment.viewUser''id'=>$enrolment->id]));
         }
           catch(\Throwable $e){
             alertify($e->getMessage())->error();

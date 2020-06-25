@@ -52,7 +52,7 @@ $("#btn").click(function() {
 
 <section class="neta-enrolment neta-contact  section-padding">
     <div class="container">
-        <div class="row">
+        <div class="row"> 
             <div class="col-sm-12">
                 <div class="container-fluid" id="grad1">
                     <div class="row justify-content-center mt-0">
@@ -285,11 +285,9 @@ $("#btn").click(function() {
                                                     <div class="col-sm-12">
                                                         <div class="payment-method">
                                                             <h5>Payment Method</h5>
-                                                            <img src="{{ asset('img/eway.png') }}" width="100px" alt="">
-                                                                                <img src="{{ asset('img/visaa.png') }}" width="80px"
-                                                                                    alt="">
-                                                                                <img src="{{ asset('img/mst.png') }}" width="80px"
-                                                                                    alt="">
+                                                            <img src="{{ asset('home/img/eway.png') }}" width="100px" alt="">
+                                                            <img src="{{ asset('home/img/visaa.png') }}" width="80px" alt="">
+                                                            <img src="{{ asset('home/img/mst.png') }}" width="80px" alt="">
                                                         </div>
                                                     </div>
                                                     <div class="" id="msform">
