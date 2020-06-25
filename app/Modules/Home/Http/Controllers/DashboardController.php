@@ -12,6 +12,8 @@ use App\Modules\Message\Repositories\MessageInterface;
 use App\Modules\CourseInfo\Repositories\CourseInfoInterface;
 use App\Modules\CourseContent\Repositories\CourseContentInterface;
 use App\Modules\Syllabus\Repositories\SyllabusInterface;
+use App\Modules\Quiz\Repositories\QuizInterface;
+
 
 class DashboardController extends Controller
 {
@@ -21,8 +23,9 @@ class DashboardController extends Controller
       protected $courseinfo;
       protected $coursecontent;
       protected $syllabus;
+      protected $quiz;
     
-    public function __construct(StudentInterface $student, AnnouncementInterface $announcement , MessageInterface $message,  CourseInfoInterface $courseinfo, CourseContentInterface $coursecontent, SyllabusInterface $syllabus)
+    public function __construct(StudentInterface $student, AnnouncementInterface $announcement , MessageInterface $message,  CourseInfoInterface $courseinfo, CourseContentInterface $coursecontent, SyllabusInterface $syllabus,QuizInterface $quiz)
     {
         $this->student = $student;
         $this->announcement = $announcement;
@@ -30,6 +33,7 @@ class DashboardController extends Controller
         $this->courseinfo = $courseinfo;
         $this->coursecontent = $coursecontent;
         $this->syllabus = $syllabus;
+        $this->quiz = $quiz;
     }
     /**
      * Display a listing of the resource.
@@ -142,6 +146,16 @@ class DashboardController extends Controller
         $data['syllabus_id'] = $syllabus_id;
 
         return view('home::student.course-lesson-detail',$data);
+    }
+
+    public function studentQuiz(Request $request){
+        $input= $request->all();
+
+        $courseinfoId = $input['course_info_id'];
+
+        $data['general_quiz'] = $this->quiz->getGeneralById($courseinfoId,10);
+
+       return view('home::student.general-quiz',$data);
     }
   
   

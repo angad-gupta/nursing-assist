@@ -196,8 +196,10 @@
                                     @endforeach
                                 @endif
 
-                                    <!-- <a href="#"><button class="btn e-btn">Practise Test</button></a> -->
-                                </div>
+                                @if($lesson_detail->is_related_to_quiz == '1')
+                                     <a href="{{ route('student-quiz',['course_info_id'=>$course_info_id]) }}"><button class="btn e-btn">Practise Test</button></a> 
+                                @endif
+                            </div>
                         </div>
 
                     </div>

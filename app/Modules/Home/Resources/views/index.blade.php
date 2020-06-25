@@ -170,7 +170,7 @@
                     <div class="col-sm-4">
                         <div class="course-enrolment__content m-0">
                             <p>{{$course_enrol->enrol_title }}</p>
-                            <h2>${{$course_enrol->course_fee}}</h2>
+                            <h2>${{$course_enrol->course_fee}} inc. GST</h2>
                             <span>({{$course_enrol->payment_mode }})</span>
                             <button class="btn w-100"><a href="{{ route('enrolment',['course_info_id'=>$course_enrol->id]) }}">Enroll</a></button>
                         </div>

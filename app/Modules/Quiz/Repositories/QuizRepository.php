@@ -71,6 +71,19 @@ class QuizRepository implements QuizInterface
         return $result; 
     }
 
+    public function getGeneralById($couseinfoId,$limit, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1]){
+
+         $result =Quiz::when(array_keys($filter, true), function ($query) use ($filter) {         
+            
+
+        })
+            ->where('category','=','General')->Where('course_content_id','=',$couseinfoId)->inRandomOrder()->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+
+        return $result;
+
+    }
+
+
 
 }
 

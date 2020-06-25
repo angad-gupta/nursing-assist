@@ -78,6 +78,7 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth:student']], function
 	Route::get('lesson-plan-detail', ['as' => 'lesson-plan-detail', 'uses' => 'DashboardController@lessonPlanDetail']);
 
 
-	
+	Route::get('student-quiz', ['as' => 'student-quiz', 'uses' => 'DashboardController@studentQuiz']);
+
 
 });
