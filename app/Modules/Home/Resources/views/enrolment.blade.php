@@ -193,7 +193,7 @@ $("#btn").click(function() {
                                                             <div class="form-group">
                                                                 <label for="">Country<span>*</span></label>
                                                                  <select  class="form-control" name="country">
-                                                                     <option value="AU">Australia</option>
+                                                                     <option value="au">Australia</option>
                                                                  </select>   
                                                             </div>
                                                         </div>
