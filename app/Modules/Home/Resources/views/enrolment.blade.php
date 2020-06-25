@@ -192,8 +192,9 @@ $("#btn").click(function() {
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
                                                                 <label for="">Country<span>*</span></label>
-                                                                <input type="text"name="country" placeholder="Country"
-                                                                    class="form-control" id="">
+                                                                 <select  class="form-control" name="country">
+                                                                     <option value="AU">Australia</option>
+                                                                 </select>   
                                                             </div>
                                                         </div>
                                                        
