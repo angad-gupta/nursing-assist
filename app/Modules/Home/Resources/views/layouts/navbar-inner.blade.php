@@ -97,7 +97,7 @@
                     </div>
                 </div>
 
-                <div class="ecm-search col-sm-12 col-md-1">
+                <div class="neta-icn col-sm-12 col-md-1">
                     <ul class="list-unstyled d-flex mt-3 float-right neta-user">
                         <a href="{{ route('student-account') }}">
                             <li class="user"><img src="{{asset('home/img/user.svg')}}" alt="">
