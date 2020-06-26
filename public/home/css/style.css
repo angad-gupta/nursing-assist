@@ -474,8 +474,8 @@ header .bg-light .navbar-brand {
 }
 
 .neta-banner .item .img-fade {
-  background: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0.1)), to(rgba(0, 0, 0, 0.19)));
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.19));
+  background: -webkit-gradient(linear, left top, right top, from(rgba(179, 176, 176, 0.45)), to(rgba(0, 0, 0, 0)));
+  background: linear-gradient(90deg, rgba(179, 176, 176, 0.45), rgba(0, 0, 0, 0));
   position: absolute;
   top: 0;
   left: 0;
@@ -1630,6 +1630,62 @@ header .bg-light .navbar-brand {
   margin-bottom: 10px;
 }
 
+.neta-invoice .b-line {
+  margin: 25px 0;
+}
+
+.neta-invoice__wrap {
+  background: #fff;
+  padding: 30px;
+  margin: 30px 0;
+  width: 100%;
+}
+
+.neta-invoice__header {
+  border-bottom: 1px solid #eaeaea;
+  margin-bottom: 20px;
+}
+
+.neta-invoice .pay-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.neta-invoice .pay-box ul {
+  background: #f1f1f1;
+  margin: 10px;
+  padding: 30px;
+  text-align: center;
+}
+
+.neta-invoice .pay-box .p-pay {
+  background: #808a94;
+  color: #fff;
+}
+
+.neta-invoice__total td {
+  font-weight: 500;
+  border: 0;
+  padding: 5px;
+}
+
+.neta-invoice__total .t-top td {
+  border-top: 1px solid #dedede;
+}
+
+.neta-invoice__total .t-top .f-bold {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.neta-invoice .bank-detail {
+  margin: 30px 0;
+}
+
 a {
   text-decoration: none !important;
   color: #000;
@@ -2007,6 +2063,9 @@ a {
   margin-top: -5px !important;
 }
 
+#grad1 input {
+  color: #fff !important;
+}
 
 #grad1 .previous {
   background: #a09e9e;

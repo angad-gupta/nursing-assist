@@ -242,6 +242,8 @@ class DashboardController extends Controller
       $input = $request->all();
 
       $student_purchase_id = $input['student_purchase_id'];
+      $data['status'] = $input['status'];
+
       $data['student_puchase_info'] = $this->student->findPurchaseCourse($student_purchase_id);
 
       return view('home::student.course-invoice',$data);
