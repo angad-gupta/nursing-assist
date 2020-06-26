@@ -1,4 +1,82 @@
-@media (max-width:768px) {
+@media (max-width:992px) {
+    .navbar-light .navbar-toggler {
+        color: rgba(0,0,0,.5);
+        border-color: transparent;
+        position: absolute;
+        position: absolute;
+        right: 0;
+        top: -64px;
+    }
+    .navbar-collapse{
+        position: absolute;
+        background: rgb(255, 255, 255);
+        width: 100%;
+        left: 0;
+        top: 0;
+        z-index: 111;
+        box-shadow: 0 10px 5px #dedede;
+    }
+
+    .neta-icn{
+        position: absolute;
+        right: 60px;
+    }
+    .navbar-light .navbar-nav .nav-link{
+        color: #000;
+    }
+
+    header .bg-light .nav-item{
+        padding: 15px;
+    }
+    #vticker{
+        width: 100% !important;
+    }
+
+    .neta-courses .course-img::after{
+        right: 0;
+    }
+
+    .neta-head,.neta-head p{
+        padding: 0 !important;
+    }
+
+    .neta-banner .item .neta-bg{
+        height: 400px;
+    }
+    .neta-banner h1{
+        font-size: 36px;
+        margin-top: 15px;
+    }
+
+    .neta-banner{
+        height: 100%;
+    }
+
+    .neta-slog li{
+        font-size: 42px;
+    }
+    .neta-banner h5{
+        font-size: 16px;
+    }
+    .neta-download p{
+        padding-top: 30px;
+        font-size: 16px;
+    }
+    .neta-download .btn{
+        float: left !important;
+        margin-bottom: 20px;
+        margin-top: 0;
+
+    }
+
+    .top-info__list{
+        display: block !important;
+    }
+
+    .social-links .top-info__list{
+        justify-content: left !important;
+        padding: 5px 0;
+    }
 
    
 }
