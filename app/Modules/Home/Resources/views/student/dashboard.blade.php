@@ -1,5 +1,12 @@
 @include('home::layouts.navbar-inner')
 
+@section('scripts')
+<link href="{{asset('admin/css/components.min.css')}}" rel="stylesheet" type="text/css">
+<script src="{{asset('admin/global/js/plugins/ui/moment/moment.min.js')}}"></script>
+<script src="{{ asset('admin/global/js/plugins/pickers/daterangepicker.js')}}"></script>
+<script src="{{ asset('admin/global/js/demo_pages/picker_date.js')}}"></script>
+@stop
+
 <section class="neta-ribbon">
     <img src="img/cc.jpg" class="img-fluid" alt="">
     <div class="container">
@@ -21,6 +28,8 @@
  @php
     $image = ($student_profile->profile_pic) ? asset($student_profile->file_full_path).'/'.$student_profile->profile_pic : asset('home/img/nn.png');
  @endphp
+
+
 
 <section class="neta-dashboard section-padding">
     <div class="container">
@@ -83,7 +92,7 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="">Date of Birth</label>
-                                                {!! Form::text('dob', $value = null, ['id'=>'datepicker4','placeholder'=>'Enter DOB','class'=>'form-control']) !!}
+                                                {!! Form::text('dob', $value = null, ['id'=>'tdatepicker4','placeholder'=>'Enter DOB','class'=>'form-control daterange-single','readonly']) !!}
                                                 </div>
                                             </div>
 
