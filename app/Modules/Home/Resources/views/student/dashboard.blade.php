@@ -258,6 +258,7 @@
                                                     <th>Purchase Date</th>
                                                     <th>Total Cost ($)</th>
                                                     <th>Payment Type</th>
+                                                    <th>Invoice</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -269,6 +270,10 @@
                                                         <td width="30%">{{date('d M,Y',strtotime($my_course_val->created_at))}}</td>
                                                         <td>${{ optional($my_coursepurchase_val->courseInfo)->course_fee }}</td>
                                                         <td>eway</td>
+                                                        <td>
+                                                            <a href="{{ route('course-invoice',['student_purchase_id'=>$my_coursepurchase_val->id,'status'=>'view']) }}" class="text-success"><b>View</b></a>  | 
+                                                            <a href="{{ route('course-invoice',['student_purchase_id'=>$my_coursepurchase_val->id,'status'=>'download']) }}" class="text-success"><b>Download</b></a>
+                                                    </td>
                                                     </tr>
                                                     @endforeach
                                                 @endif  

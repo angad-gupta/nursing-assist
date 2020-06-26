@@ -234,8 +234,17 @@ class DashboardController extends Controller
         }catch(\Throwable $e){
            alertify($e->getMessage())->error();
         }
+    }
 
 
+    public function studentCourseInvoice(Request $request){
+
+      $input = $request->all();
+
+      $student_purchase_id = $input['student_purchase_id'];
+      $data['student_puchase_info'] = $this->student->findPurchaseCourse($student_purchase_id);
+
+      return view('home::student.course-invoice',$data);
 
     }
   

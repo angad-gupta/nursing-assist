@@ -19,6 +19,10 @@ use App\Modules\FAQ\Repositories\FAQInterface;
 use App\Modules\Agent\Repositories\AgentInterface;
 use App\Modules\Quiz\Repositories\QuizInterface;
 
+// Mail
+use Illuminate\Support\Facades\Mail;
+use App\Modules\Home\Emails\SendNetaMail;
+
 class HomeController extends Controller
 {
 

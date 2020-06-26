@@ -7,6 +7,9 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use App\Modules\Student\Repositories\StudentInterface;
 use App\Modules\Quiz\Repositories\QuizInterface;
+// Mail
+use Illuminate\Support\Facades\Mail;
+use App\Modules\Home\Emails\SendNetaMail;
 
 class StudentController extends Controller
 {
@@ -102,6 +105,27 @@ class StudentController extends Controller
            );
 
             $this->student->storeStudentCourse($courseData);
+
+            /* --------------------------------------------------------------- 
+                        Email Send to Student After Payment success 
+             --------------------------------------------------------------- */
+             
+             $data['studentInfo'] = $studentInfo = $this->student->find($student_id);
+             $email = $studentInfo->email;
+
+             $subject = 'Course Payment Successfully.';
+
+             $data['coursinfo'] = $studentPuchaseInfo;  
+
+             $content  = view('student::student.partial.email-content',$data)->render(); 
+
+             if (filter_var( $email, FILTER_VALIDATE_EMAIL )) {
+                 Mail::to($email)->send(new SendNetaMail($content,$subject));
+            }
+
+            /* --------------------------------------------------------------- 
+                        Email Send to Student After Payment success 
+             --------------------------------------------------------------- */
 
 
           }

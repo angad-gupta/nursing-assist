@@ -82,5 +82,6 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth:student']], function
 
 	Route::post('studentquiz/store', ['as' => 'studentquiz.store', 'uses' => 'DashboardController@studentQuizStore']);
 
+	Route::get('course-invoice', ['as' => 'course-invoice', 'uses' => 'DashboardController@studentCourseInvoice']);
 
 });
