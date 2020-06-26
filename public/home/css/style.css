@@ -340,6 +340,7 @@ header .bg-light .navbar-brand {
           transform: translateX(-10px);
   -webkit-transition: .5s all;
   transition: .5s all;
+  min-width: 220px;
 }
 
 .neta-dropdown:hover .neta-dropdown__menu {
@@ -1661,7 +1662,8 @@ a {
 }
 
 .navbar-brand img {
-  width: 180px;
+  width: 150px;
+  padding: 10px;
 }
 
 #vticker {
@@ -2007,7 +2009,6 @@ a {
   margin-top: -5px !important;
 }
 
-
 #grad1 .previous {
   background: #a09e9e;
 }
@@ -2135,5 +2136,10 @@ a {
 
 .neta-user .dropdown-toggle {
   min-height: 52px;
+}
+
+.neta-font {
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 16px !important;
 }
 /*# sourceMappingURL=style.css.map */

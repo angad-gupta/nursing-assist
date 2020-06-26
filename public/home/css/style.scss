@@ -41,7 +41,8 @@ a {
 
 .navbar-brand {
   img {
-    width: 180px;
+    width: 150px;
+    padding: 10px;
   }
 }
 
@@ -402,4 +403,10 @@ a {
   .dropdown-toggle{
     min-height: 52px;
   }
+}
+
+
+.neta-font{
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 16px !important; 
 }

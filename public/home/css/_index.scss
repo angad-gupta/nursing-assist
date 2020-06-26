@@ -143,6 +143,7 @@ header {
         visibility: visible;
         transform: translateX(-10px);
         transition: .5s all;
+        min-width: 220px;
       }
     }
   }
