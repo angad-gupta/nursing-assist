@@ -80,7 +80,6 @@
                                              <a href="{{ route('course-detail',['course_id'=>$key]) }}"><li>{{ $courselist }}</li></a>
                                             @endforeach
                                         @endif
-                                        <a href="{{ route('enrolment') }}"><li>Enrolment</li></a>
                                     </ul>
                                 </li>
                             <li class="nav-item">

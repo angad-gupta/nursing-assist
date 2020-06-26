@@ -61,7 +61,6 @@
                                     		@endforeach
                                     	@endif
                                       
-                                        <a href="{{ route('enrolment') }}"><li>Enrolment</li></a>
                                     </ul>
                                 </li>
                                 <li class="nav-item">
