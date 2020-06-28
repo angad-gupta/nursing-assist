@@ -1,4 +1,8 @@
 .neta-contact {
+    .btn {
+        background: $primary-color !important;
+        color: #fff;
+    }
     @include ttl-line();
     margin-bottom: 30px;
     &__form {
@@ -6,6 +10,7 @@
         padding: 30px;
         width: 100%;
         border-radius: 4px;
+        margin-bottom: 30px;
     }
     span {
         color: $primary-color;

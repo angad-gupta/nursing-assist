@@ -773,6 +773,7 @@ header .bg-light .navbar-brand {
 
 .neta-ribbon__content a {
   color: #fff;
+  padding-right: 5px;
 }
 
 .neta-about .ttl-line {
@@ -895,6 +896,11 @@ header .bg-light .navbar-brand {
   margin-bottom: 30px;
 }
 
+.neta-contact .btn {
+  background: #B0117E !important;
+  color: #fff;
+}
+
 .neta-contact .ttl-line {
   position: relative;
   margin-bottom: 30px;
@@ -915,6 +921,7 @@ header .bg-light .navbar-brand {
   padding: 30px;
   width: 100%;
   border-radius: 4px;
+  margin-bottom: 30px;
 }
 
 .neta-contact span {
@@ -1148,6 +1155,10 @@ header .bg-light .navbar-brand {
   color: #fff;
 }
 
+.courses-wrap .course-enrolment__content .btn {
+  color: #fff !important;
+}
+
 .courses-wrap .course-enrolment .demo {
   background: #575c63;
   margin-top: 10px;
@@ -1228,6 +1239,70 @@ header .bg-light .navbar-brand {
   position: relative;
   top: 5px;
   margin-right: 20px;
+}
+
+.my-courses {
+  margin-bottom: 30px;
+}
+
+.my-courses__list {
+  border-radius: 4px;
+  margin-bottom: 30px;
+  background: #fff;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+  cursor: pointer;
+  min-height: 120px;
+}
+
+.my-courses__list:hover {
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+  -webkit-transform: translateY(-5px);
+          transform: translateY(-5px);
+}
+
+.my-courses__list h5 {
+  font-size: 16px;
+}
+
+.my-courses__list span {
+  padding-bottom: 0;
+}
+
+.my-courses__list .list-content {
+  padding: 20px;
+}
+
+.my-courses__list .list-content a:hover {
+  color: #000;
+}
+
+.my-courses__list .btn {
+  background: #B0117E;
+  margin-top: 30px;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+}
+
+.my-courses__list .btn a {
+  color: #fff;
+}
+
+.my-courses__list .btn:hover {
+  background: #6E2F9F;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+}
+
+.my-courses__list .btn:hover a {
+  color: #fff;
+}
+
+.my-courses__list .e-btn {
+  margin-top: 0;
+  color: #fff;
+  padding: 10px 20px;
 }
 
 .neta-catlog {
@@ -1590,7 +1665,7 @@ header .bg-light .navbar-brand {
   background: #fff;
   border-radius: 4px;
   width: 100%;
-  min-height: 300px;
+  min-height: 380px;
   padding: 20px;
   margin-bottom: 30px;
 }
@@ -1600,6 +1675,14 @@ header .bg-light .navbar-brand {
   border-bottom: 1px solid #dedede;
   padding-bottom: 15px;
   font-size: 18px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.neta-agent__content h5 i {
+  padding-right: 15px;
+  font-size: 24px;
 }
 
 .neta-agent__content ul li {
@@ -1628,6 +1711,7 @@ header .bg-light .navbar-brand {
   margin-left: 40px;
   display: block;
   margin-bottom: 10px;
+  word-break: break-all;
 }
 
 .neta-invoice .b-line {
@@ -1875,79 +1959,6 @@ a {
           box-shadow: 0 0 20px #efefef;
 }
 
-.my-courses {
-  margin-bottom: 30px;
-}
-
-.my-courses__list {
-  border-radius: 4px;
-  margin-bottom: 30px;
-  background: #fff;
-  -webkit-transition: 0.5s all;
-  transition: 0.5s all;
-  cursor: pointer;
-}
-
-.my-courses__list:hover {
-  background: #B0117E;
-  -webkit-transition: 0.5s all;
-  transition: 0.5s all;
-  color: #fff;
-  -webkit-transform: translateY(-5px);
-          transform: translateY(-5px);
-}
-
-.my-courses__list:hover a {
-  color: #fff;
-}
-
-.my-courses__list:hover .btn {
-  background: #fff;
-  color: #000;
-}
-
-.my-courses__list:hover .btn:hover {
-  color: #fff;
-}
-
-.my-courses__list h5 {
-  font-size: 16px;
-}
-
-.my-courses__list span {
-  padding-bottom: 0;
-}
-
-.my-courses__list .list-content {
-  padding: 20px;
-}
-
-.my-courses__list .btn {
-  background: #B0117E;
-  margin-top: 30px;
-  -webkit-transition: 0.5s all;
-  transition: 0.5s all;
-}
-
-.my-courses__list .btn a {
-  color: #fff;
-}
-
-.my-courses__list .btn:hover {
-  background: #6E2F9F;
-  -webkit-transition: 0.5s all;
-  transition: 0.5s all;
-}
-
-.my-courses__list .btn:hover a {
-  color: #fff;
-}
-
-.my-courses__list .e-btn {
-  margin-top: 0;
-  color: #fff;
-}
-
 .neta-payment {
   color: #000 !important;
 }
@@ -2062,10 +2073,6 @@ a {
 
 #grad1 .btn {
   margin-top: -5px !important;
-}
-
-#grad1 input {
-  color: #fff !important;
 }
 
 #grad1 .previous {
@@ -2215,7 +2222,29 @@ a {
 }
 
 .neta-font li p {
-  padding-left: 30px !important;
+  padding-left: 15px !important;
   margin: 0 !important;
+}
+
+.neta-limit {
+  font-size: 16px;
+  font-weight: 200;
+  color: #272424;
+  text-align: left;
+  height: 54px;
+  line-height: 18px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+.neta-action .view {
+  color: #4284d6 !important;
+}
+
+.neta-action .download {
+  color: #e0b720 !important;
 }
 /*# sourceMappingURL=style.css.map */

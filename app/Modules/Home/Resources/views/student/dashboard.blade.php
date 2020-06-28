@@ -251,7 +251,7 @@
                                 <p>All the purchase history are as below</p>
                                 <div class="tp-list">
                                     <div class="row">
-                                        <table class="table table-striped agent-package">
+                                        <table class="table table-striped">
                                             <thead>
                                                 <tr>
                                                     <th>Course Name</th>
@@ -269,12 +269,13 @@
                                                         <td>{{ optional($my_coursepurchase_val->courseInfo)->course_program_title }}</td>
                                                         <td width="30%">{{date('d M,Y',strtotime($my_coursepurchase_val->created_at))}}</td>
                                                         <td>${{ optional($my_coursepurchase_val->courseInfo)->course_fee }}</td>
-                                                        <td>{{ ($my_coursepurchase_val->status == 'Pending') ? 'Other' : 'eway' }}</td>
-                                                        <td>
+
+                                                         <td>{{ ($my_coursepurchase_val->status == 'Pending') ? 'Other' : 'eway' }}</td>
+                                                        <td class="neta-action">
                                                             @if($my_coursepurchase_val->status == 'Paid')
-                                                            <a href="{{ route('course-invoice',['student_purchase_id'=>$my_coursepurchase_val->id,'status'=>'view']) }}" class="text-success" target="_blank"><b>View</b></a>  | 
-                                                            <a href="{{ route('course-invoice',['student_purchase_id'=>$my_coursepurchase_val->id,'status'=>'download']) }}" class="text-success" target="_blank"><b>Download</b></a>
-                                                           @endif 
+                                                            <a href="{{ route('course-invoice',['student_purchase_id'=>$my_coursepurchase_val->id,'status'=>'view']) }}" class="text-success view" target="_blank"><i class="fa fa-eye"></i>View</a>  | 
+                                                            <a href="{{ route('course-invoice',['student_purchase_id'=>$my_coursepurchase_val->id,'status'=>'download']) }}" class="text-success download" target="_blank"><i class="fa fa-download"></i>Download</a>
+                                                            @endif 
                                                     </td>
                                                     </tr>
                                                     @endforeach

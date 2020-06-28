@@ -25,7 +25,7 @@
 <section class="neta-contact section-padding">
     <div class="container">
         <div class="row">
-            <div class="col-sm-7">
+            <div class="col-sm-12 col-md-12 col-lg-7">
                 <div class="neta-contact__form">
                     <h2 class="ttl-line">Get In Touch</h2>
                     @if($message)
@@ -78,7 +78,7 @@
 
                 </div>
             </div>
-            <div class="col-sm-5">
+            <div class="col-sm-12 col-md-12 col-lg-5">
                 <div class="neta-contact__form">
                     <h2 class="ttl-line">Address</h2>
                     <ul class="list-unstyled">
