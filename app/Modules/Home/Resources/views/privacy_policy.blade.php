@@ -26,7 +26,7 @@
 
                  <div class="courses-wrap__content neta-about">
                     <h2 class="ttl-line">Privacy Policy</h2>
-                    <div class="oba-introduction b-line">
+                    <div class="oba-introduction b-line neta-bullet neta-font">
                         {!! ($privacy_policy['short_content']) ? $privacy_policy['short_content'] : $privacy_policy['description'] !!}
 
                     </div>

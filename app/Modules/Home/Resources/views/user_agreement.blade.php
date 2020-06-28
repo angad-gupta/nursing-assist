@@ -26,7 +26,7 @@
 
                    <div class="courses-wrap__content neta-about">
                     <h2 class="ttl-line">User Agreement</h2>
-                    <div class="oba-introduction b-line">
+                    <div class="oba-introduction b-line neta-bullet neta-font">
                         {!! ($user_agreement['short_content']) ? $user_agreement['short_content'] : $user_agreement['description'] !!}
 
                     </div>

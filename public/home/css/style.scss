@@ -42,7 +42,8 @@ a {
 
 .navbar-brand {
   img {
-    width: 180px;
+    width: 150px;
+    padding:10px;
   }
 }
 
@@ -407,6 +408,22 @@ a {
   }
 }
 
-.abc{
-  background:red
+.neta-font{
+  p,span{
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 16px !important;
+}
+li{
+  list-style-type:none;
+  display: flex;
+  margin: 15px 0 !important;
+  &:before{
+    font-family: monospace;
+  }
+  p{
+    padding-left: 30px !important;
+    margin: 0 !important;
+  }
+}
+
 }

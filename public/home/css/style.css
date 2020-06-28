@@ -288,7 +288,7 @@ header .bg-light .navbar-brand {
   visibility: hidden;
   -webkit-transition: .5s all;
   transition: .5s all;
-  min-width: 150px;
+  min-width: 220px;
 }
 
 .neta-dropdown__menu li {
@@ -1717,7 +1717,8 @@ a {
 }
 
 .navbar-brand img {
-  width: 180px;
+  width: 150px;
+  padding: 10px;
 }
 
 #vticker {
@@ -2196,7 +2197,25 @@ a {
   min-height: 52px;
 }
 
-.abc {
-  background: red;
+.neta-font p, .neta-font span {
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 16px !important;
+}
+
+.neta-font li {
+  list-style-type: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 15px 0 !important;
+}
+
+.neta-font li:before {
+  font-family: monospace;
+}
+
+.neta-font li p {
+  padding-left: 30px !important;
+  margin: 0 !important;
 }
 /*# sourceMappingURL=style.css.map */
