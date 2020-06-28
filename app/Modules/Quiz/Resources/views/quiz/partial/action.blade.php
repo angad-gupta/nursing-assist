@@ -26,7 +26,7 @@
                         <span class="input-group-prepend">
                             <span class="input-group-text"><i class="icon-toggle"></i></span>
                         </span>
-                          {!! Form::select('quiz_section',[ 'Mockup'=>'Mockup','Practise'=>'Practise'], $value = null, ['placeholder'=>'Select Quiz Section','id'=>'quiz_section','class'=>'form-control' ]) !!}   
+                          {!! Form::select('quiz_section',[ 'Mockup'=>'Mockup Test','Practise'=>'Practise Test'], $value = null, ['placeholder'=>'Select Quiz Section','id'=>'quiz_section','class'=>'form-control' ]) !!}   
 
                         </div>
                     </div>
