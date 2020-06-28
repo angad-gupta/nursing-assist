@@ -19,6 +19,7 @@ class CourseInfo extends Model
     	'course_program_title',
         'course_program_sub_title',
         'course_duration_period',
+        'is_course_package',
         'course_intake_title',
     	'short_content',
         'description',

@@ -85,6 +85,19 @@
             </div>
         </div>
 
+          <div class="col-lg-6">
+            <div class="row">
+                <label class="col-form-label col-lg-3">Is Course Package:</label>
+                <div class="col-lg-9 form-group-feedback form-group-feedback-right">
+                    <div class="input-group">
+                         {!! Form::select('is_course_package',[ '0'=>'No','1'=>'Yes'], $value = null, ['id'=>'is_course_package','class'=>'form-control' ]) !!} 
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
 
     </div>
 
