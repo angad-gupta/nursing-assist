@@ -130,14 +130,14 @@
  <div class="row">
     <div class="col-lg-3">
         <div class="row">
-            <label class="col-form-label col-lg-3">Option 1:</label>
+            <label class="col-form-label col-lg-3">Option A:</label>
             <div class="col-lg-9 form-group-feedback form-group-feedback-right">
                 <div class="input-group">
                     <span class="input-group-prepend">
                         <span class="input-group-text"><i class="icon-list2"></i>
                         </span>
                     </span>
-                    {!! Form::text('option_1', $value = null, ['id'=>'option_1','placeholder'=>'Enter Option 1','class'=>'form-control']) !!}
+                    {!! Form::text('option_1', $value = null, ['id'=>'option_1','placeholder'=>'Enter Option A','class'=>'form-control']) !!}
                 </div>
             </div>
         </div>
@@ -145,14 +145,14 @@
 
     <div class="col-lg-3">
         <div class="row">
-            <label class="col-form-label col-lg-3">Option 2:</label>
+            <label class="col-form-label col-lg-3">Option B:</label>
             <div class="col-lg-9 form-group-feedback form-group-feedback-right">
                 <div class="input-group">
                     <span class="input-group-prepend">
                         <span class="input-group-text"><i class="icon-list2"></i>
                         </span>
                     </span>
-                    {!! Form::text('option_2', $value = null, ['id'=>'option_2','placeholder'=>'Enter Option 2','class'=>'form-control']) !!}
+                    {!! Form::text('option_2', $value = null, ['id'=>'option_2','placeholder'=>'Enter Option B','class'=>'form-control']) !!}
                 </div>
             </div>
         </div>
@@ -160,14 +160,14 @@
 
     <div class="col-lg-3">
         <div class="row">
-            <label class="col-form-label col-lg-3">Option 3:</label>
+            <label class="col-form-label col-lg-3">Option C:</label>
             <div class="col-lg-9 form-group-feedback form-group-feedback-right">
                 <div class="input-group">
                     <span class="input-group-prepend">
                         <span class="input-group-text"><i class="icon-list2"></i>
                         </span>
                     </span>
-                    {!! Form::text('option_3', $value = null, ['id'=>'option_3','placeholder'=>'Enter Option 3','class'=>'form-control']) !!}
+                    {!! Form::text('option_3', $value = null, ['id'=>'option_3','placeholder'=>'Enter Option C','class'=>'form-control']) !!}
                 </div>
             </div>
         </div>
@@ -175,14 +175,14 @@
 
     <div class="col-lg-3">
         <div class="row">
-            <label class="col-form-label col-lg-3">Option 4:</label>
+            <label class="col-form-label col-lg-3">Option D:</label>
             <div class="col-lg-9 form-group-feedback form-group-feedback-right">
                 <div class="input-group">
                     <span class="input-group-prepend">
                         <span class="input-group-text"><i class="icon-list2"></i>
                         </span>
                     </span>
-                    {!! Form::text('option_4', $value = null, ['id'=>'option_4','placeholder'=>'Enter Option 4','class'=>'form-control']) !!}
+                    {!! Form::text('option_4', $value = null, ['id'=>'option_4','placeholder'=>'Enter Option D','class'=>'form-control']) !!}
                 </div>
             </div>
         </div>
@@ -200,11 +200,39 @@
             <div class="form-group row">
                 <label class="col-form-label col-lg-4">Correct Answer:</label>
                     <div class="col-lg-8">
-                       <div class="input-group">
+                       <div class="input-group"> 
                         <span class="input-group-prepend">
                             <span class="input-group-text"><i class="icon-checkmark4"></i></span>
                         </span>
-                         {!! Form::select('multiple_correct_option',[ 'option_1'=>'Option 1','option_2'=>'Option 2','option_3'=>'Option 3','option_4'=>'Option 4'], $value = $multiple_value, ['placeholder'=>'Select Correct Answer','id'=>'correct_option','class'=>'form-control' ]) !!}  
+
+
+                        @php 
+                        $select_1 = "";
+                        $select_2 = "";
+                        $select_3 = "";
+                        $select_4 = "";
+                        @endphp
+
+                        @if($is_edit)
+                            @if(isset($quiz))
+                            @php
+                                $correct_val = json_decode($quiz->correct_option);  
+                                if($correct_val){
+                                    $select_1 = (in_array('option_a',$correct_val)) ?  "selected='selected'" : "";
+                                    $select_2 = (in_array('option_b',$correct_val)) ?  "selected='selected'" : "";
+                                    $select_3 = (in_array('option_c',$correct_val)) ?  "selected='selected'" : "";
+                                    $select_4 = (in_array('option_d',$correct_val)) ?  "selected='selected'" : "";
+                                }
+                            @endphp
+                            @endif
+                        @endif
+
+                        <select class="form-control multiselect" name="multiple_correct_option[]" multiple='multiple' data-fouc>
+                            <option value="option_a" {{$select_1}}>Option A</option>
+                            <option value="option_b" {{$select_2}}>Option B</option>
+                            <option value="option_c" {{$select_3}}>Option C</option>
+                            <option value="option_d" {{$select_4}}>Option D</option>
+                        </select>
                         </div>
                     </div>
             </div>

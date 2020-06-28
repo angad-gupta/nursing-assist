@@ -36,14 +36,29 @@
 
 				
 				@if(sizeof($quiz_history)>0)
-                    @foreach($quiz_history as $key => $answer)
+                    @foreach($quiz_history as $keys => $answer)
                     @php
-                     $key = $key +1; 
-                     $option_val= $answer->answer;
+                     $keys = $keys +1; 
+                     if (preg_match('/[\[\]\'^£$%&*()}{@#~?><>,|=_+¬-]/', $answer->answer))
+						{
+							$multipl_ans = json_decode($answer->answer);
+                    		$prefix = $option_val = '';
+                    		foreach($multipl_ans as $key => $ans){
+                    		 	$value = explode("_", $ans);
+                    			$answer_list = $value[0].' '.$value[1];  
+
+                    			$option_val .= $prefix . ucwords($answer_list);
+								$prefix = ', ';
+                    		}
+
+						}else{
+							$option_val= $answer->answer; 
+						}
+                     
                     @endphp
 					
 					<div class="col-sm-4"> 
-						<span>Q{{$key}}. {{ optional($answer->quizInfo)->$option_val}}</span> 
+						<span>Q{{$keys}}. {{ $option_val }}</span> 
 					</div> 
 
 					@endforeach

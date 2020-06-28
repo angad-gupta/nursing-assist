@@ -6,6 +6,8 @@
 <!-- Theme JS files -->
 <script src="{{asset('admin/global/js/plugins/forms/styling/uniform.min.js')}}"></script>
 <script src="{{asset('admin/global/js/demo_pages/form_inputs.js')}}"></script>
+<script src="{{asset('admin/global/js/plugins/forms/selects/bootstrap_multiselect.js')}}"></script>
+<script src="{{asset('admin/global/js/demo_pages/form_multiselect.js')}}"></script>
 <script src="{{ asset('admin/validation/quiz.js')}}"></script>
 <!-- /theme JS files -->
 

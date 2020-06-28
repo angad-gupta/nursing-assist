@@ -50,28 +50,28 @@
                                          @if($question->question_type == 'multiple')
                                          <div class="col-sm-6">
                                              <div class="e-input">
-                                                 <input type="radio" name="question_option_{{$key}}[]" value="option_1" required />
+                                                 <input type="checkbox" name="question_option_{{$key}}[]" value="option_a" />
                                                  <label for="">A. {{ $question->option_1 }}
                                                  </label>
                                              </div>
                                          </div>
                                          <div class="col-sm-6">
                                              <div class="e-input">
-                                                 <input type="radio" name="question_option_{{$key}}[]" value="option_2" />
+                                                 <input type="checkbox" name="question_option_{{$key}}[]" value="option_b" />
                                                  <label for="">B. {{ $question->option_2 }}
                                                  </label>
                                              </div>
                                          </div>
                                          <div class="col-sm-6">
                                              <div class="e-input">
-                                                 <input type="radio" name="question_option_{{$key}}[]" value="option_3" />
+                                                 <input type="checkbox" name="question_option_{{$key}}[]" value="option_c" />
                                                  <label for="">C. {{ $question->option_3 }}
                                                  </label>
                                              </div>
                                          </div>
                                          <div class="col-sm-6">
                                              <div class="e-input">
-                                                 <input type="radio" name="question_option_{{$key}}[]" value="option_4" />
+                                                 <input type="checkbox" name="question_option_{{$key}}[]" value="option_d" />
                                                  <label for="">D. {{ $question->option_4 }}
                                                  </label>
                                              </div>
@@ -119,6 +119,7 @@
                     @endif
 
                     {{ Form::hidden('courseinfo_id', $courseinfoId) }}
+                    {{ Form::hidden('course_content_id', $course_content_id) }}
 
                 @if($general_quiz->total() != 0)
                      <div class="col-sm-6 neta-about">

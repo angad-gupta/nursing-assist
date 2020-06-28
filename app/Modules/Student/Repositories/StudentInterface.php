@@ -30,11 +30,11 @@ interface StudentInterface
    public function storeStudentCourse($data);  
 
 
-   public function checkQuizForCourseInfo($student_id, $couseinfoid);
+   public function checkQuizForCourseInfo($student_id, $courseContentId);
 
    public function saveQuizHistory($quizdata);
-   public function getquizHistory($student_id,$courseinfo_id);
-   public function getcorrectAnswer($student_id,$courseinfo_id);
+   public function getquizHistory($student_id,$course_content_id);
+   public function getcorrectAnswer($student_id,$course_content_id);
 
    public function saveQuizResult($quizdata);
 

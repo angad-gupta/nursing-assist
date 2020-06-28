@@ -40,28 +40,28 @@
 		                        
 		                        <div class="col-sm-6">
 		                            <div class="e-input">
-		                                <input type="radio" name="rd" placeholder="Email Id" />
+		                                <input type="checkbox" name="rd" placeholder="Email Id" />
 		                                <label for="">A. {{ $question->option_1 }}
 		                                </label>
 		                            </div>
 		                        </div>
 		                        <div class="col-sm-6">
 		                            <div class="e-input">
-		                                <input type="radio" name="rd" placeholder="Email Id" />
+		                                <input type="checkbox" name="rd" placeholder="Email Id" />
 		                                <label for="">B. {{ $question->option_2 }}
 		                                </label>
 		                            </div>
 		                        </div>
 		                        <div class="col-sm-6">
 		                            <div class="e-input">
-		                                <input type="radio" name="rd" placeholder="Email Id" />
+		                                <input type="checkbox" name="rd" placeholder="Email Id" />
 		                                <label for="">C. {{ $question->option_3 }}
 		                                </label>
 		                            </div>
 		                        </div>
 		                        <div class="col-sm-6">
 		                            <div class="e-input">
-		                                <input type="radio" name="rd" placeholder="Email Id" />
+		                                <input type="checkbox" name="rd" placeholder="Email Id" />
 		                                <label for="">D. {{ $question->option_4 }}
 		                                </label>
 		                            </div>
@@ -93,14 +93,25 @@
 		                        </div>
 		                       
 		                        <div class="col-sm-12 correct_ans" style="display: none;">
+		            
 		                        	@php
+		                        	
 		                        	if($question->question_type =='multiple'){
-		                        		$value = explode("_", $question->correct_option);
+		                        		$multipl_ans = json_decode($question->correct_option);
+		                        		$answer = '';
+		                        		$prefix = $answerList = '';
+		                        		foreach($multipl_ans as $key => $ans){
+		                        		 	$value = explode("_", $ans);
+		                        			$answer_list = $value[0].' '.$value[1];  
 
-		                        		$answer =(array_key_exists("1",$value)) ?  $value[0].' '.$value[1] : $value[0];
+		                        			$answerList .= $prefix . ucwords($answer_list);
+    										$prefix = ', ';
+		                        		}
+		                        		
 		                        	}
-		                        	$correct_answer = ($question->question_type == 'true_false') ? ucfirst($question->correct_option) : $answer; 
+		                        	$correct_answer = ($question->question_type == 'true_false') ? ucfirst($question->correct_option) : $answerList; 
 		                        	@endphp
+
 		                            <div class="demo-ans1">
 		                              <p>The Correct Answer is  <span>{{ $correct_answer}}</span></p>
 		                              <h6>Explanation</h6>

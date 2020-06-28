@@ -28,14 +28,14 @@
                     <p>Find your Courses and explode your knowledge through online and evaluate with taking online Practise Tests.</p>
                     <div class="row">
                         
-                         @if($student_course)
+                         @if($student_course) 
                             @foreach($student_course as $key => $my_course_val)
 
                             @php
                                 $k = $key+1;
                                 $imgfluid = asset('home/img/c' .$k. '.png'); 
 
-                                $total_syllabus = App\Modules\CourseContent\Entities\CourseContent::gettotalsyllabus($my_course_val->id);
+                                $total_syllabus = App\Modules\CourseContent\Entities\CourseContent::gettotalsyllabus($my_course_val->courseinfo_id);
                             @endphp
 
                             <div class="col-sm-6 col-md-4 col-lg-3">
@@ -45,7 +45,7 @@
                                     <h5>{{ optional($my_course_val->courseInfo)->course_program_title }}</h5>
                                     <span>{{$total_syllabus}} syllabus</span>
                                     <div class="neta-limit"> <p>{!! optional($my_course_val->courseInfo)->short_content !!} </p> </div>
-                                     <button class="btn e-btn w-100"><a href="{{ route('syllabus-detail',['course_info_id'=>$my_course_val->id]) }}">View syllabus</a></button>
+                                     <button class="btn e-btn w-100"><a href="{{ route('syllabus-detail',['course_info_id'=>$my_course_val->courseinfo_id]) }}">View syllabus</a></button>
                                     </div>
                                 </div>
                             </div>

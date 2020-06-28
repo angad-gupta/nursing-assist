@@ -98,9 +98,9 @@ class DashboardController extends Controller
 
     public function studentCourse(){
         $id = Auth::guard('student')->user()->id;
-        $data['student_course'] = $this->student->getStudentCourse($id);
+        $data['student_course'] = $this->student->getStudentCourse($id); 
 
-        $data['other_course'] = $this->courseinfo->findAll(); 
+        $data['other_course'] = $this->courseinfo->findAll();  
         return view('home::student.courses',$data);
     }
 
@@ -152,18 +152,21 @@ class DashboardController extends Controller
         $input= $request->all();
         
         $student_id = Auth::guard('student')->user()->id; 
-        $courseinfoId = $input['course_info_id'];
+        $courseContentId = $input['course_content_id'];
 
-        $checkQuiz = $this->student->checkQuizForCourseInfo($student_id, $courseinfoId); 
+        $lessonInfo = $this->coursecontent->find($courseContentId);
+
+        $checkQuiz = $this->student->checkQuizForCourseInfo($student_id, $courseContentId); 
         if ($checkQuiz > 0) {
-            
+
             Flash('Practise Test Already Taken.Please Proceed Next Course.')->success();
-            return redirect(route('syllabus-detail',['course_info_id'=>$courseinfoId]));
+            return redirect(route('syllabus-detail',['course_info_id'=>$lessonInfo->course_info_id]));
 
         }
 
-        $data['general_quiz'] = $this->quiz->getGeneralById($courseinfoId,10);
-        $data['courseinfoId'] = $courseinfoId;
+        $data['general_quiz'] = $this->quiz->getGeneralById($courseContentId,10);
+        $data['courseinfoId'] = $lessonInfo->course_info_id;
+        $data['course_content_id'] = $courseContentId;
 
        return view('home::student.general-quiz',$data);
     }
@@ -171,8 +174,12 @@ class DashboardController extends Controller
     public function studentQuizStore(Request $request){
         $input = $request->all();
 
+  dd('i am here');
+
         $student_id = Auth::guard('student')->user()->id; 
         $courseinfo_id = $input['courseinfo_id'];
+        $course_content_id = $input['course_content_id'];
+
 
         try{
             $m =1;
@@ -184,12 +191,13 @@ class DashboardController extends Controller
                         
 
                         $quiz_id =$input['quiz_id'][$i];
-                        $question_option =$input['question_option_'.$m][0];
+                        $question_option = json_encode($input['question_option_'.$m]);
 
                          $quizdata['student_id'] = $student_id;
                          $quizdata['courseinfo_id'] = $courseinfo_id;
+                         $quizdata['course_content_id'] = $course_content_id;
                          $quizdata['quiz_id'] = $input['quiz_id'][$i];
-                         $quizdata['answer'] = $input['question_option_'.$m][0];  
+                         $quizdata['answer'] = json_encode($input['question_option_'.$m]);
 
                          $checkAnswer = $this->quiz->checkCorrectAnswer($quiz_id,$question_option);
 
@@ -204,8 +212,8 @@ class DashboardController extends Controller
                     }
                 }
 
-             $quiz_history = $this->student->getquizHistory($student_id,$courseinfo_id);   
-             $correct_answer = $this->student->getcorrectAnswer($student_id,$courseinfo_id);   
+             $quiz_history = $this->student->getquizHistory($student_id,$course_content_id);   
+             $correct_answer = $this->student->getcorrectAnswer($student_id,$course_content_id);   
 
              $total_question = count($quiz_history);
              $correct_percent = ($correct_answer / $total_question) * 100;
@@ -215,10 +223,10 @@ class DashboardController extends Controller
              $data['correct_answer'] = $correct_answer;
              $data['incorrect_answer'] = $total_question - $correct_answer ;
 
-
              $quiz_result = array(
                     'student_id' => $student_id,
-                    'courseinfo_id'=> $courseinfo_id,    
+                    'courseinfo_id'=> $courseinfo_id,  
+                    'course_content_id' =>$course_content_id,   
                     'date'=> date('Y-m-d'),
                     'total_question'=> $total_question,
                     'score'=> $correct_answer,

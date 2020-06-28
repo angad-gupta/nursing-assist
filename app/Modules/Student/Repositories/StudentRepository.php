@@ -85,20 +85,20 @@ class StudentRepository implements StudentInterface
         return StudentCourse::create($data);
    }  
 
-    public function checkQuizForCourseInfo($student_id, $couseinfoid){
-        return StudentQuizResult::where('student_id','=',$student_id)->where('courseinfo_id','=',$couseinfoid)->count();
+    public function checkQuizForCourseInfo($student_id, $courseContentId){
+        return StudentQuizResult::where('student_id','=',$student_id)->where('course_content_id','=',$courseContentId)->count();
     }
 
     public function saveQuizHistory($quizdata){
         return StudentQuizHistory::create($quizdata);
     }
 
-    public function getquizHistory($student_id,$courseinfo_id){
-        return StudentQuizHistory::where('student_id','=',$student_id)->where('courseinfo_id','=',$courseinfo_id)->get();
+    public function getquizHistory($student_id,$course_content_id){
+        return StudentQuizHistory::where('student_id','=',$student_id)->where('course_content_id','=',$course_content_id)->get();
     }
 
-    public function getcorrectAnswer($student_id,$courseinfo_id){
-        return StudentQuizHistory::where('student_id','=',$student_id)->where('courseinfo_id','=',$courseinfo_id)->where('is_correct_answer','=','1')->count();
+    public function getcorrectAnswer($student_id,$course_content_id){
+        return StudentQuizHistory::where('student_id','=',$student_id)->where('course_content_id','=',$course_content_id)->where('is_correct_answer','=','1')->count();
     
     }
 

@@ -13,6 +13,7 @@ class StudentQuizHistory extends Model
 
     	'student_id',
     	'courseinfo_id',
+        'course_content_id',
     	'quiz_id',
     	'answer',
     	'is_correct_answer'

@@ -12,6 +12,7 @@ class StudentQuizResult extends Model
 
     	'student_id',
     	'courseinfo_id',	
+        'course_content_id',
     	'date',
     	'total_question',
     	'score',

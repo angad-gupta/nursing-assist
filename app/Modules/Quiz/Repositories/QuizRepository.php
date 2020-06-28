@@ -71,13 +71,13 @@ class QuizRepository implements QuizInterface
         return $result; 
     }
 
-    public function getGeneralById($couseinfoId,$limit, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1]){
+    public function getGeneralById($courseContentId,$limit, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1]){
 
          $result =Quiz::when(array_keys($filter, true), function ($query) use ($filter) {         
             
 
-        })
-            ->where('category','=','General')->Where('course_content_id','=',$couseinfoId)->inRandomOrder()->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+        }) 
+            ->where('category','=','General')->Where('course_content_id','=',$courseContentId)->inRandomOrder()->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
 
         return $result;
 
@@ -85,9 +85,7 @@ class QuizRepository implements QuizInterface
 
 
     public function checkCorrectAnswer($quiz_id,$answer){
-         return Quiz::where('id','=',$quiz_id)->where('correct_option','=',$answer)->count();
+         return Quiz::where('id','=',$quiz_id)->where('correct_option','like',$answer)->count();
     }
 
 }
-
-

@@ -29,7 +29,7 @@ class CourseContent extends Model
     }
 
 
-    public function Courseplan()
+    public function Courseplan() 
     {
         return $this->hasMany(CoursePlan::class, 'course_content_id');
     }
@@ -42,7 +42,7 @@ class CourseContent extends Model
         return $this->belongsTo(Syllabus::class,'syllabus_id','id');
     }
 
-    static function gettotalsyllabus($couseinfoid){
+    static function gettotalsyllabus($couseinfoid){ 
         return CourseContent::where('course_info_id', '=', $couseinfoid)->groupBy('syllabus_id')->count();
     }
 

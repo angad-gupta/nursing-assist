@@ -51,15 +51,16 @@ class QuizController extends Controller
      */
     public function store(Request $request)
     {
-         $data = $request->all();
+         $data = $request->all(); 
          $question_type = $data['question_type'];
          try{ 
 
             if($question_type == 'multiple'){
-                $data['correct_option'] = $data['multiple_correct_option'];
+                $data['correct_option'] = json_encode($data['multiple_correct_option']);
             }else{
                  $data['correct_option'] = $data['single_correct_option'];
             }
+
             $quizInfo = $this->quiz->save($data);
            
             alertify()->success('Quiz Created Successfully');
@@ -92,11 +93,11 @@ class QuizController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->all();  //dd($data);
+        $data = $request->all();  
          $question_type = $data['question_type'];
          try{ 
              if($question_type == 'multiple'){
-                $data['correct_option'] = $data['multiple_correct_option'];
+                $data['correct_option'] = json_encode($data['multiple_correct_option']);
             }else{
                  $data['correct_option'] = $data['single_correct_option'];
             }
