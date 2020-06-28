@@ -2222,8 +2222,11 @@ a {
 }
 
 .neta-font li p {
-  padding-left: 15px !important;
   margin: 0 !important;
+}
+
+.neta-font li p span {
+  padding-left: 30px !important;
 }
 
 .neta-limit {

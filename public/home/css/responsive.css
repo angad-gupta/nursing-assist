@@ -84,7 +84,6 @@
     .neta-download .btn{
         float: left !important;
         margin-bottom: 20px;
-        margin-top: 0;
 
     }
 
@@ -110,7 +109,17 @@
     .courses-wrap .course-enrolment__content{
         margin-bottom: 20px !important;
     }
+    
+    .neta-courses__content .col-lg-5{
+        margin: 30px 0;
+    }
 
+    .neta-banner .item .neta-play img{
+        width: 36px;
+    }
+    .neta-courses .course-img img{
+        margin: 20px 0;
+    }
    
 }
 

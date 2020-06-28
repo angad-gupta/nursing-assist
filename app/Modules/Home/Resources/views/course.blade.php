@@ -18,11 +18,9 @@
     </div>
 </section>
 
-<section class="neta-courses">
-    <div class="container section-padding">
+<section class="neta-courses section-padding">
+    <div class="container">
         <div class="row">
-
-           
            @if(sizeof($course)>0)
                 @foreach($course as $key => $course_val)
 
@@ -34,13 +32,13 @@
 
                     <div class="col-sm-12 neta-courses__content">
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-12 col-md-12 col-lg-6">
                                 <h5 class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">{{ $course_val->title }}</h5>
                                 <p class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".75s">{!! $course_val->short_content !!}
                                 </p>
                                 <button class="btn btn-neta"><a href="{{ route('course-detail',['course_id'=>$course_val->id]) }}">Learn More</a></button>
                             </div>
-                            <div class="col-sm-5 offset-1">
+                            <div class="col-sm-12 col-md-12 col-lg-5 offset-1">
                                 <div class="course-img wow animated fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">
                                     <img src="{{ $image }}" alt="" class="img-fluid">
                                 </div>

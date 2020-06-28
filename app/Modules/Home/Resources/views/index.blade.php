@@ -215,13 +215,13 @@
 
         	<div class="col-sm-12 neta-courses__content">
 				<div class="row">
-					<div class="col-sm-6">
+					<div class="col-sm-12 col-md-12 col-lg-6">
 						<h5 class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">{{ $course_val->title }}</h5>
 						<p class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".75s">{!! $course_val->short_content !!}
 						</p>
 						<button class="btn btn-neta"><a href="{{ route('course-detail',['course_id'=>$course_val->id]) }}">Learn More</a></button>
 					</div>
-					<div class="col-sm-5 offset-1">
+					<div class="col-sm-12 col-md-12 col-lg-5 offset-1">
 						<div class="course-img wow animated fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">
 							<img src="{{ $image }}" alt="" class="img-fluid">
 						</div>
@@ -234,13 +234,13 @@
 
         	<div class="col-sm-12 neta-courses__content">
 				<div class="row">
-					<div class="col-sm-5">
+					<div class="col-sm-12 col-md-12 col-lg-6">
 						<div class="course-img-rev wow animated fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">
 							<img src="{{ $image }}" alt="" class="img-fluid">
 						</div>
 					</div>
 
-					<div class="col-sm-6 offset-1">
+					<div class="col-sm-12 col-md-12 col-lg-5 offset-1">
 						<h5 class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">{{ $course_val->title }}</h5>
 						<p class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".75s">{!! $course_val->short_content !!}
 						</p>
@@ -318,13 +318,13 @@
 		<div class="row">
 			<div class="col-sm-12 neta-courses__content">
 				<dov class="row">
-					<div class="col-sm-6">
+					<div class="col-sm-12 col-md-12 col-lg-6">
 						<h5 class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">About NETA</h5>
 						<p class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".75s">{!! ($about_neta) ? $about_neta['short_content'] : '' !!}
 						</p>
 						<button class="btn btn-neta"><a href="{{ route('about-us') }}">Learn More</a></button>
 					</div>
-					<div class="col-sm-5 offset-1">
+					<div class="col-sm-12 col-md-12 col-lg-5 offset-1">
 						<div class="course-img wow animated fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">
 							<iframe width="100%" height="300" src="https://www.youtube.com/embed/ZBXfkINlRF0"
 							frameborder="0"
@@ -339,14 +339,14 @@
 </div>
 </section>
 
-<section class="neta-selfcheck">
-	<div class="container wow animated fadeInUp" data-wow-duration=".5s" data-wow-delay=".5s">
+<section class="neta-selfcheck wow animated fadeInUp" data-wow-duration=".5s" data-wow-delay=".5s">
+	<div class="container" >
 		<div class="row">
-			<div class="col-sm-8">
+			<div class="col-sm-12 col-md-12 col-lg-8">
 				<h3>OBA Preparation Class</h3>
 				<p>No documentation needed, no English test. Just self check – for free.To know if you are eligible, commence your self check</p>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-12 col-md-12 col-lg-4">
 				<a href="https://www.nursingmidwiferyboard.gov.au/Registration-and-Endorsement/International/Completing-the-Self-check.aspx" target="_blank"><button class="btn btn-neta float-right">Self Check</button></a>
 			</div>
 		</div>
