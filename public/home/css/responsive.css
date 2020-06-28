@@ -1,4 +1,8 @@
 @media (max-width:992px) {
+
+    .neta-banner .btn-neta{
+        width: 185px;
+    }
     .navbar-light .navbar-toggler {
         color: rgba(0,0,0,.5);
         border-color: transparent;
@@ -32,24 +36,38 @@
         width: 100% !important;
     }
 
-    .neta-courses .course-img::after{
+    .neta-courses .course-img::after,.neta-courses .course-img::before{
         right: 0;
+        display: none;
+    }
+   
+    .neta-career .neta-head{
+        margin:  0 !important;
     }
 
-    .neta-head,.neta-head p{
-        padding: 0 !important;
+    .neta-courses .neta-head{
+        margin: 40px 0 !important;
+    }
+
+  .neta-head p{
+        padding: 15px
     }
 
     .neta-banner .item .neta-bg{
         height: 400px;
     }
     .neta-banner h1{
-        font-size: 36px;
+        font-size: 24px;
         margin-top: 15px;
     }
 
     .neta-banner{
         height: 100%;
+    }
+
+    .career-bg img{
+        height: 100%;
+        object-fit:cover
     }
 
     .neta-slog li{
@@ -76,6 +94,27 @@
     .social-links .top-info__list{
         justify-content: left !important;
         padding: 5px 0;
+        display: flex!important;
+    }
+
+    footer{
+        padding-top: 60px;
+    }
+    .neta-selfcheck .container{
+        padding:30px
+    }
+    .neta-selfcheck .container .btn{
+        float: left !important;
+    }
+    .courses-wrap .course-enrolment__content{
+        margin-bottom: 20px !important;
+    }
+    
+    .neta-ribbon h1{
+        font-size: 24px;
+    }
+    .neta-ribbon li{
+        font-size: 12px;
     }
 
    

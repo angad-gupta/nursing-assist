@@ -38,14 +38,14 @@
                                 $total_syllabus = App\Modules\CourseContent\Entities\CourseContent::gettotalsyllabus($my_course_val->id);
                             @endphp
 
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <div class="my-courses__list">
                                     <img src="{{ $imgfluid }}" class="img-fluid" alt="">
                                     <div class="list-content">
                                     <h5>{{ optional($my_course_val->courseInfo)->course_program_title }}</h5>
                                     <span>{{$total_syllabus}} syllabus</span>
-                                    <p>{!! optional($my_course_val->courseInfo)->short_content !!} </p>
-                                     <button class="btn e-btn"><a href="{{ route('syllabus-detail',['course_info_id'=>$my_course_val->id]) }}">View syllabus</a></button>
+                                    <div class="neta-limit"> <p>{!! optional($my_course_val->courseInfo)->short_content !!} </p> </div>
+                                     <button class="btn e-btn w-100"><a href="{{ route('syllabus-detail',['course_info_id'=>$my_course_val->id]) }}">View syllabus</a></button>
                                     </div>
                                 </div>
                             </div>
@@ -77,14 +77,14 @@
                                 $total_syllabus = App\Modules\CourseContent\Entities\CourseContent::gettotalsyllabus($course_val->id);
                             @endphp
 
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <div class="my-courses__list">
                                     <img src="{{ $imgfluid }}" class="img-fluid" alt="">
                                     <div class="list-content">
                                     <h5>{{ $course_val->course_program_title }}</h5>
                                     <span>{{$total_syllabus}}  syllabus</span>
                                      <p>{!! optional($course_val->courseInfo)->short_content !!} </p>
-                                    <button class="btn e-btn"><a href="{{ route('enrolment',['course_info_id'=>$course_val->id]) }}">Enroll</a></button>
+                                    <button class="btn e-btn w-100"><a href="{{ route('enrolment',['course_info_id'=>$course_val->id]) }}">Enroll</a></button>
                                     </div>
                                 </div>
                             </div>

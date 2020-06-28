@@ -5,7 +5,7 @@
 <footer>
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-3">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 				<h5>Online CPD</h5>
 				<ul class="list-unstyled">
 					<a href="#"><li>CPD Courses</li> </a>
@@ -16,7 +16,7 @@
 				</ul>
 			</div>
 
-			<div class="col-sm-3">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 				<h5>Features</h5>
 				<ul class="list-unstyled">
 					<a href="#"><li>Overview</li> </a>
@@ -25,7 +25,7 @@
 				</ul>
 			</div>
 
-			<div class="col-sm-3">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 				<h5>Company</h5>
 				<ul class="list-unstyled">
 					<a href="{{ route('about-us') }}"><li>About Us</li> </a>
@@ -36,7 +36,7 @@
 				</ul>
 			</div>
 
-			<div class="col-sm-3">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 				<h5>Legals</h5>
 				<ul class="list-unstyled">
 					<a href="#"><li>My Account</li> </a>
@@ -47,10 +47,10 @@
 				</ul>
 			</div>
 
-			<div class="col-sm-9">
+			<div class="col-sm-12 col-md-12 col-lg-9">
 				<p class="copyright">{{$setting->company_copyright}}</p>
 			</div>
-			<div class="col-sm-3">
+			<div class="col-sm-12 col-md-12 col-sm-3">
 				<div class="social-links">
 					<div class="top-info__list d-flex pt-2">
 						<div class="ml-2"><a href="{{$setting->facebook_link}}"><img src="{{asset('home/img/fb.svg')}}" alt=""></a></div>

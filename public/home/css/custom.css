@@ -279,3 +279,8 @@ select.list-dt {
 .card a{
     color: #1FD2CC;
 }
+
+.agent-package a{
+    color: #306bd4;
+    text-decoration: underline !important;
+  }

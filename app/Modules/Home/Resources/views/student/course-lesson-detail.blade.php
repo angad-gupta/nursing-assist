@@ -9,9 +9,9 @@
                     <h1 class="mb-0">Student Hub</h1>
                     <ul class="list-unstyled d-flex">
                         <li> <a href="{{ route('home') }}">Home  >> </a></li>
-                        <li> <a href="{{ route('student-courses') }}">Courses >></a></li>
-                        <li> <a href="{{ route('syllabus-detail',['course_info_id'=>$course_info_id]) }}">Syllabus >></a></li>
-                        <li> <a href="{{ route('lesson-detail',['syllabus_id'=>$syllabus_id,'course_info_id'=>$course_info_id]) }}">Lesson Plan >></a></li>
+                        <li> <a href="{{ route('student-courses') }}"> Courses >> </a></li>
+                        <li> <a href="{{ route('syllabus-detail',['course_info_id'=>$course_info_id]) }}"> Syllabus >> </a></li>
+                        <li> <a href="{{ route('lesson-detail',['syllabus_id'=>$syllabus_id,'course_info_id'=>$course_info_id]) }}">Lesson Plan >> </a></li>
                         <li>Couse Plan</li>
                     </ul>
                 </div>
@@ -54,7 +54,7 @@
                                     <div class="course-day">
                                         <span>Important Link</span>
                                         <ul class="list-unstyled">
-                                            <li class="d-flex b-line">
+                                            <li class="d-flex">
                                                 <a href="{{ $lesson_detail->content_path}}" target="_blank">{{ $lesson_detail->content_path}}</a>
                                             </li>
                                         </ul>

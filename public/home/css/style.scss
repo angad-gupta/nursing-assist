@@ -184,47 +184,6 @@ a {
   }
 }
 
-.my-courses {
-  margin-bottom: 30px;
-  &__list {
-    border-radius: 4px;
-    margin-bottom: 30px;
-    background: #fff;
-    transition: 0.5s all;
-    cursor: pointer;
-    &:hover {
-      background: $primary-color;
-      transition: 0.5s all;
-      color: #fff;
-      transform: translateY(-5px);
-      a {
-        color: #fff;
-      }
-      .btn{
-        background:#fff;
-        color: #000;
-        &:hover{
-          color: #fff;
-        }
-      }
-    }
-    h5 {
-      font-size: 16px;
-    }
-    span {
-      padding-bottom: 0;
-    }
-    .list-content {
-      padding: 20px;
-    }
-    @include e-btn();
-    .e-btn {
-      margin-top: 0;
-      color: #fff;
-    }
-  }
-}
-
 .neta-payment {
   color: #000 !important;
   table {
@@ -307,9 +266,6 @@ a {
   @include e-btn();
   .btn {
     margin-top: -5px !important;
-  }
-  input {
-    color: #fff !important;
   }
   .previous {
     background: #a09e9e;
@@ -421,9 +377,33 @@ li{
     font-family: monospace;
   }
   p{
-    padding-left: 30px !important;
+    padding-left: 15px !important;
     margin: 0 !important;
   }
 }
+}
+
+.neta-limit{
+  font-size: 16px;
+  font-weight: 200;
+  color: #272424;
+  text-align: left;
+  height: 54px;
+  line-height: 18px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+.neta-action{
+  .view{
+    color:#4284d6!important
+  }
+
+  .download{
+    color:#e0b720!important
+  }
 
 }
