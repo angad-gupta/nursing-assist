@@ -194,6 +194,10 @@ $("#btn").click(function() {
                                                                 <label for="">Country<span>*</span></label>
                                                                  <select  class="form-control" name="country">
                                                                      <option value="au">Australia</option>
+                                                                     <option value="ph">Philippines</option>
+                                                                     <option value="np">Nepal</option>
+                                                                     <option value="in">India</option>
+                                                                     <option value="au">Other</option>
                                                                  </select>   
                                                             </div>
                                                         </div>
@@ -293,7 +297,8 @@ $("#btn").click(function() {
                                                     </div>
                                                     <div class="" id="msform">
 
-                                                        <button class="btn action-button">Make Payment</button>
+                                                        <button class="btn action-button" name="sbumit_enrol" value="payment">Make Payment</button>
+                                                        <button class="btn action-button" name="sbumit_enrol" value="pay_later">Pay Later</button>
                                                     </div>
                                                 </div>
                                     </div>
