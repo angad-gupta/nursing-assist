@@ -1,6 +1,5 @@
 @include('home::layouts.navbar-inner')
 @section('scripts')
-<<<<<<< HEAD
 <script type="text/javascript">
    
 $("#btn").click(function() {
@@ -133,7 +132,7 @@ $("#btn").click(function() {
                                                         <div class="col-sm-4">
                                                             <div class="form-group">
                                                                  <label for="">Title<span>*</span></label>
-                                                                 <select name="title" class="form-control border-0" id="title" >
+                                                                 <select name="title" class="form-control" id="title" >
                                                                     <option value="Mr." selected="">Mr</option>
                                                                     <option value="Ms.">Ms</option>
                                                                     <option value="Mrs.">Mrs</option>

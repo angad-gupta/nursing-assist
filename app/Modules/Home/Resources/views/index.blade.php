@@ -171,7 +171,7 @@
                             <p>{{$course_enrol->enrol_title }}</p>
                             <h2>${{$course_enrol->course_fee}} inc. GST</h2>
                             <span>({{$course_enrol->payment_mode }})</span>
-                            <button class="btn w-100"><a href="{{ route('enrolment',['course_info_id'=>$course_enrol->id]) }}">Enroll</a></button>
+                            <a href="{{ route('enrolment',['course_info_id'=>$course_enrol->id]) }}" class="btn w-100">Enroll</a>
                         </div>
                     </div>
              	@endforeach
@@ -188,7 +188,7 @@
                 <p>Learn by taking a Demo Quiz! This quiz will give you a signal of how much you know, or do not know, about Related Courses.</p>
             </div>
             <div class="col-sm-4">
-                <button class="btn btn-neta float-right"><a href="{{ route('demo-quiz') }}">Take a Demo Quiz</a></button>
+               <a href="{{ route('demo-quiz') }}" class="btn btn-neta float-right">Take a Demo Quiz</a>
             </div>
         </div>
     </div>
@@ -260,14 +260,13 @@
 	</div>
 </section>
 
-<section class="neta-career">
-	<div class="container section-padding">
+<section class="neta-career section-padding">
+	<div class="container">
 		<div class="neta-head text-center m-5">
 			<h4 class="mb-0">Ready for the Next Chapter in your Career ?</h4>
 			<p>Nursing Education and Training Australia (NETA) will help you get there!</p>
 		</div>
 		<div class="row">
-
 			@if($course)
             	@foreach($course as $key => $course_val)
 
@@ -278,7 +277,6 @@
             	@endphp
             		<div class="col-sm-4">
 						<div class="neta-career__content">
-							
 							<a href="{{ route('course-detail',['course_id'=>$course_val->id]) }}">
 								<figure>
 									<div class="career-bg">
