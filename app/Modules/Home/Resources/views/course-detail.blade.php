@@ -18,8 +18,8 @@
     </div>
 </section>
 
-<section class="courses-wrap">
-    <div class="container section-padding">
+<section class="courses-wrap section-padding">
+    <div class="container">
         <div class="row">
             <div class="col-sm-8">
                 <div class="courses-wrap__content neta-about">

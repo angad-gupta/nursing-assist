@@ -377,8 +377,11 @@ li{
     font-family: monospace;
   }
   p{
-    padding-left: 15px !important;
+    // padding-left: 15px !important;
     margin: 0 !important;
+    span{
+      padding-left: 30px !important;
+    }
   }
 }
 }
