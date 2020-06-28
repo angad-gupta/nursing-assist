@@ -348,6 +348,7 @@ header {
     transition: 0.5s all;
     overflow: hidden;
     cursor: pointer;
+    margin-bottom: 20px;
     &:hover .career-bg img {
       transform: scale(1.2);
       transition: 0.5s all;
@@ -397,9 +398,9 @@ header {
   min-height: 155px;
   p {
     color: #fff;
-    padding-top: 65px;
-    font-size: 18px;
-    font-weight: 500
+    padding-top: 50px;
+    font-size: 16px;
+
   }
   .btn-neta {
     @include btn-neta();

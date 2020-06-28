@@ -38,7 +38,7 @@
                                 $total_syllabus = App\Modules\CourseContent\Entities\CourseContent::gettotalsyllabus($my_course_val->id);
                             @endphp
 
-                            <div class="col-sm-3">
+                            <div class="col-sm-6 col-md-4 col-lg-3">
                                 <div class="my-courses__list">
                                     <img src="{{ $imgfluid }}" class="img-fluid" alt="">
                                     <div class="list-content">
@@ -77,7 +77,7 @@
                                 $total_syllabus = App\Modules\CourseContent\Entities\CourseContent::gettotalsyllabus($course_val->id);
                             @endphp
 
-                            <div class="col-sm-3">
+                            <div class="col-sm-6 col-md-4 col-lg-3">
                                 <div class="my-courses__list">
                                     <img src="{{ $imgfluid }}" class="img-fluid" alt="">
                                     <div class="list-content">

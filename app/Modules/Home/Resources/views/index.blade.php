@@ -169,7 +169,7 @@
                     <div class="col-sm-4">
                         <div class="course-enrolment__content m-0">
                             <p>{{$course_enrol->enrol_title }}</p>
-                            <h2>${{$course_enrol->course_fee}} inc. GST</h2>
+                            <h2>${{$course_enrol->course_fee}} <p> inc. GST </p> </h2>
                             <span>({{$course_enrol->payment_mode }})</span>
                             <a href="{{ route('enrolment',['course_info_id'=>$course_enrol->id]) }}" class="btn w-100">Enroll</a>
                         </div>
@@ -188,7 +188,7 @@
                 <p>Learn by taking a Demo Quiz! This quiz will give you a signal of how much you know, or do not know, about Related Courses.</p>
             </div>
             <div class="col-sm-4">
-               <a href="{{ route('demo-quiz') }}" class="btn btn-neta float-right">Take a Demo Quiz</a>
+               <a href="{{ route('demo-quiz') }}" class="btn btn-neta float-right">Take a Demo</a>
             </div>
         </div>
     </div>

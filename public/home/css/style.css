@@ -630,6 +630,7 @@ header .bg-light .navbar-brand {
   transition: 0.5s all;
   overflow: hidden;
   cursor: pointer;
+  margin-bottom: 20px;
 }
 
 .neta-career__content:hover .career-bg img {
@@ -710,9 +711,8 @@ header .bg-light .navbar-brand {
 
 .neta-download p {
   color: #fff;
-  padding-top: 65px;
-  font-size: 18px;
-  font-weight: 500;
+  padding-top: 50px;
+  font-size: 16px;
 }
 
 .neta-download .btn-neta {
@@ -1121,7 +1121,7 @@ header .bg-light .navbar-brand {
 .courses-wrap .course-enrolment__content p {
   color: #B0117E;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .courses-wrap .course-enrolment__content h2 {
@@ -2242,6 +2242,8 @@ a {
 
 .neta-action .view {
   color: #4284d6 !important;
+  display: block;
+  margin-bottom: 5px;
 }
 
 .neta-action .download {
