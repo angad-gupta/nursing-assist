@@ -65,7 +65,7 @@
                                     <div class="course-day">
                                         <span>Youtube Link</span>
                                         <ul class="list-unstyled">
-                                            <li class="d-flex b-line">
+                                            <li class="d-flex">
                                                 <a href="https://www.youtube.com/watch?v={{ $lesson_detail->content_path}}" target="_blank">https://www.youtube.com/watch?v={{ $lesson_detail->content_path}}</a>
                                             </li>
                                         </ul>
@@ -100,7 +100,7 @@
                                     <div class="course-day">
                                         <span>Important Link</span>
                                         <ul class="list-unstyled">
-                                            <li class="d-flex b-line">
+                                            <li class="d-flex">
                                                 <a href="{{ $plan->plan_path}}" target="_blank">{{ $plan->plan_path}}</a>
                                             </li>
                                         </ul>
@@ -111,7 +111,7 @@
                                     <div class="course-day">
                                         <span>Youtube Link</span>
                                         <ul class="list-unstyled">
-                                            <li class="d-flex b-line">
+                                            <li class="d-flex">
                                                 <a href="https://www.youtube.com/watch?v={{ $plan->plan_path}}" target="_blank">https://www.youtube.com/watch?v={{ $plan->plan_path}}</a>
                                             </li>
                                         </ul>

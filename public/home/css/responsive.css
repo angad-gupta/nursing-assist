@@ -10,6 +10,7 @@
         position: absolute;
         right: 0;
         top: -64px;
+        outline: none;
     }
     .navbar-collapse{
         position: absolute;
@@ -109,13 +110,6 @@
     .courses-wrap .course-enrolment__content{
         margin-bottom: 20px !important;
     }
-    
-    .neta-ribbon h1{
-        font-size: 24px;
-    }
-    .neta-ribbon li{
-        font-size: 12px;
-    }
 
    
 }
@@ -133,8 +127,13 @@
    
 }
 
-@media(min-width:768px) {
-
+@media(max-width:768px) {
+    .neta-ribbon h1{
+        font-size: 30px;
+    }
+    .neta-ribbon li{
+        font-size: 12px;
+    }
     
 }
 
