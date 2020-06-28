@@ -108,4 +108,9 @@ class CourseInfoRepository implements CourseInfoInterface
         return CourseInfo::where($field, $value);
     }
 
+    public function getCoursePackage($course_id, $courseinfo_id){
+        return CourseInfo::where('course_id','=',$course_id)->where('id','!=',$courseinfo_id)->get();
+    }
+
+
 }

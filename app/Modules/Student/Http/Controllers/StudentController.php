@@ -7,6 +7,8 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use App\Modules\Student\Repositories\StudentInterface;
 use App\Modules\Quiz\Repositories\QuizInterface;
+use App\Modules\CourseInfo\Repositories\CourseInfoInterface;
+
 // Mail
 use Illuminate\Support\Facades\Mail;
 use App\Modules\Home\Emails\SendNetaMail;
@@ -15,11 +17,13 @@ class StudentController extends Controller
 {
     protected $StudentController;
     protected $quiz;
+    protected $courseinfo;
     
-    public function __construct(StudentInterface $student, QuizInterface $quiz)
+    public function __construct(StudentInterface $student, QuizInterface $quiz, CourseInfoInterface $courseinfo)
     {
         $this->student = $student;
         $this->quiz = $quiz;
+        $this->courseinfo = $courseinfo;
     }
     /**
      * Display a listing of the resource.
@@ -99,12 +103,35 @@ class StudentController extends Controller
 
            $studentPuchaseInfo =  $this->student->findPurchaseCourse($payment_id); 
 
-           $courseData = array(
+           $course_info_id = $studentPuchaseInfo->courseinfo_id;
+           $courseInfo = $this->courseinfo->find($course_info_id);
+           $is_package = $courseInfo->is_course_package;
+
+           if($is_package == 1){
+                $course_id = $courseInfo->course_id;
+                $course_package = $this->courseinfo->getCoursePackage($course_id,$course_info_id);
+
+                foreach ($course_package as $key => $pack_val) {
+                    
+                    $courseData = array(
+                        'student_id' => $student_id,
+                        'courseinfo_id' =>$pack_val->id
+                    );
+
+                    $this->student->storeStudentCourse($courseData);
+                }
+
+           }else{
+
+             $courseData = array(
                 'student_id' => $studentPuchaseInfo->student_id,
                 'courseinfo_id' =>$studentPuchaseInfo->courseinfo_id
-           );
+            );
 
             $this->student->storeStudentCourse($courseData);
+
+           }
+          
 
             /* --------------------------------------------------------------- 
                         Email Send to Student After Payment success 

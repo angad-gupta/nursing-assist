@@ -38,4 +38,6 @@ interface CourseInfoInterface
 
     public function where($field, $value);
 
+    public function getCoursePackage($course_id, $courseinfo_id);
+
 }
