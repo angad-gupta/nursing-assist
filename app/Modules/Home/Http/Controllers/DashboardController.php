@@ -46,7 +46,7 @@ class DashboardController extends Controller
         $data['announcement'] = $this->announcement->findAll($limit=5);  
         $data['message'] = $this->message->getSendMessageByUser($id, $limit=5);  
         $data['student_course'] = $this->student->getStudentCourse($id);
-        $data['student_course_purchase'] = $this->student->getStudentPurchase($id);
+        $data['student_course_purchase'] = $this->student->getStudentPurchase($id);  
 
         return view('home::student.dashboard',$data);
     }

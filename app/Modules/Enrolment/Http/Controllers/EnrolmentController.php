@@ -54,7 +54,9 @@ class EnrolmentController extends Controller
     }
     public function store(Request $request)
     {
-         $data = $request->all();
+         $data = $request->all();  
+
+         $submit = $data['sbumit_enrol'];
 
          if($data['eligible_rd'] == 'is_eligible_mcq_osce')
          {
@@ -79,12 +81,17 @@ class EnrolmentController extends Controller
          {
             $data['is_id'] = 1;
          }
-         else
+         else 
          {
           $data['is_id'] = 0;
          }
          $student_detail = auth()->guard('student')->user();
          $data['student_id'] = $student_detail->id;
+
+         $courseinfo_id = $data['courseinfo_id'];
+         $courseInfo = $this->courseinfo->find($courseinfo_id);    
+         $total_course_fee = $courseInfo->course_fee;
+
          try{
 
              $enrolmentData = array(
@@ -116,6 +123,26 @@ class EnrolmentController extends Controller
           }
 
             $enrolment = $this->enrolment->save($enrolmentData);
+
+            if($submit == 'pay_later'){
+
+                $studentPaymentData = array(
+                    'student_id'=>$data['student_id'],
+                    'courseinfo_id'=>$data['courseinfo_id'],
+                    'enrolment_payment_id'=>null,
+                    'status' => 'Pending',
+                    'moved_to_student' => 0,
+                    'total_course_fee' =>$total_course_fee,
+                    'amount_paid' => '0',
+                    'amount_left' => $total_course_fee
+                );
+               
+                $studentpayment = $this->studentpayment->save($studentPaymentData);
+
+                alertify()->success('You have Successfully enrol Course. We will contact you soon.');
+                return redirect(route('student-dashboard'));
+            }
+
             $enrolment_id = $enrolment->id;
             $courseinfo_id = $this->courseinfo->where('id', $data['courseinfo_id'])->first();
             $amount = Session::put('amount', $courseinfo_id->course_fee);
@@ -218,7 +245,10 @@ class EnrolmentController extends Controller
                 'student_id'=>$enrolpayment_info->enrolmentinfo->student_id,
                 'courseinfo_id'=>$enrolpayment_info->enrolmentinfo->courseinfo_id,
                 'enrolment_payment_id'=>$enrolpayment_info->id,
-                'status' => 'Paid'
+                'status' => 'Paid',
+                'total_course_fee' => $totalAmount,
+                'amount_paid' => $totalAmount,
+                'amount_left' => '0'
                 );
            $studentpayment = $this->studentpayment->save($studentPaymentData);
 

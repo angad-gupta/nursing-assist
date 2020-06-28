@@ -138,6 +138,47 @@ class StudentController extends Controller
         return redirect(route('studentpurchase.index',['student_id'=> $student_id]));
     }
 
+
+    public function courseInstallment(Request $request){
+        $input = $request->all(); 
+
+        $amount_paid = $input['amount_paid']; // 1000
+
+        $student_id = $input['student_id'];
+        $payment_id = $input['payment_id'];
+
+         try{ 
+
+         $studentPuchaseInfo =  $this->student->findPurchaseCourse($payment_id); 
+         $total_course_fee = $studentPuchaseInfo->total_course_fee;
+         $amount_left = $studentPuchaseInfo->amount_left;
+
+         $amountPaid = $studentPuchaseInfo->amount_paid + $amount_paid;
+
+         $amt_remaining = $amount_left - $amount_paid;
+
+         $status = ($amt_remaining == 0) ? 'Paid' : 'Partially Paid'; 
+
+         $payment_data = array(
+
+            'amount_paid' => $amountPaid,
+            'amount_left' => $amt_remaining,
+            'status' => $status
+         );
+
+         $this->student->updatePaymentStatus($payment_id, $payment_data);
+
+          alertify()->success('Student Payment Updated Successfully');
+        }catch(\Throwable $e){
+            alertify($e->getMessage())->error();
+        }
+        
+        return redirect(route('studentpurchase.index',['student_id'=> $student_id]));
+
+    }
+
+
+
     /**
      * Remove the specified resource from storage.
      * @param int $id
