@@ -1717,8 +1717,7 @@ a {
 }
 
 .navbar-brand img {
-  width: 150px;
-  padding: 10px;
+  width: 180px;
 }
 
 #vticker {
@@ -2195,5 +2194,9 @@ a {
 
 .neta-user .dropdown-toggle {
   min-height: 52px;
+}
+
+.abc {
+  background: red;
 }
 /*# sourceMappingURL=style.css.map */
