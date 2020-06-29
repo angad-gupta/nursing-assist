@@ -68,7 +68,7 @@ class StudentController extends Controller
 
 
 
-    public function studentAuthenticate(StudentLoginFormRequest $request)
+    public function studentAuthenticate(Request $request)
     {
         $data = $request->all('email', 'password','source','course_info_id');  
 
