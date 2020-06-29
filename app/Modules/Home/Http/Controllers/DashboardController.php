@@ -183,7 +183,7 @@ class DashboardController extends Controller
                   $this->student->deletePreviousQuizResult($previous_quiz_id);
                   $this->student->deletePreviousQuizHistory($student_id, $course_info_id, $previous_course_content_id);
 
-                  Flash('You have score atleast 80%.Pleast Retake Practice Test Again')->success();
+                  Flash('You have to score atleast 80% from previous Quiz.Pleast Retake Practice Test Again')->success();
                   return redirect(route('syllabus-detail',['course_info_id'=>$lessonInfo->course_info_id]));
 
                }
