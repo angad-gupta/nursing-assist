@@ -32,7 +32,7 @@
                     @if($lesson_info)
                         @foreach($lesson_info as $key => $lesson_val)
 
-                        <div class="col-sm-4">
+                        <div class="col-sm-12 col-md-6 col-lg-4">
                             <div class="my-courses__list">
                                 <div class="list-content">
                                     <a href="{{ route('lesson-plan-detail',['course_content_id'=>$lesson_val,'course_info_id'=>$course_info_id,'syllabus_id'=>$syllabus_id]) }}">

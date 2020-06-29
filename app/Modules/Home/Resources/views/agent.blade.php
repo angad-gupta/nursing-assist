@@ -30,7 +30,7 @@
 
          @if(sizeof($agent)>0)
             @foreach($agent as $key => $agent_val)
-              <div class="col-sm-4">
+              <div class="col-sm-12 col-md-6 col-lg-4">
                   <div class="neta-agent__content">
                     <h5><i class="fa fa-user-circle-o" aria-hidden="true"></i> {{ $agent_val->agent_name }}</h5>
                     <ul class="list-unstyled">

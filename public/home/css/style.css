@@ -79,6 +79,10 @@ p {
   }
 }
 
+.neta-selfcheck {
+  display: contents;
+}
+
 .neta-selfcheck .container {
   background: #B0117E;
   padding: 60px;
@@ -2251,5 +2255,13 @@ a {
 
 .neta-action .download {
   color: #e0b720 !important;
+}
+
+.nl-d .btn {
+  color: #fff !important;
+}
+
+.nl-d span {
+  padding-bottom: 5px;
 }
 /*# sourceMappingURL=style.css.map */
