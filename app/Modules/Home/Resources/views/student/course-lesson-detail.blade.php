@@ -21,7 +21,7 @@
     </div>
 </section>
 
-<section class="neta-about neta-lesson student-hub section-padding">
+<section class="neta-about neta-lesson nl-d student-hub section-padding">
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
@@ -43,8 +43,8 @@
                                     <div class="course-day">
                                         <span>Attachment</span>
                                         <ul class="list-unstyled">
-                                            <li class="d-flex b-line">
-                                                <button class="btn e-btn mt-0 w-15"><a href="{{ asset($lesson_detail->file_full_path).'/'.$lesson_detail->content_path }}" target="_blank"> <i class="fa fa-download"></i> Download PPT/Pdf</a></button>
+                                            <li class="d-flex">
+                                                <a class="btn e-btn mt-0 w-15" href="{{ asset($lesson_detail->file_full_path).'/'.$lesson_detail->content_path }}" target="_blank"> <i class="fa fa-download"></i> Download PPT/Pdf</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -89,8 +89,8 @@
                                     <div class="course-day">
                                         <span>Attachment</span>
                                         <ul class="list-unstyled">
-                                            <li class="d-flex b-line">
-                                                <button class="btn e-btn mt-0 w-15"><a href="{{ asset($plan->file_full_path).'/'.$plan->plan_path }}" target="_blank"> <i class="fa fa-download"></i> Download PPT/Pdf</a></button>
+                                            <li class="d-flex">
+                                               <a class="btn e-btn mt-0 w-15" href="{{ asset($plan->file_full_path).'/'.$plan->plan_path }}" target="_blank"> <i class="fa fa-download"></i> Download PPT/Pdf</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -154,8 +154,8 @@
                                                         <div class="course-day">
                                                             <span>Attachment</span>
                                                             <ul class="list-unstyled">
-                                                                <li class="d-flex b-line">
-                                                                    <button class="btn e-btn mt-0 w-15"><a href="{{ asset($sub_topic->file_full_path).'/'.$sub_topic->sub_topic_path }}" target="_blank"> <i class="fa fa-download"></i> Download PPT/Pdf</a></button>
+                                                                <li class="d-flex">
+                                                                    <a class="btn e-btn mt-0 w-15" href="{{ asset($sub_topic->file_full_path).'/'.$sub_topic->sub_topic_path }}" target="_blank"> <i class="fa fa-download"></i> Download PPT/Pdf</a>
                                                                 </li>
                                                             </ul>
                                                         </div>

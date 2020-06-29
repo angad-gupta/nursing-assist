@@ -42,7 +42,7 @@
                                 $total_lesson = App\Modules\CourseContent\Entities\CourseContent::gettotallesson($syllabi_val->syllabus_id,$course_info_id);
                             @endphp
 
-                        <div class="col-sm-3">
+                        <div class="col-sm-12 col-md-6 col-lg-3">
                             <div class="my-courses__list">
                                  <div class="list-content">
                                     <a href="{{ route('lesson-detail',['syllabus_id'=>$syllabi_val->syllabus_id,'course_info_id'=>$course_info_id]) }}">

@@ -21,7 +21,7 @@
 <section class="courses-wrap section-padding">
     <div class="container">
         <div class="row">
-            <div class="col-sm-8">
+            <div class="col-sm-12 col-md-12 col-lg-8">
                 <div class="courses-wrap__content neta-about">
                     <h2 class="ttl-line">{{$course_detail->title}} Courses</h2>
                     <div class="oba-introduction b-line">
@@ -95,7 +95,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-12 col-md-12 col-lg-4">
                 <div class="course-summary neta-about">
                     <h4 class="ttl-line">Course Summary</h4>
                     <ul class="list-unstyled">

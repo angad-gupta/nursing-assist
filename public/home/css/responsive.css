@@ -120,6 +120,15 @@
     .neta-courses .course-img img{
         margin: 20px 0;
     }
+    .courses-wrap__content{
+        padding: 0;
+    }
+    .courses-wrap .intake-date .col-sm-8{
+        padding: 30px;
+    }
+    .courses-wrap .intake-date__content .btn{
+        width: 100% !important;
+    }
    
 }
 
