@@ -18,6 +18,7 @@ class CourseContent extends Model
     	'lesson_title',
     	'lesson_summary',
         'is_related_to_quiz',
+        'sort_order',
     	'content_type',
     	'content_path' 
 

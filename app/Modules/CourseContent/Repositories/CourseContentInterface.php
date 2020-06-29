@@ -23,4 +23,8 @@ interface CourseContentInterface
 
     public function getAllLesson($courseinfoid, $syllabiid);
     
+    public function checkOrderByField($order,$course_info_id,$syllabus_id);
+    
+    public function getPreviousData($course_info_id,$syllabus_id,$previous_order);
+
 }

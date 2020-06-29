@@ -66,6 +66,27 @@
 
     </div>
 
+       <div class="row">
+
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-3">Sort Order:<span class="text-danger">*</span></label>
+                    <div class="col-lg-9">
+                        <div class="input-group">
+                        <span class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-sort-numeric-asc"></i></span>
+                        </span>
+                            {!! Form::text('sort_order', $value = null, ['placeholder'=>'Enter Sort Order','class'=>'sort_order form-control numeric','required'=>'required']) !!}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+   
+
     <div class="row">
         <div class="col-md-12">
             <div class="form-group row">
@@ -251,6 +272,36 @@
             }
 
          });
+
+
+          $('.sort_order').on('keyup',function(){
+            var order = $(this).val();
+            var course_info_id = $('#course_info_id').val();
+            var syllabus_id = $('#syllabus_id').val();
+            var token = $("input[name='_token']").val();
+            $.ajax({
+                url: "<?php echo route('check-course-content-order-ajax') ?>",
+                method: 'POST',
+                context: this,
+                data: {order:order,course_info_id:course_info_id,syllabus_id:syllabus_id, _token:token},
+                success: function(data) {
+                    if(data == 1){
+                        $('.sort_order').val('');
+                        $('.sort_order').addClass('alpha-danger text-danger border-danger');
+                        $('.sort_order').removeClass('alpha-success text-success border-success');
+                        $('.sort_order').parent().parent().last().append('<em id="normal-order-error" class="text-danger error help-block">Order Already Taken.</em>');
+                        $('.error').delay(2000).fadeOut('slow');
+
+                    }else{
+                        $('.sort_order').addClass('alpha-success text-success border-success');
+                        $('.sort_order').removeClass('alpha-danger text-danger border-danger');
+                        $('#normal-order-error').html('');parent().parent().last().replaceWith('');
+                    }
+                }
+            });
+
+        });
+
     });
 
 </script>

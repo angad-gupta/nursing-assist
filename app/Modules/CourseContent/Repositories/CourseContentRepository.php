@@ -64,6 +64,13 @@ class CourseContentRepository implements CourseContentInterface
         return CourseContent::where('course_info_id','=',$courseinfoid)->where('syllabus_id','=',$syllabiid)->orderBy('id','ASC')->get();
     }
 
+    public function checkOrderByField($order,$course_info_id,$syllabus_id){
+        return CourseContent::where('sort_order','=',$order)->where('course_info_id','=',$course_info_id)->where('syllabus_id','=',$syllabus_id)->count();
+    }
+
+    public function getPreviousData($course_info_id,$syllabus_id,$previous_order){
+         return CourseContent::where('course_info_id','=',$course_info_id)->where('syllabus_id','=',$syllabus_id)->where('sort_order','=',$previous_order)->get()->first();
+    }
 
 
 

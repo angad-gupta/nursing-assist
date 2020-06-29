@@ -153,6 +153,8 @@ class DashboardController extends Controller
         
         $student_id = Auth::guard('student')->user()->id; 
         $courseContentId = $input['course_content_id'];
+        $syllabus_id = $input['syllabus_id'];
+        $course_info_id = $input['course_info_id'];
 
         $lessonInfo = $this->coursecontent->find($courseContentId);
 
@@ -164,6 +166,35 @@ class DashboardController extends Controller
 
         }
 
+        $sort_order = $lessonInfo->sort_order;
+        $previous_order = ($lessonInfo->sort_order > 1) ? $sort_order -1 : $sort_order ; 
+        $previousCourseontentInfo = $this->coursecontent->getPreviousData($course_info_id,$syllabus_id,$previous_order);
+
+        $previous_course_content_id = $previousCourseontentInfo->id;
+        $previous_quiz_result = $this->student->previousQuizData($student_id, $previous_course_content_id);
+        
+        if($previous_course_content_id != $courseContentId){
+              
+            if(!is_null($previous_quiz_result)){
+               $pervious_quiz_percent = $previous_quiz_result->percent;
+               $previous_quiz_id = $previous_quiz_result->id;
+               if($pervious_quiz_percent < 80){
+                  
+                  $this->student->deletePreviousQuizResult($previous_quiz_id);
+                  $this->student->deletePreviousQuizHistory($student_id, $course_info_id, $previous_course_content_id);
+
+                  Flash('You have score atleast 80%.Pleast Retake Practice Test Again')->success();
+                  return redirect(route('syllabus-detail',['course_info_id'=>$lessonInfo->course_info_id]));
+
+               }
+
+            }else{
+                 Flash('You haven\'t taken previous Lesson Practice Test.')->success();
+                return redirect(route('syllabus-detail',['course_info_id'=>$lessonInfo->course_info_id]));
+            }
+
+        }
+
         $data['general_quiz'] = $this->quiz->getGeneralById($courseContentId,10);
         $data['courseinfoId'] = $lessonInfo->course_info_id;
         $data['course_content_id'] = $courseContentId;
@@ -172,14 +203,17 @@ class DashboardController extends Controller
     }
 
     public function studentQuizStore(Request $request){
-        $input = $request->all();
-
-  dd('i am here');
+        $input = $request->all();  
 
         $student_id = Auth::guard('student')->user()->id; 
         $courseinfo_id = $input['courseinfo_id'];
         $course_content_id = $input['course_content_id'];
 
+        $checkQuiz = $this->student->checkQuizForCourseInfo($student_id, $course_content_id); 
+        if ($checkQuiz > 0) {
+            Flash('Practise Test Already Taken.Please Proceed Next Course.')->success();
+            return redirect(route('syllabus-detail',['course_info_id'=>$courseinfo_id]));
+        }
 
         try{
             $m =1;
@@ -215,10 +249,10 @@ class DashboardController extends Controller
              $quiz_history = $this->student->getquizHistory($student_id,$course_content_id);   
              $correct_answer = $this->student->getcorrectAnswer($student_id,$course_content_id);   
 
-             $total_question = count($quiz_history);
-             $correct_percent = ($correct_answer / $total_question) * 100;
+             $total_question = count($quiz_history); 
+             $correctPercent = ($correct_answer / $total_question) * 100;
 
-             $data['correct_percent'] = $correct_percent;
+             $data['correct_percent'] = $correct_percent = number_format($correctPercent,2);
              $data['quiz_history'] = $quiz_history;
              $data['correct_answer'] = $correct_answer;
              $data['incorrect_answer'] = $total_question - $correct_answer ;
@@ -235,9 +269,7 @@ class DashboardController extends Controller
 
              $this->student->saveQuizResult($quiz_result);
 
-             
-
-            return view('home::student.general-quiz-report',$data);
+             return view('home::student.general-quiz-report',$data);
 
         }catch(\Throwable $e){
            alertify($e->getMessage())->error();

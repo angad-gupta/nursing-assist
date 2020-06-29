@@ -158,5 +158,22 @@ class CourseContentController extends Controller
         return redirect(route('coursecontent.index'));  
     }
 
+    public function checkCourseContentOrderAjax(Request $request){
+
+        $input =$request->all();
+        
+        $order = $input['order'];
+        $course_info_id = $input['course_info_id'];
+        $syllabus_id = $input['syllabus_id'];
+
+        $OrderCheck = $this->coursecontent->checkOrderByField($order,$course_info_id,$syllabus_id);
+
+        if($OrderCheck >0){
+            echo 1;
+        }else{
+            echo 0;
+        }
+    }
+
 }
  

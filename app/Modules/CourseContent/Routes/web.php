@@ -27,6 +27,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','web','permission']],
         Route::put('coursecontent/update/{id}', ['as' => 'coursecontent.update', 'uses' => 'CourseContentController@update'])->where('id','[0-9]+');
         // Course Content Delete
         Route::get('coursecontent/delete/{id}', ['as' => 'coursecontent.delete', 'uses' => 'CourseContentController@destroy'])->where('id','[0-9]+');
+        Route::post('check-course-content-order-ajax', ['as' => 'check-course-content-order-ajax', 'uses' => 'CourseContentController@checkCourseContentOrderAjax']);
 
 
 

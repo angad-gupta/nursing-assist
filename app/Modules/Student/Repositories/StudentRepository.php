@@ -115,5 +115,18 @@ class StudentRepository implements StudentInterface
             return $result;
     }
 
+    public function previousQuizData($student_id, $previous_course_content_id){
+        return StudentQuizResult::where('student_id','=',$student_id)->where('course_content_id','=',$previous_course_content_id)->get()->first();
+    }
+
+    public function deletePreviousQuizResult($previous_quiz_id){
+            StudentQuizResult::destroy($previous_quiz_id);
+    }
+    
+    public function deletePreviousQuizHistory($student_id, $course_info_id, $previous_course_content_id){
+         StudentQuizHistory::where('student_id','=',$student_id)->where('courseinfo_id','=',$course_info_id)->where('course_content_id','=',$previous_course_content_id)->delete();
+    }
+
+
 
 }
