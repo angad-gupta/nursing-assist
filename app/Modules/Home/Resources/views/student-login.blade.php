@@ -66,25 +66,25 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="">Username</label>
-                                    {!! Form::text('username', $value = null, ['id'=>'username','placeholder'=>'Enter Username','class'=>'form-control']) !!}
+                                    {!! Form::text('username', $value = null, ['id'=>'username','placeholder'=>'Enter Username','class'=>'form-control','required']) !!}
                                   </div>
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="">Email Address</label>
-                                     {!! Form::email('email', $value = null, ['id'=>'email','placeholder'=>'Enter Email Address','class'=>'form-control']) !!}
+                                     {!! Form::email('email', $value = null, ['id'=>'email','placeholder'=>'Enter Email Address','class'=>'form-control','required']) !!}
                                   </div>
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="">Password</label>
-                                    <input type="password" placeholder="Enter Password" class="form-control" id="password" name="password" >
+                                    <input type="password" placeholder="Enter Password" class="form-control" id="password" name="password" required>
                                   </div>
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="">Confirm Password</label>
-                                    <input type="password" placeholder="Enter Re-Type  Password" class="form-control" id="c_password" name="c_password" >
+                                    <input type="password" placeholder="Enter Re-Type  Password" class="form-control" id="c_password" name="c_password" required>
                                     
                                   </div>
                             </div>

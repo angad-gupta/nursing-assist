@@ -7,6 +7,9 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 
+use App\Modules\Home\Http\Requests\StudentLoginFormRequest;
+
+
 use App\Modules\Page\Repositories\PageInterface;
 use App\Modules\Banner\Repositories\BannerInterface;
 use App\Modules\Course\Repositories\CourseInterface;
@@ -252,7 +255,7 @@ class HomeController extends Controller
          return view('home::student-login',$data);
     }
 
-    public function studentRegister(Request $request){
+    public function studentRegister(StudentLoginFormRequest $request){
         $input = $request->all();
 
          try{
