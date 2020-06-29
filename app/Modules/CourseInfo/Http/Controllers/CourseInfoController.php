@@ -29,7 +29,7 @@ class CourseInfoController extends Controller
     public function index(Request $request)
     {
         $search = $request->all();
-        $data['courseinfo'] = $this->courseinfo->findAll($limit= 10, $search); 
+        $data['courseinfo'] = $this->courseinfo->findAll($limit= 50, $search); 
         $data['search_value']=$search;
         return view('courseinfo::courseinfo.index',$data);
     }
