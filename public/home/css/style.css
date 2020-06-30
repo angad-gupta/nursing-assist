@@ -1838,8 +1838,27 @@ a {
   margin-bottom: 10px;
 }
 
+.student-hub .my-courses__list {
+  margin-top: 30px;
+}
+
 .student-hub .b-line {
   padding: 20px 0;
+}
+
+.student-hub .nav-tabs {
+  border: 0;
+}
+
+.student-hub .nav-tabs .nav-links {
+  background: #fff !important;
+  margin: 0 5px;
+}
+
+.student-hub .nav .active {
+  color: #fdfeff;
+  background-color: #b0117e;
+  border-color: #dee2e6 #dee2e6 #fff;
 }
 
 .student-hub span {

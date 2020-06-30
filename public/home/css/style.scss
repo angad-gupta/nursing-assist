@@ -80,8 +80,25 @@ a {
 }
 
 .student-hub {
+  .my-courses__list{
+    margin-top:30px
+  }
   .b-line {
     padding: 20px 0;
+  }
+  .nav-tabs{
+    border:0;
+    .nav-links{
+      background: #fff !important;
+      margin: 0 5px;
+    }
+  }
+  .nav{
+    .active{
+      color: #fdfeff;
+    background-color: #b0117e;
+    border-color: #dee2e6 #dee2e6 #fff;
+    }
   }
 
   span {
