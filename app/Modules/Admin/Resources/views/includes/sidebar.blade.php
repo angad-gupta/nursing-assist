@@ -194,6 +194,18 @@
                             <span>Quiz Management</span>
                         </a>
                     </li>
+                    @endif  
+
+                      @if($menuRoles->assignedRoles('mockup.index'))
+                    <li class="nav-item">
+                        <a href="{{route('mockup.index')}}"
+                           class="nav-link @if($Route[0]=='mockup') active @endif"
+                           data-popup="tooltip" data-original-title="Mockup Test Management"
+                           data-placement="right">
+                            <i class="icon-paste"></i>
+                            <span>Mockup Test Management</span>
+                        </a>
+                    </li>
                     @endif   
 
                     @if($menuRoles->assignedRoles('contactus.index'))
@@ -281,18 +293,6 @@
                     </li>
                     @endif
 
-<!-- 
-                    @if($menuRoles->assignedRoles('coursematerial.index'))
-                    <li class="nav-item">
-                        <a href="{{route('coursematerial.index')}}"
-                           class="nav-link @if($Route[0]=='coursematerial') active @endif"
-                           data-popup="tooltip" data-original-title="Course Material Management"
-                           data-placement="right">
-                            <i class="icon-book3"></i>
-                            <span>Course Material Management</span>
-                        </a>
-                    </li>
-                    @endif -->
 
             </ul>
         </div>

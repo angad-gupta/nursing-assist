@@ -6,6 +6,7 @@ use App\Modules\Student\Entities\StudentCourse;
 use App\Modules\Student\Entities\StudentPayment;
 use App\Modules\Student\Entities\StudentQuizResult;
 use App\Modules\Student\Entities\StudentQuizHistory;
+use App\Modules\Student\Entities\StudentMockupResult;
 
 class StudentRepository implements StudentInterface
 {
@@ -109,6 +110,15 @@ class StudentRepository implements StudentInterface
     public function getStudentQuizResult($student_id,$limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1]){
             
         $result =StudentQuizResult::when(array_keys($filter, true), function ($query) use ($filter) {
+               
+            })->where('student_id','=',$student_id)->orderBy('id', $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+            
+            return $result;
+    }
+    
+    public function getStudentMockupResult($student_id,$limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1]){
+            
+        $result =StudentMockupResult::when(array_keys($filter, true), function ($query) use ($filter) {
                
             })->where('student_id','=',$student_id)->orderBy('id', $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
             

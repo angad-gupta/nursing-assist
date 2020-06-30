@@ -84,6 +84,16 @@ class StudentController extends Controller
          return view('student::student.student_quiz_result',$data);
     }
 
+    public function studentmockupResult(Request $request){
+         $input = $request->all();
+         $student_id = $input['student_id']; 
+
+         $data['student_mockup'] = $this->student->getStudentMockupResult($student_id);   
+         $data['student_id'] = $student_id;
+
+         return view('student::student.student_mockup_result',$data);
+    }
+
     public function purchaseUpdate(Request $request){
         $input = $request->all();
 

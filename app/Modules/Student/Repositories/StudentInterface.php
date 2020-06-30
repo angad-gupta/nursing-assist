@@ -39,6 +39,8 @@ interface StudentInterface
    public function saveQuizResult($quizdata);
 
    public function getStudentQuizResult($student_id,$limit=null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
+   public function getStudentMockupResult($student_id,$limit=null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
+   
    public function previousQuizData($student_id, $previous_course_content_id);
 
    public function deletePreviousQuizResult($previous_quiz_id);
