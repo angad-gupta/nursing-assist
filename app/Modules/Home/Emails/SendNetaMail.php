@@ -31,9 +31,8 @@ class SendNetaMail extends Mailable
      */
     public function build()
     {
-        $content = $this->content;
+        $content = $this->content;  
 
         return $this->subject($this->subject)->with('content',$content)->view('student::email');
- 
     }
 }

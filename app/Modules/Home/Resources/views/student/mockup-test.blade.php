@@ -6,10 +6,11 @@
         <div class="row">
             <div class="neta-ribbon__content">
                 <div class="col-sm-12">
-                    <h1 class="mb-0">Practice Test</h1>
+                    <h1 class="mb-0">Mockup Test</h1>
                     <ul class="list-unstyled d-flex">
                          <li> <a href="{{ route('home') }}">Home  >> </a></li>
-                        <li>Practice Test</li>
+                        <li> <a href="{{ route('student-courses') }}">Courses >></a></li>
+                        <li>Mockup Test</li>
                     </ul>
                 </div>
             </div>
@@ -22,7 +23,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h2 class="ttl-line">Practice Test
+                <h2 class="ttl-line">{{ ucfirst(str_replace('_',' ',$mockup_title)) }}
                 </h2>
                 <p>Comprehension, Analysis and Application level questions from all categories using the Related Courses. Complete the test in a quiet environment. </p>
             </div>
@@ -30,11 +31,9 @@
             <div class="col-sm-12">
                 <div class="accordion" id="accordionExample">
 
-                    <script src="{{ asset('admin/validation/generalquiz.js')}}"></script>
-                    {!! Form::open(['route'=>'studentquiz.store','method'=>'POST','id'=>'generalquiz_submit','class'=>'form-horizontal','role'=>'form','files' => true]) !!}
+                    {!! Form::open(['route'=>'studentmockup.store','method'=>'POST','id'=>'studentmockup_submit','class'=>'form-horizontal','role'=>'form','files' => true]) !!}
 
-                    @if($general_quiz->total() != 0)
-                    @foreach($general_quiz as $key => $question)
+                    @foreach($mockupInfo as $key => $question)
                     @php $key = $key +1; @endphp
 
                     <div class="card">
@@ -45,7 +44,8 @@
                             <div class="card-body demo-quiz neta-about">
                                 <div class="">
                                      <div class="row">
-                                        {{ Form::hidden('quiz_id[]', $question->id) }}
+                                        {{ Form::hidden('question_id[]', $question->id) }}
+                                        {{ Form::hidden('mockup_title', $mockup_title) }}
 
                                          @if($question->question_type == 'multiple')
                                          <div class="col-sm-6">
@@ -105,27 +105,11 @@
                         </div>
                     </div>
 
-                        @endforeach
-                    @else
+                @endforeach
 
-                        <div class="card">
-                            <div class="row">
-                                <h4 class="text-danger">No Practice Question Added</h4>
-                            </div>
-                        </div>
-                         <div class="col-sm-6 neta-about">
-                             <button onclick="history.back();" class="enrol-cpd" id="show-btn">Go Back</button>
-                        </div>
-                    @endif
-
-                    {{ Form::hidden('courseinfo_id', $courseinfoId) }}
-                    {{ Form::hidden('course_content_id', $course_content_id) }}
-
-                @if($general_quiz->total() != 0)
                      <div class="col-sm-6 neta-about">
                          <button type="submit" class="enrol-cpd" id="show-btn">Submit Your Answer</button>
                      </div>
-                @endif
 
                 {!! Form::close() !!}     
 

@@ -7,6 +7,7 @@ use App\Modules\Student\Entities\StudentPayment;
 use App\Modules\Student\Entities\StudentQuizResult;
 use App\Modules\Student\Entities\StudentQuizHistory;
 use App\Modules\Student\Entities\StudentMockupResult;
+use App\Modules\Student\Entities\StudentMockupHistory;
 
 class StudentRepository implements StudentInterface
 {
@@ -107,6 +108,10 @@ class StudentRepository implements StudentInterface
         return StudentQuizResult::create($quizdata);
    }
 
+   public function saveMockupResult($mockdata){
+        return StudentMockupResult::create($mockdata);
+   }
+
     public function getStudentQuizResult($student_id,$limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1]){
             
         $result =StudentQuizResult::when(array_keys($filter, true), function ($query) use ($filter) {
@@ -137,6 +142,22 @@ class StudentRepository implements StudentInterface
          StudentQuizHistory::where('student_id','=',$student_id)->where('courseinfo_id','=',$course_info_id)->where('course_content_id','=',$previous_course_content_id)->delete();
     }
 
+
+    public function deleteMockuphistory($student_id,$mockup_title){
+         StudentMockupHistory::where('student_id','=',$student_id)->where('mockup_title','=',$mockup_title)->delete();
+    }
+
+   public function savemockupHistory($mockupdata){
+        return StudentMockupHistory::create($mockupdata);
+   }
+
+    public function getmockupHistory($student_id,$mockup_title){
+        return StudentMockupHistory::where('student_id','=',$student_id)->where('mockup_title','=',$mockup_title)->get();
+    } 
+
+   public function getmockupcorrectAnswer($student_id,$mockup_title){
+        return StudentMockupHistory::where('student_id','=',$student_id)->where('mockup_title','=',$mockup_title)->where('is_correct_answer','=','1')->count();
+   }  
 
 
 }

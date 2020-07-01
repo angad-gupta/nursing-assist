@@ -24,6 +24,7 @@ class CreateMockupsTable extends Migration
             $table->string('option_3')->nullable();
             $table->string('option_4')->nullable();
             $table->string('correct_option')->nullable();
+            $table->text('correct_answer_reason')->nullable();
 
             $table->timestamps();
         });

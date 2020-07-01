@@ -80,6 +80,10 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth:student']], function
 
 	Route::get('student-quiz', ['as' => 'student-quiz', 'uses' => 'DashboardController@studentQuiz']);
 
+	Route::get('mockup-question', ['as' => 'mockup-question', 'uses' => 'DashboardController@mockupQuestion']);
+
+	Route::post('studentmockup/store', ['as' => 'studentmockup.store', 'uses' => 'DashboardController@studentmockupStore']);
+	
 	Route::post('studentquiz/store', ['as' => 'studentquiz.store', 'uses' => 'DashboardController@studentQuizStore']);
 
 	Route::get('course-invoice', ['as' => 'course-invoice', 'uses' => 'DashboardController@studentCourseInvoice']);

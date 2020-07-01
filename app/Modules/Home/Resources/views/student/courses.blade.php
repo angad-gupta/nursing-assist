@@ -22,6 +22,7 @@
     <div class="container">
         <div class="row">
          <div class="col-sm-12">
+            @include('flash::message')
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
                   <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">My Courses</a>
@@ -33,6 +34,7 @@
                   <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Other Courses</a>
                 </li>
               </ul>
+
               <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                     <div class="my-courses">
@@ -72,37 +74,30 @@
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                     <div class="my-courses">
                         <div class="row">
-                            <div class="col-sm-6 col-md-4 col-lg-3">
-                                <div class="my-courses__list">
-                                    <div class="list-content">
-                                    <h5>Mockup Test 1</h5>
-                                    <span>15 Questions</span>
-                                    <button class="btn e-btn w-100"><a href="#">View detail</a></button>
-                                    </div>
-                                </div>
-                            </div>
+
+                            @php
+                            $mockup_list =array('mockup_test_week_1'=>'Mockup Test Week 1','mockup_test_week_2'=>'Mockup Test Week 2','mockup_test_week_3'=>'Mockup Test Week 3','mockup_test_week_4'=>'Mockup Test Week 4','mockup_test_week_5'=>'Mockup Test Week 5','mockup_test_week_6'=>'Mockup Test Week 6','mockup_test_week_7'=>'Mockup Test Week 7','mockup_test_week_8'=>'Mockup Test Week 8');
+                            @endphp
+
+                            @foreach($mockup_list as $key => $list)
+
+                            @php 
+                            $total_quesion = App\Modules\Mockup\Entities\Mockup::gettotalQuestion($key);
+                            @endphp
 
                             <div class="col-sm-6 col-md-4 col-lg-3">
                                 <div class="my-courses__list">
                                     <div class="list-content">
-                                    <h5>Mockup Test 1</h5>
-                                    <span>105 Questions</span>
-                                    <button class="btn e-btn w-100"><a href="#">View detail</a></button>
+                                    <h5>{{$list}}</h5> 
+                                    <span>{{$total_quesion}} Questions</span>
+                                    <button class="btn e-btn w-100"><a href="{{ route('mockup-question',['mockup_title'=>$key]) }}">View detail</a></button>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6 col-md-4 col-lg-3">
-                                <div class="my-courses__list">
-                                    <div class="list-content">
-                                    <h5>Mockup Test 1</h5>
-                                    <span>15 Questions</span>
-                                    <button class="btn e-btn w-100"><a href="#">View detail</a></button>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
+
                         </div>
-
-                </div>
+                    </div>
                 </div>
                 <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                     <div class="my-courses">

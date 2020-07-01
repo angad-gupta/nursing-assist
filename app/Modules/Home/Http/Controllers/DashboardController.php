@@ -13,6 +13,7 @@ use App\Modules\CourseInfo\Repositories\CourseInfoInterface;
 use App\Modules\CourseContent\Repositories\CourseContentInterface;
 use App\Modules\Syllabus\Repositories\SyllabusInterface;
 use App\Modules\Quiz\Repositories\QuizInterface;
+use App\Modules\Mockup\Repositories\MockupInterface;
 
 
 class DashboardController extends Controller
@@ -24,8 +25,9 @@ class DashboardController extends Controller
       protected $coursecontent;
       protected $syllabus;
       protected $quiz;
+      protected $mockup;
     
-    public function __construct(StudentInterface $student, AnnouncementInterface $announcement , MessageInterface $message,  CourseInfoInterface $courseinfo, CourseContentInterface $coursecontent, SyllabusInterface $syllabus,QuizInterface $quiz)
+    public function __construct(StudentInterface $student, AnnouncementInterface $announcement , MessageInterface $message,  CourseInfoInterface $courseinfo, CourseContentInterface $coursecontent, SyllabusInterface $syllabus,QuizInterface $quiz, MockupInterface $mockup)
     {
         $this->student = $student;
         $this->announcement = $announcement;
@@ -34,6 +36,7 @@ class DashboardController extends Controller
         $this->coursecontent = $coursecontent;
         $this->syllabus = $syllabus;
         $this->quiz = $quiz;
+        $this->mockup = $mockup;
     }
     /**
      * Display a listing of the resource.
@@ -220,6 +223,11 @@ class DashboardController extends Controller
             return redirect(route('syllabus-detail',['course_info_id'=>$courseinfo_id]));
         }
 
+        if(!array_key_exists('question_option_1', $input)){
+            Flash('Are you Serious with your Test ? Please Choose your Answer.')->error();
+            return redirect(route('student-courses'));
+        }
+
         try{
             $m =1;
             $quiz_id = $input['quiz_id'];
@@ -279,6 +287,102 @@ class DashboardController extends Controller
         }catch(\Throwable $e){
            alertify($e->getMessage())->error();
         }
+    }
+
+
+    public function mockupQuestion(Request $request){
+
+      $input = $request->all(); 
+
+      $mockup_title = $input['mockup_title'];
+
+      $mockupInfo = $this->mockup->getQuestionByTitle($mockup_title);
+
+      if(sizeof($mockupInfo) > 0){
+      
+       $data['mockupInfo'] = $mockupInfo;
+       $data['mockup_title'] = $mockup_title;
+       return view('home::student.mockup-test',$data);
+      
+      }else{
+           Flash('No Mockup Question Set. Please Check Later.')->error();
+            return redirect(route('student-courses'));
+      }
+
+    }
+
+    public function studentmockupStore(Request $request){
+      $input = $request->all();  
+
+      $mockup_title = $input['mockup_title'];
+      $student_id = Auth::guard('student')->user()->id; 
+
+      $this->student->deleteMockuphistory($student_id,$mockup_title);
+
+      if(!array_key_exists('question_option_1', $input)){
+            Flash('Are you Serious with your Test ? Please Choose your Answer.')->error();
+            return redirect(route('student-courses'));
+      }
+        
+      try{
+         $m =1;
+            $question_id = $input['question_id'];
+            $countname = sizeof($question_id); 
+                for($i = 0; $i < $countname; $i++){
+                   
+                    if($input['question_id'][$i]){
+                        
+                        $question_id =$input['question_id'][$i];
+                        $question_option = json_encode($input['question_option_'.$m]);
+
+                         $mockupdata['student_id'] = $student_id;
+                         $mockupdata['mockup_title'] = $mockup_title;
+                         $mockupdata['question_id'] = $input['question_id'][$i];
+                         $mockupdata['answer'] = json_encode($input['question_option_'.$m]);
+
+                         $checkAnswer = $this->mockup->checkCorrectAnswer($question_id,$question_option);
+
+                         if($checkAnswer > 0){
+                            $mockupdata['is_correct_answer'] = 1;
+                         }else{
+                            $mockupdata['is_correct_answer'] = 0;
+                         }
+                      
+                            $this->student->savemockupHistory($mockupdata);
+                        $m++;
+                    }
+                }
+
+             $mockup_history = $this->student->getmockupHistory($student_id,$mockup_title);   
+             $correct_answer = $this->student->getmockupcorrectAnswer($student_id,$mockup_title);   
+
+             $total_question = count($mockup_history); 
+             $correctPercent = ($correct_answer / $total_question) * 100;
+
+             $data['correct_percent'] = $correct_percent = number_format($correctPercent,2);
+             $data['mockup_history'] = $mockup_history;
+             $data['correct_answer'] = $correct_answer;
+             $data['incorrect_answer'] = $total_question - $correct_answer ;
+
+             $mockup_result = array(
+                    'student_id' => $student_id,
+                    'mockup_title'=> $mockup_title,   
+                    'date'=> date('Y-m-d'),
+                    'total_question'=> $total_question,
+                    'correct_answer'=> $correct_answer,
+                    'percent'=> $correct_percent
+             );
+            
+             $this->student->saveMockupResult($mockup_result);
+
+             return view('home::student.mockup-report',$data);
+
+
+
+      }catch(\Throwable $e){
+           alertify($e->getMessage())->error();
+        }
+
     }
 
 
