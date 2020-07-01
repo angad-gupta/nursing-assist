@@ -171,29 +171,34 @@ class DashboardController extends Controller
         $previousCourseontentInfo = $this->coursecontent->getPreviousData($course_info_id,$syllabus_id,$previous_order);
 
         $previous_course_content_id = $previousCourseontentInfo->id;
-        $previous_quiz_result = $this->student->previousQuizData($student_id, $previous_course_content_id);
+
+
+        if($previousCourseontentInfo->is_related_to_quiz == '1'){
+            $previous_quiz_result = $this->student->previousQuizData($student_id, $previous_course_content_id);
         
-        if($previous_course_content_id != $courseContentId){
-              
-            if(!is_null($previous_quiz_result)){
-               $pervious_quiz_percent = $previous_quiz_result->percent;
-               $previous_quiz_id = $previous_quiz_result->id;
-               if($pervious_quiz_percent < 80){
+        
+            if($previous_course_content_id != $courseContentId){
                   
-                  $this->student->deletePreviousQuizResult($previous_quiz_id);
-                  $this->student->deletePreviousQuizHistory($student_id, $course_info_id, $previous_course_content_id);
+                if(!is_null($previous_quiz_result)){
+                   $pervious_quiz_percent = $previous_quiz_result->percent;
+                   $previous_quiz_id = $previous_quiz_result->id;
+                   if($pervious_quiz_percent < 80){
+                      
+                      $this->student->deletePreviousQuizResult($previous_quiz_id);
+                      $this->student->deletePreviousQuizHistory($student_id, $course_info_id, $previous_course_content_id);
 
-                  Flash('You have to score atleast 80% from previous Quiz.Pleast Retake Practice Test Again')->success();
-                  return redirect(route('syllabus-detail',['course_info_id'=>$lessonInfo->course_info_id]));
+                      Flash('You have to score atleast 80% from previous Quiz.Pleast Retake Practice Test Again')->success();
+                      return redirect(route('syllabus-detail',['course_info_id'=>$lessonInfo->course_info_id]));
 
-               }
+                   }
 
-            }else{
-                 Flash('You haven\'t taken previous Lesson Practice Test.')->success();
-                return redirect(route('syllabus-detail',['course_info_id'=>$lessonInfo->course_info_id]));
+                }else{
+                     Flash('You haven\'t taken previous Lesson Practice Test.')->success();
+                    return redirect(route('syllabus-detail',['course_info_id'=>$lessonInfo->course_info_id]));
+                }
             }
 
-        }
+      }
 
         $data['general_quiz'] = $this->quiz->getGeneralById($courseContentId,10);
         $data['courseinfoId'] = $lessonInfo->course_info_id;
