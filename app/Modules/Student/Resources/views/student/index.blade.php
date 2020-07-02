@@ -52,7 +52,7 @@
 
                     <a class="btn bg-pink btn-icon rounded-round" href="{{ route('studentquiz.result',['student_id'=> $value->id]) }}" data-popup="tooltip" data-placement="bottom" data-original-title="Student Quiz Result"><i class="icon-file-presentation "></i></a>
 
-                     <a class="btn bg-pink btn-icon rounded-round" href="{{ route('studentmockup.result',['student_id'=> $value->id]) }}" data-popup="tooltip" data-placement="bottom" data-original-title="Student Mockup Result"><i class="icon-file-presentation "></i></a>
+                     <a class="btn bg-violet btn-icon rounded-round" href="{{ route('studentmockup.result',['student_id'=> $value->id]) }}" data-popup="tooltip" data-placement="bottom" data-original-title="Student Mockup Result"><i class="icon-stack-text"></i></a>
 
                     <a data-toggle="modal" data-target="#modal_theme_warning" class="btn bg-danger-400 btn-icon rounded-round delete_student" link="{{route('student.delete',$value->id)}}" data-popup="tooltip" data-original-title="Delete" data-placement="bottom"><i class="icon-bin"></i></a>
                     </td>
