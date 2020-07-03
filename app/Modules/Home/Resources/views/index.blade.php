@@ -113,7 +113,7 @@
                          <h5 class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".75s">{{ $banner_val->sub_title }}</h5>
                          <div class="banner-btn d-flex mt-2">
                              <button class="btn btn-neta"><a href="{{ route('course') }}">Learn More</a></button>
-                             <a href="#">
+                             <a href="https://www.youtube.com/embed/ZBXfkINlRF0" target="_blank">
                                  <div class="neta-play"><img src="{{asset('home/img/play.svg')}}" alt=""><span>Watch Video</span></div>
                              </a>
                          </div>
@@ -166,6 +166,7 @@
 
     	  @if(sizeof($course_info)>0) 
                 @foreach($course_info as $key => $course_enrol)
+                @if($course_enrol->is_course_package == '1')
                     <div class="col-sm-4">
                         <div class="course-enrolment__content m-0">
                             <p>{{$course_enrol->enrol_title }}</p>
@@ -174,8 +175,9 @@
                             <a href="{{ route('enrolment',['course_info_id'=>$course_enrol->id]) }}" class="btn w-100">Enroll</a>
                         </div>
                     </div>
-             	@endforeach
-             @endif    
+                @endif
+         	@endforeach
+         @endif    
  </div>
 </div>
 </section>
@@ -185,7 +187,8 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-8">
-                <p>Learn by taking a Demo Quiz! This quiz will give you a signal of how much you know, or do not know, about Related Courses.</p>
+                <p>Take a demo quiz to experience the learning from NETA.</p>
+                <span style="color:white">The demo is intended for a trial quiz only and not all features of the course are available. To obtain full access, you will need to enrol to our classes.</span>
             </div>
             <div class="col-sm-4">
                <a href="{{ route('demo-quiz') }}" class="btn btn-neta float-right">Take a Demo</a>

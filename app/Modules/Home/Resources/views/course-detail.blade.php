@@ -41,6 +41,7 @@
                         <div class="row">
                               @if(sizeof($course_info)>0)
                                 @foreach($course_info as $key => $enroll_val)
+                                 @if($course_enrol->is_course_package == '1')
                                     <div class="col-sm-4">
                                         <div class="course-enrolment__content">
                                             <p>{{$enroll_val->enrol_title }}</p>
@@ -49,6 +50,7 @@
                                             <button class="btn w-100"><a href="{{ route('enrolment',['course_info_id'=>$enroll_val->id]) }}">Enroll</a></button>
                                         </div>
                                     </div>
+                                @endif
                              @endforeach
                             @endif
 

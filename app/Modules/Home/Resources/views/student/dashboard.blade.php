@@ -162,7 +162,8 @@
                                                 @if($student_course->total() != 0)
                                                     @foreach($student_course as $key => $my_course_val)
                                                     @php
-                                                    $total_syllabus = App\Modules\CourseContent\Entities\CourseContent::gettotalsyllabus($my_course_val->id);
+                                                    $total_syllabus = App\Modules\CourseContent\Entities\CourseContent::gettotalsyllabus($my_course_val->courseinfo_id);
+                                                    
                                                     @endphp
                                                     <tr>
                                                         <td>{{ optional($my_course_val->courseInfo)->course_program_title }}</td>
