@@ -112,6 +112,12 @@ p {
   font-size: 18px;
 }
 
+.neta-selfcheck .btn-neta:hover {
+  background: #6E2F9F;
+  -webkit-transition: .5s all;
+  transition: .5s all;
+}
+
 .neta-selfcheck .btn-neta a {
   color: #B0117E;
 }
@@ -462,6 +468,12 @@ header .bg-light .navbar-brand {
   font-size: 18px;
 }
 
+.neta-banner .btn-neta:hover {
+  background: #6E2F9F;
+  -webkit-transition: .5s all;
+  transition: .5s all;
+}
+
 .neta-banner h1 {
   font-size: 42px;
   font-weight: 500;
@@ -560,6 +572,12 @@ header .bg-light .navbar-brand {
   font-size: 18px;
 }
 
+.neta-slog .btn-neta:hover {
+  background: #6E2F9F;
+  -webkit-transition: .5s all;
+  transition: .5s all;
+}
+
 .neta-slog .btn-neta a {
   color: #B0117E;
 }
@@ -587,6 +605,12 @@ header .bg-light .navbar-brand {
 .neta-courses .btn-neta a {
   color: #fff;
   font-size: 18px;
+}
+
+.neta-courses .btn-neta:hover {
+  background: #6E2F9F;
+  -webkit-transition: .5s all;
+  transition: .5s all;
 }
 
 .neta-courses .course-img {
@@ -734,6 +758,12 @@ header .bg-light .navbar-brand {
 .neta-download .btn-neta a {
   color: #fff;
   font-size: 18px;
+}
+
+.neta-download .btn-neta:hover {
+  background: #6E2F9F;
+  -webkit-transition: .5s all;
+  transition: .5s all;
 }
 
 .neta-download .btn-neta a {
@@ -992,6 +1022,12 @@ header .bg-light .navbar-brand {
 .neta-contact form .btn-neta a {
   color: #fff;
   font-size: 18px;
+}
+
+.neta-contact form .btn-neta:hover {
+  background: #6E2F9F;
+  -webkit-transition: .5s all;
+  transition: .5s all;
 }
 
 .neta-map iframe {
