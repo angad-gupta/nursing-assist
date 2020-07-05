@@ -85,7 +85,7 @@
                         <label class="col-form-label col-lg-3">Description:<span class="text-danger">*</span></label>
                         <div class="col-lg-9 form-group-feedback form-group-feedback-right">
                             <div class="input-group">
-                                {!! Form::textarea('description', $value = null, ['placeholder'=>'Enter Description','class'=>'form-control simple_textarea_description']) !!}
+                                {!! Form::textarea('description', $value = null, ['placeholder'=>'Enter Description','class'=>'form-control textarea_description']) !!}
                             </div>
                         </div>
                     </div>
