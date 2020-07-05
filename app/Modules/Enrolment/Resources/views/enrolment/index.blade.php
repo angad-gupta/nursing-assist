@@ -4,21 +4,21 @@
 
 @section('content')
 
-
 <div class="card card-body">
     <div class="d-flex justify-content-between">
         <h4>List of Enrolment Detail</h4>
     </div>
-    <div class="mb-3 mt-3"></div>
+    <div class="mb-3 mt-3"></div> 
     <div class="table-responsive table-card">
         <table class="table table-striped">
             <thead>
                 <tr class="bg-slate">
                     <th>#</th>
-                    <th>Company Name</th>
+                    <th>Student Name</th>
                     <th>Email</th>
                     <th>Mobile No.</th>
-                    <th>Country</th>
+                    <th>Intake Date</th>
+                    <th>Payment Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -27,13 +27,13 @@
                 @foreach($enrolment as $key => $value)
                 <tr>
                     <td>{{$enrolment->firstItem() +$key}}</td>
-                    <td>{{ $value->company_name }}</td>
-                    <td>{{ $value->email }}</td>
-                    <td>{{ $value->contact_number }}</td>
-                    <td>{{ $value->country }}</td>
-                
+                    <td>{{ optional($value->student)->full_name }}</td>
+                    <td>{{ optional($value->student)->email }}</td>
+                    <td>{{ optional($value->student)->phone_no }}</td>
+                    <td>{{ $value->intake_date }}</td>
+                    <td class="{{ ($value->payment_status == '1') ? 'text-success font-weight-bold' :'text-danger font-weight-bold' }}">{{ ($value->payment_status == '1') ? 'Paid' :'Payment Pending' }}</td>
                     <td>
-                         <a data-toggle="modal" data-target="#modal_theme_view_info" class="btn bg-danger-400 btn-icon rounded-round view_detail" enrolment_id="{{$value->id}}" data-popup="tooltip" data-original-title="View Detail" data-placement="bottom"><i class="icon-eye"></i></a>
+                    <a data-toggle="modal" data-target="#modal_theme_view_info" class="btn bg-danger-400 btn-icon rounded-round view_detail" enrolment_id="{{$value->id}}" data-popup="tooltip" data-original-title="View Detail" data-placement="bottom"><i class="icon-eye"></i></a>
 
                     </td>
 

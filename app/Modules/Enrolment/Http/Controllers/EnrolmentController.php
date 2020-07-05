@@ -112,6 +112,7 @@ class EnrolmentController extends Controller
                 'country' => $data['country'],
                 'email' => $data['email'],
                 'phone' => $data['phone'],
+                'intake_date' => $data['intake_date'],
                 'payment_status' =>0
             );
             if ($request->hasFile('eligible_document')) {

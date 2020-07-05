@@ -8,7 +8,7 @@ use App\Modules\Student\Entities\Student;
 
 
 class Enrolment extends Model
-{
+{ 
 	const FILE_PATH = '/uploads/eligible_document/';
 	const ID_PATH = '/uploads/student/identity_document/';
 
@@ -33,6 +33,7 @@ class Enrolment extends Model
         'country',
         'email',
         'phone',
+        'intake_date',
         'payment_status'
     
     ];
