@@ -39,33 +39,54 @@
 
 			 	@foreach($quiz_history as $kys => $quiz)
 
+			 @php 
+            	if (preg_match('/[\[\]\'^£$%&*()}{@#~?><>,|=_+¬-]/', $quiz->quizInfo->correct_option))
+						{
+							$multipl_ans = json_decode($quiz->quizInfo->correct_option);
+                    		$prefix = $option_val = '';
+                    		foreach($multipl_ans as $key => $ans){
+                    		 	$value = explode("_", $ans);
+                    			$answer_list = $value[0].' '.$value[1];  
+
+                    			$option_val .= $prefix . ucwords($answer_list);
+								$prefix = ', ';
+                    		}
+
+						}else{
+							$option_val= $quiz->quizInfo->correct_option; 
+						}
+
+				if (preg_match('/[\[\]\'^£$%&*()}{@#~?><>,|=_+¬-]/', $quiz->answer))
+						{
+							$multipl_my_ans = json_decode($quiz->answer);
+                    		$mprefix = $moption_val = '';
+                    		foreach($multipl_my_ans as $key => $myans){
+                    		 	$mvalue = explode("_", $myans);
+                    			$manswer_list = $mvalue[0].' '.$mvalue[1];  
+
+                    			$moption_val .= $mprefix . ucwords($manswer_list);
+								$mprefix = ', ';
+                    		}
+
+						}else{
+							$moption_val= $quiz->answer; 
+						}	
+
+					$color_status = ($option_val == $moption_val) ? "text-success" : "text-danger";	
+					$main_color_status = ($option_val == $moption_val) ? "bg-success" : "bg-danger";	
+
+            	@endphp
+
+
                 <div class="card">
-                    <div class="card-header" data-toggle="collapse"
+                    <div class="card-header {{ $main_color_status }} " data-toggle="collapse"
                         data-target="#collapse_{{$kys}}" aria-expanded="true">
                         <span class="title">{{optional($quiz->quizInfo)->question}}</span>
                     </div>
                     <div id="collapse_{{$kys}}" class="collapse show"
                         data-parent="#accordionExample">
                         <div class="card-body">
-
-                        	@php ;
-                        	if (preg_match('/[\[\]\'^£$%&*()}{@#~?><>,|=_+¬-]/', $quiz->quizInfo->correct_option))
-									{
-										$multipl_ans = json_decode($quiz->quizInfo->correct_option);
-			                    		$prefix = $option_val = '';
-			                    		foreach($multipl_ans as $key => $ans){
-			                    		 	$value = explode("_", $ans);
-			                    			$answer_list = $value[0].' '.$value[1];  
-
-			                    			$option_val .= $prefix . ucwords($answer_list);
-											$prefix = ', ';
-			                    		}
-
-									}else{
-										$option_val= $quiz->quizInfo->correct_option; 
-									}
-
-                        	@endphp
+                        	<p>Your Answer is <span class="{{$color_status}}"><b>{{ $moption_val }}</b></span></a>
                             <p>Correct Answer is <span class="text-success"><b>{{ $option_val }}</b></span></a>
                             </p>
                             <p>

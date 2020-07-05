@@ -9,19 +9,16 @@
 				<h5>Online CPD</h5>
 				<ul class="list-unstyled">
 					<a href="#"><li>CPD Courses</li> </a>
-					<a href="#"><li>Online</li> </a>
-					<a href="#"><li>All Resourses</li> </a>
-					<a href="#"><li>Practical Question</li> </a>
-					<a href="#"><li>Podcasts</li> </a>
+					<a href="{{ route('demo-quiz') }}"><li>Demo Questions</li> </a>
 				</ul>
 			</div>
 
 			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-				<h5>Features</h5>
+				<h5>Media</h5>
 				<ul class="list-unstyled">
-					<a href="#"><li>Overview</li> </a>
-					<a href="#"><li>Learning</li> </a>
-					<a href="#"><li>OBA Courses</li> </a>
+					<a href="#"><li>Podcasts</li> </a>
+					<a href="#"><li>Gallery</li> </a>
+					<a href="#"><li>Videos</li> </a>
 				</ul>
 			</div>
 
@@ -31,7 +28,6 @@
 					<a href="{{ route('about-us') }}"><li>About Us</li> </a>
 					<a href="{{ route('about-us') }}"><li>Our Team</li> </a>
 					<a href="{{ route('contact-us') }}"><li>Contact US</li> </a>
-					<a href="#"><li>CPD Guidelines</li> </a>
 					<a href="{{ route('faq')}}"><li>FAQ's</li> </a>
 				</ul>
 			</div>

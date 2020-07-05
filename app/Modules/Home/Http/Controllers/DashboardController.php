@@ -349,6 +349,10 @@ class DashboardController extends Controller
                          }
                       
                             $this->student->savemockupHistory($mockupdata);
+
+                            //sleep for 3 seconds
+                            usleep(3000000);
+
                         $m++;
                     }
                 }
