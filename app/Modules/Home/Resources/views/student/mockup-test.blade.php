@@ -33,6 +33,7 @@
 
                     {!! Form::open(['route'=>'studentmockup.store','method'=>'POST','id'=>'studentmockup_submit','class'=>'form-horizontal','role'=>'form','files' => true]) !!}
 
+
                     @foreach($mockupInfo as $key => $question)
                     @php $key = $key +1; @endphp
 
@@ -107,8 +108,15 @@
 
                 @endforeach
 
-                     <div class="col-sm-6 neta-about">
-                         <button type="submit" class="enrol-cpd" id="show-btn">Submit Your Answer</button>
+               
+
+
+                     <div class="col-sm-12 neta-about">
+                         <button type="submit" class="enrol-cpd mockup_submit" id="show-btn">Submit Your Answer</button>
+                         <span class="text-center" id="loaderImg" style="display:none;" >
+                              <img src="{{asset('home/img/loader.gif')}}" alt="loader1" style="margin-left: 330px; height:200px; width:auto;">
+                              <h4>Please Wait..While Saving Your Answer</h4>
+                         </span>
                      </div>
 
                 {!! Form::close() !!}     
@@ -122,3 +130,31 @@
 
 <section class="section-padding"></section>
 @include('home::layouts.footer')
+
+<script type="text/javascript">
+    
+$(document).ready(function(){
+
+    $('#studentmockup_submit').submit(function() {
+        $('#loaderImg').show(); 
+        $('.mockup_submit').attr('disabled', true);
+        $('.mockup_submit').prepend('<i class="icon-spinner4 spinner"></i>');
+        return true;
+      });
+
+});
+
+  // $('.mockup_submit').click( function () { 
+  //   var form = $(this).parents('form:first');
+    
+  //   if (form.valid()) { 
+  //     $(this).attr('disabled', true);
+  //     $(this).prepend('<i class="icon-spinner4 spinner"></i> ');
+
+  //     form.submit();
+  //   }
+
+  // });
+
+
+</script>
