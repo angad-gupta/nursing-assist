@@ -330,7 +330,7 @@ class DashboardController extends Controller
             $countname = sizeof($question_id); 
                 for($i = 0; $i < $countname; $i++){
                    
-                    if($input['question_id'][$i]){
+                    if(array_key_exists('question_option_'.$m, $input)){
                         
                         $question_id =$input['question_id'][$i];
                         $question_option = json_encode($input['question_option_'.$m]);
