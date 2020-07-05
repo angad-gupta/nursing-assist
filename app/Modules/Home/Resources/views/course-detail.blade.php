@@ -40,8 +40,8 @@
 
                         <div class="row">
                               @if(sizeof($course_info)>0)
-                                @foreach($course_info as $key => $enroll_val)
-                                 @if($course_enrol->is_course_package == '1')
+                                @foreach($course_info as $key => $enroll_val) 
+                                 @if($enroll_val->is_course_package == '1')
                                     <div class="col-sm-4">
                                         <div class="course-enrolment__content">
                                             <p>{{$enroll_val->enrol_title }}</p>
