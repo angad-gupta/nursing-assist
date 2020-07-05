@@ -739,7 +739,7 @@ header .bg-light .navbar-brand {
 
 .neta-download p {
   color: #fff;
-  padding-top: 50px;
+  padding-top: 70px;
   font-size: 16px;
 }
 
@@ -2254,7 +2254,7 @@ a {
   transition: 0.5s all;
 }
 
-.neta-user .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+.neta-user .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
   width: 220px;
   margin-right: 20px;
 }
@@ -2263,8 +2263,9 @@ a {
   min-height: 52px;
 }
 
-.neta-font p, .neta-font span {
-  font-family: 'Poppins', sans-serif !important;
+.neta-font p,
+.neta-font span {
+  font-family: "Poppins", sans-serif !important;
   font-size: 16px !important;
 }
 
@@ -2318,5 +2319,39 @@ a {
 
 .nl-d span {
   padding-bottom: 5px;
+}
+
+.btn-neta:hover,
+.btn-neta:hover a {
+  color: #fff;
+}
+
+.sac-btn {
+  background: #8958b1;
+  color: #fff;
+  font-size: 12px;
+  -webkit-transition: .5s all;
+  transition: .5s all;
+}
+
+.sac-btn:hover {
+  color: #fff;
+  background: #B0117E;
+  -webkit-transition: .5s all;
+  transition: .5s all;
+}
+
+.return-btn {
+  background: #7d7d7d !important;
+  margin-right: 15px !important;
+  -webkit-transition: .5s all;
+  transition: .5s all;
+  cursor: pointer;
+}
+
+.return-btn:hover {
+  background: #B0117E !important;
+  -webkit-transition: .5s all;
+  transition: .5s all;
 }
 /*# sourceMappingURL=style.css.map */

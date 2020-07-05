@@ -310,7 +310,7 @@
 				<p>Download course Brochure of the OBA</p>
 			</div>
 			<div class="col-sm-4">
-				<button class="btn btn-neta float-right"><a target="_blank" href="{{asset('admin/oba_download.pdf')}}">Download</a></button>
+				<a target="_blank" class="btn btn-neta float-right" href="{{asset('admin/oba_download.pdf')}}">Download</a>
 			</div>
 		</div>
 	</div>

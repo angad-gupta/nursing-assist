@@ -197,7 +197,7 @@
                                 @endif
 
                                 @if($lesson_detail->is_related_to_quiz == '1')
-                                     <a href="{{ route('student-quiz',['course_content_id'=>$lesson_detail->id,'syllabus_id'=>$syllabus_id,'course_info_id'=>$course_info_id]) }}"><button class="btn e-btn">Practise Test</button></a> 
+                                     <a href="{{ route('student-quiz',['course_content_id'=>$lesson_detail->id,'syllabus_id'=>$syllabus_id,'course_info_id'=>$course_info_id]) }}"  class="btn e-btn d-inline">Practise Test</a> 
                                 @endif
                             </div>
                         </div>
@@ -206,7 +206,13 @@
 
                 </div>
             </div>
-
+            <div class="col-sm-12">
+             <ul class="list-unstyled d-flex">
+                 <li><a href="{{ route('student-quiz',['course_content_id'=>$lesson_detail->id,'syllabus_id'=>$syllabus_id,'course_info_id'=>$course_info_id]) }}"  class="btn return-btn">Return Back</a> </li>
+                 <li><a href="{{ route('student-quiz',['course_content_id'=>$lesson_detail->id,'syllabus_id'=>$syllabus_id,'course_info_id'=>$course_info_id]) }}"  class="btn e-btn">Proceed to Next</a> </li>
+             </ul>
+            </div>
+            
         </div>
     </div>
 </section>

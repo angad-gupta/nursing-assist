@@ -146,8 +146,10 @@
 
                             <div class="tab-pane fade" id="v-pills-book" role="tabpanel" aria-labelledby="v-pills-book-tab">
                                 <h5>My Courses</h5>
+                                <a target="_blank" class="btn sac-btn" href="{{asset('admin/oba_download.pdf')}}">See Available Courses</a>
                                 <div class="tp-list">
                                     <div class="row">
+                                        <div class="col-sm-12">
                                         <table class="table">
                                             <thead>
                                                 <tr>
@@ -176,6 +178,7 @@
 
                                             </tbody>
                                         </table>
+                                    </div>
                                     </div>
                                 </div><!-- tp-list -->
                             </div>
@@ -250,8 +253,10 @@
                             <div class="tab-pane fade" id="v-pills-purchase" role="tabpanel" aria-labelledby="v-pills-purchase">
                                 <h5 class="mb-0">Purchase History</h5>
                                 <p>All the purchase history are as below</p>
+                                <a target="_blank" class="btn sac-btn" href="{{asset('admin/oba_download.pdf')}}">See Available Courses</a>
                                 <div class="tp-list">
                                     <div class="row">
+                                        <div class="col-sm-12">
                                         <table class="table">
                                             <thead>
                                                 <tr>
@@ -286,6 +291,7 @@
 
                                             </tbody>
                                         </table>
+                                    </div>
                                     </div>
                                 </div><!-- tp-list -->
                             </div>
