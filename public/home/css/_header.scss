@@ -67,6 +67,11 @@ p {
       color: #fff;
       font-size: 18px;
     }
+
+    &:hover{
+      background:$purple;
+      transition: .5s all;
+    }
 }
 @mixin owl-prev{
     span {

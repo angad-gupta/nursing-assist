@@ -112,6 +112,12 @@ p {
   font-size: 18px;
 }
 
+.neta-selfcheck .btn-neta:hover {
+  background: #6E2F9F;
+  -webkit-transition: .5s all;
+  transition: .5s all;
+}
+
 .neta-selfcheck .btn-neta a {
   color: #B0117E;
 }
@@ -462,6 +468,12 @@ header .bg-light .navbar-brand {
   font-size: 18px;
 }
 
+.neta-banner .btn-neta:hover {
+  background: #6E2F9F;
+  -webkit-transition: .5s all;
+  transition: .5s all;
+}
+
 .neta-banner h1 {
   font-size: 42px;
   font-weight: 500;
@@ -560,6 +572,12 @@ header .bg-light .navbar-brand {
   font-size: 18px;
 }
 
+.neta-slog .btn-neta:hover {
+  background: #6E2F9F;
+  -webkit-transition: .5s all;
+  transition: .5s all;
+}
+
 .neta-slog .btn-neta a {
   color: #B0117E;
 }
@@ -587,6 +605,12 @@ header .bg-light .navbar-brand {
 .neta-courses .btn-neta a {
   color: #fff;
   font-size: 18px;
+}
+
+.neta-courses .btn-neta:hover {
+  background: #6E2F9F;
+  -webkit-transition: .5s all;
+  transition: .5s all;
 }
 
 .neta-courses .course-img {
@@ -715,7 +739,7 @@ header .bg-light .navbar-brand {
 
 .neta-download p {
   color: #fff;
-  padding-top: 50px;
+  padding-top: 70px;
   font-size: 16px;
 }
 
@@ -734,6 +758,12 @@ header .bg-light .navbar-brand {
 .neta-download .btn-neta a {
   color: #fff;
   font-size: 18px;
+}
+
+.neta-download .btn-neta:hover {
+  background: #6E2F9F;
+  -webkit-transition: .5s all;
+  transition: .5s all;
 }
 
 .neta-download .btn-neta a {
@@ -992,6 +1022,12 @@ header .bg-light .navbar-brand {
 .neta-contact form .btn-neta a {
   color: #fff;
   font-size: 18px;
+}
+
+.neta-contact form .btn-neta:hover {
+  background: #6E2F9F;
+  -webkit-transition: .5s all;
+  transition: .5s all;
 }
 
 .neta-map iframe {
@@ -2218,7 +2254,7 @@ a {
   transition: 0.5s all;
 }
 
-.neta-user .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+.neta-user .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
   width: 220px;
   margin-right: 20px;
 }
@@ -2227,8 +2263,9 @@ a {
   min-height: 52px;
 }
 
-.neta-font p, .neta-font span {
-  font-family: 'Poppins', sans-serif !important;
+.neta-font p,
+.neta-font span {
+  font-family: "Poppins", sans-serif !important;
   font-size: 16px !important;
 }
 
@@ -2282,5 +2319,39 @@ a {
 
 .nl-d span {
   padding-bottom: 5px;
+}
+
+.btn-neta:hover,
+.btn-neta:hover a {
+  color: #fff;
+}
+
+.sac-btn {
+  background: #8958b1;
+  color: #fff;
+  font-size: 12px;
+  -webkit-transition: .5s all;
+  transition: .5s all;
+}
+
+.sac-btn:hover {
+  color: #fff;
+  background: #B0117E;
+  -webkit-transition: .5s all;
+  transition: .5s all;
+}
+
+.return-btn {
+  background: #7d7d7d !important;
+  margin-right: 15px !important;
+  -webkit-transition: .5s all;
+  transition: .5s all;
+  cursor: pointer;
+}
+
+.return-btn:hover {
+  background: #B0117E !important;
+  -webkit-transition: .5s all;
+  transition: .5s all;
 }
 /*# sourceMappingURL=style.css.map */

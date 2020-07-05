@@ -72,6 +72,9 @@ class CourseContentRepository implements CourseContentInterface
          return CourseContent::where('course_info_id','=',$course_info_id)->where('syllabus_id','=',$syllabus_id)->where('sort_order','=',$previous_order)->get()->first();
     }
 
+    public function findNextLesson($course_info_id, $syllabus_id, $next_lesson_sort){
+        return CourseContent::where('course_info_id','=',$course_info_id)->where('syllabus_id','=',$syllabus_id)->where('sort_order','=',$next_lesson_sort)->get()->first();
+    }
 
 
 }

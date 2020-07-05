@@ -43,7 +43,7 @@ a {
 .navbar-brand {
   img {
     width: 150px;
-    padding:10px;
+    padding: 10px;
   }
 }
 
@@ -80,24 +80,24 @@ a {
 }
 
 .student-hub {
-  .my-courses__list{
-    margin-top:30px
+  .my-courses__list {
+    margin-top: 30px;
   }
   .b-line {
     padding: 20px 0;
   }
-  .nav-tabs{
-    border:0;
-    .nav-links{
+  .nav-tabs {
+    border: 0;
+    .nav-links {
       background: #fff !important;
       margin: 0 5px;
     }
   }
-  .nav{
-    .active{
+  .nav {
+    .active {
       color: #fdfeff;
-    background-color: #b0117e;
-    border-color: #dee2e6 #dee2e6 #fff;
+      background-color: #b0117e;
+      border-color: #dee2e6 #dee2e6 #fff;
     }
   }
 
@@ -290,10 +290,10 @@ a {
 }
 
 .neta-lesson {
-  .lesson-desc{
-    background:#fff;
+  .lesson-desc {
+    background: #fff;
     padding: 20px;
-    border-radius:4px
+    border-radius: 4px;
   }
   .lesson-parts {
     margin: 20px 0;
@@ -333,7 +333,7 @@ a {
   }
 
   @include e-btn();
-  .btn{
+  .btn {
     color: #fff;
     margin: 15px 0;
   }
@@ -371,39 +371,40 @@ a {
     }
   }
 
-  .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+  .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
     width: 220px;
     margin-right: 20px;
   }
 
-  .dropdown-toggle{
+  .dropdown-toggle {
     min-height: 52px;
   }
 }
 
-.neta-font{
-  p,span{
-  font-family: 'Poppins', sans-serif !important;
-  font-size: 16px !important;
-}
-li{
-  list-style-type:none;
-  display: flex;
-  margin: 15px 0 !important;
-  &:before{
-    font-family: monospace;
+.neta-font {
+  p,
+  span {
+    font-family: "Poppins", sans-serif !important;
+    font-size: 16px !important;
   }
-  p{
-    // padding-left: 15px !important;
-    margin: 0 !important;
-    span{
-      padding-left: 30px !important;
+  li {
+    list-style-type: none;
+    display: flex;
+    margin: 15px 0 !important;
+    &:before {
+      font-family: monospace;
+    }
+    p {
+      // padding-left: 15px !important;
+      margin: 0 !important;
+      span {
+        padding-left: 30px !important;
+      }
     }
   }
 }
-}
 
-.neta-limit{
+.neta-limit {
   font-size: 16px;
   font-weight: 200;
   color: #272424;
@@ -417,24 +418,52 @@ li{
   margin-bottom: 15px;
 }
 
-.neta-action{
-  .view{
-    color:#4284d6!important;
+.neta-action {
+  .view {
+    color: #4284d6 !important;
     display: block;
     margin-bottom: 5px;
   }
 
-  .download{
-    color:#e0b720!important
+  .download {
+    color: #e0b720 !important;
   }
-
 }
 
-.nl-d{
-  .btn{
+.nl-d {
+  .btn {
     color: #fff !important;
   }
-  span{
+  span {
     padding-bottom: 5px;
+  }
+}
+
+.btn-neta:hover,
+.btn-neta:hover a {
+  color: #fff;
+}
+
+.sac-btn {
+  background: #8958b1;
+  color: #fff;
+  font-size: 12px;
+  transition: .5s all;
+  &:hover{
+    color: #fff;
+    background:$primary-color;
+    transition: .5s all;
+  }
+}
+
+
+.return-btn{
+  background: #7d7d7d !important;
+  margin-right: 15px !important;
+  transition: .5s all;
+  cursor: pointer;
+  &:hover{
+    background:$primary-color !important;
+    transition: .5s all;
   }
 }

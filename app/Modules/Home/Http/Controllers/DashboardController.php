@@ -131,7 +131,7 @@ class DashboardController extends Controller
         $data['course_info_id'] = $course_info_id;
         $data['syllabus_id'] = $syllabus_id;
 
-        $data['syllabus'] = $this->syllabus->find($syllabus_id); 
+        $data['syllabus'] = $this->syllabus->find($syllabus_id);  
 
         return view('home::student.course-lesson',$data);
 
@@ -144,7 +144,18 @@ class DashboardController extends Controller
         $course_info_id = $input['course_info_id'];
         $syllabus_id = $input['syllabus_id'];
 
-        $data['lesson_detail'] = $this->coursecontent->find($course_content_id);
+        $data['lesson_detail'] = $lesson_detail = $this->coursecontent->find($course_content_id);
+
+        $next_lesson_sort = ($lesson_detail->sort_order)+1;
+
+        $next_lesson = $this->coursecontent->findNextLesson($course_info_id, $syllabus_id, $next_lesson_sort);
+
+        if($next_lesson){
+            $data['next_course_content_id'] = $next_lesson['id'];
+        }else{
+            $data['next_course_content_id'] = '';
+        }
+
         $data['course_info_id'] = $course_info_id;
         $data['syllabus_id'] = $syllabus_id;
 
