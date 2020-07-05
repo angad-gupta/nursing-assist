@@ -191,7 +191,7 @@
 
                                     </div>
                                     <div class="submit float-right">
-                                        <button type="submit" class="btn btn-success">Send Message</button>
+                                        <input type="submit" class="btn btn-success" value="Send Message" id="message_send">
                                     </div>
 
                                 {!! Form::close() !!}
@@ -341,3 +341,12 @@
 <section class="section-padding"></section>
 
 @include('home::layouts.footer')
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#message_send').on('click',function(){
+            $('#compose-field').submit();
+        });
+    });
+</script>
