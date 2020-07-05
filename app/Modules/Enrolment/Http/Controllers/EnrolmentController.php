@@ -41,7 +41,7 @@ class EnrolmentController extends Controller
     public function index(Request $request)
     {
         $search = $request->all();
-        $data['enrolment'] = $this->enrolment->findAll($limit= 10, $search);
+        $data['enrolment'] = $this->enrolment->findAll($limit= 50, $search);
         return view('enrolment::enrolment.index',$data);
     }
 
