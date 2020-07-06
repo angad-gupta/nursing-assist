@@ -1272,6 +1272,7 @@ header .bg-light .navbar-brand {
   margin-top: 30px;
   -webkit-transition: 0.5s all;
   transition: 0.5s all;
+  color: #fff;
 }
 
 .courses-wrap .intake-date__content .btn a {
