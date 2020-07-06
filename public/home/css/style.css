@@ -781,6 +781,10 @@ header .bg-light .navbar-brand {
   position: relative;
 }
 
+.neta-demo p{
+  padding-top:40px !important;
+}
+
 .neta-demo .demo-fade {
   position: absolute;
   width: 100%;
