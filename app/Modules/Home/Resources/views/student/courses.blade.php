@@ -58,7 +58,7 @@
                                         <h5>{{ optional($my_course_val->courseInfo)->course_program_title }}</h5>
                                         <span>{{$total_syllabus}} syllabus</span>
                                         <div class="neta-limit"> <p>{!! optional($my_course_val->courseInfo)->short_content !!} </p> </div>
-                                         <button class="btn e-btn w-100"><a href="{{ route('syllabus-detail',['course_info_id'=>$my_course_val->courseinfo_id]) }}">View syllabus</a></button>
+                                        <a class="btn e-btn w-100" href="{{ route('syllabus-detail',['course_info_id'=>$my_course_val->courseinfo_id]) }}">View syllabus</a>
                                         </div>
                                     </div>
                                 </div>
@@ -89,7 +89,7 @@
                                     <div class="list-content">
                                     <h5>{{$list}}</h5> 
                                     <span>{{$total_quesion}} Questions</span>
-                                    <button class="btn e-btn w-100"><a href="{{ route('mockup-question',['mockup_title'=>$key]) }}">Take Test</a></button>
+                                    <a class="btn e-btn w-100" href="{{ route('mockup-question',['mockup_title'=>$key]) }}">Take Test</a>
                                     </div>
                                 </div>
                             </div>
@@ -119,7 +119,7 @@
                                     <h5>{{ $course_val->course_program_title }}</h5>
                                     <span>{{$total_syllabus}}  syllabus</span>
                                      <p>{!! optional($course_val->courseInfo)->short_content !!} </p>
-                                    <button class="btn e-btn w-100"><a href="{{ route('enrolment',['course_info_id'=>$course_val->id]) }}">Enroll</a></button>
+                                   <a class="btn e-btn w-100" href="{{ route('enrolment',['course_info_id'=>$course_val->id]) }}">Enroll</a>
                                     </div>
                                 </div>
                             </div>

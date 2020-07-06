@@ -461,6 +461,7 @@ header .bg-light .navbar-brand {
   border: 0;
   -webkit-transition: .5s all;
   transition: .5s all;
+  color: #fff;
 }
 
 .neta-banner .btn-neta a {
@@ -600,6 +601,7 @@ header .bg-light .navbar-brand {
   border: 0;
   -webkit-transition: .5s all;
   transition: .5s all;
+  color:#fff
 }
 
 .neta-courses .btn-neta a {
@@ -1335,7 +1337,7 @@ header .bg-light .navbar-brand {
 }
 
 .my-courses__list .list-content a:hover {
-  color: #000;
+  color: #fff;
 }
 
 .my-courses__list .btn {

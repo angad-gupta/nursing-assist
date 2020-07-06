@@ -112,7 +112,7 @@
                          <h1 class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">{{ $banner_val->title }}</h1>                         
                          <h5 class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".75s">{{ $banner_val->sub_title }}</h5>
                          <div class="banner-btn d-flex mt-2">
-                             <button class="btn btn-neta"><a href="{{ route('course-detail',['course_id'=>'1']) }}">Learn More</a></button>
+                          <a class="btn btn-neta" href="{{ route('course-detail',['course_id'=>'1']) }}">Learn More</a>
                              <a href="https://www.youtube.com/embed/ZBXfkINlRF0" target="_blank">
                                  <div class="neta-play"><img src="{{asset('home/img/play.svg')}}" alt=""><span>Watch Video</span></div>
                              </a>
@@ -149,7 +149,7 @@
 					</div>
 					<p>It is the work that we do every day that makes us superheroes.</p>
 					<p>What is your Superpower?</p>
-					<button class="btn btn-neta"><a href="{{ route('course') }}">Find More</a></button>
+					<a class="btn btn-neta" href="{{ route('course') }}">Find More</a>
 				</div>
 			</div>
 		</div>
@@ -223,7 +223,7 @@
 						<h5 class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">{{ $course_val->title }}</h5>
 						<p class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".75s">{!! $course_val->short_content !!}
 						</p>
-						<button class="btn btn-neta"><a href="{{ route('course-detail',['course_id'=>$course_val->id]) }}">Learn More</a></button>
+						<a class="btn btn-neta" href="{{ route('course-detail',['course_id'=>$course_val->id]) }}">Learn More</a>
 					</div>
 					<div class="col-sm-12 col-md-12 col-lg-5 offset-1">
 						<div class="course-img wow animated fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">
@@ -248,7 +248,7 @@
 						<h5 class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">{{ $course_val->title }}</h5>
 						<p class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".75s">{!! $course_val->short_content !!}
 						</p>
-						<button class="btn btn-neta"><a href="{{ route('course-detail',['course_id'=>$course_val->id]) }}">Learn More</a></button>
+						<a class="btn btn-neta" href="{{ route('course-detail',['course_id'=>$course_val->id]) }}">Learn More</a>
 					</div>
 				</div>
 			</div>
@@ -311,7 +311,7 @@
 				<p>Do you want to download our promotional kit</p>
 			</div>
 			<div class="col-sm-4">
-				<button class="btn btn-neta float-right"><a target="_blank" href="{{asset('admin/oba_download.jpg')}}">Download Now</a></button>
+				<a class="btn btn-neta float-right" target="_blank" href="{{asset('admin/oba_download.jpg')}}">Download Now</a>
 			</div>
 		</div>
 	</div>
@@ -326,7 +326,7 @@
 						<h5 class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">About NETA</h5>
 						<p class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".75s">{!! ($about_neta) ? $about_neta['short_content'] : '' !!}
 						</p>
-						<button class="btn btn-neta"><a href="{{ route('about-us') }}">Learn More</a></button>
+						<a class="btn btn-neta" href="{{ route('about-us') }}">Learn More</a>
 					</div>
 					<div class="col-sm-12 col-md-12 col-lg-5 offset-1">
 						<div class="course-img wow animated fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">

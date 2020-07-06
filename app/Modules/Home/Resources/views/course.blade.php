@@ -36,7 +36,7 @@
                                 <h5 class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">{{ $course_val->title }}</h5>
                                 <p class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".75s">{!! $course_val->short_content !!}
                                 </p>
-                                <button class="btn btn-neta"><a href="{{ route('course-detail',['course_id'=>$course_val->id]) }}">Learn More</a></button>
+                                <a class="btn btn-neta" href="{{ route('course-detail',['course_id'=>$course_val->id]) }}">Learn More</a>
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-5 offset-1">
                                 <div class="course-img wow animated fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">
@@ -61,7 +61,7 @@
                                 <h5 class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">{{ $course_val->title }}</h5>
                                 <p class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".75s">{!! $course_val->short_content !!}
                                 </p>
-                                <button class="btn btn-neta"><a href="{{ route('course-detail',['course_id'=>$course_val->id]) }}">Learn More</a></button>
+                                <a class="btn btn-neta" href="{{ route('course-detail',['course_id'=>$course_val->id]) }}">Learn More</a>
                             </div>
                         </div>
                     </div>
