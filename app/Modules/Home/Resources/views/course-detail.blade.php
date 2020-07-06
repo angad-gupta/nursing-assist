@@ -64,6 +64,9 @@
                      @if(isset($course_info))
                      
                             @foreach($course_info as $key => $courseInfo)
+
+                            @if($courseInfo->is_course_package == '0')
+
                                 <div class="intake-date__content">
                                     <div class="row">
                                         <div class="col-sm-4">
@@ -89,6 +92,8 @@
                                         </div>
                                     </div>
                                 </div>
+                            @endif
+
                             @endforeach
                             @else
                              <span>No Intake Date Added</span>
