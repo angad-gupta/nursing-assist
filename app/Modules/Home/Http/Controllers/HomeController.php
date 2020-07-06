@@ -270,7 +270,7 @@ class HomeController extends Controller
 
             $this->student->save($studentData);
 
-            $registerStudent['message'] = 'You have register Successfully.';
+            $registerStudent['message'] = 'You have registered Successfully.';
         }catch(\Throwable $e){
             $registerStudent['message'] = 'Something Wrong With Message';
         }
