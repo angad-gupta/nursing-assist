@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>Con Tech CRM</title>
+	<title>Nursing Education & Training Australia(NETA) CMS</title>
 
 	<!-- Global stylesheets -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
@@ -43,42 +43,50 @@
 			<div class="content d-flex justify-content-center align-items-center">
 
 				<!-- Login form -->
-				<form class="login-form wmin-sm-400" action="index.html">
-					<div class="card mb-0">
+                    {!! Form::open(['route'=>'login-post','method'=>'POST','class'=>'login-form wmin-sm-400','role'=>'form','files' => true]) !!} 
+					<div class="card mb-0 border-top-success" style="border-radius: 40px;background-color: gainsboro;">
 
 						<div class="card-body">
 							
 							<div>
 								<div class="text-center mb-3">
-									<i class="icon-reading icon-2x text-slate-300 border-slate-300 border-3 rounded-round p-3 mb-3 mt-1"></i>
-									<h5 class="mb-0">Login to your account</h5>
+									 @if(isset($setting))
+							            <img src="{{ asset('uploads/setting/'.$setting->company_logo)}}" alt="" width="50%" height="50%">
+							            @else
+							            <img src="{{ asset('admin/global/images/logo.png')}}" alt="" width="75%" height="75%">
+							            @endif
+									<h5 class="mb-0 mt-2">Login to <b class="text-success">NETA CMS</b></h5>
 									<span class="d-block text-muted">Your credentials</span>
 								</div>
+								
+                                @include('flash::message')
 
 								<div class="form-group form-group-feedback form-group-feedback-left">
-									<input type="text" class="form-control" placeholder="Username">
+									{!! Form::text('username', $value = null, ['id'=>'username','placeholder'=>'Enter Username','class'=>'form-control']) !!}
 									<div class="form-control-feedback">
-										<i class="icon-user text-muted"></i>
+										<i class="icon-user text-success"></i>
 									</div>
 								</div>
 
 								<div class="form-group form-group-feedback form-group-feedback-left">
-									<input type="password" class="form-control" placeholder="Password">
+									{!! Form::password('password', ['id'=>'password', 'placeholder'=> 'Enter Password','class'=>'form-control']) !!}
 									<div class="form-control-feedback">
-										<i class="icon-lock2 text-muted"></i>
+										<i class="icon-lock2 text-success"></i>
 									</div>
-								</div>
+								</div> 
 
 
 								<div class="form-group">
-									<button type="submit" class="btn btn-primary btn-block">Sign in</button>
+									<button type="submit" class="btn btn-warning btn-block"><b>Proceed</b></button>
 								</div>
-
+                                <span class="navbar-text">
+                                    &copy; {{date('Y')}}. <a href="javascript:void(0)" class="text-blue-700">NETA CMS</a> by <a href="http://bidhee.com/" target="_blank" class="text-teal">Bidhee Pvt. Ltd</a>
+                                </span>
 
 							</div>
 						</div>
 					</div>
-				</form>
+				 {!! Form::close() !!}
 				<!-- /login form -->
 
 			</div>
