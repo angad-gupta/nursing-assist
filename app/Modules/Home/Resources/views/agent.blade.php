@@ -25,14 +25,14 @@
             <div class="col-sm-6">
                 <div class="doyou">
                     <p>Do you want to enrol a student?</p>
-                    <a href="{{ route('contact-us') }}" class="btn">Enrol Now</a>
+                    <a href="{{ route('enrolment',['course_info_id'=>'4']) }}" class="btn">Enrol Now</a>
                 </div>
             </div>
 
             <div class="col-sm-6">
                 <div class="doyou2">
                     <p>Do you want to download our promotional kit? </p>
-                    <a href="{{ route('contact-us') }}" class="btn">Download Now</a>
+                    <a href="{{asset('admin/oba_download.jpg')}}" class="btn">Download Now</a>
                 </div>
             </div>
         </div>
