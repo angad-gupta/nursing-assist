@@ -61,7 +61,7 @@
 </div>
 </section>
 
-<section class="section-padding pb-0">
+<section class="pb-3">
     <div class="container">
         <div class="row">
             <div class="col-sm-6">
