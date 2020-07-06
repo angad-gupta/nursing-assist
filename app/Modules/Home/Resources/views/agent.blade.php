@@ -68,7 +68,7 @@
             <div class="col-sm-6">
                 <div class="doyou">
                     <p>Do you want to enrol a student?</p>
-                    <a href="{{ route('enrolment',['course_info_id'=>'4']) }}" class="btn">Enrol Now</a>
+                    <a href="{{ route('enrolment',['course_info_id'=>'4']) }}" class="btn">Enrol Student</a>
                 </div>
             </div>
 
