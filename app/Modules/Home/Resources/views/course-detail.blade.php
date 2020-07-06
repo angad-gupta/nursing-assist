@@ -47,7 +47,7 @@
                                             <p>{{$enroll_val->enrol_title }}</p>
                                             <h2>${{$enroll_val->course_fee}} <p>inc. GST</p></h2>
                                             <span>({{$enroll_val->payment_mode }})</span>
-                                            <button class="btn w-100"><a href="{{ route('enrolment',['course_info_id'=>$enroll_val->id]) }}">Enroll</a></button>
+                                            <a class="btn w-100" href="{{ route('enrolment',['course_info_id'=>$enroll_val->id]) }}">Enroll</a>
                                         </div>
                                     </div>
                                 @endif
@@ -88,7 +88,7 @@
                                                 @endif
 
                                             </ul>
-                                            <button class="btn e-btn w-25 mt-1"><a href="{{ route('enrolment',['course_info_id'=>$courseInfo->id]) }}">Enroll Now</a></button>
+                                            <a  class="btn e-btn w-25 mt-1" href="{{ route('enrolment',['course_info_id'=>$courseInfo->id]) }}">Enroll Now</a>
                                         </div>
                                     </div>
                                 </div>
