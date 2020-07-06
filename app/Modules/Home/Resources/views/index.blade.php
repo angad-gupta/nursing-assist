@@ -112,7 +112,7 @@
                          <h1 class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">{{ $banner_val->title }}</h1>                         
                          <h5 class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".75s">{{ $banner_val->sub_title }}</h5>
                          <div class="banner-btn d-flex mt-2">
-                             <button class="btn btn-neta"><a href="{{ route('course') }}">Learn More</a></button>
+                             <button class="btn btn-neta"><a href="{{ route('course-detail',['course_id'=>'1']) }}">Learn More</a></button>
                              <a href="https://www.youtube.com/embed/ZBXfkINlRF0" target="_blank">
                                  <div class="neta-play"><img src="{{asset('home/img/play.svg')}}" alt=""><span>Watch Video</span></div>
                              </a>

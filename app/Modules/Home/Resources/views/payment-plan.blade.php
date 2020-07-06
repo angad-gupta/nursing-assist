@@ -106,7 +106,7 @@
                         <tr>
                             <td>NCLEX Prep</td>
                             <td>8 weeks</td>
-                            <td>$2000</td>
+                            <td>$2500</td>
                             <td>Online classroom</td>
                         </tr>
 
@@ -127,8 +127,8 @@
 
                         <tr>
                             <td>1st Year RN Development</td>
-                            <td>3 weeks</td>
-                            <td>$3500</td>
+                            <td>12 Months</td>
+                            <td>$650</td>
                             <td>Online & Face to Face</td>
                         </tr>
 
