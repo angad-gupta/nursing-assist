@@ -290,7 +290,7 @@ header .bg-light .navbar-brand {
 
 .neta-dropdown__menu {
   position: absolute;
-  top: 65px;
+  top: 105px;
   left: 0;
   background: #fff;
   z-index: 1;
@@ -739,7 +739,7 @@ header .bg-light .navbar-brand {
 
 .neta-download p {
   color: #fff;
-  padding-top: 40px;
+  padding-top: 60px;
   font-size: 16px;
   margin-bottom: 10px;
   font-weight: 500;
@@ -816,7 +816,7 @@ header .bg-light .navbar-brand {
 
 .neta-ribbon__content {
   position: absolute;
-  top: 50px;
+  top: 55px;
   color: #fff;
   z-index: 1;
 }
@@ -2368,6 +2368,48 @@ a {
 .return-btn:hover {
   background: #B0117E !important;
   -webkit-transition: .5s all;
+  transition: .5s all;
+}
+
+.doyou{
+  background: #b0117e;
+  padding: 20px;
+  border-radius:4px;
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+.doyou .btn{
+  background:#fff;
+  color: #000;
+  cursor: pointer;
+  transition: .5s all;
+}
+
+.doyou .btn:hover{
+  background:#6E2F9F;
+  color: #fff;
+  transition: .5s all;
+}
+
+.doyou2{
+  background: #6e2f9f;
+  padding: 20px;
+  border-radius:4px;
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+.doyou2 .btn{
+  background:#fff;
+  color: #000;
+  cursor: pointer;
+  transition: .5s all;
+}
+
+.doyou2 .btn:hover{
+  background:#b0117e;
+  color: #fff;
   transition: .5s all;
 }
 /*# sourceMappingURL=style.css.map */
