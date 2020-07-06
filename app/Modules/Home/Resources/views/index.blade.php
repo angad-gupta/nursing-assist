@@ -162,7 +162,7 @@
             <h4 class="mb-0">Browse Courses</h4>
             <p>Courses to get you started.</p>
         </div>
-    <div class="row">
+    <div class="row d-flex justify-content-center">
 
     	  @if(sizeof($course_info)>0) 
                 @foreach($course_info as $key => $course_enrol)
