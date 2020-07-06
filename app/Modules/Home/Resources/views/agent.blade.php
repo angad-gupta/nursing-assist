@@ -1,4 +1,3 @@
-
 @include('home::layouts.navbar-inner')
 
 <section class="neta-ribbon">
@@ -18,6 +17,8 @@
         </div>
     </div>
 </section>
+
+
 
 <section class="neta-agent neta-about section-padding">
 <div class="container">
@@ -60,20 +61,20 @@
 </div>
 </section>
 
-<section class="section-padding ">
+<section class="section-padding pb-0">
     <div class="container">
         <div class="row">
             <div class="col-sm-6">
                 <div class="doyou">
                     <p>Do you want to enrol a student?</p>
-                    <a href="{{ route('contact-us') }}" class="btn">Enrol Student</a>
+                    <a href="{{ route('enrolment',['course_info_id'=>'4']) }}" class="btn">Enrol Student</a>
                 </div>
             </div>
 
             <div class="col-sm-6">
                 <div class="doyou2">
                     <p>Do you want to download our promotional kit? </p>
-                    <a href="{{ route('contact-us') }}" class="btn">Download Promotional Kit</a>
+                    <a  target="_blank" href="{{asset('admin/oba_download.jpg')}}" class="btn">Download Now</a>
                 </div>
             </div>
         </div>
