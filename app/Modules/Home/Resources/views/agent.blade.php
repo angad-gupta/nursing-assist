@@ -39,7 +39,6 @@
     </div>
 </section>
 
-
 <section class="neta-agent neta-about section-padding">
 <div class="container">
     <div class="row">
@@ -80,6 +79,27 @@
     </div>
 </div>
 </section>
+
+<section class="section-padding ">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="doyou">
+                    <p>Do you want to enrol a student?</p>
+                    <a href="{{ route('contact-us') }}" class="btn">Enrol Student</a>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="doyou2">
+                    <p>Do you want to download our promotional kit? </p>
+                    <a href="{{ route('contact-us') }}" class="btn">Download Promotional Kit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 
 <section class="neta-download">
     <div class="container">
