@@ -74,7 +74,7 @@
             <div class="col-sm-6">
                 <div class="doyou2">
                     <p>Do you want to download our promotional kit? </p>
-                    <a  target="_blank" href="{{asset('admin/oba_download.jpg')}}" class="btn">Download Now</a>
+                    <a  target="_blank" href="{{asset('admin/oba_download.jpg')}}" class="btn">Download Promotional Kit</a>
                 </div>
             </div>
         </div>
