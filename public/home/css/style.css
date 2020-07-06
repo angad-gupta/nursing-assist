@@ -2419,4 +2419,9 @@ a {
   color: #fff;
   transition: .5s all;
 }
+
+.my-courses a:hover{
+  color: #000 !important;
+
+}
 /*# sourceMappingURL=style.css.map */
