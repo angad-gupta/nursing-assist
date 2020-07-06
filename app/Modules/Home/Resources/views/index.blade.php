@@ -184,6 +184,7 @@
 
 
 <section class="neta-download neta-demo">
+	<div class="demo-fade"></div>
     <div class="container">
         <div class="row">
             <div class="col-sm-8">

@@ -398,9 +398,14 @@ header {
   min-height: 155px;
   p {
     color: #fff;
-    padding-top: 70px;
+    padding-top: 60px;
     font-size: 16px;
+    margin-bottom: 10px;
+    font-weight:500;
 
+  }
+  span{
+    font-size: 14px;
   }
   .btn-neta {
     @include btn-neta();
@@ -414,5 +419,19 @@ header {
 
 .neta-demo{
   background:url('../img/adm.png') center center/cover fixed !important;
+  position: relative;
+  p{
+    padding-top:40px;
+  }
+  .demo-fade{
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    background:rgba(0,0,0,.5);
+    top:0;
+    left:0;
+    z
+
+  }
 
 }
