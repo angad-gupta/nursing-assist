@@ -6,11 +6,11 @@
         <div class="row">
             <div class="neta-ribbon__content">
                 <div class="col-sm-12">
-                    <h1 class="mb-0">Mockup Test</h1>
+                    <h1 class="mb-0">Mock Test</h1>
                     <ul class="list-unstyled d-flex">
                          <li> <a href="{{ route('home') }}">Home  >> </a></li>
                         <li> <a href="{{ route('student-courses') }}">Courses >></a></li>
-                        <li>Mockup Test</li>
+                        <li>Mock Test</li>
                     </ul>
                 </div>
             </div>

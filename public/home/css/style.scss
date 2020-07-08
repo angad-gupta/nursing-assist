@@ -80,9 +80,10 @@ a {
 }
 
 .student-hub {
-  .my-courses__list {
+  .my-courses{
     margin-top: 30px;
   }
+
   .b-line {
     padding: 20px 0;
   }
@@ -472,4 +473,22 @@ a {
   background: #b0117e;
   color: #fff;
   padding: 15px;
+}
+
+.enrol-cbx{
+  input{
+    transform: scale(1.3);
+    margin-top: 5px !important;
+  }
+  a{
+    text-decoration: underline !important;
+    color: #0443cc !important;
+  }
+}
+
+.self-check{
+  color:$primary-color !important;
+  &:hover{
+    color: #fff !important;
+  }
 }

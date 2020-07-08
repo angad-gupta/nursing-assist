@@ -136,6 +136,9 @@
             border-radius: 4px;
             overflow: hidden;
             margin-bottom: 30px;
+            .e-btn{
+                color:#fff
+            }
             h4{
                 margin-bottom: 0;
             }
@@ -151,9 +154,9 @@
                     font-weight: 500;
                 }
                 li {
-                    margin-right: 15px;
-                    border-right: 1px solid #dedede;
                     padding-right: 10px;
+                    display: inline-flex;
+                    margin: 10px 0px;
                     &:nth-last-child(1) {
                         border-right: 0;
                     }
@@ -211,9 +214,6 @@
       }
       .list-content {
         padding: 20px;
-        a:hover{
-            color:#000;
-        }
       }
       @include e-btn();
       .e-btn {

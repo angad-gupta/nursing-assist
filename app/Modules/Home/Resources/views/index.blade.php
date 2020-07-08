@@ -351,7 +351,7 @@
 				<p>No documentation needed, no English test. Just self check – for free.To know if you are eligible, commence your self check</p>
 			</div>
 			<div class="col-sm-12 col-md-12 col-lg-4">
-				<a href="https://www.nursingmidwiferyboard.gov.au/Registration-and-Endorsement/International/Completing-the-Self-check.aspx" target="_blank"><button class="btn btn-neta float-right">Self Check</button></a>
+				<a href="https://www.nursingmidwiferyboard.gov.au/Registration-and-Endorsement/International/Completing-the-Self-check.aspx" target="_blank"><button class="btn btn-neta self-check float-right">Self Check</button></a>
 			</div>
 		</div>
 	</div>

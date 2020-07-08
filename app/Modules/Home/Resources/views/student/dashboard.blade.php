@@ -50,7 +50,7 @@
                         <a class="nav-link" id="v-pills-book-tab" data-toggle="pill" href="#v-pills-book" role="tab"
                         aria-controls="v-pills-book" aria-selected="false"> My Courses</a>
                         <a class="nav-link" id="v-pills-message-tab" data-toggle="pill" href="#v-pills-message" role="tab"
-                        aria-controls="v-pills-message" aria-selected="false">Message</a>
+                        aria-controls="v-pills-message" aria-selected="false">Ask an Educator</a>
                         <a class="nav-link" id="v-pills-notification-tab" data-toggle="pill" href="#v-pills-notification"
                         role="tab" aria-controls="v-pills-messages" aria-selected="false">Announcement</a>
                         <a class="nav-link" id="v-pills-purchase-tab" data-toggle="pill" href="#v-pills-purchase"

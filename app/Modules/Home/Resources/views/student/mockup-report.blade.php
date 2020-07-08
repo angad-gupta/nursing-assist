@@ -5,7 +5,7 @@
 <section class="neta-enrolment neta-quiz neta-contact  section-padding">
 	<div class="container">
 		<div class="form-card"> 
-			<h2 class="fs-title mb-0">Mockup Result</h2>
+			<h2 class="fs-title mb-0">Mock Result</h2>
 			<p>You have successfully completed the practice test. Below is your result</p> 
 			<div class="row b-line"> 
 				<div class="col-sm-3 text-center"> 

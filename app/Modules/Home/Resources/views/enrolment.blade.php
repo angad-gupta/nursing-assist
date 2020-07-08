@@ -79,20 +79,21 @@ $("#btn").click(function() {
                                                 <div class="form-card">
                                                     <h2 class="fs-title">Eligibility</h2>
                                                     <div class="e-input">
-                                                        <input type="radio" name="eligible_rd" value="is_eligible_mcq_osce" placeholder="Email Id" id="radio1" checked="checked" />
-                                                        <label for="">I have done self-check through AHPRA that
+
+                                                        <input type="radio" id="radio-1" class="radio-custom" name="eligible_rd" value="is_eligible_mcq_osce" placeholder="Email Id" id="radio1" checked="checked" />
+                                                        <label for="radio-1" class="radio-custom-label">I have done self-check through AHPRA that
                                                             indicates MCQ and OSCE </label>
                                                     </div>
 
                                                     <div class="e-input">
-                                                        <input type="radio" name="eligible_rd" value="is_eligible_att" placeholder="Email Id"id="radio2" />
-                                                        <label for="">I hold an Authority to Take (ATT) notification
+                                                        <input type="radio" id="radio-2" class="radio-custom" name="eligible_rd" value="is_eligible_att" placeholder="Email Id"id="radio2" />
+                                                        <label for="radio-2" class="radio-custom-label">I hold an Authority to Take (ATT) notification
                                                             from AHPRA </label>
                                                     </div>
 
                                                     <div class="e-input">
-                                                        <input type="radio" name="eligible_rd" value="is_eligible_letter_ahpra" placeholder="Email Id" id="radio3"/>
-                                                        <label for="">I have a letter from AHPRA referring me to the OBA
+                                                        <input type="radio" id="radio-3" class="radio-custom" name="eligible_rd" value="is_eligible_letter_ahpra" placeholder="Email Id" id="radio3"/>
+                                                        <label for="radio-3" class="radio-custom-label">I have a letter from AHPRA referring me to the OBA
                                                         </label>
                                                     </div>
 
@@ -109,8 +110,8 @@ $("#btn").click(function() {
                                                 <div class="form-card">
                                                     <h2 class="fs-title">Identity Document</h2>
                                                     <div class="e-input">
-                                                        <input type="radio" name="rd" value="is_id" placeholder="Email Id" />
-                                                        <label for="">I have provided a copy of valid ID
+                                                        <input type="checkbox" id="radio-4" class="radio-custom" name="rd" value="is_id" placeholder="Email Id" />
+                                                        <label for="radio-4" class="radio-custom-label">I have provided a copy of valid ID
                                                         </label>
                                                     </div>
 
@@ -155,15 +156,15 @@ $("#btn").click(function() {
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
-                                                                <label for="">Street1<span>*</span></label>
-                                                                <input type="text" name="street1" placeholder="Street1"
+                                                                <label for="">Street 1<span>*</span></label>
+                                                                <input type="text" name="street1" placeholder="Street 1"
                                                                     class="form-control" id="">
                                                             </div>
                                                         </div>
                                                          <div class="col-sm-6">
                                                             <div class="form-group">
-                                                                <label for="">Street2<span>*</span></label>
-                                                                <input type="text" name="street2" placeholder="Street2"
+                                                                <label for="">Suburb<span>*</span></label>
+                                                                <input type="text" name="Suburb" placeholder="Suburb"
                                                                     class="form-control" id="">
                                                             </div>
                                                         </div>
@@ -183,8 +184,8 @@ $("#btn").click(function() {
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
-                                                                <label for="">Postalcode <span>*</span></label>
-                                                                <input type="text" name="postalcode" placeholder="Postalcode"
+                                                                <label for="">Post Code <span>*</span></label>
+                                                                <input type="text" name="Post Code" placeholder="Post Code"
                                                                     class="form-control" id="">
                                                             </div>
                                                         </div>
@@ -203,7 +204,7 @@ $("#btn").click(function() {
 
                                                          <div class="col-sm-6">
                                                             <div class="form-group">
-                                                                <label for="">Intake Date<span>*</span></label>
+                                                                <label for="">Intake Month<span>*</span></label>
                                                                  <select  class="form-control" name="intake_date">
                                                                      <option value="January">January</option>
                                                                      <option value="February">February</option>
@@ -217,6 +218,19 @@ $("#btn").click(function() {
                                                                      <option value="October">October</option>
                                                                      <option value="November">November</option>
                                                                      <option value="December">December</option>
+                                                                 </select>   
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="">Referring Agency<span>*</span></label>
+                                                                 <select  class="form-control" name="intake_date">
+                                                                     <option value="January">None</option>
+                                                                     <option value="February">Sydney</option>
+                                                                     <option value="March">Perth</option>
+                                                                     <option value="April">Melbourne</option>
+    
                                                                  </select>   
                                                             </div>
                                                         </div>
@@ -234,6 +248,10 @@ $("#btn").click(function() {
                                                                 <input type="texts" name="phone" placeholder="Contact Number"
                                                                     class="form-control">
                                                             </div>
+                                                        </div>
+
+                                                        <div class="col-sm-12 d-flex enrol-cbx">
+                                                           <input type="checkbox"> <p>I have read and understood the <a href="#">Terms & Conditions</a>, <a href="#">Privacy Policy</a> and <a href="#">User Agreement of NETA</a></p>
                                                         </div>
                                                         <!-- <div class="col-sm-4">
                                                                 <button class="btn btn-neta"><a

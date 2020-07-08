@@ -36,7 +36,7 @@ body {
 }
 
 header {
-  box-shadow: 0 0 10px #efefef;
+  box-shadow: 0 5px 10px rgba(239, 239, 239, 0.36);
   background: $white;
  
   .bg-light {
@@ -290,9 +290,9 @@ header {
   }
   .btn-neta {
     @include btn-neta();
-    background: #fff;
+    background: $primary-color;
     a {
-      color: $primary-color;
+      color: #fff;
     }
   }
 }
@@ -409,10 +409,10 @@ header {
   }
   .btn-neta {
     @include btn-neta();
-    background: #fff;
+    background:$primary-color;
     margin-top: 55px;
     a {
-      color: $primary-color;
+      color: #fff;
     }
   }
 }
@@ -430,8 +430,6 @@ header {
     background:rgba(0,0,0,.5);
     top:0;
     left:0;
-    z
-
   }
 
 }
