@@ -228,8 +228,8 @@ body {
 }
 
 header {
-  -webkit-box-shadow: 0 0 10px #efefef;
-          box-shadow: 0 0 10px #efefef;
+  -webkit-box-shadow: 0 5px 10px rgba(239, 239, 239, 0.36);
+          box-shadow: 0 5px 10px rgba(239, 239, 239, 0.36);
   background: #fff;
 }
 
@@ -2385,8 +2385,48 @@ a {
 
 .doyou {
   background: #b0117e;
+  padding: 20px;
+  border-radius: 4px;
   color: #fff;
-  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.doyou .btn {
+  background: #fff;
+  color: #000;
+  cursor: pointer;
+  -webkit-transition: .5s all;
+  transition: .5s all;
+}
+
+.doyou .btn:hover {
+  background: #6E2F9F;
+  color: #fff;
+  -webkit-transition: .5s all;
+  transition: .5s all;
+}
+
+.doyou2 {
+  background: #6e2f9f;
+  padding: 20px;
+  border-radius: 4px;
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+.doyou2 .btn {
+  background: #fff;
+  color: #000;
+  cursor: pointer;
+  -webkit-transition: .5s all;
+  transition: .5s all;
+}
+
+.doyou2 .btn:hover {
+  background: #b0117e;
+  color: #fff;
+  -webkit-transition: .5s all;
+  transition: .5s all;
 }
 
 .enrol-cbx input {
