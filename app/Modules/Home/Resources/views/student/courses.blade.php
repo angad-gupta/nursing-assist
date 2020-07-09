@@ -75,7 +75,7 @@
                         <div class="row">
 
                             @php
-                            $mockup_list =array('mockup_test_week_1'=>'Mockup Test Week 1','mockup_test_week_2'=>'Mockup Test Week 2','mockup_test_week_3'=>'Mockup Test Week 3','mockup_test_week_4'=>'Mockup Test Week 4','mockup_test_week_5'=>'Mockup Test Week 5','mockup_test_week_6'=>'Mockup Test Week 6','mockup_test_week_7'=>'Mockup Test Week 7','mockup_test_week_8'=>'Mockup Test Week 8');
+                            $mockup_list =array('mockup_test_week_1'=>'Mock Test Week 1','mockup_test_week_2'=>'Mock Test Week 2','mockup_test_week_3'=>'Mock Test Week 3','mockup_test_week_4'=>'Mock Test Week 4','mockup_test_week_5'=>'Mock Test Week 5','mockup_test_week_6'=>'Mock Test Week 6','mockup_test_week_7'=>'Mock Test Week 7','mockup_test_week_8'=>'Mock Test Week 8');
                             @endphp
 
                             @foreach($mockup_list as $key => $list)

@@ -22,7 +22,7 @@ class AgentRepository implements AgentInterface
     }
     
    public function getList(){  
-       $team = Agent::pluck('company_name', 'id');
+       $team = Agent::pluck('agent_name', 'id'); 
        return $team;
    }
     

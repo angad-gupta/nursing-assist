@@ -13,19 +13,26 @@ $("#btn").click(function() {
          }
 
         });
-     $("#btn_second").click(function() {
-        if(document.getElementById("file_second").value != "") {
-            return true;
-        }
-         else{
-          alert('Please upload the identity document.');
-          gotothen();
-         }
-        });
+$("#btn_second").click(function() {
+    if(document.getElementById("file_second").value != "") {
+        return true;
+    }
+     else{
+      alert('Please upload the identity document.');
+      gotothen();
+     }
+});
 
+$('#detail_form').click(function(){
+    if(document.getElementById('term_conditions_agree').checked) {
+        return true;
+    } else {
+        alert('Please check Term & Conditions');
+        gotothen();
+    }
+});
 
-
-</script>
+</script> 
 
 @endsection 
 
@@ -110,7 +117,7 @@ $("#btn").click(function() {
                                                 <div class="form-card">
                                                     <h2 class="fs-title">Identity Document</h2>
                                                     <div class="e-input">
-                                                        <input type="checkbox" id="radio-4" class="radio-custom" name="rd" value="is_id" placeholder="Email Id" />
+                                                        <input type="checkbox" id="radio-4" class="radio-custom" name="rd" value="is_id" placeholder="Email Id" checked="checked"/>
                                                         <label for="radio-4" class="radio-custom-label">I have provided a copy of valid ID
                                                         </label>
                                                     </div>
@@ -120,10 +127,8 @@ $("#btn").click(function() {
 
                                                         </label>
                                                     </div>
-                                                </div> <input type="button" name="previous"
-                                                    class="previous action-button-previous" value="Previous" /> 
-                                                    <input type="button" name="next" class="next action-button"
-                                                    value="Next Step" id="btn_second"/>
+                                                </div> <input type="button" name="previous" class="previous action-button-previous" value="Previous" /> 
+                                                    <input type="button" name="next" class="next action-button" value="Next Step" id="btn_second"/>
                                             </fieldset>
 
                                             <fieldset>
@@ -189,7 +194,7 @@ $("#btn").click(function() {
                                                                     class="form-control" id="">
                                                             </div>
                                                         </div>
-                                                        <div class="col-sm-6">
+                                                        <div class="col-sm-6"> 
                                                             <div class="form-group">
                                                                 <label for="">Country<span>*</span></label>
                                                                  <select  class="form-control" name="country">
@@ -225,12 +230,11 @@ $("#btn").click(function() {
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
                                                                 <label for="">Referring Agency<span>*</span></label>
-                                                                 <select  class="form-control" name="intake_date">
-                                                                     <option value="January">None</option>
-                                                                     <option value="February">Sydney</option>
-                                                                     <option value="March">Perth</option>
-                                                                     <option value="April">Melbourne</option>
-    
+                                                                 <select class="form-control" name="agents">
+                                                                     <option value="0">None</option>
+                                                                     @foreach($agents as $key => $agent)
+                                                                     <option value="{{$key}}">{{$agent}}</option>
+                                                                     @endforeach
                                                                  </select>   
                                                             </div>
                                                         </div>
@@ -251,17 +255,12 @@ $("#btn").click(function() {
                                                         </div>
 
                                                         <div class="col-sm-12 d-flex enrol-cbx">
-                                                           <input type="checkbox"> <p>I have read and understood the <a href="#">Terms & Conditions</a>, <a href="#">Privacy Policy</a> and <a href="#">User Agreement of NETA</a></p>
+                                                           <input type="checkbox" id="term_conditions_agree" required="required"> <p>I have read and understood the <a href="{{ route('term-condition')}}">Terms & Conditions</a>, <a href="{{ route('privacy-policy')}}">Privacy Policy</a> and <a href="{{ route('user-agreement')}}">User Agreement of NETA</a></p>
                                                         </div>
-                                                        <!-- <div class="col-sm-4">
-                                                                <button class="btn btn-neta"><a
-                                                                        href="#">Submit</a></button>
-                                                            </div> -->
                                                     </div>
-                                                </div> <input type="button" name="previous"
-                                                    class="previous action-button-previous" value="Previous" /> <input
-                                                    type="button" name="make_payment" class="next action-button"
-                                                    value="Confirm" />
+                                                </div> 
+                                                <input type="button" name="previous" class="previous action-button-previous" value="Previous" /> 
+                                                <input type="button" name="make_payment" class="next action-button" value="Confirm" id="detail_form" />
                                             </fieldset>
                                             <fieldset>
                                                 <div class="form-card neta-payment">

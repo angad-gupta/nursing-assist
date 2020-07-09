@@ -12,18 +12,22 @@ use App\Modules\Home\Http\Requests\StudentLoginFormRequest;
 use App\Modules\Student\Repositories\StudentInterface;
 use App\Modules\CourseInfo\Repositories\CourseInfoInterface;
 use App\Modules\Course\Repositories\CourseInterface;
+use App\Modules\Agent\Repositories\AgentInterface;
+
 
 class StudentController extends Controller
 {
     protected $student;
     protected $courseinfo;
     protected $course;
+    protected $agent;
     
-    public function __construct(StudentInterface $student,CourseInfoInterface $courseinfo, CourseInterface $course)
+    public function __construct(StudentInterface $student,CourseInfoInterface $courseinfo, CourseInterface $course,AgentInterface $agent)
     {
         $this->student = $student;
         $this->courseinfo = $courseinfo;
         $this->course = $course;
+        $this->agent = $agent;
     }
 
      public function studentLogin()
@@ -53,6 +57,9 @@ class StudentController extends Controller
 
         if (Auth::guard('student')->check()) {
 
+
+            $data['agents'] = $this->agent->getList();
+            
             $data['course_info_id'] = $input['course_info_id'];
 
             $data['courseinfo'] = $this->courseinfo->where('id', $data['course_info_id'])->first();

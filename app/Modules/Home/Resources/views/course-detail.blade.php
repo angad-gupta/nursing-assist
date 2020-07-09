@@ -88,7 +88,7 @@
                                                 @endif
 
                                             </ul>
-                                            <a  class="btn e-btn w-25 mt-1" href="{{ route('enrolment',['course_info_id'=>$courseInfo->id]) }}">Enroll Now</a>
+                                            <!-- <a  class="btn e-btn w-25 mt-1" href="{{ route('enrolment',['course_info_id'=>$courseInfo->id]) }}">Enroll Now</a> -->
                                         </div>
                                     </div>
                                 </div>

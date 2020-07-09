@@ -256,7 +256,8 @@ class HomeController extends Controller
     }
 
     public function studentRegister(StudentLoginFormRequest $request){
-        $input = $request->all();
+        $input = $request->all(); 
+        $email = $input['email']; 
 
          try{
 
@@ -269,6 +270,24 @@ class HomeController extends Controller
             );
 
             $this->student->save($studentData);
+
+            /* --------------------------------------------------------------- 
+                        Email Send to Student After Registration 
+             --------------------------------------------------------------- */
+             
+            
+             $subject = 'Register Successfully.'; 
+
+             $content  = view('home::email-register-content')->render(); 
+
+             if (filter_var( $email, FILTER_VALIDATE_EMAIL )) {
+                 Mail::to($email)->send(new SendNetaMail($content,$subject));
+            }
+
+            /* --------------------------------------------------------------- 
+                        Email Send to Student After Registration 
+             --------------------------------------------------------------- */
+
 
             $registerStudent['message'] = 'You have registered Successfully.';
         }catch(\Throwable $e){
