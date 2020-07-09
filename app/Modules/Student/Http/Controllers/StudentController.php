@@ -150,11 +150,11 @@ class StudentController extends Controller
              $data['studentInfo'] = $studentInfo = $this->student->find($student_id);
              $email = $studentInfo->email;
 
-             $subject = 'Course Payment Successfully.';
+             $subject = 'Course Approval Successfully.';
 
              $data['coursinfo'] = $studentPuchaseInfo;  
 
-             $content  = view('student::student.partial.email-content',$data)->render(); 
+             $content  = view('student::student.partial.email-content')->render(); 
 
              if (filter_var( $email, FILTER_VALIDATE_EMAIL )) {
                  Mail::to($email)->send(new SendNetaMail($content,$subject));

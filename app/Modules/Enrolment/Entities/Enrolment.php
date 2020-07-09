@@ -30,6 +30,7 @@ class Enrolment extends Model
         'city',
         'state',
         'postalcode',
+        'agents',
         'country',
         'email',
         'phone',

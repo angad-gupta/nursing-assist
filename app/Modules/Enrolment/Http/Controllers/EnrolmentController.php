@@ -15,6 +15,10 @@ use App\Modules\Course\Repositories\CourseInterface;
 use Illuminate\Support\Facades\Redirect;
 use Session;
 
+// Mail
+use Illuminate\Support\Facades\Mail;
+use App\Modules\Home\Emails\SendNetaMail;
+
 class EnrolmentController extends Controller
 {
 
@@ -109,6 +113,7 @@ class EnrolmentController extends Controller
                 'city' => $data['city'],
                 'state' => $data['state'],
                 'postalcode' => $data['postalcode'],
+                'agents' => $data['agents'],
                 'country' => $data['country'],
                 'email' => $data['email'],
                 'phone' => $data['phone'],
@@ -139,6 +144,27 @@ class EnrolmentController extends Controller
                 );
                
                 $studentpayment = $this->studentpayment->save($studentPaymentData);
+
+                /* --------------------------------------------------------------- 
+                        Email Send to Student After Registration 
+                 --------------------------------------------------------------- */
+                 
+                 $email =$student_detail->email;
+                
+                 $subject = 'Enrolment Successfully.'; 
+
+                 $student['name'] = $student_detail->full_name;
+
+                 $content  = view('enrolment::enrolment.enrol-register-content',$student)->render(); 
+
+                 if (filter_var( $email, FILTER_VALIDATE_EMAIL )) {
+                     Mail::to($email)->send(new SendNetaMail($content,$subject));
+                }
+
+                /* --------------------------------------------------------------- 
+                            Email Send to Student After Registration 
+                --------------------------------------------------------------- */
+
 
                 alertify()->success('You have Successfully enrol Course. We will contact you soon.');
                 return redirect(route('student-dashboard'));
