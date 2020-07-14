@@ -154,9 +154,9 @@ class EnrolmentController extends Controller
 
                  $content  = view('enrolment::enrolment.enrol-register-content',$student)->render(); 
 
-                 if (filter_var( $email, FILTER_VALIDATE_EMAIL )) {
+                 //if (filter_var( $email, FILTER_VALIDATE_EMAIL )) {
                      Mail::to($email)->send(new SendNetaMail($content,$subject));
-                }
+                //}
 
                 /* --------------------------------------------------------------- 
                             Email Send to Student After Registration 

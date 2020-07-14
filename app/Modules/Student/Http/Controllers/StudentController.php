@@ -156,9 +156,9 @@ class StudentController extends Controller
 
              $content  = view('student::student.partial.email-content')->render(); 
 
-             if (filter_var( $email, FILTER_VALIDATE_EMAIL )) {
+           //  if (filter_var( $email, FILTER_VALIDATE_EMAIL )) {
                  Mail::to($email)->send(new SendNetaMail($content,$subject));
-            }
+           // }
 
             /* --------------------------------------------------------------- 
                         Email Send to Student After Payment success 
