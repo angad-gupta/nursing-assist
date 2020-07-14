@@ -50,7 +50,7 @@ class EnrolmentController extends Controller
     }
 
     public function viewUser(Request $request){
-        $data = $request->all();
+        $data = $request->all(); 
         $id = (array_key_exists('id', $data)) ? $data['id'] : '';
         $enrolment = $this->enrolment->find($id);
         $data = view('enrolment::enrolment.view-detail',compact('enrolment'))->render();
@@ -80,22 +80,17 @@ class EnrolmentController extends Controller
             $data['is_eligible_att'] = 0;
             $data['is_eligible_letter_ahpra'] = 1;
          }
+       
 
-         if(isset($request->rd))
-         {
             $data['is_id'] = 1;
-         }
-         else 
-         {
-          $data['is_id'] = 0;
-         }
+     
          $student_detail = auth()->guard('student')->user();
          $data['student_id'] = $student_detail->id;
 
          $courseinfo_id = $data['courseinfo_id'];
          $courseInfo = $this->courseinfo->find($courseinfo_id);    
          $total_course_fee = $courseInfo->course_fee;
-
+  
          try{
 
              $enrolmentData = array(
@@ -109,17 +104,18 @@ class EnrolmentController extends Controller
                 'first_name' => $data['first_name'],
                 'last_name' => $data['last_name'],
                 'street1' => $data['street1'], 
-                'street2' => $data['street2'],
+                'street2' => $data['Suburb'],
                 'city' => $data['city'],
                 'state' => $data['state'],
-                'postalcode' => $data['postalcode'],
+                'postalcode' => $data['Post_Code'],
                 'agents' => $data['agents'],
-                'country' => $data['country'],
+                'country' => $data['country'], 
                 'email' => $data['email'],
                 'phone' => $data['phone'],
                 'intake_date' => $data['intake_date'],
                 'payment_status' =>0
             );
+
             if ($request->hasFile('eligible_document')) {
               $enrolmentData['eligible_document'] = $this->enrolment->upload($data['eligible_document']);
              }
@@ -130,7 +126,8 @@ class EnrolmentController extends Controller
 
             $enrolment = $this->enrolment->save($enrolmentData);
 
-            if($submit == 'pay_later'){
+
+            if($submit === 'pay_later'){ 
 
                 $studentPaymentData = array(
                     'student_id'=>$data['student_id'],
@@ -142,7 +139,7 @@ class EnrolmentController extends Controller
                     'amount_paid' => '0',
                     'amount_left' => $total_course_fee
                 );
-               
+              
                 $studentpayment = $this->studentpayment->save($studentPaymentData);
 
                 /* --------------------------------------------------------------- 
@@ -166,7 +163,8 @@ class EnrolmentController extends Controller
                 --------------------------------------------------------------- */
 
 
-                alertify()->success('You have Successfully enrol Course. We will contact you soon.');
+                //alertify()->success('You have Successfully enrol Course. We will contact you soon.');
+                Flash('You have Successfully enrol Course. We will contact you soon.')->success(); 
                 return redirect(route('student-dashboard'));
             }
 
@@ -212,26 +210,33 @@ class EnrolmentController extends Controller
                 return Redirect::to($sharedURL);
                 } else {
                 foreach ($response->getErrors() as $error) {
-                    return redirect(route('enrolment.viewUser',['id'=>$enrolment_id]));
+                    // return redirect(route('enrolment.viewUser',['id'=>$enrolment_id]));
+                    return redirect(route('student-dashboard'));
                  // echo "Error: ".\Eway\Rapid::getMessage($error)."";
                 }
                 die();
                 }
 
-           alertify()->success('Course Information Created Successfully');
-          return redirect(route('enrolment.viewUser',['id'=>$enrolment_id]));
+                Flash('You have Successfully enrol Course. We will contact you soon.')->success();  
+           // alertify()->success('Course Information Created Successfully');
+          // return redirect(route('enrolment.viewUser',['id'=>$enrolment_id]));
+          return redirect(route('student-dashboard'));
+
         }
           catch(\Throwable $e){
             alertify($e->getMessage())->error();
         }
 
-        return redirect(route('enrolment.viewUser'));
+        // return redirect(route('enrolment.viewUser'));
+        Flash('You have Successfully enrol Course. We will contact you soon.')->success(); 
+        return redirect(route('student-dashboard'));
     }
 
 
     public function cancel()
     {
-       return redirect(route('enrolment.viewUser'));
+       // return redirect(route('enrolment.viewUser'));
+        return redirect(route('student-dashboard'));
     }
     public function redirect($id)
     {
@@ -288,7 +293,8 @@ class EnrolmentController extends Controller
          {
         $errors = split(', ', $transactionResponse->ResponseMessage);
         foreach ($errors as $error) {
-                 return redirect(route('enrolment.viewUser'));
+                 // return redirect(route('enrolment.viewUser'));
+                  return redirect(route('student-dashboard'));
             }
         }
     }
