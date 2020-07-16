@@ -28,6 +28,7 @@
                     <th>Full Name</th>
                     <th>Course</th>
                     <th>Date</th>
+                    <th>Lesson Title</th>
                     <th>Total Question</th>
                     <th>Correct Answer</th>
                     <th>Pecentage</th>
@@ -42,6 +43,7 @@
                     <td>{{ optional($value->studentInfo)->full_name }}</td>
                     <td>{{ optional($value->courseInfo)->course_program_title }}</td>
                     <td>{{ date('d M, Y',strtotime($value->date)) }}</td>
+                    <td>{{ optional($value->courseContentInfo)->lesson_title }}</td>
                     <td>{{$value->total_question}}</td>
                     <td>{{$value->score}}</td>
                     <td>{{$value->percent}} %</td>

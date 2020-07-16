@@ -263,6 +263,7 @@ class HomeController extends Controller
 
             $studentData = array(
                 'username' => $input['username'],
+                'full_name' => $input['full_name'],
                 'email' => $input['email'],
                 'password' => bcrypt($input['password']),
                 'user_type' => 'student',

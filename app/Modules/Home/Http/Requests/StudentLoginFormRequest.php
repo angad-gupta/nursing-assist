@@ -17,6 +17,7 @@ class StudentLoginFormRequest extends FormRequest
         { 
             return [
                 'username' => 'required',
+                'full_name' => 'required',
                 'email' => 'required',
                 'password' => 'required|min:4',
             ];

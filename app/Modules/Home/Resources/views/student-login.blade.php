@@ -71,6 +71,12 @@
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group">
+                                    <label for="">Full Name</label>
+                                    {!! Form::text('full_name', $value = null, ['id'=>'full_name','placeholder'=>'Enter Full Name','class'=>'form-control','required']) !!}
+                                  </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
                                     <label for="">Email Address</label>
                                      {!! Form::email('email', $value = null, ['id'=>'email','placeholder'=>'Enter Email Address','class'=>'form-control','required']) !!}
                                   </div>

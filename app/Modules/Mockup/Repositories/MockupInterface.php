@@ -20,4 +20,6 @@ interface MockupInterface
     
     public function checkCorrectAnswer($question_id,$answer);
 
+    public function getTotalQuestionsByTitle($mockup_title, $datetime);
+
 }

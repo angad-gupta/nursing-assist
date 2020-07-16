@@ -171,7 +171,7 @@
                                                         <td>{{ optional($my_course_val->courseInfo)->course_program_title }}</td>
                                                         <td>{{$total_syllabus}} syllabus</td>
                                                         <td width="30%">{{date('d M,Y',strtotime($my_course_val->created_at))}}</td>
-                                                        <td><a href="{{ route('syllabus-detail',['course_info_id'=>$my_course_val->id]) }}">Click To View Course</a></td>
+                                                        <td><a href="{{ route('syllabus-detail',['course_info_id'=>$my_course_val->courseinfo_id]) }}">Click To View Course</a></td>
                                                     </tr>
                                                     @endforeach
                                                 @endif
