@@ -8,7 +8,7 @@
                 <div class="col-sm-12">
                     <h1 class="mb-0">Mock Test</h1>
                     <ul class="list-unstyled d-flex">
-                         <li> <a href="{{ route('home') }}">Home  >> </a></li>
+                        <li> <a href="{{ route('home') }}">Home >> </a></li>
                         <li> <a href="{{ route('student-courses') }}">Courses >></a></li>
                         <li>Mock Test</li>
                     </ul>
@@ -25,101 +25,115 @@
             <div class="col-sm-12">
                 <h2 class="ttl-line">{{ ucfirst(str_replace('_',' ',$mockup_title)) }}
                 </h2>
-                <p>Comprehension, Analysis and Application level questions from all categories using the Related Courses. Complete the test in a quiet environment. </p>
+                <p>Comprehension, Analysis and Application level questions from all categories using the Related
+                    Courses. Complete the test in a quiet environment. </p>
             </div>
 
             <div class="col-sm-12">
                 <div class="accordion" id="accordionExample">
 
-                    {!! Form::open(['route'=>'studentmockup.store','method'=>'POST','id'=>'studentmockup_submit','class'=>'form-horizontal','role'=>'form','files' => true]) !!}
+                    {!! Form::open(['route'=>'studentmockup.store','method'=>'POST','id'=>'studentmockup_submit','class'=>'form-horizontal','role'=>'form','files'=> true]) !!}
 
+                    @php $last_key = $mockupInfo->keys()->last(); @endphp
 
                     @foreach($mockupInfo as $key => $question)
-                    @php $key = $key +1; @endphp
+                    @php $key = $key + 1; @endphp
 
-                    <div class="card">
-                        <div class="card-header" data-toggle="collapse" data-target="#collapse{{$key}}" aria-expanded="true">     
+                    <div class="card" style="display: {{ $key == 1 ? '' : 'none' }}" id="question_{{$key}}">
+                        <div class="card-header" data-toggle="collapse" data-target="#collapse{{$key}}"
+                            aria-expanded="true">
                             <span class="title">{{$key}}. {{ $question->question }}</span>
-                        </div> 
+                        </div>
                         <div id="collapse{{$key}}" class="collapse show" data-parent="#accordionExample">
                             <div class="card-body demo-quiz neta-about">
                                 <div class="">
-                                     <div class="row">
+                                    <div class="row">
                                         {{ Form::hidden('question_id[]', $question->id) }}
                                         {{ Form::hidden('mockup_title', $mockup_title) }}
 
-                                         @if($question->question_type == 'multiple')
-                                         <div class="col-sm-6">
-                                             <div class="e-input">
-                                                 <input type="checkbox" name="question_option_{{$key}}[]" value="option_a" />
-                                                 <label for="">A. {{ $question->option_1 }}
-                                                 </label>
-                                             </div>
-                                         </div>
-                                         <div class="col-sm-6">
-                                             <div class="e-input">
-                                                 <input type="checkbox" name="question_option_{{$key}}[]" value="option_b" />
-                                                 <label for="">B. {{ $question->option_2 }}
-                                                 </label>
-                                             </div>
-                                         </div>
-                                         <div class="col-sm-6">
-                                             <div class="e-input">
-                                                 <input type="checkbox" name="question_option_{{$key}}[]" value="option_c" />
-                                                 <label for="">C. {{ $question->option_3 }}
-                                                 </label>
-                                             </div>
-                                         </div>
-                                         <div class="col-sm-6">
-                                             <div class="e-input">
-                                                 <input type="checkbox" name="question_option_{{$key}}[]" value="option_d" />
-                                                 <label for="">D. {{ $question->option_4 }}
-                                                 </label>
-                                             </div>
-                                         </div>
+                                        @if($question->question_type == 'multiple')
+                                        <div class="col-sm-6">
+                                            <div class="e-input">
+                                                <input type="checkbox" name="question_option_{{$key}}[]"
+                                                    value="option_a" />
+                                                <label for="">A. {{ $question->option_1 }}
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="e-input">
+                                                <input type="checkbox" name="question_option_{{$key}}[]"
+                                                    value="option_b" />
+                                                <label for="">B. {{ $question->option_2 }}
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="e-input">
+                                                <input type="checkbox" name="question_option_{{$key}}[]"
+                                                    value="option_c" />
+                                                <label for="">C. {{ $question->option_3 }}
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="e-input">
+                                                <input type="checkbox" name="question_option_{{$key}}[]"
+                                                    value="option_d" />
+                                                <label for="">D. {{ $question->option_4 }}
+                                                </label>
+                                            </div>
+                                        </div>
 
                                         @else
 
-                                           <div class="col-sm-6">
-                                                <div class="e-input">
-                                                    <input type="radio" name="question_option_{{$key}}[]" value="true" required/>
-                                                    <label for="">True
-                                                    </label>
-                                                </div>
+                                        <div class="col-sm-6">
+                                            <div class="e-input">
+                                                <input type="radio" name="question_option_{{$key}}[]" value="true" />
+                                                <label for="">True
+                                                </label>
                                             </div>
-                                            <div class="col-sm-6"></div>
-                                            <div class="col-sm-6">
-                                                <div class="e-input">
-                                                    <input type="radio" name="question_option_{{$key}}[]" value="false" />
-                                                    <label for="">False
-                                                    </label>
-                                                </div>
+                                        </div>
+                                        <div class="col-sm-6"></div>
+                                        <div class="col-sm-6">
+                                            <div class="e-input">
+                                                <input type="radio" name="question_option_{{$key}}[]" value="false" />
+                                                <label for="">False
+                                                </label>
                                             </div>
-                                            <div class="col-sm-6"></div>
+                                        </div>
+                                        <div class="col-sm-6"></div>
 
-                                        @endif 
-   
-                                     </div>
-                 
-                                 </div>
+                                        @endif
+                                        @if($last_key + 1 == $key)
+                                            <div class="col-sm-6">
+                                                <button type="submit" class="enrol-cpd mockup_submit" id="show-btn">Submit Your Answer</button>
+                                            </div>
+                                        @else
+                                        <div class="col-sm-6">
+                                            <button type="button" name="next" class="enrol-cpd show-btn"
+                                                data-id="{{$key}}">Next Question</button>
+                                        </div>
+                                        @endif
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                @endforeach
+                    @endforeach
+                   
+                   
+                    <div class="col-sm-12 neta-about">
+                        <span class="text-center" id="loaderImg" style="display:none;">
+                            <img src="{{asset('home/img/loader.gif')}}" alt="loader1"
+                                style="margin-left: 330px; height:200px; width:auto;">
+                            <h4>Please Wait..While Saving Your Answer</h4>
+                        </span>
+                    </div>
 
-               
-
-
-                     <div class="col-sm-12 neta-about">
-                         <button type="submit" class="enrol-cpd mockup_submit" id="show-btn">Submit Your Answer</button>
-                         <span class="text-center" id="loaderImg" style="display:none;" >
-                              <img src="{{asset('home/img/loader.gif')}}" alt="loader1" style="margin-left: 330px; height:200px; width:auto;">
-                              <h4>Please Wait..While Saving Your Answer</h4>
-                         </span>
-                     </div>
-
-                {!! Form::close() !!}     
+                    {!! Form::close() !!}
 
                 </div>
 
@@ -132,29 +146,22 @@
 @include('home::layouts.footer')
 
 <script type="text/javascript">
-    
-$(document).ready(function(){
+    $(document).ready(function () {
 
-    $('#studentmockup_submit').submit(function() {
-        $('#loaderImg').show(); 
-        $('.mockup_submit').attr('disabled', true);
-        $('.mockup_submit').prepend('<i class="icon-spinner4 spinner"></i>');
-        return true;
-      });
+        $('#studentmockup_submit').submit(function () {
+            $('#loaderImg').show();
+            $('.mockup_submit').attr('disabled', true);
+            $('.mockup_submit').prepend('<i class="icon-spinner4 spinner"></i>');
+            return true;
+        });
 
-});
+        $('.show-btn').on('click', function () {
+            var qkey = $(this).attr('data-id');
+            var new_key = parseInt(qkey, 10) + 1;
+            $('#question_'+qkey).css('display', 'none');
+            $('#question_'+new_key).css('display', 'block');
+        });
 
-  // $('.mockup_submit').click( function () { 
-  //   var form = $(this).parents('form:first');
-    
-  //   if (form.valid()) { 
-  //     $(this).attr('disabled', true);
-  //     $(this).prepend('<i class="icon-spinner4 spinner"></i> ');
-
-  //     form.submit();
-  //   }
-
-  // });
-
+    });
 
 </script>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use App\Modules\Student\Repositories\StudentInterface;
+use App\Modules\Agent\Repositories\AgentInterface;
 use App\Modules\Quiz\Repositories\QuizInterface;
 use App\Modules\CourseInfo\Repositories\CourseInfoInterface;
 
@@ -18,12 +19,17 @@ class StudentController extends Controller
     protected $StudentController;
     protected $quiz;
     protected $courseinfo;
+    /**
+     * @var AgentInterface
+     */
+    protected $agent;
     
-    public function __construct(StudentInterface $student, QuizInterface $quiz, CourseInfoInterface $courseinfo)
+    public function __construct(StudentInterface $student, QuizInterface $quiz, CourseInfoInterface $courseinfo, AgentInterface $agent)
     {
         $this->student = $student;
         $this->quiz = $quiz;
         $this->courseinfo = $courseinfo;
+        $this->agent = $agent;
     }
     /**
      * Display a listing of the resource.
@@ -32,7 +38,15 @@ class StudentController extends Controller
     public function index(Request $request)
     {
         $search = $request->all();
-        $data['student'] = $this->student->findAll($limit= 50,$search);  
+        $sort_by = ['by' => 'id', 'sort' => 'DESC'];
+        if(isset($search['sort_by']) && !empty($search['sort_by'])) {
+            $sort_by = ['by' => 'full_name', 'sort' => $search['sort_by']];
+        }
+
+        $data['student'] = $this->student->findAll($limit= 50,$search, $sort_by);  
+        $data['months'] = $this->courseinfo->getMonths();
+        $data['agents'] = $this->agent->getList();
+
         return view('student::student.index',$data);
     }
 

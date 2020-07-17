@@ -335,11 +335,11 @@ class DashboardController extends Controller
 
         $this->student->deleteMockuphistory($student_id, $mockup_title);
 
-        /* if (!array_key_exists('question_option_1', $input)) {
+        if (!array_key_exists('question_option_1', $input)) {
             Flash('Are you Serious with your Test ? Please Choose your Answer.')->error();
             return redirect(route('student-courses'));
         }
- */
+ 
         try {
             $m = 1;
             $question_id = $input['question_id']; 

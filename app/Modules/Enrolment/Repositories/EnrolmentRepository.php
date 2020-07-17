@@ -4,18 +4,16 @@ namespace App\Modules\Enrolment\Repositories;
 
 use App\Modules\Enrolment\Entities\Enrolment;
 
-
 class EnrolmentRepository implements EnrolmentInterface
 {
     public function findAll($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1])
     {
-         $result =Enrolment::when(array_keys($filter, true), function ($query) use ($filter) {
-        
-            
+        $result = Enrolment::when(array_keys($filter, true), function ($query) use ($filter) {
+
         })
             ->orderBy($sort['by'], $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
 
-        return $result; 
+        return $result;
 
     }
 
@@ -46,20 +44,27 @@ class EnrolmentRepository implements EnrolmentInterface
         return Enrolment::destroy($id);
     }
 
-    public function countTotal(){
+    public function countTotal()
+    {
         return Enrolment::count();
     }
-     public function upload($file){
-        
+
+    public function upload($file)
+    {
+
         $imageName = $file->getClientOriginalName();
         $fileName = date('Y-m-d-h-i-s') . '-' . preg_replace('[ ]', '-', $imageName);
 
         $file->move(public_path() . Enrolment::FILE_PATH, $fileName);
 
         return $fileName;
-   }
+    }
 
-     
-
+    public function getLatestByStudent($student_id)
+    {
+        return Enrolment::where('student_id', $student_id)
+            ->where('status', '!=', 'Disapproved')
+            ->latest()->first();
+    }
 
 }
