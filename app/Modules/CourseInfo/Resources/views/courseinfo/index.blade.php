@@ -28,6 +28,7 @@
                     <th>Course</th>
                     <th>Course Program Title</th>
                     <th>Course Sub Title</th>
+                    <th>Students Per Intake</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -39,6 +40,7 @@
                     <td>{{ optional($value->Course)->title }}</td>
                     <td>{{ $value->course_program_title }}</td>
                     <td>{{ $value->course_program_sub_title }}</td>
+                    <td>{{ $value->students_per_intake }}</td>
                     <td>
 
                         <a class="btn bg-info btn-icon rounded-round" href="{{ route('courseinfo.edit',$value->id) }}" data-popup="tooltip" data-placement="bottom" data-original-title="Edit Course Info"><i class="icon-pencil"></i></a>

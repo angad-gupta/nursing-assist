@@ -21,4 +21,6 @@ interface EnrolmentInterface
     public function upload($file);
 
     public function getLatestByStudent($student_id);
+
+    public function checkCourseIntakeAvailability($courseinfo_id, $intake_month, $students_per_intake = 40);
 }

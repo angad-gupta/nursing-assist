@@ -9,7 +9,7 @@ $(document).ready(function () {
             enrol_title: "required",
             course_fee: "required",
             payment_mode: "required",
-
+            students_per_intake: "required",
         },
         messages: {
             course_id: "Please Select Course",
@@ -19,7 +19,8 @@ $(document).ready(function () {
             course_duration_period: "Please  Enter Duration Period",
             enrol_title: "Please  Enter Enrol Title",
             course_fee: "Please  Enter Course Fee",
-            payment_mode: "Please  Enter Payment Mode"
+            payment_mode: "Please  Enter Payment Mode",
+            students_per_intake: "Please Enter Students per intake"
         },
         errorElement: "em",
         errorPlacement: function (error, element) {  console.log(element)

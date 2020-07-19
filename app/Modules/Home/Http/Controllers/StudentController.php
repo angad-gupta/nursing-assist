@@ -2,18 +2,15 @@
 
 namespace App\Modules\Home\Http\Controllers;
 
+use App\Modules\Agent\Repositories\AgentInterface;
+use App\Modules\CourseInfo\Repositories\CourseInfoInterface;
+use App\Modules\Course\Repositories\CourseInterface;
+use App\Modules\Student\Repositories\StudentInterface;
+use App\Modules\Enrolment\Repositories\EnrolmentInterface;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
-use App\Modules\Home\Http\Requests\StudentLoginFormRequest;
-use App\Modules\Student\Repositories\StudentInterface;
-use App\Modules\CourseInfo\Repositories\CourseInfoInterface;
-use App\Modules\Course\Repositories\CourseInterface;
-use App\Modules\Agent\Repositories\AgentInterface;
-
 
 class StudentController extends Controller
 {
@@ -21,16 +18,21 @@ class StudentController extends Controller
     protected $courseinfo;
     protected $course;
     protected $agent;
-    
-    public function __construct(StudentInterface $student,CourseInfoInterface $courseinfo, CourseInterface $course,AgentInterface $agent)
+    /**
+     * @var EnrolmentInterface
+     */
+    protected $enrolment;
+
+    public function __construct(StudentInterface $student, CourseInfoInterface $courseinfo, CourseInterface $course, AgentInterface $agent, EnrolmentInterface $enrolment)
     {
         $this->student = $student;
         $this->courseinfo = $courseinfo;
         $this->course = $course;
         $this->agent = $agent;
+        $this->enrolment = $enrolment;
     }
 
-     public function studentLogin()
+    public function studentLogin()
     {
         if (Auth::guard('student')->check()) {
 
@@ -39,7 +41,7 @@ class StudentController extends Controller
 
             return view('home::student.dashboard');
         }
-    } 
+    }
 
     public function studenthub()
     {
@@ -47,45 +49,44 @@ class StudentController extends Controller
             return redirect(route('student-courses'));
         } else {
             $param = 'course';
-            return redirect(route('student-account',['source'=>$param]));
+            return redirect(route('student-account', ['source' => $param]));
         }
     }
 
     public function Enrolment(Request $request)
     {
-        $input = $request->all(); 
+        $input = $request->all();
 
         if (Auth::guard('student')->check()) {
 
-
             $data['agents'] = $this->agent->getList();
-            
+
             $data['course_info_id'] = $input['course_info_id'];
 
             $data['courseinfo'] = $this->courseinfo->where('id', $data['course_info_id'])->first();
-          
-             return view('home::enrolment',$data);
+            
+            $data['course_intakes'] = $this->courseinfo->getCourseIntakeList($data['course_info_id']);
+
+            return view('home::enrolment', $data);
         } else {
             $param = 'enrol';
             $course_info_id = $input['course_info_id'];
-            return redirect(route('student-account',['source'=>$param,'course_info_id'=> $course_info_id]));
+            return redirect(route('student-account', ['source' => $param, 'course_info_id' => $course_info_id]));
         }
 
     }
 
-
-
     public function studentAuthenticate(Request $request)
     {
-        $data = $request->all('email', 'password','source','course_info_id');  
+        $data = $request->all('email', 'password', 'source', 'course_info_id');
 
-       if (Auth::guard('student')->attempt(['email' => $data['email'], 'password' => $data['password'],'active' => 1])) {
+        if (Auth::guard('student')->attempt(['email' => $data['email'], 'password' => $data['password'], 'active' => 1])) {
 
-            if($data['source'] == 'course'){
+            if ($data['source'] == 'course') {
                 return redirect()->intended(route('student-hub'));
-            }else if($data['source'] == 'enrol'){
-                return redirect()->intended(route('enrolment',['course_info_id'=>$data['course_info_id']]));
-            }else{
+            } else if ($data['source'] == 'enrol') {
+                return redirect()->intended(route('enrolment', ['course_info_id' => $data['course_info_id']]));
+            } else {
                 return redirect()->intended(route('student-dashboard'));
             }
         } else {
@@ -95,16 +96,17 @@ class StudentController extends Controller
 
     }
 
-    public function updateStudentPassword(Request $request){
+    public function updateStudentPassword(Request $request)
+    {
 
         $oldPassword = $request->get('old_password');
         $newPassword = $request->get('password');
 
-        $id = Auth::guard('student')->user()->id;  
-        $users = Auth::guard('student')->user()->find($id); 
+        $id = Auth::guard('student')->user()->id;
+        $users = Auth::guard('student')->user()->find($id);
 
-        if (!(Hash::check($oldPassword, $users->password))) { 
-            Flash("Old Password Do Not Match !")->error();  
+        if (!(Hash::check($oldPassword, $users->password))) {
+            Flash("Old Password Do Not Match !")->error();
             return redirect(route('student-dashboard'));
         } else {
             $data['password'] = Hash::make($newPassword);
@@ -117,12 +119,17 @@ class StudentController extends Controller
 
     }
 
-     public function studentLogout()
+    public function studentLogout()
     {
         Auth::guard('student')->logout();
 
         return redirect(route('home'));
     }
 
-   
+    public function checkIntakeAvailability(Request $request)
+    {
+        $input = $request->all();
+        return $this->enrolment->checkCourseIntakeAvailability($input['courseinfo_id'], $input['intake_month'], $input['students_per_intake']);
+    }
+
 }

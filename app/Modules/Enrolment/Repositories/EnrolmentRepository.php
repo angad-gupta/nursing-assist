@@ -3,6 +3,7 @@
 namespace App\Modules\Enrolment\Repositories;
 
 use App\Modules\Enrolment\Entities\Enrolment;
+use DB;
 
 class EnrolmentRepository implements EnrolmentInterface
 {
@@ -65,6 +66,21 @@ class EnrolmentRepository implements EnrolmentInterface
         return Enrolment::where('student_id', $student_id)
             ->where('status', '!=', 'Disapproved')
             ->latest()->first();
+    }
+
+    public function checkCourseIntakeAvailability($courseinfo_id, $intake_month, $students_per_intake = 40)
+    {
+        $total = Enrolment::where('courseinfo_id', $courseinfo_id)
+            ->where('status', '!=', 'Disapproved')
+            ->where('intake_date', $intake_month)
+            ->count();
+         
+        if($total < $students_per_intake ) {
+            return $total + 1;
+        } else {
+            return 0;
+        }
+
     }
 
 }

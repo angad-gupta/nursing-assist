@@ -124,4 +124,20 @@ class CourseInfoRepository implements CourseInfoInterface
         $result = Month::pluck('name', 'name');
         return $result;
     }
+
+    public function getCourseIntakeList($courseinfo_id)
+    {
+        $intake_months = [];
+        $result = CourseIntake::where('course_info_id', $courseinfo_id)->get();
+        if ($result->count() > 0) {
+            foreach ($result as $key => $value) {
+                $intake_months[$value->month->name] = $value->month->name;
+            }
+        } else {
+            $intake_months = $this->getMonths();
+        }
+
+        return $intake_months;
+    }
+
 }

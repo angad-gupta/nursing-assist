@@ -70,8 +70,8 @@ class CourseInfoController extends Controller
                 'youtube_id' => $data['youtube_id'],
                 'enrol_title' => $data['enrol_title'],
                 'course_fee' => $data['course_fee'],
-                'payment_mode' => $data['payment_mode']
-
+                'payment_mode' => $data['payment_mode'],
+                'students_per_intake' => $data['students_per_intake']
             );
 
             if ($request->hasFile('image_path')) {
@@ -166,7 +166,8 @@ class CourseInfoController extends Controller
                 'youtube_id' => $data['youtube_id'],
                 'enrol_title' => $data['enrol_title'],
                 'course_fee' => $data['course_fee'],
-                'payment_mode' => $data['payment_mode']
+                'payment_mode' => $data['payment_mode'],
+                'students_per_intake' => $data['students_per_intake']
             );
 
             if ($request->hasFile('image_path')) {

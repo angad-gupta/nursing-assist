@@ -52,6 +52,7 @@ Route::post('student-update-password',['as'=>'student-update-password','uses'=>'
 Route::get('student-hub', ['as' => 'student-hub', 'uses' => 'StudentController@studentHub']);
 
 Route::get('enrolment', ['as' => 'enrolment', 'uses' => 'StudentController@Enrolment']);
+Route::get('enrolment/checkIntakeAvailability', ['as' => 'enrolment.checkIntakeAvailability', 'uses' => 'StudentController@checkIntakeAvailability']);
 
 Route::post('enrolment/store', ['as' => 'enrolment.store', 'uses' => 'HomeController@storeEnrolment']);
 

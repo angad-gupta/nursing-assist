@@ -28,7 +28,8 @@ class CourseInfo extends Model
     	'youtube_id',
         'enrol_title',
         'course_fee',
-        'payment_mode'
+        'payment_mode',
+        'students_per_intake'
 
     ];
 

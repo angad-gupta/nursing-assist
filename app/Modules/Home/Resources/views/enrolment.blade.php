@@ -2,7 +2,7 @@
 @section('scripts')
 <script type="text/javascript">
    
-$("#btn").click(function() {
+    $("#btn").click(function() {
 
         if(document.getElementById("file").value != "") {
             return true;
@@ -12,25 +12,47 @@ $("#btn").click(function() {
            gotothen();
          }
 
-        });
-$("#btn_second").click(function() {
-    if(document.getElementById("file_second").value != "") {
-        return true;
-    }
-     else{
-      alert('Please upload the identity document.');
-      gotothen();
-     }
-});
+    });
 
-$('#detail_form').click(function(){
-    if(document.getElementById('term_conditions_agree').checked) {
-        return true;
-    } else {
-        alert('Please check Term & Conditions');
-        gotothen();
-    }
-});
+    $("#btn_second").click(function() {
+        if(document.getElementById("file_second").value != "") {
+            return true;
+        }
+        else{
+            alert('Please upload the identity document.');
+            gotothen();
+        }
+    });
+
+    $('#detail_form').click(function(){
+        if(document.getElementById('term_conditions_agree').checked) {
+            return true;
+        } else {
+            alert('Please check Term & Conditions');
+            gotothen();
+        }
+    });
+
+    $('#intake_date').on('change', function() {
+        var intake_month = $(this).val();
+        var students_per_intake = '{{$courseinfo->students_per_intake}}';
+        var courseinfo_id = '{{$course_info_id}}';
+
+        $.ajax({
+            type: "GET",
+            data: {courseinfo_id: courseinfo_id,intake_month: intake_month, students_per_intake: students_per_intake },
+            url: '{{route("enrolment.checkIntakeAvailability")}}',
+            success: function (resp) {
+                if(resp > 0) {
+                    $('.intake_error').html('');
+                    $('#detail_form').attr('disabled', false);
+                } else {
+                    $('.intake_error').html('Intake for month '+intake_month+' is full!');
+                    $('#detail_form').attr('disabled', true);
+                }
+            }
+        })
+    })
 
 </script> 
 
@@ -210,20 +232,8 @@ $('#detail_form').click(function(){
                                                          <div class="col-sm-6">
                                                             <div class="form-group">
                                                                 <label for="">Intake Month<span>*</span></label>
-                                                                 <select  class="form-control" name="intake_date">
-                                                                     <option value="January">January</option>
-                                                                     <option value="February">February</option>
-                                                                     <option value="March">March</option>
-                                                                     <option value="April">April</option>
-                                                                     <option value="May">May</option>
-                                                                     <option value="June">June</option>
-                                                                     <option value="July">July</option>
-                                                                     <option value="August">August</option>
-                                                                     <option value="September">September</option>
-                                                                     <option value="October">October</option>
-                                                                     <option value="November">November</option>
-                                                                     <option value="December">December</option>
-                                                                 </select>   
+                                                                 {!! Form::select('intake_date', $course_intakes, null, ['id'=>'intake_date', 'class'=>'form-control']) !!}
+                                                                 <span class="text-danger intake_error" ></span>
                                                             </div>
                                                         </div>
 

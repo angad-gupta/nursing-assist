@@ -211,7 +211,7 @@
 </fieldset>
 
 <fieldset class="mb-3">
-    <legend class="text-uppercase font-size-sm font-weight-bold">Course Enroment</legend>
+    <legend class="text-uppercase font-size-sm font-weight-bold">Course Enrolment</legend>
 
       <div class="form-group row">
 
@@ -258,6 +258,20 @@
                                {!! Form::text('payment_mode', $value = null, ['placeholder'=>'Enter Payment Mode','class'=>'payment_mode form-control']) !!}                 
                             </div>
                         </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="row">
+                    <label class="col-form-label col-lg-3">Students Per Intake:<span class="text-danger">*</span></label>
+                    <div class="col-lg-9">
+                        <div class="input-group">
+                            <span class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-wallet"></i></span>
+                        </span>
+                            {!! Form::text('students_per_intake', $value = null, ['id'=>'students_per_intake', 'placeholder'=>'Enter Payment Mode','class'=>'form-control numeric']) !!}                 
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
