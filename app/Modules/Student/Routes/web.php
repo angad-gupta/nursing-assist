@@ -30,6 +30,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','permission']], funct
 
    Route::get('studentcourse', ['as' => 'studentcourse.index', 'uses' => 'StudentController@studentCourse']);
    Route::get('studentpurchase', ['as' => 'studentpurchase.index', 'uses' => 'StudentController@studentPurchase']);
+   Route::get('studentpurchase/delete', ['as' => 'studentpurchase.delete', 'uses' => 'StudentController@destroyStudentPurchase'])->where('id','[0-9]+');
    Route::get('studentquiz/result', ['as' => 'studentquiz.result', 'uses' => 'StudentController@studentquizResult']);
    Route::get('studentmockup/result', ['as' => 'studentmockup.result', 'uses' => 'StudentController@studentmockupResult']);
 
