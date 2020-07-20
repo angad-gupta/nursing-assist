@@ -7,7 +7,7 @@ use App\Modules\Employment\Entities\Country;
 class AgentRepository implements AgentInterface
 {
     
-    public function findAll($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1])
+    public function findAll($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1])
     { 
          $result =Agent::when(array_keys($filter, true), function ($query) use ($filter) {
            

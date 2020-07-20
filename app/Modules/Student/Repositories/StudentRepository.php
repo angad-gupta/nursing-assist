@@ -85,7 +85,7 @@ class StudentRepository implements StudentInterface
         return $fileName;
     }
 
-    public function getStudentCourse($student_id, $limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1])
+    public function getStudentCourse($student_id, $limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1])
     {
 
         $result = StudentCourse::when(array_keys($filter, true), function ($query) use ($filter) {
@@ -95,7 +95,7 @@ class StudentRepository implements StudentInterface
         return $result;
     }
 
-    public function getStudentPurchase($student_id, $limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1])
+    public function getStudentPurchase($student_id, $limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1])
     {
 
         $result = StudentPayment::when(array_keys($filter, true), function ($query) use ($filter) {
@@ -152,7 +152,7 @@ class StudentRepository implements StudentInterface
         return StudentMockupResult::create($mockdata);
     }
 
-    public function getStudentQuizResult($student_id, $limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1])
+    public function getStudentQuizResult($student_id, $limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1])
     {
 
         $result = StudentQuizResult::when(array_keys($filter, true), function ($query) use ($filter) {
@@ -162,7 +162,7 @@ class StudentRepository implements StudentInterface
         return $result;
     }
 
-    public function getStudentMockupResult($student_id, $limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1])
+    public function getStudentMockupResult($student_id, $limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1])
     {
 
         $result = StudentMockupResult::when(array_keys($filter, true), function ($query) use ($filter) {

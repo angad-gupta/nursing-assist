@@ -6,7 +6,7 @@ use App\Modules\Team\Entities\Team;
 class TeamRepository implements TeamInterface
 {
     
-    public function findAll($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1])
+    public function findAll($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1])
     { 
          $result =Team::when(array_keys($filter, true), function ($query) use ($filter) {
            
