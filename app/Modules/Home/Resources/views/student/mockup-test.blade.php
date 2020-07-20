@@ -31,7 +31,7 @@
 
             <div class="col-sm-12">
                 <h6 class="p-0 mb-0"> <label id="question_number">1</label> out of {{$mockupInfo->count()}}</h6>
-                <div class="accordion" id="accordionExample">
+                {{--<div class="accordion" id="accordionExample">--}}
 
                     {!! Form::open(['route'=>'studentmockup.store','method'=>'POST','id'=>'studentmockup_submit','class'=>'form-horizontal','role'=>'form','files'=> true]) !!}
 
@@ -137,7 +137,7 @@
 
                     {!! Form::close() !!}
 
-                </div>
+                {{--</div>--}}
 
             </div>
         </div>
