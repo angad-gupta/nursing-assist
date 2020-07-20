@@ -30,6 +30,7 @@
             </div>
 
             <div class="col-sm-12">
+                <h6 class="p-0 mb-0"> <label id="question_number">1</label> out of {{$mockupInfo->count()}}</h6>
                 <div class="accordion" id="accordionExample">
 
                     {!! Form::open(['route'=>'studentmockup.store','method'=>'POST','id'=>'studentmockup_submit','class'=>'form-horizontal','role'=>'form','files'=> true]) !!}
@@ -38,7 +39,7 @@
 
                     @foreach($mockupInfo as $key => $question)
                     @php $key = $key + 1; @endphp
-
+                    
                     <div class="card" style="display: {{ $key == 1 ? '' : 'none' }}" id="question_{{$key}}">
                         <div class="card-header" data-toggle="collapse" data-target="#collapse{{$key}}"
                             aria-expanded="true">
@@ -160,6 +161,7 @@
             var new_key = parseInt(qkey, 10) + 1;
             $('#question_'+qkey).css('display', 'none');
             $('#question_'+new_key).css('display', 'block');
+            $('#question_number').text(new_key);
         });
 
     });
