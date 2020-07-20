@@ -106,11 +106,11 @@
                                         <div class="col-sm-6"></div>
 
                                         @endif
-                                        @if($last_key + 1 == $key)
+                                        {{--
                                             <div class="col-sm-6">
                                                 <button type="submit" class="enrol-cpd mockup_submit" id="show-btn">Submit Your Answer</button>
-                                            </div>
-                                        @else
+                                        </div>--}}
+                                        @if($last_key + 1 != $key)
                                         <div class="col-sm-6">
                                             <button type="button" name="next" class="enrol-cpd show-btn"
                                                 data-id="{{$key}}">Next Question</button>
@@ -127,6 +127,7 @@
                    
                    
                     <div class="col-sm-12 neta-about">
+                        <button type="submit" class="enrol-cpd mockup_submit" id="show-btn">Submit Your Answer</button> 
                         <span class="text-center" id="loaderImg" style="display:none;">
                             <img src="{{asset('home/img/loader.gif')}}" alt="loader1"
                                 style="margin-left: 330px; height:200px; width:auto;">
