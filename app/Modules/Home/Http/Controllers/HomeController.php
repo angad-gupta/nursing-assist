@@ -133,7 +133,7 @@ class HomeController extends Controller
 
             $this->contactus->save($data);
 
-            $contact['message'] = 'You Message Store  Successfully';
+            $contact['message'] = 'Your Message Sent Successfully.';
         }catch(\Throwable $e){
             $contact['message'] = 'Something Wrong With Message';
         }

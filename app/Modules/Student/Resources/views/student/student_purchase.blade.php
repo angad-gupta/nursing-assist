@@ -124,9 +124,7 @@
                 <h4 class="modal-title">Move Course To Student</h4>
             </div>
             <div class="modal-body">
-                {!!
-                Form::open(['route'=>'student.purchaseupdate','method'=>'POST','id'=>'team_submit','class'=>'form-horizontal','role'=>'form','files'
-                => true]) !!}
+                {!! Form::open(['route'=>'student.purchaseupdate','method'=>'POST','id'=>'team_submit','class'=>'form-horizontal','role'=>'form','files'=> true]) !!}
                 <div class="form-group row">
                     <label class="col-form-label col-lg-3">Select Status:</label>
                     <div class="col-lg-9">
@@ -158,14 +156,11 @@
                 <h4 class="modal-title">Installment Course Fee</h4>
             </div>
             <div class="modal-body">
-                {!!
-                Form::open(['route'=>'student.courseinstallment','method'=>'POST','id'=>'team_submit','class'=>'form-horizontal','role'=>'form','files'
-                => true]) !!}
+                {!! Form::open(['route'=>'student.courseinstallment','method'=>'POST','id'=>'team_submit','class'=>'form-horizontal','role'=>'form','files'=> true]) !!}
                 <div class="form-group row">
                     <label class="col-form-label col-lg-3">Amount Paid:</label>
                     <div class="col-lg-9">
-                        {!! Form::text('amount_paid', $value = null, ['id'=>'amount_paid','placeholder'=>'Enter
-                        Amount','class'=>'form-control numeric']) !!}
+                        {!! Form::text('amount_paid', $value = null, ['id'=>'amount_paid','placeholder'=>'Enter Amount','class'=>'form-control numeric']) !!}
                     </div>
                 </div>
 
