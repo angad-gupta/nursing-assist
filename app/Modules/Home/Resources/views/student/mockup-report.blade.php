@@ -22,7 +22,7 @@
 					</div> 
 				</div> 
 				
-				<div class="col-sm-3 text-center"> 
+				<div class="col-sm-4 text-center"> 
 					<div class="quiz-score"> 
 						<h2>{{$correct_percent}} %</h2> 
 						<span>Correct Answer</span> 
