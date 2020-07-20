@@ -157,7 +157,7 @@ class EnrolmentController extends Controller
                 --------------------------------------------------------------- */
 
                 //alertify()->success('You have Successfully enrol Course. We will contact you soon.');
-                Flash('you have successfully enrolled the course. We will contact you soon.')->success();
+                Flash('You have successfully enrolled the course. We will contact you soon.')->success();
                 return redirect(route('student-dashboard'));
             }
 
@@ -210,7 +210,7 @@ class EnrolmentController extends Controller
                 die();
             }
 
-            Flash('you have successfully enrolled the course. We will contact you soon.')->success();
+            Flash('You have successfully enrolled the course. We will contact you soon.')->success();
             // alertify()->success('Course Information Created Successfully');
             // return redirect(route('enrolment.viewUser',['id'=>$enrolment_id]));
             return redirect(route('student-dashboard'));
@@ -220,7 +220,7 @@ class EnrolmentController extends Controller
         }
 
         // return redirect(route('enrolment.viewUser'));
-        Flash('you have successfully enrolled the course. We will contact you soon.')->success();
+        Flash('You have successfully enrolled the course. We will contact you soon.')->success();
         return redirect(route('student-dashboard'));
     }
 
