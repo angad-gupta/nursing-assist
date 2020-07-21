@@ -308,7 +308,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-8">
-				<p>Do you want to download our promotional kit</p>
+				<p>Download OBA PrepClass Brochure</p>
 			</div>
 			<div class="col-sm-4">
 				<a class="btn btn-neta float-right" target="_blank" href="{{asset('admin/oba_download.jpg')}}">Download Now</a>
