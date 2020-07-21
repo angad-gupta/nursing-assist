@@ -28,7 +28,12 @@ class EnrolmentController extends Controller
     protected $enrolpayment;
     protected $studentpayment;
 
-    public function __construct(EnrolmentInterface $enrolment, CourseInfoInterface $courseinfo, CourseInterface $course, EnrolmentPaymentInterface $enrolpayment, StudentPaymentInterface $studentpayment)
+    public function __construct(
+        EnrolmentInterface $enrolment, 
+        CourseInfoInterface $courseinfo, 
+        CourseInterface $course, 
+        EnrolmentPaymentInterface $enrolpayment, 
+        StudentPaymentInterface $studentpayment)
     {
         $this->enrolment = $enrolment;
         $this->courseinfo = $courseinfo;
@@ -57,6 +62,7 @@ class EnrolmentController extends Controller
         $data = view('enrolment::enrolment.view-detail', compact('enrolment'))->render();
         return response()->json(['options' => $data]);
     }
+
     public function store(Request $request)
     {
         $data = $request->all();

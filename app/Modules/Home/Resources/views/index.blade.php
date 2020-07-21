@@ -67,7 +67,7 @@
                                     <a class="nav-link" href="{{ route('agent') }}">Agents</a>
                                 </li>
                                 <li class="nav-item">
-                               	 <a class="nav-link" href="{{ route('student-hub') }}">Student's Hub</a>
+                               	 <a class="nav-link" href="{{ route('student-hub') }}">Learner’s Portal</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('contact-us') }}">Contact Us</a>

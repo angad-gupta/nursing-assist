@@ -47,12 +47,12 @@
             <thead>
                 <tr class="bg-slate">
                     <th>#</th>
+                    <th>Date</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Mobile No.</th>
                     <th>Enquiry</th>
                     <th>Status</th>
-                    <th>Date</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -61,12 +61,13 @@
                 @foreach($contactus as $key => $value)
                 <tr>
                     <td>{{$contactus->firstItem() +$key}}</td>
+                    <td>{{ date('jS M, Y', strtotime($value->created_at)) }}</th>
                     <td>{{ $value->first_name .' '. $value->last_name }}</td>
                     <td>{{ $value->email }}</td>
                     <td>{{ $value->phone }}</td>
                     <td>{{ $value->enquiry_about }}</td>
                     <td>{{ $value->status }}</td>
-                    <td>{{ date('jS M, Y', strtotime($value->created_at)) }}</th>
+                   
                     <td>
                         @if($value->status == 'Pending')
                         <a data-toggle="modal" data-target="#modal_theme_status"
