@@ -21,7 +21,8 @@ class Course extends Model
     	'description',
         'enrollment_process',
         'important_course',
-    	'image'
+        'image',
+        'status'
 
     ];
 

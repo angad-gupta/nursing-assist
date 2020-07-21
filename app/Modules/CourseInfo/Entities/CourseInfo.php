@@ -29,7 +29,8 @@ class CourseInfo extends Model
         'enrol_title',
         'course_fee',
         'payment_mode',
-        'students_per_intake'
+        'students_per_intake',
+        'status'
 
     ];
 

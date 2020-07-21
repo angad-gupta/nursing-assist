@@ -140,4 +140,16 @@ class CourseInfoRepository implements CourseInfoInterface
         return $intake_months;
     }
 
+    public function getAll($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1])
+    {
+
+        $result = CourseInfo::where('status', 1)->when(array_keys($filter, true), function ($query) use ($filter) {
+
+        })
+            ->orderBy($sort['by'], $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+
+        return $result;
+
+    }
+
 }

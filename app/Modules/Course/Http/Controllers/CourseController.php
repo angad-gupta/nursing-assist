@@ -62,6 +62,7 @@ class CourseController extends Controller
                 'description' => $data['description'],
                 'enrollment_process' => $data['enrollment_process'],
                 'important_course' => $data['important_course'],
+                //'status'=> $data['status']
             );
 
             if ($request->hasFile('image')) {
@@ -123,6 +124,7 @@ class CourseController extends Controller
                 'description' => $data['description'],
                 'enrollment_process' => $data['enrollment_process'],
                 'important_course' => $data['important_course'],
+                //'status'=> $data['status']
             );
 
             if ($request->hasFile('image')) {

@@ -71,7 +71,8 @@ class CourseInfoController extends Controller
                 'enrol_title' => $data['enrol_title'],
                 'course_fee' => $data['course_fee'],
                 'payment_mode' => $data['payment_mode'],
-                'students_per_intake' => $data['students_per_intake']
+                'students_per_intake' => $data['students_per_intake'],
+                'status' => $data['status']
             );
 
             if ($request->hasFile('image_path')) {
@@ -167,7 +168,8 @@ class CourseInfoController extends Controller
                 'enrol_title' => $data['enrol_title'],
                 'course_fee' => $data['course_fee'],
                 'payment_mode' => $data['payment_mode'],
-                'students_per_intake' => $data['students_per_intake']
+                'students_per_intake' => $data['students_per_intake'],
+                'status' => $data['status']
             );
 
             if ($request->hasFile('image_path')) {

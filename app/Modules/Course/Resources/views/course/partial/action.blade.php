@@ -170,23 +170,38 @@
                         </span>
                         {!! Form::file('image', ['id'=>'image','class'=>'form-control']) !!}
                     </div>
-                </div>
-            </div>
-        </div>
-
-          <div class="col-lg-6">
-            <div class="row">
-                 <label class="col-form-label col-lg-3"></label>
-                <div class="col-lg-9 form-group-feedback form-group-feedback-right">
                     @if($is_edit)
                         @php
                              $image = ($course->image) ? asset($course->file_full_path).'/'.$course->image : asset('admin/default.png');
                         @endphp
 
                         <img id="image" src="{{$image}}" alt="your image" class="preview-image" style="height: 100px;width: auto;" />
-                        @else
+                    @else
                         <img id="image" src="{{ asset('admin/default.png') }}" alt="your image" class="preview-image" style="height: 100px; width: auto;" />
-                        @endif
+                    @endif
+                </div>
+            </div>
+        </div>
+
+          <div class="col-lg-6">
+            <div class="row">
+                 <label class="col-form-label col-lg-3">Status: </label>
+                <div class="col-lg-9 form-group-feedback form-group-feedback-right">
+                    {{--<div class="input-group">
+                        <span class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-pen"></i></span>
+                        </span>
+                        {!! Form::select('status', ['1'=>'Active', '0'=>'In-Active'], null, ['id'=>'status', 'class'=>'form-control']) !!}
+                    </div>--}}
+                    @if($is_edit)
+                        @php
+                             $image = ($course->image) ? asset($course->file_full_path).'/'.$course->image : asset('admin/default.png');
+                        @endphp
+
+                        <img id="image" src="{{$image}}" alt="your image" class="preview-image" style="height: 100px;width: auto;" />
+                    @else
+                        <img id="image" src="{{ asset('admin/default.png') }}" alt="your image" class="preview-image" style="height: 100px; width: auto;" />
+                    @endif
                 </div>
 
             </div>

@@ -28,6 +28,7 @@
                     <th>Mode of Delivery</th>
                     <th>Course Fees</th>
                     <th>Intake Dates</th>
+                    {{--<th>Status</th>--}}
                     <th>Action</th>
                 </tr>
             </thead>
@@ -36,11 +37,15 @@
                 @foreach($course as $key => $value)
                 <tr>
                     <td>{{$course->firstItem() +$key}}</td>
-                     <td>{{ $value->title }}</td>
-                     <td>{{ $value->course_duration }}</td>
-                     <td>{{ $value->mode_of_delivery }}</td>
-                     <td>{{ $value->course_fees }}</td>
-                     <td>{{ $value->intake_dates }}</td>
+                    <td>{{ $value->title }}</td>
+                    <td>{{ $value->course_duration }}</td>
+                    <td>{{ $value->mode_of_delivery }}</td>
+                    <td>{{ $value->course_fees }}</td>
+                    <td>{{ $value->intake_dates }}</td>
+                    {{--<td
+                        class="{{ ($value->status == 1) ? 'text-success font-weight-bold' :'text-danger font-weight-bold' }}">
+                        {{ $value->status == 1 ? 'Active' :'In-Active' }}
+                    </td>--}}
                     <td>
 
                         <a class="btn bg-teal-400 btn-icon rounded-round" href="{{route('course.edit',$value->id)}}" data-popup="tooltip" data-original-title="Edit" data-placement="bottom"><i class="icon-pencil6"></i></a>

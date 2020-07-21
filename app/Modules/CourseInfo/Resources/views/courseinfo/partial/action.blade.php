@@ -143,6 +143,21 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-form-label col-lg-3">Status:</label>
+                <div class="col-lg-9">
+                    <div class="input-group">
+                    <span class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-sort-numeric-asc"></i></span>
+                    </span>
+                    {!! Form::select('status',['1'=>'Active','0'=>'In-active'], $value = null, ['id'=>'status','class'=>'form-control' ]) !!}   
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     @php
@@ -169,27 +184,20 @@
                                 </span>
                                 {!! Form::file('image_path', ['id'=>'image_path','class'=>'form-control']) !!}
                             </div>
+                            @if($is_edit)
+                                @php
+                                    $image = ($courseinfo->image_path) ? asset($courseinfo->file_full_path).'/'.$courseinfo->image_path : asset('admin/default.png');
+                                @endphp
+
+                                <img id="image_path" src="{{$image}}" alt="your image" class="preview-image" style="height: 100px;width: auto;" />
+                            @else
+                                <img id="image_path" src="{{ asset('admin/default.png') }}" alt="your image" class="preview-image" style="height: 100px; width: auto;" />
+                            @endif
                         </div>
                     </div>
                 </div>
 
-            <div class="col-lg-6">
-                <div class="row">
-                     <label class="col-form-label col-lg-3"></label>
-                    <div class="col-lg-9 form-group-feedback form-group-feedback-right">
-                        @if($is_edit)
-                            @php
-                                 $image = ($courseinfo->image_path) ? asset($courseinfo->file_full_path).'/'.$courseinfo->image_path : asset('admin/default.png');
-                            @endphp
-
-                            <img id="image_path" src="{{$image}}" alt="your image" class="preview-image" style="height: 100px;width: auto;" />
-                            @else
-                            <img id="image_path" src="{{ asset('admin/default.png') }}" alt="your image" class="preview-image" style="height: 100px; width: auto;" />
-                            @endif
-                    </div>
-
-                </div>
-            </div>
+        
         </div>
 
             <div class="row video_type" {{ $videoType }}>

@@ -41,5 +41,7 @@ interface CourseInfoInterface
     public function getCoursePackage($course_id, $courseinfo_id);
 
     public function getCourseIntakeList($courseinfo_id);
+    
+    public function getAll($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1]);
 
 }

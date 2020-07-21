@@ -105,7 +105,7 @@ class DashboardController extends Controller
         $id = Auth::guard('student')->user()->id;
         $data['student_course'] = $this->student->getStudentCourse($id);
 
-        $data['other_course'] = $this->courseinfo->findAll();
+        $data['other_course'] = $this->courseinfo->getAll();
         return view('home::student.courses', $data);
     }
 
