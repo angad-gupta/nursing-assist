@@ -19,7 +19,8 @@ class StudentLoginFormRequest extends FormRequest
                 'username' => 'required',
                 'full_name' => 'required',
                 'email' => 'required',
-                'password' => 'required|min:4',
+                'password' => 'required|min:6|same:c_password',
+                'c_password' => 'min:6',
             ];
         }
     }

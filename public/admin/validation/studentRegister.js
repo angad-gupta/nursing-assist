@@ -1,13 +1,32 @@
 $(document).ready(function () {
-    $("#student_submit").validate({
+    $("#studentRegister_submit").validate({
         rules: {
+            username: "required",
+            full_name: "required",
             email: "required",
-            password: "required",
+            password: {
+                required: true,
+                minlength: 6,
+            },
+            c_password: {
+                required: true,
+                minlength: 6,
+                equalTo: "#rpassword"
+            },
         },
         messages: {
-            email: "Please Enter Email",
-            password: "Please Enter Password",
-
+            username: "Enter Username",
+            full_name: "Enter Full Name",
+            email: "Enter Email",
+            password: {
+                required: "Enter Password",
+                minlength: "Minimum 6 characters",
+            },
+            c_password: {
+                required: "Enter Confirm Password",
+                minlength: "Minimum 6 Characters",
+                equalTo: "Must be equals to password"
+            },
         },
         errorElement: "em",
         errorPlacement: function (error, element) {  console.log(element)
