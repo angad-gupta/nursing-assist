@@ -2,29 +2,26 @@
 
 namespace App\Modules\Home\Http\Controllers;
 
+use App\Modules\Agent\Repositories\AgentInterface;
+use App\Modules\Banner\Repositories\BannerInterface;
+use App\Modules\ContactUs\Repositories\ContactUsInterface;
+use App\Modules\CourseInfo\Repositories\CourseInfoInterface;
+use App\Modules\Course\Repositories\CourseInterface;
+use App\Modules\Enrolment\Repositories\EnrolmentInterface;
+use App\Modules\FAQ\Repositories\FAQInterface;
+use App\Modules\Home\Emails\SendNetaMail;
+use App\Modules\Home\Http\Requests\StudentLoginFormRequest;
+use App\Modules\Page\Repositories\PageInterface;
+use App\Modules\Quiz\Repositories\QuizInterface;
+use App\Modules\Student\Repositories\StudentInterface;
+use App\Modules\Team\Repositories\TeamInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Auth;
-
-use App\Modules\Home\Http\Requests\StudentLoginFormRequest;
-
-
-use App\Modules\Page\Repositories\PageInterface;
-use App\Modules\Banner\Repositories\BannerInterface;
-use App\Modules\Course\Repositories\CourseInterface;
-use App\Modules\CourseInfo\Repositories\CourseInfoInterface;
-use App\Modules\Team\Repositories\TeamInterface;
-use App\Modules\ContactUs\Repositories\ContactUsInterface;
-use App\Modules\Enrolment\Repositories\EnrolmentInterface;
-use App\Modules\Student\Repositories\StudentInterface;
-use App\Modules\FAQ\Repositories\FAQInterface;
-use App\Modules\Agent\Repositories\AgentInterface;
-use App\Modules\Quiz\Repositories\QuizInterface;
 
 // Mail
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-use App\Modules\Home\Emails\SendNetaMail;
 
 class HomeController extends Controller
 {
@@ -40,22 +37,20 @@ class HomeController extends Controller
     protected $faq;
     protected $agent;
     protected $quiz;
-    
-    public function __construct(
-            PageInterface $page,
-            BannerInterface $banner,
-            CourseInterface $course,
-            CourseInfoInterface $courseinfo,
-            TeamInterface $team,
-            ContactUsInterface $contactus,
-            EnrolmentInterface $enrolment,
-            StudentInterface $student,
-            FAQInterface $faq,
-            AgentInterface $agent,
-            QuizInterface $quiz
-        )
 
-    {
+    public function __construct(
+        PageInterface $page,
+        BannerInterface $banner,
+        CourseInterface $course,
+        CourseInfoInterface $courseinfo,
+        TeamInterface $team,
+        ContactUsInterface $contactus,
+        EnrolmentInterface $enrolment,
+        StudentInterface $student,
+        FAQInterface $faq,
+        AgentInterface $agent,
+        QuizInterface $quiz
+    ) {
         $this->page = $page;
         $this->banner = $banner;
         $this->course = $course;
@@ -78,10 +73,10 @@ class HomeController extends Controller
         $data['banner'] = $this->banner->findAll();
         $data['we_offer'] = $this->page->getBySlug('we_offer');
         $data['course'] = $this->course->findAll();
-        $data['about_neta'] =$this->page->getBySlug('about_us'); 
-        $data['course_info'] = $this->courseinfo->findAll();        
+        $data['about_neta'] = $this->page->getBySlug('about_us');
+        $data['course_info'] = $this->courseinfo->findAll();
 
-        return view('home::index',$data);
+        return view('home::index', $data);
     }
 
     /**
@@ -90,11 +85,10 @@ class HomeController extends Controller
      */
     public function AboutUs()
     {
-        $data['about_neta'] =$this->page->getBySlug('about_us');
-        $data['team'] =$this->team->findAll();
-        return view('home::aboutus',$data);
+        $data['about_neta'] = $this->page->getBySlug('about_us');
+        $data['team'] = $this->team->findAll();
+        return view('home::aboutus', $data);
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -102,22 +96,22 @@ class HomeController extends Controller
      */
     public function ContactUs(Request $request)
     {
-        $input = $request->all(); 
-        $data['contact_us'] =$this->page->getBySlug('contact_us');
-        $data['message'] = ($input) ? $input['message'] : FALSE;
-        return view('home::contactus',$data);
+        $input = $request->all();
+        $data['contact_us'] = $this->page->getBySlug('contact_us');
+        $data['message'] = ($input) ? $input['message'] : false;
+        return view('home::contactus', $data);
     }
 
     public function faq()
     {
         $data['faq'] = $this->faq->findAll();
-        return view('home::faq',$data);
+        return view('home::faq', $data);
     }
 
     public function agent()
     {
         $data['agent'] = $this->agent->findAll();
-        return view('home::agent',$data);
+        return view('home::agent', $data);
     }
 
     /**
@@ -128,22 +122,20 @@ class HomeController extends Controller
     public function storeContact(Request $request)
     {
         $data = $request->all();
-        
-         try{
+
+        try {
 
             $this->contactus->save($data);
 
             $contact['message'] = 'Your Message Sent Successfully.';
-        }catch(\Throwable $e){
+        } catch (\Throwable $e) {
             $contact['message'] = 'Something Wrong With Message';
         }
-        
-        return redirect(route('contact-us',$contact));
+
+        return redirect(route('contact-us', $contact));
     }
 
-   
-
-     /**
+    /**
      * Store a newly created resource in storage.
      * @param Request $request
      * @return Response
@@ -151,115 +143,125 @@ class HomeController extends Controller
     public function storeEnrolment(Request $request)
     {
         $data = $request->all();
-        
-         try{
+
+        try {
 
             $this->enrolment->save($data);
 
             $contact['message'] = 'You Message Store  Successfully';
-        }catch(\Throwable $e){
+        } catch (\Throwable $e) {
             $contact['message'] = 'Something Wrong With Message';
         }
-        
-        return redirect(route('enrolment',$contact));
+
+        return redirect(route('enrolment', $contact));
     }
 
-
-      /**
+    /**
      * Show the form for creating a new resource.
      * @return Response
      */
     public function Course(Request $request)
     {
-        $input = $request->all(); 
+        $input = $request->all();
         $data['course'] = $this->course->findAll();
-        return view('home::course',$data);
+        return view('home::course', $data);
     }
 
-    public function courseDetail(Request $request){
+    public function courseDetail(Request $request)
+    {
         $input = $request->all();
 
         $course_id = $input['course_id'];
 
         $data['course_detail'] = $this->course->find($course_id);
-        $data['course_info'] = $this->courseinfo->getCourseInfoByCourse($course_id); 
+        $data['course_info'] = $this->courseinfo->getCourseInfoByCourse($course_id);
 
-        return view('home::course-detail',$data);
-      
+        return view('home::course-detail', $data);
+
     }
 
-    public function courseInfoDetail(Request $request){
+    public function courseInfoDetail(Request $request)
+    {
         $input = $request->all();
 
         $courseinfo_id = $input['courseinfo_id'];
         $data['course_info_detail'] = $this->courseinfo->find($courseinfo_id);
 
-        return view('home::course-info-detail',$data);
-      
+        return view('home::course-info-detail', $data);
+
     }
 
-    public function termCondition(Request $request){
+    public function termCondition(Request $request)
+    {
         $input = $request->all();
-        $data['terms_and_conditions'] =$this->page->getBySlug('terms_and_conditions');
-        return view('home::term-condition',$data);
-      
+        $data['terms_and_conditions'] = $this->page->getBySlug('terms_and_conditions');
+        return view('home::term-condition', $data);
+
     }
 
-    public function privacyPolicy(Request $request){
+    public function privacyPolicy(Request $request)
+    {
         $input = $request->all();
-        $data['privacy_policy'] =$this->page->getBySlug('privacy_policy');
-        return view('home::privacy_policy',$data);
-      
+        $data['privacy_policy'] = $this->page->getBySlug('privacy_policy');
+        return view('home::privacy_policy', $data);
+
     }
 
-    public function userAgreement(Request $request){
+    public function userAgreement(Request $request)
+    {
         $input = $request->all();
-        $data['user_agreement'] =$this->page->getBySlug('user_agreement');
-        return view('home::user_agreement',$data);
-      
+        $data['user_agreement'] = $this->page->getBySlug('user_agreement');
+        return view('home::user_agreement', $data);
+
     }
 
-    public function paymentPlan(){
+    public function paymentPlan()
+    {
         return view('home::payment-plan');
-      
+
     }
 
-    public function demoQuiz(){
-        $data['demo_quiz'] = $this->quiz->getDemoQuiz(5); 
+    public function demoQuiz()
+    {
+        $data['demo_quiz'] = $this->quiz->getDemoQuiz(5);
 
-        return view('home::demo-quiz',$data);
-      
+        return view('home::demo-quiz', $data);
+
     }
 
-    public function studentAccount(Request $request){
-         $input = $request->all();
+    public function studentAccount(Request $request)
+    {
+        $input = $request->all();
 
-         $course_info_id = (array_key_exists('course_info_id', $input)) ? $input['course_info_id'] : '';
+        $course_info_id = (array_key_exists('course_info_id', $input)) ? $input['course_info_id'] : '';
 
-        if (Auth::guard('student')->check()) { 
-             return redirect(route('student-dashboard'));
+        if (Auth::guard('student')->check()) {
+            return redirect(route('student-dashboard'));
         }
 
-         $data['message'] = (array_key_exists('message', $input)) ? $input['message'] : FALSE; 
+        $data['message'] = (array_key_exists('message', $input)) ? $input['message'] : false;
 
-         $data['course_info_id'] = $course_info_id;
+        $data['course_info_id'] = $course_info_id;
 
-         if((array_key_exists('source', $input) AND $input['source'] == 'course')){
-                $data['source'] = 'course';
-         }else if((array_key_exists('source', $input) AND $input['source'] == 'enrol')){
-                $data['source'] = 'enrol';
-         }else{
-                $data['source'] = '';
-         }
+        if ((array_key_exists('source', $input) and $input['source'] == 'course')) {
+            $data['source'] = 'course';
+        } else if ((array_key_exists('source', $input) and $input['source'] == 'enrol')) {
+            $data['source'] = 'enrol';
+        } else if ((array_key_exists('source', $input) and $input['source'] == 'resources')) {
+            $data['source'] = 'resources';
+        } else {
+            $data['source'] = '';
+        }
 
-         return view('home::student-login',$data);
+        return view('home::student-login', $data);
     }
 
-    public function studentRegister(StudentLoginFormRequest $request){
-        $input = $request->all(); 
-        $email = $input['email']; 
+    public function studentRegister(StudentLoginFormRequest $request)
+    {
+        $input = $request->all();
+        $email = $input['email'];
 
-         try{
+        try {
 
             $studentData = array(
                 'username' => $input['username'],
@@ -267,37 +269,43 @@ class HomeController extends Controller
                 'email' => $input['email'],
                 'password' => bcrypt($input['password']),
                 'user_type' => 'student',
-                'active' => 1
+                'active' => 1,
             );
 
             $this->student->save($studentData);
 
-            /* --------------------------------------------------------------- 
-                        Email Send to Student After Registration 
-             --------------------------------------------------------------- */
-             
-            
-             $subject = 'Register Successfully.'; 
+            /* ---------------------------------------------------------------
+            Email Send to Student After Registration
+            --------------------------------------------------------------- */
 
-             $content  = view('home::email-register-content')->render(); 
+            $subject = 'Register Successfully.';
 
-             //if (filter_var( $email, FILTER_VALIDATE_EMAIL )) {
-                 Mail::to($email)->send(new SendNetaMail($content,$subject));
+            $content = view('home::email-register-content')->render();
+
+            //if (filter_var( $email, FILTER_VALIDATE_EMAIL )) {
+            Mail::to($email)->send(new SendNetaMail($content, $subject));
             //}
 
-            /* --------------------------------------------------------------- 
-                        Email Send to Student After Registration 
-             --------------------------------------------------------------- */
-
+            /* ---------------------------------------------------------------
+            Email Send to Student After Registration
+            --------------------------------------------------------------- */
 
             $registerStudent['message'] = 'You have registered Successfully.';
-        }catch(\Throwable $e){
+        } catch (\Throwable $e) {
             $registerStudent['message'] = 'Something Wrong With Message';
         }
 
-        return redirect(route('student-account',$registerStudent));
+        return redirect(route('student-account', $registerStudent));
     }
 
-    
+    public function resources()
+    {
+        if (Auth::guard('student')->check()) {
+            return redirect(route('student-resources'));
+        } else {
+            $param = 'resources';
+            return redirect(route('student-account', ['source' => $param]));
+        }
+    }
+
 }
-    

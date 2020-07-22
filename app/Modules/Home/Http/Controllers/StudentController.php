@@ -86,6 +86,8 @@ class StudentController extends Controller
                 return redirect()->intended(route('student-hub'));
             } else if ($data['source'] == 'enrol') {
                 return redirect()->intended(route('enrolment', ['course_info_id' => $data['course_info_id']]));
+            } else if ($data['source'] == 'resources') {
+                return redirect()->intended(route('student-resources'));
             } else {
                 return redirect()->intended(route('student-dashboard'));
             }

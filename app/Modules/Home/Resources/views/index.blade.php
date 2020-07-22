@@ -28,7 +28,7 @@
         <div class="container">
             <div class="row">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <div class="col-md-3 col-lg-3">
+                    <div class="col-md-3 col-lg-1">
                        @if($setting != null && $setting->company_logo != null)
                        <a class="navbar-brand" href="{{ route('home') }}"><img src="{{asset('uploads/setting/'.$setting->company_logo)}}" alt="" class="img-fluid"></a>
                     @else
@@ -36,7 +36,7 @@
                     @endif
                     </div>
 
-                    <div class="col-sm-12 col-md-12 col-lg-8">
+                    <div class="col-sm-12 col-md-12 col-lg-9">
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -68,6 +68,9 @@
                                 </li>
                                 <li class="nav-item">
                                	 <a class="nav-link" href="{{ route('student-hub') }}">Learner’s Portal</a>
+                                </li>
+								<li class="nav-item">
+                               	 <a class="nav-link" href="{{ route('resources') }}">Resources</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('contact-us') }}">Contact Us</a>

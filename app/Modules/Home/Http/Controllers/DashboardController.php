@@ -10,6 +10,7 @@ use App\Modules\Mockup\Repositories\MockupInterface;
 use App\Modules\Quiz\Repositories\QuizInterface;
 use App\Modules\Student\Repositories\StudentInterface;
 use App\Modules\Syllabus\Repositories\SyllabusInterface;
+use App\Modules\Resource\Repositories\ResourcesInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
@@ -25,8 +26,21 @@ class DashboardController extends Controller
     protected $syllabus;
     protected $quiz;
     protected $mockup;
+    /**
+     * @var ResourcesInterface
+     */
+    protected $resource;
 
-    public function __construct(StudentInterface $student, AnnouncementInterface $announcement, MessageInterface $message, CourseInfoInterface $courseinfo, CourseContentInterface $coursecontent, SyllabusInterface $syllabus, QuizInterface $quiz, MockupInterface $mockup)
+    public function __construct(
+        StudentInterface $student, 
+        AnnouncementInterface $announcement, 
+        MessageInterface $message, 
+        CourseInfoInterface $courseinfo, 
+        CourseContentInterface $coursecontent, 
+        SyllabusInterface $syllabus, 
+        QuizInterface $quiz, 
+        MockupInterface $mockup,
+        ResourcesInterface $resource)
     {
         $this->student = $student;
         $this->announcement = $announcement;
@@ -36,6 +50,7 @@ class DashboardController extends Controller
         $this->syllabus = $syllabus;
         $this->quiz = $quiz;
         $this->mockup = $mockup;
+        $this->resource = $resource;
     }
     /**
      * Display a listing of the resource.
@@ -339,37 +354,36 @@ class DashboardController extends Controller
             Flash('Are you Serious with your Test ? Please Choose your Answer.')->error();
             return redirect(route('student-courses'));
         }
- 
+
         try {
             $m = 1;
-            $question_id = $input['question_id']; 
-            $countname = sizeof($question_id); 
-            for ($i = 0; $i < $countname; $i++) { 
+            $question_id = $input['question_id'];
+            $countname = sizeof($question_id);
+            for ($i = 0; $i < $countname; $i++) {
 
                 if (array_key_exists('question_option_' . $m, $input)) {
-                    
+
                     $question_id = $input['question_id'][$i];
                     $mockup_question = $this->mockup->find($question_id);
-                    if($mockup_question->question_type == 'multiple') {
+                    if ($mockup_question->question_type == 'multiple') {
                         $question_option = json_encode($input['question_option_' . $m]);
                     } else {
                         $question_option = $input['question_option_' . $m][0];
                     }
 
-                   
                     $mockupdata['student_id'] = $student_id;
                     $mockupdata['mockup_title'] = $mockup_title;
                     $mockupdata['question_id'] = $question_id;
                     $mockupdata['answer'] = $question_option;
-                
+
                     $checkAnswer = $this->mockup->checkCorrectAnswer($question_id, $question_option);
-                   
+
                     if ($checkAnswer > 0) {
                         $mockupdata['is_correct_answer'] = 1;
                     } else {
                         $mockupdata['is_correct_answer'] = 0;
                     }
-                    
+
                     $this->student->savemockupHistory($mockupdata);
 
                     //sleep for 3 seconds
@@ -381,7 +395,7 @@ class DashboardController extends Controller
 
             $mockup_history = $this->student->getmockupHistory($student_id, $mockup_title);
             $correct_answer = $this->student->getmockupcorrectAnswer($student_id, $mockup_title);
-         
+
             //$total_question = count($mockup_history);
             $total_question = $this->mockup->getTotalQuestionsByTitle($mockup_title, date('Y-m-d H:i:s'));
             $correctPercent = ($correct_answer / $total_question) * 100;
@@ -422,6 +436,16 @@ class DashboardController extends Controller
 
         return view('home::student.course-invoice', $data);
 
+    }
+
+
+    public function studentResources(Request $request)
+    {
+        $search = $request->all();
+        $id = Auth::guard('student')->user()->id;
+        $data['resources'] = $this->resource->findAll(50, $search);
+
+        return view('home::student.resources', $data);
     }
 
 }

@@ -9,7 +9,7 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::get('home', ['as' => 'login', 'uses' => 'LoginController@login']);
 
@@ -47,9 +47,11 @@ Route::post('student-login', ['as' => 'student-login-post', 'uses' => 'StudentCo
 
 Route::get('student-logout', ['as' => 'student-logout', 'uses' => 'StudentController@studentLogout']);
 
-Route::post('student-update-password',['as'=>'student-update-password','uses'=>'StudentController@updateStudentPassword']);
+Route::post('student-update-password', ['as' => 'student-update-password', 'uses' => 'StudentController@updateStudentPassword']);
 
 Route::get('student-hub', ['as' => 'student-hub', 'uses' => 'StudentController@studentHub']);
+
+Route::get('resources', ['as' => 'resources', 'uses' => 'HomeController@resources']);
 
 Route::get('enrolment', ['as' => 'enrolment', 'uses' => 'StudentController@Enrolment']);
 Route::get('enrolment/checkIntakeAvailability', ['as' => 'enrolment.checkIntakeAvailability', 'uses' => 'StudentController@checkIntakeAvailability']);
@@ -64,29 +66,29 @@ Route::get('demo-quiz', ['as' => 'demo-quiz', 'uses' => 'HomeController@demoQuiz
 
 Route::group(['prefix' => 'student', 'middleware' => ['auth:student']], function () {
 
-	Route::get('student-dashboard', ['as' => 'student-dashboard', 'uses' => 'DashboardController@index']);
+    Route::get('student-dashboard', ['as' => 'student-dashboard', 'uses' => 'DashboardController@index']);
 
-	Route::put('studentprofile/update/{id}', ['as' => 'studentprofile.update', 'uses' => 'DashboardController@studentProfileUpdate'])->where('id','[0-9]+');
+    Route::put('studentprofile/update/{id}', ['as' => 'studentprofile.update', 'uses' => 'DashboardController@studentProfileUpdate'])->where('id', '[0-9]+');
 
-	Route::post('message/send', ['as' => 'message.send', 'uses' => 'DashboardController@sendMessage']);
+    Route::post('message/send', ['as' => 'message.send', 'uses' => 'DashboardController@sendMessage']);
 
-	Route::get('student-courses', ['as' => 'student-courses', 'uses' => 'DashboardController@studentCourse']);
+    Route::get('student-courses', ['as' => 'student-courses', 'uses' => 'DashboardController@studentCourse']);
 
-	Route::get('syllabus-detail', ['as' => 'syllabus-detail', 'uses' => 'DashboardController@syllabusDetail']);
+    Route::get('syllabus-detail', ['as' => 'syllabus-detail', 'uses' => 'DashboardController@syllabusDetail']);
 
-	Route::get('lesson-detail', ['as' => 'lesson-detail', 'uses' => 'DashboardController@lessonsDetail']);
-	
-	Route::get('lesson-plan-detail', ['as' => 'lesson-plan-detail', 'uses' => 'DashboardController@lessonPlanDetail']);
+    Route::get('lesson-detail', ['as' => 'lesson-detail', 'uses' => 'DashboardController@lessonsDetail']);
 
+    Route::get('lesson-plan-detail', ['as' => 'lesson-plan-detail', 'uses' => 'DashboardController@lessonPlanDetail']);
 
-	Route::get('student-quiz', ['as' => 'student-quiz', 'uses' => 'DashboardController@studentQuiz']);
+    Route::get('student-quiz', ['as' => 'student-quiz', 'uses' => 'DashboardController@studentQuiz']);
 
-	Route::get('mockup-question', ['as' => 'mockup-question', 'uses' => 'DashboardController@mockupQuestion']);
+    Route::get('mockup-question', ['as' => 'mockup-question', 'uses' => 'DashboardController@mockupQuestion']);
 
-	Route::post('studentmockup/store', ['as' => 'studentmockup.store', 'uses' => 'DashboardController@studentmockupStore']);
-	
-	Route::post('studentquiz/store', ['as' => 'studentquiz.store', 'uses' => 'DashboardController@studentQuizStore']);
+    Route::post('studentmockup/store', ['as' => 'studentmockup.store', 'uses' => 'DashboardController@studentmockupStore']);
 
-	Route::get('course-invoice', ['as' => 'course-invoice', 'uses' => 'DashboardController@studentCourseInvoice']);
+    Route::post('studentquiz/store', ['as' => 'studentquiz.store', 'uses' => 'DashboardController@studentQuizStore']);
 
+    Route::get('course-invoice', ['as' => 'course-invoice', 'uses' => 'DashboardController@studentCourseInvoice']);
+
+	Route::get('student-resources', ['as' => 'student-resources', 'uses' => 'DashboardController@studentResources']);
 });
