@@ -77,7 +77,7 @@
                         style="height: 100px;width: auto;" />
                 @elseif(strpos($resource->mime_type, 'video') !== false)
                     <iframe id="image_path" width="200" height="200" src="{{asset($resource->file_full_path).'/'.$resource->source_name}}" frameborder="0" allowtransparency="true" allowfullscreen></iframe>  
-                @elseif(strpos($resource->mime_type, 'application') !== false || strpos($resource->mime_type, 'plain') !== false )
+                @else
                     <a href="{{asset($resource->file_full_path).'/'.$resource->source_name}}" download><p>{{$resource->source_name}}</p> </a>
                 @endif
             @endif
@@ -91,7 +91,7 @@
 </div>
 
 <!-- Warning modal -->
-{{--<div id="modal_image_size" class="modal fade" tabindex="-1">
+<div id="modal_image_size" class="modal fade" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body">
@@ -100,21 +100,21 @@
                 </center>
                 <br>
                 <center>
-                    <h4 class="text-purple">Image Size is Greater Than 1Mb. Please Upload Below 2Mb.</h4>
+                    <h4 class="text-purple">Please Upload Below 5Mb.</h4>
                     <button type="button" class="btn btn-success" data-dismiss="modal">Thank You !!!</button>
                 </center>
             </div>
         </div>
     </div>
-</div>--}}
+</div>
 <!-- /warning modal -->
 
-{{--<script type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function () {
         $('#source_name').bind('change', function () {
             var a = (this.files[0].size);
 
-            if (a > 2000000) {
+            if (a > 5000000) {
                 $('#modal_image_size').modal('show');
                 $('#source_name').val('');
             };
@@ -122,22 +122,3 @@
     });
 
 </script>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-
-        $('#type').on('change', function () {
-            var type = $(this).val();
-
-            if (type == 'image') {
-                $('.image_type').show();
-                $('.video_type').hide();
-            } else {
-                $('.video_type').show();
-                $('.image_type').hide();
-            }
-        });
-
-    });
-
-</script>--}}
