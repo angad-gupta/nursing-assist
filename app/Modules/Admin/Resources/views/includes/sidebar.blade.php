@@ -294,6 +294,19 @@
                     @endif
 
 
+                    @if($menuRoles->assignedRoles('resource.index'))
+                    <li class="nav-item">
+                        <a href="{{route('resource.index')}}"
+                           class="nav-link @if($Route[0]=='resource') active @endif"
+                           data-popup="tooltip" data-original-title="Resource Management"
+                           data-placement="right">
+                            <i class="icon-archive"></i>
+                            <span>Resource Management</span>
+                        </a>
+                    </li>
+                    @endif
+
+
             </ul>
         </div>
         <!-- /main navigation -->
