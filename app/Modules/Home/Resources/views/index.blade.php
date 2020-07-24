@@ -69,9 +69,9 @@
                                 <li class="nav-item">
                                	 <a class="nav-link" href="{{ route('student-hub') }}">Learner’s Portal</a>
                                 </li>
-								<li class="nav-item">
+								{{--<li class="nav-item">
                                	 <a class="nav-link" href="{{ route('resources') }}">Resources</a>
-                                </li>
+                                </li>--}}
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('contact-us') }}">Contact Us</a>
                                 </li>
