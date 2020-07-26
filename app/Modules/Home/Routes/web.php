@@ -90,5 +90,7 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth:student']], function
 
     Route::get('course-invoice', ['as' => 'course-invoice', 'uses' => 'DashboardController@studentCourseInvoice']);
 
-	Route::get('student-resources', ['as' => 'student-resources', 'uses' => 'DashboardController@studentResources']);
+    Route::get('student-resources', ['as' => 'student-resources', 'uses' => 'DashboardController@studentResources']);
+    
+    Route::get('readline-question', ['as' => 'readline-question', 'uses' => 'DashboardController@readlineQuestion']);
 });

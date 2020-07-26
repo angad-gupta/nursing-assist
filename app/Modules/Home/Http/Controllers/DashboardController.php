@@ -8,9 +8,9 @@ use App\Modules\CourseInfo\Repositories\CourseInfoInterface;
 use App\Modules\Message\Repositories\MessageInterface;
 use App\Modules\Mockup\Repositories\MockupInterface;
 use App\Modules\Quiz\Repositories\QuizInterface;
+use App\Modules\Resource\Repositories\ResourcesInterface;
 use App\Modules\Student\Repositories\StudentInterface;
 use App\Modules\Syllabus\Repositories\SyllabusInterface;
-use App\Modules\Resource\Repositories\ResourcesInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
@@ -32,16 +32,15 @@ class DashboardController extends Controller
     protected $resource;
 
     public function __construct(
-        StudentInterface $student, 
-        AnnouncementInterface $announcement, 
-        MessageInterface $message, 
-        CourseInfoInterface $courseinfo, 
-        CourseContentInterface $coursecontent, 
-        SyllabusInterface $syllabus, 
-        QuizInterface $quiz, 
+        StudentInterface $student,
+        AnnouncementInterface $announcement,
+        MessageInterface $message,
+        CourseInfoInterface $courseinfo,
+        CourseContentInterface $coursecontent,
+        SyllabusInterface $syllabus,
+        QuizInterface $quiz,
         MockupInterface $mockup,
-        ResourcesInterface $resource)
-    {
+        ResourcesInterface $resource) {
         $this->student = $student;
         $this->announcement = $announcement;
         $this->message = $message;
@@ -439,7 +438,6 @@ class DashboardController extends Controller
 
     }
 
-
     public function studentResources(Request $request)
     {
         $search = $request->all();
@@ -447,6 +445,24 @@ class DashboardController extends Controller
         $data['resources'] = $this->resource->findAll(50, $search);
 
         return view('home::student.resources', $data);
+    }
+
+    public function readlineQuestion(Request $request)
+    {
+        $input = $request->all();
+
+        $readline_title = $input['readline_title'];
+        $mockupInfo = $this->mockup->getRandomQuestion(2, ['readline_title'=>$readline_title]);
+        if (sizeof($mockupInfo) > 0) {
+            $data['mockupInfo'] = $mockupInfo;
+            $data['readline_title'] = $readline_title;
+            return view('home::student.readline-test', $data);
+
+        } else {
+            Flash('No Readline Question Set. Please Check Later.')->error();
+            return redirect(route('student-courses'));
+        }
+
     }
 
 }

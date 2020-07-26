@@ -42,6 +42,10 @@
                         <a class="nav-link" id="resources-tab" data-toggle="tab" href="#resources" role="tab"
                             aria-controls="resources" aria-selected="false">Resources</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="readliness-tab" data-toggle="tab" href="#readliness" role="tab"
+                            aria-controls="readliness" aria-selected="false">Readiness Exam</a>
+                    </li>
                 </ul>
 
                 <div class="tab-content" id="myTabContent">
@@ -107,8 +111,7 @@
                                                 <h5>{{$list}}</h5>
                                                 <span>{{$total_quesion}} Questions</span>
                                                 <a class="btn e-btn w-100"
-                                                    href="{{ route('mockup-question',['mockup_title'=>$key]) }}">Take
-                                                    Test</a>
+                                                    href="{{ route('mockup-question',['mockup_title'=>$key]) }}">Take Test</a>
                                             </div>
                                         </div>
                                     </div>
@@ -174,6 +177,29 @@
                                     </div>
                                 @endforeach
                             @endif                           
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="readliness" role="tabpanel" aria-labelledby="contact-tab">
+                        <div class="row my-courses">
+                            @php
+                                $readiness_list = array('readiness_exam_1'=>'Readiness Exam 1','readiness_exam_2'=>'Readiness Exam 2',
+                                    'readiness_exam_3'=>'Readiness Exam 3');
+                                @endphp
+
+                                @foreach($readiness_list as $key => $list)
+
+                                    <div class="col-sm-6 col-md-4 col-lg-3">
+                                        <div class="my-courses__list">
+                                            <div class="list-content">
+                                                <h5>{{$list}}</h5>
+                                                <span>50 Questions</span>
+                                                <a class="btn e-btn w-100"
+                                                    href="{{ route('readline-question',['readline_title'=>$key]) }}">Take Test</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
                         </div>
                     </div>
 

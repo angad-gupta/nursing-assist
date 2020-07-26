@@ -61,10 +61,21 @@ class MockupRepository implements MockupInterface
     }
 
     public function getTotalQuestionsByTitle($mockup_title, $datetime)
-    { 
+    {
         $result = Mockup::where('mockup_title', '=', $mockup_title)
             ->where('created_at', '<=', $datetime)
             ->count();
+
+        return $result;
+    }
+
+    public function getRandomQuestion($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1])
+    {
+
+        $result = Mockup::when(array_keys($filter, true), function ($query) use ($filter) {
+
+        })
+            ->inRandomOrder()->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
 
         return $result;
     }
