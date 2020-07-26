@@ -526,3 +526,29 @@ a {
     color: #fff !important;
   }
 }
+
+
+.neta-resources {
+  h6 {
+    color: $primary-color;
+  }
+  .resource-box {
+    background: white;
+    padding: 15px;
+    margin: 15px;
+    border-radius:4px
+  }
+  .downloads{
+    float: right;
+    padding-top: 20px;
+    a{
+      padding-right: 10px;
+    }
+    .fa-file-pdf-o{
+      color: #f51e1e;
+    }
+    .fa-file-video-o{
+      color: #67b4ea;
+    }
+  }
+}

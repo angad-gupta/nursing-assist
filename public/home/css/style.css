@@ -2447,4 +2447,31 @@ a {
 .self-check:hover {
   color: #fff !important;
 }
+.neta-resources h6 {
+  color: #B0117E;
+}
+
+.neta-resources .resource-box {
+  background: white;
+  padding: 15px;
+  margin: 15px;
+  border-radius: 4px;
+}
+
+.neta-resources .downloads {
+  float: right;
+  padding-top: 20px;
+}
+
+.neta-resources .downloads a {
+  padding-right: 10px;
+}
+
+.neta-resources .downloads .fa-file-pdf-o {
+  color: #f51e1e;
+}
+
+.neta-resources .downloads .fa-file-video-o {
+  color: #67b4ea;
+}
 /*# sourceMappingURL=style.css.map */
