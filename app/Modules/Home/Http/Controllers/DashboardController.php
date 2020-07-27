@@ -349,15 +349,15 @@ class DashboardController extends Controller
         $mockup_title = $input['mockup_title'];
         $student_id = Auth::guard('student')->user()->id;
 
-        $this->student->deleteMockuphistory($student_id, $mockup_title);
+       // $this->student->deleteMockuphistory($student_id, $mockup_title);
 
-        if (!array_key_exists('question_option_1', $input)) {
+        /* if (!array_key_exists('question_option_1', $input)) {
             Flash('Are you Serious with your Test ? Please Choose your Answer.')->error();
             return redirect(route('student-courses'));
-        }
+        } */
 
         try {
-            $m = 1;
+           /*  $m = 1;
             $question_id = $input['question_id'];
             $countname = sizeof($question_id);
             for ($i = 0; $i < $countname; $i++) {
@@ -393,7 +393,7 @@ class DashboardController extends Controller
                     $m++;
                 }
             }
-
+ */
             $mockup_history = $this->student->getmockupHistory($student_id, $mockup_title);
             $correct_answer = $this->student->getmockupcorrectAnswer($student_id, $mockup_title);
 
@@ -447,6 +447,57 @@ class DashboardController extends Controller
         $data['resources'] = $this->resource->findAll(50, $search);
 
         return view('home::student.resources', $data);
+    }
+
+    public function ajaxQuestionStore(Request $request)
+    {
+        $input = $request->all();
+        $mockup_title = $input['mockup_title'];
+        $qkey = $input['qkey'];
+        $question_id = $input['question_id'];
+        
+        $answers = []; 
+        if (isset($input['answers']) && !empty($input['answers'])) {
+            $answers = $input['answers'];
+        } else {
+            return 0;
+        }
+
+        try {
+           
+            $student_id = Auth::guard('student')->user()->id;
+            if($qkey == 1) {
+                $this->student->deleteMockuphistory($student_id, $mockup_title);
+            }
+//dd($answers);
+            $mockup_question = $this->mockup->find($question_id);
+            if ($mockup_question->question_type == 'multiple') {
+                $question_option = json_encode($answers); 
+            } else {
+                $question_option = $answers;
+            }
+            
+            $mockupdata['student_id'] = $student_id;
+            $mockupdata['mockup_title'] = $mockup_title;
+            $mockupdata['question_id'] = $question_id;
+            $mockupdata['answer'] = $question_option;
+
+            $checkAnswer = $this->mockup->checkCorrectAnswer($question_id, $question_option);
+
+            if ($checkAnswer > 0) {
+                $mockupdata['is_correct_answer'] = 1;
+            } else {
+                $mockupdata['is_correct_answer'] = 0;
+            }
+            //dd($mockupdata);
+            $this->student->savemockupHistory($mockupdata);
+
+            return 1;
+
+        } catch (\Throwable $e) {
+            return 2;
+        }
+
     }
 
 }
