@@ -26,11 +26,21 @@
                 <h2 class="ttl-line">{{ ucfirst(str_replace('_',' ',$readline_title)) }}
                 </h2>
                 <p>Dear student,You are about to take a Computer Adaptive Test (CAT). Please make sure that you continue the test undisturbed. 
-                    Please allot 4 hours to take the test.No calculators allowed No food and drinks allowed. The computer will ask you if you would like to take a break.
-                    Ready to begin the test?</p>
+                    Please allot 4 hours to take the test.No calculators allowed No food and drinks allowed. The computer will ask you if you would like to take a break.</p>
+                
+                <p class="text-center"><strong>Ready to begin the test?</strong></p><br>
+                <div class="col-sm-12 row">
+                    <div class="col-sm-6">
+                        <button type="button" class="form-control" id="begin_btn">Yes</button>
+                    </div>
+                    <div class="col-sm-6">
+                        <a href="{{route('student-courses')}}" class="button">Return to Learner's Portal</a>
+                    </div>
+                </div>
+                
             </div>
 
-            <div class="col-sm-12">
+            <div class="col-sm-12" style="display:none" id="readine_questions">
                 <h6 class="p-0 mb-0"> <label id="question_number">1</label> out of {{$mockupInfo->count()}}</h6>
                
                     {!! Form::open(['route'=>'studentmockup.store','method'=>'POST','id'=>'studentmockup_submit','class'=>'form-horizontal','role'=>'form','files'=> true]) !!}
@@ -161,6 +171,9 @@
             $('#question_number').text(new_key);
         });
 
+        $('#begin_btn').on('click', function() {
+            $('#readine_questions').css('display', '');
+        })
     });
 
 </script>
