@@ -96,6 +96,8 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth:student']], function
 
     Route::get('readline-question/startTime', ['as' => 'readline-question.saveStartTime', 'uses' => 'DashboardController@saveStartTime']);
     Route::get('readline-question/breakTime', ['as' => 'readline-question.saveBreakTime', 'uses' => 'DashboardController@saveBreakTime']);
-
+    Route::post('readline-question/ajaxStore', ['as' => 'readline-question.ajaxStore', 'uses' => 'DashboardController@ajaxReadinessStore']);
     Route::post('readline-question/store', ['as' => 'readline-question.store', 'uses' => 'DashboardController@studentReadinessStore']);
+
+    Route::post('studentmockup/ajaxStore', ['as' => 'studentmockup.ajaxStore', 'uses' => 'DashboardController@ajaxQuestionStore']);
 });

@@ -16,4 +16,11 @@ interface StudentReadinessInterface
 
     public function delete($id);
 
+    public function saveHistory($mockupdata);
+
+    public function deleteHistory($student_id, $title);
+
+    public function getHistory($student_id, $title);
+
+    public function getCorrectAnswer($student_id, $title);
 }

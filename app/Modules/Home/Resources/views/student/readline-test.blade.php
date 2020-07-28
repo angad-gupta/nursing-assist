@@ -6,11 +6,11 @@
         <div class="row">
             <div class="neta-ribbon__content">
                 <div class="col-sm-12">
-                    <h1 class="mb-0">Mock Test</h1>
+                    <h1 class="mb-0">Readiness Exam</h1>
                     <ul class="list-unstyled d-flex">
                         <li> <a href="{{ route('home') }}">Home >> </a></li>
                         <li> <a href="{{ route('student-courses') }}">Courses >></a></li>
-                        <li>Mock Test</li>
+                        <li>Readiness Exam</li>
                     </ul>
                 </div>
             </div>
@@ -29,17 +29,19 @@
                     Please allot 4 hours to take the test.No calculators allowed No food and drinks allowed. The computer will ask you if you would like to take a break.</p>
                 
                 <div class="card card-body" id="ready_div">
-                    <p class="text-center"><strong>Ready to begin the test?</strong></p><br>
+                    
                     <div class="col-sm-12 row">
-                        <div class="col-sm-6">
+                    <div class="col-sm-3">
+                        <p style="padding-top:30px"><strong>Ready to begin the test?</strong></p>
+                    </div>
+                        <div class="col-sm-3">
                             <a id="begin_btn" 
-                            class="btn bg-danger btn-icon rounded-round" data-popup="tooltip" 
-                            data-placement="bottom">Yes&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;      </a>
+                            class="btn bg-danger btn-icon rounded-round" data-popup="tooltip">Yes&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </a>
+                           
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-3">
                             <a href="{{route('student-courses')}}" id="begin_btn" 
-                                class="btn bg-danger btn-icon rounded-round" data-popup="tooltip" 
-                                data-placement="bottom">Return to Learner's Portal</a>
+                                class="btn bg-danger btn-icon rounded-round" data-popup="tooltip" >Return to Learner's Portal</a>
                         </div>
                     </div>
                 </div>
@@ -49,7 +51,7 @@
             <div class="col-sm-12" style="display:none" id="readine_questions">
                 <h6 class="p-0 mb-0"> <label id="question_number">1</label> out of {{$mockupInfo->count()}}</h6>
                
-                    {!! Form::open(['route'=>'studentmockup.store','method'=>'POST','id'=>'studentmockup_submit','class'=>'form-horizontal','role'=>'form','files'=> true]) !!}
+                    {!! Form::open(['route'=>'readline-question.store','method'=>'POST','id'=>'studentmockup_submit','class'=>'form-horizontal','role'=>'form','files'=> true]) !!}
 
                     @php $last_key = $mockupInfo->keys()->last(); @endphp
 
@@ -65,14 +67,15 @@
                             <div class="card-body demo-quiz neta-about">
                                 <div class="">
                                     <div class="row">
-                                        {!! Form::hidden('question_id[]', $question->id) !!}
-                                        {!! Form::hidden('title', $readline_title) !!}
+                                        {!! Form::hidden('question_id[]', $question->id, ['class'=>'question_id']) !!}
+                                        {!! Form::hidden('title', $readline_title, ['class'=>'title']) !!}
+                                        {!! Form::hidden('question_type[]', $question->question_type, ['class'=>'question_type']) !!}
 
                                         @if($question->question_type == 'multiple')
                                         <div class="col-sm-6">
                                             <div class="e-input">
                                                 <input type="checkbox" name="question_option_{{$key}}[]"
-                                                    value="option_a" />
+                                                    value="option_a" class="question_option"/>
                                                 <label for="">A. {{ $question->option_1 }}
                                                 </label>
                                             </div>
@@ -80,7 +83,7 @@
                                         <div class="col-sm-6">
                                             <div class="e-input">
                                                 <input type="checkbox" name="question_option_{{$key}}[]"
-                                                    value="option_b" />
+                                                    value="option_b" class="question_option"/>
                                                 <label for="">B. {{ $question->option_2 }}
                                                 </label>
                                             </div>
@@ -88,7 +91,7 @@
                                         <div class="col-sm-6">
                                             <div class="e-input">
                                                 <input type="checkbox" name="question_option_{{$key}}[]"
-                                                    value="option_c" />
+                                                    value="option_c" class="question_option"/>
                                                 <label for="">C. {{ $question->option_3 }}
                                                 </label>
                                             </div>
@@ -96,7 +99,7 @@
                                         <div class="col-sm-6">
                                             <div class="e-input">
                                                 <input type="checkbox" name="question_option_{{$key}}[]"
-                                                    value="option_d" />
+                                                    value="option_d" class="question_option"/>
                                                 <label for="">D. {{ $question->option_4 }}
                                                 </label>
                                             </div>
@@ -106,7 +109,7 @@
 
                                         <div class="col-sm-6">
                                             <div class="e-input">
-                                                <input type="radio" name="question_option_{{$key}}[]" value="true" />
+                                                <input type="radio" name="question_option_{{$key}}[]" value="true" class="question_option"/>
                                                 <label for="">True
                                                 </label>
                                             </div>
@@ -114,7 +117,7 @@
                                         <div class="col-sm-6"></div>
                                         <div class="col-sm-6">
                                             <div class="e-input">
-                                                <input type="radio" name="question_option_{{$key}}[]" value="false" />
+                                                <input type="radio" name="question_option_{{$key}}[]" value="false" class="question_option"/>
                                                 <label for="">False
                                                 </label>
                                             </div>
@@ -123,11 +126,15 @@
 
                                         @endif
                                        
-                                        @if($last_key + 1 != $key)
-                                        <div class="col-sm-6">
-                                            <button type="button" name="next" class="enrol-cpd show-btn"
-                                                data-id="{{$key}}">Next Question</button>
-                                        </div>
+                                        @if($last_key + 1 == $key)
+                                            <div class="col-sm-6">
+                                                <button type="button" class="enrol-cpd mockup_submit" id="show-btn"  data-id="{{$key}}" >Submit Your Answer</button>
+                                            </div>
+                                        @else
+                                            <div class="col-sm-6">
+                                                <button type="button" name="next" class="enrol-cpd show-btn"
+                                                    data-id="{{$key}}">Next Question</button>
+                                            </div>
                                         @endif
                                     </div>
 
@@ -141,7 +148,7 @@
                    {!! Form::hidden('start_time', null, ['id'=>'start_time']) !!}
                    {!! Form::hidden('result_id', null, ['id'=>'result_id']) !!}
                     <div class="col-sm-12 neta-about">
-                        <button type="submit" class="enrol-cpd mockup_submit" id="show-btn">Submit Your Answer</button> 
+                        {{--<button type="submit" class="enrol-cpd mockup_submit" id="show-btn">Submit Your Answer</button> --}}
                         <span class="text-center" id="loaderImg" style="display:none;">
                             <img src="{{asset('home/img/loader.gif')}}" alt="loader1"
                                 style="margin-left: 330px; height:200px; width:auto;">
@@ -150,13 +157,13 @@
                     </div>
 
                     {!! Form::close() !!}
-
-
             </div>
         </div>
     </div>`
 </section>
+
 <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+
 <section class="section-padding"></section>
 
  <!-- Warning modal -->
@@ -182,20 +189,96 @@
 <script src="{{asset('admin/global/js/plugins/notifications/bootbox.min.js')}}"></script>
 <script type="text/javascript">
     $(document).ready(function () {
+        //dailog box center screen
+        var windowHeight = $(window).height();
+        var windowWidth = $(window).width();
+        var boxHeight = $('.modal').height();
+        var boxWidth = $('.modal').width();
+        $('.modal').css({'left' : ((windowWidth - boxWidth)/2), 'top' : ((windowHeight - boxHeight)/2)});
 
-        $('#studentmockup_submit').submit(function () {
+        $('.mockup_submit').on('click', function () {
             $('#loaderImg').show();
             $('.mockup_submit').attr('disabled', true);
             $('.mockup_submit').prepend('<i class="icon-spinner4 spinner"></i>');
-            return true;
+
+            var qkey = $(this).attr('data-id');
+            var index = qkey - 1;
+            var title = $('.title').val();
+            var question_id = $('.question_id').eq(index).val();
+            var question_type = $('.question_type').eq(index).val();
+  
+            var ans_array = [];
+            if(question_type == 'multiple') {
+               // $('.question_option:eq('+index+'):checkbox:checked')
+                var checkedVals =  $('input[name="question_option_'+qkey+'[]"]:checked').map(function() {
+                    ans_array.push(this.value);
+                });
+            } else {
+               var ans_array =  $('input[name="question_option_'+qkey+'[]"]:checked').val();
+            }
+       
+            var token = '{{csrf_token()}}';
+
+            $.ajax({
+                type: 'POST',
+                url: '{{route("readline-question.ajaxStore")}}',
+                data: { title: title, question_id: question_id, answers: ans_array, qkey: qkey, _token: token },
+                success: function (res) {
+                    if(res == 1) {
+                        $('#studentmockup_submit').submit();
+                        return true;
+                    } else if(res == 0) {
+                        alert('Please provide answer');
+                        return false;
+                    } else {
+                        alert('Saving Answer error!Please try again');
+                        return false;
+                    }
+                }
+            }) 
+            
         });
+
 
         $('.show-btn').on('click', function () {
             var qkey = $(this).attr('data-id');
             var new_key = parseInt(qkey, 10) + 1;
-            $('#question_'+qkey).css('display', 'none');
-            $('#question_'+new_key).css('display', 'block');
-            $('#question_number').text(new_key);
+
+            var index = qkey - 1;
+            var title = $('.title').val();
+            var question_id = $('.question_id').eq(index).val();
+            var question_type = $('.question_type').eq(index).val();
+  
+            var ans_array = [];
+            if(question_type == 'multiple') {
+                var checkedVals =  $('input[name="question_option_'+qkey+'[]"]:checked').map(function() {
+                    ans_array.push(this.value);
+                });
+            } else {
+               var ans_array =  $('input[name="question_option_'+qkey+'[]"]:checked').val();
+            }
+  
+            var token = '{{csrf_token()}}';
+
+            $.ajax({
+                type: 'POST',
+                url: '{{route("readline-question.ajaxStore")}}',
+                data: { title: title, question_id: question_id, answers: ans_array, qkey: qkey, _token: token },
+                success: function (res) {
+                    if(res == 1) {
+                       $('#question_'+qkey).css('display', 'none');
+                        $('#question_'+new_key).css('display', 'block');
+                        $('#question_number').text(new_key);
+                        return true;
+                    } else if(res == 0) {
+                        alert('Please provide answer');
+                        return false;
+                    } else {
+                        alert('Saving Answer error!Please try again');
+                        return false;
+                    }
+                }
+            })
         });
 
         $('#begin_btn').on('click', function() {
@@ -204,8 +287,8 @@
 
             setTimeout(function(){ 
                 ConfirmDialog(dt);
-            },3000);
-          //7200000
+            },7200000);
+          ///7200000
 
             $.ajax({
                 type:'GET',
@@ -239,13 +322,13 @@
                     label: 'Yes',
                     className: 'btn-primary',
                     callback: function(){
-                        //console.log('Custom ok clicked');
-                        $('#readine_questions').css('display', 'none');
-                        var new_dt = dt + 60000;
+                        //$('#readine_questions').css('display', 'none');
+                      /*   var new_dt = dt + 60000;
                         var exceed_dt = dt + 90000;
-                        var four_dt = dt + (4.5*60*60*1000);
+                        var four_dt = dt + (4.5*60*60*1000); */
 
                         var result_id = $('#result_id').val();
+                        
                         $.ajax({
                             type:'GET',
                             url:'{{route("readline-question.saveBreakTime")}}',
@@ -253,7 +336,7 @@
                                 result_id: result_id,
                             },
                             success: function(res) {
-                                if($res == 1) {
+                                if(res == 1) {
                                     alert('Enjoy your break. You have half an hour for your break');
                                 } else {
                                     alert('Error!');
@@ -262,9 +345,9 @@
                         })                       
                         
                         //show questions after 30 minutes
-                        setTimeout(function(){ 
+                        /* setTimeout(function(){ 
                             $('#readine_questions').css('display', '');
-                        }, 60000);
+                        }, 60000); */
                         
                         // cancel test if not appear after 31 minutes
                         var time = new Date().getTime();
@@ -273,7 +356,7 @@
                         });
 
                         function refresh() {
-                            if(new Date().getTime() - time >= 90000) 
+                            if(new Date().getTime() - time >= 900000) 
                                 window.location = '{{route("student-courses")}}';
                             else 
                                 setTimeout(refresh, 10000);
@@ -284,7 +367,7 @@
                         //auto form submit on time crosses 4h + 30 minutes break
                         setTimeout(function(){ 
                             $('#studentmockup_submit').submit();
-                        }, four_dt);
+                        }, 7200000);
                         //900000
                     },
                 },
@@ -292,12 +375,11 @@
                     label: 'Cancel',
                     className: 'btn-link',
                     callback: function(){
-                        var dt = + new Date(); 
-                        var four_dt = dt + (4*60*60*1000);
+                        //var four_dt = dt + (4*60*60*1000);
 
                         setTimeout(function(){ 
                             $('#studentmockup_submit').submit();
-                        }, four_dt);
+                        }, 7200000);
                     },
                 },
             }

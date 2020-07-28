@@ -1,7 +1,7 @@
 <?php
 namespace App\Modules\Student\Repositories;
 
-//use App\Modules\Student\Entities\StudentReadinessHistory;
+use App\Modules\Student\Entities\StudentReadinessHistory;
 use App\Modules\Student\Entities\StudentReadinessResult;
 
 class StudentReadinessRepository implements StudentReadinessInterface
@@ -45,4 +45,23 @@ class StudentReadinessRepository implements StudentReadinessInterface
         return $result->delete();
     }
 
+    public function saveHistory($mockupdata)
+    {
+        return StudentReadinessHistory::create($mockupdata);
+    }
+
+    public function deleteHistory($student_id, $title)
+    {
+        return StudentReadinessHistory::where('student_id', '=', $student_id)->where('title', '=', $title)->delete();
+    }
+
+    public function getHistory($student_id, $title)
+    {
+        return StudentReadinessHistory::where('student_id', '=', $student_id)->where('title', '=', $title)->get();
+    }
+
+    public function getCorrectAnswer($student_id, $title)
+    {
+        return StudentReadinessHistory::where('student_id', '=', $student_id)->where('title', '=', $title)->where('is_correct_answer', '=', '1')->count();
+    }
 }

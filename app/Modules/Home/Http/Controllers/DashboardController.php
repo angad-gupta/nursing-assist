@@ -355,15 +355,15 @@ class DashboardController extends Controller
         $mockup_title = $input['mockup_title'];
         $student_id = Auth::guard('student')->user()->id;
 
-        $this->student->deleteMockuphistory($student_id, $mockup_title);
+       // $this->student->deleteMockuphistory($student_id, $mockup_title);
 
-        if (!array_key_exists('question_option_1', $input)) {
+        /* if (!array_key_exists('question_option_1', $input)) {
             Flash('Are you Serious with your Test ? Please Choose your Answer.')->error();
             return redirect(route('student-courses'));
-        }
+        } */
 
         try {
-            $m = 1;
+           /*  $m = 1;
             $question_id = $input['question_id'];
             $countname = sizeof($question_id);
             for ($i = 0; $i < $countname; $i++) {
@@ -399,7 +399,7 @@ class DashboardController extends Controller
                     $m++;
                 }
             }
-
+ */
             $mockup_history = $this->student->getmockupHistory($student_id, $mockup_title);
             $correct_answer = $this->student->getmockupcorrectAnswer($student_id, $mockup_title);
 
@@ -459,7 +459,7 @@ class DashboardController extends Controller
         $input = $request->all();
 
         $readline_title = $input['readline_title'];
-        $mockupInfo = $this->mockup->getRandomQuestion(2, ['readline_title'=>$readline_title]);
+        $mockupInfo = $this->mockup->getRandomQuestion(100, ['readline_title'=>$readline_title]);
         if (sizeof($mockupInfo) > 0) {
             $data['mockupInfo'] = $mockupInfo;
             $data['readline_title'] = $readline_title;
@@ -517,59 +517,17 @@ class DashboardController extends Controller
     {
         $input = $request->all();
         $title = $input['title'];
-        
-        if (!array_key_exists('question_option_1', $input)) {
-            Flash('Are you Serious with your Test ? Please Choose your Answer.')->error();
-            return redirect(route('student-courses'));
-        }
+        $result_id = $input['result_id'];
 
         try {
             $student_id = Auth::guard('student')->user()->id;
 
-            $this->student->deleteMockuphistory($student_id, $title);
-
-            $m = 1;
-            $question_id = $input['question_id'];
-            $countname = sizeof($question_id);
-            for ($i = 0; $i < $countname; $i++) {
-
-                if (array_key_exists('question_option_' . $m, $input)) {
-
-                    $question_id = $input['question_id'][$i];
-                    $mockup_question = $this->mockup->find($question_id);
-                    if ($mockup_question->question_type == 'multiple') {
-                        $question_option = json_encode($input['question_option_' . $m]);
-                    } else {
-                        $question_option = $input['question_option_' . $m][0];
-                    }
-
-                    $mockupdata['student_id'] = $student_id;
-                    $mockupdata['title'] = $title;
-                    $mockupdata['question_id'] = $question_id;
-                    $mockupdata['answer'] = $question_option;
-
-                    $checkAnswer = $this->mockup->checkCorrectAnswer($question_id, $question_option);
-
-                    if ($checkAnswer > 0) {
-                        $mockupdata['is_correct_answer'] = 1;
-                    } else {
-                        $mockupdata['is_correct_answer'] = 0;
-                    }
-
-                    $this->student->savemockupHistory($mockupdata);
-
-                    //sleep for 3 seconds
-                    usleep(3000000);
-
-                    $m++;
-                }
-            }
-
-            $mockup_history = $this->student->getmockupHistory($student_id, $title);
-            $correct_answer = $this->student->getmockupcorrectAnswer($student_id, $title);
-
-            //$total_question = count($mockup_history);
-            $total_question = $this->mockup->getTotalQuestionsByTitle($title, date('Y-m-d H:i:s'));
+            $mockup_history = $this->studentReadiness->getHistory($student_id, $title);
+            $correct_answer = $this->studentReadiness->getCorrectAnswer($student_id, $title);
+           
+            $total_attempt_question = count($mockup_history);
+            //$total_question = $this->mockup->getTotalQuestionsByTitle($title, date('Y-m-d H:i:s'));
+            $total_question = 100;
             $correctPercent = ($correct_answer / $total_question) * 100;
 
             $data['correct_percent'] = $correct_percent = number_format($correctPercent, 2);
@@ -577,22 +535,124 @@ class DashboardController extends Controller
             $data['correct_answer'] = $correct_answer;
             $data['incorrect_answer'] = $total_question - $correct_answer;
 
-            $mockup_result = array(
-                'student_id' => $student_id,
-                'mockup_title' => $mockup_title,
-                'date' => date('Y-m-d'),
+            $updateResult = array(
                 'total_question' => $total_question,
+                'total_attempted_question' => $total_attempt_question,
                 'correct_answer' => $correct_answer,
                 'percent' => $correct_percent,
+                'end_time' => date('Y-m-d H:i:s')
             );
 
-            $this->student->saveMockupResult($mockup_result);
+            $this->studentReadiness->update($result_id, $updateResult);
 
-            return view('home::student.mockup-report', $data);
+            return view('home::student.readiness-report', $data);
 
         } catch (\Throwable $e) {
             alertify($e->getMessage())->error();
         }
 
     }
+
+    public function ajaxQuestionStore(Request $request)
+    {
+        $input = $request->all();
+        $mockup_title = $input['mockup_title'];
+        $qkey = $input['qkey'];
+        $question_id = $input['question_id'];
+        
+        $answers = []; 
+        if (isset($input['answers']) && !empty($input['answers'])) {
+            $answers = $input['answers'];
+        } else {
+            return 0;
+        }
+
+        try {
+           
+            $student_id = Auth::guard('student')->user()->id;
+            if($qkey == 1) {
+                $this->student->deleteMockuphistory($student_id, $mockup_title);
+            }
+//dd($answers);
+            $mockup_question = $this->mockup->find($question_id);
+            if ($mockup_question->question_type == 'multiple') {
+                $question_option = json_encode($answers); 
+            } else {
+                $question_option = $answers;
+            }
+            
+            $mockupdata['student_id'] = $student_id;
+            $mockupdata['mockup_title'] = $mockup_title;
+            $mockupdata['question_id'] = $question_id;
+            $mockupdata['answer'] = $question_option;
+
+            $checkAnswer = $this->mockup->checkCorrectAnswer($question_id, $question_option);
+
+            if ($checkAnswer > 0) {
+                $mockupdata['is_correct_answer'] = 1;
+            } else {
+                $mockupdata['is_correct_answer'] = 0;
+            }
+            //dd($mockupdata);
+            $this->student->savemockupHistory($mockupdata);
+
+            return 1;
+
+        } catch (\Throwable $e) {
+            return 2;
+        }
+
+    }
+
+    public function ajaxReadinessStore(Request $request)
+    {
+        $input = $request->all();
+        $title = $input['title'];
+        $qkey = $input['qkey'];
+        $question_id = $input['question_id'];
+        
+        $answers = []; 
+        if (isset($input['answers']) && !empty($input['answers'])) {
+            $answers = $input['answers'];
+        } else {
+            return 0;
+        }
+
+        try {
+           
+            $student_id = Auth::guard('student')->user()->id;
+            if($qkey == 1) {
+                $this->studentReadiness->deleteHistory($student_id, $title);
+            }
+//dd($answers);
+            $mockup_question = $this->mockup->find($question_id);
+            if ($mockup_question->question_type == 'multiple') {
+                $question_option = json_encode($answers); 
+            } else {
+                $question_option = $answers;
+            }
+            
+            $mockupdata['student_id'] = $student_id;
+            $mockupdata['title'] = $title;
+            $mockupdata['question_id'] = $question_id;
+            $mockupdata['answer'] = $question_option;
+
+            $checkAnswer = $this->mockup->checkCorrectAnswer($question_id, $question_option);
+
+            if ($checkAnswer > 0) {
+                $mockupdata['is_correct_answer'] = 1;
+            } else {
+                $mockupdata['is_correct_answer'] = 0;
+            }
+            //dd($mockupdata);
+            $this->studentReadiness->saveHistory($mockupdata);
+
+            return 1;
+
+        } catch (\Throwable $e) {
+            return 2;
+        }
+
+    }
+
 }

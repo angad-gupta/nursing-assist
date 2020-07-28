@@ -193,7 +193,7 @@
                                         <div class="my-courses__list">
                                             <div class="list-content">
                                                 <h5>{{$list}}</h5>
-                                                <span>50 Questions</span>
+                                                <span>100 Questions</span>
                                                 <a class="btn e-btn w-100"
                                                     href="{{ route('readline-question',['readline_title'=>$key]) }}">Take Test</a>
                                             </div>

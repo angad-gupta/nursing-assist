@@ -49,14 +49,15 @@
                             <div class="card-body demo-quiz neta-about">
                                 <div class="">
                                     <div class="row">
-                                        {{ Form::hidden('question_id[]', $question->id) }}
-                                        {{ Form::hidden('mockup_title', $mockup_title) }}
+                                        {!! Form::hidden('question_id[]', $question->id, ['class'=>'question_id']) !!}
+                                        {!! Form::hidden('mockup_title', $mockup_title, ['class'=>'mockup_title']) !!}
+                                        {!! Form::hidden('question_type[]', $question->question_type, ['class'=>'question_type']) !!}
 
                                         @if($question->question_type == 'multiple')
                                         <div class="col-sm-6">
                                             <div class="e-input">
                                                 <input type="checkbox" name="question_option_{{$key}}[]"
-                                                    value="option_a" />
+                                                    value="option_a" class="question_option" />
                                                 <label for="">A. {{ $question->option_1 }}
                                                 </label>
                                             </div>
@@ -64,7 +65,7 @@
                                         <div class="col-sm-6">
                                             <div class="e-input">
                                                 <input type="checkbox" name="question_option_{{$key}}[]"
-                                                    value="option_b" />
+                                                    value="option_b"  class="question_option" />
                                                 <label for="">B. {{ $question->option_2 }}
                                                 </label>
                                             </div>
@@ -72,7 +73,7 @@
                                         <div class="col-sm-6">
                                             <div class="e-input">
                                                 <input type="checkbox" name="question_option_{{$key}}[]"
-                                                    value="option_c" />
+                                                    value="option_c"  class="question_option" />
                                                 <label for="">C. {{ $question->option_3 }}
                                                 </label>
                                             </div>
@@ -80,7 +81,7 @@
                                         <div class="col-sm-6">
                                             <div class="e-input">
                                                 <input type="checkbox" name="question_option_{{$key}}[]"
-                                                    value="option_d" />
+                                                    value="option_d"   class="question_option" />
                                                 <label for="">D. {{ $question->option_4 }}
                                                 </label>
                                             </div>
@@ -90,7 +91,7 @@
 
                                         <div class="col-sm-6">
                                             <div class="e-input">
-                                                <input type="radio" name="question_option_{{$key}}[]" value="true" />
+                                                <input type="radio" name="question_option_{{$key}}[]" value="true"  class="question_option"/>
                                                 <label for="">True
                                                 </label>
                                             </div>
@@ -98,7 +99,7 @@
                                         <div class="col-sm-6"></div>
                                         <div class="col-sm-6">
                                             <div class="e-input">
-                                                <input type="radio" name="question_option_{{$key}}[]" value="false" />
+                                                <input type="radio" name="question_option_{{$key}}[]" value="false"   class="question_option"/>
                                                 <label for="">False
                                                 </label>
                                             </div>
@@ -106,15 +107,15 @@
                                         <div class="col-sm-6"></div>
 
                                         @endif
-                                        {{--
+                                        @if($last_key + 1 == $key)
                                             <div class="col-sm-6">
-                                                <button type="submit" class="enrol-cpd mockup_submit" id="show-btn">Submit Your Answer</button>
-                                        </div>--}}
-                                        @if($last_key + 1 != $key)
-                                        <div class="col-sm-6">
-                                            <button type="button" name="next" class="enrol-cpd show-btn"
-                                                data-id="{{$key}}">Next Question</button>
-                                        </div>
+                                                <button type="button" class="enrol-cpd mockup_submit" id="show-btn"  data-id="{{$key}}" >Submit Your Answer</button>
+                                            </div>
+                                        @else
+                                            <div class="col-sm-6">
+                                                <button type="button" name="next" class="enrol-cpd show-btn"
+                                                    data-id="{{$key}}">Next Question</button>
+                                            </div>
                                         @endif
                                     </div>
 
@@ -127,7 +128,7 @@
                    
                    
                     <div class="col-sm-12 neta-about">
-                        <button type="submit" class="enrol-cpd mockup_submit" id="show-btn">Submit Your Answer</button> 
+                        {{--<button type="submit" class="enrol-cpd mockup_submit" id="show-btn">Submit Your Answer</button>--}}
                         <span class="text-center" id="loaderImg" style="display:none;">
                             <img src="{{asset('home/img/loader.gif')}}" alt="loader1"
                                 style="margin-left: 330px; height:200px; width:auto;">
@@ -150,19 +151,88 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
-        $('#studentmockup_submit').submit(function () {
+        $('.mockup_submit').on('click', function () {
             $('#loaderImg').show();
             $('.mockup_submit').attr('disabled', true);
             $('.mockup_submit').prepend('<i class="icon-spinner4 spinner"></i>');
-            return true;
+
+            var qkey = $(this).attr('data-id');
+            var index = qkey - 1;
+            var mockup_title = $('.mockup_title').val();
+            var question_id = $('.question_id').eq(index).val();
+            var question_type = $('.question_type').eq(index).val();
+  
+            var ans_array = [];
+            if(question_type == 'multiple') {
+               // $('.question_option:eq('+index+'):checkbox:checked')
+                var checkedVals =  $('input[name="question_option_'+qkey+'[]"]:checked').map(function() {
+                    ans_array.push(this.value);
+                });
+            } else {
+               var ans_array =  $('input[name="question_option_'+qkey+'[]"]:checked').val();
+            }
+       
+            var token = '{{csrf_token()}}';
+
+            $.ajax({
+                type: 'POST',
+                url: '{{route("studentmockup.ajaxStore")}}',
+                data: { mockup_title: mockup_title, question_id: question_id, answers: ans_array, qkey: qkey, _token: token },
+                success: function (res) {
+                    if(res == 1) {
+                        $('#studentmockup_submit').submit();
+                        return true;
+                    } else if(res == 0) {
+                        alert('Please provide answer');
+                        return false;
+                    } else {
+                        alert('Saving Answer error!Please try again');
+                        return false;
+                    }
+                }
+            }) 
+            
         });
 
         $('.show-btn').on('click', function () {
             var qkey = $(this).attr('data-id');
             var new_key = parseInt(qkey, 10) + 1;
-            $('#question_'+qkey).css('display', 'none');
-            $('#question_'+new_key).css('display', 'block');
-            $('#question_number').text(new_key);
+
+            var index = qkey - 1;
+            var mockup_title = $('.mockup_title').val();
+            var question_id = $('.question_id').eq(index).val();
+            var question_type = $('.question_type').eq(index).val();
+  
+            var ans_array = [];
+            if(question_type == 'multiple') {
+                var checkedVals =  $('input[name="question_option_'+qkey+'[]"]:checked').map(function() {
+                    ans_array.push(this.value);
+                });
+            } else {
+               var ans_array =  $('input[name="question_option_'+qkey+'[]"]:checked').val();
+            }
+  
+            var token = '{{csrf_token()}}';
+
+            $.ajax({
+                type: 'POST',
+                url: '{{route("studentmockup.ajaxStore")}}',
+                data: { mockup_title: mockup_title, question_id: question_id, answers: ans_array, qkey: qkey, _token: token },
+                success: function (res) {
+                    if(res == 1) {
+                       $('#question_'+qkey).css('display', 'none');
+                        $('#question_'+new_key).css('display', 'block');
+                        $('#question_number').text(new_key);
+                        return true;
+                    } else if(res == 0) {
+                        alert('Please provide answer');
+                        return false;
+                    } else {
+                        alert('Saving Answer error!Please try again');
+                        return false;
+                    }
+                }
+            })
         });
 
     });
