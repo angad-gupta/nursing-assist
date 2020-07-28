@@ -2,12 +2,14 @@
 
 namespace App\Modules\Student\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Eloquent\Factory;
+use App\Modules\Student\Repositories\StudentInterface;
 use App\Modules\Student\Repositories\StudentPaymentInterface;
 use App\Modules\Student\Repositories\StudentPaymentRepository;
-use App\Modules\Student\Repositories\StudentInterface;
+use App\Modules\Student\Repositories\StudentReadinessInterface;
+use App\Modules\Student\Repositories\StudentReadinessRepository;
 use App\Modules\Student\Repositories\StudentRepository;
+use Illuminate\Database\Eloquent\Factory;
+use Illuminate\Support\ServiceProvider;
 
 class StudentServiceProvider extends ServiceProvider
 {
@@ -42,20 +44,30 @@ class StudentServiceProvider extends ServiceProvider
         $this->app->register(RouteServiceProvider::class);
         $this->studentRegister();
         $this->studentPaymentRegister();
+        $this->studentReadinessRegister();
     }
 
-    public function studentRegister(){
+    public function studentRegister()
+    {
         $this->app->bind(
-              StudentInterface::class,
-              StudentRepository::class
+            StudentInterface::class,
+            StudentRepository::class
         );
     }
 
-
-    public function studentPaymentRegister(){
+    public function studentReadinessRegister()
+    {
         $this->app->bind(
-              StudentPaymentInterface::class,
-              StudentPaymentRepository::class
+            StudentReadinessInterface::class,
+            StudentReadinessRepository::class
+        );
+    }
+
+    public function studentPaymentRegister()
+    {
+        $this->app->bind(
+            StudentPaymentInterface::class,
+            StudentPaymentRepository::class
         );
     }
 
@@ -67,10 +79,10 @@ class StudentServiceProvider extends ServiceProvider
     protected function registerConfig()
     {
         $this->publishes([
-            __DIR__.'/../Config/config.php' => config_path('student.php'),
+            __DIR__ . '/../Config/config.php' => config_path('student.php'),
         ], 'config');
         $this->mergeConfigFrom(
-            __DIR__.'/../Config/config.php', 'student'
+            __DIR__ . '/../Config/config.php', 'student'
         );
     }
 
@@ -83,11 +95,11 @@ class StudentServiceProvider extends ServiceProvider
     {
         $viewPath = resource_path('views/modules/student');
 
-        $sourcePath = __DIR__.'/../Resources/views';
+        $sourcePath = __DIR__ . '/../Resources/views';
 
         $this->publishes([
-            $sourcePath => $viewPath
-        ],'views');
+            $sourcePath => $viewPath,
+        ], 'views');
 
         $this->loadViewsFrom(array_merge(array_map(function ($path) {
             return $path . '/modules/student';
@@ -106,18 +118,18 @@ class StudentServiceProvider extends ServiceProvider
         if (is_dir($langPath)) {
             $this->loadTranslationsFrom($langPath, 'student');
         } else {
-            $this->loadTranslationsFrom(__DIR__ .'/../Resources/lang', 'student');
+            $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'student');
         }
     }
 
     /**
      * Register an additional directory of factories.
-     * 
+     *
      * @return void
      */
     public function registerFactories()
     {
-        if (! app()->environment('production')) {
+        if (!app()->environment('production')) {
             app(Factory::class)->load(__DIR__ . '/../Database/factories');
         }
     }

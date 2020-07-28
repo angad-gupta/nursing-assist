@@ -2,23 +2,25 @@
 
 namespace App\Modules\Student\Entities;
 
-use App\Modules\Student\Entities\Student;
 use Illuminate\Database\Eloquent\Model;
 
-class StudentMockupResult extends Model
+class StudentReadinessResult extends Model
 {
     protected $fillable = [
 
         'student_id',
         'date',
-        'mockup_title',
+        'title',
         'total_question',
+        'total_attempted_question',
         'correct_answer',
         'percent',
-
+        'start_time',
+        'break_time',
+        'end_time',
     ];
 
-    public function studentInfo()
+    public function student()
     {
         return $this->belongsTo(Student::class, 'student_id', 'id');
     }

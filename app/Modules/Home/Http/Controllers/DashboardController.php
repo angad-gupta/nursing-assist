@@ -10,6 +10,7 @@ use App\Modules\Mockup\Repositories\MockupInterface;
 use App\Modules\Quiz\Repositories\QuizInterface;
 use App\Modules\Resource\Repositories\ResourcesInterface;
 use App\Modules\Student\Repositories\StudentInterface;
+use App\Modules\Student\Repositories\StudentReadinessInterface;
 use App\Modules\Syllabus\Repositories\SyllabusInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -30,6 +31,10 @@ class DashboardController extends Controller
      * @var ResourcesInterface
      */
     protected $resource;
+    /**
+     * @var StudentReadinessInterface
+     */
+    protected $studentReadiness;
 
     public function __construct(
         StudentInterface $student,
@@ -40,7 +45,8 @@ class DashboardController extends Controller
         SyllabusInterface $syllabus,
         QuizInterface $quiz,
         MockupInterface $mockup,
-        ResourcesInterface $resource) {
+        ResourcesInterface $resource,
+        StudentReadinessInterface $studentReadiness) {
         $this->student = $student;
         $this->announcement = $announcement;
         $this->message = $message;
@@ -50,6 +56,7 @@ class DashboardController extends Controller
         $this->quiz = $quiz;
         $this->mockup = $mockup;
         $this->resource = $resource;
+        $this->studentReadiness = $studentReadiness;
     }
     /**
      * Display a listing of the resource.
@@ -465,4 +472,127 @@ class DashboardController extends Controller
 
     }
 
+    public function saveStartTime(Request $request)
+    {
+        $input = $request->all();
+        $start_time =  date('Y-m-d H:i:s');
+        try {
+            $id = Auth::guard('student')->user()->id;
+           
+            $insertArray = [
+                'student_id' => $id,
+                'date' => date('Y-m-d'),
+                'title' => $input['title'],
+                'start_time' => $start_time
+            ];
+
+            $readiness = $this->studentReadiness->save($insertArray);
+
+            return ['status' => '1', 'start_time' => $start_time, 'result_id'=> $readiness->id];
+        } catch(\Throwable $t) {
+            return  ['status' => '0'];
+        }
+    }
+
+    public function saveBreakTime(Request $request)
+    {
+        $input = $request->all();
+        $break_time =  date('Y-m-d H:i:s');
+        try {
+            $id = Auth::guard('student')->user()->id;
+           
+            $updateArray = [
+                'break_time' => $break_time
+            ];
+
+            $readiness = $this->studentReadiness->update($input['result_id'], $updateArray);
+
+            return 1;
+        } catch(\Throwable $t) {
+            return 0;
+        }
+    }
+
+    public function studentReadinessStore(Request $request)
+    {
+        $input = $request->all();
+        $title = $input['title'];
+        
+        if (!array_key_exists('question_option_1', $input)) {
+            Flash('Are you Serious with your Test ? Please Choose your Answer.')->error();
+            return redirect(route('student-courses'));
+        }
+
+        try {
+            $student_id = Auth::guard('student')->user()->id;
+
+            $this->student->deleteMockuphistory($student_id, $title);
+
+            $m = 1;
+            $question_id = $input['question_id'];
+            $countname = sizeof($question_id);
+            for ($i = 0; $i < $countname; $i++) {
+
+                if (array_key_exists('question_option_' . $m, $input)) {
+
+                    $question_id = $input['question_id'][$i];
+                    $mockup_question = $this->mockup->find($question_id);
+                    if ($mockup_question->question_type == 'multiple') {
+                        $question_option = json_encode($input['question_option_' . $m]);
+                    } else {
+                        $question_option = $input['question_option_' . $m][0];
+                    }
+
+                    $mockupdata['student_id'] = $student_id;
+                    $mockupdata['title'] = $title;
+                    $mockupdata['question_id'] = $question_id;
+                    $mockupdata['answer'] = $question_option;
+
+                    $checkAnswer = $this->mockup->checkCorrectAnswer($question_id, $question_option);
+
+                    if ($checkAnswer > 0) {
+                        $mockupdata['is_correct_answer'] = 1;
+                    } else {
+                        $mockupdata['is_correct_answer'] = 0;
+                    }
+
+                    $this->student->savemockupHistory($mockupdata);
+
+                    //sleep for 3 seconds
+                    usleep(3000000);
+
+                    $m++;
+                }
+            }
+
+            $mockup_history = $this->student->getmockupHistory($student_id, $title);
+            $correct_answer = $this->student->getmockupcorrectAnswer($student_id, $title);
+
+            //$total_question = count($mockup_history);
+            $total_question = $this->mockup->getTotalQuestionsByTitle($title, date('Y-m-d H:i:s'));
+            $correctPercent = ($correct_answer / $total_question) * 100;
+
+            $data['correct_percent'] = $correct_percent = number_format($correctPercent, 2);
+            $data['mockup_history'] = $mockup_history;
+            $data['correct_answer'] = $correct_answer;
+            $data['incorrect_answer'] = $total_question - $correct_answer;
+
+            $mockup_result = array(
+                'student_id' => $student_id,
+                'mockup_title' => $mockup_title,
+                'date' => date('Y-m-d'),
+                'total_question' => $total_question,
+                'correct_answer' => $correct_answer,
+                'percent' => $correct_percent,
+            );
+
+            $this->student->saveMockupResult($mockup_result);
+
+            return view('home::student.mockup-report', $data);
+
+        } catch (\Throwable $e) {
+            alertify($e->getMessage())->error();
+        }
+
+    }
 }

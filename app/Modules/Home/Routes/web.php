@@ -93,4 +93,9 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth:student']], function
     Route::get('student-resources', ['as' => 'student-resources', 'uses' => 'DashboardController@studentResources']);
     
     Route::get('readline-question', ['as' => 'readline-question', 'uses' => 'DashboardController@readlineQuestion']);
+
+    Route::get('readline-question/startTime', ['as' => 'readline-question.saveStartTime', 'uses' => 'DashboardController@saveStartTime']);
+    Route::get('readline-question/breakTime', ['as' => 'readline-question.saveBreakTime', 'uses' => 'DashboardController@saveBreakTime']);
+
+    Route::post('readline-question/store', ['as' => 'readline-question.store', 'uses' => 'DashboardController@studentReadinessStore']);
 });
