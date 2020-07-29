@@ -1,4 +1,7 @@
 @include('home::layouts.navbar-inner')
+<style>
+.bootbox.modal {z-index: 9999 !important;}
+</style>
 
 <section class="neta-ribbon">
     <img src="img/cc.jpg" class="img-fluid" alt="">
@@ -162,7 +165,6 @@
     </div>`
 </section>
 
-<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet" />
 
 <section class="section-padding"></section>
 
@@ -190,11 +192,11 @@
 <script type="text/javascript">
     $(document).ready(function () {
         //dailog box center screen
-        var windowHeight = $(window).height();
+      /*   var windowHeight = $(window).height();
         var windowWidth = $(window).width();
-        var boxHeight = $('.modal').height();
-        var boxWidth = $('.modal').width();
-        $('.modal').css({'left' : ((windowWidth - boxWidth)/2), 'top' : ((windowHeight - boxHeight)/2)});
+        var boxHeight = $('.modal-dialog').height();
+        var boxWidth = $('.modal-dialog').width();
+        $('.modal-dialog').css({'left' : ((windowWidth - boxWidth)/2), 'top' : ((windowHeight - boxHeight)/2)});  */
 
         $('.mockup_submit').on('click', function () {
             $('#loaderImg').show();
@@ -203,7 +205,7 @@
 
             var qkey = $(this).attr('data-id');
             var index = qkey - 1;
-            var title = $('.title').val();
+            var title = '{{$readline_title}}';
             var question_id = $('.question_id').eq(index).val();
             var question_type = $('.question_type').eq(index).val();
   
@@ -245,7 +247,7 @@
             var new_key = parseInt(qkey, 10) + 1;
 
             var index = qkey - 1;
-            var title = $('.title').val();
+            var title = '{{$readline_title}}';
             var question_id = $('.question_id').eq(index).val();
             var question_type = $('.question_type').eq(index).val();
   
@@ -367,7 +369,7 @@
                         //auto form submit on time crosses 4h + 30 minutes break
                         setTimeout(function(){ 
                             $('#studentmockup_submit').submit();
-                        }, 7200000);
+                        }, 10800000);
                         //900000
                     },
                 },
@@ -379,7 +381,7 @@
 
                         setTimeout(function(){ 
                             $('#studentmockup_submit').submit();
-                        }, 7200000);
+                        }, 10800000);
                     },
                 },
             }

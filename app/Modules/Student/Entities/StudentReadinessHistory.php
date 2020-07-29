@@ -2,6 +2,7 @@
 
 namespace App\Modules\Student\Entities;
 
+use App\Modules\Mockup\Entities\Mockup;
 use Illuminate\Database\Eloquent\Model;
 
 class StudentReadinessHistory extends Model

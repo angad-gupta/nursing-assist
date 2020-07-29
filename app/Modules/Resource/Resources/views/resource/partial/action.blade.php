@@ -86,8 +86,13 @@
 </fieldset>
 
 <div class="text-right">
-    <button type="submit" class="ml-2 btn bg-pink-600 btn-labeled btn-labeled-left"><b><i
+    <button type="submit" class="ml-2 btn bg-pink-600 btn-labeled btn-labeled-left" id="submit_btn"><b><i
                 class="icon-database-insert"></i></b> {{ $btnType }}</button>
+    <span class="text-center" id="loaderImg" style="display:none;">
+                <img src="{{asset('home/img/loader.gif')}}" alt="loader1"
+                    style="margin-left: 330px; height:200px; width:auto;">
+                <h4>Please Wait..While Uploading...</h4>
+            </span>
 </div>
 
 <!-- Warning modal -->
@@ -100,7 +105,7 @@
                 </center>
                 <br>
                 <center>
-                    <h4 class="text-purple">Please Upload Below 5Mb.</h4>
+                    <h4 class="text-purple">Please Upload Below 60Mb.</h4>
                     <button type="button" class="btn btn-success" data-dismiss="modal">Thank You !!!</button>
                 </center>
             </div>
@@ -114,11 +119,18 @@
         $('#source_name').bind('change', function () {
             var a = (this.files[0].size);
 
-            if (a > 5000000) {
+            if (a > 60000000) {
                 $('#modal_image_size').modal('show');
                 $('#source_name').val('');
             };
         });
+
+        $('#submit_btn').submit(function () {
+            $('#loaderImg').show();
+            $('.submit_btn').attr('disabled', true);
+            $('.submit_btn').prepend('<i class="icon-spinner4 spinner"></i>');
+        )};
+
     });
 
 </script>
