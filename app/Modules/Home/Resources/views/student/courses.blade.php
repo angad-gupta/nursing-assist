@@ -38,14 +38,16 @@
                         <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
                             aria-controls="contact" aria-selected="false">Other Courses</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="resources-tab" data-toggle="tab" href="#resources" role="tab"
-                            aria-controls="resources" aria-selected="false">Resources</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="readliness-tab" data-toggle="tab" href="#readliness" role="tab"
-                            aria-controls="readliness" aria-selected="false">Readiness Exam</a>
-                    </li>
+                    @if(sizeof($student_course)>0)
+                        <li class="nav-item">
+                            <a class="nav-link" id="resources-tab" data-toggle="tab" href="#resources" role="tab"
+                                aria-controls="resources" aria-selected="false">Resources</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="readliness-tab" data-toggle="tab" href="#readliness" role="tab"
+                                aria-controls="readliness" aria-selected="false">Readiness Exam</a>
+                        </li>
+                    @endif
                 </ul>
 
                 <div class="tab-content" id="myTabContent">
