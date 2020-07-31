@@ -5,10 +5,10 @@ namespace App\Modules\Home\Http\Controllers\Auth;
 use App\Modules\Home\Http\Requests\ChangePasswordFormRequest;
 use App\Modules\Student\Entities\Student;
 use DB;
+use Hash;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
-use Hash;
 
 class ResetPasswordController extends Controller
 {
@@ -90,12 +90,7 @@ class ResetPasswordController extends Controller
 
                 // If the user shouldn't reuse the token later, delete the token
                 DB::table('password_resets')->where('email', $row->email)->delete();
-                //Send Email Reset Success Email
-                /*   if ($this->sendSuccessEmail($tokenData->email)) {
-                    return view('index');
-                } else {
-                    return redirect()->back()->withErrors(['email' => trans('A Network Error occurred. Please try again.')]);
-                } */
+
                 flash()->success("Password Changed Successfully!");
             } else {
                 flash()->error('Reset Token Doesnot Match!');

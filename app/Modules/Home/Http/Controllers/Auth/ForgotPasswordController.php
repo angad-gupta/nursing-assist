@@ -3,7 +3,6 @@
 namespace App\Modules\Home\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Notifications\StudentResetPassword;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
@@ -50,10 +49,6 @@ class ForgotPasswordController extends Controller
         // We will send the password reset link to this user. Once we have attempted
         // to send the link, we will examine the response then see the message we
         // need to show to the user. Finally, we'll send out a proper response.
-
-       /*  $response = $this->broker()->sendResetLink(
-            $request->only('email'), $this->resetNotifier()
-        ); */
         $response = $this->broker()->sendResetLink(
             $request->only('email')
         );
@@ -61,10 +56,6 @@ class ForgotPasswordController extends Controller
         switch ($response) {
             case Password::RESET_LINK_SENT:
                 return back()->with('status', "If you've provided registered e-mail, you should get recovery e-mail shortly.");
-
-            /*  return response()->json([
-            'success' => true
-            ]); */
 
             case Password::INVALID_USER:
             default:
@@ -77,13 +68,4 @@ class ForgotPasswordController extends Controller
     {
         return Password::broker('students'); //set password broker name according to guard which you have set in config/auth.php
     }
-
-    // overwritte function resetNotifier() on trait SendsPasswordResetEmails
-   /*  protected function resetNotifier()
-    {
-        return function ($token) {
-            return new StudentResetPassword($token);
-        };
-
-    } */
 }
