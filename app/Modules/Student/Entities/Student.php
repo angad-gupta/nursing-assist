@@ -2,11 +2,16 @@
 
 namespace App\Modules\Student\Entities;
 
+use Illuminate\Notifications\Notifiable;
 use App\Modules\Enrolment\Entities\Enrolment;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Notifications\StudentResetPassword;
+use Illuminate\Contracts\Auth\CanResetPassword;
 
-class Student extends Authenticatable
+class Student extends Authenticatable implements CanResetPassword
 {
+    use Notifiable;
+    
     const FILE_PATH = '/uploads/student/';
 
     protected $fillable = [
@@ -49,4 +54,8 @@ class Student extends Authenticatable
         return $this->hasMany(Enrolment::class, 'student_id');
     }
 
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new StudentResetPassword($token));
+    }
 }

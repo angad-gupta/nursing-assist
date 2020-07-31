@@ -60,6 +60,14 @@ Route::post('enrolment/store', ['as' => 'enrolment.store', 'uses' => 'HomeContro
 
 Route::get('demo-quiz', ['as' => 'demo-quiz', 'uses' => 'HomeController@demoQuiz']);
 
+// Password reset link request routes...
+Route::get('student/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
+Route::post('student/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('student.password.email');
+
+// Password reset routes...
+Route::get('student/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('student.password.reset.token');
+Route::post('student/password/reset', 'Auth\ResetPasswordController@reset')->name('student.password.reset');
+
 /** --------------------------------------------------------------------------------------- **/
 
 /** --------------------------------------------------------------------------------------- **/

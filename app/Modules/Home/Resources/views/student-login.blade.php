@@ -71,8 +71,11 @@ $(document).ready(function() {
 
                             {{ Form::hidden('course_info_id', $course_info_id) }}
                             {{ Form::hidden('source', $source) }}
-
-
+                            <div class="col-sm-12">
+                                <div class="text-center">
+                                    <a href="{{route('student.password.reset')}}">Forgot password?</a>
+                                </div>
+                            </div>
                             <div class="col-sm-12">
                                  <button type="submit" class="btn btn-neta w-100" style="color: white;">Login</button>
                             </div>
