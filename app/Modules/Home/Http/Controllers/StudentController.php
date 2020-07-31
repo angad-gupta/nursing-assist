@@ -92,7 +92,7 @@ class StudentController extends Controller
                 return redirect()->intended(route('student-dashboard'));
             }
         } else {
-            Flash('Invalid Access')->warning();
+            Flash('Invalid Credentials')->warning();
             return redirect(route('student-account'));
         }
 

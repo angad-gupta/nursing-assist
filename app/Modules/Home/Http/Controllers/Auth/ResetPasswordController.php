@@ -76,28 +76,30 @@ class ResetPasswordController extends Controller
     public function reset(ChangePasswordFormRequest $request)
     {
         try {
-            $password = $request->password; dd($token);
-            $token = Hash::make($request->token);
-           dd($token);
-            $tokenData = DB::table('password_resets')->where('token', $token)->first();
+            $password = $request->password;
+            $row = DB::table('password_resets')->where('email', $request->email)->first();
+            if (Hash::check($request->token, $row->token)) {
+                // The passwords match...
+                $student = Student::where('email', $row->email)->first();
+                if (!$student) {
+                    return redirect()->to('student-account');
+                }
 
-            $student = Student::where('email', $tokenData->email)->first();
-            if (!$student) {
-                return redirect()->to('student-account');
-            }
+                $student->password = Hash::make($password);
+                $student->update();
 
-            $student->password = Hash::make($password);
-            $student->update();
-
-            // If the user shouldn't reuse the token later, delete the token
-            DB::table('password_resets')->where('email', $tokenData->email)->delete();
-            //Send Email Reset Success Email
-          /*   if ($this->sendSuccessEmail($tokenData->email)) {
-                return view('index');
+                // If the user shouldn't reuse the token later, delete the token
+                DB::table('password_resets')->where('email', $row->email)->delete();
+                //Send Email Reset Success Email
+                /*   if ($this->sendSuccessEmail($tokenData->email)) {
+                    return view('index');
+                } else {
+                    return redirect()->back()->withErrors(['email' => trans('A Network Error occurred. Please try again.')]);
+                } */
+                flash()->success("Password Changed Successfully!");
             } else {
-                return redirect()->back()->withErrors(['email' => trans('A Network Error occurred. Please try again.')]);
-            } */
-            flash()->success("Password Changed Successfully!");
+                flash()->error('Reset Token Doesnot Match!');
+            }
 
         } catch (\Throwable $e) {
             flash()->error($e->getMessage());

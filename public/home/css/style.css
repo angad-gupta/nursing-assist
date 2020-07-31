@@ -2474,4 +2474,8 @@ a {
 .neta-resources .downloads .fa-file-video-o {
   color: #67b4ea;
 }
+
+input[type=password] {
+  width: 100%;
+}
 /*# sourceMappingURL=style.css.map */

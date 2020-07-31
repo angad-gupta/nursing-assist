@@ -1,8 +1,8 @@
 @include('home::layouts.navbar-inner')
 <section class="neta-login neta-contact section-padding">
     <div class="container">
-        <div class="row">
-            <div class="col-sm-6">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-sm-6 ">
                 <div class="neta-contact__form">
                     <h4>Reset Password</h4>
 
@@ -13,13 +13,14 @@
                     </div>
                     @endif
 
-                    {!! Form::open(['route'=>'student.password.reset','method'=>'POST','id'=>'student_submit','class'=>'form-horizontal','role'=>'form']) !!}
+                    {!! Form::open(['route'=>'student.password.reset','method'=>'POST','id'=>'studentResetPassword_submit','class'=>'form-horizontal','role'=>'form']) !!}
                     <input type="hidden" name="token" value="{{ $token }}">
 
                     <div class="row">
                         <div class="col-sm-12">
+                        <label for="">Email Address <span class="text-danger">*</span></label>
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                <label for="">Email Address <span class="text-danger">*</span></label>
+                                
                                 {!! Form::email('email', $value = null, ['id'=>'email','placeholder'=>'Enter Email','class'=>'form-control']) !!}
                                 @if ($errors->has('email'))
                                 <span class="help-block"><strong>{{ $errors->first('email') }}</strong></span>
@@ -28,9 +29,10 @@
                         </div>
 
                         <div class="col-sm-12">
+                            <label for="">Password <span class="text-danger">*</span></label>
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <label for="">Password <span class="text-danger">*</span></label>
-                                {!! Form::password('password', $value = null, ['id'=>'password','placeholder'=>'Enter Password','class'=>'form-control']) !!}
+                             
+                                {!! Form::password('password', $value = null, ['id'=>'password','placeholder'=>'Enter Password','class'=>'form-control', 'style'=>'width:100%!important;']) !!}
                                 @if ($errors->has('password'))
                                 <span class="help-block"><strong>{{ $errors->first('password') }}</strong></span>
                                 @endif
@@ -38,9 +40,9 @@
                         </div>
 
                         <div class="col-sm-12">
+                            <label for="">Confirm Password <span class="text-danger">*</span></label>
                             <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                                <label for="">Confirm Password <span class="text-danger">*</span></label>
-                                {!! Form::password('password_confirmation', $value = null, ['id'=>'password_confirmation','placeholder'=>'Enter Confirm Password','class'=>'form-control']) !!}
+                                {!! Form::password('password_confirmation', $value = null, ['id'=>'password_confirmation','placeholder'=>'Enter Confirm Password','class'=>'form-control', 'style'=>'width:100%']) !!}
                                 @if ($errors->has('password_confirmation'))
                                 <span class="help-block"><strong>{{ $errors->first('password_confirmation') }}</strong></span>
                                 @endif
@@ -58,3 +60,4 @@
     </div>
 </section>
 @include('home::layouts.footer')
+<script src="{{asset('admin/validation/studentResetPassword.js')}}"></script>

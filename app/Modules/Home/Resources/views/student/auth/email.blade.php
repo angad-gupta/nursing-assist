@@ -1,7 +1,7 @@
 @include('home::layouts.navbar-inner')
 <section class="neta-login neta-contact section-padding">
     <div class="container">
-        <div class="row">
+        <div class="row justify-content-center align-items-center">
             <div class="col-sm-6">
                 <div class="neta-contact__form">
                     <h4>Password Reset</h4>
@@ -14,7 +14,7 @@
                     </div>
                     @endif
 
-                    {!! Form::open(['route'=>'student.password.email','method'=>'POST','id'=>'student_submit','class'=>'form-horizontal','role'=>'form']) !!}
+                    {!! Form::open(['route'=>'student.password.email','method'=>'POST','id'=>'studentResetPassword_submit','class'=>'form-horizontal','role'=>'form']) !!}
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -28,9 +28,6 @@
 
                         <div class="col-sm-12">
                             <button type="submit" class="btn btn-neta w-100" style="color: white;">Send Password Reset Link</button>
-                            <div class="text-center">
-                                <a href="{{route('student-account')}}">Login</a>
-                            </div>
                         </div>
                     </div>
                     {!! Form::close() !!}
@@ -40,3 +37,4 @@
     </div>
 </section>
 @include('home::layouts.footer')
+<script src="{{asset('admin/validation/studentResetPassword.js')}}"></script>
