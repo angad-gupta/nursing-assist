@@ -32,7 +32,7 @@
                             <label for="">Password <span class="text-danger">*</span></label>
                             <div class="form-group">
                              
-                                {!! Form::password('password', $value = null, ['id'=>'password','placeholder'=>'Enter Password','class'=>'form-control password', 'style'=>'width:100%!important;']) !!}
+                                {!! Form::password('password', ['id'=>'password','placeholder'=>'Enter Password','class'=>'form-control password']) !!}
                                 @if ($errors->has('password'))
                                 <span class="help-block"><strong>{{ $errors->first('password') }}</strong></span>
                                 @endif
@@ -42,7 +42,7 @@
                         <div class="col-sm-12">
                             <label for="">Confirm Password <span class="text-danger">*</span></label>
                             <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                                {!! Form::password('password_confirmation', $value = null, ['id'=>'password_confirmation','placeholder'=>'Enter Confirm Password','class'=>'form-control', 'style'=>'width:100%']) !!}
+                                {!! Form::password('password_confirmation', ['id'=>'password_confirmation','placeholder'=>'Enter Confirm Password','class'=>'form-control']) !!}
                                 @if ($errors->has('password_confirmation'))
                                 <span class="help-block"><strong>{{ $errors->first('password_confirmation') }}</strong></span>
                                 @endif

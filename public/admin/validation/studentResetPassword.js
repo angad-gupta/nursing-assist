@@ -9,7 +9,7 @@ $(document).ready(function () {
             password_confirmation : {
                 required: true,
                 minlength : 5,
-               // equalTo : ".password"
+                equalTo : "#password"
             },
         },
         messages: {
@@ -21,7 +21,7 @@ $(document).ready(function () {
             password_confirmation : {
                 required: "Please enter confirm password",
                 minlength : "Please enter atleast 5 characters",
-                //equalTo : "It must be equals to password"
+                equalTo : "It must be equals to password"
             },
         },
         errorElement: "em",
