@@ -30,9 +30,9 @@
 
                         <div class="col-sm-12">
                             <label for="">Password <span class="text-danger">*</span></label>
-                            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                            <div class="form-group">
                              
-                                {!! Form::password('password', $value = null, ['id'=>'password','placeholder'=>'Enter Password','class'=>'form-control', 'style'=>'width:100%!important;']) !!}
+                                {!! Form::password('password', $value = null, ['id'=>'password','placeholder'=>'Enter Password','class'=>'form-control password', 'style'=>'width:100%!important;']) !!}
                                 @if ($errors->has('password'))
                                 <span class="help-block"><strong>{{ $errors->first('password') }}</strong></span>
                                 @endif
