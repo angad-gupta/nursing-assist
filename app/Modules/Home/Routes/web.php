@@ -108,4 +108,6 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth:student']], function
     Route::post('readline-question/store', ['as' => 'readline-question.store', 'uses' => 'DashboardController@studentReadinessStore']);
 
     Route::post('studentmockup/ajaxStore', ['as' => 'studentmockup.ajaxStore', 'uses' => 'DashboardController@ajaxQuestionStore']);
+
+    Route::get('mockup/history', ['as' => 'mockup.history', 'uses' => 'DashboardController@studentMockupHistory']);
 });

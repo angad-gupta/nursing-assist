@@ -49,6 +49,8 @@
                         role="tab" aria-controls="v-pills-profile" aria-selected="true">  My Account</a>
                         <a class="nav-link" id="v-pills-book-tab" data-toggle="pill" href="#v-pills-book" role="tab"
                         aria-controls="v-pills-book" aria-selected="false"> My Courses</a>
+                        <a class="nav-link" id="v-pills-mockup-tab" data-toggle="pill" href="#v-pills-mockup" role="tab"
+                        aria-controls="v-pills-mockup" aria-selected="false"> Mockup History</a>
                         <a class="nav-link" id="v-pills-message-tab" data-toggle="pill" href="#v-pills-message" role="tab"
                         aria-controls="v-pills-message" aria-selected="false">Ask an Educator</a>
                         <a class="nav-link" id="v-pills-notification-tab" data-toggle="pill" href="#v-pills-notification"
@@ -192,6 +194,48 @@
                                     </div>
                                 </div><!-- tp-list -->
                             </div>
+
+                            <!-- mockup history -->
+                            <div class="tab-pane fade" id="v-pills-mockup" role="tabpanel" aria-labelledby="v-pills-mockup-tab">
+                                <h5>Mockup History</h5>
+                                <div class="tp-list">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Mockup Title</th>
+                                                    <th>Date</th>
+                                                    <th>Total Question</th>
+                                                    {{--<th>Total Attempted Question</th>--}}
+                                                    <th>Correct Answer</th>
+                                                    <th>Percent</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                
+                                                @if($student_mockup->total() != 0)
+                                                    @foreach($student_mockup as $key => $value)
+                                                    <tr>
+                                                        <td width="30%">{{ ucfirst(str_replace('_',' ',$value->mockup_title)) }}</td>
+                                                        <td width="30%">{{ date('d M, Y',strtotime($value->date)) }}</td>
+                                                        <td>{{$value->total_question}}</td>
+                                                        {{--  <td>{{$value->total_question}}</td> --}}
+                                                        <td>{{$value->correct_answer}}</td>
+                                                        <td>{{$value->percent}} %</td>
+                                                        <td>{{--<a href="{{ route('syllabus-detail',['course_info_id'=>$my_course_val->courseinfo_id]) }}">Click To View Course</a>--}}</td>
+                                                    </tr>
+                                                    @endforeach
+                                                @endif
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- mockup history -->
 
                             <div class="tab-pane fade neta-message neta-about" id="v-pills-message" role="tabpanel" aria-labelledby="v-pills-message">
                                 <h5 class="mb-0">Message</h5>

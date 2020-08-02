@@ -70,6 +70,7 @@ class DashboardController extends Controller
         $data['message'] = $this->message->getSendMessageByUser($id, $limit = 5);
         $data['student_course'] = $this->student->getStudentCourse($id);
         $data['student_course_purchase'] = $this->student->getStudentPurchase($id);
+        $data['student_mockup'] = $this->student->getStudentMockupResult($id);
 
         return view('home::student.dashboard', $data);
     }
@@ -654,5 +655,46 @@ class DashboardController extends Controller
         }
 
     }
+
+    public function studentMockupHistory(Request $request)
+    {
+        $input = $request->all();
+
+        $mockup_title = $input['mockup_title'];
+        $student_id = Auth::guard('student')->user()->id;
+
+        try {
+
+            $mockup_history = $this->student->getmockupHistory($student_id, $mockup_title);
+            $correct_answer = $this->student->getmockupcorrectAnswer($student_id, $mockup_title);
+
+            //$total_question = count($mockup_history);
+            $total_question = $this->mockup->getTotalQuestionsByTitle($mockup_title, date('Y-m-d H:i:s'));
+            $correctPercent = ($correct_answer / $total_question) * 100;
+
+            $data['correct_percent'] = $correct_percent = number_format($correctPercent, 2);
+            $data['mockup_history'] = $mockup_history;
+            $data['correct_answer'] = $correct_answer;
+            $data['incorrect_answer'] = $total_question - $correct_answer;
+
+            $mockup_result = array(
+                'student_id' => $student_id,
+                'mockup_title' => $mockup_title,
+                'date' => date('Y-m-d'),
+                'total_question' => $total_question,
+                'correct_answer' => $correct_answer,
+                'percent' => $correct_percent,
+            );
+
+            $this->student->saveMockupResult($mockup_result);
+
+            return view('home::student.mockup-report', $data);
+
+        } catch (\Throwable $e) {
+            alertify($e->getMessage())->error();
+        }
+
+    }
+
 
 }
