@@ -14,7 +14,9 @@ class EnrolPayment extends Model
     protected $fillable = [
 
     	'enrolment_id',
-    	'transactionID',
+        'transactionID',
+        'authCode',
+        'currency',
     	'totalAmount',
     	'tokenCustomerID',
     	'customer',
