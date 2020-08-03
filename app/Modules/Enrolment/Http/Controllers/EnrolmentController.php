@@ -9,6 +9,7 @@ use App\Modules\Enrolment\Repositories\EnrolmentInterface;
 use App\Modules\Enrolment\Repositories\EnrolmentPaymentInterface;
 use App\Modules\Home\Emails\SendNetaMail;
 use App\Modules\Student\Repositories\StudentPaymentInterface;
+use App\Notifications\EnrolmentPayment;
 use Eway\Rapid\Client;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Session;
+use Notification;
 
 class EnrolmentController extends Controller
 {
@@ -197,6 +199,8 @@ class EnrolmentController extends Controller
                         'sucess' => 1);
 
                     $enrolpayment = $this->enrolpayment->save($enrolpaymentData);
+
+                    //$student_detail->notify(new EnrolmentPayment($data));
 
                     Flash('You have successfully enrolled the course. We will contact you soon.')->success();
                 } else {
