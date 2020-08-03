@@ -119,7 +119,7 @@
         $('#source_name').bind('change', function () {
             var a = (this.files[0].size);
 
-            if (a > 60000000) {
+            if (a > 180000000) {
                 $('#modal_image_size').modal('show');
                 $('#source_name').val('');
             };
