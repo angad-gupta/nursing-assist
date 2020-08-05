@@ -92,8 +92,8 @@ class EnrolmentController extends Controller
 
         $courseinfo_id = $data['courseinfo_id'];
         $courseInfo = $this->courseinfo->find($courseinfo_id);
-        $total_course_fee = $courseInfo->course_fee;
-
+        $data['total_course_fee'] = $total_course_fee = $courseInfo->course_fee;
+        $data['course_program_title'] = $courseInfo->course_program_title;
         try {
 
             $enrolmentData = array(
@@ -129,7 +129,7 @@ class EnrolmentController extends Controller
 
             $enrolment = $this->enrolment->save($enrolmentData);
 
-            if ($submit === 'pay_later') {echo "fdsafdsa";exit;
+            if ($submit === 'pay_later') {
 
                 $studentPaymentData = array(
                     'student_id' => $data['student_id'],
@@ -200,7 +200,7 @@ class EnrolmentController extends Controller
 
                     $enrolpayment = $this->enrolpayment->save($enrolpaymentData);
 
-                    //$student_detail->notify(new EnrolmentPayment($data));
+                    $student_detail->notify(new EnrolmentPayment($data));
 
                     Flash('You have successfully enrolled the course. We will contact you soon.')->success();
                 } else {

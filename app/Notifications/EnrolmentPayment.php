@@ -12,7 +12,7 @@ class EnrolmentPayment extends Notification
     use Queueable;
 
     private $data;
-    
+
     /**
      * Create a new notification instance.
      *
@@ -43,9 +43,10 @@ class EnrolmentPayment extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('student-account'))
-                    ->line('Thank you for using our application!');
+                    ->subject('Payment Successful')
+                    ->line('You have successfully paid '.$this->data['total_course_fee'].' for '.$this->data['course_program_title'].' enrolment. We will contact you soon.')
+                    ->action('My Courses', route('student-hub'))
+                    ->line('Thank you for enrolling!');
     }
 
     /**
