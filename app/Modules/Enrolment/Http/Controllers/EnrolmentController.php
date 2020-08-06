@@ -187,6 +187,13 @@ class EnrolmentController extends Controller
 
                 if ($payment->paymentStatus == 'APPROVED') {
 
+                 /*    $customer = \Simplify_Customer::createCustomer(array(
+                        'reference' => 'enrol_' . $enrolment_id,
+                        'name' => $data['first_name'].' '.$data['last_name'],
+                        'email' => $data['email'],
+                        'token' => $data['simplifyToken'],
+                    ));
+ */
                     $enrolpaymentData = array(
                         'enrolment_id' => $enrolment_id,
                         'transactionID' => $payment->id,
@@ -281,7 +288,7 @@ class EnrolmentController extends Controller
     {
         return redirect(route('student-dashboard'));
     }
-    
+
     public function redirect($id)
     {
         $id = (int) $id;

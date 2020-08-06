@@ -24,6 +24,8 @@
             $("#process-payment-btn").removeAttr("disabled");
             $("#paylater-btn").removeAttr("disabled");
         } else {
+            $('#loaderImg').show();
+            $('#process-payment-btn').prepend('<i class="icon-spinner4 spinner"></i>');
 
             // The token contains id, last4, and card type
             var token = data["id"];
@@ -39,10 +41,6 @@
             // Disable the submit button
             $("#process-payment-btn").attr("disabled", "disabled");
             $("#paylater-btn").attr("disabled", "disabled");
-
-
-            $('#loaderImg').show();
-            $('#process-payment-btn').prepend('<i class="icon-spinner4 spinner"></i>');
             // Generate a card token & handle the response
             SimplifyCommerce.generateToken({
                 key: "sbpb_OGUzNWUwMGQtOTZjZi00ODlhLWJmNjMtOTEwOGZjMmI4YTU4",
@@ -51,11 +49,11 @@
                     number: $("#cc-number").val(),
                     cvc: $("#cc-cvc").val(),
                     expMonth: $("#cc-exp-month").val(),
-                    expYear: $("#cc-exp-year").val()
-                },
-                order: {
-                    customerName: $('#first_name').val() + $('#last_name').val(),
-                    customerEmail: $('#email').val()
+                    expYear: $("#cc-exp-year").val(),/* 
+                    customer: {
+                        name: $('#first_name').val() + ' ' $('#last_name').val(),
+                        email: $('#email').val()
+                    } */
                 }
             }, simplifyResponseHandler);
             // Prevent the form from submitting
