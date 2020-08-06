@@ -20,7 +20,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Session;
-use Notification;
 
 class EnrolmentController extends Controller
 {
@@ -148,25 +147,23 @@ class EnrolmentController extends Controller
                 Email Send to Student After Registration
                 --------------------------------------------------------------- */
 
-                $email = $student_detail->email;
+                /*   $email = $student_detail->email;
 
                 $subject = 'Enrolment Successfully.';
 
                 $student['name'] = $student_detail->full_name;
 
-                $content = view('enrolment::enrolment.enrol-register-content', $student)->render();
+                $content = view('enrolment::enrolment.enrol-register-content', $student)->render(); */
 
                 //if (filter_var( $email, FILTER_VALIDATE_EMAIL )) {
-                Mail::to($email)->send(new SendNetaMail($content, $subject));
+                //Mail::to($email)->send(new SendNetaMail($content, $subject));
                 //}
 
                 /* ---------------------------------------------------------------
                 Email Send to Student After Registration
                 --------------------------------------------------------------- */
 
-                //alertify()->success('You have Successfully enrol Course. We will contact you soon.');
                 Flash('You have successfully enrolled the course. We will contact you soon.')->success();
-                //return redirect(route('student-dashboard'));
             }
 
             $enrolment_id = $enrolment->id;
@@ -174,8 +171,8 @@ class EnrolmentController extends Controller
             $amount = Session::put('amount', $courseinfo_id->course_fee);
 
             //common wealth function
-            Simplify::$publicKey = 'sbpb_OGUzNWUwMGQtOTZjZi00ODlhLWJmNjMtOTEwOGZjMmI4YTU4';
-            Simplify::$privateKey = 'rH4J3pcevKazg+gV2F5lq6rlnOQLAlbpJCcyTvmar7h5YFFQL0ODSXAOkNtXTToq';
+            Simplify::$publicKey = env('SANDBOX_PUBLIC_KEY');
+            Simplify::$privateKey = env('SANDBOX_PRIVATE_KEY');
 
             $fee_in_cwbank = str_replace(',', '', $total_course_fee) * 100;
             if (isset($data['simplifyToken']) && $data['simplifyToken'] != '') {
@@ -187,7 +184,7 @@ class EnrolmentController extends Controller
                     'currency' => 'AUD',
                     'token' => $data['simplifyToken'],
                 ));
-             
+
                 if ($payment->paymentStatus == 'APPROVED') {
 
                     $enrolpaymentData = array(
@@ -200,6 +197,8 @@ class EnrolmentController extends Controller
 
                     $enrolpayment = $this->enrolpayment->save($enrolpaymentData);
 
+                    $this->enrolment->update($enrolment_id, ['payment_status' => 1]);
+                    $data['full_name'] = $student_detail->full_name;
                     $student_detail->notify(new EnrolmentPayment($data));
 
                     Flash('You have successfully enrolled the course. We will contact you soon.')->success();
@@ -207,6 +206,21 @@ class EnrolmentController extends Controller
                     Flash('Payment Error!')->error();
                 }
             }
+
+            /* ---------------------------------------------------------------
+            Email Send to Student After Registration
+            --------------------------------------------------------------- */
+
+            $email = $student_detail->email;
+            $subject = 'Enrolment Successful';
+            $student['name'] = $student_detail->full_name;
+            $content = view('enrolment::enrolment.enrol-register-content', $student)->render();
+
+            Mail::to($email)->send(new SendNetaMail($content, $subject));
+
+            /* ---------------------------------------------------------------
+            Email Send to Student After Registration
+            --------------------------------------------------------------- */
 
             /*        $apiKey = env('APIKEY');
             $apiPassword = env('PASSWORD');
@@ -254,25 +268,20 @@ class EnrolmentController extends Controller
             die();
             }
              */
-
-            // alertify()->success('Course Information Created Successfully');
             // return redirect(route('enrolment.viewUser',['id'=>$enrolment_id]));
-            //return redirect(route('student-dashboard'));
 
-        } catch (\Throwable $e) {dd($e->getMessage());
-            alertify($e->getMessage())->error();
+        } catch (\Throwable $e) {
+            Flash($e->getMessage())->success();
         }
 
-        // return redirect(route('enrolment.viewUser'));
-        //Flash('You have successfully enrolled the course. We will contact you soon.')->success();
         return redirect(route('student-dashboard'));
     }
 
     public function cancel()
     {
-        // return redirect(route('enrolment.viewUser'));
         return redirect(route('student-dashboard'));
     }
+    
     public function redirect($id)
     {
         $id = (int) $id;

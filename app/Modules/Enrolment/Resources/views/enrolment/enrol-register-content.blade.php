@@ -17,7 +17,7 @@ PsEz0koVzAQjdyMwSnV6FzdUq2H</p>
         We would also like you to follow us on Facebook for the latest and up to date information regarding the OBA Preparation Class.</a></p>
         <p style="font-family: sans-serif;padding-top: 20px;font-size: 14px;padding-left: 20px;">Once again, thank you for choosing Nursing Education and Training Australia.</p>
 
-        <div class="detail" style="margin-bottom: 15px;display:flow-root;clear:both;background:#b30174;color:#fff;padding:20px">
+        <div class="detail" style="margin-bottom: 30px;display:flow-root;clear:both;background:#b30174;color:#fff;padding:20px 0px 10px">
             <div class="lft" style="float:left">
                 <p style="text-align: left;font-family: sans-serif;margin-left: 15px;font-size: 14px;font-weight: 600;margin-bottom: 5px;">Kind Regards,</p>
                 <span style="text-align: left;font-family: sans-serif;margin-left: 15px;font-size: 14px;">The Team at NETA</span>

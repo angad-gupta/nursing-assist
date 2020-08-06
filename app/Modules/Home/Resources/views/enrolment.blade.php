@@ -22,9 +22,8 @@
             }
             // Re-enable the submit button
             $("#process-payment-btn").removeAttr("disabled");
+            $("#paylater-btn").removeAttr("disabled");
         } else {
-            $('#loaderImg').show();
-            $('#process-payment-btn').prepend('<i class="icon-spinner4 spinner"></i>');
 
             // The token contains id, last4, and card type
             var token = data["id"];
@@ -39,6 +38,11 @@
         $("#process-payment-btn").on("click", function() {
             // Disable the submit button
             $("#process-payment-btn").attr("disabled", "disabled");
+            $("#paylater-btn").attr("disabled", "disabled");
+
+
+            $('#loaderImg').show();
+            $('#process-payment-btn').prepend('<i class="icon-spinner4 spinner"></i>');
             // Generate a card token & handle the response
             SimplifyCommerce.generateToken({
                 key: "sbpb_OGUzNWUwMGQtOTZjZi00ODlhLWJmNjMtOTEwOGZjMmI4YTU4",
@@ -487,6 +491,22 @@
                                                     <h2 class="fs-title">Payment</h2>
                                                     <div class="row justify-content-center">
                                                         <div class="col-sm-12">
+                                                            <h5>You Order Summary</h5>
+                                                            <table class="table">
+                                                                <tr>
+                                                                    <td>Enrol {{ $courseinfo->course_program_title }}
+                                                                    </td>
+                                                                    <td class="text-right">
+                                                                        ${{ $courseinfo->course_fee }}</td>
+                                                                </tr>
+
+                                                                <tr class="total">
+                                                                    <td>Total</td>
+                                                                    <td class="text-right">
+                                                                        ${{ $courseinfo->course_fee }}</td>
+                                                                </tr>
+                                                            </table>
+
                                                             <div class="order-summary">
                                                                 <div class="row">
 
@@ -558,22 +578,6 @@
                                                                 </div>
                                                             </div>
 
-
-                                                            <h5>You Order Summary</h5>
-                                                            <table class="table">
-                                                                <tr>
-                                                                    <td>Enrol {{ $courseinfo->course_program_title }}
-                                                                    </td>
-                                                                    <td class="text-right">
-                                                                        ${{ $courseinfo->course_fee }}</td>
-                                                                </tr>
-
-                                                                <tr class="total">
-                                                                    <td>Total</td>
-                                                                    <td class="text-right">
-                                                                        ${{ $courseinfo->course_fee }}</td>
-                                                                </tr>
-                                                            </table>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-12">
@@ -592,13 +596,13 @@
                                                         <button class="btn action-button" name="submit_enrol"
                                                             value="payment" id="process-payment-btn">Make Payment</button>
                                                         <button class="btn action-button" name="submit_enrol"
-                                                            value="pay_later">Pay Later</button>
+                                                            value="pay_later" id="paylater-btn">Pay Later</button>
                                                     </div>
 
                                                     <div class="col-sm-12 neta-about">
                                                         <span class="text-center" id="loaderImg" style="display:none;">
                                                             <img src="{{asset('home/img/loader.gif')}}" alt="loader1"
-                                                                style="margin-left: 330px; height:200px; width:auto;">
+                                                                style="margin-left: 30px; height:100px; width:auto;">
                                                             <h4>Please Wait..While Processing Payment...</h4>
                                                         </span>
                                                     </div>

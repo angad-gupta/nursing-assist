@@ -3,9 +3,8 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 
 class EnrolmentPayment extends Notification
 {
@@ -43,10 +42,11 @@ class EnrolmentPayment extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Payment Successful')
-                    ->line('You have successfully paid '.$this->data['total_course_fee'].' for '.$this->data['course_program_title'].' enrolment. We will contact you soon.')
-                    ->action('My Courses', route('student-hub'))
-                    ->line('Thank you for enrolling!');
+            ->greeting('Dear ' . $this->data['full_name'])
+            ->subject('Payment Successful')
+            ->line('You have successfully paid $' . $this->data['total_course_fee'] . ' for ' . $this->data['course_program_title'] . ' enrolment.')
+            ->action('My Courses', route('student-hub'))
+            ->line('Thank you for enrolling!');
     }
 
     /**
