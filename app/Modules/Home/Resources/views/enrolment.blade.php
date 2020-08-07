@@ -51,7 +51,7 @@
                     expMonth: $("#cc-exp-month").val(),
                     expYear: $("#cc-exp-year").val(),
                     customer: {
-                        name: $('#first_name').val() + ' ' $('#last_name').val(),
+                        name: $('#first_name').val() + ' ' + $('#last_name').val(),
                         email: $('#email').val()
                     }
                 }
