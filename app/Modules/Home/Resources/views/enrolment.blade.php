@@ -49,11 +49,11 @@
                     number: $("#cc-number").val(),
                     cvc: $("#cc-cvc").val(),
                     expMonth: $("#cc-exp-month").val(),
-                    expYear: $("#cc-exp-year").val(),/* 
+                    expYear: $("#cc-exp-year").val(),
                     customer: {
                         name: $('#first_name').val() + ' ' $('#last_name').val(),
                         email: $('#email').val()
-                    } */
+                    }
                 }
             }, simplifyResponseHandler);
             // Prevent the form from submitting

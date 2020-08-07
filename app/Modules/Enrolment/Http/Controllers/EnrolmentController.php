@@ -183,17 +183,13 @@ class EnrolmentController extends Controller
                     'description' => 'Course Enrolment',
                     'currency' => 'AUD',
                     'token' => $data['simplifyToken'],
+                    'order' => ['customerName' => $data['first_name'].' '.$data['last_name'], 'customerEmail' => $data['email']]
                 ));
+
+              
 
                 if ($payment->paymentStatus == 'APPROVED') {
 
-                 /*    $customer = \Simplify_Customer::createCustomer(array(
-                        'reference' => 'enrol_' . $enrolment_id,
-                        'name' => $data['first_name'].' '.$data['last_name'],
-                        'email' => $data['email'],
-                        'token' => $data['simplifyToken'],
-                    ));
- */
                     $enrolpaymentData = array(
                         'enrolment_id' => $enrolment_id,
                         'transactionID' => $payment->id,
