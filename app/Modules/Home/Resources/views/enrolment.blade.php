@@ -20,12 +20,14 @@
                 // Display the errors
                 $paymentForm.after(errorList);
             }
+
+            $('#loaderImg').hide();
+            //$('#process-payment-btn').prepend('<i class="icon-spinner4 spinner"></i>');
             // Re-enable the submit button
             $("#process-payment-btn").removeAttr("disabled");
             $("#paylater-btn").removeAttr("disabled");
         } else {
-            $('#loaderImg').show();
-            $('#process-payment-btn').prepend('<i class="icon-spinner4 spinner"></i>');
+           
 
             // The token contains id, last4, and card type
             var token = data["id"];
@@ -41,6 +43,9 @@
             // Disable the submit button
             $("#process-payment-btn").attr("disabled", "disabled");
             $("#paylater-btn").attr("disabled", "disabled");
+
+            $('#loaderImg').show();
+            $('#process-payment-btn').prepend('<i class="icon-spinner4 spinner"></i>');
             // Generate a card token & handle the response
             SimplifyCommerce.generateToken({
                 key: "sbpb_OGUzNWUwMGQtOTZjZi00ODlhLWJmNjMtOTEwOGZjMmI4YTU4",
