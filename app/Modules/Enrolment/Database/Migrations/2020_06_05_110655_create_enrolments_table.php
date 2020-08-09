@@ -35,7 +35,7 @@ class CreateEnrolmentsTable extends Migration
             $table->string('country')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
-            $table->string('payment_status')->nullable();
+            $table->string('payment_status')->nullable()->comment('0-unpaid, 1- paid, 2 - partially paid');
             $table->timestamps();
             $table->softDeletes();
 

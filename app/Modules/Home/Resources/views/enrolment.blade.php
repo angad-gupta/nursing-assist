@@ -240,7 +240,19 @@
             }
         })
     });
-
+ 
+ $(document).ready(function() {
+     $('#payment_type').on('change', function() {
+        var payment_type = $(this).val();
+        if(payment_type == 1) {
+            $('#installment_payment').css('display', '');
+            $('#full_payment').css('display', 'none');
+        } else {
+            $('#installment_payment').css('display', 'none');
+            $('#full_payment').css('display', '');
+        }
+     })
+ })
 </script>
 
 @endsection
@@ -495,7 +507,7 @@
                                                     <div class="row justify-content-center">
                                                         <div class="col-sm-12">
                                                             <h5>You Order Summary</h5>
-                                                            <table class="table">
+                                                            <table class="table" id="full_payment">
                                                                 <tr>
                                                                     <td>Enrol {{ $courseinfo->course_program_title }}
                                                                     </td>
@@ -510,8 +522,43 @@
                                                                 </tr>
                                                             </table>
 
+                                                            @if($courseinfo->payment_mode != 'one off payment')
+                                                                <table class="table" id="installment_payment" style="display:none">
+                                                                    <tr>
+                                                                        <td>Initial payment</td>
+                                                                        <td class="text-right">$1,500</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Administration fee(2.5%) applies</td>
+                                                                        <td class="text-right">
+                                                                            2.5% of ${{ $courseinfo->course_fee}} = ${{ str_replace(',', '', $courseinfo->course_fee) * 0.025 }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Second Payment (15 days after course commencement)
+                                                                        </td>
+                                                                        <td class="text-right">$2,500</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Final Payment (30 days after course commencement)
+                                                                        </td>
+                                                                        <td class="text-right">$1,500</td>
+                                                                    </tr>
+
+                                                                    <tr class="total">
+                                                                        <td>Enrol {{ $courseinfo->course_program_title }} Total</td>
+                                                                        <td class="text-right">${{ str_replace(',', '', $courseinfo->course_fee) * 0.025  + str_replace(',', '', $courseinfo->course_fee)}}</td>
+                                                                    </tr>
+
+                                                                    <tr class="total">
+                                                                        <td>First Inital Payment Total</td>
+                                                                        <td class="text-right">${{ str_replace(',', '', $courseinfo->course_fee) * 0.025  + 1500}}</td>
+                                                                    </tr>
+                                                                </table>
+                                                            @endif
+
+                                                           
                                                             <div class="order-summary">
-                                                                <div class="row">
+                                                                <div class="row">                                                                   
 
                                                                     <div class="col-sm-4">
                                                                         <div class="form-group">
@@ -542,14 +589,23 @@
                                                                         </div>
                                                                     </div>--}}
 
-                                                                    <div class="col-sm-4">
-                                                                        <div class="form-group">
-                                                                            <label for="">Expiry Date: <span class="text-danger">*</span></label></div>
+                                                                    <div class="col-sm-10 row">
+                                                                        <div class ="col-sm-6 ">
+                                                                            <div class="form-group">
+                                                                                <label for="">Expiry Date: <span class="text-danger">*</span></label>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class ="col-sm-4 ">
+                                                                            <div class="form-group">
+                                                                               
+                                                                                <label class="d-block font-weight-semibold">Payment Type: <span class="text-danger">*</span></label>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
 
-                                                                    <div class="col-sm-6 row">                                                                           
-                                                                        <div class ="col-sm-4 ">
+                                                                    <div class="col-sm-10 row">                                                                           
+                                                                        <div class ="col-sm-3 ">
                                                                             <div class="form-group">
                                                                                 <select id="cc-exp-month" name="cc_exp_month"  class="form-control">
                                                                                     <option value="01">Jan</option>
@@ -567,7 +623,7 @@
                                                                                 </select>
                                                                             </div>
                                                                         </div>
-                                                                        <div class ="col-sm-4">
+                                                                        <div class ="col-sm-3">
                                                                             <div class="form-group">
                                                                                 <select id="cc-exp-year" name="cc_exp_year"  class="form-control">
                                                                                     @for($i=date('Y'); $i<= date('Y') + 10; $i++)
@@ -575,15 +631,23 @@
                                                                                     @endfor
                                                                                 </select>
                                                                             </div>
-                                                                        </div>
+                                                                        </div>   
                                                                         
+                                                                        <div class="col-sm-4">
+                                                                            <div class="form-group">
+                                                                                {!! Form::select('payment_type', ['0'=>'Full Payment', '1'=>'Installment Payment'], null, ['id' => 'payment_type', 'class'=>'form-control']) !!}
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
+
+                                                                    
+
                                                                 </div>
                                                             </div>
 
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-12">
+                                                    <div class="row justify-content-center">
                                                         <div class="payment-method">
                                                             <h5>Payment Method</h5>
                                                             <img src="{{ asset('home/img/eway.png') }}" width="100px"
@@ -602,7 +666,7 @@
                                                             value="pay_later" id="paylater-btn">Pay Later</button>
                                                     </div>
 
-                                                    <div class="col-sm-12 neta-about">
+                                                    <div class="col-sm-12 neta-about row justify-content-center">
                                                         <span class="text-center" id="loaderImg" style="display:none;">
                                                             <img src="{{asset('home/img/loader.gif')}}" alt="loader1"
                                                                 style="margin-left: 30px; height:100px; width:auto;">

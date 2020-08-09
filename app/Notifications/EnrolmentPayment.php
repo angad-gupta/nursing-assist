@@ -43,8 +43,8 @@ class EnrolmentPayment extends Notification
     {
         return (new MailMessage)
             ->greeting('Dear ' . $this->data['full_name'])
-            ->subject('Payment Successful')
-            ->line('You have successfully paid $' . $this->data['total_course_fee'] . ' for ' . $this->data['course_program_title'] . ' enrolment.')
+            ->subject($this->data['subject'])
+            ->line($this->data['mail_desc'])
             ->action('My Courses', route('student-hub'))
             ->line('Thank you for enrolling!');
     }

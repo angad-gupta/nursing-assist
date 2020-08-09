@@ -36,6 +36,7 @@ class Enrolment extends Model
         'phone',
         'intake_date',
         'payment_status',
+        'payment_type',
         'status',
 
     ];

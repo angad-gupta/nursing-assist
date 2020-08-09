@@ -135,6 +135,7 @@ class StudentController extends Controller
         try {
             $studentSData = array(
                 'moved_to_student' => $moved_to_student,
+                'moved_date' => date('Y-m-d')
             );
 
             $this->student->updatePaymentStatus($payment_id, $studentSData);

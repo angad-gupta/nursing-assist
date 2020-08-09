@@ -8,6 +8,7 @@ use App\Modules\Course\Repositories\CourseInterface;
 use App\Modules\Enrolment\Repositories\EnrolmentInterface;
 use App\Modules\Enrolment\Repositories\EnrolmentPaymentInterface;
 use App\Modules\Home\Emails\SendNetaMail;
+use App\Modules\Student\Repositories\StudentPaymentInstallmentInterface;
 use App\Modules\Student\Repositories\StudentPaymentInterface;
 use App\Notifications\EnrolmentPayment;
 use Eway\Rapid\Client;
@@ -29,18 +30,24 @@ class EnrolmentController extends Controller
     protected $course;
     protected $enrolpayment;
     protected $studentpayment;
+    /**
+     * @var StudentPaymentInstallmentInterface
+     */
+    protected $studentPaymentInstallment;
 
     public function __construct(
         EnrolmentInterface $enrolment,
         CourseInfoInterface $courseinfo,
         CourseInterface $course,
         EnrolmentPaymentInterface $enrolpayment,
-        StudentPaymentInterface $studentpayment) {
+        StudentPaymentInterface $studentpayment,
+        StudentPaymentInstallmentInterface $studentPaymentInstallment) {
         $this->enrolment = $enrolment;
         $this->courseinfo = $courseinfo;
         $this->course = $course;
         $this->enrolpayment = $enrolpayment;
         $this->studentpayment = $studentpayment;
+        $this->studentPaymentInstallment = $studentPaymentInstallment;
 
     }
 
@@ -116,6 +123,7 @@ class EnrolmentController extends Controller
                 'phone' => $data['phone'],
                 'intake_date' => $data['intake_date'],
                 'payment_status' => 0,
+                'payment_type' => $data['payment_type'],
             );
 
             if ($request->hasFile('eligible_document')) {
@@ -127,8 +135,11 @@ class EnrolmentController extends Controller
             }
 
             $enrolment = $this->enrolment->save($enrolmentData);
+            $enrolment_id = $enrolment->id;
 
             if ($submit === 'pay_later') {
+
+                $this->enrolment->update($enrolment_id, ['payment_type' => 0]);
 
                 $studentPaymentData = array(
                     'student_id' => $data['student_id'],
@@ -143,135 +154,166 @@ class EnrolmentController extends Controller
 
                 $studentpayment = $this->studentpayment->save($studentPaymentData);
 
-                /* ---------------------------------------------------------------
-                Email Send to Student After Registration
-                --------------------------------------------------------------- */
-
-                /*   $email = $student_detail->email;
-
-                $subject = 'Enrolment Successfully.';
-
-                $student['name'] = $student_detail->full_name;
-
-                $content = view('enrolment::enrolment.enrol-register-content', $student)->render(); */
-
-                //if (filter_var( $email, FILTER_VALIDATE_EMAIL )) {
-                //Mail::to($email)->send(new SendNetaMail($content, $subject));
-                //}
-
-                /* ---------------------------------------------------------------
-                Email Send to Student After Registration
-                --------------------------------------------------------------- */
-
                 Flash('You have successfully enrolled the course. We will contact you soon.')->success();
-            }
 
-            $enrolment_id = $enrolment->id;
-            $courseinfo_id = $this->courseinfo->where('id', $data['courseinfo_id'])->first();
-            $amount = Session::put('amount', $courseinfo_id->course_fee);
-
-            //common wealth function
-            Simplify::$publicKey = env('SANDBOX_PUBLIC_KEY');
-            Simplify::$privateKey = env('SANDBOX_PRIVATE_KEY');
-
-            $fee_in_cwbank = str_replace(',', '', $total_course_fee) * 100;
-            if (isset($data['simplifyToken']) && $data['simplifyToken'] != '') {
-
-                $payment = \Simplify_Payment::createPayment(array(
-                    'reference' => 'enrol_' . $enrolment_id, //optional Custom reference field to be used with outside systems.
-                    'amount' => $fee_in_cwbank,
-                    'description' => 'Course Enrolment',
-                    'currency' => 'AUD',
-                    'token' => $data['simplifyToken'],
-                    'order' => ['customerName' => $data['first_name'].' '.$data['last_name'], 'customerEmail' => $data['email']]
-                ));
-
-              
-
-                if ($payment->paymentStatus == 'APPROVED') {
-
-                    $enrolpaymentData = array(
-                        'enrolment_id' => $enrolment_id,
-                        'transactionID' => $payment->id,
-                        'authCode' => $payment->authCode,
-                        'currency' => $payment->transactionData->currency,
-                        'totalAmount' => $payment->transactionData->amount / 100,
-                        'sucess' => 1);
-
-                    $enrolpayment = $this->enrolpayment->save($enrolpaymentData);
-
-                    $this->enrolment->update($enrolment_id, ['payment_status' => 1]);
-                    $data['full_name'] = $student_detail->full_name;
-                    $student_detail->notify(new EnrolmentPayment($data));
-
-                    Flash('You have successfully enrolled the course. We will contact you soon.')->success();
-                } else {
-                    Flash('Payment Error!')->error();
-                }
-            }
-
-            /* ---------------------------------------------------------------
-            Email Send to Student After Registration
-            --------------------------------------------------------------- */
-
-            $email = $student_detail->email;
-            $subject = 'Enrolment Successful';
-            $student['name'] = $student_detail->full_name;
-            $content = view('enrolment::enrolment.enrol-register-content', $student)->render();
-
-            Mail::to($email)->send(new SendNetaMail($content, $subject));
-
-            /* ---------------------------------------------------------------
-            Email Send to Student After Registration
-            --------------------------------------------------------------- */
-
-            /*        $apiKey = env('APIKEY');
-            $apiPassword = env('PASSWORD');
-            $apiEndpoint = \Eway\Rapid\Client::MODE_SANDBOX;
-
-            $client = \Eway\Rapid::createClient($apiKey, $apiPassword, $apiEndpoint);
-            $transaction = [
-            'Customer' => [
-            'Title' => $enrolment->title,
-            'FirstName' => $enrolment->first_name,
-            'LastName' => $enrolment->last_name,
-            'Street1' => $enrolment->street1,
-            'Street2' => $enrolment->street2,
-            'City' => $enrolment->city,
-            'State' => $enrolment->state,
-            'PostalCode' => $enrolment->postalcode,
-            'Country' => $enrolment->country,
-            'Email' => $enrolment->email,
-            'Phone' => $enrolment->phone,
-            ],
-            'RedirectUrl' => route('enrolmentstudent.redirect', $enrolment->id),
-            'CancelUrl' => route('enrolmentstudent.cancel'),
-            'TransactionType' => \Eway\Rapid\Enum\TransactionType::PURCHASE,
-            'Payment' => [
-            'TotalAmount' => $courseinfo_id->course_fee . "00",
-            ],
-            ];
-
-            $response = $client->createTransaction(\Eway\Rapid\Enum\ApiMethod::RESPONSIVE_SHARED, $transaction);
-
-            if (!$response->getErrors()) {
-            $sharedURL = $response->SharedPaymentUrl;
-            $enrolpaymentData = array(
-            'enrolment_id' => $enrolment->id,
-            'sucess' => 0);
-
-            $enrolpayment = $this->enrolpayment->save($enrolpaymentData);
-            return Redirect::to($sharedURL);
             } else {
-            foreach ($response->getErrors() as $error) {
-            // return redirect(route('enrolment.viewUser',['id'=>$enrolment_id]));
-            return redirect(route('student-dashboard'));
-            // echo "Error: ".\Eway\Rapid::getMessage($error)."";
+
+                //$amount = Session::put('amount', $courseInfo->course_fee);
+
+                //common wealth function
+                Simplify::$publicKey = env('SANDBOX_PUBLIC_KEY');
+                Simplify::$privateKey = env('SANDBOX_PRIVATE_KEY');
+
+                if ($courseInfo->payment_mode != 'one off payment') {
+                    $fee_in_cwbank = str_replace(',', '', $total_course_fee) * 0.025 + 1500;
+                    $total_course_fee = str_replace(',', '', $total_course_fee) * 0.025 + 5500;
+                    $description = 'First Installment of ' . $data['course_program_title'] . ' Course Enrolment';
+                } else {
+                    $fee_in_cwbank = str_replace(',', '', $total_course_fee) * 100;
+                    $description = 'Full Payment of ' . $data['course_program_title'] . ' Course Enrolment';
+                }
+
+                if (isset($data['simplifyToken']) && $data['simplifyToken'] != '') {
+
+                    $payment = \Simplify_Payment::createPayment(array(
+                        'reference' => 'enrol_' . $enrolment_id, //optional Custom reference field to be used with outside systems.
+                        'amount' => $fee_in_cwbank,
+                        'description' => $description,
+                        'currency' => 'AUD',
+                        'token' => $data['simplifyToken'],
+                        'order' => ['customerName' => $data['first_name'] . ' ' . $data['last_name'], 'customerEmail' => $data['email']],
+                    ));
+
+                    if ($payment->paymentStatus == 'APPROVED') {
+
+                        $enrolpaymentData = array(
+                            'enrolment_id' => $enrolment_id,
+                            'transactionID' => $payment->id,
+                            'authCode' => $payment->authCode,
+                            'currency' => $payment->transactionData->currency,
+                            'totalAmount' => $payment->transactionData->amount / 100,
+                            'sucess' => 1);
+
+                        $enrolpayment = $this->enrolpayment->save($enrolpaymentData);
+
+                        $this->enrolment->update($enrolment_id, ['payment_status' => 1]);
+
+                        if ($data['payment_type'] == 1) {
+                            $studentPaymentData = array(
+                                'student_id' => $data['student_id'],
+                                'courseinfo_id' => $data['courseinfo_id'],
+                                'enrolment_payment_id' => $enrolpayment->id ?? 0,
+                                'status' => 'First Installment Paid',
+                                'moved_to_student' => 0,
+                                'total_course_fee' => $total_course_fee,
+                                'amount_paid' => $fee_in_cwbank,
+                                'amount_left' => ($total_course_fee - $fee_in_cwbank),
+                            );
+                            $studentpayment = $this->studentpayment->save($studentPaymentData);
+
+                            //Installment Payment Storage
+                            $studentPaymentInstallmentData = array(
+                                'student_payment_id' => $studentpayment->id ?? 0,
+                                'enrolment_payment_id' => $enrolpayment->id ?? 0,
+                                'status' => 1,
+                                'installment_amt' => $fee_in_cwbank,
+                            );
+                            $this->studentPaymentInstallment->save($studentPaymentInstallmentData);
+
+                            $data['subject'] = 'First Installment Payment Successful';
+                            $data['mail_desc'] = 'You have successfully paid first installment of $' . $fee_in_cwbank . ' with admission fee of 2.5% for ' . $data['course_program_title'] . ' enrolment.';
+
+                        } else {
+                            $studentPaymentData = array(
+                                'student_id' => $data['student_id'],
+                                'courseinfo_id' => $data['courseinfo_id'],
+                                'enrolment_payment_id' => $enrolpayment->id ?? 0,
+                                'status' => 'Paid',
+                                'moved_to_student' => 0,
+                                'total_course_fee' => $total_course_fee,
+                                'amount_paid' => $total_course_fee,
+                                'amount_left' => 0,
+                            );
+                            $studentpayment = $this->studentpayment->save($studentPaymentData);
+
+                            $data['subject'] = 'Full Payment Successful';
+                            $data['mail_desc'] = 'You have successfully paid $' . $fee_in_cwbank . ' for ' . $data['course_program_title'] . ' enrolment.';
+
+                        }
+
+                        $data['full_name'] = $student_detail->full_name;
+                        $data['fee_in_cwbank'] = $fee_in_cwbank;
+                        $student_detail->notify(new EnrolmentPayment($data));
+
+                        Flash('You have successfully enrolled the course. We will contact you soon.')->success();
+                    } else {
+                        Flash('Payment Error!')->error();
+                    }
+                }
+
+                /* ---------------------------------------------------------------
+                Email Send to Student After Registration
+                --------------------------------------------------------------- */
+
+                $email = $student_detail->email;
+                $subject = 'Enrolment Successful';
+                $student['name'] = $student_detail->full_name;
+                $content = view('enrolment::enrolment.enrol-register-content', $student)->render();
+
+                Mail::to($email)->send(new SendNetaMail($content, $subject));
+
+                /* ---------------------------------------------------------------
+                Email Send to Student After Registration
+                --------------------------------------------------------------- */
+
+                /*        $apiKey = env('APIKEY');
+                $apiPassword = env('PASSWORD');
+                $apiEndpoint = \Eway\Rapid\Client::MODE_SANDBOX;
+
+                $client = \Eway\Rapid::createClient($apiKey, $apiPassword, $apiEndpoint);
+                $transaction = [
+                'Customer' => [
+                'Title' => $enrolment->title,
+                'FirstName' => $enrolment->first_name,
+                'LastName' => $enrolment->last_name,
+                'Street1' => $enrolment->street1,
+                'Street2' => $enrolment->street2,
+                'City' => $enrolment->city,
+                'State' => $enrolment->state,
+                'PostalCode' => $enrolment->postalcode,
+                'Country' => $enrolment->country,
+                'Email' => $enrolment->email,
+                'Phone' => $enrolment->phone,
+                ],
+                'RedirectUrl' => route('enrolmentstudent.redirect', $enrolment->id),
+                'CancelUrl' => route('enrolmentstudent.cancel'),
+                'TransactionType' => \Eway\Rapid\Enum\TransactionType::PURCHASE,
+                'Payment' => [
+                'TotalAmount' => $courseinfo_id->course_fee . "00",
+                ],
+                ];
+
+                $response = $client->createTransaction(\Eway\Rapid\Enum\ApiMethod::RESPONSIVE_SHARED, $transaction);
+
+                if (!$response->getErrors()) {
+                $sharedURL = $response->SharedPaymentUrl;
+                $enrolpaymentData = array(
+                'enrolment_id' => $enrolment->id,
+                'sucess' => 0);
+
+                $enrolpayment = $this->enrolpayment->save($enrolpaymentData);
+                return Redirect::to($sharedURL);
+                } else {
+                foreach ($response->getErrors() as $error) {
+                // return redirect(route('enrolment.viewUser',['id'=>$enrolment_id]));
+                return redirect(route('student-dashboard'));
+                // echo "Error: ".\Eway\Rapid::getMessage($error)."";
+                }
+                die();
+                }
+                 */
+                // return redirect(route('enrolment.viewUser',['id'=>$enrolment_id]));
             }
-            die();
-            }
-             */
-            // return redirect(route('enrolment.viewUser',['id'=>$enrolment_id]));
 
         } catch (\Throwable $e) {
             Flash($e->getMessage())->success();
