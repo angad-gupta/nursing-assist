@@ -14,6 +14,7 @@ class AddMovedDateStudentPaymentsTable extends Migration
     public function up()
     {
         Schema::table('student_payments', function (Blueprint $table) {
+            $table->integer('enrolment_id')->nullable()->after('courseinfo_id');
             $table->date('moved_date')->nullable()->comment('moved to student date');
         });
     }
@@ -26,6 +27,7 @@ class AddMovedDateStudentPaymentsTable extends Migration
     public function down()
     {
         Schema::table('student_payments', function (Blueprint $table) {
+            $table->dropColumn('enrolment_id');
             $table->dropColumn('moved_date');
         });
     }

@@ -10,6 +10,7 @@ use App\Modules\Enrolment\Repositories\EnrolmentPaymentInterface;
 use App\Modules\Home\Emails\SendNetaMail;
 use App\Modules\Student\Repositories\StudentPaymentInstallmentInterface;
 use App\Modules\Student\Repositories\StudentPaymentInterface;
+use App\Modules\Student\Repositories\StudentInterface;
 use App\Notifications\EnrolmentPayment;
 use Eway\Rapid\Client;
 use Illuminate\Http\Request;
@@ -34,6 +35,10 @@ class EnrolmentController extends Controller
      * @var StudentPaymentInstallmentInterface
      */
     protected $studentPaymentInstallment;
+    /**
+     * @var StudentInterface
+     */
+    protected $student;
 
     public function __construct(
         EnrolmentInterface $enrolment,
@@ -41,13 +46,15 @@ class EnrolmentController extends Controller
         CourseInterface $course,
         EnrolmentPaymentInterface $enrolpayment,
         StudentPaymentInterface $studentpayment,
-        StudentPaymentInstallmentInterface $studentPaymentInstallment) {
+        StudentPaymentInstallmentInterface $studentPaymentInstallment,
+        StudentInterface $student) {
         $this->enrolment = $enrolment;
         $this->courseinfo = $courseinfo;
         $this->course = $course;
         $this->enrolpayment = $enrolpayment;
         $this->studentpayment = $studentpayment;
         $this->studentPaymentInstallment = $studentPaymentInstallment;
+        $this->student = $student;
 
     }
 
@@ -144,6 +151,7 @@ class EnrolmentController extends Controller
                 $studentPaymentData = array(
                     'student_id' => $data['student_id'],
                     'courseinfo_id' => $data['courseinfo_id'],
+                    'enrolment_id' => $enrolment_id,
                     'enrolment_payment_id' => null,
                     'status' => 'Pending',
                     'moved_to_student' => 0,
@@ -164,12 +172,12 @@ class EnrolmentController extends Controller
                 Simplify::$publicKey = env('SANDBOX_PUBLIC_KEY');
                 Simplify::$privateKey = env('SANDBOX_PRIVATE_KEY');
 
-                if ($courseInfo->payment_mode != 'one off payment') {
+                if ($courseInfo->payment_mode != 'one off payment' && $data['payment_type'] == 1) {
                     $fee_in_cwbank = str_replace(',', '', $total_course_fee) * 0.025 + 1500;
                     $total_course_fee = str_replace(',', '', $total_course_fee) * 0.025 + 5500;
                     $description = 'First Installment of ' . $data['course_program_title'] . ' Course Enrolment';
                 } else {
-                    $fee_in_cwbank = str_replace(',', '', $total_course_fee) * 100;
+                    $fee_in_cwbank = str_replace(',', '', $total_course_fee);
                     $description = 'Full Payment of ' . $data['course_program_title'] . ' Course Enrolment';
                 }
 
@@ -177,7 +185,7 @@ class EnrolmentController extends Controller
 
                     $payment = \Simplify_Payment::createPayment(array(
                         'reference' => 'enrol_' . $enrolment_id, //optional Custom reference field to be used with outside systems.
-                        'amount' => $fee_in_cwbank,
+                        'amount' => ($fee_in_cwbank * 100),
                         'description' => $description,
                         'currency' => 'AUD',
                         'token' => $data['simplifyToken'],
@@ -196,12 +204,11 @@ class EnrolmentController extends Controller
 
                         $enrolpayment = $this->enrolpayment->save($enrolpaymentData);
 
-                        $this->enrolment->update($enrolment_id, ['payment_status' => 1]);
-
                         if ($data['payment_type'] == 1) {
                             $studentPaymentData = array(
                                 'student_id' => $data['student_id'],
                                 'courseinfo_id' => $data['courseinfo_id'],
+                                'enrolment_id' => $enrolment_id,
                                 'enrolment_payment_id' => $enrolpayment->id ?? 0,
                                 'status' => 'First Installment Paid',
                                 'moved_to_student' => 0,
@@ -220,6 +227,8 @@ class EnrolmentController extends Controller
                             );
                             $this->studentPaymentInstallment->save($studentPaymentInstallmentData);
 
+                            $this->enrolment->update($enrolment_id, ['payment_status' => 2]);
+
                             $data['subject'] = 'First Installment Payment Successful';
                             $data['mail_desc'] = 'You have successfully paid first installment of $' . $fee_in_cwbank . ' with admission fee of 2.5% for ' . $data['course_program_title'] . ' enrolment.';
 
@@ -227,6 +236,7 @@ class EnrolmentController extends Controller
                             $studentPaymentData = array(
                                 'student_id' => $data['student_id'],
                                 'courseinfo_id' => $data['courseinfo_id'],
+                                'enrolment_id' => $enrolment_id,
                                 'enrolment_payment_id' => $enrolpayment->id ?? 0,
                                 'status' => 'Paid',
                                 'moved_to_student' => 0,
@@ -235,6 +245,8 @@ class EnrolmentController extends Controller
                                 'amount_left' => 0,
                             );
                             $studentpayment = $this->studentpayment->save($studentPaymentData);
+
+                            $this->enrolment->update($enrolment_id, ['payment_status' => 1]);
 
                             $data['subject'] = 'Full Payment Successful';
                             $data['mail_desc'] = 'You have successfully paid $' . $fee_in_cwbank . ' for ' . $data['course_program_title'] . ' enrolment.';
@@ -407,6 +419,160 @@ class EnrolmentController extends Controller
             alertify($e->getMessage())->error();
         }
         return redirect()->route('enrolment.index');
+    }
+
+    public function installmentPayment(Request $request)
+    {
+        $data = $request->all();
+        //dd($data);
+        try {
+            $student_payment = $this->studentpayment->find($data['student_payment_id']);
+            if (!empty($student_payment)) { 
+
+                $studentInfo = optional($student_payment->studentInfo);
+                $student_id = $student_payment->student_id;
+                $full_name = $studentInfo->full_name;
+                $email = $studentInfo->email;
+                $enrolment_id = $student_payment->enrolment_id;
+                $course_program_title = optional($student_payment->courseInfo)->course_program_title;
+                $course_info_id = $student_payment->courseinfo_id;
+
+                if ($data['ins'] == 2) {
+                    $installment_amt = 2500;
+                    $description = 'Second Installment of ' . $course_program_title . ' Course Enrolment';
+                } elseif ($data['ins'] == 3) {
+                    $installment_amt = $student_payment->status == 'First Installment Paid' ? 4000 : 1500;
+                    $description = 'Final Installment of ' . $course_program_title . ' Course Enrolment';
+                }
+                //common wealth function
+                Simplify::$publicKey = env('SANDBOX_PUBLIC_KEY');
+                Simplify::$privateKey = env('SANDBOX_PRIVATE_KEY');
+
+                if (isset($data['simplifyToken']) && $data['simplifyToken'] != '') {
+
+                    $payment = \Simplify_Payment::createPayment(array(
+                        'reference' => 'enrol_' . $enrolment_id, //optional Custom reference field to be used with outside systems.
+                        'amount' => ($installment_amt * 100),
+                        'description' => $description,
+                        'currency' => 'AUD',
+                        'token' => $data['simplifyToken'],
+                        'order' => ['customerName' => $full_name, 'customerEmail' => $email],
+                    ));
+
+                    if ($payment->paymentStatus == 'APPROVED') {
+
+                        $enrolpaymentData = array(
+                            'enrolment_id' => $enrolment_id,
+                            'transactionID' => $payment->id,
+                            'authCode' => $payment->authCode,
+                            'currency' => $payment->transactionData->currency,
+                            'totalAmount' => $payment->transactionData->amount / 100,
+                            'sucess' => 1);
+
+                        $enrolpayment = $this->enrolpayment->save($enrolpaymentData);
+
+                        if ($data['ins'] == 2) {
+                            $this->enrolment->update($enrolment_id, ['payment_status' => 2]);
+                            $payment_status = 'Second Installment Paid';
+
+                            $data['subject'] = 'Second Installment Payment Successful';
+                            $data['mail_desc'] = 'You have successfully paid second installment of $' . $installment_amt . ' for ' . $course_program_title . ' enrolment.';
+
+                        } elseif ($data['ins'] == 3) {
+                            $this->enrolment->update($enrolment_id, ['payment_status' => 1]);
+                            $payment_status = 'Final Installment Paid';
+
+                            $data['subject'] = 'Final Installment Payment Successful';
+                            $data['mail_desc'] = 'You have successfully paid final installment of $' . $installment_amt . ' for ' . $course_program_title . ' enrolment.';
+
+                        }
+
+                        $total_course_fee = $student_payment->total_course_fee;
+                        $amount_left = $student_payment->amount_left - $installment_amt;
+                        $amount_paid = $student_payment->amount_paid + $installment_amt;
+
+                        $updateStudentPaymentData = array(
+                            'enrolment_payment_id' => $enrolpayment->id ?? 0,
+                            'status' => $payment_status,
+                            'moved_to_student' => 1,
+                            'amount_paid' => $amount_paid,
+                            'amount_left' => $amount_left,
+                        );
+                        $studentpayment = $this->studentpayment->update($data['student_payment_id'], $updateStudentPaymentData);
+
+                        //Installment Payment Storage
+                        $studentPaymentInstallmentData = array(
+                            'student_payment_id' => $data['student_payment_id'],
+                            'enrolment_payment_id' => $enrolpayment->id ?? 0,
+                            'status' => 1,
+                            'installment_amt' => $installment_amt,
+                        );
+                        $this->studentPaymentInstallment->save($studentPaymentInstallmentData);
+
+                        //update status of course for providing installments payments
+                        $courseInfo = $this->courseinfo->find($course_info_id); 
+                        $is_package = $courseInfo->is_course_package;
+
+                        if ($is_package == 1) {
+                            $course_id = $courseInfo->course_id;
+                            $course_package = $this->courseinfo->getCoursePackage($course_id, $course_info_id);
+                            
+                            foreach ($course_package as $key => $pack_val) {
+
+                                $wherecondition = array(
+                                    'student_id' => $student_id,
+                                    'courseinfo_id' => $pack_val->id,
+                                );
+
+                                $this->student->updateStudentCourseStatus(['status' => 1], $wherecondition);
+                            }
+
+                        } else {
+
+                            $wherecondition = array(
+                                'student_id' => $student_id,
+                                'courseinfo_id' => $course_info_id,
+                            );
+
+                            $this->student->updateStudentCourseStatus(['status' => 1], $wherecondition);
+
+                        }
+
+                        $data['full_name'] = $full_name;
+                        $studentInfo->notify(new EnrolmentPayment($data));
+
+                        Flash('You have successfully paid the installment.')->success();
+                    } else {
+                        Flash('Payment Error!')->error();
+                    }
+                } else {
+                    Flash('Payment Error!')->error();
+                }
+
+            } else {
+                Flash("Data doesn't exist!")->error();
+            }
+
+        } catch (\Throwable $e) {
+            Flash($e->getMessage())->error();
+        }
+        return redirect()->route('student-dashboard');
+    }
+
+    public function viewInstallmentForm(Request $request)
+    {
+        $data = $request->all();
+        try {
+            $data['student_payment'] = $student_payment = $this->studentpayment->find($data['id']);
+            if (!empty($student_payment)) {
+                $data['courseinfo'] = optional($student_payment->courseInfo);
+            }
+            return view('home::installment_form', $data);
+        } catch (\Throwable $e) { 
+            alertify($e->getMessage())->error();
+            return redirect()->route('student-hub');
+        }
+
     }
 
 }

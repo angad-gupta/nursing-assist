@@ -181,7 +181,10 @@
                                                         <td>{{ optional($my_course_val->courseInfo)->course_program_title }}</td>
                                                         <td>{{$total_syllabus}} syllabus</td>
                                                         <td width="30%">{{date('d M,Y',strtotime($my_course_val->created_at))}}</td>
-                                                        <td><a href="{{ route('syllabus-detail',['course_info_id'=>$my_course_val->courseinfo_id]) }}">Click To View Course</a></td>
+                                                        <td> @if($my_course_val->status == 1)
+                                                            <a href="{{ route('syllabus-detail',['course_info_id'=>$my_course_val->courseinfo_id]) }}">Click To View Course</a>
+                                                            @endif
+                                                        </td>
                                                     </tr>
                                                     @endforeach
                                                 @endif
@@ -272,8 +275,8 @@
                                                 <tr>
                                                     <th>Course Name</th>
                                                     <th>Purchase Date</th>
-                                                    <th>Total Cost ($)</th>
-                                                    <th>Paid Amount</th>
+                                                    <th>Total Cost (A$)</th>
+                                                    <th>Paid Amount(A$)</th>
                                                     <th>Payment Status</th>
                                                     <th>Invoice</th>
                                                 </tr>
@@ -285,12 +288,12 @@
                                                     <tr>
                                                         <td width="20%">{{ optional($my_coursepurchase_val->courseInfo)->course_program_title }}</td>
                                                         <td width="20%">{{date('d M,Y',strtotime($my_coursepurchase_val->created_at))}}</td>
-                                                        <td>${{ $my_coursepurchase_val->total_course_fee }}</td>
-                                                        <td>${{ $my_coursepurchase_val->amount_paid }}</td>
+                                                        <td>{{ $my_coursepurchase_val->total_course_fee }}</td>
+                                                        <td>{{ $my_coursepurchase_val->amount_paid }}</td>
                                                         <td>{{ $my_coursepurchase_val->status }}</td>
                                                         <td class="neta-action">
 
-                                                            @if($my_coursepurchase_val->status == 'Partially Paid' || $my_coursepurchase_val->status == 'Paid')
+                                                            @if($my_coursepurchase_val->status == 'First Installment Paid' || $my_coursepurchase_val->status == 'Second Installment Paid' || $my_coursepurchase_val->status == 'Final Installment Paid' || $my_coursepurchase_val->status == 'Paid')
                                                                 <a href="{{ route('course-invoice',['student_purchase_id'=>$my_coursepurchase_val->id,'status'=>'view']) }}" class="text-success view" target="_blank"><i class="fa fa-eye"></i></a>  | 
                                                                 <a href="{{ route('course-invoice',['student_purchase_id'=>$my_coursepurchase_val->id,'status'=>'download']) }}" class="text-success download" target="_blank"><i class="fa fa-download"></i></a>
                                                             @endif 

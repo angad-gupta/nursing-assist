@@ -74,9 +74,11 @@
                                                     <div class="neta-limit">
                                                         <p>{!! optional($my_course_val->courseInfo)->short_content !!} </p>
                                                     </div>
+                                                    @if($my_course_val->status == 1)
                                                     <a class="btn e-btn w-100"
                                                         href="{{ route('syllabus-detail',['course_info_id'=>$my_course_val->courseinfo_id]) }}">View
                                                         syllabus</a>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>

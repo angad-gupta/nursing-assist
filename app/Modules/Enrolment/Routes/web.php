@@ -30,3 +30,7 @@ Route::get('enrolmentstudent/redirect/{id}', ['as' => 'enrolmentstudent.redirect
 Route::get('enrolmentstudent/sucess/{transaction_id}', ['as' => 'enrolmentstudent.sucess', 'uses' => 'EnrolmentController@sucess']);
 
 Route::get('enrolmentstudent/error', ['as' => 'enrolmentstudent.error', 'uses' => 'EnrolmentController@error']);
+
+//installment payment form
+Route::get('enrolment/installment/pay', ['as' => 'enrolment.installment.pay', 'uses' => 'EnrolmentController@viewInstallmentForm']);
+Route::post('enrolment/installment/pay/store', ['as' => 'enrolment.installment.pay.store', 'uses' => 'EnrolmentController@installmentPayment']);
