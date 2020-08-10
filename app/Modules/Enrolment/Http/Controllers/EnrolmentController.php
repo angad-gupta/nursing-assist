@@ -267,12 +267,12 @@ class EnrolmentController extends Controller
                 Email Send to Student After Registration
                 --------------------------------------------------------------- */
 
-                $email = $student_detail->email;
+               /*  $email = $student_detail->email;
                 $subject = 'Enrolment Successful';
                 $student['name'] = $student_detail->full_name;
                 $content = view('enrolment::enrolment.enrol-register-content', $student)->render();
 
-                Mail::to($email)->send(new SendNetaMail($content, $subject));
+                Mail::to($email)->send(new SendNetaMail($content, $subject)); */
 
                 /* ---------------------------------------------------------------
                 Email Send to Student After Registration
