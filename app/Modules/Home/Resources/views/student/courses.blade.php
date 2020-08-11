@@ -1,5 +1,7 @@
 @include('home::layouts.navbar-inner')
-
+<style>
+.modal {z-index: 9999 !important;}
+</style>
 <section class="neta-ribbon">
     <img src="img/cc.jpg" class="img-fluid" alt="">
     <div class="container">
@@ -77,7 +79,10 @@
                                                     @if($my_course_val->status == 1)
                                                     <a class="btn e-btn w-100"
                                                         href="{{ route('syllabus-detail',['course_info_id'=>$my_course_val->courseinfo_id]) }}">View
-                                                        syllabus</a>
+                                                        Syllabus</a>
+                                                    @else
+                                                    <a data-toggle="modal" data-target="#modal_theme_installment"
+                                                        class="btn e-btn w-100 installment_info">View Syllabus</a>
                                                     @endif
                                                 </div>
                                             </div>
@@ -214,5 +219,24 @@
 </section>
 
 <section class="section-padding"></section>
+
+<!-- Warning modal -->
+<div id="modal_theme_installment" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <center>
+                    <i class="icon-alert text-danger icon-3x"></i>
+                </center>
+                <br>
+                <center>
+                    <p>Please pay remaining installment to access the syllabus! You might have received an email regarding the installments.</p>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /warning modal -->
 
 @include('home::layouts.footer')

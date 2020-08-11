@@ -255,7 +255,7 @@ class EnrolmentController extends Controller
 
                         $data['full_name'] = $student_detail->full_name;
                         $data['fee_in_cwbank'] = $fee_in_cwbank;
-                        $student_detail->notify(new EnrolmentPayment($data));
+                       // $student_detail->notify(new EnrolmentPayment($data));
 
                         Flash('You have successfully enrolled the course. We will contact you soon.')->success();
                     } else {
@@ -539,7 +539,7 @@ class EnrolmentController extends Controller
                         }
 
                         $data['full_name'] = $full_name;
-                        $studentInfo->notify(new EnrolmentPayment($data));
+                        //$studentInfo->notify(new EnrolmentPayment($data));
 
                         Flash('You have successfully paid the installment.')->success();
                     } else {

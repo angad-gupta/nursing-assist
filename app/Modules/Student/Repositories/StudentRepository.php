@@ -127,6 +127,11 @@ class StudentRepository implements StudentInterface
         return $result->update($data);
     }
 
+    public function getStudentCourseInfo($where)
+    {
+        $result = StudentCourse::where($where)->first();
+        return $result;
+    }
 
     public function checkQuizForCourseInfo($student_id, $courseContentId)
     {

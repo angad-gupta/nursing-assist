@@ -283,7 +283,7 @@ class HomeController extends Controller
             $content = view('home::email-register-content')->render();
 
             //if (filter_var( $email, FILTER_VALIDATE_EMAIL )) {
-            Mail::to($email)->send(new SendNetaMail($content, $subject));
+            //Mail::to($email)->send(new SendNetaMail($content, $subject));
             //}
 
             /* ---------------------------------------------------------------

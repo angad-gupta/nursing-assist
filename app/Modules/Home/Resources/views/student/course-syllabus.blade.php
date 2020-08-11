@@ -28,36 +28,35 @@
 
             <div class="col-sm-12">
                 <div class="my-courses">
-                    <h2 class="ttl-line">All syllabus
-                    </h2>
-                    <p>Find All Syllabus related to your Courses.</p>
-                    <div class="row">
+                    <h2 class="ttl-line">All syllabus</h2>
+                    @if($courseInfo->status == 0)
+                        <p>Please pay remaining installment to access the syllabus! You might have received an email regarding the installments.</p>
+                    @else
+                        <p>Find All Syllabus related to your Courses.</p>
+                        <div class="row">
 
+                        
+                            @if($syllabus_info)
+                                @foreach($syllabus_info as $key => $syllabi_val)
 
-                    @if($syllabus_info)
-                        @foreach($syllabus_info as $key => $syllabi_val)
+                                @php
+                                    $total_lesson = App\Modules\CourseContent\Entities\CourseContent::gettotallesson($syllabi_val->syllabus_id,$course_info_id);
+                                @endphp
 
-                         @php
-
-                                $total_lesson = App\Modules\CourseContent\Entities\CourseContent::gettotallesson($syllabi_val->syllabus_id,$course_info_id);
-                            @endphp
-
-                        <div class="col-sm-12 col-md-6 col-lg-3">
-                            <div class="my-courses__list">
-                                 <div class="list-content">
-                                    <a href="{{ route('lesson-detail',['syllabus_id'=>$syllabi_val->syllabus_id,'course_info_id'=>$course_info_id]) }}">
-                                    <h5>{{ optional($syllabi_val->syllabus)->syllabus_title}}</h5>
-                                    <span>{{$total_lesson}} Lessons</span>
-                                    </a>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                    <div class="my-courses__list">
+                                        <div class="list-content">
+                                            <a href="{{ route('lesson-detail',['syllabus_id'=>$syllabi_val->syllabus_id,'course_info_id'=>$course_info_id]) }}">
+                                            <h5>{{ optional($syllabi_val->syllabus)->syllabus_title}}</h5>
+                                            <span>{{$total_lesson}} Lessons</span>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                                @endforeach
+                            @endif
                         </div>
-                        @endforeach
                     @endif
-                       
-
-                    </div>
-
                 </div>
             </div>
 

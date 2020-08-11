@@ -183,6 +183,8 @@
                                                         <td width="30%">{{date('d M,Y',strtotime($my_course_val->created_at))}}</td>
                                                         <td> @if($my_course_val->status == 1)
                                                             <a href="{{ route('syllabus-detail',['course_info_id'=>$my_course_val->courseinfo_id]) }}">Click To View Course</a>
+                                                            @else
+                                                                Installment Remaining
                                                             @endif
                                                         </td>
                                                     </tr>

@@ -134,8 +134,12 @@ class DashboardController extends Controller
     public function syllabusDetail(Request $request)
     {
         $input = $request->all();
-
+        $id = Auth::guard('student')->user()->id;
         $course_info_id = $input['course_info_id'];
+
+        $condition = ['student_id'=> $id, 'courseinfo_id'=> $course_info_id];
+        $data['courseInfo'] = $this->student->getStudentCourseInfo($condition);
+        
 
         $data['syllabus_info'] = $this->coursecontent->getAllCourses($course_info_id);
         $data['course_info_id'] = $course_info_id;
