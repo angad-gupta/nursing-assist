@@ -15,13 +15,14 @@ class StudentPayment extends Model
 
         'student_id',
         'courseinfo_id',
+        'enrolment_id',
         'enrolment_payment_id',
         'status',
         'moved_to_student',
         'total_course_fee',
         'amount_paid',
         'amount_left',
-
+        'moved_date'
     ];
 
     public function studentInfo()

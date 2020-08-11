@@ -73,7 +73,11 @@
                                    <ul class="list-unstyled p-pay">
                                     <li>
                                         <h5>Please Pay</h5>
-                                        <span> A ${{optional($student_puchase_info->courseInfo)->course_fee}}</span>
+                                        @if(optional($student_puchase_info->courseInfo)->payment_mode != 'one off payment')
+                                        <span>A${{str_replace(',', '', optional($student_puchase_info->courseInfo)->course_fee) + 137.50 }}</span>
+                                        @else
+                                        <span>A${{optional($student_puchase_info->courseInfo)->course_fee}}</span>
+                                        @endif
                                     </li>
                                 </ul>
 
@@ -107,7 +111,8 @@
                                         <th scope="col">GST</th>
                                         <th scope="col">QTY</th>
                                         <th scope="col">Rate</th>
-                                        <th scope="col">Amount</th>
+                                        <th scope="col">Paid Amount</th>
+                                        <th scope="col">Remaining Amount</th>
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -117,8 +122,9 @@
                                         <td width="30%">{!! optional($student_puchase_info->courseInfo)->short_content !!}</td>
                                         <td>GST</td>
                                         <td>1</td>
-                                        <td>{{optional($student_puchase_info->courseInfo)->course_fee}}.00</td>
-                                        <td>{{optional($student_puchase_info->courseInfo)->course_fee}}.00</td>
+                                        <td>A${{ numberFormat(str_replace(',', '', optional($student_puchase_info->courseInfo)->course_fee))}}</td>
+                                        <td>A${{numberFormat($student_puchase_info->amount_paid)}}</td>
+                                        <td>A${{ numberFormat($student_puchase_info->amount_left) }}</td>
                                       </tr>
                     
                                     </tbody>
@@ -131,7 +137,7 @@
 
                  @php 
                     $course_fee = optional($student_puchase_info->courseInfo)->course_fee;
-                    $gst = (10/100) * $course_fee;
+                    $gst = (10/100) * str_replace(',', '', $course_fee);
                 @endphp
                 <div class="col-sm-12">
                     <div class="neta-invoice__total b-line">
@@ -140,19 +146,38 @@
                                 <table class="table">
                                     <tr>
                                         <th>INCLUDES GST TOTAL</th>
-                                        <td>{{$gst}}</td>
+                                        <td>A${{numberFormat($gst)}}</td>
                                     </tr>
+                                    @if(optional($student_puchase_info->courseInfo)->payment_mode != 'one off payment')
+                                        <tr>
+                                            <th>Intial Payment + Administration Fee(2.5%)</th>
+                                            <td>A$1,637.50</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Second Installment</th>
+                                            <td>A$2,500</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Final Installment</th>
+                                            <td>A$1,500</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Total</th>
+                                            <td>A$5,637.50</td>
+                                        </tr>
+                                    @else 
                                     <tr>
                                         <th>Total</th>
-                                        <td>{{optional($student_puchase_info->courseInfo)->course_fee}}.00</td>
+                                        <td>A${{numberFormat(str_replace(',', '', optional($student_puchase_info->courseInfo)->course_fee))}}</td>
                                     </tr>
+                                    @endif
                                     <tr>
-                                        <th>Deposite</th>
-                                        <td>00.00</td>
+                                        <th>Deposit(-)</th>
+                                        <td>A${{numberFormat($student_puchase_info->amount_paid)}}</td>
                                     </tr>
                                     <tr class="t-top">
                                         <th>Total</th>
-                                        <td class="f-bold">A${{optional($student_puchase_info->courseInfo)->course_fee}}.00</td>
+                                        <td class="f-bold">A${{ numberFormat($student_puchase_info->amount_left)}}</td>
                                     </tr>
                                     <tr>
                                         <td></td>
@@ -182,14 +207,19 @@
                                         <th scope="col">Rate</th>
                                         <th scope="col">GST</th>
                                         <th scope="col">NET</th>
+                                        @if(optional($student_puchase_info->courseInfo)->payment_mode != 'one off payment')
+                                        <th scope="col">Administration Fee(2.5%)</th>
+                                        @endif
                                       </tr>
                                     </thead>
                                     <tbody>
                                       <tr>
                                         <th>GST @ 10%</th>
-                                        <td>{{$gst}}.00</td>
-                                        <td>{{optional($student_puchase_info->courseInfo)->course_fee}}.00</td>
-                                        
+                                        <td>A${{numberFormat($gst)}}</td>
+                                        <td>A${{numberFormat(str_replace(',', '', optional($student_puchase_info->courseInfo)->course_fee))}}</td>
+                                        @if(optional($student_puchase_info->courseInfo)->payment_mode != 'one off payment')
+                                            <td>A$137.50</td>
+                                        @endif
                                       </tr>
                                     </tbody>
                                   </table>

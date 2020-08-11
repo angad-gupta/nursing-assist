@@ -121,6 +121,18 @@ class StudentRepository implements StudentInterface
         return StudentCourse::create($data);
     }
 
+    public function updateStudentCourseStatus($data, $where = [])
+    {
+        $result = StudentCourse::where($where);
+        return $result->update($data);
+    }
+
+    public function getStudentCourseInfo($where)
+    {
+        $result = StudentCourse::where($where)->first();
+        return $result;
+    }
+
     public function checkQuizForCourseInfo($student_id, $courseContentId)
     {
         return StudentQuizResult::where('student_id', '=', $student_id)->where('course_content_id', '=', $courseContentId)->count();

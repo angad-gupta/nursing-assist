@@ -135,6 +135,7 @@ class StudentController extends Controller
         try {
             $studentSData = array(
                 'moved_to_student' => $moved_to_student,
+                'moved_date' => date('Y-m-d')
             );
 
             $this->student->updatePaymentStatus($payment_id, $studentSData);
@@ -186,7 +187,7 @@ class StudentController extends Controller
                 $content = view('student::student.partial.email-content')->render();
 
                 //  if (filter_var( $email, FILTER_VALIDATE_EMAIL )) {
-                Mail::to($email)->send(new SendNetaMail($content, $subject));
+                //Mail::to($email)->send(new SendNetaMail($content, $subject));
                 // }
 
                 /* ---------------------------------------------------------------

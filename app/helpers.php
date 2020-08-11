@@ -3,7 +3,7 @@
 /**
  * Global helpers file with misc functions.
  */
-if (! function_exists('history')) {
+if (!function_exists('history')) {
     /**
      * Helper to grab the application name.
      *
@@ -15,14 +15,14 @@ if (! function_exists('history')) {
     }
 }
 
-if (! function_exists('date_converter')) {
+if (!function_exists('date_converter')) {
     function date_converter()
     {
         return new App\Modules\Admin\Entities\DateConverter;
     }
 }
 
-if (! function_exists('priceFormat')) {
+if (!function_exists('priceFormat')) {
     /**
      * Helper to get price format
      *
@@ -30,11 +30,11 @@ if (! function_exists('priceFormat')) {
      */
     function priceFormat($price)
     {
-        return number_format($price, 2, '.', ',').'/-';
+        return number_format($price, 2, '.', ',') . '/-';
     }
 
 }
-if (! function_exists('hr_randomcolor')) {
+if (!function_exists('hr_randomcolor')) {
     /**
      * Helper to get price format
      *
@@ -45,4 +45,17 @@ if (! function_exists('hr_randomcolor')) {
         return '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT);
 
     }
+}
+
+if (!function_exists('numberFormat')) {
+    /**
+     * Helper to get price format
+     *
+     * @return mixed
+     */
+    function numberFormat($price, $decimal_places = 2)
+    {
+        return number_format($price, $decimal_places, '.', ',');
+    }
+
 }

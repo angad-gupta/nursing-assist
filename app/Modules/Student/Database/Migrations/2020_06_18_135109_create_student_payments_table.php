@@ -19,7 +19,7 @@ class CreateStudentPaymentsTable extends Migration
             $table->integer('student_id')->nullable();
             $table->integer('courseinfo_id')->nullable();
             $table->integer('enrolment_payment_id')->nullable();
-            $table->string('status')->nullable();
+            $table->string('status')->nullable()->comment('Pending; Paid; First Intallment Paid; Second Installment Paid; Final Installment Paid');
             $table->boolean('moved_to_student')->default(0);
 
             $table->timestamps();

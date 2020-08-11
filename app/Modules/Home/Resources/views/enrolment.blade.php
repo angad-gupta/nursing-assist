@@ -1,5 +1,72 @@
 @include('home::layouts.navbar-inner')
 @section('scripts')
+<script type="text/javascript" src="https://www.simplify.com/commerce/v1/simplify.js"></script>
+<script type="text/javascript">
+    function simplifyResponseHandler(data) {
+        var $paymentForm = $(".enrolment_form");
+        // Remove all previous errors
+        $(".error").remove();
+        // Check for errors
+        if (data.error) {
+            // Show any validation errors
+            if (data.error.code == "validation") {
+                var fieldErrors = data.error.fieldErrors,
+                        fieldErrorsLength = fieldErrors.length,
+                        errorList = "";
+                for (var i = 0; i < fieldErrorsLength; i++) {
+                    errorList += "<div class='text-danger error'>Field: '" + fieldErrors[i].field +
+                            "' is invalid - " + fieldErrors[i].message + "</div>";
+                }
+                // Display the errors
+                $paymentForm.after(errorList);
+            }
+
+            $('#loaderImg').hide();
+            //$('#process-payment-btn').prepend('<i class="icon-spinner4 spinner"></i>');
+            // Re-enable the submit button
+            $("#process-payment-btn").removeAttr("disabled");
+            $("#paylater-btn").removeAttr("disabled");
+        } else {
+           
+
+            // The token contains id, last4, and card type
+            var token = data["id"];
+            $paymentForm.append("<input type='hidden' name='submit_enrol' value='payment' />");
+            // Insert the token into the form so it gets submitted to the server
+            $paymentForm.append("<input type='hidden' name='simplifyToken' value='" + token + "' />");
+            // Submit the form to the server
+            $paymentForm.get(0).submit();
+        }
+    }
+    $(document).ready(function() {
+        $("#process-payment-btn").on("click", function() {
+            // Disable the submit button
+            $("#process-payment-btn").attr("disabled", "disabled");
+            $("#paylater-btn").attr("disabled", "disabled");
+
+            $('#loaderImg').show();
+            $('#process-payment-btn').prepend('<i class="icon-spinner4 spinner"></i>');
+            // Generate a card token & handle the response
+            SimplifyCommerce.generateToken({
+                key: "sbpb_OGUzNWUwMGQtOTZjZi00ODlhLWJmNjMtOTEwOGZjMmI4YTU4",
+                card: {
+                    name: $('#card_holder_name').val(),
+                    number: $("#cc-number").val(),
+                    cvc: $("#cc-cvc").val(),
+                    expMonth: $("#cc-exp-month").val(),
+                    expYear: $("#cc-exp-year").val(),
+                    customer: {
+                        name: $('#first_name').val() + ' ' + $('#last_name').val(),
+                        email: $('#email').val()
+                    }
+                }
+            }, simplifyResponseHandler);
+            // Prevent the form from submitting
+            return false;
+        });
+    });
+</script>
+
 <script type="text/javascript">
     $("#btn").click(function () {
 
@@ -173,7 +240,19 @@
             }
         })
     });
-
+ 
+ $(document).ready(function() {
+     $('#payment_type').on('change', function() {
+        var payment_type = $(this).val();
+        if(payment_type == 1) {
+            $('#installment_payment').css('display', '');
+            $('#full_payment').css('display', 'none');
+        } else {
+            $('#installment_payment').css('display', 'none');
+            $('#full_payment').css('display', '');
+        }
+     })
+ })
 </script>
 
 @endsection
@@ -427,50 +506,8 @@
                                                     <h2 class="fs-title">Payment</h2>
                                                     <div class="row justify-content-center">
                                                         <div class="col-sm-12">
-                                                            <!-- <div class="order-summary">
-                                                                <div class="row">
-
-                                                                <div class="col-sm-4">
-                                                                        <div class="form-group">
-                                                                            <label for="">Card Holder Name</label>
-                                                                            <input type="text" name="card_holder_name" class="form-control">
-                                                                        </div>
-                                                                    </div>
-
-
-                                                                    <div class="col-sm-4">
-                                                                        <div class="form-group">
-                                                                            <label for="">Enter Your Card Number</label>
-                                                                            <input type="text" name="card_number"class="form-control">
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="col-sm-4">
-                                                                        <div class="form-group">
-                                                                            <label for="">CCV</label>
-                                                                            <input type="text" name="ccv" class="form-control">
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="col-sm-4">
-                                                                        <div class="form-group">
-                                                                            <label for="">Email Address</label>
-                                                                            <input type="text" name="card_email"class="form-control">
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="col-sm-4">
-                                                                        <div class="form-group">
-                                                                            <label for="">Expiry Date</label>
-                                                                            <input type="date" name="card_expiry_data"class="form-control">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div> -->
-
-
                                                             <h5>You Order Summary</h5>
-                                                            <table class="table">
+                                                            <table class="table" id="full_payment">
                                                                 <tr>
                                                                     <td>Enrol {{ $courseinfo->course_program_title }}
                                                                     </td>
@@ -484,9 +521,133 @@
                                                                         ${{ $courseinfo->course_fee }}</td>
                                                                 </tr>
                                                             </table>
+
+                                                            @if($courseinfo->payment_mode != 'one off payment')
+                                                                <table class="table" id="installment_payment" style="display:none">
+                                                                    <tr>
+                                                                        <td>Initial payment</td>
+                                                                        <td class="text-right">$1,500</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Administration fee(2.5%) applies</td>
+                                                                        <td class="text-right">
+                                                                            2.5% of ${{ $courseinfo->course_fee}} = ${{ str_replace(',', '', $courseinfo->course_fee) * 0.025 }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Second Payment (15 days after course commencement)
+                                                                        </td>
+                                                                        <td class="text-right">$2,500</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Final Payment (30 days after course commencement)
+                                                                        </td>
+                                                                        <td class="text-right">$1,500</td>
+                                                                    </tr>
+
+                                                                    <tr class="total">
+                                                                        <td>Enrol {{ $courseinfo->course_program_title }} Total</td>
+                                                                        <td class="text-right">${{ str_replace(',', '', $courseinfo->course_fee) * 0.025  + str_replace(',', '', $courseinfo->course_fee)}}</td>
+                                                                    </tr>
+
+                                                                    <tr class="total">
+                                                                        <td>First Inital Payment Total</td>
+                                                                        <td class="text-right">${{ str_replace(',', '', $courseinfo->course_fee) * 0.025  + 1500}}</td>
+                                                                    </tr>
+                                                                </table>
+                                                            @endif
+
+                                                           
+                                                            <div class="order-summary">
+                                                                <div class="row">                                                                   
+
+                                                                    <div class="col-sm-4">
+                                                                        <div class="form-group">
+                                                                            <label for="">Cardholder Name: </label>
+                                                                            <input type="text" name="card_holder_name" id="card_holder_name" class="form-control" placeholder="Enter Cardholder Name">
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <div class="col-sm-4">
+                                                                        <div class="form-group">
+                                                                            <label for="">Card Number :<span class="text-danger">*</span></label>
+                                                                            <input type="text" name="card_number" id="cc-number"  class="form-control" maxlength="20" autocomplete="off" autofocus placeholder="Enter Card Number">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-sm-4">
+                                                                        <div class="form-group">
+                                                                            <label for="">CVC: <span class="text-danger">*</span></label>
+                                                                            <input type="password" name="ccv" id="cc-cvc" class="form-control" maxlength="4" autocomplete="off" placeholder="Enter CVC">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    {{--<div class="col-sm-4">
+                                                                        <div class="form-group">
+                                                                            <label for="">Email Address: </label>
+                                                                            <input type="text" name="card_email" class="form-control">
+                                                                        </div>
+                                                                    </div>--}}
+
+                                                                    <div class="col-sm-10 row">
+                                                                        <div class ="col-sm-6 ">
+                                                                            <div class="form-group">
+                                                                                <label for="">Expiry Date: <span class="text-danger">*</span></label>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class ="col-sm-4 ">
+                                                                            <div class="form-group">
+                                                                               
+                                                                                <label class="d-block font-weight-semibold">Payment Type: <span class="text-danger">*</span></label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-sm-10 row">                                                                           
+                                                                        <div class ="col-sm-3 ">
+                                                                            <div class="form-group">
+                                                                                <select id="cc-exp-month" name="cc_exp_month"  class="form-control">
+                                                                                    <option value="01">Jan</option>
+                                                                                    <option value="02">Feb</option>
+                                                                                    <option value="03">Mar</option>
+                                                                                    <option value="04">Apr</option>
+                                                                                    <option value="05">May</option>
+                                                                                    <option value="06">Jun</option>
+                                                                                    <option value="07">Jul</option>
+                                                                                    <option value="08">Aug</option>
+                                                                                    <option value="09">Sep</option>
+                                                                                    <option value="10">Oct</option>
+                                                                                    <option value="11">Nov</option>
+                                                                                    <option value="12">Dec</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class ="col-sm-3">
+                                                                            <div class="form-group">
+                                                                                <select id="cc-exp-year" name="cc_exp_year"  class="form-control">
+                                                                                    @for($i=date('Y'); $i<= date('Y') + 10; $i++)
+                                                                                        <option value="{{substr($i, -2)}}">{{$i}}</option>
+                                                                                    @endfor
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>   
+                                                                        
+                                                                        <div class="col-sm-4">
+                                                                            <div class="form-group">
+                                                                                {!! Form::select('payment_type', ['0'=>'Full Payment', '1'=>'Installment Payment'], null, ['id' => 'payment_type', 'class'=>'form-control']) !!}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    
+
+                                                                </div>
+                                                            </div>
+
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-12">
+                                                    <div class="row justify-content-center">
                                                         <div class="payment-method">
                                                             <h5>Payment Method</h5>
                                                             <img src="{{ asset('home/img/eway.png') }}" width="100px"
@@ -499,10 +660,18 @@
                                                     </div>
                                                     <div class="" id="msform">
 
-                                                        <button class="btn action-button" name="sbumit_enrol"
-                                                            value="payment">Make Payment</button>
-                                                        <button class="btn action-button" name="sbumit_enrol"
-                                                            value="pay_later">Pay Later</button>
+                                                        <button class="btn action-button" name="submit_enrol"
+                                                            value="payment" id="process-payment-btn">Make Payment</button>
+                                                        <button class="btn action-button" name="submit_enrol"
+                                                            value="pay_later" id="paylater-btn">Pay Later</button>
+                                                    </div>
+
+                                                    <div class="col-sm-12 neta-about row justify-content-center">
+                                                        <span class="text-center" id="loaderImg" style="display:none;">
+                                                            <img src="{{asset('home/img/loader.gif')}}" alt="loader1"
+                                                                style="margin-left: 30px; height:100px; width:auto;">
+                                                            <h4>Please Wait..While Processing Payment...</h4>
+                                                        </span>
                                                     </div>
                                                 </div>
                                     </div>

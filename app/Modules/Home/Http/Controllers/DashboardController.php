@@ -135,8 +135,12 @@ class DashboardController extends Controller
     public function syllabusDetail(Request $request)
     {
         $input = $request->all();
-
+        $id = Auth::guard('student')->user()->id;
         $course_info_id = $input['course_info_id'];
+
+        $condition = ['student_id'=> $id, 'courseinfo_id'=> $course_info_id];
+        $data['courseInfo'] = $this->student->getStudentCourseInfo($condition);
+        
 
         $data['syllabus_info'] = $this->coursecontent->getAllCourses($course_info_id);
         $data['course_info_id'] = $course_info_id;
@@ -356,51 +360,51 @@ class DashboardController extends Controller
         $mockup_title = $input['mockup_title'];
         $student_id = Auth::guard('student')->user()->id;
 
-       // $this->student->deleteMockuphistory($student_id, $mockup_title);
+        // $this->student->deleteMockuphistory($student_id, $mockup_title);
 
         /* if (!array_key_exists('question_option_1', $input)) {
-            Flash('Are you Serious with your Test ? Please Choose your Answer.')->error();
-            return redirect(route('student-courses'));
+        Flash('Are you Serious with your Test ? Please Choose your Answer.')->error();
+        return redirect(route('student-courses'));
         } */
 
         try {
-           /*  $m = 1;
+            /*  $m = 1;
             $question_id = $input['question_id'];
             $countname = sizeof($question_id);
             for ($i = 0; $i < $countname; $i++) {
 
-                if (array_key_exists('question_option_' . $m, $input)) {
+            if (array_key_exists('question_option_' . $m, $input)) {
 
-                    $question_id = $input['question_id'][$i];
-                    $mockup_question = $this->mockup->find($question_id);
-                    if ($mockup_question->question_type == 'multiple') {
-                        $question_option = json_encode($input['question_option_' . $m]);
-                    } else {
-                        $question_option = $input['question_option_' . $m][0];
-                    }
-
-                    $mockupdata['student_id'] = $student_id;
-                    $mockupdata['mockup_title'] = $mockup_title;
-                    $mockupdata['question_id'] = $question_id;
-                    $mockupdata['answer'] = $question_option;
-
-                    $checkAnswer = $this->mockup->checkCorrectAnswer($question_id, $question_option);
-
-                    if ($checkAnswer > 0) {
-                        $mockupdata['is_correct_answer'] = 1;
-                    } else {
-                        $mockupdata['is_correct_answer'] = 0;
-                    }
-
-                    $this->student->savemockupHistory($mockupdata);
-
-                    //sleep for 3 seconds
-                    usleep(3000000);
-
-                    $m++;
-                }
+            $question_id = $input['question_id'][$i];
+            $mockup_question = $this->mockup->find($question_id);
+            if ($mockup_question->question_type == 'multiple') {
+            $question_option = json_encode($input['question_option_' . $m]);
+            } else {
+            $question_option = $input['question_option_' . $m][0];
             }
- */
+
+            $mockupdata['student_id'] = $student_id;
+            $mockupdata['mockup_title'] = $mockup_title;
+            $mockupdata['question_id'] = $question_id;
+            $mockupdata['answer'] = $question_option;
+
+            $checkAnswer = $this->mockup->checkCorrectAnswer($question_id, $question_option);
+
+            if ($checkAnswer > 0) {
+            $mockupdata['is_correct_answer'] = 1;
+            } else {
+            $mockupdata['is_correct_answer'] = 0;
+            }
+
+            $this->student->savemockupHistory($mockupdata);
+
+            //sleep for 3 seconds
+            usleep(3000000);
+
+            $m++;
+            }
+            }
+             */
             $mockup_history = $this->student->getmockupHistory($student_id, $mockup_title);
             $correct_answer = $this->student->getmockupcorrectAnswer($student_id, $mockup_title);
 
@@ -460,7 +464,7 @@ class DashboardController extends Controller
         $input = $request->all();
 
         $readline_title = $input['readline_title'];
-        $mockupInfo = $this->mockup->getRandomQuestion(100, ['readline_title'=>$readline_title]);
+        $mockupInfo = $this->mockup->getRandomQuestion(100, ['readline_title' => $readline_title]);
         if (sizeof($mockupInfo) > 0) {
             $data['mockupInfo'] = $mockupInfo;
             $data['readline_title'] = $readline_title;
@@ -476,40 +480,40 @@ class DashboardController extends Controller
     public function saveStartTime(Request $request)
     {
         $input = $request->all();
-        $start_time =  date('Y-m-d H:i:s');
+        $start_time = date('Y-m-d H:i:s');
         try {
             $id = Auth::guard('student')->user()->id;
-           
+
             $insertArray = [
                 'student_id' => $id,
                 'date' => date('Y-m-d'),
                 'title' => $input['title'],
-                'start_time' => $start_time
+                'start_time' => $start_time,
             ];
 
             $readiness = $this->studentReadiness->save($insertArray);
 
-            return ['status' => '1', 'start_time' => $start_time, 'result_id'=> $readiness->id];
-        } catch(\Throwable $t) {
-            return  ['status' => '0'];
+            return ['status' => '1', 'start_time' => $start_time, 'result_id' => $readiness->id];
+        } catch (\Throwable $t) {
+            return ['status' => '0'];
         }
     }
 
     public function saveBreakTime(Request $request)
     {
         $input = $request->all();
-        $break_time =  date('Y-m-d H:i:s');
+        $break_time = date('Y-m-d H:i:s');
         try {
             $id = Auth::guard('student')->user()->id;
-           
+
             $updateArray = [
-                'break_time' => $break_time
+                'break_time' => $break_time,
             ];
 
             $readiness = $this->studentReadiness->update($input['result_id'], $updateArray);
 
             return 1;
-        } catch(\Throwable $t) {
+        } catch (\Throwable $t) {
             return 0;
         }
     }
@@ -525,7 +529,7 @@ class DashboardController extends Controller
 
             $mockup_history = $this->studentReadiness->getHistory($student_id, $title);
             $correct_answer = $this->studentReadiness->getCorrectAnswer($student_id, $title);
-           
+
             $total_attempt_question = count($mockup_history);
             //$total_question = $this->mockup->getTotalQuestionsByTitle($title, date('Y-m-d H:i:s'));
             $total_question = 100;
@@ -541,7 +545,7 @@ class DashboardController extends Controller
                 'total_attempted_question' => $total_attempt_question,
                 'correct_answer' => $correct_answer,
                 'percent' => $correct_percent,
-                'end_time' => date('Y-m-d H:i:s')
+                'end_time' => date('Y-m-d H:i:s'),
             );
 
             $this->studentReadiness->update($result_id, $updateResult);
@@ -560,8 +564,8 @@ class DashboardController extends Controller
         $mockup_title = $input['mockup_title'];
         $qkey = $input['qkey'];
         $question_id = $input['question_id'];
-        
-        $answers = []; 
+
+        $answers = [];
         if (isset($input['answers']) && !empty($input['answers'])) {
             $answers = $input['answers'];
         } else {
@@ -569,19 +573,19 @@ class DashboardController extends Controller
         }
 
         try {
-           
+
             $student_id = Auth::guard('student')->user()->id;
-            if($qkey == 1) {
+            if ($qkey == 1) {
                 $this->student->deleteMockuphistory($student_id, $mockup_title);
             }
 //dd($answers);
             $mockup_question = $this->mockup->find($question_id);
             if ($mockup_question->question_type == 'multiple') {
-                $question_option = json_encode($answers); 
+                $question_option = json_encode($answers);
             } else {
                 $question_option = $answers;
             }
-            
+
             $mockupdata['student_id'] = $student_id;
             $mockupdata['mockup_title'] = $mockup_title;
             $mockupdata['question_id'] = $question_id;
@@ -611,8 +615,8 @@ class DashboardController extends Controller
         $title = $input['title'];
         $qkey = $input['qkey'];
         $question_id = $input['question_id'];
-        
-        $answers = []; 
+
+        $answers = [];
         if (isset($input['answers']) && !empty($input['answers'])) {
             $answers = $input['answers'];
         } else {
@@ -620,19 +624,19 @@ class DashboardController extends Controller
         }
 
         try {
-           
+
             $student_id = Auth::guard('student')->user()->id;
-            if($qkey == 1) {
+            if ($qkey == 1) {
                 $this->studentReadiness->deleteHistory($student_id, $title);
             }
 //dd($answers);
             $mockup_question = $this->mockup->find($question_id);
             if ($mockup_question->question_type == 'multiple') {
-                $question_option = json_encode($answers); 
+                $question_option = json_encode($answers);
             } else {
                 $question_option = $answers;
             }
-            
+
             $mockupdata['student_id'] = $student_id;
             $mockupdata['title'] = $title;
             $mockupdata['question_id'] = $question_id;

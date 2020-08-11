@@ -84,12 +84,13 @@
                                 class="icon-color-sampler"></i></a>
                         @endif
 
+                        @if($value->moved_to_student == 0)
                         <a data-toggle="{{$modal}}" data-target="#modal_theme_status"
                             class="btn bg-success-400 btn-icon rounded-round update_status"
                             student_id="{{ $student_id }}" payment_id="{{$value->id}}" data-popup="tooltip"
                             data-original-title="Course Move Update" data-placement="bottom"><i
                                 class="icon-flip-horizontal2"></i></a>
-
+                        @endif
                         <a data-toggle="modal" data-target="#modal_theme_warning"
                             class="btn bg-danger-400 btn-icon rounded-round delete_purchase"
                             link="{{route('studentpurchase.delete', ['id' => $value->id, 'student_id' => $student_id])}}" data-popup="tooltip"

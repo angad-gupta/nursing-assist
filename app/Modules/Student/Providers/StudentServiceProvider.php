@@ -5,6 +5,8 @@ namespace App\Modules\Student\Providers;
 use App\Modules\Student\Repositories\StudentInterface;
 use App\Modules\Student\Repositories\StudentPaymentInterface;
 use App\Modules\Student\Repositories\StudentPaymentRepository;
+use App\Modules\Student\Repositories\StudentPaymentInstallmentInterface;
+use App\Modules\Student\Repositories\StudentPaymentInstallmentRepository;
 use App\Modules\Student\Repositories\StudentReadinessInterface;
 use App\Modules\Student\Repositories\StudentReadinessRepository;
 use App\Modules\Student\Repositories\StudentRepository;
@@ -45,6 +47,7 @@ class StudentServiceProvider extends ServiceProvider
         $this->studentRegister();
         $this->studentPaymentRegister();
         $this->studentReadinessRegister();
+        $this->studentPaymentInstallmentRegister();
     }
 
     public function studentRegister()
@@ -68,6 +71,14 @@ class StudentServiceProvider extends ServiceProvider
         $this->app->bind(
             StudentPaymentInterface::class,
             StudentPaymentRepository::class
+        );
+    }
+
+    public function studentPaymentInstallmentRegister()
+    {
+        $this->app->bind(
+            StudentPaymentInstallmentInterface::class,
+            StudentPaymentInstallmentRepository::class
         );
     }
 
