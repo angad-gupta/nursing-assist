@@ -77,7 +77,6 @@ class DashboardController extends Controller
         $data['message'] = $this->message->getSendMessageByUser($id, $limit = 5);
         $data['student_course'] = $this->student->getStudentCourse($id);
         $data['student_course_purchase'] = $this->student->getStudentPurchase($id);
-        $data['student_mockup'] = $this->student->getStudentMockupResult($id);
 
         return view('home::student.dashboard', $data);
     }
@@ -368,51 +367,8 @@ class DashboardController extends Controller
         $mockup_title = $input['mockup_title'];
         $student_id = Auth::guard('student')->user()->id;
 
-        // $this->student->deleteMockuphistory($student_id, $mockup_title);
-
-        /* if (!array_key_exists('question_option_1', $input)) {
-        Flash('Are you Serious with your Test ? Please Choose your Answer.')->error();
-        return redirect(route('student-courses'));
-        } */
-
         try {
-            /*  $m = 1;
-            $question_id = $input['question_id'];
-            $countname = sizeof($question_id);
-            for ($i = 0; $i < $countname; $i++) {
-
-            if (array_key_exists('question_option_' . $m, $input)) {
-
-            $question_id = $input['question_id'][$i];
-            $mockup_question = $this->mockup->find($question_id);
-            if ($mockup_question->question_type == 'multiple') {
-            $question_option = json_encode($input['question_option_' . $m]);
-            } else {
-            $question_option = $input['question_option_' . $m][0];
-            }
-
-            $mockupdata['student_id'] = $student_id;
-            $mockupdata['mockup_title'] = $mockup_title;
-            $mockupdata['question_id'] = $question_id;
-            $mockupdata['answer'] = $question_option;
-
-            $checkAnswer = $this->mockup->checkCorrectAnswer($question_id, $question_option);
-
-            if ($checkAnswer > 0) {
-            $mockupdata['is_correct_answer'] = 1;
-            } else {
-            $mockupdata['is_correct_answer'] = 0;
-            }
-
-            $this->student->savemockupHistory($mockupdata);
-
-            //sleep for 3 seconds
-            usleep(3000000);
-
-            $m++;
-            }
-            }
-             */
+       
             $mockup_history = $this->student->getmockupHistory($student_id, $mockup_title);
             $correct_answer = $this->student->getmockupcorrectAnswer($student_id, $mockup_title);
 
@@ -425,16 +381,28 @@ class DashboardController extends Controller
             $data['correct_answer'] = $correct_answer;
             $data['incorrect_answer'] = $total_question - $correct_answer;
 
-            $mockup_result = array(
-                'student_id' => $student_id,
-                'mockup_title' => $mockup_title,
-                'date' => date('Y-m-d'),
-                'total_question' => $total_question,
-                'correct_answer' => $correct_answer,
-                'percent' => $correct_percent,
-            );
+            $date = date('Y-m-d');
+            $resultInfo = $this->studentMockup->checkMockupResult($student_id, $mockup_title, $date);
+            if(empty($resultInfo)) {
 
-            $this->student->saveMockupResult($mockup_result);
+                $mockup_result = array(
+                    'student_id' => $student_id,
+                    'mockup_title' => $mockup_title,
+                    'date' => $date,
+                    'total_question' => $total_question,
+                    'correct_answer' => $correct_answer,
+                    'percent' => $correct_percent,
+                );
+
+                $this->student->saveMockupResult($mockup_result);
+            } else {
+                $updateArray = array(
+                    'total_question' => $total_question,
+                    'correct_answer' => $correct_answer,
+                    'percent' => $correct_percent,
+                );
+                $resultInfo->update($updateArray);
+            }
 
             return view('home::student.mockup-report', $data);
 
@@ -583,10 +551,27 @@ class DashboardController extends Controller
         try {
 
             $student_id = Auth::guard('student')->user()->id;
-            if ($qkey == 1) {
+            $date = date('Y-m-d');
+
+            $resultInfo = $this->studentMockup->checkMockupResult($student_id, $mockup_title, $date);
+            if(empty($resultInfo)) {
+                $mockup_result = array(
+                    'student_id' => $student_id,
+                    'mockup_title' => $mockup_title,
+                    'date' => date('Y-m-d'),
+                );
+
+                $resultInfo = $this->student->saveMockupResult($mockup_result);
+                $result_id = $resultInfo->id;
+            } else {
+                $result_id = $resultInfo->id;
+            }
+
+
+          /*   if ($qkey == 1) {
                 $this->student->deleteMockuphistory($student_id, $mockup_title);
             }
-//dd($answers);
+ */
             $mockup_question = $this->mockup->find($question_id);
             if ($mockup_question->question_type == 'multiple') {
                 $question_option = json_encode($answers);
@@ -594,6 +579,7 @@ class DashboardController extends Controller
                 $question_option = $answers;
             }
 
+            $mockupdata['mockup_result_id'] = $result_id;
             $mockupdata['student_id'] = $student_id;
             $mockupdata['mockup_title'] = $mockup_title;
             $mockupdata['question_id'] = $question_id;

@@ -84,5 +84,12 @@ class StudentMockupRepository implements StudentMockupInterface
         return StudentMockupHistory::where('student_id', '=', $student_id)->where('mockup_title', '=', $title)->update($updateData);
     }
 
+    public function checkMockupResult($student_id, $title, $date)
+    {
+        return StudentMockupResult::where('student_id', '=', $student_id)
+            ->where('mockup_title', '=', $title)
+            ->where('date', $date)
+            ->first();
+    }
 
 }

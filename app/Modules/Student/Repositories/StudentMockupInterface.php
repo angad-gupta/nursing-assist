@@ -27,4 +27,6 @@ interface StudentMockupInterface
     public function findAllHistory($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
 
     public function updateHistory($student_id, $title, $updateData);
+
+    public function checkMockupResult($student_id, $title, $date);
 }

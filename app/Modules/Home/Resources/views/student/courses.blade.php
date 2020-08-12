@@ -51,7 +51,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="history-tab" data-toggle="tab" href="#history" role="tab"
-                                aria-controls="history" aria-selected="false">History</a>
+                                aria-controls="history" aria-selected="false">Mockup History</a>
                         </li>
                     @endif
                 </ul>
