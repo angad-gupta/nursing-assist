@@ -49,6 +49,10 @@
                             <a class="nav-link" id="readliness-tab" data-toggle="tab" href="#readliness" role="tab"
                                 aria-controls="readliness" aria-selected="false">Readiness Exam</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="history-tab" data-toggle="tab" href="#history" role="tab"
+                                aria-controls="history" aria-selected="false">History</a>
+                        </li>
                     @endif
                 </ul>
 
@@ -209,6 +213,51 @@
                                         </div>
                                     </div>
                                 @endforeach
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade neta-resources" id="history" role="tabpanel" aria-labelledby="history-tab">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="resource-box">
+                                    <div class="row col-sm-12">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>S.No.</th>
+                                                    <th>Mockup Title</th>
+                                                    <th>Date</th>
+                                                    <th>Total Questions</th>
+                                                    <th>Correct Answer</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                
+                                                @if($student_mockup->total() != 0)
+                                                    @foreach($student_mockup as $key => $value)
+                                                    <tr>
+                                                        <td>{{ $student_mockup->firstItem() + $key }}</td>
+                                                        <td>{{ ucfirst(str_replace('_',' ',$value->mockup_title)) }}</td>
+                                                        <td>{{ date('dS M, Y',strtotime($value->date)) }}</td>
+                                                        <td>{{$value->total_question}}</td>
+                                                        <td>{{$value->correct_answer}}</td>
+                                                        <td>
+                                                        <div class="history-view"><a href="{{ route('mockup.history', $value->id) }}" class="btn e-btn">View Details</a></td>
+                                                    </tr>
+                                                    @endforeach
+                                                @endif
+
+                                            </tbody>
+                                        </table>
+                                        <span style="margin: 5px;float: right;">
+                                            @if($student_mockup->total() != 0)
+                                            {{ $student_mockup->appends(request()->except('page'))->links()  }}
+                                            @endif
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>                       
                         </div>
                     </div>
 

@@ -11,6 +11,7 @@ use App\Modules\Quiz\Repositories\QuizInterface;
 use App\Modules\Resource\Repositories\ResourcesInterface;
 use App\Modules\Student\Repositories\StudentInterface;
 use App\Modules\Student\Repositories\StudentReadinessInterface;
+use App\Modules\Student\Repositories\StudentMockupInterface;
 use App\Modules\Syllabus\Repositories\SyllabusInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -35,6 +36,10 @@ class DashboardController extends Controller
      * @var StudentReadinessInterface
      */
     protected $studentReadiness;
+    /**
+     * @var StudentMockupInterface
+     */
+    protected $studentMockup;
 
     public function __construct(
         StudentInterface $student,
@@ -46,7 +51,8 @@ class DashboardController extends Controller
         QuizInterface $quiz,
         MockupInterface $mockup,
         ResourcesInterface $resource,
-        StudentReadinessInterface $studentReadiness) {
+        StudentReadinessInterface $studentReadiness,
+        StudentMockupInterface $studentMockup) {
         $this->student = $student;
         $this->announcement = $announcement;
         $this->message = $message;
@@ -57,6 +63,7 @@ class DashboardController extends Controller
         $this->mockup = $mockup;
         $this->resource = $resource;
         $this->studentReadiness = $studentReadiness;
+        $this->studentMockup = $studentMockup;
     }
     /**
      * Display a listing of the resource.
@@ -128,6 +135,7 @@ class DashboardController extends Controller
         $data['student_course'] = $this->student->getStudentCourse($id);
         $data['other_course'] = $this->courseinfo->getAll();
         $data['resources'] = $this->resource->findAll();
+        $data['student_mockup'] = $this->student->getStudentMockupResult($id, 20);
 
         return view('home::student.courses', $data);
     }
@@ -663,36 +671,16 @@ class DashboardController extends Controller
     public function studentMockupHistory(Request $request)
     {
         $input = $request->all();
-
-        $mockup_title = $input['mockup_title'];
+       
+        //$mockup_title = $input['mockup_title'];
         $student_id = Auth::guard('student')->user()->id;
 
         try {
+            $result_id = $input['id'];
+            $mockup_history = $this->studentMockup->findAllHistory(20, ['mockup_result_id' => $result_id]);
 
-            $mockup_history = $this->student->getmockupHistory($student_id, $mockup_title);
-            $correct_answer = $this->student->getmockupcorrectAnswer($student_id, $mockup_title);
-
-            //$total_question = count($mockup_history);
             $total_question = $this->mockup->getTotalQuestionsByTitle($mockup_title, date('Y-m-d H:i:s'));
-            $correctPercent = ($correct_answer / $total_question) * 100;
-
-            $data['correct_percent'] = $correct_percent = number_format($correctPercent, 2);
-            $data['mockup_history'] = $mockup_history;
-            $data['correct_answer'] = $correct_answer;
-            $data['incorrect_answer'] = $total_question - $correct_answer;
-
-            $mockup_result = array(
-                'student_id' => $student_id,
-                'mockup_title' => $mockup_title,
-                'date' => date('Y-m-d'),
-                'total_question' => $total_question,
-                'correct_answer' => $correct_answer,
-                'percent' => $correct_percent,
-            );
-
-            $this->student->saveMockupResult($mockup_result);
-
-            return view('home::student.mockup-report', $data);
+            return view('home::student.mockup-history', $data);
 
         } catch (\Throwable $e) {
             alertify($e->getMessage())->error();

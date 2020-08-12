@@ -9,6 +9,8 @@ use App\Modules\Student\Repositories\StudentPaymentInstallmentInterface;
 use App\Modules\Student\Repositories\StudentPaymentInstallmentRepository;
 use App\Modules\Student\Repositories\StudentReadinessInterface;
 use App\Modules\Student\Repositories\StudentReadinessRepository;
+use App\Modules\Student\Repositories\StudentMockupInterface;
+use App\Modules\Student\Repositories\StudentMockupRepository;
 use App\Modules\Student\Repositories\StudentRepository;
 use Illuminate\Database\Eloquent\Factory;
 use Illuminate\Support\ServiceProvider;
@@ -47,6 +49,7 @@ class StudentServiceProvider extends ServiceProvider
         $this->studentRegister();
         $this->studentPaymentRegister();
         $this->studentReadinessRegister();
+        $this->studentMockupRegister();
         $this->studentPaymentInstallmentRegister();
     }
 
@@ -63,6 +66,14 @@ class StudentServiceProvider extends ServiceProvider
         $this->app->bind(
             StudentReadinessInterface::class,
             StudentReadinessRepository::class
+        );
+    }
+
+    public function studentMockupRegister()
+    {
+        $this->app->bind(
+            StudentMockupInterface::class,
+            StudentMockupRepository::class
         );
     }
 

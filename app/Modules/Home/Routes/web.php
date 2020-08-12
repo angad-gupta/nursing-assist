@@ -109,5 +109,5 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth:student']], function
 
     Route::post('studentmockup/ajaxStore', ['as' => 'studentmockup.ajaxStore', 'uses' => 'DashboardController@ajaxQuestionStore']);
 
-    Route::get('mockup/history', ['as' => 'mockup.history', 'uses' => 'DashboardController@studentMockupHistory']);
+    Route::get('mockup/history/{id}', ['as' => 'mockup.history', 'uses' => 'DashboardController@studentMockupHistory']);
 });

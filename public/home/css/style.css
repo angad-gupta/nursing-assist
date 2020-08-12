@@ -2478,4 +2478,29 @@ a {
 input[type=password] {
   width: 100%;
 }
+
+
+.history-view .btn {
+  background: #B0117E;
+  transition: 0.5s all;
+}
+
+.history-view .btn a {
+  color: #fff;
+}
+
+.history-view .btn:hover {
+  background: #6E2F9F;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+}
+
+.history-view .btn:hover a {
+  color: #fff;
+}
+
+.history-view .e-btn {
+  margin-top: 0;
+  color: #fff;
+}
 /*# sourceMappingURL=style.css.map */
