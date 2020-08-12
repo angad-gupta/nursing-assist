@@ -7,11 +7,11 @@
         <div class="row">
             <div class="neta-ribbon__content">
                 <div class="col-sm-12">
-                    <h1 class="mb-0">Readiness Exam Report</h1>
+                    <h1 class="mb-0">Mockup Test Report</h1>
                     <ul class="list-unstyled d-flex">
                         <li> <a href="{{ route('home') }}">Home >> </a></li>
                         <li> <a href="{{ route('student-courses') }}">Courses >></a></li>
-                        <li>Readiness Report</li>
+                        <li>Mockup Test History</li>
                     </ul>
                 </div>
             </div>
@@ -23,44 +23,19 @@
 <section class="neta-enrolment neta-quiz neta-contact  section-padding">
 	<div class="container">
 		<div class="form-card"> 
-			<h2 class="fs-title mb-0">Readiness Exam Result</h2>
-			<p>You have successfully completed the practice test. Below is your result:</p> 
-			<div class="row b-line"> 
-				<div class="col-sm-3 text-center"> 
-					<div class="quiz-score"> 
-						<h2>{{$correct_answer}}</h2> 
-						<span>Correct Answer</span> 
-					</div> 
-				</div>
-
-				<div class="col-sm-3 text-center"> 
-					<div class="quiz-score"> 
-						<h2>{{$incorrect_answer}}</h2> 
-						<span>Incorrect Answer</span> 
-					</div> 
-				</div> 
-				
-				<div class="col-sm-4 text-center"> 
-					<div class="quiz-score"> 
-						<h2>{{$correct_percent}} %</h2> 
-						<span>Correct Answer</span> 
-					</div> 
-				</div>
-
-			</div> 
-
+			<h2 class="fs-title mb-0">Mockup Test History</h2>
 			<div class="neta-head text-center m-5">
 				<h4 class="mb-0">Here are the answer sheets with Reason</h4>
 			</div>
 
 			 <div class="accordion" id="accordionExample">
 
-			 	@foreach($mockup_history as $kys => $mockup)
+			 	@foreach($mockup_histories as $kys => $mockup)
 
 			 	@php 
-            	if (preg_match('/[\[\]\'^£$%&*()}{@#~?><>,|=_+¬-]/', $mockup->mockup->correct_option))
+            	if (preg_match('/[\[\]\'^£$%&*()}{@#~?><>,|=_+¬-]/', $mockup->mockupInfo->correct_option))
 						{
-							$multipl_ans = json_decode($mockup->mockup->correct_option);
+							$multipl_ans = json_decode($mockup->mockupInfo->correct_option);
                     		$prefix = $option_val = '';
                     		foreach($multipl_ans as $key => $ans){
                     		 	$value = explode("_", $ans);
@@ -98,7 +73,7 @@
                 <div class="card">
                     <div class="card-header {{ $main_color_status }}" data-toggle="collapse"
                         data-target="#collapse_{{$kys}}" aria-expanded="true">
-                        <span class="title">{{optional($mockup->mockup)->question}}</span>
+                        <span class="title">{{optional($mockup->mockupInfo)->question}}</span>
                     </div>
                     <div id="collapse_{{$kys}}" class="collapse show"
                         data-parent="#accordionExample">
@@ -109,13 +84,18 @@
                             <p>Correct Answer is <span class="text-success"><b>{{ $option_val }}</b></span></a>
                             </p>
                             <p>
-                                <span class="text-success"><b>Reason</b></span>: {!! optional($mockup->mockup)->correct_answer_reason !!}
+                                <span class="text-success"><b>Reason</b></span>: {!! optional($mockup->mockupInfo)->correct_answer_reason !!}
                             </p>
                         </div>
                     </div>
                 </div>
 
-                @endforeach
+				@endforeach
+				<span style="margin: 5px;float: right;">
+					@if($mockup_histories->total() != 0)
+					{{ $mockup_histories->appends(request()->except('page'))->links()  }}
+					@endif
+				</span>
             </div>
 
 		</div>

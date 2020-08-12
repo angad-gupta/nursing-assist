@@ -24,7 +24,7 @@ class StudentMockupRepository implements StudentMockupInterface
 
     public function getList()
     {
-        $result = StudentMockupResult::pluck('company_name', 'id');
+        $result = StudentMockupResult::pluck('mockup_title', 'id');
         return $result;
     }
 
@@ -52,12 +52,12 @@ class StudentMockupRepository implements StudentMockupInterface
 
     public function deleteHistory($student_id, $title)
     {
-        return StudentMockupHistory::where('student_id', '=', $student_id)->where('title', '=', $title)->delete();
+        return StudentMockupHistory::where('student_id', '=', $student_id)->where('mockup_title', '=', $title)->delete();
     }
 
     public function getHistory($student_id, $title)
     {
-        return StudentMockupHistory::where('student_id', '=', $student_id)->where('title', '=', $title)->get();
+        return StudentMockupHistory::where('student_id', '=', $student_id)->where('mockup_title', '=', $title)->get();
     }
 
     public function getCorrectAnswer($result_id)
@@ -78,5 +78,11 @@ class StudentMockupRepository implements StudentMockupInterface
         return $result;
 
     }
+
+    public function updateHistory($student_id, $title, $updateData)
+    {
+        return StudentMockupHistory::where('student_id', '=', $student_id)->where('mockup_title', '=', $title)->update($updateData);
+    }
+
 
 }

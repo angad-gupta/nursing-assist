@@ -668,22 +668,18 @@ class DashboardController extends Controller
 
     }
 
-    public function studentMockupHistory(Request $request)
+    public function studentMockupHistory($id)
     {
-        $input = $request->all();
-       
-        //$mockup_title = $input['mockup_title'];
         $student_id = Auth::guard('student')->user()->id;
-
         try {
-            $result_id = $input['id'];
-            $mockup_history = $this->studentMockup->findAllHistory(20, ['mockup_result_id' => $result_id]);
+            $data['mockup_histories'] = $this->studentMockup->findAllHistory('', ['mockup_result_id' => $id]);
 
-            $total_question = $this->mockup->getTotalQuestionsByTitle($mockup_title, date('Y-m-d H:i:s'));
+            //$total_question = $this->mockup->getTotalQuestionsByTitle($mockup_title, date('Y-m-d H:i:s'));
             return view('home::student.mockup-history', $data);
 
         } catch (\Throwable $e) {
-            alertify($e->getMessage())->error();
+            Flash($e->getMessage())->error();
+            return redirect()->route('student-courses');
         }
 
     }

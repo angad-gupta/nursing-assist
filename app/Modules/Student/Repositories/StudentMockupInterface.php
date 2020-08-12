@@ -22,7 +22,9 @@ interface StudentMockupInterface
 
     public function getHistory($student_id, $title);
 
-    public function getCorrectAnswer($student_id, $title);
+    public function getCorrectAnswer($result_id);
 
     public function findAllHistory($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
+
+    public function updateHistory($student_id, $title, $updateData);
 }

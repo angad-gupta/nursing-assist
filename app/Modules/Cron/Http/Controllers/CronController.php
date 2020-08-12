@@ -5,10 +5,14 @@ namespace App\Modules\Cron\Http\Controllers;
 use App\Modules\CourseInfo\Repositories\CourseInfoInterface;
 use App\Modules\Student\Repositories\StudentInterface;
 use App\Modules\Student\Repositories\StudentPaymentInterface;
+//use App\Modules\Student\Entities\StudentMockupHistory;
+use App\Modules\Student\Entities\StudentMockupResult; 
+use App\Modules\Student\Repositories\StudentMockupInterface; 
 use App\Notifications\EnrolmentInstallmentPayment;
 use Carbon\Carbon;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use DB;
 
 class CronController extends Controller
 {
@@ -24,12 +28,17 @@ class CronController extends Controller
      * @var StudentInterface
      */
     protected $student;
+    /**
+     * @var StudentMockupInterface
+     */
+    protected $studentMockup;
 
-    public function __construct(StudentPaymentInterface $studentPayment, CourseInfoInterface $courseinfo, StudentInterface $student)
+    public function __construct(StudentPaymentInterface $studentPayment, CourseInfoInterface $courseinfo, StudentInterface $student, StudentMockupInterface $studentMockup)
     {
         $this->studentPayment = $studentPayment;
         $this->courseinfo = $courseinfo;
         $this->student = $student;
+        $this->studentMockup = $studentMockup;
     }
 
     /**
@@ -142,6 +151,27 @@ class CronController extends Controller
             }
         }
 
+    }
+
+    public function updateStudentMockupHistory()
+    {
+       /*  $result = DB::table('student_mockup_histories as h')
+            ->join('student_mockup_results as r', function($join)
+            {
+                $join->on('r.student_id', '=', 'h.student_id');
+                $join->on('r.mockup_title','=', 'h.mockup_title');
+            })
+            ->orderBy('id', 'desc')
+            ->get(); dd($result->count()); */
+
+        $result  = StudentMockupResult::select(DB::raw('max(id) as result_id'), 'student_id', 'mockup_title')
+            ->groupBy('student_id','mockup_title')
+            ->get();
+        if($result->count() > 0) {
+            foreach ($result as $value) {
+                $this->studentMockup->updateHistory($value->student_id, $value->mockup_title, ['mockup_result_id'=> $value->result_id]);
+            }
+        }
     }
 
 }
