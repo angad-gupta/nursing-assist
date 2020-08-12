@@ -8,14 +8,10 @@
 
 <script type="text/javascript">
     $('document').ready(function () {
-        $('.delete_student').on('click', function () {
-            var link = $(this).attr('link');
-            $('.get_link').attr('href', link);
-        });
 
         $('.update_status').on('click', function () {
             var student_id = $(this).attr('student_id');
-            $('.student_id').val(student_id);
+            $('#student_id').val(student_id);
         });
 
         $('.select-search').select2();
@@ -34,18 +30,6 @@
             window.location.href = url;
         })
 
-        {{--$('#headerTable').DataTable( {
-            //"sorting": true,
-            "filter":false,
-            //"info": false,
-            "paging": false
-            rowReorder: true,
-            columnDefs: [
-                { orderable: true, className: 'reorder', targets: 2 },
-                { orderable: false, targets: '_all' }
-            ]
-            //"order": [[ 3, "desc" ]]
-        });--}}
     });
 
 </script>
@@ -53,15 +37,15 @@
 
 @section('content')
 
-@include('student::student.partial.filter')
+@include('student::student.partial.filter-archive')
 
 <div class="card">
     <div class="card-header header-elements-inline">
         <h5 class="card-title">List of Student</h5>
         <div class="text-right">
 
-            <a href="{{ route('student.indexArchive') }}" class="btn bg-warning">
-                <b>Archived Students</b>
+            <a href="{{ route('student.index') }}" class="btn bg-warning">
+                <b>Active Students</b>
             </a>
         </div>
         <div class="header-elements">
@@ -84,9 +68,6 @@
                     <th >Full Name</th>
                     <th class="no-sort">Username</th>
                     <th class="no-sort">Email Address</th>
-                    <th class="no-sort">Intake Month</th>
-                    <th class="no-sort">Agency</th>
-                    <th class="no-sort">Practice Lesson Title</th>
                     <th class="no-sort">Status</th>
                     <th class="no-sort">Action</th>
                 </tr>
@@ -108,9 +89,6 @@
                     <td>{{ $value->full_name }}</td>
                     <td>{{ $value->username }}</td>
                     <td>{{ $value->email }}</td>
-                    <td>{{ !empty($latest_enrol) ? $latest_enrol->intake_date : '-' }}</td>
-                    <td>{{ !empty($latest_enrol) ? optional($latest_enrol->agent)->agent_name : '-' }}</td>
-                    <td>{{ !empty($latest_quiz) ? optional($latest_quiz->courseContentInfo)->lesson_title : '-' }}</td>
                     <td
                         class="{{ ($value->active == '1') ? 'text-success font-weight-bold' :'text-danger font-weight-bold' }}">
                         {{ ($value->active == '1') ? 'Active' :'In-Active' }}</td>
@@ -120,30 +98,6 @@
                             class="btn bg-success-400 btn-icon rounded-round update_status" student_id="{{ $value->id}}"
                             data-popup="tooltip" data-original-title="Status Update" data-placement="bottom"><i
                                 class="icon-flip-horizontal2"></i></a>
-
-                        <a class="btn bg-warning btn-icon rounded-round"
-                            href="{{ route('studentcourse.index',['student_id'=> $value->id]) }}" data-popup="tooltip"
-                            data-placement="bottom" data-original-title="My Courses"><i class="icon-package"></i></a>
-
-                        <a class="btn bg-teal btn-icon rounded-round"
-                            href="{{ route('studentpurchase.index',['student_id'=> $value->id]) }}" data-popup="tooltip"
-                            data-placement="bottom" data-original-title="Purchase History"><i
-                                class="icon-basket"></i></a>
-
-                        <a class="btn bg-pink btn-icon rounded-round"
-                            href="{{ route('studentquiz.result',['student_id'=> $value->id]) }}" data-popup="tooltip"
-                            data-placement="bottom" data-original-title="Student Quiz Result"><i
-                                class="icon-file-presentation "></i></a>
-
-                        <a class="btn bg-violet btn-icon rounded-round"
-                            href="{{ route('studentmockup.result',['student_id'=> $value->id]) }}" data-popup="tooltip"
-                            data-placement="bottom" data-original-title="Student Mockup Result"><i
-                                class="icon-stack-text"></i></a>
-
-                        <a data-toggle="modal" data-target="#modal_theme_warning"
-                            class="btn bg-danger-400 btn-icon rounded-round delete_student"
-                            link="{{route('student.delete',$value->id)}}" data-popup="tooltip"
-                            data-original-title="Delete" data-placement="bottom"><i class="icon-bin"></i></a>
                     </td>
                 </tr>
                 @endforeach
@@ -164,25 +118,6 @@
     </div>
 </div>
 
-<!-- Warning modal -->
-<div id="modal_theme_warning" class="modal fade" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                <center>
-                    <i class="icon-alert text-danger icon-3x"></i>
-                </center>
-                <br>
-                <center>
-                    <h2>Are You Sure Want To Delete ?</h2>
-                    <a class="btn btn-success get_link" href="">Yes, Delete It!</a>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                </center>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- /warning modal -->
 
 <!-- Warning modal -->
 <div id="modal_theme_status" class="modal fade" tabindex="-1">
@@ -200,7 +135,8 @@
                         ['id'=>'active','class'=>'form-control']) !!}
                     </div>
 
-                    {{ Form::hidden('student_id', '',['class'=>'student_id']) }}
+                    {!! Form::hidden('student_id', '',['id'=>'student_id']) !!}
+                    {!! Form::hidden('archive', 1,['class'=>'archive']) !!}
 
                 </div>
                 <div class="text-right">

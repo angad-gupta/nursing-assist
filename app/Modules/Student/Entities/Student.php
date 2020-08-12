@@ -7,10 +7,13 @@ use App\Modules\Enrolment\Entities\Enrolment;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\StudentResetPassword;
 use Illuminate\Contracts\Auth\CanResetPassword;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Student extends Authenticatable implements CanResetPassword
 {
     use Notifiable;
+
+    use SoftDeletes;
     
     const FILE_PATH = '/uploads/student/';
 

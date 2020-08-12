@@ -92,9 +92,8 @@
 
         if ($('#first_name').val() == '' && $('#last_name').val() == '' && $('#street').val() == '' && $(
                 '#suburb').val() == '' && $('#city').val() == '' && $('#state').val() == '' &&
-            $('#post_code').val() == '' && $('#intake_date').val() == '' && $('#agent').val() == 0 && $(
-                '#email').val() == '' && $('#phone').val() == '' &&
-            !$('#term_conditions_agree').is(":checked")) {
+            $('#post_code').val() == '' && $('#intake_date').val() == '' && $('#email').val() == '' && 
+            $('#phone').val() == '' && !$('#term_conditions_agree').is(":checked")) {
             alert('Please enter all fields');
             gotothen();
         } else {
@@ -167,14 +166,6 @@
             } else {
                 $('.intake_error').html('Select Intake Month');
                 $('#intake_date').focus();
-                gotothen();
-            }
-
-            if ($('#agent').val() > 0) {
-                $('.agent_error').html('');
-            } else {
-                $('.agent_error').html('Select Agent');
-                $('#agent').focus();
                 gotothen();
             }
 

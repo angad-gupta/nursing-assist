@@ -15,7 +15,11 @@ class StudentRepository implements StudentInterface
 
     public function findAll($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1])
     {
-        $result = Student::when(array_keys($filter, true), function ($query) use ($filter) {
+        $result = Student::when(array_keys($filter), function ($query) use ($filter) {
+
+            if (isset($filter['active'])) {
+                $query->where('active', $filter['active']);
+            }
 
             if (isset($filter['intake_date']) && !empty($filter['intake_date'])) {
                 $query->whereHas('enrolments', function ($qry) use ($filter) {
@@ -46,6 +50,31 @@ class StudentRepository implements StudentInterface
 
     }
 
+    public function findAllArchives($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1])
+    {
+        $result = Student::withTrashed()->when(array_keys($filter), function ($query) use ($filter) {
+
+            if (isset($filter['active'])) {
+                $query->where('active', $filter['active']);
+            }
+
+            if (isset($filter['search_value']) && !empty($filter['search_value'])) {
+                $query->where(function ($q) use ($filter) {
+                    $q->where('full_name', 'like', '%' . $filter['search_value'] . '%');
+                    $q->orWhere('username', 'like', '%' . $filter['search_value'] . '%');
+                    $q->orWhere('email', 'like', '%' . $filter['search_value'] . '%');
+                    $q->orWhere('phone_no', 'like', '%' . $filter['search_value'] . '%');
+                });
+
+            }
+
+        })->orderBy($sort['by'], $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+
+        return $result;
+
+    }
+
+
     public function find($id)
     {
         return Student::find($id);
@@ -64,7 +93,7 @@ class StudentRepository implements StudentInterface
 
     public function update($id, $data)
     {
-        $Student = Student::find($id);
+        $Student = Student::withTrashed()->find($id);
         return $Student->update($data);
     }
 

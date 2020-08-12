@@ -17,6 +17,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','permission']], funct
     
        
     Route::get('student', ['as' => 'student.index', 'uses' => 'StudentController@index']);
+    Route::get('student/archive', ['as' => 'student.indexArchive', 'uses' => 'StudentController@indexArchive']);
 
     Route::get('student/edit/{id}', ['as' => 'student.edit', 'uses' => 'StudentController@edit'])->where('id','[0-9]+');
     Route::put('student/update/{id}', ['as' => 'student.update', 'uses' => 'StudentController@update'])->where('id','[0-9]+');

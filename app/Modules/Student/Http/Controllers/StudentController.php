@@ -4,7 +4,6 @@ namespace App\Modules\Student\Http\Controllers;
 
 use App\Modules\Agent\Repositories\AgentInterface;
 use App\Modules\CourseInfo\Repositories\CourseInfoInterface;
-use App\Modules\Home\Emails\SendNetaMail;
 use App\Modules\Quiz\Repositories\QuizInterface;
 use App\Modules\Student\Repositories\StudentInterface;
 use App\Modules\Student\Repositories\StudentPaymentInterface;
@@ -13,7 +12,6 @@ use Illuminate\Http\Response;
 
 // Mail
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Mail;
 
 class StudentController extends Controller
 {
@@ -60,6 +58,18 @@ class StudentController extends Controller
         return view('student::student.index', $data);
     }
 
+    public function indexArchive(Request $request)
+    {
+        $search = $request->all();
+        $sort_by = ['by' => 'id', 'sort' => 'DESC'];
+        if (isset($search['sort_by']) && !empty($search['sort_by'])) {
+            $sort_by = ['by' => 'full_name', 'sort' => $search['sort_by']];
+        }
+
+        $data['student'] = $this->student->findAllArchives($limit = 50, ['active' => 0], $sort_by);
+        return view('student::student.index-archive', $data);
+    }
+
     public function status(Request $request)
     {
         $input = $request->all();
@@ -69,6 +79,10 @@ class StudentController extends Controller
             $studentData = array(
                 'active' => $input['active'],
             );
+
+            if(isset($input['archive']) && $input['archive'] == 1 && $input['active'] == 1) {
+                $studentData['deleted_at'] = null;
+            } 
 
             $this->student->update($student_id, $studentData);
 
@@ -135,7 +149,7 @@ class StudentController extends Controller
         try {
             $studentSData = array(
                 'moved_to_student' => $moved_to_student,
-                'moved_date' => date('Y-m-d')
+                'moved_date' => date('Y-m-d'),
             );
 
             $this->student->updatePaymentStatus($payment_id, $studentSData);
@@ -251,6 +265,7 @@ class StudentController extends Controller
     public function destroy($id)
     {
         try {
+            $this->student->update($id, ['active' => 0]);
             $this->student->delete($id);
             alertify()->success('Student Deleted Successfully');
         } catch (\Throwable $e) {
