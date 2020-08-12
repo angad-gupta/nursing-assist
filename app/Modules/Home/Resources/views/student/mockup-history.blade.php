@@ -34,40 +34,54 @@
 
 			 	@php 
             	if (preg_match('/[\[\]\'^£$%&*()}{@#~?><>,|=_+¬-]/', $mockup->mockupInfo->correct_option))
-						{
-							$multipl_ans = json_decode($mockup->mockupInfo->correct_option);
-                    		$prefix = $option_val = '';
-                    		foreach($multipl_ans as $key => $ans){
-                    		 	$value = explode("_", $ans);
-                    			$answer_list = $value[0].' '.$value[1];  
+				{
+					$corr_ans = '';
+					$ans_array = [];
+					$multipl_ans = json_decode($mockup->mockupInfo->correct_option);
+					$prefix = $option_val = '';
+					foreach($multipl_ans as $key => $ans){
 
-                    			$option_val .= $prefix . ucwords($answer_list);
-								$prefix = ', ';
-                    		}
+						$ans_array[] = $ans == 'Option A' ? optional($mockup->mockupInfo)->option_1 : ($ans == 'Option B' ? optional($mockup->mockupInfo)->option_2 : ($ans == 'Option C' ? optional($mockup->mockupInfo)->option_3 : optional($mockup->mockupInfo)->option_4 ));
+						$value = explode("_", $ans);
+						$answer_list = $value[0].' '.$value[1];  
 
-						}else{
-							$option_val= $mockup->mockup->correct_option; 
-						}
+						$option_val .= $prefix . ucwords($answer_list);
+						$prefix = ', ';
+						
+					}
+					$corr_ans = implode(', ', $ans_array);
+
+				}else{
+					$option_val= $mockup->mockup->correct_option; 
+					$corr_ans = $option_val == 'Option A' ? optional($mockup->mockupInfo)->option_1 : ($option_val == 'Option B' ? optional($mockup->mockupInfo)->option_2 : ($option_val == 'Option C' ? optional($mockup->mockupInfo)->option_3 : optional($mockup->mockupInfo)->option_4 ));
+				}
 
 				if (preg_match('/[\[\]\'^£$%&*()}{@#~?><>,|=_+¬-]/', $mockup->answer))
-						{
-							$multipl_my_ans = json_decode($mockup->answer);
-                    		$mprefix = $moption_val = '';
-                    		foreach($multipl_my_ans as $key => $myans){
-                    		 	$mvalue = explode("_", $myans);
-                    			$manswer_list = $mvalue[0].' '.$mvalue[1];  
+				{
+					$stud_ans = '';
+					$stud_ans_array = [];
+					$multipl_my_ans = json_decode($mockup->answer);
+					$mprefix = $moption_val = '';
+					foreach($multipl_my_ans as $key => $myans){
+						
+						$stud_ans_array[] = $myans == 'Option A' ? optional($mockup->mockupInfo)->option_1 : ($myans == 'Option B' ? optional($mockup->mockupInfo)->option_2 : ($myans == 'Option C' ? optional($mockup->mockupInfo)->option_3 : optional($mockup->mockupInfo)->option_4 ));
+						$mvalue = explode("_", $myans);
+						$manswer_list = $mvalue[0].' '.$mvalue[1];  
 
-                    			$moption_val .= $mprefix . ucwords($manswer_list);
-								$mprefix = ', ';
-                    		}
+						$moption_val .= $mprefix . ucwords($manswer_list);
+						$mprefix = ', ';
+					}
+					$stud_ans = implode(', ', $stud_ans_array);
+				}else{
+					$moption_val= $mockup->answer; 
+					$stud_ans = $moption_val == 'Option A' ? optional($mockup->mockupInfo)->option_1 : ($moption_val == 'Option B' ? optional($mockup->mockupInfo)->option_2 : ($moption_val == 'Option C' ? optional($mockup->mockupInfo)->option_3 : optional($mockup->mockupInfo)->option_4 ));
+				}	
 
-						}else{
-							$moption_val= $mockup->answer; 
-						}	
+				$color_status = ($option_val == $moption_val) ? "text-success" : "text-danger";	
+				$main_color_status = ($option_val == $moption_val) ? "bg-success" : "bg-danger";	
 
-					$color_status = ($option_val == $moption_val) ? "text-success" : "text-danger";	
-					$main_color_status = ($option_val == $moption_val) ? "bg-success" : "bg-danger";	
-
+					
+					
             	@endphp
 
                 <div class="card">
@@ -80,8 +94,8 @@
                         <div class="card-body">
 
                         	
-                        	<p>Your Answer is <span class="{{$color_status}}"><b>{{ $moption_val }}</b></span></a>
-                            <p>Correct Answer is <span class="text-success"><b>{{ $option_val }}</b></span></a>
+                        	<p>Your Answer is: <span class="{{$color_status}}"><b>{{ $stud_ans }}</b></span></a>
+                            <p>Correct Answer is: <span class="text-success"><b>{{ $corr_ans }}</b></span></a>
                             </p>
                             <p>
                                 <span class="text-success"><b>Reason</b></span>: {!! optional($mockup->mockupInfo)->correct_answer_reason !!}
