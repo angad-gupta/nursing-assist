@@ -14,3 +14,4 @@ use Illuminate\Http\Request;
 */
 
 Route::get('enrolment/installment', ['as' => 'enrolment.installment', 'uses' => 'CronController@installmentNotification']);
+Route::get('mockuphistory', ['as' => 'mockuphistory', 'uses' => 'CronController@updateStudentMockupHistory']);
