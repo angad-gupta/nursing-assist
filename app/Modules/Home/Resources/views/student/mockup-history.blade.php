@@ -33,11 +33,11 @@
 			 	@foreach($mockup_histories as $kys => $mockup)
 
 			 	@php 
-            	if (preg_match('/[\[\]\'^£$%&*()}{@#~?><>,|=_+¬-]/', $mockup->mockupInfo->correct_option))
+            	if (preg_match('/[\[\]\'^£$%&*()}{@#~?><>,|=_+¬-]/', optional($mockup->mockupInfo)->correct_option))
 				{
 					$corr_ans = '';
 					$ans_array = [];
-					$multipl_ans = json_decode($mockup->mockupInfo->correct_option);
+					$multipl_ans = json_decode(optional($mockup->mockupInfo)->correct_option);
 					$prefix = $option_val = '';
 					foreach($multipl_ans as $key => $ans){
 
@@ -52,7 +52,7 @@
 					$corr_ans = implode(', ', $ans_array);
 
 				}else{
-					$option_val= $mockup->mockup->correct_option; 
+					$option_val= optional($mockup->mockupInfo)->correct_option; 
 					$corr_ans = $option_val == 'Option A' ? optional($mockup->mockupInfo)->option_1 : ($option_val == 'Option B' ? optional($mockup->mockupInfo)->option_2 : ($option_val == 'Option C' ? optional($mockup->mockupInfo)->option_3 : optional($mockup->mockupInfo)->option_4 ));
 				}
 
