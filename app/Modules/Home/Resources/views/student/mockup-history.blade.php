@@ -41,7 +41,7 @@
 					$prefix = $option_val = '';
 					foreach($multipl_ans as $key => $ans){
 
-						$ans_array[] = $ans == 'Option A' ? optional($mockup->mockupInfo)->option_1 : ($ans == 'Option B' ? optional($mockup->mockupInfo)->option_2 : ($ans == 'Option C' ? optional($mockup->mockupInfo)->option_3 : optional($mockup->mockupInfo)->option_4 ));
+						$ans_array[] = $ans == 'option_a' ? optional($mockup->mockupInfo)->option_1 : ($ans == 'option_b' ? optional($mockup->mockupInfo)->option_2 : ($ans == 'option_c' ? optional($mockup->mockupInfo)->option_3 : optional($mockup->mockupInfo)->option_4 ));
 						$value = explode("_", $ans);
 						$answer_list = $value[0].' '.$value[1];  
 
@@ -64,7 +64,7 @@
 					$mprefix = $moption_val = '';
 					foreach($multipl_my_ans as $key => $myans){
 						
-						$stud_ans_array[] = $myans == 'Option A' ? optional($mockup->mockupInfo)->option_1 : ($myans == 'Option B' ? optional($mockup->mockupInfo)->option_2 : ($myans == 'Option C' ? optional($mockup->mockupInfo)->option_3 : optional($mockup->mockupInfo)->option_4 ));
+						$stud_ans_array[] = $myans == 'option_a' ? optional($mockup->mockupInfo)->option_1 : ($myans == 'option_b' ? optional($mockup->mockupInfo)->option_2 : ($myans == 'option_c' ? optional($mockup->mockupInfo)->option_3 : optional($mockup->mockupInfo)->option_4 ));
 						$mvalue = explode("_", $myans);
 						$manswer_list = $mvalue[0].' '.$mvalue[1];  
 
