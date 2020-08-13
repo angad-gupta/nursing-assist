@@ -34,6 +34,7 @@ class Student extends Authenticatable implements CanResetPassword
         'active',
         'activation_code',
         'remember_token',
+        'deleted_at'
 
     ];
 
@@ -44,7 +45,7 @@ class Student extends Authenticatable implements CanResetPassword
         'remember_token',
         'created_at',
         'updated_at',
-
+        'deleted_at'
     ];
 
     public function getFileFullPathAttribute()

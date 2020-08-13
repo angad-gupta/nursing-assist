@@ -61,12 +61,13 @@ class StudentController extends Controller
     public function indexArchive(Request $request)
     {
         $search = $request->all();
+        $search['active'] = 0;
         $sort_by = ['by' => 'id', 'sort' => 'DESC'];
         if (isset($search['sort_by']) && !empty($search['sort_by'])) {
             $sort_by = ['by' => 'full_name', 'sort' => $search['sort_by']];
         }
 
-        $data['student'] = $this->student->findAllArchives($limit = 50, ['active' => 0], $sort_by);
+        $data['student'] = $this->student->findAllArchives($limit = 50, $search, $sort_by);
         return view('student::student.index-archive', $data);
     }
 
@@ -82,7 +83,9 @@ class StudentController extends Controller
 
             if(isset($input['archive']) && $input['archive'] == 1 && $input['active'] == 1) {
                 $studentData['deleted_at'] = null;
-            } 
+            } elseif($input['active'] == 0) {
+                $studentData['deleted_at'] = date('Y-m-d H:i:s');
+            }
 
             $this->student->update($student_id, $studentData);
 

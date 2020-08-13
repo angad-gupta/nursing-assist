@@ -196,8 +196,8 @@
                 <div class="form-group row">
                     <label class="col-form-label col-lg-3">Select Status:</label>
                     <div class="col-lg-9">
-                        {!! Form::select('active',[ '0'=>'In-Active','1'=>'Active'], $value = null,
-                        ['id'=>'active','class'=>'form-control']) !!}
+                        {!! Form::select('active',[ '0'=>'In-Active','1'=>'Active'], $value = null, 
+                        ['id'=>'active','class'=>'form-control','placeholder'=>'Select Status']) !!}
                     </div>
 
                     {{ Form::hidden('student_id', '',['class'=>'student_id']) }}
