@@ -243,7 +243,8 @@
                                                         <td>{{$value->total_question}}</td>
                                                         <td>{{$value->correct_answer}}</td>
                                                         <td>
-                                                        <div class="history-view"><a href="{{ route('mockup.history', $value->id) }}" class="btn e-btn">View Details</a></td>
+                                                            <div class="history-view"><a href="{{ route('mockup.history', $value->id) }}" class="btn e-btn">View Details</a></td>
+                                                      
                                                     </tr>
                                                     @endforeach
                                                 @endif

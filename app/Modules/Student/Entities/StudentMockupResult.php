@@ -22,4 +22,9 @@ class StudentMockupResult extends Model
     {
         return $this->belongsTo(Student::class, 'student_id', 'id');
     }
+
+    public function histories()
+    {
+        return $this->hasMany(StudentMockupHistory::class, 'mockup_result_id', 'id');
+    }
 }

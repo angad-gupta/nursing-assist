@@ -27,9 +27,9 @@
 			<div class="neta-head text-center m-5">
 				<h4 class="mb-0">Here are the answer sheets with Reason</h4>
 			</div>
-
+			
 			 <div class="accordion" id="accordionExample">
-
+			 	@if($mockup_histories->total() > 0)
 			 	@foreach($mockup_histories as $kys => $mockup)
 
 			 	@php 
@@ -110,8 +110,11 @@
 					{{ $mockup_histories->appends(request()->except('page'))->links()  }}
 					@endif
 				</span>
+				@else
+					<p class="text-center">No Data Found!!!</p>
+				@endif
             </div>
-
+			
 		</div>
 
 	<div class="col-sm-6 neta-about">
