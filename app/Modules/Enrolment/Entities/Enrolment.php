@@ -6,9 +6,12 @@ use App\Modules\CourseInfo\Entities\CourseInfo;
 use App\Modules\Student\Entities\Student;
 use App\Modules\Agent\Entities\Agent;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Enrolment extends Model
 {
+    use SoftDeletes;
+    
     const FILE_PATH = '/uploads/eligible_document/';
     const ID_PATH = '/uploads/student/identity_document/';
 

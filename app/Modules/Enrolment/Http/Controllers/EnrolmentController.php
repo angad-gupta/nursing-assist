@@ -597,4 +597,21 @@ class EnrolmentController extends Controller
 
     }
 
+      /**
+     * Remove the specified resource from storage.
+     * @param int $id
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        try {
+            $this->enrolment->delete($id);
+            alertify()->success('Enrolment Deleted Successfully');
+        } catch (\Throwable $e) {
+            alertify($e->getMessage())->error();
+        }
+        return redirect(route('enrolment.index'));
+    }
+
+
 }

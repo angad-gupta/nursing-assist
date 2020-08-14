@@ -16,6 +16,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'permission']], func
     Route::get('enrolment', ['as' => 'enrolment.index', 'uses' => 'EnrolmentController@index']);
     Route::get('enrolment/archive', ['as' => 'enrolment.indexArchive', 'uses' => 'EnrolmentController@indexArchive']);
 
+    Route::get('enrolment/delete/{id}', ['as' => 'enrolment.delete', 'uses' => 'EnrolmentController@destroy'])->where('id', '[0-9]+');
+
     Route::get('enrolment/viewUser', ['as' => 'enrolment.viewUser', 'uses' => 'EnrolmentController@viewUser']);
 
     Route::post('enrolment/update-status', ['as' => 'enrolment.updateStatus', 'uses' => 'EnrolmentController@updateStatus']);
