@@ -77,7 +77,7 @@ class StudentRepository implements StudentInterface
 
     public function find($id)
     {
-        return Student::find($id);
+        return Student::withTrashed()->find($id);
     }
 
     public function getList()

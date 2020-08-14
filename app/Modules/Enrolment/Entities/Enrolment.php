@@ -41,6 +41,7 @@ class Enrolment extends Model
         'payment_status',
         'payment_type',
         'status',
+        'deleted_at'
 
     ];
 

@@ -46,9 +46,49 @@ class EnrolmentRepository implements EnrolmentInterface
 
     }
 
+    public function findAllArchives($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1])
+    {
+        $result = Enrolment::onlyTrashed()->when(array_keys($filter), function ($query) use ($filter) {
+
+            if (isset($filter['active'])) {
+                if($filter['active'] == 1) {
+                    $query->where('status', '!=', 'Disapproved');
+                } else {
+                    $query->where('status', 'Disapproved');
+                }
+            }
+            
+
+            if (isset($filter['status']) && !empty($filter['status'])) {
+                $query->where('status', $filter['status']);
+            }
+            
+            if (isset($filter['agents']) && !empty($filter['agents'])) {
+                $query->whereHas('agent', function ($qry) use ($filter) {
+                    $qry->where('agents', $filter['agents']);
+                });
+            }
+
+            if (isset($filter['search_value']) && !empty($filter['search_value'])) {
+                $query->whereHas('student', function ($qry) use ($filter) {
+                    $qry->where(function ($q) use ($filter) {
+                        $q->where('full_name', 'like', '%' . $filter['search_value'] . '%');
+                        $q->orWhere('email', 'like', '%' . $filter['search_value'] . '%');
+                        $q->orWhere('phone_no', 'like', '%' . $filter['search_value'] . '%');
+                    });
+                });
+            }
+        })
+            ->orderBy($sort['by'], $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+
+        return $result;
+
+    }
+
+
     public function find($id)
     {
-        return Enrolment::find($id);
+        return Enrolment::withTrashed()->find($id);
     }
 
     public function getList()
@@ -64,7 +104,7 @@ class EnrolmentRepository implements EnrolmentInterface
 
     public function update($id, $data)
     {
-        $result = Enrolment::find($id);
+        $result = Enrolment::withTrashed()->find($id);
         return $result->update($data);
     }
 

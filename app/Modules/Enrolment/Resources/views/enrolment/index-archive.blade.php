@@ -11,7 +11,7 @@
 
         $('.update_status').on('click', function () {
             var enrolment_id = $(this).attr('enrolment_id');
-            $('.enrolment_id').val(enrolment_id);
+            $('#enrolment_id').val(enrolment_id);
         });
 
         $('.delete_recommend').on('click', function () {
@@ -151,11 +151,12 @@
                 <div class="form-group row">
                     <label class="col-form-label col-lg-3">Select Status: <span class="text-danger">*</span></label>
                     <div class="col-lg-9">
-                        {!! Form::select('status',['Pending'=> 'Pending', 'Approved'=>'Approve', 'Disapproved'=>'Disapprove'], $value = null,
-                        ['id'=>'status','class'=>'form-control','placeholder'=>'--Select Enrollment Status--']) !!}
+                        {!! Form::select('status',['Pending'=> 'Pending', 'Approved'=>'Approve'], $value = null,
+                        ['id'=>'status','class'=>'form-control']) !!}
                     </div>
 
-                    {{ Form::hidden('enrolment_id', '',['class'=>'enrolment_id']) }}
+                    {{ Form::hidden('enrolment_id', '',['id'=>'enrolment_id']) }}
+                    {!! Form::hidden('archive', '1',['id'=>'archive']) !!}
 
                 </div>
                 <div class="text-right">

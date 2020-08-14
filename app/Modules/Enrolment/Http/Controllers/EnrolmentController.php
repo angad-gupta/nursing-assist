@@ -71,7 +71,7 @@ class EnrolmentController extends Controller
     public function index(Request $request)
     {
         $search = $request->all();
-        $search['active'] = 1;
+        //$search['active'] = 1;
         $data['enrolment'] = $this->enrolment->findAll($limit = 50, $search);
         $data['agents'] = $this->agent->getList();
         return view('enrolment::enrolment.index', $data);
@@ -81,10 +81,9 @@ class EnrolmentController extends Controller
     {
         $search = $request->all();
         //$search['status'] = 'Disapproved';
-        $search['active'] = 0;
-        $sort_by = ['by' => 'id', 'sort' => 'DESC'];
+        //$search['active'] = 0;
 
-        $data['enrolment'] = $this->enrolment->findAll($limit = 50, $search);
+        $data['enrolment'] = $this->enrolment->findAllArchives($limit = 50, $search);
         $data['agents'] = $this->agent->getList();
 
         return view('enrolment::enrolment.index-archive', $data);
@@ -435,6 +434,12 @@ class EnrolmentController extends Controller
     {
         $data = $request->all();
         try {
+            if(isset($data['archive']) && $data['archive'] == 1 && ($data['status'] == 'Pending' || $data['status'] == 'Approved')) {
+                $data['deleted_at'] = null;
+            } else {
+                $data['deleted_at'] = date('Y-m-d H:i:s');
+            } 
+
             $this->enrolment->update($data['enrolment_id'], $data);
             alertify('Status Updated Succesfully!')->success();
         } catch (\Throwable $e) {
@@ -605,6 +610,7 @@ class EnrolmentController extends Controller
     public function destroy($id)
     {
         try {
+            $this->enrolment->update($id, ['status' => 'Disapproved']);
             $this->enrolment->delete($id);
             alertify()->success('Enrolment Deleted Successfully');
         } catch (\Throwable $e) {
