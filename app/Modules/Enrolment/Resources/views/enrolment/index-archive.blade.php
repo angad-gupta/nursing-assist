@@ -44,14 +44,14 @@
 @stop
 @section('content')
 
-@include('enrolment::enrolment.partial.filter')
+@include('enrolment::enrolment.partial.filter-archive')
 
 <div class="card">
     <div class="card-header header-elements-inline">
         <h5 class="card-title">List of Enrolment Detail</h5>
         <div class="text-right">
-            <a href="{{ route('enrolment.indexArchive') }}" class="btn bg-warning">
-                <b>Archived Enrolments</b>
+            <a href="{{ route('enrolment.index') }}" class="btn bg-warning">
+                <b>Active Enrolments</b>
             </a>
         </div>
     </div>
@@ -90,12 +90,12 @@
                             class="btn bg-danger-400 btn-icon rounded-round view_detail" enrolment_id="{{$value->id}}"
                             data-popup="tooltip" data-original-title="View Detail" data-placement="bottom"><i
                                 class="icon-eye"></i></a>
-                        @if($value->status == 'Pending')
+                       
                         <a data-toggle="modal" data-target="#modal_theme_status"
                             class="btn bg-success-400 btn-icon rounded-round update_status"
                             enrolment_id="{{ $value->id}}" data-popup="tooltip" data-original-title="Status Update"
                             data-placement="bottom"><i class="icon-flip-horizontal2"></i></a>
-                        @endif
+                     
                     </td>
 
                 </tr>
@@ -151,7 +151,7 @@
                 <div class="form-group row">
                     <label class="col-form-label col-lg-3">Select Status: <span class="text-danger">*</span></label>
                     <div class="col-lg-9">
-                        {!! Form::select('status',[ 'Approved'=>'Approve','Disapproved'=>'Disapprove'], $value = null,
+                        {!! Form::select('status',['Pending'=> 'Pending', 'Approved'=>'Approve', 'Disapproved'=>'Disapprove'], $value = null,
                         ['id'=>'status','class'=>'form-control','placeholder'=>'--Select Enrollment Status--']) !!}
                     </div>
 

@@ -2,6 +2,7 @@
 
 namespace App\Modules\Enrolment\Http\Controllers;
 
+use App\Modules\Agent\Repositories\AgentInterface;
 use App\libraries\Commonwealth\lib\Simplify;
 use App\Modules\CourseInfo\Repositories\CourseInfoInterface;
 use App\Modules\Course\Repositories\CourseInterface;
@@ -39,6 +40,10 @@ class EnrolmentController extends Controller
      * @var StudentInterface
      */
     protected $student;
+       /**
+     * @var AgentInterface
+     */
+    protected $agent;
 
     public function __construct(
         EnrolmentInterface $enrolment,
@@ -47,7 +52,8 @@ class EnrolmentController extends Controller
         EnrolmentPaymentInterface $enrolpayment,
         StudentPaymentInterface $studentpayment,
         StudentPaymentInstallmentInterface $studentPaymentInstallment,
-        StudentInterface $student) {
+        StudentInterface $student,
+        AgentInterface $agent) {
         $this->enrolment = $enrolment;
         $this->courseinfo = $courseinfo;
         $this->course = $course;
@@ -55,7 +61,7 @@ class EnrolmentController extends Controller
         $this->studentpayment = $studentpayment;
         $this->studentPaymentInstallment = $studentPaymentInstallment;
         $this->student = $student;
-
+        $this->agent = $agent;
     }
 
     /**
@@ -65,9 +71,25 @@ class EnrolmentController extends Controller
     public function index(Request $request)
     {
         $search = $request->all();
+        $search['active'] = 1;
         $data['enrolment'] = $this->enrolment->findAll($limit = 50, $search);
+        $data['agents'] = $this->agent->getList();
         return view('enrolment::enrolment.index', $data);
     }
+
+    public function indexArchive(Request $request)
+    {
+        $search = $request->all();
+        //$search['status'] = 'Disapproved';
+        $search['active'] = 0;
+        $sort_by = ['by' => 'id', 'sort' => 'DESC'];
+
+        $data['enrolment'] = $this->enrolment->findAll($limit = 50, $search);
+        $data['agents'] = $this->agent->getList();
+
+        return view('enrolment::enrolment.index-archive', $data);
+    }
+
 
     public function viewUser(Request $request)
     {

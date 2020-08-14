@@ -14,6 +14,7 @@
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'permission']], function () {
 
     Route::get('enrolment', ['as' => 'enrolment.index', 'uses' => 'EnrolmentController@index']);
+    Route::get('enrolment/archive', ['as' => 'enrolment.indexArchive', 'uses' => 'EnrolmentController@indexArchive']);
 
     Route::get('enrolment/viewUser', ['as' => 'enrolment.viewUser', 'uses' => 'EnrolmentController@viewUser']);
 
