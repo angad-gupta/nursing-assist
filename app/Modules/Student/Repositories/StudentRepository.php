@@ -254,4 +254,9 @@ class StudentRepository implements StudentInterface
             ->latest()->first();
     }
 
+    public function getQuizForCourseInfo($student_id, $courseContentId)
+    {
+        return StudentQuizResult::where('student_id', '=', $student_id)->where('course_content_id', '=', $courseContentId)->first();
+    }
+
 }

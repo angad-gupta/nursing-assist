@@ -10,8 +10,8 @@ use App\Modules\Mockup\Repositories\MockupInterface;
 use App\Modules\Quiz\Repositories\QuizInterface;
 use App\Modules\Resource\Repositories\ResourcesInterface;
 use App\Modules\Student\Repositories\StudentInterface;
-use App\Modules\Student\Repositories\StudentReadinessInterface;
 use App\Modules\Student\Repositories\StudentMockupInterface;
+use App\Modules\Student\Repositories\StudentReadinessInterface;
 use App\Modules\Syllabus\Repositories\SyllabusInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -145,9 +145,8 @@ class DashboardController extends Controller
         $id = Auth::guard('student')->user()->id;
         $course_info_id = $input['course_info_id'];
 
-        $condition = ['student_id'=> $id, 'courseinfo_id'=> $course_info_id];
+        $condition = ['student_id' => $id, 'courseinfo_id' => $course_info_id];
         $data['courseInfo'] = $this->student->getStudentCourseInfo($condition);
-        
 
         $data['syllabus_info'] = $this->coursecontent->getAllCourses($course_info_id);
         $data['course_info_id'] = $course_info_id;
@@ -212,12 +211,10 @@ class DashboardController extends Controller
 
         $lessonInfo = $this->coursecontent->find($courseContentId);
 
-        $checkQuiz = $this->student->checkQuizForCourseInfo($student_id, $courseContentId);
-        if ($checkQuiz > 0) {
-
+        $checkQuiz = $this->student->getQuizForCourseInfo($student_id, $courseContentId);
+        if (!empty($checkQuiz) && $checkQuiz->percent >= 80) {
             Flash('Practise Test Already Taken.Please Proceed Next Course.')->success();
             return redirect(route('syllabus-detail', ['course_info_id' => $lessonInfo->course_info_id]));
-
         }
 
         $sort_order = $lessonInfo->sort_order;
@@ -368,7 +365,7 @@ class DashboardController extends Controller
         $student_id = Auth::guard('student')->user()->id;
 
         try {
-       
+
             $mockup_history = $this->student->getmockupHistory($student_id, $mockup_title);
             $correct_answer = $this->student->getmockupcorrectAnswer($student_id, $mockup_title);
 
@@ -383,7 +380,7 @@ class DashboardController extends Controller
 
             $date = date('Y-m-d');
             $resultInfo = $this->studentMockup->checkMockupResult($student_id, $mockup_title, $date);
-            if(empty($resultInfo)) {
+            if (empty($resultInfo)) {
 
                 $mockup_result = array(
                     'student_id' => $student_id,
@@ -554,7 +551,7 @@ class DashboardController extends Controller
             $date = date('Y-m-d');
 
             $resultInfo = $this->studentMockup->checkMockupResult($student_id, $mockup_title, $date);
-            if(empty($resultInfo)) {
+            if (empty($resultInfo)) {
                 $mockup_result = array(
                     'student_id' => $student_id,
                     'mockup_title' => $mockup_title,
@@ -567,11 +564,10 @@ class DashboardController extends Controller
                 $result_id = $resultInfo->id;
             }
 
-
-          /*   if ($qkey == 1) {
-                $this->student->deleteMockuphistory($student_id, $mockup_title);
+            /*   if ($qkey == 1) {
+            $this->student->deleteMockuphistory($student_id, $mockup_title);
             }
- */
+             */
             $mockup_question = $this->mockup->find($question_id);
             if ($mockup_question->question_type == 'multiple') {
                 $question_option = json_encode($answers);
@@ -669,6 +665,5 @@ class DashboardController extends Controller
         }
 
     }
-
 
 }

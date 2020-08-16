@@ -58,5 +58,5 @@ interface StudentInterface
     public function getmockupcorrectAnswer($student_id, $mockup_title);
 
     public function getLatestQuizByStudent($student_id);
-
+    public function getQuizForCourseInfo($student_id, $courseContentId);
 }
