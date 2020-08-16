@@ -283,7 +283,7 @@
 
             setTimeout(function(){ 
                 ConfirmDialog(dt);
-            },5000);
+            },7200000);
           ///7200000
             Clock.start();
 
@@ -357,12 +357,13 @@
 
                         function refresh() {
                             //900000
-                            if(new Date().getTime() - time >= 60000) {
+                            if(new Date().getTime() - time > 1000000) {
                                 window.location = '{{route("student-courses")}}';
-                            } else  {
-                                setTimeout(refresh, 1000); 
-                                //Clock.resume();
-                            } 
+                            } else if(new Date().getTime() - time < 900000) { 
+                                setTimeout(refresh, 1000);                                 
+                            } else {
+                                Clock.resume();
+                            }
                         }
 
                         setTimeout(refresh, 1000);
