@@ -14,11 +14,6 @@
             $('#enrolment_id').val(enrolment_id);
         });
 
-        $('.delete_recommend').on('click', function () {
-            var link = $(this).attr('link');
-            $('.get_link').attr('href', link);
-        });
-
         $('.view_detail').on('click', function () {
             var enrolment_id = $(this).attr('enrolment_id');
 
