@@ -440,7 +440,7 @@ class DashboardController extends Controller
         $input = $request->all();
 
         $readline_title = $input['readline_title'];
-        $mockupInfo = $this->mockup->getRandomQuestion(100, ['readline_title' => $readline_title]);
+        $mockupInfo = $this->mockup->getRandomQuestion(250, ['readline_title' => $readline_title]);
         if (sizeof($mockupInfo) > 0) {
             $data['mockupInfo'] = $mockupInfo;
             $data['readline_title'] = $readline_title;
@@ -508,7 +508,7 @@ class DashboardController extends Controller
 
             $total_attempt_question = count($mockup_history);
             //$total_question = $this->mockup->getTotalQuestionsByTitle($title, date('Y-m-d H:i:s'));
-            $total_question = 100;
+            $total_question = 250;
             $correctPercent = ($correct_answer / $total_question) * 100;
 
             $data['correct_percent'] = $correct_percent = number_format($correctPercent, 2);

@@ -1,6 +1,7 @@
 @include('home::layouts.navbar-inner')
 <style>
 .bootbox.modal {z-index: 9999 !important;}
+#time { float:right; background-color: cyan; font-size:x-large}
 </style>
 
 <section class="neta-ribbon">
@@ -52,7 +53,7 @@
             </div>
 
             <div class="col-sm-12" style="display:none" id="readine_questions">
-                <h6 class="p-0 mb-0"> <label id="question_number">1</label> out of {{$mockupInfo->count()}}</h6>
+                <h6 class="p-0 mb-0"> <label id="question_number">1</label> out of {{$mockupInfo->count()}}  <p id="time"></p></h6>
                
                     {!! Form::open(['route'=>'readline-question.store','method'=>'POST','id'=>'studentmockup_submit','class'=>'form-horizontal','role'=>'form','files'=> true]) !!}
 
@@ -300,10 +301,12 @@
                 },
                 success: function(res) {
                     if(res.status == 1) {
+                        countdownTimeStart();
                         $('#readine_questions').css('display', '');
                         $('#ready_div').css('display', 'none');
                         $('#start_time').val(res.start_time);
                         $('#result_id').val(res.result_id);
+                        
                     } else {
                         alert('Error!');
                     }
@@ -386,6 +389,34 @@
                 },
             }
         });
+    }
+
+    function countdownTimeStart(){
+
+        var countDownDate = new Date().getTime();
+        // Update the count down every 1 second
+        var x = setInterval(function() {
+
+            // Get todays date and time
+            var now = new Date().getTime();
+
+            // Find the distance between now an the count down date
+            var distance = now - countDownDate;
+            console.log(distance);
+            // Time calculations for days, hours, minutes and seconds
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            // Output the result in an element with id="demo"
+            document.getElementById("time").innerHTML = hours + ":"+ minutes + ":" + seconds;
+            
+            // If the count down is over, write some text 
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("time").innerHTML = "EXPIRED";
+            }
+        }, 1000);
     }
 
 
