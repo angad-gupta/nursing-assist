@@ -192,12 +192,6 @@
 <script src="{{asset('admin/global/js/plugins/notifications/bootbox.min.js')}}"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        //dailog box center screen
-      /*   var windowHeight = $(window).height();
-        var windowWidth = $(window).width();
-        var boxHeight = $('.modal-dialog').height();
-        var boxWidth = $('.modal-dialog').width();
-        $('.modal-dialog').css({'left' : ((windowWidth - boxWidth)/2), 'top' : ((windowHeight - boxHeight)/2)});  */
 
         $('.mockup_submit').on('click', function () {
             $('#loaderImg').show();
@@ -212,7 +206,6 @@
   
             var ans_array = [];
             if(question_type == 'multiple') {
-               // $('.question_option:eq('+index+'):checkbox:checked')
                 var checkedVals =  $('input[name="question_option_'+qkey+'[]"]:checked').map(function() {
                     ans_array.push(this.value);
                 });
@@ -290,8 +283,9 @@
 
             setTimeout(function(){ 
                 ConfirmDialog(dt);
-            },7200000);
+            },5000);
           ///7200000
+            Clock.start();
 
             $.ajax({
                 type:'GET',
@@ -301,7 +295,8 @@
                 },
                 success: function(res) {
                     if(res.status == 1) {
-                        countdownTimeStart();
+                        //countdownTimeStart();
+                       
                         $('#readine_questions').css('display', '');
                         $('#ready_div').css('display', 'none');
                         $('#start_time').val(res.start_time);
@@ -348,7 +343,7 @@
                                 }
                             }
                         })                       
-                        
+                        Clock.pause();
                         //show questions after 30 minutes
                         /* setTimeout(function(){ 
                             $('#readine_questions').css('display', '');
@@ -361,13 +356,16 @@
                         });
 
                         function refresh() {
-                            if(new Date().getTime() - time >= 900000) 
+                            //900000
+                            if(new Date().getTime() - time >= 60000) {
                                 window.location = '{{route("student-courses")}}';
-                            else 
-                                setTimeout(refresh, 10000);
+                            } else  {
+                                setTimeout(refresh, 1000); 
+                                //Clock.resume();
+                            } 
                         }
 
-                        setTimeout(refresh, 10000);
+                        setTimeout(refresh, 1000);
 
                         //auto form submit on time crosses 4h + 30 minutes break
                         setTimeout(function(){ 
@@ -391,7 +389,7 @@
         });
     }
 
-    function countdownTimeStart(){
+ /*    function countdownTimeStart(){
 
         var countDownDate = new Date().getTime();
         // Update the count down every 1 second
@@ -417,7 +415,45 @@
                 document.getElementById("time").innerHTML = "EXPIRED";
             }
         }, 1000);
-    }
+    } */
+
+    var Clock = {
+        totalSeconds: 0,
+
+        start: function () {
+            var self = this;
+
+            this.interval = setInterval(function () {
+                self.totalSeconds += 1;
+
+                // Time calculations for days, hours, minutes and seconds
+                var hours = Math.floor(self.totalSeconds / 3600);
+                var minutes = Math.floor(self.totalSeconds / 60 % 60);
+                var seconds = Math.floor(self.totalSeconds % 60);
+                document.getElementById("time").innerHTML = hours + ":"+ minutes + ":" + seconds;
+            
+            /*   $("#hour").text(Math.floor();
+                $("#min").text(Math.floor());
+                $("#sec").text(parseInt()); */
+            }, 1000);
+        },
+
+        pause: function () {
+            clearInterval(this.interval);
+            delete this.interval;
+        },
+
+        resume: function () {
+            if (!this.interval) this.start();
+        }
+    };
+
+       
+
+       /*  $('#pauseButton').click(function () { Clock.pause(); });
+        $('#resumeButton').click(function () { Clock.resume(); }); */
+
+
 
 
 </script>
