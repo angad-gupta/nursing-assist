@@ -1,5 +1,7 @@
 @include('home::layouts.navbar-inner')
-
+<style>
+#time { background-color: cyan; font-size:x-large;padding:5px 30px 5px 30px}
+</style>
 <section class="neta-ribbon">
     <img src="img/cc.jpg" class="img-fluid" alt="">
     <div class="container">
@@ -23,10 +25,30 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h2 class="ttl-line">{{ ucfirst(str_replace('_',' ',$mockup_title)) }}
-                </h2>
+                <h2 class="ttl-line">{{ ucfirst(str_replace('_',' ',$mockup_title)) }}</h2>
                 <p>Comprehension, Analysis and Application level questions from all categories using the Related
                     Courses. Complete the test in a quiet environment. </p>
+                
+                <div class="card card-body" id="timer_div">
+                    
+                    <div class="col-sm-12 row ">
+                        <div class="col-sm-12 row justify-content-center">
+                            <p id="time" class="text-center"></p>
+                        </div>
+                        <div class="col-sm-12 row justify-content-center">
+                            <div class="col-sm-2">
+                                <a id="pause_btn" 
+                                class="btn bg-danger btn-icon rounded-round" data-popup="tooltip">Pause Timer</a>
+                            
+                            </div>
+                            <div class="col-sm-2">
+                                <a id="resume_btn" 
+                                    class="btn bg-danger btn-icon rounded-round" data-popup="tooltip" >Resume Timer</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <div class="col-sm-12">
@@ -150,6 +172,9 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        Clock.start();
+        $('#pause_btn').click(function () { Clock.pause(); });
+        $('#resume_btn').click(function () { Clock.resume(); });
 
         $('.mockup_submit').on('click', function () {
             $('#loaderImg').show();
@@ -236,5 +261,32 @@
         });
 
     });
+
+    var Clock = {
+        totalSeconds: 0,
+
+        start: function () {
+            var self = this;
+
+            this.interval = setInterval(function () {
+                self.totalSeconds += 1;
+
+                // Time calculations for days, hours, minutes and seconds
+                var hours = Math.floor(self.totalSeconds / 3600);
+                var minutes = Math.floor(self.totalSeconds / 60 % 60);
+                var seconds = Math.floor(self.totalSeconds % 60);
+                document.getElementById("time").innerHTML = hours + ":"+ minutes + ":" + seconds;
+            }, 1000);
+        },
+
+        pause: function () {
+            clearInterval(this.interval);
+            delete this.interval;
+        },
+
+        resume: function () {
+            if (!this.interval) this.start();
+        }
+    };
 
 </script>

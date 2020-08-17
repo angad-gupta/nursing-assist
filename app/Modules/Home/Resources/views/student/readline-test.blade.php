@@ -44,7 +44,7 @@
                            
                         </div>
                         <div class="col-sm-3">
-                            <a href="{{route('student-courses')}}" id="begin_btn" 
+                            <a href="{{route('student-courses')}}"
                                 class="btn bg-danger btn-icon rounded-round" data-popup="tooltip" >Return to Learner's Portal</a>
                         </div>
                     </div>
@@ -390,34 +390,6 @@
         });
     }
 
- /*    function countdownTimeStart(){
-
-        var countDownDate = new Date().getTime();
-        // Update the count down every 1 second
-        var x = setInterval(function() {
-
-            // Get todays date and time
-            var now = new Date().getTime();
-
-            // Find the distance between now an the count down date
-            var distance = now - countDownDate;
-            console.log(distance);
-            // Time calculations for days, hours, minutes and seconds
-            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
-            // Output the result in an element with id="demo"
-            document.getElementById("time").innerHTML = hours + ":"+ minutes + ":" + seconds;
-            
-            // If the count down is over, write some text 
-            if (distance < 0) {
-                clearInterval(x);
-                document.getElementById("time").innerHTML = "EXPIRED";
-            }
-        }, 1000);
-    } */
-
     var Clock = {
         totalSeconds: 0,
 
@@ -432,10 +404,7 @@
                 var minutes = Math.floor(self.totalSeconds / 60 % 60);
                 var seconds = Math.floor(self.totalSeconds % 60);
                 document.getElementById("time").innerHTML = hours + ":"+ minutes + ":" + seconds;
-            
-            /*   $("#hour").text(Math.floor();
-                $("#min").text(Math.floor());
-                $("#sec").text(parseInt()); */
+
             }, 1000);
         },
 
@@ -448,13 +417,5 @@
             if (!this.interval) this.start();
         }
     };
-
-       
-
-       /*  $('#pauseButton').click(function () { Clock.pause(); });
-        $('#resumeButton').click(function () { Clock.resume(); }); */
-
-
-
 
 </script>
