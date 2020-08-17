@@ -476,10 +476,11 @@ class EnrolmentController extends Controller
                 Simplify::$privateKey = env('LIVE_PRIVATE_KEY');
 
                 if (isset($data['simplifyToken']) && $data['simplifyToken'] != '') {
-
+                    $installment_amt = 1;
                     $payment = \Simplify_Payment::createPayment(array(
                         'reference' => 'enrol_' . $enrolment_id, //optional Custom reference field to be used with outside systems.
                         'amount' => ($installment_amt * 100),
+                        //'amount' => 100,
                         'description' => $description,
                         'currency' => 'AUD',
                         'token' => $data['simplifyToken'],
