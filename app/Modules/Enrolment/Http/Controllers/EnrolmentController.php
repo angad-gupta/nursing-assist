@@ -581,7 +581,7 @@ class EnrolmentController extends Controller
             }
 
         } catch (\Throwable $e) {
-            Flash($e->getMessage())->error();
+            Flash('Something Wrong with Card Details')->error();
         }
         return redirect()->route('student-dashboard');
     }
