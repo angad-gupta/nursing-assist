@@ -203,7 +203,7 @@ class EnrolmentController extends Controller
                 }
 
                 if (isset($data['simplifyToken']) && $data['simplifyToken'] != '') {
-                    $fee_in_cwbank = 1;
+                    //$fee_in_cwbank = 1;
                     $payment = \Simplify_Payment::createPayment(array(
                         'reference' => 'enrol_' . $enrolment_id, //optional Custom reference field to be used with outside systems.
                         'amount' => ($fee_in_cwbank * 100),
@@ -477,7 +477,7 @@ class EnrolmentController extends Controller
                 Simplify::$privateKey = env('LIVE_PRIVATE_KEY');
 
                 if (isset($data['simplifyToken']) && $data['simplifyToken'] != '') {
-                    $installment_amt = 1;
+                    //$installment_amt = 1;
                     $payment = \Simplify_Payment::createPayment(array(
                         'reference' => 'enrol_' . $enrolment_id, //optional Custom reference field to be used with outside systems.
                         'amount' => ($installment_amt * 100),
