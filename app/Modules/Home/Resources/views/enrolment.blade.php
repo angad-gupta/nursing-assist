@@ -48,7 +48,7 @@
             $('#process-payment-btn').prepend('<i class="icon-spinner4 spinner"></i>');
             // Generate a card token & handle the response
             SimplifyCommerce.generateToken({
-                key: "lvpb_YTg3MDE2NjYtYzYzYy00YzkyLTgwYjEtMTViNWRjNGFhNzk3", //public key
+                key: "lvpb_MGQzNTNiMjctYzdhZC00MDk1LWFkYTctZmFhMDQ4OTdjMjkz", //public key
                 card: {
                     name: $('#card_holder_name').val(),
                     number: $("#cc-number").val(),
