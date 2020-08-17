@@ -472,8 +472,8 @@ class EnrolmentController extends Controller
                     $description = 'Final Installment of ' . $course_program_title . ' Course Enrolment';
                 }
                 //common wealth function
-                Simplify::$publicKey = env('SANDBOX_PUBLIC_KEY');
-                Simplify::$privateKey = env('SANDBOX_PRIVATE_KEY');
+                Simplify::$publicKey = env('LIVE_PUBLIC_KEY');
+                Simplify::$privateKey = env('LIVE_PRIVATE_KEY');
 
                 if (isset($data['simplifyToken']) && $data['simplifyToken'] != '') {
 
