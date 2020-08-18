@@ -1,6 +1,7 @@
 @include('home::layouts.navbar-inner')
 <style>
 .bootbox.modal {z-index: 9999 !important;}
+#time { float:right; background-color: cyan; font-size:x-large}
 </style>
 
 <section class="neta-ribbon">
@@ -43,7 +44,7 @@
                            
                         </div>
                         <div class="col-sm-3">
-                            <a href="{{route('student-courses')}}" id="begin_btn" 
+                            <a href="{{route('student-courses')}}"
                                 class="btn bg-danger btn-icon rounded-round" data-popup="tooltip" >Return to Learner's Portal</a>
                         </div>
                     </div>
@@ -52,7 +53,7 @@
             </div>
 
             <div class="col-sm-12" style="display:none" id="readine_questions">
-                <h6 class="p-0 mb-0"> <label id="question_number">1</label> out of {{$mockupInfo->count()}}</h6>
+                <h6 class="p-0 mb-0"> <label id="question_number">1</label> out of {{$mockupInfo->count()}}  <p id="time"></p></h6>
                
                     {!! Form::open(['route'=>'readline-question.store','method'=>'POST','id'=>'studentmockup_submit','class'=>'form-horizontal','role'=>'form','files'=> true]) !!}
 
@@ -191,12 +192,6 @@
 <script src="{{asset('admin/global/js/plugins/notifications/bootbox.min.js')}}"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        //dailog box center screen
-      /*   var windowHeight = $(window).height();
-        var windowWidth = $(window).width();
-        var boxHeight = $('.modal-dialog').height();
-        var boxWidth = $('.modal-dialog').width();
-        $('.modal-dialog').css({'left' : ((windowWidth - boxWidth)/2), 'top' : ((windowHeight - boxHeight)/2)});  */
 
         $('.mockup_submit').on('click', function () {
             $('#loaderImg').show();
@@ -211,7 +206,6 @@
   
             var ans_array = [];
             if(question_type == 'multiple') {
-               // $('.question_option:eq('+index+'):checkbox:checked')
                 var checkedVals =  $('input[name="question_option_'+qkey+'[]"]:checked').map(function() {
                     ans_array.push(this.value);
                 });
@@ -291,6 +285,7 @@
                 ConfirmDialog(dt);
             },7200000);
           ///7200000
+            Clock.start();
 
             $.ajax({
                 type:'GET',
@@ -300,10 +295,13 @@
                 },
                 success: function(res) {
                     if(res.status == 1) {
+                        //countdownTimeStart();
+                       
                         $('#readine_questions').css('display', '');
                         $('#ready_div').css('display', 'none');
                         $('#start_time').val(res.start_time);
                         $('#result_id').val(res.result_id);
+                        
                     } else {
                         alert('Error!');
                     }
@@ -345,7 +343,7 @@
                                 }
                             }
                         })                       
-                        
+                        Clock.pause();
                         //show questions after 30 minutes
                         /* setTimeout(function(){ 
                             $('#readine_questions').css('display', '');
@@ -358,13 +356,17 @@
                         });
 
                         function refresh() {
-                            if(new Date().getTime() - time >= 900000) 
+                            //900000
+                            if(new Date().getTime() - time > 1000000) {
                                 window.location = '{{route("student-courses")}}';
-                            else 
-                                setTimeout(refresh, 10000);
+                            } else if(new Date().getTime() - time < 900000) { 
+                                setTimeout(refresh, 1000);                                 
+                            } else {
+                                Clock.resume();
+                            }
                         }
 
-                        setTimeout(refresh, 10000);
+                        setTimeout(refresh, 1000);
 
                         //auto form submit on time crosses 4h + 30 minutes break
                         setTimeout(function(){ 
@@ -388,5 +390,32 @@
         });
     }
 
+    var Clock = {
+        totalSeconds: 0,
+
+        start: function () {
+            var self = this;
+
+            this.interval = setInterval(function () {
+                self.totalSeconds += 1;
+
+                // Time calculations for days, hours, minutes and seconds
+                var hours = Math.floor(self.totalSeconds / 3600);
+                var minutes = Math.floor(self.totalSeconds / 60 % 60);
+                var seconds = Math.floor(self.totalSeconds % 60);
+                document.getElementById("time").innerHTML = hours + ":"+ minutes + ":" + seconds;
+
+            }, 1000);
+        },
+
+        pause: function () {
+            clearInterval(this.interval);
+            delete this.interval;
+        },
+
+        resume: function () {
+            if (!this.interval) this.start();
+        }
+    };
 
 </script>
