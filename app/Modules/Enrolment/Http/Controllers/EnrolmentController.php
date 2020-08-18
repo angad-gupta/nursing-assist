@@ -190,8 +190,8 @@ class EnrolmentController extends Controller
                 //$amount = Session::put('amount', $courseInfo->course_fee);
 
                 //common wealth function
-                Simplify::$publicKey = env('SANDBOX_PUBLIC_KEY');
-                Simplify::$privateKey = env('SANDBOX_PRIVATE_KEY');
+                Simplify::$publicKey = env('LIVE_PUBLIC_KEY');
+                Simplify::$privateKey = env('LIVE_PRIVATE_KEY');
 
                 if ($courseInfo->payment_mode != 'one off payment' && $data['payment_type'] == 1) {
                     $fee_in_cwbank = str_replace(',', '', $total_course_fee) * 0.025 + 1500;
@@ -203,7 +203,7 @@ class EnrolmentController extends Controller
                 }
 
                 if (isset($data['simplifyToken']) && $data['simplifyToken'] != '') {
-
+                    //$fee_in_cwbank = 1;
                     $payment = \Simplify_Payment::createPayment(array(
                         'reference' => 'enrol_' . $enrolment_id, //optional Custom reference field to be used with outside systems.
                         'amount' => ($fee_in_cwbank * 100),
@@ -471,15 +471,17 @@ class EnrolmentController extends Controller
                     $installment_amt = $student_payment->status == 'First Installment Paid' ? 4000 : 1500;
                     $description = 'Final Installment of ' . $course_program_title . ' Course Enrolment';
                 }
+              
                 //common wealth function
-                Simplify::$publicKey = env('SANDBOX_PUBLIC_KEY');
-                Simplify::$privateKey = env('SANDBOX_PRIVATE_KEY');
+                Simplify::$publicKey = env('LIVE_PUBLIC_KEY');
+                Simplify::$privateKey = env('LIVE_PRIVATE_KEY');
 
                 if (isset($data['simplifyToken']) && $data['simplifyToken'] != '') {
-
+                    //$installment_amt = 1;
                     $payment = \Simplify_Payment::createPayment(array(
                         'reference' => 'enrol_' . $enrolment_id, //optional Custom reference field to be used with outside systems.
                         'amount' => ($installment_amt * 100),
+                        //'amount' => 100,
                         'description' => $description,
                         'currency' => 'AUD',
                         'token' => $data['simplifyToken'],
@@ -581,7 +583,7 @@ class EnrolmentController extends Controller
             }
 
         } catch (\Throwable $e) {
-            Flash($e->getMessage())->error();
+            Flash('Something Wrong with Card Details')->error();
         }
         return redirect()->route('student-dashboard');
     }

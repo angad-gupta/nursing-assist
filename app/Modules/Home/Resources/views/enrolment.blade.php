@@ -48,7 +48,7 @@
             $('#process-payment-btn').prepend('<i class="icon-spinner4 spinner"></i>');
             // Generate a card token & handle the response
             SimplifyCommerce.generateToken({
-                key: "sbpb_OGUzNWUwMGQtOTZjZi00ODlhLWJmNjMtOTEwOGZjMmI4YTU4",
+                key: "lvpb_MGQzNTNiMjctYzdhZC00MDk1LWFkYTctZmFhMDQ4OTdjMjkz", //public key
                 card: {
                     name: $('#card_holder_name').val(),
                     number: $("#cc-number").val(),
@@ -569,7 +569,7 @@
                                                                     <div class="col-sm-4">
                                                                         <div class="form-group">
                                                                             <label for="">CVC: <span class="text-danger">*</span></label>
-                                                                            <input type="password" name="ccv" id="cc-cvc" class="form-control" maxlength="4" autocomplete="off" placeholder="Enter CVC">
+                                                                            <input type="password" name="ccv" id="cc-cvc" class="form-control" maxlength="4" autocomplete="off" placeholder="Enter CVC" required>
                                                                         </div>
                                                                     </div>
 
@@ -654,7 +654,7 @@
                                                         <button class="btn action-button" name="submit_enrol"
                                                             value="payment" id="process-payment-btn">Make Payment</button>
                                                         <button class="btn action-button" name="submit_enrol"
-                                                            value="pay_later" id="paylater-btn">Pay Later</button>
+                                                            value="pay_later" id="paylater-btn">Pay to Agent</button>
                                                     </div>
 
                                                     <div class="col-sm-12 neta-about row justify-content-center">
