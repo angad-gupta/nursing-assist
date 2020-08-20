@@ -621,5 +621,55 @@ class EnrolmentController extends Controller
         return redirect(route('enrolment.index'));
     }
 
+    public function payment_3ds()
+    {
+        return view('enrolment::enrolment.3ds');
+    }
 
+    public function payPayment(Request $request)
+    {
+        $data = $request->all();
+        try {
+            Simplify::$publicKey = env('LIVE_PUBLIC_KEY');
+            Simplify::$privateKey = env('LIVE_PRIVATE_KEY');
+
+           /*  $cardToken = \Simplify_CardToken::createCardToken(array(
+                'card' => array(
+                    'expMonth' => $data['cc_exp_month'],
+                    'expYear' => $data['cc_exp_year'],
+                    'cvc' => $data['cc_cvc'],
+                    'number' => $data['cc_number']
+                ),
+                'secure3DRequestData' => array(
+                    'amount' => '100',
+                    'currency' => 'AUD',
+                    'description' => 'test payment'
+                )
+            )); */
+            return 1;
+        } catch(\Throwable $e) {
+            return 0;
+        }
+    }
+
+    public function completePayment(Request $request)
+    {
+        $data = $request->all();
+        try {
+            Simplify::$publicKey = env('LIVE_PUBLIC_KEY');
+            Simplify::$privateKey = env('LIVE_PRIVATE_KEY');
+
+          /*   $payment = \Simplify_Payment::createPayment(array(
+                'reference' => 'enrol_1', //optional Custom reference field to be used with outside systems.
+                'amount' => 100,
+                'description' => '3ds test payment',
+                'currency' => 'AUD',
+                'token' => $data['token'],
+            )); */
+
+            return 1;
+        } catch(\Throwable $e) {
+            return 0;
+        }
+    }
 }

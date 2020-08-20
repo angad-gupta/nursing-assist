@@ -22,6 +22,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'permission']], func
 
     Route::post('enrolment/update-status', ['as' => 'enrolment.updateStatus', 'uses' => 'EnrolmentController@updateStatus']);
 
+ 
+
 });
 
 Route::post('enrolmentstudent/store', ['as' => 'enrolmentstudent.store', 'uses' => 'EnrolmentController@store']);
@@ -37,3 +39,8 @@ Route::get('enrolmentstudent/error', ['as' => 'enrolmentstudent.error', 'uses' =
 //installment payment form
 Route::get('enrolment/installment/pay', ['as' => 'enrolment.installment.pay', 'uses' => 'EnrolmentController@viewInstallmentForm']);
 Route::post('enrolment/installment/pay/store', ['as' => 'enrolment.installment.pay.store', 'uses' => 'EnrolmentController@installmentPayment']);
+
+//3ds sample
+Route::get('enrolment/payment_3ds', ['as' => 'enrolment.payment_3ds', 'uses' => 'EnrolmentController@payment_3ds']);
+Route::post('enrolment/payment_3ds/pay', ['as' => 'enrolment.3ds.pay', 'uses' => 'EnrolmentController@payPayment']);
+Route::post('enrolment/payment_3ds/complete', ['as' => 'enrolment.3ds.complete', 'uses' => 'EnrolmentController@completePayment']);
