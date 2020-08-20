@@ -271,8 +271,14 @@ class DashboardController extends Controller
         $courseinfo_id = $input['courseinfo_id'];
         $course_content_id = $input['course_content_id'];
 
-        $checkQuiz = $this->student->checkQuizForCourseInfo($student_id, $course_content_id);
+       /*  $checkQuiz = $this->student->checkQuizForCourseInfo($student_id, $course_content_id);
         if ($checkQuiz > 0) {
+            Flash('Practise Test Already Taken.Please Proceed Next Course.')->success();
+            return redirect(route('syllabus-detail', ['course_info_id' => $courseinfo_id]));
+        } */
+
+        $checkQuiz = $this->student->getQuizForCourseInfo($student_id, $course_content_id);
+        if (!empty($checkQuiz) && $checkQuiz->percent >= 80) {
             Flash('Practise Test Already Taken.Please Proceed Next Course.')->success();
             return redirect(route('syllabus-detail', ['course_info_id' => $courseinfo_id]));
         }
