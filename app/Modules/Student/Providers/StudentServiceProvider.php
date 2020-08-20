@@ -9,6 +9,8 @@ use App\Modules\Student\Repositories\StudentPaymentInstallmentInterface;
 use App\Modules\Student\Repositories\StudentPaymentInstallmentRepository;
 use App\Modules\Student\Repositories\StudentReadinessInterface;
 use App\Modules\Student\Repositories\StudentReadinessRepository;
+use App\Modules\Student\Repositories\StudentPracticeInterface;
+use App\Modules\Student\Repositories\StudentPracticeRepository;
 use App\Modules\Student\Repositories\StudentMockupInterface;
 use App\Modules\Student\Repositories\StudentMockupRepository;
 use App\Modules\Student\Repositories\StudentRepository;
@@ -49,6 +51,7 @@ class StudentServiceProvider extends ServiceProvider
         $this->studentRegister();
         $this->studentPaymentRegister();
         $this->studentReadinessRegister();
+        $this->studentPracticeRegister();
         $this->studentMockupRegister();
         $this->studentPaymentInstallmentRegister();
     }
@@ -66,6 +69,14 @@ class StudentServiceProvider extends ServiceProvider
         $this->app->bind(
             StudentReadinessInterface::class,
             StudentReadinessRepository::class
+        );
+    }
+
+    public function studentPracticeRegister()
+    {
+        $this->app->bind(
+            StudentPracticeInterface::class,
+            StudentPracticeRepository::class
         );
     }
 
