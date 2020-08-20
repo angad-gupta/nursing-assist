@@ -217,7 +217,8 @@ class HomeController extends Controller
 
     public function paymentPlan()
     {
-        return view('home::payment-plan');
+        $data['payment_plan'] = $this->page->getBySlug('fee_and_payment_plan');
+        return view('home::payment-plan', $data);
 
     }
 

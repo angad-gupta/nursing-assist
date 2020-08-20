@@ -2,7 +2,7 @@
 
 namespace App\Modules\Student\Repositories;
 
-interface StudentReadinessInterface
+interface StudentPracticeInterface
 {
     public function findAll($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
 
@@ -21,4 +21,6 @@ interface StudentReadinessInterface
     public function getHistory($student_id, $title);
 
     public function getCorrectAnswer($student_id, $title);
+
+    public function checkPracticeResult($student_id, $title, $date);
 }

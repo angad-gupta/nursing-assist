@@ -22,12 +22,6 @@ class StudentReadinessRepository implements StudentReadinessInterface
         return StudentReadinessResult::find($id);
     }
 
-    public function getList()
-    {
-        $result = StudentReadinessResult::pluck('company_name', 'id');
-        return $result;
-    }
-
     public function save($data)
     {
         return StudentReadinessResult::create($data);

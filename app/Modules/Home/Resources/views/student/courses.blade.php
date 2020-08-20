@@ -8,7 +8,7 @@
         <div class="row">
             <div class="neta-ribbon__content">
                 <div class="col-sm-12">
-                    <h1 class="mb-0">Student Hub</h1>
+                    <h1 class="mb-0">Learner's Portal</h1>
                     <ul class="list-unstyled d-flex">
                         <li> <a href="{{ route('home') }}">Home >> </a></li>
                         <li> Student Courses</li>
@@ -31,6 +31,10 @@
                             aria-controls="home" aria-selected="true">My Courses</a>
                     </li>
                     @if(sizeof($student_course)>0)
+                    <li class="nav-item">
+                        <a class="nav-link" id="practice-tab" data-toggle="tab" href="#practice" role="tab"
+                            aria-controls="practice" aria-selected="false">Practice Test</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
                             aria-controls="profile" aria-selected="false">Mock Tests</a>
@@ -133,6 +137,30 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="tab-pane fade" id="practice" role="tabpanel" aria-labelledby="practice-tab">
+                        <div class="row my-courses">
+                            @php
+                                $practice_list = array('practice_test_1'=>'Practice Test 1','practice_test_2'=>'Practice Test 2',
+                                    'practice_test_3'=>'Practice Test 3');
+                                @endphp
+
+                                @foreach($practice_list as $key => $list)
+
+                                    <div class="col-sm-6 col-md-4 col-lg-3">
+                                        <div class="my-courses__list">
+                                            <div class="list-content">
+                                                <h5>{{$list}}</h5>
+                                                <span>25 Questions</span>
+                                                <a class="btn e-btn w-100"
+                                                    href="{{ route('practice-question',['practice_title'=>$key]) }}">Take Test</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                        </div>
+                    </div>
+
 
                     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                         <div class="my-courses">

@@ -12,6 +12,7 @@ use App\Modules\Resource\Repositories\ResourcesInterface;
 use App\Modules\Student\Repositories\StudentInterface;
 use App\Modules\Student\Repositories\StudentMockupInterface;
 use App\Modules\Student\Repositories\StudentReadinessInterface;
+use App\Modules\Student\Repositories\StudentPracticeInterface;
 use App\Modules\Syllabus\Repositories\SyllabusInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -40,6 +41,10 @@ class DashboardController extends Controller
      * @var StudentMockupInterface
      */
     protected $studentMockup;
+    /**
+     * @var StudentPracticeInterface
+     */
+    protected $studentPractice;
 
     public function __construct(
         StudentInterface $student,
@@ -52,7 +57,8 @@ class DashboardController extends Controller
         MockupInterface $mockup,
         ResourcesInterface $resource,
         StudentReadinessInterface $studentReadiness,
-        StudentMockupInterface $studentMockup) {
+        StudentMockupInterface $studentMockup,
+        StudentPracticeInterface $studentPractice) {
         $this->student = $student;
         $this->announcement = $announcement;
         $this->message = $message;
@@ -64,6 +70,7 @@ class DashboardController extends Controller
         $this->resource = $resource;
         $this->studentReadiness = $studentReadiness;
         $this->studentMockup = $studentMockup;
+        $this->studentPractice = $studentPractice;
     }
     /**
      * Display a listing of the resource.
@@ -405,6 +412,7 @@ class DashboardController extends Controller
 
         } catch (\Throwable $e) {
             alertify($e->getMessage())->error();
+            return redirect()->back();
         }
 
     }
@@ -527,6 +535,7 @@ class DashboardController extends Controller
 
         } catch (\Throwable $e) {
             alertify($e->getMessage())->error();
+            return redirect()->back();
         }
 
     }
@@ -665,5 +674,144 @@ class DashboardController extends Controller
         }
 
     }
+
+    public function practiceQuestion(Request $request)
+    {
+        $input = $request->all();
+
+        $practice_title = $input['practice_title'];
+        $mockupInfo = $this->mockup->getRandomQuestion(25, ['practice_title' => $practice_title]);
+        if (sizeof($mockupInfo) > 0) {
+            $data['mockupInfo'] = $mockupInfo;
+            $data['practice_title'] = $practice_title;
+            return view('home::student.practice-test', $data);
+
+        } else {
+            Flash('No Practice Question Set. Please Check Later.')->error();
+            return redirect(route('student-courses'));
+        }
+
+    }
+
+    public function studentPracticeStore(Request $request)
+    {
+        $input = $request->all();
+        $title = $input['title'];
+
+        try {
+            $student_id = Auth::guard('student')->user()->id;
+
+            $mockup_history = $this->studentPractice->getHistory($student_id, $title);
+            $correct_answer = $this->studentPractice->getCorrectAnswer($student_id, $title);
+
+            $total_attempt_question = count($mockup_history);
+            $total_question = 25;
+            $correctPercent = ($correct_answer / $total_question) * 100;
+
+            $data['correct_percent'] = $correct_percent = number_format($correctPercent, 2);
+            $data['mockup_history'] = $mockup_history;
+            $data['correct_answer'] = $correct_answer;
+            $data['incorrect_answer'] = $total_question - $correct_answer;
+
+            $date = date('Y-m-d');
+            $resultInfo = $this->studentPractice->checkPracticeResult($student_id, $title, $date);
+            if (empty($resultInfo)) {
+
+                $practice_result = array(
+                    'student_id' => $student_id,
+                    'mockup_title' => $title,
+                    'date' => $date,
+                    'total_question' => $total_question,
+                    'total_attempted_question' => $total_attempt_question,
+                    'correct_answer' => $correct_answer,
+                    'percent' => $correct_percent,
+                );
+
+                $this->student->save($practice_result);
+            } else {
+                $updateArray = array(
+                    'total_question' => $total_question,
+                    'total_attempted_question' => $total_attempt_question,
+                    'correct_answer' => $correct_answer,
+                    'percent' => $correct_percent,
+                );
+                $resultInfo->update($updateArray);
+            }
+
+            return view('home::student.practice-report', $data);
+
+        } catch (\Throwable $e) {
+            alertify($e->getMessage())->error();
+            return redirect()->back();
+        }
+
+    }
+
+    public function ajaxPracticeStore(Request $request)
+    {
+
+        $input = $request->all();
+        $title = $input['title'];
+        $qkey = $input['qkey'];
+        $question_id = $input['question_id'];
+
+        $answers = [];
+        if (isset($input['answers']) && !empty($input['answers'])) {
+            $answers = $input['answers'];
+        } else {
+            return 0;
+        }
+
+        try {
+
+            $student_id = Auth::guard('student')->user()->id;
+            $date = date('Y-m-d');
+
+            $resultInfo = $this->studentPractice->checkPracticeResult($student_id, $title, $date);
+            if (empty($resultInfo)) {
+                $practice_result = array(
+                    'student_id' => $student_id,
+                    'title' => $title,
+                    'date' => date('Y-m-d'),
+                );
+
+                $resultInfo = $this->studentPractice->save($practice_result);
+                $result_id = $resultInfo->id;
+            } else {
+                $result_id = $resultInfo->id;
+            }
+
+          
+            $mockup_question = $this->mockup->find($question_id);
+            if ($mockup_question->question_type == 'multiple') {
+                $question_option = json_encode($answers);
+            } else {
+                $question_option = $answers;
+            }
+
+            $mockupdata['practice_result_id'] = $result_id;
+            $mockupdata['student_id'] = $student_id;
+            $mockupdata['title'] = $title;
+            $mockupdata['question_id'] = $question_id;
+            $mockupdata['answer'] = $question_option;
+
+            $checkAnswer = $this->mockup->checkCorrectAnswer($question_id, $question_option);
+
+            if ($checkAnswer > 0) {
+                $mockupdata['is_correct_answer'] = 1;
+            } else {
+                $mockupdata['is_correct_answer'] = 0;
+            }
+            //dd($mockupdata);
+            $this->studentPractice->saveHistory($mockupdata);
+
+            return 1;
+
+        } catch (\Throwable $e) {
+            return 2;
+        }
+
+    }
+
 
 }
