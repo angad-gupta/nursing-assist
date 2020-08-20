@@ -8,7 +8,7 @@
         <div class="row">
             <div class="neta-ribbon__content">
                 <div class="col-sm-12">
-                    <h1 class="mb-0">Student Hub</h1>
+                    <h1 class="mb-0">Learner's Portal</h1>
                     <ul class="list-unstyled d-flex">
                         <li> <a href="{{ route('home') }}">Home >> </a></li>
                         <li> Student Courses</li>
