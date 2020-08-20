@@ -67,4 +67,16 @@ class StudentPracticeRepository implements StudentPracticeInterface
             ->first();
     }
 
+    public function getQuestionHistory($whereArray)
+    {
+        return StudentPracticeHistory::where($whereArray)->first();
+    }
+
+    public function updateHistory($id, $data)
+    {
+        $result = StudentPracticeHistory::find($id);
+        return $result->update($data);
+    }
+
+
 }

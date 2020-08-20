@@ -597,8 +597,20 @@ class DashboardController extends Controller
             } else {
                 $mockupdata['is_correct_answer'] = 0;
             }
-            //dd($mockupdata);
-            $this->student->savemockupHistory($mockupdata);
+
+            $whereArray = [
+                'mockup_result_id' => $result_id,
+                'student_id' => $student_id,
+                'mockup_title' => $mockup_title,
+                'question_id' => $question_id
+            ];
+
+            $checkQuestionHistory = $this->studentMockup->getQuestionHistory($whereArray);
+            if(!empty($checkQuestionHistory)) {
+                $this->studentMockup->updateQuestionHistory($checkQuestionHistory->id, $mockupdata);
+            } else {
+                $this->studentMockup->saveHistory($mockupdata);
+            }
 
             return 1;
 
@@ -802,8 +814,21 @@ class DashboardController extends Controller
             } else {
                 $mockupdata['is_correct_answer'] = 0;
             }
-            //dd($mockupdata);
-            $this->studentPractice->saveHistory($mockupdata);
+
+            $whereArray = [
+                'practice_result_id' => $result_id,
+                'student_id' => $student_id,
+                'title' => $title,
+                'question_id' => $question_id
+            ];
+
+            $checkQuestionHistory = $this->studentPractice->getQuestionHistory($whereArray);
+            if(!empty($checkQuestionHistory)) {
+                $this->studentPractice->updateHistory($checkQuestionHistory->id, $mockupdata);
+            } else {
+                $this->studentPractice->saveHistory($mockupdata);
+            }
+            
 
             return 1;
 

@@ -23,4 +23,8 @@ interface StudentPracticeInterface
     public function getCorrectAnswer($student_id, $title);
 
     public function checkPracticeResult($student_id, $title, $date);
+
+    public function getQuestionHistory($whereArray);
+
+    public function updateHistory($id, $data);
 }
