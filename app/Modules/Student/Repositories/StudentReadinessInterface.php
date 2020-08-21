@@ -8,8 +8,6 @@ interface StudentReadinessInterface
 
     public function find($id);
 
-    public function getList();
-
     public function save($data);
 
     public function update($id, $data);

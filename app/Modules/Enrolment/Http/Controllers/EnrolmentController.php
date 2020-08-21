@@ -471,7 +471,7 @@ class EnrolmentController extends Controller
                     $installment_amt = $student_payment->status == 'First Installment Paid' ? 4000 : 1500;
                     $description = 'Final Installment of ' . $course_program_title . ' Course Enrolment';
                 }
-              
+                //dd($data);
                 //common wealth function
                 Simplify::$publicKey = env('LIVE_PUBLIC_KEY');
                 Simplify::$privateKey = env('LIVE_PRIVATE_KEY');

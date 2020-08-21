@@ -10,11 +10,11 @@
         <div class="row">
             <div class="neta-ribbon__content">
                 <div class="col-sm-12">
-                    <h1 class="mb-0">Readiness Exam</h1>
+                    <h1 class="mb-0">Pracitce Test</h1>
                     <ul class="list-unstyled d-flex">
                         <li> <a href="{{ route('home') }}">Home >> </a></li>
                         <li> <a href="{{ route('student-courses') }}">Courses >></a></li>
-                        <li>Readiness Exam</li>
+                        <li>Practice Test</li>
                     </ul>
                 </div>
             </div>
@@ -27,35 +27,16 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h2 class="ttl-line">{{ ucfirst(str_replace('_',' ',$readline_title)) }}
+                <h2 class="ttl-line">{{ ucfirst(str_replace('_',' ',$practice_title)) }}
                 </h2>
-                <p>Dear student,You are about to take a Computer Adaptive Test (CAT). Please make sure that you continue the test undisturbed. 
-                    Please allot 4 hours to take the test.No calculators allowed No food and drinks allowed. The computer will ask you if you would like to take a break.</p>
-                
-                <div class="card card-body" id="ready_div">
-                    
-                    <div class="col-sm-12 row">
-                    <div class="col-sm-3">
-                        <p style="padding-top:30px"><strong>Ready to begin the test?</strong></p>
-                    </div>
-                        <div class="col-sm-3">
-                            <a id="begin_btn" 
-                            class="btn bg-danger btn-icon rounded-round" data-popup="tooltip">Yes&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </a>
-                           
-                        </div>
-                        <div class="col-sm-3">
-                            <a href="{{route('student-courses')}}"
-                                class="btn bg-danger btn-icon rounded-round" data-popup="tooltip" >Return to Learner's Portal</a>
-                        </div>
-                    </div>
-                </div>
-                
+                <p>Comprehension, Analysis and Application level questions from all categories using the Related
+                    Courses. Complete the test in a quiet environment. </p>
             </div>
 
-            <div class="col-sm-12" style="display:none" id="readine_questions">
+            <div class="col-sm-12" id="practice_questions">
                 <h6 class="p-0 mb-0"> <label id="question_number">1</label> out of {{$mockupInfo->count()}}  <p id="time"></p></h6>
                
-                    {!! Form::open(['route'=>'readline-question.store','method'=>'POST','id'=>'studentmockup_submit','class'=>'form-horizontal','role'=>'form','files'=> true]) !!}
+                    {!! Form::open(['route'=>'practice-question.store','method'=>'POST','id'=>'studentmockup_submit','class'=>'form-horizontal','role'=>'form']) !!}
 
                     @php $last_key = $mockupInfo->keys()->last(); @endphp
 
@@ -72,7 +53,7 @@
                                 <div class="">
                                     <div class="row">
                                         {!! Form::hidden('question_id[]', $question->id, ['class'=>'question_id']) !!}
-                                        {!! Form::hidden('title', $readline_title, ['class'=>'title']) !!}
+                                        {!! Form::hidden('title', $practice_title, ['class'=>'title']) !!}
                                         {!! Form::hidden('question_type[]', $question->question_type, ['class'=>'question_type']) !!}
 
                                         @if($question->question_type == 'multiple')
@@ -149,10 +130,7 @@
 
                     @endforeach
 
-                   {!! Form::hidden('start_time', null, ['id'=>'start_time']) !!}
-                   {!! Form::hidden('result_id', null, ['id'=>'result_id']) !!}
                     <div class="col-sm-12 neta-about">
-                        {{--<button type="submit" class="enrol-cpd mockup_submit" id="show-btn">Submit Your Answer</button> --}}
                         <span class="text-center" id="loaderImg" style="display:none;">
                             <img src="{{asset('home/img/loader.gif')}}" alt="loader1"
                                 style="margin-left: 330px; height:200px; width:auto;">
@@ -170,9 +148,9 @@
 <section class="section-padding"></section>
 
 @include('home::layouts.footer')
-<script src="{{asset('admin/global/js/plugins/notifications/bootbox.min.js')}}"></script>
 <script type="text/javascript">
     $(document).ready(function () {
+        Clock.start();
 
         $('.mockup_submit').on('click', function () {
             $('#loaderImg').show();
@@ -181,7 +159,7 @@
 
             var qkey = $(this).attr('data-id');
             var index = qkey - 1;
-            var title = '{{$readline_title}}';
+            var title = '{{$practice_title}}';
             var question_id = $('.question_id').eq(index).val();
             var question_type = $('.question_type').eq(index).val();
   
@@ -198,7 +176,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '{{route("readline-question.ajaxStore")}}',
+                url: '{{route("practice-question.ajaxStore")}}',
                 data: { title: title, question_id: question_id, answers: ans_array, qkey: qkey, _token: token },
                 success: function (res) {
                     if(res == 1) {
@@ -222,7 +200,7 @@
             var new_key = parseInt(qkey, 10) + 1;
 
             var index = qkey - 1;
-            var title = '{{$readline_title}}';
+            var title = '{{$practice_title}}';
             var question_id = $('.question_id').eq(index).val();
             var question_type = $('.question_type').eq(index).val();
   
@@ -239,7 +217,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '{{route("readline-question.ajaxStore")}}',
+                url: '{{route("practice-question.ajaxStore")}}',
                 data: { title: title, question_id: question_id, answers: ans_array, qkey: qkey, _token: token },
                 success: function (res) {
                     if(res == 1) {
@@ -258,118 +236,7 @@
             })
         });
 
-        $('#begin_btn').on('click', function() {
-            
-            var dt = + new Date();
-
-            setTimeout(function(){ 
-                ConfirmDialog(dt);
-            },7200000);
-          ///7200000
-            Clock.start();
-
-            $.ajax({
-                type:'GET',
-                url:'{{route("readline-question.saveStartTime")}}',
-                data: {
-                    title: '{{$readline_title}}',
-                },
-                success: function(res) {
-                    if(res.status == 1) {
-                        //countdownTimeStart();
-                       
-                        $('#readine_questions').css('display', '');
-                        $('#ready_div').css('display', 'none');
-                        $('#start_time').val(res.start_time);
-                        $('#result_id').val(res.result_id);
-                        
-                    } else {
-                        alert('Error!');
-                    }
-                }
-            })
-          
-        })
-
     });
-
-    function ConfirmDialog(dt) 
-    {
-        bootbox.dialog({
-            title: 'Take A Break Confirmation',
-            message: 'You have completed two hours of the test,would you like to take a break?',
-            buttons: {
-                ok: {
-                    label: 'Yes',
-                    className: 'btn-primary',
-                    callback: function(){
-                        //$('#readine_questions').css('display', 'none');
-                      /*   var new_dt = dt + 60000;
-                        var exceed_dt = dt + 90000;
-                        var four_dt = dt + (4.5*60*60*1000); */
-
-                        var result_id = $('#result_id').val();
-                        
-                        $.ajax({
-                            type:'GET',
-                            url:'{{route("readline-question.saveBreakTime")}}',
-                            data: {
-                                result_id: result_id,
-                            },
-                            success: function(res) {
-                                if(res == 1) {
-                                    alert('Enjoy your break. You have half an hour for your break');
-                                } else {
-                                    alert('Error!');
-                                }
-                            }
-                        })                       
-                        Clock.pause();
-                        //show questions after 30 minutes
-                        /* setTimeout(function(){ 
-                            $('#readine_questions').css('display', '');
-                        }, 60000); */
-                        
-                        // cancel test if not appear after 31 minutes
-                        var time = new Date().getTime();
-                        $(document.body).bind("mousemove keypress", function(e) {
-                            time = new Date().getTime(); 
-                        });
-
-                        function refresh() {
-                            //900000
-                            if(new Date().getTime() - time > 1000000) {
-                                window.location = '{{route("student-courses")}}';
-                            } else if(new Date().getTime() - time < 900000) { 
-                                setTimeout(refresh, 1000);                                 
-                            } else {
-                                Clock.resume();
-                            }
-                        }
-
-                        setTimeout(refresh, 1000);
-
-                        //auto form submit on time crosses 4h + 30 minutes break
-                        setTimeout(function(){ 
-                            $('#studentmockup_submit').submit();
-                        }, 10800000);
-                        //900000
-                    },
-                },
-                cancel: {
-                    label: 'Cancel',
-                    className: 'btn-link',
-                    callback: function(){
-                        //var four_dt = dt + (4*60*60*1000);
-
-                        setTimeout(function(){ 
-                            $('#studentmockup_submit').submit();
-                        }, 10800000);
-                    },
-                },
-            }
-        });
-    }
 
     var Clock = {
         totalSeconds: 0,

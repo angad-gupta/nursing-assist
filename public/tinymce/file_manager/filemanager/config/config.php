@@ -136,7 +136,7 @@ $config = array(
       | in Megabytes
       |
      */
-    'MaxSizeUpload' => 200,
+    'MaxSizeUpload' => 1024,
     /*
       |--------------------------------------------------------------------------
       | default language file name

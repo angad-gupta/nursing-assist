@@ -2,13 +2,11 @@
 
 namespace App\Modules\Student\Repositories;
 
-interface StudentMockupInterface
+interface StudentPracticeInterface
 {
     public function findAll($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
 
     public function find($id);
-
-    public function getList();
 
     public function save($data);
 
@@ -22,15 +20,11 @@ interface StudentMockupInterface
 
     public function getHistory($student_id, $title);
 
-    public function getCorrectAnswer($result_id);
+    public function getCorrectAnswer($student_id, $title);
 
-    public function findAllHistory($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
-
-    public function updateHistory($student_id, $title, $updateData);
-
-    public function checkMockupResult($student_id, $title, $date);
+    public function checkPracticeResult($student_id, $title, $date);
 
     public function getQuestionHistory($whereArray);
 
-    public function updateQuestionHistory($id, $data);
+    public function updateHistory($id, $data);
 }
