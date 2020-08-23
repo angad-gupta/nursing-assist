@@ -85,68 +85,125 @@
 
     
                                 <div class="row neta-field p-0">
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="">Full Name</label>
                                             {!! Form::text('full_name', $value = null, ['id'=>'full_name','placeholder'=>'Enter Full Name','class'=>'form-control']) !!}
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="">Gender</label>
-                                            {!! Form::select('gender',['male'=>'Male','female'=>'Female','other'=>'Other'], $value = null, ['id'=>'gender','class'=>'selectpicker' ]) !!}    
+                                            {!! Form::select('gender',['male'=>'Male','female'=>'Female','other'=>'Other'], $value = null, ['id'=>'gender','class'=>'selectpicker', 'placeholder'=>'Select Gender' ]) !!}    
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                        <label for="">Date of Birth</label>
+                                            {!! Form::text('dob', $value = null, ['id'=>'tdatepicker4','placeholder'=>'Enter DOB','class'=>'form-control daterange-single','readonly']) !!}
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="">Email Address</label>
+                                            {!! Form::text('email', $value = null, ['id'=>'email','placeholder'=>'Enter Email','class'=>'form-control']) !!}
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="">Phone Number</label>
+                                            {!! Form::text('phone_no', $value = null, ['id'=>'phone_no','placeholder'=>'Enter Phone Number' ,'class'=>'form-control']) !!}
+                                        </div>
+                                    </div>
+
+
+                                    {{--<div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="">Primary Address</label>
+                                            {!! Form::text('primary_address', $value = null, ['id'=>'primary_address','placeholder'=>'Enter Primary Address','class'=>'form-control']) !!}
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="">Temporary Address</label>
+                                            {!! Form::text('temporary_address', $value = null, ['id'=>'temporary_address','placeholder'=>'Enter Temporary Address','class'=>'form-control']) !!}
+
+                                        </div>
+                                    </div>--}}
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="">Street number<span>*</span></label>
+                                            <input type="text" name="street_number" placeholder="Street Number"
+                                                class="form-control" id="street">
+                                            <span class="text-danger street_error"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="">Street Number <span>*</span></label>
+                                            <input type="text" name="street_name" placeholder="Street Name"
+                                                class="form-control" id="street_name">
+                                            <span class="text-danger city_error"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="">Suburb<span>*</span></label>
+                                            <input type="text" name="Suburb" placeholder="Suburb"
+                                                class="form-control" id="suburb">
+                                            <span class="text-danger suburb_error"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="">Postal Code <span>*</span></label>
+                                            <input type="text" name="postal_code"
+                                                placeholder="Post Code" class="form-control numeric"
+                                                id="postal_code">
+                                            <span class="text-danger postcode_error"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="">State<span>*</span></label>
+                                            <input type="text" name="state" placeholder="State"
+                                                class="form-control" id="state">
+                                            <span class="text-danger state_error"></span>
+                                        </div>
+                                    </div>
+                                  
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="">Country<span>*</span></label>
+                                            <select class="form-control" name="country"
+                                                id="country">
+                                                <option value="au">Australia</option>
+                                                <option value="ph">Philippines</option>
+                                                <option value="np">Nepal</option>
+                                                <option value="in">India</option>
+                                                <option value="au">Other</option>
+                                            </select>
+                                            <span class="text-danger country_error"></span>
                                         </div>
                                     </div>
 
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label for="">Date of Birth</label>
-                                                {!! Form::text('dob', $value = null, ['id'=>'tdatepicker4','placeholder'=>'Enter DOB','class'=>'form-control daterange-single','readonly']) !!}
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-4">
-                                                <div class="form-group">
-                                                    <label for="">Email Address</label>
-                                                    {!! Form::text('email', $value = null, ['id'=>'email','placeholder'=>'Enter Email','class'=>'form-control']) !!}
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-4">
-                                                <div class="form-group">
-                                                    <label for="">Phone Number</label>
-                                                    {!! Form::text('phone_no', $value = null, ['id'=>'phone_no','placeholder'=>'Enter Phone Number' ,'class'=>'form-control']) !!}
-                                                </div>
-                                            </div>
-
-
-                                            <div class="col-sm-4">
-                                                <div class="form-group">
-                                                    <label for="">Primary Address</label>
-                                                    {!! Form::text('primary_address', $value = null, ['id'=>'primary_address','placeholder'=>'Enter Primary Address','class'=>'form-control']) !!}
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-4">
-                                                <div class="form-group">
-                                                    <label for="">Temporary Address</label>
-                                                    {!! Form::text('temporary_address', $value = null, ['id'=>'temporary_address','placeholder'=>'Enter Temporary Address','class'=>'form-control']) !!}
-
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-4">
-                                                <div class="form-group">
-                                                    <label for="">Upload Profile</label>
-                                                    {!! Form::file('profile_pic', ['id'=>'profile_pic','class'=>'form-control']) !!}
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-12 save-btn">
-                                                <button class="btn e-btn mt-3" type="submit" style="color:white;">Update Info</button>
-                                            </div>
+                                            <label for="">Upload Profile</label>
+                                            {!! Form::file('profile_pic', ['id'=>'profile_pic','class'=>'form-control']) !!}
                                         </div>
+                                    </div>
+
+                                    <div class="col-sm-12 save-btn">
+                                        <button class="btn e-btn mt-3" type="submit" style="color:white;">Update Info</button>
+                                    </div>
+                                </div>
 
                                 {!! Form::close() !!}
 
