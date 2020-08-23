@@ -92,4 +92,17 @@ class StudentMockupRepository implements StudentMockupInterface
             ->first();
     }
 
+    public function getQuestionHistory($whereArray)
+    {
+        return StudentMockupHistory::where($whereArray)->first();
+    }
+
+    public function updateQuestionHistory($id, $data)
+    {
+        $result = StudentMockupHistory::find($id);
+        return $result->update($data);
+    }
+
+
+
 }

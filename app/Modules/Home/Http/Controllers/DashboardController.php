@@ -271,8 +271,14 @@ class DashboardController extends Controller
         $courseinfo_id = $input['courseinfo_id'];
         $course_content_id = $input['course_content_id'];
 
-        $checkQuiz = $this->student->checkQuizForCourseInfo($student_id, $course_content_id);
+       /*  $checkQuiz = $this->student->checkQuizForCourseInfo($student_id, $course_content_id);
         if ($checkQuiz > 0) {
+            Flash('Practise Test Already Taken.Please Proceed Next Course.')->success();
+            return redirect(route('syllabus-detail', ['course_info_id' => $courseinfo_id]));
+        } */
+
+        $checkQuiz = $this->student->getQuizForCourseInfo($student_id, $course_content_id);
+        if (!empty($checkQuiz) && $checkQuiz->percent >= 80) {
             Flash('Practise Test Already Taken.Please Proceed Next Course.')->success();
             return redirect(route('syllabus-detail', ['course_info_id' => $courseinfo_id]));
         }
@@ -597,8 +603,20 @@ class DashboardController extends Controller
             } else {
                 $mockupdata['is_correct_answer'] = 0;
             }
-            //dd($mockupdata);
-            $this->student->savemockupHistory($mockupdata);
+
+            $whereArray = [
+                'mockup_result_id' => $result_id,
+                'student_id' => $student_id,
+                'mockup_title' => $mockup_title,
+                'question_id' => $question_id
+            ];
+
+            $checkQuestionHistory = $this->studentMockup->getQuestionHistory($whereArray);
+            if(!empty($checkQuestionHistory)) {
+                $this->studentMockup->updateQuestionHistory($checkQuestionHistory->id, $mockupdata);
+            } else {
+                $this->studentMockup->saveHistory($mockupdata);
+            }
 
             return 1;
 
@@ -802,8 +820,21 @@ class DashboardController extends Controller
             } else {
                 $mockupdata['is_correct_answer'] = 0;
             }
-            //dd($mockupdata);
-            $this->studentPractice->saveHistory($mockupdata);
+
+            $whereArray = [
+                'practice_result_id' => $result_id,
+                'student_id' => $student_id,
+                'title' => $title,
+                'question_id' => $question_id
+            ];
+
+            $checkQuestionHistory = $this->studentPractice->getQuestionHistory($whereArray);
+            if(!empty($checkQuestionHistory)) {
+                $this->studentPractice->updateHistory($checkQuestionHistory->id, $mockupdata);
+            } else {
+                $this->studentPractice->saveHistory($mockupdata);
+            }
+            
 
             return 1;
 

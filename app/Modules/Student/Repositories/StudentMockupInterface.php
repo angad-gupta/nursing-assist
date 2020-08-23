@@ -29,4 +29,8 @@ interface StudentMockupInterface
     public function updateHistory($student_id, $title, $updateData);
 
     public function checkMockupResult($student_id, $title, $date);
+
+    public function getQuestionHistory($whereArray);
+
+    public function updateQuestionHistory($id, $data);
 }
