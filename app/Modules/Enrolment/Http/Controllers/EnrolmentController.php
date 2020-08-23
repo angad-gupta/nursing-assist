@@ -2,16 +2,15 @@
 
 namespace App\Modules\Enrolment\Http\Controllers;
 
-use App\Modules\Agent\Repositories\AgentInterface;
 use App\libraries\Commonwealth\lib\Simplify;
+use App\Modules\Agent\Repositories\AgentInterface;
 use App\Modules\CourseInfo\Repositories\CourseInfoInterface;
 use App\Modules\Course\Repositories\CourseInterface;
 use App\Modules\Enrolment\Repositories\EnrolmentInterface;
 use App\Modules\Enrolment\Repositories\EnrolmentPaymentInterface;
-use App\Modules\Home\Emails\SendNetaMail;
+use App\Modules\Student\Repositories\StudentInterface;
 use App\Modules\Student\Repositories\StudentPaymentInstallmentInterface;
 use App\Modules\Student\Repositories\StudentPaymentInterface;
-use App\Modules\Student\Repositories\StudentInterface;
 use App\Notifications\EnrolmentPayment;
 use Eway\Rapid\Client;
 use Illuminate\Http\Request;
@@ -20,7 +19,6 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 
 // Mail
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Session;
 
@@ -40,7 +38,7 @@ class EnrolmentController extends Controller
      * @var StudentInterface
      */
     protected $student;
-       /**
+    /**
      * @var AgentInterface
      */
     protected $agent;
@@ -88,7 +86,6 @@ class EnrolmentController extends Controller
 
         return view('enrolment::enrolment.index-archive', $data);
     }
-
 
     public function viewUser(Request $request)
     {
@@ -288,7 +285,7 @@ class EnrolmentController extends Controller
                 Email Send to Student After Registration
                 --------------------------------------------------------------- */
 
-               /*  $email = $student_detail->email;
+                /*  $email = $student_detail->email;
                 $subject = 'Enrolment Successful';
                 $student['name'] = $student_detail->full_name;
                 $content = view('enrolment::enrolment.enrol-register-content', $student)->render();
@@ -434,11 +431,11 @@ class EnrolmentController extends Controller
     {
         $data = $request->all();
         try {
-            if(isset($data['archive']) && $data['archive'] == 1 && ($data['status'] == 'Pending' || $data['status'] == 'Approved')) {
+            if (isset($data['archive']) && $data['archive'] == 1 && ($data['status'] == 'Pending' || $data['status'] == 'Approved')) {
                 $data['deleted_at'] = null;
             } else {
                 $data['deleted_at'] = date('Y-m-d H:i:s');
-            } 
+            }
 
             $this->enrolment->update($data['enrolment_id'], $data);
             alertify('Status Updated Succesfully!')->success();
@@ -454,7 +451,7 @@ class EnrolmentController extends Controller
         //dd($data);
         try {
             $student_payment = $this->studentpayment->find($data['student_payment_id']);
-            if (!empty($student_payment)) { 
+            if (!empty($student_payment)) {
 
                 $studentInfo = optional($student_payment->studentInfo);
                 $student_id = $student_payment->student_id;
@@ -539,13 +536,13 @@ class EnrolmentController extends Controller
                         $this->studentPaymentInstallment->save($studentPaymentInstallmentData);
 
                         //update status of course for providing installments payments
-                        $courseInfo = $this->courseinfo->find($course_info_id); 
+                        $courseInfo = $this->courseinfo->find($course_info_id);
                         $is_package = $courseInfo->is_course_package;
 
                         if ($is_package == 1) {
                             $course_id = $courseInfo->course_id;
                             $course_package = $this->courseinfo->getCoursePackage($course_id, $course_info_id);
-                            
+
                             foreach ($course_package as $key => $pack_val) {
 
                                 $wherecondition = array(
@@ -597,14 +594,14 @@ class EnrolmentController extends Controller
                 $data['courseinfo'] = optional($student_payment->courseInfo);
             }
             return view('home::installment_form', $data);
-        } catch (\Throwable $e) { 
+        } catch (\Throwable $e) {
             alertify($e->getMessage())->error();
             return redirect()->route('student-hub');
         }
 
     }
 
-      /**
+    /**
      * Remove the specified resource from storage.
      * @param int $id
      * @return Response
@@ -632,22 +629,47 @@ class EnrolmentController extends Controller
         try {
             Simplify::$publicKey = env('LIVE_PUBLIC_KEY');
             Simplify::$privateKey = env('LIVE_PRIVATE_KEY');
-
-           /*  $cardToken = \Simplify_CardToken::createCardToken(array(
-                'card' => array(
-                    'expMonth' => $data['cc_exp_month'],
-                    'expYear' => $data['cc_exp_year'],
-                    'cvc' => $data['cc_cvc'],
-                    'number' => $data['cc_number']
-                ),
-                'secure3DRequestData' => array(
-                    'amount' => '100',
-                    'currency' => 'AUD',
-                    'description' => 'test payment'
-                )
-            )); */
-            return 1;
-        } catch(\Throwable $e) {
+/* 
+                  $cardToken = \Simplify_CardToken::createCardToken(array(
+            'card' => array(
+            'expMonth' => $data['cc_exp_month'],
+            'expYear' => $data['cc_exp_year'],
+            'cvc' => $data['cc_cvc'],
+            'number' => $data['cc_number']
+            ),
+            'secure3DRequestData' => array(
+            'amount' => '100',
+            'currency' => 'AUD',
+            'description' => 'test payment'
+            )
+            ));
+            return $cardToken; */
+            //return 1;
+             return
+                '{
+                    "card": {
+                      "id": "GrxMdEEK",
+                      "type": "VISA",
+                      "last4": "6292",
+                      "expMonth": 6,
+                      "expYear": 23,
+                      "dateCreated": 1598161502138,
+                      "cardEntryMode": "E_COMMERCE",
+                      "secure3DData": {
+                        "id": "agARxrrk",
+                        "isEnrolled": true,
+                        "acsUrl": "https://www.securesuite.co.uk/cba/tdsecure/opt_in_dispatcher.jsp?VAA=B",
+                        "paReq": "eAFVkk1vozAQhu+V+h8QWvW2scNHgHTiipZty6G0mxKpPbpklLAKhhhIsv9+xwlpuze/74zHM88Ybg7VxtqhbstazezxiNsWqqJelmo1sxf5/c/QvhGXF5CvNWLyikWvUcATtq1coVUuZ7bD+ZhHgRe648ixBbzEc9wKGGoKKjlygJ0lXdXFWqpOgCy2t2kmvMjjPmUMEirUaSKKuqr2+LH72HHuRRQ+2aBkhSJbzF/T7MH6lSzu4jx9zqwrWTXXVj6P0wzYMQeKuled/iu4OwF2FtDrjVh3XdNOGdvv9yPV0+hqhZ0c0ZMMmEkA9tXlS2/6bWnoQ7kUW0+//c7ke6HW901e/nnjbIOBDJpkNQNmMmApOxQOJyyh41rcn3r+lHvAjj7IyrQl4kVi/SA0nOY+OdCYh+KTGJvAdwOIu6bFnMc5K8BDUyukioTo8wzsq+u7R0O66IipNwknbuCGgR9NQt8hLEPAVCkJleNyMgcBzFxlwzqJyHHl5Pz3FS4v/gFUELrX",
+                        "md": "Njg2NzEyRThERDhDNEE3NBDDk5kkBQInBD7uIq1j5QDnp8F04LJn0MRTpUtCAG9F0r09CKu0p+iojMo6RNEg+xGB4wPzjClsQaA7ci+wCY0It1njWX0tKtynlhxNrrQiCwIp1ZsEay2oOWS3G6QUcLg=",
+                        "termUrl": "https://www.simplify.com/commerce/secure3d"
+                      },
+                      "indicator": "DEBIT_CARD",
+                      "indicatorSource": "CARD_BIN"
+                    },
+                    "used": false,
+                    "id": "142d7a0f-d07a-4ecb-9e99-48dfb0bc9f98"
+                  }';
+        } catch (\Throwable $e) {
             return 0;
         }
     }
@@ -659,16 +681,16 @@ class EnrolmentController extends Controller
             Simplify::$publicKey = env('LIVE_PUBLIC_KEY');
             Simplify::$privateKey = env('LIVE_PRIVATE_KEY');
 
-          /*   $payment = \Simplify_Payment::createPayment(array(
-                'reference' => 'enrol_1', //optional Custom reference field to be used with outside systems.
-                'amount' => 100,
-                'description' => '3ds test payment',
-                'currency' => 'AUD',
-                'token' => $data['token'],
+            /*   $payment = \Simplify_Payment::createPayment(array(
+            'reference' => 'enrol_1', //optional Custom reference field to be used with outside systems.
+            'amount' => 100,
+            'description' => '3ds test payment',
+            'currency' => 'AUD',
+            'token' => $data['token'],
             )); */
 
             return 1;
-        } catch(\Throwable $e) {
+        } catch (\Throwable $e) {
             return 0;
         }
     }
