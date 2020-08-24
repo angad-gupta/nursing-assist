@@ -35,7 +35,7 @@ class Student extends Authenticatable implements CanResetPassword
         'suburb',
         'postalcode',
         'state',            
-        'country',
+        'country_id',
         'profile_pic',
         'active',
         'activation_code',

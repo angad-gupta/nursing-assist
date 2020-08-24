@@ -5,6 +5,19 @@
 <script src="{{asset('admin/global/js/plugins/ui/moment/moment.min.js')}}"></script>
 <script src="{{ asset('admin/global/js/plugins/pickers/daterangepicker.js')}}"></script>
 <script src="{{ asset('admin/global/js/demo_pages/picker_date.js')}}"></script>
+<script src="{{asset('js/validation.js')}}"></script>
+<script>
+    
+   if ($('#phone').val() != '') {
+       
+        
+    } else {
+        $('.phone_error').html('Enter Phone');
+        $('#phone').focus();
+        gotothen();
+    }
+
+</script>
 @stop
 
 <section class="neta-ribbon">
@@ -49,6 +62,7 @@
                         role="tab" aria-controls="v-pills-profile" aria-selected="true">  My Account</a>
                         <a class="nav-link" id="v-pills-book-tab" data-toggle="pill" href="#v-pills-book" role="tab"
                         aria-controls="v-pills-book" aria-selected="false"> My Courses</a>
+  
                         <a class="nav-link" id="v-pills-message-tab" data-toggle="pill" href="#v-pills-message" role="tab"
                         aria-controls="v-pills-message" aria-selected="false">Ask an Educator</a>
                         <a class="nav-link" id="v-pills-notification-tab" data-toggle="pill" href="#v-pills-notification"
@@ -76,8 +90,9 @@
                         <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel"
                         aria-labelledby="v-pills-profile-tab">
                         <h5 class="mb-0">My Account</h5>
-                        <p>View and edit your personal info below.</p> 
-                         
+                        
+                        <p>View and edit your personal info below. <a  href="{{route('student-hub')}}" style="float:right;color:blueviolet">Enroll in a Course</a></p> 
+                       
                         <div class="row">
                             <div class="col-sm-12 col-md-12 col-lg-12 pt-0">
 
@@ -95,7 +110,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="">Gender</label>
-                                            {!! Form::select('gender',['male'=>'Male','female'=>'Female','other'=>'Other'], $value = null, ['id'=>'gender','class'=>'selectpicker', 'placeholder'=>'Select Gender' ]) !!}    
+                                            {!! Form::select('gender',['male'=>'Male','female'=>'Female','other'=>'Other'], $value = null, ['id'=>'gender','class'=>'form-control selectpicker', 'placeholder'=>'Select Gender' ]) !!}    
                                         </div>
                                     </div>
 
@@ -109,14 +124,15 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="">Email Address</label>
-                                            {!! Form::text('email', $value = null, ['id'=>'email','placeholder'=>'Enter Email','class'=>'form-control']) !!}
+                                            {!! Form::email('email', $value = null, ['id'=>'email','placeholder'=>'Enter Email','class'=>'form-control']) !!}
                                         </div>
                                     </div>
 
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="">Phone Number</label>
-                                            {!! Form::text('phone_no', $value = null, ['id'=>'phone_no','placeholder'=>'Enter Phone Number' ,'class'=>'form-control']) !!}
+                                            {!! Form::text('phone_no', $value = null, ['id'=>'phone_no','placeholder'=>'Enter Phone Number' ,'class'=>'form-control', 'onkeyup'=>"phoneLength($(this).val())"]) !!}
+                                            <span class="text-danger phone_error"></span>
                                         </div>
                                     </div>
 
@@ -138,62 +154,43 @@
 
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="">Street number<span>*</span></label>
-                                            <input type="text" name="street_number" placeholder="Street Number"
-                                                class="form-control" id="street">
-                                            <span class="text-danger street_error"></span>
+                                            <label for="">Street Number</label>
+                                            {!! Form::text('street_number', $value = null, ['id'=>'street_number','placeholder'=>'Enter Street Number' ,'class'=>'form-control']) !!}
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="">Street Number <span>*</span></label>
-                                            <input type="text" name="street_name" placeholder="Street Name"
-                                                class="form-control" id="street_name">
-                                            <span class="text-danger city_error"></span>
+                                            <label for="">Street Name </label>
+                                            {!! Form::text('street_name', $value = null, ['id'=>'street_name','placeholder'=>'Enter Street Name' ,'class'=>'form-control']) !!}
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="">Suburb<span>*</span></label>
-                                            <input type="text" name="Suburb" placeholder="Suburb"
-                                                class="form-control" id="suburb">
-                                            <span class="text-danger suburb_error"></span>
+                                            <label for="">Suburb</label>
+                                            {!! Form::text('suburb', $value = null, ['id'=>'suburb','placeholder'=>'Enter Suburb' ,'class'=>'form-control']) !!}
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="">Postal Code <span>*</span></label>
-                                            <input type="text" name="postal_code"
-                                                placeholder="Post Code" class="form-control numeric"
-                                                id="postal_code">
-                                            <span class="text-danger postcode_error"></span>
+                                            <label for="">Postal Code</label>
+                                            {!! Form::text('postal_code', $value = null, ['id'=>'postal_code','placeholder'=>'Enter Postal Code' ,'class'=>'form-control numeric']) !!}
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="">State<span>*</span></label>
-                                            <input type="text" name="state" placeholder="State"
-                                                class="form-control" id="state">
-                                            <span class="text-danger state_error"></span>
+                                            <label for="">State </label>
+                                            {!! Form::text('state', $value = null, ['id'=>'state','placeholder'=>'Enter State' ,'class'=>'form-control']) !!}
                                         </div>
                                     </div>
                                   
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="">Country<span>*</span></label>
-                                            <select class="form-control" name="country"
-                                                id="country">
-                                                <option value="au">Australia</option>
-                                                <option value="ph">Philippines</option>
-                                                <option value="np">Nepal</option>
-                                                <option value="in">India</option>
-                                                <option value="au">Other</option>
-                                            </select>
-                                            <span class="text-danger country_error"></span>
+                                            {!! Form::select('country_id', $countries, $value = null, ['id'=>'country_id','placeholder'=>'Select Country' ,'class'=>'form-control']) !!}
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="">Upload Profile</label>
                                             {!! Form::file('profile_pic', ['id'=>'profile_pic','class'=>'form-control']) !!}
