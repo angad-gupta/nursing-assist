@@ -51,12 +51,12 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>
 function createInput(name, value) {
-      var input = document.createElement('input');
-      input.setAttribute('type', 'hidden');
-      input.setAttribute('name', name);
-      input.setAttribute('value', value);
-      return input;
-    }
+    var input = document.createElement('input');
+    input.setAttribute('type', 'hidden');
+    input.setAttribute('name', name);
+    input.setAttribute('value', value);
+    return input;
+  }
  
     function createSecure3dForm(data) {
       //var secure3dData = data['3dsecure'];
@@ -107,7 +107,7 @@ function createInput(name, value) {
           var process3dSecureCallback = function (threeDsResponse) { console.log(threeDsResponse);
             console.log('Processing 3D Secure callback...');
             window.removeEventListener('message', process3dSecureCallback);
-            var simplifyDomain = 'https://simplify.com';
+            var simplifyDomain = 'https://www.simplify.com';
             // Step 4
              if (threeDsResponse.origin === simplifyDomain
               && JSON.parse(threeDsResponse.data)['secure3d']['authenticated']) {
@@ -128,6 +128,9 @@ function createInput(name, value) {
                 }
                 iframeNode.hide();
               });
+            } else {
+               var err_res = JSON.parse(threeDsResponse.data);
+               alert(err_res.secure3d.error.message);
             }
           };
  
