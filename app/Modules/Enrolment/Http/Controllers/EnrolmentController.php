@@ -681,15 +681,15 @@ class EnrolmentController extends Controller
             Simplify::$publicKey = env('LIVE_PUBLIC_KEY');
             Simplify::$privateKey = env('LIVE_PRIVATE_KEY');
 
-            /*   $payment = \Simplify_Payment::createPayment(array(
-            'reference' => 'enrol_1', //optional Custom reference field to be used with outside systems.
-            'amount' => 100,
-            'description' => '3ds test payment',
-            'currency' => 'AUD',
-            'token' => $data['token'],
-            )); */
-
-            return 1;
+           $payment = \Simplify_Payment::createPayment(array(
+                'reference' => 'enrol_1', //optional Custom reference field to be used with outside systems.
+                'amount' => 100,
+                'description' => '3ds test payment',
+                'currency' => 'AUD',
+                'token' => $data['token'],
+            ));
+return $payment;
+            //return 1;
         } catch (\Throwable $e) {
             return 0;
         }

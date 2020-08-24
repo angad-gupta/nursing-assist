@@ -60,19 +60,19 @@ function createInput(name, value) {
  
     function createSecure3dForm(data) {
       //var secure3dData = data['3dsecure'];
-      var secure3dData = data.card.secure3DData; console.log(secure3dData);
+      var secure3dData = data.card.secure3DData;
       var secure3dForm = document.createElement('form');
       secure3dForm.setAttribute('method', 'POST');
-      secure3dForm.setAttribute('action', secure3dData.acsUrl); console.log(secure3dData.acsUrl)
+      secure3dForm.setAttribute('action', secure3dData.acsUrl); 
       secure3dForm.setAttribute('target', 'secure3d-frame');
  
       var merchantDetails = secure3dData.md;
       var paReq = secure3dData.paReq;
       var termUrl = secure3dData.termUrl;
  
-      secure3dForm.append(createInput('PaReq', paReq));  console.log(secure3dData.paReq);
-      secure3dForm.append(createInput('TermUrl', termUrl)); console.log(secure3dData.termUrl);
-      secure3dForm.append(createInput('MD', merchantDetails)); console.log(secure3dData.merchantDetails);
+      secure3dForm.append(createInput('PaReq', paReq)); 
+      secure3dForm.append(createInput('TermUrl', termUrl)); 
+      secure3dForm.append(createInput('MD', merchantDetails)); 
  
       return secure3dForm;
     }
@@ -95,7 +95,7 @@ function createInput(name, value) {
         var token = response.id;
         var currency ='AUD';
 
-        if (response.card.secure3DData.isEnrolled) { alert('fdasf');// Step 1
+        if (response.card.secure3DData.isEnrolled) { // Step 1
         //if(1) {
           var secure3dForm = createSecure3dForm(response); // Step 2
           var iframeNode = $('#secure3d-frame');
@@ -104,13 +104,14 @@ function createInput(name, value) {
           iframeNode.show();
           //iframeNode.css('display', '');
  
-          var process3dSecureCallback = function (threeDsResponse) { console.log(threeDsResponse);
+          var process3dSecureCallback = function (threeDsResponse) {
             console.log('Processing 3D Secure callback...');
+            var three_data = JSON.parse(threeDsResponse.data);
             window.removeEventListener('message', process3dSecureCallback);
-            var simplifyDomain = 'https://www.simplify.com';
-            // Step 4
+            var simplifyDomain = 'https://www.simplify.com'; console.log(threeDsResponse.origin)
+            // Step 4 
              if (threeDsResponse.origin === simplifyDomain
-              && JSON.parse(threeDsResponse.data)['secure3d']['authenticated']) {
+              && three_data.secure3d.authenticated) {
               //if(1) {
               var completePayload = {
                 amount: 100,
@@ -120,7 +121,7 @@ function createInput(name, value) {
                 _token: '{{csrf_token()}}'
               };
  
-              $.post('{{route("enrolment.3ds.complete")}}', completePayload, function (completeResponse) {
+              $.post('{{route("enrolment.3ds.complete")}}', completePayload, function (completeResponse) { console.log(completeResponse);
                 if (completeResponse.success) {
                   $('#simplify-payment-form').hide();
                   $('#simplify-success').show();
