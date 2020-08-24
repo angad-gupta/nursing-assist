@@ -63,16 +63,16 @@ function createInput(name, value) {
       var secure3dData = data.card.secure3DData; console.log(secure3dData);
       var secure3dForm = document.createElement('form');
       secure3dForm.setAttribute('method', 'POST');
-      secure3dForm.setAttribute('action', secure3dData.acsUrl);
+      secure3dForm.setAttribute('action', secure3dData.acsUrl); console.log(secure3dData.acsUrl)
       secure3dForm.setAttribute('target', 'secure3d-frame');
  
       var merchantDetails = secure3dData.md;
       var paReq = secure3dData.paReq;
       var termUrl = secure3dData.termUrl;
  
-      secure3dForm.append(createInput('PaReq', paReq));
-      secure3dForm.append(createInput('TermUrl', termUrl));
-      secure3dForm.append(createInput('MD', merchantDetails));
+      secure3dForm.append(createInput('PaReq', paReq));  console.log(secure3dData.paReq);
+      secure3dForm.append(createInput('TermUrl', termUrl)); console.log(secure3dData.termUrl);
+      secure3dForm.append(createInput('MD', merchantDetails)); console.log(secure3dData.merchantDetails);
  
       return secure3dForm;
     }
@@ -101,8 +101,8 @@ function createInput(name, value) {
           var iframeNode = $('#secure3d-frame');
  
           $(secure3dForm).insertAfter(iframeNode);
-          //iframeNode.show();
-          iframeNode.css('display', '');
+          iframeNode.show();
+          //iframeNode.css('display', '');
  
           var process3dSecureCallback = function (threeDsResponse) { console.log(threeDsResponse);
             console.log('Processing 3D Secure callback...');

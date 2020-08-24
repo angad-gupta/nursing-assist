@@ -14,6 +14,7 @@ use App\Modules\Student\Repositories\StudentMockupInterface;
 use App\Modules\Student\Repositories\StudentReadinessInterface;
 use App\Modules\Student\Repositories\StudentPracticeInterface;
 use App\Modules\Syllabus\Repositories\SyllabusInterface;
+use App\Modules\Employment\Repositories\EmploymentInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
@@ -45,6 +46,10 @@ class DashboardController extends Controller
      * @var StudentPracticeInterface
      */
     protected $studentPractice;
+    /**
+     * @var EmploymentInterface
+     */
+    protected $employment;
 
     public function __construct(
         StudentInterface $student,
@@ -58,7 +63,8 @@ class DashboardController extends Controller
         ResourcesInterface $resource,
         StudentReadinessInterface $studentReadiness,
         StudentMockupInterface $studentMockup,
-        StudentPracticeInterface $studentPractice) {
+        StudentPracticeInterface $studentPractice,
+        EmploymentInterface $employment) {
         $this->student = $student;
         $this->announcement = $announcement;
         $this->message = $message;
@@ -71,6 +77,7 @@ class DashboardController extends Controller
         $this->studentReadiness = $studentReadiness;
         $this->studentMockup = $studentMockup;
         $this->studentPractice = $studentPractice;
+        $this->employment = $employment;
     }
     /**
      * Display a listing of the resource.
@@ -84,7 +91,8 @@ class DashboardController extends Controller
         $data['message'] = $this->message->getSendMessageByUser($id, $limit = 5);
         $data['student_course'] = $this->student->getStudentCourse($id);
         $data['student_course_purchase'] = $this->student->getStudentPurchase($id);
-
+        $data['countries'] = $this->employment->getCountries();
+        
         return view('home::student.dashboard', $data);
     }
 

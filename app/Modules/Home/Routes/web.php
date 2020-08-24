@@ -41,6 +41,8 @@ Route::get('payment-plan', ['as' => 'payment-plan', 'uses' => 'HomeController@pa
 
 Route::get('student-account', ['as' => 'student-account', 'uses' => 'HomeController@studentAccount']);
 
+Route::get('student/register', ['as' => 'student.register', 'uses' => 'HomeController@studentRegisterForm']);
+
 Route::post('student-register/store', ['as' => 'student-register.store', 'uses' => 'HomeController@studentRegister']);
 
 Route::post('student-login', ['as' => 'student-login-post', 'uses' => 'StudentController@studentAuthenticate']);

@@ -1,5 +1,6 @@
 @include('home::layouts.navbar-inner')
 @section('scripts')
+<script src="{{asset('js/validation.js')}}"></script>
 <script type="text/javascript" src="https://www.simplify.com/commerce/v1/simplify.js"></script>
 <script type="text/javascript">
     function simplifyResponseHandler(data) {
@@ -170,7 +171,14 @@
             }
 
             if ($('#email').val() != '') {
-                $('.email_error').html('');
+                if(isEmail($('#email').val())) {
+                    $('.email_error').html('');
+                } else {
+                    $('.email_error').html('Invalid Email');
+                    $('#email').focus();
+                    gotothen();
+                }
+                
             } else {
                 $('.email_error').html('Enter Email');
                 $('#email').focus();
@@ -178,7 +186,16 @@
             }
 
             if ($('#phone').val() != '') {
-                $('.phone_error').html('');
+                var len_phone = $('#phone').val().length;
+                if(len_phone < 10 ){
+                    $('.phone_error').html('Phone number must of be of 10 digits minimum');
+                    $('#phone').focus();
+                    gotothen();
+                }
+                else{
+                    $('.phone_error').html('');
+                }
+               
             } else {
                 $('.phone_error').html('Enter Phone');
                 $('#phone').focus();
@@ -419,7 +436,7 @@
                                                             <div class="form-group">
                                                                 <label for="">Post Code <span>*</span></label>
                                                                 <input type="text" name="Post Code"
-                                                                    placeholder="Post Code" class="form-control"
+                                                                    placeholder="Post Code" class="form-control numeric"
                                                                     id="post_code">
                                                                 <span class="text-danger postcode_error"></span>
                                                             </div>
@@ -466,7 +483,7 @@
                                                             <div class="form-group">
                                                                 <label for="">Email <span>*</span></label>
                                                                 <input type="email" name="email" placeholder="Email"
-                                                                    class="form-control" id="email">
+                                                                    class="form-control" id="email" required>
                                                                 <span class="text-danger email_error"></span>
                                                             </div>
                                                         </div>
@@ -475,7 +492,7 @@
                                                                 <label for="">Contact Number <span>*</span></label>
                                                                 <input type="texts" name="phone"
                                                                     placeholder="Contact Number" class="form-control"
-                                                                    id="phone">
+                                                                    id="phone" pattern=".{10,}"   required title="10 characters minimum">
                                                                 <span class="text-danger phone_error"></span>
                                                             </div>
                                                         </div>

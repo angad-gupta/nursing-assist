@@ -629,23 +629,23 @@ class EnrolmentController extends Controller
         try {
             Simplify::$publicKey = env('LIVE_PUBLIC_KEY');
             Simplify::$privateKey = env('LIVE_PRIVATE_KEY');
-/* 
-                  $cardToken = \Simplify_CardToken::createCardToken(array(
-            'card' => array(
-            'expMonth' => $data['cc_exp_month'],
-            'expYear' => $data['cc_exp_year'],
-            'cvc' => $data['cc_cvc'],
-            'number' => $data['cc_number']
-            ),
-            'secure3DRequestData' => array(
-            'amount' => '100',
-            'currency' => 'AUD',
-            'description' => 'test payment'
-            )
+ 
+            $cardToken = \Simplify_CardToken::createCardToken(array(
+                'card' => array(
+                    'expMonth' => $data['cc_exp_month'],
+                    'expYear' => $data['cc_exp_year'],
+                    'cvc' => $data['cc_cvc'],
+                    'number' => $data['cc_number']
+                ),
+                'secure3DRequestData' => array(
+                    'amount' => '100',
+                    'currency' => 'AUD',
+                    'description' => 'test payment'
+                )
             ));
-            return $cardToken; */
+            return $cardToken; 
             //return 1;
-             return
+    /*          return
                 '{
                     "card": {
                       "id": "GrxMdEEK",
@@ -668,7 +668,7 @@ class EnrolmentController extends Controller
                     },
                     "used": false,
                     "id": "142d7a0f-d07a-4ecb-9e99-48dfb0bc9f98"
-                  }';
+                  }'; */
         } catch (\Throwable $e) {
             return 0;
         }

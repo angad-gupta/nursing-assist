@@ -309,4 +309,31 @@ class HomeController extends Controller
         }
     }
 
+    public function studentRegisterForm(Request $request)
+    {
+        $input = $request->all();
+
+        $course_info_id = (array_key_exists('course_info_id', $input)) ? $input['course_info_id'] : '';
+
+        if (Auth::guard('student')->check()) {
+            return redirect(route('student-dashboard'));
+        }
+
+        $data['message'] = (array_key_exists('message', $input)) ? $input['message'] : false;
+
+        $data['course_info_id'] = $course_info_id;
+
+        if ((array_key_exists('source', $input) and $input['source'] == 'course')) {
+            $data['source'] = 'course';
+        } else if ((array_key_exists('source', $input) and $input['source'] == 'enrol')) {
+            $data['source'] = 'enrol';
+        } else if ((array_key_exists('source', $input) and $input['source'] == 'resources')) {
+            $data['source'] = 'resources';
+        } else {
+            $data['source'] = '';
+        }
+
+        return view('home::student-register', $data);
+    }
+
 }
