@@ -36,7 +36,9 @@
             // Insert the token into the form so it gets submitted to the server
             $paymentForm.append("<input type='hidden' name='simplifyToken' value='" + token + "' />");
             // Submit the form to the server
-            $paymentForm.get(0).submit();
+            //$paymentForm.get(0).submit();
+            processPayment();
+            return false;
         }
     }
     $(document).ready(function() {
@@ -66,6 +68,115 @@
             return false;
         });
     });
+
+    function createInput(name, value) {
+        var input = document.createElement('input');
+        input.setAttribute('type', 'hidden');
+        input.setAttribute('name', name);
+        input.setAttribute('value', value);
+        return input;
+    }
+
+    function createSecure3dForm(data) {
+        var secure3dData = data.card.secure3DData;
+        var secure3dForm = document.createElement('form');
+        secure3dForm.setAttribute('method', 'POST');
+        secure3dForm.setAttribute('action', secure3dData.acsUrl);
+        secure3dForm.setAttribute('target', 'secure3d-frame');
+
+        var merchantDetails = secure3dData.md;
+        var paReq = secure3dData.paReq;
+        var termUrl = secure3dData.termUrl;
+
+        secure3dForm.append(createInput('PaReq', paReq));
+        secure3dForm.append(createInput('TermUrl', termUrl));
+        secure3dForm.append(createInput('MD', merchantDetails));
+
+        return secure3dForm;
+    }
+
+    function processPayment() {
+        var payload = {
+            cc_number: $('#cc-number').val(),
+            cc_exp_month: $('#cc-exp-month').val(),
+            cc_exp_year: $('#cc-exp-year').val(),
+            cc_cvc: $('#cc-cvc').val(),
+            currency: 'AUD',
+            amount: $('#amount').val(),
+            _token: '{{csrf_token()}}'
+        };
+
+        $.post('{{route("enrolment.3ds.pay")}}', payload, function (res) {
+            var response = JSON.parse(res);
+            var token = response.id;
+            var currency = 'AUD';
+            var amount = $('#amount').val();
+            var enrolment_id = $('#enrolment_id').val();
+            var payment_type = $('#payment_type').val();
+            var first_name = $('#first_name').val();
+            var last_name = $('#last_name').val();
+            var email = $('#email').val();
+
+            if (response.card.secure3DData.isEnrolled) { // Step 
+                var secure3dForm = createSecure3dForm(response); // Step 2
+                var iframeNode = $('#secure3d-frame');
+
+                $(secure3dForm).insertAfter(iframeNode);                
+                $('.iframe_modal').modal({show:true});
+
+                var process3dSecureCallback = function (threeDsResponse) {
+                    console.log('Processing 3D Secure callback...');
+                    var three_data = JSON.parse(threeDsResponse.data);
+                    window.removeEventListener('message', process3dSecureCallback);
+                    var simplifyDomain = 'https://www.simplify.com';
+
+                    // Step 4 
+                     if (threeDsResponse.origin === simplifyDomain &&
+                        three_data.secure3d.authenticated) { 
+                 
+                        var completePayload = {
+                            amount: amount,
+                            currency: currency,
+                            description: 'Enrolment Payment',
+                            enrolment_id: enrolment_id,
+                            payment_type: payment_type,
+                            first_name:first_name,
+                            last_name:last_name,
+                            email:email,
+                            token: token,
+                            _token: '{{csrf_token()}}'
+                        };
+
+                        $.post('{{route("enrolment.3ds.complete")}}', completePayload, function (completeResponse) {
+                            if (completeResponse == 0) {
+                                alert('Payment Error!');
+                                return false;
+                            } else if(completeResponse == 2) {
+                                alert('Payment Rejected By Commonwealth Bank!');
+                                return false;
+                            } else {
+                         /*        $('.iframe_modal').modal({show:false});
+                                $('.enrolment_form').hide();
+                                $('.simplify-success').modal({show:true}); */
+                                window.location = "{{route('student-dashboard')}}?payment=success";
+                            }
+                            
+                        });
+                    } else {
+                        var err_res = JSON.parse(threeDsResponse.data);
+                        alert(err_res.secure3d.error.message);
+                    } 
+                };
+ 
+                iframeNode.on('load', function () {
+                    window.addEventListener('message', process3dSecureCallback); // Step 3
+                    $('#loaderImg').hide();
+                });
+
+                secure3dForm.submit();
+            }
+        });
+    }
 </script>
 
 <script type="text/javascript">
@@ -89,12 +200,10 @@
         }
     });
 
-    $('#detail_form').click(function () {
-
-        if ($('#first_name').val() == '' && $('#last_name').val() == '' && $('#street').val() == '' && $(
-                '#suburb').val() == '' && $('#city').val() == '' && $('#state').val() == '' &&
-            $('#post_code').val() == '' && $('#intake_date').val() == '' && $('#email').val() == '' && 
-            $('#phone').val() == '' && !$('#term_conditions_agree').is(":checked")) {
+    function validateUserInput() {
+        if ($('#first_name').val() == '' && $('#last_name').val() == '' && $('#street').val() == '' && $('#suburb').val() == '' && $('#city').val() == '' 
+        && $('#state').val() == '' && $('#post_code').val() == '' && $('#intake_date').val() == '' && $('#email').val() == '' && 
+        $('#phone').val() == '' && !$('#term_conditions_agree').is(":checked")) {
             alert('Please enter all fields');
             gotothen();
         } else {
@@ -195,7 +304,7 @@
                 else{
                     $('.phone_error').html('');
                 }
-               
+            
             } else {
                 $('.phone_error').html('Enter Phone');
                 $('#phone').focus();
@@ -209,13 +318,55 @@
                 gotothen();
             }
         }
-        
-        $('#agent').on('change', function() {
-            if($(this).val() > 0) {
-                $('.agent_error').html('');
+    }
+
+    $(document).ready(function() {
+        $('#detail_form').click(function () {
+
+           if(validateUserInput()) {
+            var form = $('form')[0];
+               var formData = new FormData(form);
+                formData.append('eligible_document', document.getElementById("file").files[0]);
+                formData.append('identity_document', document.getElementById("file_second").files[0]);
+         
+
+                var self = $(this);
+                $.ajax({
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    url: '{{route("enrolmentstudent.store") }}',
+                    success: function (resp) {
+                        if(resp > 0) {
+                            $('#enrolment_id').val(resp);
+                            next_fs = self.parent().next();
+                            (self.parent()).css('display', 'none');
+                            (self.parent().next()).css('display', 'block');
+                        } else {
+                            alert('Something went wrong!');
+                        }
+                    },
+                    error: function(errResponse) {
+                        console.log(errResponse);
+                    }
+                })
+
+            }
+             
+        });
+ 
+ 
+        $('#payment_type').on('change', function() {
+            var payment_type = $(this).val();
+            if(payment_type == 1) {
+                $('#installment_payment').css('display', '');
+                $('#full_payment').css('display', 'none');
+                $('#amount').val(1637.5);
             } else {
-                $('.agent_error').html('Select Agent');
-                gotothen();
+                $('#installment_payment').css('display', 'none');
+                $('#full_payment').css('display', '');
+                $('#amount').val(5500);
             }
         })
 
@@ -247,19 +398,6 @@
                 $('.intake_error').html('Select Intake Month');
             }
         })
-    });
- 
- $(document).ready(function() {
-     $('#payment_type').on('change', function() {
-        var payment_type = $(this).val();
-        if(payment_type == 1) {
-            $('#installment_payment').css('display', '');
-            $('#full_payment').css('display', 'none');
-        } else {
-            $('#installment_payment').css('display', 'none');
-            $('#full_payment').css('display', '');
-        }
-     })
  })
 </script>
 
@@ -298,7 +436,7 @@
                                 <div class="row">
                                     <div class="col-md-12 mx-0">
                                         <!-- <form id="msform"> -->
-                                        <form action="{{ route('enrolmentstudent.store') }}" class="enrolment_form"
+                                        <form action="{{ route('enrolmentstudent.paylater.store') }}" class="enrolment_form"
                                             method="post" id="msform" enctype="multipart/form-data">
                                             {{ csrf_field() }}
                                             <!-- progressbar -->
@@ -506,7 +644,7 @@
                                                 </div>
                                                 <input type="button" name="previous"
                                                     class="previous action-button-previous" value="Previous" />
-                                                <input type="button" name="make_payment" class="next action-button"
+                                                <input type="button" name="make_payment" class=" action-button"
                                                     value="Confirm" id="detail_form" />
                                             </fieldset>
                                             <fieldset>
@@ -529,8 +667,9 @@
                                                                         ${{ $courseinfo->course_fee }}</td>
                                                                 </tr>
                                                             </table>
-
+                                                            {!! Form::hidden('enrolment_id',null, ['id' => 'enrolment_id'] ) !!}
                                                             @if($courseinfo->payment_mode != 'one off payment')
+                                                                {!! Form::hidden('amount', 1637.5, ['id' => 'amount'] ) !!}
                                                                 <table class="table" id="installment_payment" style="display:none">
                                                                     <tr>
                                                                         <td>Initial payment</td>
@@ -562,6 +701,8 @@
                                                                         <td class="text-right">${{ str_replace(',', '', $courseinfo->course_fee) * 0.025  + 1500}}</td>
                                                                     </tr>
                                                                 </table>
+                                                            @else
+                                                                {!! Form::hidden('amount', 5500, ['id' => 'amount'] ) !!}
                                                             @endif
 
                                                            
@@ -697,5 +838,22 @@
     </div>
     </div>
 </section>
+
+
+<div class="modal fade bs-example-modal-lg simplify-success" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+            <p>Payment was processed successfully.<p>
+      </div>
+  </div>
+</div>
+
+<div class="modal fade bs-example-modal-lg iframe_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <iframe name="secure3d-frame" id="secure3d-frame"  height="800" width="800"></iframe>
+      </div>
+  </div>
+</div>
 
 @include('home::layouts.footer')

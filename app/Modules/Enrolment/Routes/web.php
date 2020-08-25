@@ -22,11 +22,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'permission']], func
 
     Route::post('enrolment/update-status', ['as' => 'enrolment.updateStatus', 'uses' => 'EnrolmentController@updateStatus']);
 
- 
 
 });
 
 Route::post('enrolmentstudent/store', ['as' => 'enrolmentstudent.store', 'uses' => 'EnrolmentController@store']);
+
+Route::post('enrolmentstudent/paylater_store', ['as' => 'enrolmentstudent.paylater.store', 'uses' => 'EnrolmentController@payLaterStore']);
 
 Route::get('enrolmentstudent/cancel', ['as' => 'enrolmentstudent.cancel', 'uses' => 'EnrolmentController@cancel']);
 
@@ -44,3 +45,4 @@ Route::post('enrolment/installment/pay/store', ['as' => 'enrolment.installment.p
 Route::get('enrolment/payment_3ds', ['as' => 'enrolment.payment_3ds', 'uses' => 'EnrolmentController@payment_3ds']);
 Route::post('enrolment/payment_3ds/pay', ['as' => 'enrolment.3ds.pay', 'uses' => 'EnrolmentController@payPayment']);
 Route::post('enrolment/payment_3ds/complete', ['as' => 'enrolment.3ds.complete', 'uses' => 'EnrolmentController@completePayment']);
+

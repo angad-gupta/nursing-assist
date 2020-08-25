@@ -83,8 +83,10 @@ class DashboardController extends Controller
      * Display a listing of the resource.
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $data = $request->all();
+
         $id = Auth::guard('student')->user()->id;
         $data['student_profile'] = Auth::guard('student')->user()->find($id);
         $data['announcement'] = $this->announcement->findAll($limit = 5);
@@ -92,7 +94,10 @@ class DashboardController extends Controller
         $data['student_course'] = $this->student->getStudentCourse($id);
         $data['student_course_purchase'] = $this->student->getStudentPurchase($id);
         $data['countries'] = $this->employment->getCountries();
-        
+ 
+        if(isset($data['payment']) && $data['payment'] == 'success') {
+            Flash('You have successfully enrolled the course. We will contact you soon.')->success();
+        }
         return view('home::student.dashboard', $data);
     }
 
