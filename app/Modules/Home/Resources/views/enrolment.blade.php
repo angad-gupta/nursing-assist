@@ -1,4 +1,7 @@
 @include('home::layouts.navbar-inner')
+<style>
+.modal {z-index: 9999 !important;}
+</style>
 @section('scripts')
 <script src="{{asset('js/validation.js')}}"></script>
 <script type="text/javascript" src="https://www.simplify.com/commerce/v1/simplify.js"></script>
