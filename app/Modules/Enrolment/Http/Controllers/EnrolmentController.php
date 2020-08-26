@@ -441,13 +441,12 @@ class EnrolmentController extends Controller
     public function installmentPayment(Request $request)
     {
         $data = $request->all();
-        //dd($data);
         try {
           /*   $amount = $data['amount'] * 100;
             $description = $data['description'];
             $enrolment_id = $data['enrolment_id'];
  */
-            $student_payment = $this->studentpayment->find($data['student_payment_id']);
+            $student_payment = $this->studentpayment->find($data['student_payment_id']); 
             if (!empty($student_payment)) {
 
                 $studentInfo = optional($student_payment->studentInfo);
@@ -465,24 +464,23 @@ class EnrolmentController extends Controller
                     $installment_amt = $student_payment->status == 'First Installment Paid' ? 4000 : 1500;
                     $description = 'Final Installment of ' . $course_program_title . ' Course Enrolment';
                 }
-                //dd($data);
+  
                 //common wealth function
                 Simplify::$publicKey = env('LIVE_PUBLIC_KEY');
                 Simplify::$privateKey = env('LIVE_PRIVATE_KEY');
 
                 if (isset($data['token']) && $data['token'] != '') {
-                    $installment_amt = 1;
+                    //$installment_amt = 1;
                     $payment_info = \Simplify_Payment::createPayment(array(
                         'reference' => 'enrol_' . $enrolment_id, //optional Custom reference field to be used with outside systems.
                         'amount' => ($installment_amt * 100),
-                        //'amount' => 100,
                         'description' => $description,
                         'currency' => 'AUD',
                         'token' => $data['simplifyToken'],
                         'order' => ['customerName' => $full_name, 'customerEmail' => $email],
                     ));
 
-                    $payment = json_decode($payment_info);
+                    $payment = json_decode($payment_info); 
                     if ($payment->paymentStatus == 'APPROVED') {
 
                         $enrolpaymentData = array(

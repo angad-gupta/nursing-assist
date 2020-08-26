@@ -39,7 +39,7 @@ Route::get('enrolmentstudent/error', ['as' => 'enrolmentstudent.error', 'uses' =
 
 //installment payment form
 Route::get('enrolment/installment/pay', ['as' => 'enrolment.installment.pay', 'uses' => 'EnrolmentController@viewInstallmentForm']);
-//Route::post('enrolment/installment/pay/store', ['as' => 'enrolment.installment.pay.store', 'uses' => 'EnrolmentController@installmentPayment']);
+Route::post('enrolment/installment/pay/store', ['as' => 'enrolment.installment.pay.store', 'uses' => 'EnrolmentController@installmentPayment']);
 
 //3ds sample
 Route::get('enrolment/payment_3ds', ['as' => 'enrolment.payment_3ds', 'uses' => 'EnrolmentController@payment_3ds']);

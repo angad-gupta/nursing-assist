@@ -6,6 +6,32 @@
 <script src="{{asset('js/validation.js')}}"></script>
 <script type="text/javascript" src="https://www.simplify.com/commerce/v1/simplify.js"></script>
 <script type="text/javascript">
+
+    $(document).ready(function() {
+        $("#process-payment-btn").on("click", function() {
+            // Disable the submit button
+            $("#process-payment-btn").attr("disabled", "disabled");
+            $("#paylater-btn").attr("disabled", "disabled");
+
+            $('#loaderImg').show();
+            $('#process-payment-btn').prepend('<i class="icon-spinner4 spinner"></i>');
+            // Generate a card token & handle the response
+            SimplifyCommerce.generateToken({
+                key: "lvpb_MGQzNTNiMjctYzdhZC00MDk1LWFkYTctZmFhMDQ4OTdjMjkz", //public key
+                card: {
+                    name: $('#card_holder_name').val(),
+                    number: $("#cc-number").val(),
+                    cvc: $("#cc-cvc").val(),
+                    expMonth: $("#cc-exp-month").val(),
+                    expYear: $("#cc-exp-year").val()
+                }
+            }, simplifyResponseHandler);
+            // Prevent the form from submitting
+            return false;
+        });
+        
+    });
+
     function simplifyResponseHandler(data) {
         var $paymentForm = $(".enrolment_form");
         // Remove all previous errors
@@ -44,31 +70,6 @@
             return false;
         }
     }
-
-    $(document).ready(function() {
-        $("#process-payment-btn").on("click", function() {
-            // Disable the submit button
-            $("#process-payment-btn").attr("disabled", "disabled");
-            $("#paylater-btn").attr("disabled", "disabled");
-
-            $('#loaderImg').show();
-            $('#process-payment-btn').prepend('<i class="icon-spinner4 spinner"></i>');
-            // Generate a card token & handle the response
-            SimplifyCommerce.generateToken({
-                key: "lvpb_MGQzNTNiMjctYzdhZC00MDk1LWFkYTctZmFhMDQ4OTdjMjkz", //public key
-                card: {
-                    name: $('#card_holder_name').val(),
-                    number: $("#cc-number").val(),
-                    cvc: $("#cc-cvc").val(),
-                    expMonth: $("#cc-exp-month").val(),
-                    expYear: $("#cc-exp-year").val()
-                }
-            }, simplifyResponseHandler);
-            // Prevent the form from submitting
-            return false;
-        });
-        
-    });
 
     function createInput(name, value) {
         var input = document.createElement('input');
@@ -118,6 +119,8 @@
             var last_name = $('#last_name').val();
             var email = $('#email').val();
             var description = '{{$ins == 2 ? "Second Installment Payment" : "Final Installment Payment"}}';
+            var student_payment_id = $('#student_payment_id').val();
+            var ins = $('#ins').val();
 
             if (response.card.secure3DData.isEnrolled) { // Step 
                 var secure3dForm = createSecure3dForm(response); // Step 2
@@ -135,11 +138,13 @@
                     // Step 4 
                      if (threeDsResponse.origin === simplifyDomain &&
                         three_data.secure3d.authenticated) { 
-                 
+                  
                         var completePayload = {
                             amount: amount,
                             currency: currency,
                             description: description,
+                            student_payment_id: student_payment_id,
+                            ins:ins,
                             enrolment_id: enrolment_id,
                             payment_type: payment_type,
                             first_name:first_name,
@@ -157,9 +162,9 @@
                                 alert('Payment Rejected By Commonwealth Bank!');
                                 return false;
                             } else {
-                         /*        $('.iframe_modal').modal({show:false});
+                             /*    $('.iframe_modal').modal({show:false});
                                 $('.enrolment_form').hide();
-                                $('.simplify-success').modal({show:true}); */
+                                $('.simplify-success').modal({show:true});  */
                                 window.location = "{{route('student-dashboard')}}?payment=success";
                             }
                             
@@ -167,6 +172,8 @@
                     } else {
                         var err_res = JSON.parse(threeDsResponse.data);
                         alert(err_res.secure3d.error.message);
+                        $('#loaderImg').hide();
+                        $("#process-payment-btn").attr("disabled", false);
                     } 
                 };
  
@@ -176,6 +183,12 @@
                 });
 
                 secure3dForm.submit();
+            } else {
+                alert('3DS not enabled in the card.');
+                $('#loaderImg').hide();
+                $("#process-payment-btn").attr("disabled", false);
+                return false;
+               
             }
         });
     }
