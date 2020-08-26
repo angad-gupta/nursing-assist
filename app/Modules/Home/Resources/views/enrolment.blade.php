@@ -6,6 +6,46 @@
 <script src="{{asset('js/validation.js')}}"></script>
 <script type="text/javascript" src="https://www.simplify.com/commerce/v1/simplify.js"></script>
 <script type="text/javascript">
+   
+    $(document).ready(function() {
+        $("#process-payment-btn").on("click", function() {
+            // Disable the submit button
+            $("#process-payment-btn").attr("disabled", "disabled");
+            $("#paylater-btn").attr("disabled", "disabled");
+
+            $('#loaderImg').show();
+            $('#process-payment-btn').prepend('<i class="icon-spinner4 spinner"></i>');
+            // Generate a card token & handle the response
+            SimplifyCommerce.generateToken({
+                key: "lvpb_MGQzNTNiMjctYzdhZC00MDk1LWFkYTctZmFhMDQ4OTdjMjkz", //public key
+                card: {
+                    name: $('#card_holder_name').val(),
+                    number: $("#cc-number").val(),
+                    cvc: $("#cc-cvc").val(),
+                    expMonth: $("#cc-exp-month").val(),
+                    expYear: $("#cc-exp-year").val(),
+                    customer: {
+                        name: $('#first_name').val() + ' ' + $('#last_name').val(),
+                        email: $('#email').val()
+                    }
+                }
+            }, simplifyResponseHandler);
+            // Prevent the form from submitting
+            return false;
+        });
+
+        window.addEventListener('keydown', function(e) {
+            var keyCode = e.keyCode || e.which;
+            //if user pressed enter, set the variable to true
+            if (keyCode == 13){
+                e.preventDefault();
+                return false;
+            }
+
+        })
+
+    });
+
     function simplifyResponseHandler(data) {
         var $paymentForm = $(".enrolment_form");
         // Remove all previous errors
@@ -44,33 +84,6 @@
             return false;
         }
     }
-    $(document).ready(function() {
-        $("#process-payment-btn").on("click", function() {
-            // Disable the submit button
-            $("#process-payment-btn").attr("disabled", "disabled");
-            $("#paylater-btn").attr("disabled", "disabled");
-
-            $('#loaderImg').show();
-            $('#process-payment-btn').prepend('<i class="icon-spinner4 spinner"></i>');
-            // Generate a card token & handle the response
-            SimplifyCommerce.generateToken({
-                key: "lvpb_MGQzNTNiMjctYzdhZC00MDk1LWFkYTctZmFhMDQ4OTdjMjkz", //public key
-                card: {
-                    name: $('#card_holder_name').val(),
-                    number: $("#cc-number").val(),
-                    cvc: $("#cc-cvc").val(),
-                    expMonth: $("#cc-exp-month").val(),
-                    expYear: $("#cc-exp-year").val(),
-                    customer: {
-                        name: $('#first_name').val() + ' ' + $('#last_name').val(),
-                        email: $('#email').val()
-                    }
-                }
-            }, simplifyResponseHandler);
-            // Prevent the form from submitting
-            return false;
-        });
-    });
 
     function createInput(name, value) {
         var input = document.createElement('input');
@@ -168,6 +181,8 @@
                     } else {
                         var err_res = JSON.parse(threeDsResponse.data);
                         alert(err_res.secure3d.error.message);
+                        $('#loaderImg').hide();
+                        $("#process-payment-btn").attr("disabled", false);
                     } 
                 };
  
@@ -177,6 +192,13 @@
                 });
 
                 secure3dForm.submit();
+            } else {
+                alert('3DS not enabled in the card.');
+                $('#loaderImg').hide();
+                $("#process-payment-btn").attr("disabled", false);
+                $("#paylater-btn").removeAttr("disabled");
+                return false;
+               
             }
         });
     }
