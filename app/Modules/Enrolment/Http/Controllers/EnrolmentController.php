@@ -443,6 +443,10 @@ class EnrolmentController extends Controller
         $data = $request->all();
         //dd($data);
         try {
+          /*   $amount = $data['amount'] * 100;
+            $description = $data['description'];
+            $enrolment_id = $data['enrolment_id'];
+ */
             $student_payment = $this->studentpayment->find($data['student_payment_id']);
             if (!empty($student_payment)) {
 
@@ -466,9 +470,9 @@ class EnrolmentController extends Controller
                 Simplify::$publicKey = env('LIVE_PUBLIC_KEY');
                 Simplify::$privateKey = env('LIVE_PRIVATE_KEY');
 
-                if (isset($data['simplifyToken']) && $data['simplifyToken'] != '') {
+                if (isset($data['token']) && $data['token'] != '') {
                     $installment_amt = 1;
-                    $payment = \Simplify_Payment::createPayment(array(
+                    $payment_info = \Simplify_Payment::createPayment(array(
                         'reference' => 'enrol_' . $enrolment_id, //optional Custom reference field to be used with outside systems.
                         'amount' => ($installment_amt * 100),
                         //'amount' => 100,
@@ -478,6 +482,7 @@ class EnrolmentController extends Controller
                         'order' => ['customerName' => $full_name, 'customerEmail' => $email],
                     ));
 
+                    $payment = json_decode($payment_info);
                     if ($payment->paymentStatus == 'APPROVED') {
 
                         $enrolpaymentData = array(
@@ -560,22 +565,24 @@ class EnrolmentController extends Controller
                         $data['full_name'] = $full_name;
                         $studentInfo->notify(new EnrolmentPayment($data));
 
-                        Flash('You have successfully paid the installment.')->success();
+                        //Flash('You have successfully paid the installment.')->success();
+                        return 1;
                     } else {
-                        Flash('Payment Error!')->error();
+                        //Flash('Payment Error!')->error();
+                        return 2;
                     }
                 } else {
-                    Flash('Payment Error!')->error();
+                    return 0;
                 }
 
             } else {
-                Flash("Data doesn't exist!")->error();
+                return 0;
             }
 
         } catch (\Throwable $e) {
-            Flash('Something Wrong with Card Details')->error();
+            return 0;
         }
-        return redirect()->route('student-dashboard');
+            
     }
 
     public function viewInstallmentForm(Request $request)
@@ -632,7 +639,7 @@ class EnrolmentController extends Controller
                     'number' => $data['cc_number']
                 ),
                 'secure3DRequestData' => array(
-                    'amount' => '100',
+                    'amount' => $amount,
                     'currency' => 'AUD',
                     'description' => 'Enrolment Payment'
                 )

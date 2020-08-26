@@ -4,6 +4,7 @@ namespace App\Modules\Student\Entities;
 
 use App\Modules\CourseInfo\Entities\CourseInfo;
 use App\Modules\Student\Entities\Student;
+use App\Modules\Enrolment\Entities\Enrolment;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -38,6 +39,11 @@ class StudentPayment extends Model
     public function enrolmentPaymentInfo()
     {
         return $this->belongsTo(EnrolPayment::class, 'enrolment_payment_id', 'id');
+    }
+
+    public function enrolmentInfo()
+    {
+        return $this->belongsTo(Enrolment::class, 'enrolment_id', 'id');
     }
 
 }

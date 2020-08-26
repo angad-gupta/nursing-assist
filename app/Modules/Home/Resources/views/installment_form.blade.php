@@ -1,5 +1,6 @@
 @include('home::layouts.navbar-inner')
 @section('scripts')
+<script src="{{asset('js/validation.js')}}"></script>
 <script type="text/javascript" src="https://www.simplify.com/commerce/v1/simplify.js"></script>
 <script type="text/javascript">
     function simplifyResponseHandler(data) {
@@ -35,9 +36,12 @@
             // Insert the token into the form so it gets submitted to the server
             $paymentForm.append("<input type='hidden' name='simplifyToken' value='" + token + "' />");
             // Submit the form to the server
-            $paymentForm.get(0).submit();
+            //$paymentForm.get(0).submit();
+            processPayment();
+            return false;
         }
     }
+
     $(document).ready(function() {
         $("#process-payment-btn").on("click", function() {
             // Disable the submit button
@@ -48,24 +52,132 @@
             $('#process-payment-btn').prepend('<i class="icon-spinner4 spinner"></i>');
             // Generate a card token & handle the response
             SimplifyCommerce.generateToken({
-                key: "sbpb_OGUzNWUwMGQtOTZjZi00ODlhLWJmNjMtOTEwOGZjMmI4YTU4",
+                key: "lvpb_MGQzNTNiMjctYzdhZC00MDk1LWFkYTctZmFhMDQ4OTdjMjkz", //public key
                 card: {
                     name: $('#card_holder_name').val(),
                     number: $("#cc-number").val(),
                     cvc: $("#cc-cvc").val(),
                     expMonth: $("#cc-exp-month").val(),
-                    expYear: $("#cc-exp-year").val(),
-                    customer: {
-                        name: $('#first_name').val() + ' ' + $('#last_name').val(),
-                        email: $('#email').val()
-                    }
+                    expYear: $("#cc-exp-year").val()
                 }
             }, simplifyResponseHandler);
             // Prevent the form from submitting
             return false;
         });
+        
     });
+
+    function createInput(name, value) {
+        var input = document.createElement('input');
+        input.setAttribute('type', 'hidden');
+        input.setAttribute('name', name);
+        input.setAttribute('value', value);
+        return input;
+    }
+
+    function createSecure3dForm(data) {
+        var secure3dData = data.card.secure3DData;
+        var secure3dForm = document.createElement('form');
+        secure3dForm.setAttribute('method', 'POST');
+        secure3dForm.setAttribute('action', secure3dData.acsUrl);
+        secure3dForm.setAttribute('target', 'secure3d-frame');
+
+        var merchantDetails = secure3dData.md;
+        var paReq = secure3dData.paReq;
+        var termUrl = secure3dData.termUrl;
+
+        secure3dForm.append(createInput('PaReq', paReq));
+        secure3dForm.append(createInput('TermUrl', termUrl));
+        secure3dForm.append(createInput('MD', merchantDetails));
+
+        return secure3dForm;
+    }
+
+    function processPayment() {
+        var payload = {
+            cc_number: $('#cc-number').val(),
+            cc_exp_month: $('#cc-exp-month').val(),
+            cc_exp_year: $('#cc-exp-year').val(),
+            cc_cvc: $('#cc-cvc').val(),
+            currency: 'AUD',
+            amount: $('#amount').val(),
+            _token: '{{csrf_token()}}'
+        };
+
+        $.post('{{route("enrolment.3ds.pay")}}', payload, function (res) {
+            var response = JSON.parse(res);
+            var token = response.id;
+            var currency = 'AUD';
+            var amount = $('#amount').val();
+            var enrolment_id = $('#enrolment_id').val();
+            var payment_type = 1;
+            var first_name = $('#first_name').val();
+            var last_name = $('#last_name').val();
+            var email = $('#email').val();
+            var description = '{{$ins == 2 ? "Second Installment Payment" : "Final Installment Payment"}}';
+
+            if (response.card.secure3DData.isEnrolled) { // Step 
+                var secure3dForm = createSecure3dForm(response); // Step 2
+                var iframeNode = $('#secure3d-frame');
+
+                $(secure3dForm).insertAfter(iframeNode);                
+                $('.iframe_modal').modal({show:true});
+
+                var process3dSecureCallback = function (threeDsResponse) {
+                    console.log('Processing 3D Secure callback...');
+                    var three_data = JSON.parse(threeDsResponse.data);
+                    window.removeEventListener('message', process3dSecureCallback);
+                    var simplifyDomain = 'https://www.simplify.com';
+
+                    // Step 4 
+                     if (threeDsResponse.origin === simplifyDomain &&
+                        three_data.secure3d.authenticated) { 
+                 
+                        var completePayload = {
+                            amount: amount,
+                            currency: currency,
+                            description: description,
+                            enrolment_id: enrolment_id,
+                            payment_type: payment_type,
+                            first_name:first_name,
+                            last_name:last_name,
+                            email:email,
+                            token: token,
+                            _token: '{{csrf_token()}}'
+                        };
+
+                        $.post('{{route("enrolment.3ds.installment.store")}}', completePayload, function (completeResponse) {
+                            if (completeResponse == 0) {
+                                alert('Payment Error!');
+                                return false;
+                            } else if(completeResponse == 2) {
+                                alert('Payment Rejected By Commonwealth Bank!');
+                                return false;
+                            } else {
+                         /*        $('.iframe_modal').modal({show:false});
+                                $('.enrolment_form').hide();
+                                $('.simplify-success').modal({show:true}); */
+                                window.location = "{{route('student-dashboard')}}?payment=success";
+                            }
+                            
+                        });
+                    } else {
+                        var err_res = JSON.parse(threeDsResponse.data);
+                        alert(err_res.secure3d.error.message);
+                    } 
+                };
+ 
+                iframeNode.on('load', function () {
+                    window.addEventListener('message', process3dSecureCallback); // Step 3
+                    $('#loaderImg').hide();
+                });
+
+                secure3dForm.submit();
+            }
+        });
+    }
 </script>
+
 
 @endsection
 
@@ -107,6 +219,12 @@
                                             {{ csrf_field() }}
                                             {!! Form::hidden('student_payment_id', $id, ['id' => 'student_payment_id']) !!}
                                             {!! Form::hidden('ins', $ins, ['id' => 'ins']) !!}
+                                            {!! Form::hidden('enrolment_id', $student_payment->enrolment_id, ['id' => 'enrolment_id'] ) !!}
+                                            {!! Form::hidden('amount', $ins == 2 ? 2500 : 1500, ['id' => 'amount'] ) !!}
+                                            {!! Form::hidden('first_name', optional($student_payment->enrolmentInfo)->first_name, ['id' => 'first_name'] ) !!}
+                                            {!! Form::hidden('last_name', optional($student_payment->enrolmentInfo)->last_name, ['id' => 'last_name'] ) !!}
+                                            {!! Form::hidden('email', optional($student_payment->enrolmentInfo)->email, ['id' => 'email'] ) !!}
+
                                             <fieldset>
                                                 <div class="form-card neta-payment">
                                                     <div class="row justify-content-center">
@@ -258,5 +376,23 @@
     </div>
     </div>
 </section>
+
+
+<div class="modal fade bs-example-modal-lg simplify-success" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+            <p>Payment was processed successfully.<p>
+      </div>
+  </div>
+</div>
+
+<div class="modal fade bs-example-modal-lg iframe_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <iframe name="secure3d-frame" id="secure3d-frame"  height="800" width="800"></iframe>
+      </div>
+  </div>
+</div>
+
 
 @include('home::layouts.footer')
