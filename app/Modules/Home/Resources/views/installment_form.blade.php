@@ -98,21 +98,23 @@
     }
 
     function processPayment() {
+        var amount = $('#amount').val();
+        //var amount = 1;
+        var currency = 'AUD';  
+
         var payload = {
             cc_number: $('#cc-number').val(),
             cc_exp_month: $('#cc-exp-month').val(),
             cc_exp_year: $('#cc-exp-year').val(),
             cc_cvc: $('#cc-cvc').val(),
             currency: 'AUD',
-            amount: $('#amount').val(),
+            amount: amount,
             _token: '{{csrf_token()}}'
         };
 
         $.post('{{route("enrolment.3ds.pay")}}', payload, function (res) {
             var response = JSON.parse(res);
             var token = response.id;
-            var currency = 'AUD';
-            var amount = $('#amount').val();
             var enrolment_id = $('#enrolment_id').val();
             var payment_type = 1;
             var first_name = $('#first_name').val();
