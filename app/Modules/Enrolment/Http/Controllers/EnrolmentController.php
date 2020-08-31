@@ -671,8 +671,10 @@ class EnrolmentController extends Controller
             $data['course_program_title'] = $course_program_title = $courseInfo->course_program_title; 
 
             if ($courseInfo->payment_mode != 'one off payment' && $data['payment_type'] == 1) {
-                $fee_in_cwbank = str_replace(',', '', $total_course_fee) * 0.025 + 1500;
-                $total_course_fee = str_replace(',', '', $total_course_fee) * 0.025 + 5500;
+              /*   $fee_in_cwbank = str_replace(',', '', $total_course_fee) * 0.025 + 1500;
+                $total_course_fee = str_replace(',', '', $total_course_fee) * 0.025 + 5500; */
+                $fee_in_cwbank = 1500;
+                $total_course_fee = 5500;
                 $description = 'First Installment of ' . $course_program_title . ' Course Enrolment';
             } else {
                 $fee_in_cwbank = str_replace(',', '', $total_course_fee);

@@ -238,7 +238,7 @@
                                             {!! Form::hidden('student_payment_id', $id, ['id' => 'student_payment_id']) !!}
                                             {!! Form::hidden('ins', $ins, ['id' => 'ins']) !!}
                                             {!! Form::hidden('enrolment_id', $student_payment->enrolment_id, ['id' => 'enrolment_id'] ) !!}
-                                            {!! Form::hidden('amount', $ins == 2 ? 2500 : 1500, ['id' => 'amount'] ) !!}
+                                            {!! Form::hidden('amount', $ins == 2 ? 2500 : ($student_payment->status == 'First Installment Paid' ? 4000 : 1500), ['id' => 'amount'] ) !!}
                                             {!! Form::hidden('first_name', optional($student_payment->enrolmentInfo)->first_name, ['id' => 'first_name'] ) !!}
                                             {!! Form::hidden('last_name', optional($student_payment->enrolmentInfo)->last_name, ['id' => 'last_name'] ) !!}
                                             {!! Form::hidden('email', optional($student_payment->enrolmentInfo)->email, ['id' => 'email'] ) !!}
