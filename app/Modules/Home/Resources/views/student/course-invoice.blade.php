@@ -149,9 +149,13 @@
                                         <td>A${{numberFormat($gst)}}</td>
                                     </tr>
                                     @if(optional($student_puchase_info->courseInfo)->payment_mode != 'one off payment')
-                                        <tr>
+                                        {{--<tr>
                                             <th>Intial Payment + Administration Fee(2.5%)</th>
                                             <td>A$1,637.50</td>
+                                        </tr>--}}
+                                        <tr>
+                                            <th>Intial Payment</th>
+                                            <td>A$1,500</td>
                                         </tr>
                                         <tr>
                                             <th>Second Installment</th>
@@ -161,9 +165,13 @@
                                             <th>Final Installment</th>
                                             <td>A$1,500</td>
                                         </tr>
-                                        <tr>
+                                        {{--<tr>
                                             <th>Total</th>
                                             <td>A$5,637.50</td>
+                                        </tr>--}}
+                                        <tr>
+                                            <th>Total</th>
+                                            <td>A$5,500</td>
                                         </tr>
                                     @else 
                                     <tr>
@@ -207,9 +215,9 @@
                                         <th scope="col">Rate</th>
                                         <th scope="col">GST</th>
                                         <th scope="col">NET</th>
-                                        @if(optional($student_puchase_info->courseInfo)->payment_mode != 'one off payment')
+                                        {{--@if(optional($student_puchase_info->courseInfo)->payment_mode != 'one off payment')
                                         <th scope="col">Administration Fee(2.5%)</th>
-                                        @endif
+                                        @endif--}}
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -217,9 +225,9 @@
                                         <th>GST @ 10%</th>
                                         <td>A${{numberFormat($gst)}}</td>
                                         <td>A${{numberFormat(str_replace(',', '', optional($student_puchase_info->courseInfo)->course_fee))}}</td>
-                                        @if(optional($student_puchase_info->courseInfo)->payment_mode != 'one off payment')
+                                       {{-- @if(optional($student_puchase_info->courseInfo)->payment_mode != 'one off payment')
                                             <td>A$137.50</td>
-                                        @endif
+                                        @endif--}}
                                       </tr>
                                     </tbody>
                                   </table>

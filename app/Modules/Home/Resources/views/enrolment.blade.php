@@ -390,7 +390,8 @@
             if(payment_type == 1) {
                 $('#installment_payment').css('display', '');
                 $('#full_payment').css('display', 'none');
-                $('#amount').val(1637.5);
+                //$('#amount').val(1637.5);
+                $('#amount').val(1500);
             } else {
                 $('#installment_payment').css('display', 'none');
                 $('#full_payment').css('display', '');
@@ -697,17 +698,18 @@
                                                             </table>
                                                             {!! Form::hidden('enrolment_id',null, ['id' => 'enrolment_id'] ) !!}
                                                             @if($courseinfo->payment_mode != 'one off payment')
-                                                                {!! Form::hidden('amount', 1637.5, ['id' => 'amount'] ) !!}
+                                                                {{--{!! Form::hidden('amount', 1637.5, ['id' => 'amount'] ) !!}--}}
+                                                                {!! Form::hidden('amount', 1500, ['id' => 'amount'] ) !!}
                                                                 <table class="table" id="installment_payment" style="display:none">
                                                                     <tr>
                                                                         <td>Initial payment</td>
                                                                         <td class="text-right">$1,500</td>
                                                                     </tr>
-                                                                    <tr>
+                                                                    {{--<tr>
                                                                         <td>Administration fee(2.5%) applies</td>
                                                                         <td class="text-right">
                                                                             2.5% of ${{ $courseinfo->course_fee}} = ${{ str_replace(',', '', $courseinfo->course_fee) * 0.025 }}</td>
-                                                                    </tr>
+                                                                    </tr>--}}
                                                                     <tr>
                                                                         <td>Second Payment (15 days after course commencement)
                                                                         </td>
@@ -721,12 +723,14 @@
 
                                                                     <tr class="total">
                                                                         <td>Enrol {{ $courseinfo->course_program_title }} Total</td>
-                                                                        <td class="text-right">${{ str_replace(',', '', $courseinfo->course_fee) * 0.025  + str_replace(',', '', $courseinfo->course_fee)}}</td>
+                                                                        {{--<td class="text-right">${{ str_replace(',', '', $courseinfo->course_fee) * 0.025  + str_replace(',', '', $courseinfo->course_fee)}}</td>--}}
+                                                                        <td class="text-right">${{ str_replace(',', '', $courseinfo->course_fee) }}</td>
                                                                     </tr>
 
                                                                     <tr class="total">
                                                                         <td>First Inital Payment Total</td>
-                                                                        <td class="text-right">${{ str_replace(',', '', $courseinfo->course_fee) * 0.025  + 1500}}</td>
+                                                                        {{--<td class="text-right">${{ str_replace(',', '', $courseinfo->course_fee) * 0.025  + 1500}}</td>--}}
+                                                                        <td class="text-right">$1,500</td>
                                                                     </tr>
                                                                 </table>
                                                             @else

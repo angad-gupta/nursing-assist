@@ -798,7 +798,8 @@ class EnrolmentController extends Controller
                         $this->enrolment->update($enrolment_id, ['payment_type'=> 1, 'payment_status' => 2]);
 
                         $data['subject'] = 'First Installment Payment Successful';
-                        $data['mail_desc'] = 'You have successfully paid first installment of $' . $fee_in_cwbank . ' with admission fee of 2.5% for ' . $data['course_program_title'] . ' enrolment.';
+                       // $data['mail_desc'] = 'You have successfully paid first installment of $' . $fee_in_cwbank . ' with admission fee of 2.5% for ' . $data['course_program_title'] . ' enrolment.';
+                       $data['mail_desc'] = 'You have successfully paid first installment of $' . $fee_in_cwbank . ' for ' . $data['course_program_title'] . ' enrolment.';
 
                     } else {
                         $studentPaymentData = array(
