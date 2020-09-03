@@ -25,7 +25,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h2 class="ttl-line">{{ ucfirst(str_replace('_',' ',$mockup_title)) }}</h2>
+                <h2 class="ttl-line">Mock Test Week {{ substr($mockup_title, -1) }}</h2>
                 <p>Comprehension, Analysis and Application level questions from all categories using the Related
                     Courses. Complete the test in a quiet environment. </p>
                 

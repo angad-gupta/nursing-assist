@@ -106,7 +106,7 @@ class CourseInfoRepository implements CourseInfoInterface
 
     public function getCourseInfoByCourse($id)
     {
-        return CourseInfo::where('course_id', '=', $id)->get();
+        return CourseInfo::where('course_id', '=', $id)->where('status', 1)->get();
     }
 
     public function where($field, $value)

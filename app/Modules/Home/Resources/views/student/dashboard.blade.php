@@ -91,7 +91,7 @@
                         aria-labelledby="v-pills-profile-tab">
                         <h5 class="mb-0">My Account</h5>
                         
-                        <p>View and edit your personal info below. <a  href="{{route('student-hub')}}" style="float:right;color:blueviolet">Enroll in a Course</a></p> 
+                        <p>View and edit your personal info below. <a  href="{{route('student-hub')}}" style="float:right;color:purple;font-size:20px">Enroll to a Course</a></p> 
                        
                         <div class="row">
                             <div class="col-sm-12 col-md-12 col-lg-12 pt-0">
@@ -210,7 +210,7 @@
 
                             <div class="tab-pane fade" id="v-pills-book" role="tabpanel" aria-labelledby="v-pills-book-tab">
                                 <h5>My Courses</h5>
-                                <a target="_blank" class="btn sac-btn" href="{{ route('student-courses') }}">See Available Courses</a>
+                                <div style="text-align:center;"><a target="_blank" class="btn sac-btn" href="{{ route('student-courses') }}">See Available Courses</a></div>
                                 <div class="tp-list">
                                     <div class="row">
                                         <div class="col-sm-12">

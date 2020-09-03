@@ -203,7 +203,7 @@
                            data-popup="tooltip" data-original-title="Mockup Test Management"
                            data-placement="right">
                             <i class="icon-paste"></i>
-                            <span>Mockup Test Management</span>
+                            <span>Mock Test Management</span>
                         </a>
                     </li>
                     @endif   

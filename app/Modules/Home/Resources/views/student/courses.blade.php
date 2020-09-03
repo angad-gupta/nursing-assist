@@ -31,33 +31,31 @@
                             aria-controls="home" aria-selected="true">My Courses</a>
                     </li>
                     @if(sizeof($student_course)>0)
-                    <li class="nav-item">
-                        <a class="nav-link" id="practice-tab" data-toggle="tab" href="#practice" role="tab"
-                            aria-controls="practice" aria-selected="false">Practice Test</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                            aria-controls="profile" aria-selected="false">Mock Tests</a>
-                    </li>
-                    @endif
-                    <li class="nav-item">
-                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
-                            aria-controls="contact" aria-selected="false">Other Courses</a>
-                    </li>
-                    @if(sizeof($student_course)>0)
                         <li class="nav-item">
                             <a class="nav-link" id="resources-tab" data-toggle="tab" href="#resources" role="tab"
                                 aria-controls="resources" aria-selected="false">Resources</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" id="practice-tab" data-toggle="tab" href="#practice" role="tab"
+                                aria-controls="practice" aria-selected="false">Practice Test</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                                aria-controls="profile" aria-selected="false">Mock Test</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" id="readliness-tab" data-toggle="tab" href="#readliness" role="tab"
-                                aria-controls="readliness" aria-selected="false">Readiness Exam</a>
+                                aria-controls="readliness" aria-selected="false">Readiness Test</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="history-tab" data-toggle="tab" href="#history" role="tab"
-                                aria-controls="history" aria-selected="false">Mockup History</a>
+                                aria-controls="history" aria-selected="false">Test History</a>
                         </li>
                     @endif
+                    <li class="nav-item">
+                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
+                            aria-controls="contact" aria-selected="false">Other Courses</a>
+                    </li>
                 </ul>
 
                 <div class="tab-content" id="myTabContent">
@@ -266,7 +264,7 @@
                                                     @foreach($student_mockup as $key => $value)
                                                     <tr>
                                                         <td>{{ $student_mockup->firstItem() + $key }}</td>
-                                                        <td>{{ ucfirst(str_replace('_',' ',$value->mockup_title)) }}</td>
+                                                        <td>Mock Test Week {{ substr($value->mockup_title, -1) }}</td>
                                                         <td>{{ date('dS M, Y',strtotime($value->date)) }}</td>
                                                         <td>{{$value->total_question}}</td>
                                                         <td>{{$value->correct_answer}}</td>
