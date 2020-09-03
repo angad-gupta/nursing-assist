@@ -215,7 +215,7 @@ class StudentRepository implements StudentInterface
 
     public function previousQuizData($student_id, $previous_course_content_id)
     {
-        return StudentQuizResult::where('student_id', '=', $student_id)->where('course_content_id', '=', $previous_course_content_id)->get()->first();
+        return StudentQuizResult::where('student_id', '=', $student_id)->where('course_content_id', '=', $previous_course_content_id)->orderBy('id', 'DESC')->limit(1)->first();
     }
 
     public function deletePreviousQuizResult($previous_quiz_id)
@@ -256,7 +256,7 @@ class StudentRepository implements StudentInterface
 
     public function getQuizForCourseInfo($student_id, $courseContentId)
     {
-        return StudentQuizResult::where('student_id', '=', $student_id)->where('course_content_id', '=', $courseContentId)->first();
+        return StudentQuizResult::where('student_id', '=', $student_id)->where('course_content_id', '=', $courseContentId)->orderBy('id', 'DESC')->limit(1)->first();
     }
 
 }

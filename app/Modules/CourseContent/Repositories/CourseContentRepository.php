@@ -65,7 +65,7 @@ class CourseContentRepository implements CourseContentInterface
 
     public function getAllLesson($courseinfoid, $syllabiid)
     {
-        return CourseContent::where('course_info_id', '=', $courseinfoid)->where('syllabus_id', '=', $syllabiid)->orderBy('id', 'ASC')->get();
+        return CourseContent::where('course_info_id', '=', $courseinfoid)->where('syllabus_id', '=', $syllabiid)->orderBy('sort_order', 'ASC')->get();
     }
 
     public function checkOrderByField($order, $course_info_id, $syllabus_id)
