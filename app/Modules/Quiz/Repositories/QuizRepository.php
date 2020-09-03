@@ -10,19 +10,18 @@ class QuizRepository implements QuizInterface
     public function findAll($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1])
     {
 
-         $result =Quiz::when(array_keys($filter, true), function ($query) use ($filter) {         
-            
+        $result = Quiz::when(array_keys($filter, true), function ($query) use ($filter) {
 
         })
             ->orderBy($sort['by'], $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
 
-        return $result; 
+        return $result;
 
     }
 
     public function find($id)
     {
-        return Quiz::find($id); 
+        return Quiz::find($id);
     }
 
     public function getList()
@@ -36,7 +35,8 @@ class QuizRepository implements QuizInterface
         return Quiz::create($data);
     }
 
-    public function saveQuizOption($data){
+    public function saveQuizOption($data)
+    {
 
         return QuizOption::create($data);
     }
@@ -52,40 +52,47 @@ class QuizRepository implements QuizInterface
         return Quiz::destroy($id);
     }
 
-    public function deleteQuizOpton($id){
-        QuizOption::where('quiz_id','=',$id)->delete($id);
+    public function deleteQuizOpton($id)
+    {
+        QuizOption::where('quiz_id', '=', $id)->delete($id);
     }
 
-    public function countTotal(){
+    public function countTotal()
+    {
         return Quiz::count();
     }
 
-    public function getDemoQuiz($limit, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1]){
+    public function getDemoQuiz($limit, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1])
+    {
 
-        $result =Quiz::when(array_keys($filter, true), function ($query) use ($filter) {         
-            
+        $result = Quiz::when(array_keys($filter, true), function ($query) use ($filter) {
 
         })
-            ->where('category','=','Demo')->orWhere('set_for_demo','=','1')->inRandomOrder()->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+            ->where('category', '=', 'Demo')->orWhere('set_for_demo', '=', '1')->inRandomOrder()->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
 
-        return $result; 
+        return $result;
     }
 
-    public function getGeneralById($courseContentId,$limit, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1]){
+    public function getGeneralById($courseContentId, $limit, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1])
+    {
 
-         $result =Quiz::when(array_keys($filter, true), function ($query) use ($filter) {         
-            
+        $result = Quiz::when(array_keys($filter, true), function ($query) use ($filter) {
 
-        }) 
-            ->where('category','=','General')->Where('course_content_id','=',$courseContentId)->inRandomOrder()->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+        })
+            ->where('category', '=', 'General')->Where('course_content_id', '=', $courseContentId)->inRandomOrder()->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
 
         return $result;
 
     }
 
+    public function checkCorrectAnswer($quiz_id, $answer)
+    {
+        return Quiz::where('id', '=', $quiz_id)->where('correct_option', 'like', $answer)->count();
+    }
 
-    public function checkCorrectAnswer($quiz_id,$answer){
-         return Quiz::where('id','=',$quiz_id)->where('correct_option','like',$answer)->count();
+    public static function totalBySectionContentId($course_content_id, $quiz_section = 'Practise')
+    {
+        return Quiz::where('course_content_id', $course_content_id)->where('quiz_section', $quiz_section)->count();
     }
 
 }
