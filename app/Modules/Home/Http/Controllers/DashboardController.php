@@ -279,6 +279,8 @@ class DashboardController extends Controller
     public function studentQuizStore(Request $request)
     {
         $input = $request->all();
+ 
+        $total_quiz_question = count($input['quiz_id']);
 
         $student_id = Auth::guard('student')->user()->id;
         $courseinfo_id = $input['courseinfo_id'];
@@ -334,7 +336,7 @@ class DashboardController extends Controller
             $quiz_history = $this->student->getquizHistory($student_id, $course_content_id);
             $correct_answer = $this->student->getcorrectAnswer($student_id, $course_content_id);
 
-            $total_question = count($quiz_history);
+            $total_question = $total_quiz_question; //count($quiz_history);
             $correctPercent = ($correct_answer / $total_question) * 100;
 
             $data['correct_percent'] = $correct_percent = number_format($correctPercent, 2);
