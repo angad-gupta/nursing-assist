@@ -28,7 +28,7 @@
         <div class="container">
             <div class="row">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <div class="col-md-3 col-lg-1">
+                    <div class="col-md-3 col-lg-2">
                        @if($setting != null && $setting->company_logo != null)
                        <a class="navbar-brand" href="{{ route('home') }}"><img src="{{asset('uploads/setting/'.$setting->company_logo)}}" alt="" class="img-fluid"></a>
                     @else
