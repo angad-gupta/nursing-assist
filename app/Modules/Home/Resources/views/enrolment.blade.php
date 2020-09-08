@@ -759,7 +759,7 @@
                                                                     <div class="col-sm-4">
                                                                         <div class="form-group">
                                                                             <label for="">CVC: <span class="text-danger">*</span></label>
-                                                                            <input type="password" name="ccv" id="cc-cvc" class="form-control" maxlength="4" autocomplete="off" placeholder="Enter CVC" required>
+                                                                            <input type="password" name="ccv" id="cc-cvc" class="form-control" maxlength="4" autocomplete="off" placeholder="Enter CVC">
                                                                         </div>
                                                                     </div>
 
