@@ -149,7 +149,7 @@
                                         <div class="my-courses__list">
                                             <div class="list-content">
                                                 <h5>{{$list}}</h5>
-                                                <span>25 Questions</span>
+                                                <span>{{ $key == 'practice_test_1' ? '25' : ($key == 'practice_test_2' ? '50' : '100') }} Questions</span>
                                                 <a class="btn e-btn w-100"
                                                     href="{{ route('practice-question',['practice_title'=>$key]) }}">Take Test</a>
                                             </div>
@@ -260,16 +260,23 @@
                                             </thead>
                                             <tbody>
                                                 
-                                                @if($student_mockup->total() != 0)
-                                                    @foreach($student_mockup as $key => $value)
+                                                @if($student_histories->total() != 0)
+                                                    @foreach($student_histories as $key => $value)
                                                     <tr>
-                                                        <td>{{ $student_mockup->firstItem() + $key }}</td>
-                                                        <td>Mock Test Week {{ substr($value->mockup_title, -1) }}</td>
+                                                        <td>{{ $student_histories->firstItem() + $key }}</td>
+                                                        <td>{{ $value->type == 'mockup' ? 'Mock Test Week' : 'Practice Test'}} {{ substr($value->title, -1) }}</td>
                                                         <td>{{ date('dS M, Y',strtotime($value->date)) }}</td>
                                                         <td>{{$value->total_question}}</td>
                                                         <td>{{$value->correct_answer}}</td>
                                                         <td>
-                                                            <div class="history-view"><a href="{{ route('mockup.history', $value->id) }}" class="btn e-btn">View Details</a></td>
+                                                            <div class="history-view">
+                                                                @if($value->type == 'mockup')
+                                                                    <a href="{{ route('mockup.history', $value->id) }}" class="btn e-btn">View Details</a>
+                                                                @else
+                                                                    <a href="{{ route('practice.history', $value->id) }}" class="btn e-btn">View Details</a>
+                                                                @endif
+                                                            </div>
+                                                        </td>
                                                       
                                                     </tr>
                                                     @endforeach
@@ -278,8 +285,8 @@
                                             </tbody>
                                         </table>
                                         <span style="margin: 5px;float: right;">
-                                            @if($student_mockup->total() != 0)
-                                            {{ $student_mockup->appends(request()->except('page'))->links()  }}
+                                            @if($student_histories->total() != 0)
+                                            {{ $student_histories->appends(request()->except('page'))->links()  }}
                                             @endif
                                         </span>
                                     </div>

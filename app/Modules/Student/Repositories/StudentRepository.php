@@ -8,6 +8,7 @@ use App\Modules\Student\Entities\StudentMockupResult;
 use App\Modules\Student\Entities\StudentPayment;
 use App\Modules\Student\Entities\StudentQuizHistory;
 use App\Modules\Student\Entities\StudentQuizResult;
+use App\Modules\Student\Entities\StudentPracticeResult;
 use DB;
 
 class StudentRepository implements StudentInterface
@@ -259,4 +260,27 @@ class StudentRepository implements StudentInterface
         return StudentQuizResult::where('student_id', '=', $student_id)->where('course_content_id', '=', $courseContentId)->orderBy('id', 'DESC')->limit(1)->first();
     }
 
+    public function getAllHistories($student_id, $limit = null, $filter = [])
+    {
+        $mockup_results = StudentMockupResult::when(array_keys($filter, true), function ($query) use ($filter) {
+
+        })->where('student_id', '=', $student_id)->selectRaw('"mockup" as type, id, mockup_title as title, date, total_question, correct_answer');
+
+        $practice_results = StudentPracticeResult::when(array_keys($filter, true), function ($query) use ($filter) {
+
+        })->where('student_id', '=', $student_id)->selectRaw('"practice" as type, id, title, date, total_question, correct_answer');
+
+        $unions = $mockup_results->unionAll($practice_results);
+
+        $result = DB::table(DB::raw("({$unions->toSql()}) AS s"))
+            ->mergeBindings($unions->getQuery())
+            ->when(array_keys($filter, true), function ($query) use ($filter) {
+
+            })
+            ->selectRaw('s.type, s.id, s.title, s.date, s.total_question, s.correct_answer')
+            ->orderBy('s.date', 'DESC')
+            ->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+
+        return $result;
+    }
 }
