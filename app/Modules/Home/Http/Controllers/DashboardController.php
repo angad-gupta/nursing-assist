@@ -292,6 +292,8 @@ class DashboardController extends Controller
             return redirect(route('syllabus-detail', ['course_info_id' => $courseinfo_id]));
         } */
 
+        $this->student->clearOldQuizHistory($student_id, $course_content_id);
+
         $checkQuiz = $this->student->getQuizForCourseInfo($student_id, $course_content_id);
         if (!empty($checkQuiz) && $checkQuiz->percent >= 80) {
             Flash('Practise Test Already Taken.Please Proceed Next Course.')->success();
@@ -387,7 +389,7 @@ class DashboardController extends Controller
 
     public function studentmockupStore(Request $request)
     {
-        $input = $request->all();
+        $input = $request->all();  dd($input);
 
         $mockup_title = $input['mockup_title'];
         $student_id = Auth::guard('student')->user()->id;

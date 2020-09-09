@@ -167,6 +167,10 @@ class StudentRepository implements StudentInterface
         return StudentQuizResult::where('student_id', '=', $student_id)->where('course_content_id', '=', $courseContentId)->count();
     }
 
+    public function clearOldQuizHistory($student_id, $course_content_id){
+        StudentQuizHistory:: where('student_id','=',$student_id)->where('course_content_id','=',$course_content_id)->delete();
+    }
+
     public function saveQuizHistory($quizdata)
     {
         return StudentQuizHistory::create($quizdata);

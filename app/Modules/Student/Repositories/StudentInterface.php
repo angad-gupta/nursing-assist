@@ -36,6 +36,7 @@ interface StudentInterface
 
     public function checkQuizForCourseInfo($student_id, $courseContentId);
 
+    public function clearOldQuizHistory($student_id, $course_content_id); 
     public function saveQuizHistory($quizdata);
     public function getquizHistory($student_id, $course_content_id);
     public function getcorrectAnswer($student_id, $course_content_id);
