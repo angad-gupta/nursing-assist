@@ -27,4 +27,6 @@ interface StudentPracticeInterface
     public function getQuestionHistory($whereArray);
 
     public function updateHistory($id, $data);
+
+    public function findAllHistory($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC']);
 }

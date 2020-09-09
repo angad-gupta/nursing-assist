@@ -60,4 +60,6 @@ interface StudentInterface
 
     public function getLatestQuizByStudent($student_id);
     public function getQuizForCourseInfo($student_id, $courseContentId);
+
+    public function getAllHistories($student_id, $limit = null, $filter = []);
 }

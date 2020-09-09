@@ -154,7 +154,8 @@ class DashboardController extends Controller
         $data['student_course'] = $this->student->getStudentCourse($id);
         $data['other_course'] = $this->courseinfo->getAll();
         $data['resources'] = $this->resource->findAll();
-        $data['student_mockup'] = $this->student->getStudentMockupResult($id, 20);
+        //$data['student_mockup'] = $this->student->getStudentMockupResult($id, 20);
+        $data['student_histories'] = $this->student->getAllHistories($id, 20);
 
         return view('home::student.courses', $data);
     }
@@ -715,7 +716,8 @@ class DashboardController extends Controller
         $input = $request->all();
 
         $practice_title = $input['practice_title'];
-        $mockupInfo = $this->mockup->getRandomQuestion(25, ['practice_title' => $practice_title]);
+        $total_questions = ($practice_title == 'practice_test_1' ? '25' : ($practice_title == 'practice_test_2' ? '50' : '100'));
+        $mockupInfo = $this->mockup->getRandomQuestion($total_questions, ['practice_title' => $practice_title]);
         if (sizeof($mockupInfo) > 0) {
             $data['mockupInfo'] = $mockupInfo;
             $data['practice_title'] = $practice_title;
@@ -740,7 +742,7 @@ class DashboardController extends Controller
             $correct_answer = $this->studentPractice->getCorrectAnswer($student_id, $title);
 
             $total_attempt_question = count($mockup_history);
-            $total_question = 25;
+            $total_question = ($title == 'practice_test_1' ? '25' : ($title == 'practice_test_2' ? '50' : '100'));
             $correctPercent = ($correct_answer / $total_question) * 100;
 
             $data['correct_percent'] = $correct_percent = number_format($correctPercent, 2);
@@ -857,6 +859,20 @@ class DashboardController extends Controller
 
         } catch (\Throwable $e) {
             return 2;
+        }
+
+    }
+
+    public function studentPracticeHistory($id)
+    {
+        $student_id = Auth::guard('student')->user()->id;
+        try {
+            $data['practice_histories'] = $this->studentPractice->findAllHistory('', ['practice_result_id' => $id]);
+            return view('home::student.practice-history', $data);
+
+        } catch (\Throwable $e) {
+            Flash($e->getMessage())->error();
+            return redirect()->route('student-courses');
         }
 
     }

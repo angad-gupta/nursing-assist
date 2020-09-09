@@ -11,6 +11,10 @@ class StudentPracticeRepository implements StudentPracticeInterface
     {
         $result = StudentPracticeResult::when(array_keys($filter, true), function ($query) use ($filter) {
 
+            if(isset($filter['student_id']) && !empty($filter['student_id'])) {
+                $query->where('student_id', $filter['student_id']);
+            }
+
         })->orderBy('id', $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
 
         return $result;
@@ -78,5 +82,18 @@ class StudentPracticeRepository implements StudentPracticeInterface
         return $result->update($data);
     }
 
+    public function findAllHistory($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'])
+    {
+        $result = StudentPracticeHistory::when(array_keys($filter, true), function ($query) use ($filter) {
+
+            if (isset($filter['practice_result_id']) && !empty($filter['practice_result_id'])) {
+                $query->where('practice_result_id', $filter['practice_result_id']);
+            }
+
+        })->orderBy('id', $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+
+        return $result;
+
+    }
 
 }

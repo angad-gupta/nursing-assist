@@ -32,4 +32,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'permission']], func
 
     Route::post('student/courseinstallment', ['as' => 'student.courseinstallment', 'uses' => 'StudentController@courseInstallment']);
 
+    Route::get('student/practice-result', ['as' => 'studentpractice.result', 'uses' => 'StudentController@studentPracticeResult']);
+
 });

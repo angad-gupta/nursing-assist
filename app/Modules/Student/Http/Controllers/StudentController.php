@@ -7,6 +7,7 @@ use App\Modules\CourseInfo\Repositories\CourseInfoInterface;
 use App\Modules\Quiz\Repositories\QuizInterface;
 use App\Modules\Student\Repositories\StudentInterface;
 use App\Modules\Student\Repositories\StudentPaymentInterface;
+use App\Modules\Student\Repositories\StudentPracticeInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -26,18 +27,24 @@ class StudentController extends Controller
      * @var StudentPaymentInterface
      */
     protected $studentPayment;
+    /**
+     * @var StudentPracticeInterface
+     */
+    protected $studentPractice;
 
     public function __construct(
         StudentInterface $student,
         QuizInterface $quiz,
         CourseInfoInterface $courseinfo,
         AgentInterface $agent,
-        StudentPaymentInterface $studentPayment) {
+        StudentPaymentInterface $studentPayment,
+        StudentPracticeInterface $studentPractice) {
         $this->student = $student;
         $this->quiz = $quiz;
         $this->courseinfo = $courseinfo;
         $this->agent = $agent;
         $this->studentPayment = $studentPayment;
+        $this->studentPractice = $studentPractice;
     }
     /**
      * Display a listing of the resource.
@@ -294,4 +301,13 @@ class StudentController extends Controller
         return redirect(route('studentpurchase.index', ['student_id' => $input['student_id']]));
     }
 
+    public function studentPracticeResult(Request $request)
+    {
+        $data = $request->all();
+        $student_id = $data['student_id'];
+
+        $data['practice_results'] = $this->studentPractice->findAll(20, ['student_id' => $student_id]);
+
+        return view('student::student.student_practice_result', $data);
+    }
 }

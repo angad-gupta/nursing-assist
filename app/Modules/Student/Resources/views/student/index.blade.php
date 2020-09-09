@@ -140,6 +140,12 @@
                             data-placement="bottom" data-original-title="Student Mockup Result"><i
                                 class="icon-stack-text"></i></a>
 
+                        <a class="btn bg-purple btn-icon rounded-round"
+                            href="{{ route('studentpractice.result',['student_id'=> $value->id]) }}" data-popup="tooltip"
+                            data-placement="bottom" data-original-title="Student Practice Test Result"><i
+                                class="icon-stack-text "></i></a>
+
+
                         <a data-toggle="modal" data-target="#modal_theme_warning"
                             class="btn bg-danger-400 btn-icon rounded-round delete_student"
                             link="{{route('student.delete',$value->id)}}" data-popup="tooltip"
