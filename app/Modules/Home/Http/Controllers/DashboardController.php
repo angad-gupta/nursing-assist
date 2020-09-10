@@ -390,7 +390,7 @@ class DashboardController extends Controller
 
     public function studentmockupStore(Request $request)
     {
-        $input = $request->all();  dd($input);
+        $input = $request->all(); 
 
         $mockup_title = $input['mockup_title'];
         $student_id = Auth::guard('student')->user()->id;
