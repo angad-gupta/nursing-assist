@@ -68,6 +68,7 @@ class StudentPracticeRepository implements StudentPracticeInterface
         return StudentPracticeResult::where('student_id', '=', $student_id)
             ->where('title', '=', $title)
             ->where('date', $date)
+            ->orderBy('id', 'DESC')
             ->first();
     }
 
@@ -94,6 +95,11 @@ class StudentPracticeRepository implements StudentPracticeInterface
 
         return $result;
 
+    }
+
+    public function getCorrectAnswerByResult($practice_result_id)
+    {
+        return StudentPracticeHistory::where('practice_result_id', '=', $practice_result_id)->where('is_correct_answer', '=', '1')->count();
     }
 
 }
