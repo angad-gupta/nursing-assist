@@ -15,7 +15,9 @@ class StudentPracticeRepository implements StudentPracticeInterface
                 $query->where('student_id', $filter['student_id']);
             }
 
-        })->orderBy('id', $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+        })
+        ->whereNotNull('percent')->whereNotNull('total_question')
+        ->orderBy('id', $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
 
         return $result;
 
