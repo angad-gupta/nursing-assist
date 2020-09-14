@@ -7,10 +7,21 @@
 <script src="{{ asset('admin/global/js/demo_pages/picker_date.js')}}"></script>
 <script src="{{asset('admin/global/js/plugins/tables/datatables/datatables.min.js')}}"></script>
 <script src="{{asset('admin/global/js/plugins/forms/selects/select2.min.js')}}"></script>
+
+<script type="text/javascript">
+    $('document').ready(function () {
+
+            $('.select-search').select2();
+
+         });
+
+</script>
+
 @stop
 
 @section('content') 
 
+@include('quiz::quiz.partial.filter')
 
 <div class="card card-body">
     <div class="d-flex justify-content-between">
@@ -25,11 +36,12 @@
             <thead>
                 <tr class="bg-slate">
                     <th>#</th>
-                    <th>Quiz Category</th>
-                    <th>Quiz Question Type</th>
-                    <th>Quiz Type</th>
-                    <th width="60%">Quiz Question</th>
-                    <th>Action</th>
+                    <th>Category</th>
+                    <th>Lesson</th>
+                    <th>Question Type</th>
+                    <th>Type</th>
+                    <th width="60%">Question</th>
+                    <th width="10%">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -38,6 +50,7 @@
                 <tr>
                     <td>{{$quiz->firstItem() +$key}}</td>
                     <td>{{ $value->category }}</td>
+                    <td>{{ optional($value->courseLessonInfo)->lesson_title }}</td>
                     <td>{{ $value->question_type }}</td>
                     <td>{{ $value->quiz_section }}</td>
                     <td>{{ $value->question }}</td>

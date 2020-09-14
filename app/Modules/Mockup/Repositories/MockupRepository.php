@@ -10,6 +10,17 @@ class MockupRepository implements MockupInterface
     {
         $result = Mockup::when(array_keys($filter, true), function ($query) use ($filter) {
 
+              if (isset($filter['mockup_title'])) {
+                $query->where('mockup_title', $filter['mockup_title']);
+            }
+
+              if (isset($filter['search_value']) && !empty($filter['search_value'])) {
+                $query->where(function ($q) use ($filter) {
+                    $q->where('question', 'like', '%' . $filter['search_value'] . '%');
+                });
+
+            }
+
         })->orderBy('id', $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
 
         return $result;

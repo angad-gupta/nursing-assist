@@ -12,6 +12,18 @@ class QuizRepository implements QuizInterface
 
         $result = Quiz::when(array_keys($filter, true), function ($query) use ($filter) {
 
+
+            if (isset($filter['course_content_id'])) {
+                $query->where('course_content_id', $filter['course_content_id']);
+            }
+
+              if (isset($filter['search_value']) && !empty($filter['search_value'])) {
+                $query->where(function ($q) use ($filter) {
+                    $q->where('question', 'like', '%' . $filter['search_value'] . '%');
+                });
+
+            }
+
         })
             ->orderBy($sort['by'], $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
 

@@ -12,6 +12,8 @@
 @section('content') 
 
 
+@include('mockup::mockup.partial.filter')
+
 <div class="card card-body">
     <div class="d-flex justify-content-between">
         <h4>List of Mockup Question</h4>
