@@ -203,12 +203,12 @@
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-12">
         <div class="row">
-            <label class="col-form-label col-lg-3">Correct Answer Reason:</label>
+            <label class="col-form-label col-lg-2">Correct Answer Reason:</label>
             <div class="col-lg-9 form-group-feedback form-group-feedback-right">
                 <div class="input-group">
-                    {!! Form::textarea('correct_answer_reason', null, ['id' => 'correct_answer_reason','placeholder'=>'Enter Correct Answer Reason', 'class' =>'form-control simple_textarea_description']) !!}
+                    {!! Form::textarea('correct_answer_reason', null, ['id' => 'correct_answer_reason','placeholder'=>'Enter Correct Answer Reason', 'class' =>'form-control textarea_description']) !!}
                 </div>
             </div>
         </div>
