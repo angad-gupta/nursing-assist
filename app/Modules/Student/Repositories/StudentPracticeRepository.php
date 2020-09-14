@@ -15,7 +15,9 @@ class StudentPracticeRepository implements StudentPracticeInterface
                 $query->where('student_id', $filter['student_id']);
             }
 
-        })->orderBy('id', $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+        })
+        ->whereNotNull('percent')->whereNotNull('total_question')
+        ->orderBy('id', $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
 
         return $result;
 
@@ -68,6 +70,7 @@ class StudentPracticeRepository implements StudentPracticeInterface
         return StudentPracticeResult::where('student_id', '=', $student_id)
             ->where('title', '=', $title)
             ->where('date', $date)
+            ->orderBy('id', 'DESC')
             ->first();
     }
 
@@ -94,6 +97,11 @@ class StudentPracticeRepository implements StudentPracticeInterface
 
         return $result;
 
+    }
+
+    public function getCorrectAnswerByResult($practice_result_id)
+    {
+        return StudentPracticeHistory::where('practice_result_id', '=', $practice_result_id)->where('is_correct_answer', '=', '1')->count();
     }
 
 }

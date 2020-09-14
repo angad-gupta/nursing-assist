@@ -739,19 +739,20 @@ class DashboardController extends Controller
             $student_id = Auth::guard('student')->user()->id;
 
             $mockup_history = $this->studentPractice->getHistory($student_id, $title);
-            $correct_answer = $this->studentPractice->getCorrectAnswer($student_id, $title);
+            //$correct_answer = $this->studentPractice->getCorrectAnswer($student_id, $title);
+            $correct_answer = $this->studentPractice->getCorrectAnswerByResult($input['practice_result_id']);
 
-            $total_attempt_question = count($mockup_history);
+            //$total_attempt_question = count($mockup_history);
             $total_question = ($title == 'practice_test_1' ? '25' : ($title == 'practice_test_2' ? '50' : '100'));
             $correctPercent = ($correct_answer / $total_question) * 100;
-
+           
             $data['correct_percent'] = $correct_percent = number_format($correctPercent, 2);
             $data['mockup_history'] = $mockup_history;
             $data['correct_answer'] = $correct_answer;
             $data['incorrect_answer'] = $total_question - $correct_answer;
 
             $date = date('Y-m-d');
-            $resultInfo = $this->studentPractice->checkPracticeResult($student_id, $title, $date);
+            $resultInfo = $this->studentPractice->checkPracticeResult($student_id, $title, $date); 
             if (empty($resultInfo)) {
 
                 $practice_result = array(
@@ -759,7 +760,7 @@ class DashboardController extends Controller
                     'mockup_title' => $title,
                     'date' => $date,
                     'total_question' => $total_question,
-                    'total_attempted_question' => $total_attempt_question,
+                    'total_attempted_question' => $total_question,
                     'correct_answer' => $correct_answer,
                     'percent' => $correct_percent,
                 );
@@ -768,7 +769,7 @@ class DashboardController extends Controller
             } else {
                 $updateArray = array(
                     'total_question' => $total_question,
-                    'total_attempted_question' => $total_attempt_question,
+                    'total_attempted_question' => $total_question,
                     'correct_answer' => $correct_answer,
                     'percent' => $correct_percent,
                 );
@@ -804,8 +805,7 @@ class DashboardController extends Controller
             $student_id = Auth::guard('student')->user()->id;
             $date = date('Y-m-d');
 
-            $resultInfo = $this->studentPractice->checkPracticeResult($student_id, $title, $date);
-            if (empty($resultInfo)) {
+            if($qkey == 1) {
                 $practice_result = array(
                     'student_id' => $student_id,
                     'title' => $title,
@@ -815,9 +815,20 @@ class DashboardController extends Controller
                 $resultInfo = $this->studentPractice->save($practice_result);
                 $result_id = $resultInfo->id;
             } else {
-                $result_id = $resultInfo->id;
-            }
+                $resultInfo = $this->studentPractice->checkPracticeResult($student_id, $title, $date);
+                if (empty($resultInfo)) {
+                    $practice_result = array(
+                        'student_id' => $student_id,
+                        'title' => $title,
+                        'date' => date('Y-m-d'),
+                    );
 
+                    $resultInfo = $this->studentPractice->save($practice_result);
+                    $result_id = $resultInfo->id;
+                } else {
+                    $result_id = $resultInfo->id;
+                }
+            }
           
             $mockup_question = $this->mockup->find($question_id);
             if ($mockup_question->question_type == 'multiple') {
@@ -855,7 +866,7 @@ class DashboardController extends Controller
             }
             
 
-            return 1;
+            return $result_id;
 
         } catch (\Throwable $e) {
             return 2;

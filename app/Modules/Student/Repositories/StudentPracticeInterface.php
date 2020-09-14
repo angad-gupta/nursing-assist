@@ -29,4 +29,6 @@ interface StudentPracticeInterface
     public function updateHistory($id, $data);
 
     public function findAllHistory($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC']);
+
+    public function getCorrectAnswerByResult($practice_result_id);
 }

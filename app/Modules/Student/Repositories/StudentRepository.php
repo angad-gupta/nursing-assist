@@ -213,7 +213,7 @@ class StudentRepository implements StudentInterface
 
         $result = StudentMockupResult::when(array_keys($filter, true), function ($query) use ($filter) {
 
-        })->where('student_id', '=', $student_id)->orderBy('id', $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+        })->where('student_id', '=', $student_id)->whereNotNull('percent')->whereNotNull('total_question')->orderBy('id', $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
 
         return $result;
     }
@@ -268,11 +268,11 @@ class StudentRepository implements StudentInterface
     {
         $mockup_results = StudentMockupResult::when(array_keys($filter, true), function ($query) use ($filter) {
 
-        })->where('student_id', '=', $student_id)->selectRaw('"mockup" as type, id, mockup_title as title, date, total_question, correct_answer');
+        })->where('student_id', '=', $student_id)->whereNotNull('percent')->whereNotNull('total_question')->selectRaw('"mockup" as type, id, mockup_title as title, date, total_question, correct_answer');
 
         $practice_results = StudentPracticeResult::when(array_keys($filter, true), function ($query) use ($filter) {
 
-        })->where('student_id', '=', $student_id)->selectRaw('"practice" as type, id, title, date, total_question, correct_answer');
+        })->where('student_id', '=', $student_id)->whereNotNull('percent')->whereNotNull('total_question')->selectRaw('"practice" as type, id, title, date, total_question, correct_answer');
 
         $unions = $mockup_results->unionAll($practice_results);
 

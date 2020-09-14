@@ -27,6 +27,7 @@
                     <th>#</th>
                     <th>Full Name</th>
                     <th>Date</th>
+                    <th>Title</th>
                     <th>Total Question</th>
                     <th>Correct Answer</th>
                     <th>Pecentage</th>
@@ -40,6 +41,7 @@
                     <td>{{$practice_results->firstItem() +$key}}</td>
                     <td>{{ optional($value->student)->full_name }}</td>
                     <td>{{ date('d M, Y',strtotime($value->date)) }}</td>
+                    <td>Practice Test {{ substr($value->title, -1) }}</td>
                     <td>{{$value->total_question}}</td>
                     <td>{{$value->correct_answer}}</td>
                     <td>{{$value->percent}} %</td>

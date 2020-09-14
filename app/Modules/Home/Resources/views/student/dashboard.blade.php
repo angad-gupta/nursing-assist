@@ -91,7 +91,8 @@
                         aria-labelledby="v-pills-profile-tab">
                         <h5 class="mb-0">My Account</h5>
                         
-                        <p>View and edit your personal info below. <a  href="{{route('student-hub')}}" style="float:right;color:purple;font-size:20px">Enroll to a Course</a></p> 
+                        <p>View and edit your personal info below. <a  href="{{route('student-hub')}}" class="btn sac-btn" style="float:right;font-size:15px;background:#B0117E">Enroll to a Course</a></p> 
+
                        
                         <div class="row">
                             <div class="col-sm-12 col-md-12 col-lg-12 pt-0">

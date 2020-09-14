@@ -179,15 +179,15 @@
                 url: '{{route("practice-question.ajaxStore")}}',
                 data: { title: title, question_id: question_id, answers: ans_array, qkey: qkey, _token: token },
                 success: function (res) {
-                    if(res == 1) {
-                        $('#studentmockup_submit').submit();
-                        return true;
-                    } else if(res == 0) {
+                    if(res == 0) {
                         alert('Please provide answer');
                         return false;
-                    } else {
+                    } else if (res == 2) {
                         alert('Saving Answer error!Please try again');
                         return false;
+                    } else {
+                        $('#studentmockup_submit').submit();
+                        return true;
                     }
                 }
             }) 
@@ -220,17 +220,18 @@
                 url: '{{route("practice-question.ajaxStore")}}',
                 data: { title: title, question_id: question_id, answers: ans_array, qkey: qkey, _token: token },
                 success: function (res) {
-                    if(res == 1) {
-                       $('#question_'+qkey).css('display', 'none');
-                        $('#question_'+new_key).css('display', 'block');
-                        $('#question_number').text(new_key);
-                        return true;
-                    } else if(res == 0) {
+                    if(res == 0) {
                         alert('Please provide answer');
                         return false;
-                    } else {
+                    } else if(res == 2) {
                         alert('Saving Answer error!Please try again');
                         return false;
+                    } else {
+                        $('#question_'+qkey).css('display', 'none');
+                        $('#question_'+new_key).css('display', 'block');
+                        $('#question_number').text(new_key);
+                        $('#studentmockup_submit').append('<input type="hidden" name="practice_result_id" value="'+res+'" />');
+                        return true;
                     }
                 }
             })
