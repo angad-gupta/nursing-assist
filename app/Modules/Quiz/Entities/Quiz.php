@@ -7,6 +7,9 @@ use App\Modules\CourseContent\Entities\CourseContent;
 
 class Quiz extends Model
 {
+    
+    const FILE_PATH = '/uploads/quiz/';
+
     protected $fillable = [
 
     	'category',
@@ -14,6 +17,7 @@ class Quiz extends Model
         'course_content_id',
         'set_for_demo',
     	'question',
+        'additional_image',
     	'question_type', 
         'option_1',
         'option_2',
@@ -24,6 +28,10 @@ class Quiz extends Model
 
     ];
 
+    public function getFileFullPathAttribute()
+    {
+        return self::FILE_PATH . $this->file_name;
+    }
 
     public function courseLessonInfo(){
         return $this->belongsTo(CourseContent::class,'course_content_id','id');

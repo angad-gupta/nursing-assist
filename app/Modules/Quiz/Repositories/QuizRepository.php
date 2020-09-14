@@ -107,4 +107,13 @@ class QuizRepository implements QuizInterface
         return Quiz::where('course_content_id', $course_content_id)->where('quiz_section', $quiz_section)->count();
     }
 
+    public function upload($file){
+        $imageName = $file->getClientOriginalName();
+        $fileName = date('Y-m-d-h-i-s') . '-' . preg_replace('[ ]', '-', $imageName);
+
+        $file->move(public_path() . Quiz::FILE_PATH, $fileName);
+
+        return $fileName;
+    }
+
 }

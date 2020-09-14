@@ -50,6 +50,10 @@ class MockupController extends Controller
         
          try{
             
+             if ($request->hasFile('additional_image')) {
+                $data['additional_image'] = $this->mockup->upload($data['additional_image']);
+            }
+
              if($question_type == 'multiple'){
                 $data['correct_option'] = json_encode($data['multiple_correct_option']);
             }else{
@@ -100,6 +104,10 @@ class MockupController extends Controller
 
         try{
             
+             if ($request->hasFile('additional_image')) {
+                $data['additional_image'] = $this->mockup->upload($data['additional_image']);
+            }
+
             if($question_type == 'multiple'){
                 $data['correct_option'] = json_encode($data['multiple_correct_option']);
             }else{

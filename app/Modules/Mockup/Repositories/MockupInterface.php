@@ -23,4 +23,7 @@ interface MockupInterface
     public function getTotalQuestionsByTitle($mockup_title, $datetime);
 
     public function getRandomQuestion($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1]);
+
+    public function upload($file_name);
+
 }

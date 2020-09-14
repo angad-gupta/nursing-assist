@@ -56,13 +56,20 @@ class QuizController extends Controller
          $question_type = $data['question_type'];
          try{ 
 
-            if($question_type == 'multiple'){
-                $data['correct_option'] = json_encode($data['multiple_correct_option']);
-            }else{
-                 $data['correct_option'] = $data['single_correct_option'];
+             if ($request->hasFile('additional_image')) {
+                $data['additional_image'] = $this->quiz->upload($data['additional_image']);
             }
 
-            $quizInfo = $this->quiz->save($data);
+            if($question_type == 'multiple'){
+                $data['correct_option'] = json_encode($data['multiple_correct_option']);
+                 unset($data['multiple_correct_option']);
+            }else{
+                 $data['correct_option'] = $data['single_correct_option'];
+                  unset($data['single_correct_option']);
+            }
+
+
+            $quizInfo = $this->quiz->save($data);  
            
             alertify()->success('Quiz Created Successfully');
         }catch(\Throwable $e){
@@ -97,6 +104,11 @@ class QuizController extends Controller
         $data = $request->all();  
          $question_type = $data['question_type'];
          try{ 
+
+            if ($request->hasFile('additional_image')) {
+                $data['additional_image'] = $this->quiz->upload($data['additional_image']);
+            }
+
              if($question_type == 'multiple'){
                 $data['correct_option'] = json_encode($data['multiple_correct_option']);
             }else{

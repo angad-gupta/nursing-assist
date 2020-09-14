@@ -90,4 +90,13 @@ class MockupRepository implements MockupInterface
 
         return $result;
     }
+
+    public function upload($file){
+        $imageName = $file->getClientOriginalName();
+        $fileName = date('Y-m-d-h-i-s') . '-' . preg_replace('[ ]', '-', $imageName);
+
+        $file->move(public_path() . Mockup::FILE_PATH, $fileName);
+
+        return $fileName;
+    }
 }

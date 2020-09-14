@@ -29,4 +29,7 @@ interface QuizInterface
     public function checkCorrectAnswer($quiz_id,$answer);
 
     public static function totalBySectionContentId($course_content_id, $quiz_section = 'Practise');
+
+    public function upload($file_name);
+
 }

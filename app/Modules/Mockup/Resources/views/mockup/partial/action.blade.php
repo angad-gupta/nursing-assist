@@ -66,9 +66,41 @@
     @endphp
 
 
-    
-          
+    </div>
 
+
+    <div class="form-group row">
+
+        <div class="col-lg-6">
+            <div class="row">
+                <label class="col-form-label col-lg-4">Additional Image:</label>
+                    <div class="col-lg-8 form-group-feedback form-group-feedback-right">
+                        <div class="input-group">
+                        <span class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-book3"></i></span>
+                        </span>
+                        {!! Form::file('additional_image', ['id'=>'additional_image','class'=>'form-control']) !!}
+                        </div>
+                    </div>
+            </div>
+        </div>
+  
+        <div class="col-lg-6">
+            <div class="row">
+                 <label class="col-form-label col-lg-4"></label>
+                <div class="col-lg-8 form-group-feedback form-group-feedback-right">
+                    @if($is_edit)
+                        @php
+                             $image = ($mockup->additional_image) ? asset($mockup->file_full_path).'/'.$mockup->additional_image : asset('admin/image.png');
+                        @endphp
+
+                        <img id="additional_image" src="{{$image}}" alt="your image" class="preview-image" style="height: 100px;width: auto;" />
+                        @else
+                        <img id="additional_image" src="{{ asset('admin/image.png') }}" alt="your image" class="preview-image" style="height: 100px; width: auto;" />
+                        @endif
+                </div>
+            </div>
+        </div>
     </div>
 
 </fieldset>
