@@ -439,7 +439,7 @@
 
      <!-- Warning modal -->
     <div id="view_annoucement_detail" class="modal fade" tabindex="-1">
-         <div class="modal-dialog modal-lg">
+         <div class="modal-dialog modal-dialog-centered  modal-lg">
             <div class="modal-content">
                 <div class="modal-header bg-warning">
                     <h6 class="modal-title">View Annoucement</h6>
