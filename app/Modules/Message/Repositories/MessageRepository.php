@@ -2,6 +2,7 @@
 namespace App\Modules\Message\Repositories;
 
 use App\Modules\Message\Entities\Message;
+use App\Modules\Message\Entities\MessageReply;
 
 class MessageRepository implements MessageInterface
 {
@@ -19,6 +20,10 @@ class MessageRepository implements MessageInterface
         return Message::find($id);
     }
     
+    public function findMessageInox($id){
+        return MessageReply::find($id);
+    }
+    
    public function getList(){  
        $result = Message::pluck('question', 'id');
       
@@ -28,6 +33,11 @@ class MessageRepository implements MessageInterface
     public function save($data){
         return Message::create($data);
     }
+
+    public function saveMessageReply($data){
+        return MessageReply::create($data);
+    }
+
     
     public function update($id,$data){
         $result = Message::find($id);
@@ -40,8 +50,13 @@ class MessageRepository implements MessageInterface
     }
 
     public function getSendMessageByUser($id,$limit){
-         return  Message::where('sent_by','=',$id)->orderBy('id','DESC')->take(3)->get();
+         return  Message::where('sent_by','=',$id)->orderBy('id','DESC')->take(5)->get();
     }
+
+    public function getInboxMessage($id,$limit){
+        return  MessageReply::where('sent_to','=',$id)->orderBy('id','DESC')->take(5)->get();
+    }
+
 
 
 }

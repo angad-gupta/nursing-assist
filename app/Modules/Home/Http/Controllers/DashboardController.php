@@ -95,6 +95,7 @@ class DashboardController extends Controller
         $data['student_profile'] = Auth::guard('student')->user()->find($id);
         $data['announcement'] = $this->announcement->findAll($limit = 5);
         $data['message'] = $this->message->getSendMessageByUser($id, $limit = 5);
+        $data['inbox_message'] = $this->message->getInboxMessage($id, $limit = 5);
         $data['student_course'] = $this->student->getStudentCourse($id);
         $data['student_course_purchase'] = $this->student->getStudentPurchase($id);
         $data['countries'] = $this->employment->getCountries();

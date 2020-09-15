@@ -11,7 +11,8 @@ class Message extends Model
 
     	'title',
     	'message',
-    	'sent_by'
+    	'sent_by',
+    	'status'
 
     ];
 

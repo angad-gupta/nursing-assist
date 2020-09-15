@@ -65,6 +65,8 @@
   
                         <a class="nav-link" id="v-pills-message-tab" data-toggle="pill" href="#v-pills-message" role="tab"
                         aria-controls="v-pills-message" aria-selected="false">Ask an Educator</a>
+                         <a class="nav-link" id="v-pills-reply-message-tab" data-toggle="pill" href="#v-pills-reply-message" role="tab"
+                        aria-controls="v-pills-reply-message" aria-selected="false">Response From Educator</a>
                         <a class="nav-link" id="v-pills-notification-tab" data-toggle="pill" href="#v-pills-notification"
                         role="tab" aria-controls="v-pills-messages" aria-selected="false">Announcement</a>
                         <a class="nav-link" id="v-pills-purchase-tab" data-toggle="pill" href="#v-pills-purchase"
@@ -296,6 +298,41 @@
                              </div>
     
                             </div><!-- tour-pills -->
+
+                            <div class="tab-pane fade neta-message neta-about" id="v-pills-reply-message" role="tabpanel" aria-labelledby="v-pills-reply-message">
+                                <h5 class="mb-0">Inbox Message</h5>
+                                <p>See all the Message Send By Eductors</p>
+                               <div class="message-table">
+                               <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Message</th>
+                                        <th>Date / Time</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                @if(sizeof($inbox_message)>0)
+                                    @foreach($inbox_message as $key => $msg_val)
+                                    <tr>
+                                       <td>{{ $msg_val->title }}</td>
+                                       <td>{{ substr($msg_val->message,0,10) }}...</td>
+                                        <td>{{date('d M,Y H:i:s A',strtotime($msg_val->created_at))}}</td>
+                                        <td class="neta-action">
+                                            <a data-toggle="modal" data-target="#view_reply_message_detail" class="btn sac-btn view_inbox" message_id="{{$msg_val->id}}" data-popup="tooltip" data-original-title="Delete" data-placement="bottom">View</a>
+
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                @endif 
+
+                                </tbody>
+                               </table>
+                             </div>
+    
+                            </div><!-- tour-pills -->
                             
                             <div class="tab-pane fade" id="v-pills-notification" role="tabpanel" aria-labelledby="v-pills-notification">
                                 <h5 class="mb-0">Announcement</h5>
@@ -457,8 +494,27 @@
         </div>
     </div>
 <!-- /warning modal -->
-<!-- /warning modal --> -->
 
+     <!-- Warning modal -->
+    <div id="view_reply_message_detail" class="modal fade" tabindex="-1">
+         <div class="modal-dialog modal-dialog-centered  modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-warning">
+                    <h6 class="modal-title">View Inbox Message</h6>
+                </div>
+
+                <div class="modal-body">
+                    <div class="table-responsive result_inbox_view_detail">  
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn bg-teal-400" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- /warning modal -->
 
 
 @include('home::layouts.footer')
@@ -478,6 +534,22 @@
             success: function (data) { 
                 console.log(data);
                 $('.result_view_detail').html(data);
+            }
+        }); 
+    });     
+
+
+    $('.view_inbox').on('click',function(){ 
+        var message_id = $(this).attr('message_id');
+
+        $.ajax({
+            type: 'GET',
+            url: "<?php echo route('ajax-inbox-message-detail') ?>",
+            data: { message_id: message_id },
+
+            success: function (data) { 
+                console.log(data);
+                $('.result_inbox_view_detail').html(data);
             }
         }); 
     });
