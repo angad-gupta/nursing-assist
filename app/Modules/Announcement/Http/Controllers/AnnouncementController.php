@@ -113,6 +113,7 @@ class AnnouncementController extends Controller
     public function edit($id)
     {
         $data['is_edit'] = true;
+        $data['month'] = $this->courseinfo->getIntakeMonth();
         $data['announcement'] = $this->announcement->find($id);
         return view('announcement::announcement.edit',$data);
     }
