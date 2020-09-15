@@ -13,8 +13,8 @@ class AddIntakeDateAnnoucement extends Migration
      */
     public function up()
     {
-        Schema::table('', function (Blueprint $table) {
-
+        Schema::table('announcements', function (Blueprint $table) {
+            $table->string('intake_date')->after('title')->nullable();
         });
     }
 
@@ -25,8 +25,8 @@ class AddIntakeDateAnnoucement extends Migration
      */
     public function down()
     {
-        Schema::table('', function (Blueprint $table) {
-
+        Schema::table('announcements', function (Blueprint $table) {
+            $table->dropColumn('intake_date');
         });
     }
 }

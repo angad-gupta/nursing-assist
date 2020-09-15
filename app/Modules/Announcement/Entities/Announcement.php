@@ -9,6 +9,7 @@ class Announcement extends Model
     protected $fillable = [
 
     	'title',
+    	'intake_date',
     	'content'
 
     ];

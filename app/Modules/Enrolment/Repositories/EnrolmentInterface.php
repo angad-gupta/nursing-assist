@@ -23,4 +23,6 @@ interface EnrolmentInterface
     public function getLatestByStudent($student_id);
 
     public function checkCourseIntakeAvailability($courseinfo_id, $intake_month, $students_per_intake = 40);
+
+    public function getAllEnrolmentByIntake($intake_date);
 }

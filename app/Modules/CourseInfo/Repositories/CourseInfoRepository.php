@@ -102,6 +102,12 @@ class CourseInfoRepository implements CourseInfoInterface
     {
         $result = Month::pluck('name', 'id');
         return $result;
+    } 
+
+    public function getIntakeMonth()
+    {
+        $result = Month::pluck('name', 'name');
+        return $result;
     }
 
     public function getCourseInfoByCourse($id)
