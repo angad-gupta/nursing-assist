@@ -301,21 +301,40 @@
                                 <h5 class="mb-0">Announcement</h5>
                                 <p>See all the Announcement form Eductors</p>
 
-                                @if(sizeof($announcement)>0)
-                                    @foreach($announcement as $key => $announcement_val)
-                                        <div class="tp-list">
-                                            <div class="row">
+                                <div class="tp-list">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Title</th>
+                                                    <th>Time Period</th>
+                                                    <th>Date</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                
+                                                @if(sizeof($announcement)>0)
+                                                    @foreach($announcement as $key => $announcement_val)
+                                                    <tr>
+                                                        <td width="40%">{{ $announcement_val->title }}</td>
+                                                        <td>{{ $announcement_val->created_at->diffForHumans() }}</td>
+                                                        <td>{{date('d M,Y',strtotime($announcement_val->created_at))}}</td>
+                                                        <td class="neta-action">
+                                                            <a data-toggle="modal" data-target="#view_annoucement_detail" class="btn sac-btn view_announcement" announcement_id="{{$announcement_val->id}}" data-popup="tooltip" data-original-title="Delete" data-placement="bottom">View</a>
 
-                                                <div class="col-sm-10 col-md-10 col-lg-10 tp-list__desc">
-                                                    <p class="mb-0">{{ $announcement_val->title }}</p>
-                                                    <h6>{!! $announcement_val->content !!}</h6>
-                                                    <span>{{ $announcement_val->created_at->diffForHumans() }}</span>
-                                                </div>
+                                                        </td>
+                                                    </tr>
+                                                    @endforeach
+                                                @endif  
 
-                                            </div>
-                                        </div><!-- tp-list -->
-                                    @endforeach
-                                @endif  
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    </div>
+                                </div><!-- tp-list -->
+ 
 
 
                             </div><!-- tour-pills -->
@@ -417,11 +436,52 @@
 
 <section class="section-padding"></section>
 
+
+     <!-- Warning modal -->
+    <div id="view_annoucement_detail" class="modal fade" tabindex="-1">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-warning">
+                    <h6 class="modal-title">View Annoucement</h6>
+                </div>
+
+                <div class="modal-body">
+                    <div class="table-responsive result_view_detail">  
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn bg-teal-400" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- /warning modal -->
+<!-- /warning modal --> -->
+
+
+
 @include('home::layouts.footer')
 
 
 <script type="text/javascript">
     $(document).ready(function(){
+            
+    $('.view_announcement').on('click',function(){ 
+        var announcement_id = $(this).attr('announcement_id');
+
+        $.ajax({
+            type: 'GET',
+            url: "<?php echo route('ajax-announcement-detail') ?>",
+            data: { announcement_id: announcement_id },
+
+            success: function (data) { 
+                console.log(data);
+                $('.result_view_detail').html(data);
+            }
+        }); 
+    });
+
         $('#message_send').on('click',function(){
             $('#compose-field').submit();
         });

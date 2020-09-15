@@ -894,5 +894,35 @@ class DashboardController extends Controller
 
     }
 
+    public function ajaxAnnouncementDetail(Request $request){
+        $data = $request->all();
+
+        $announcement_id = $data['announcement_id'];
+
+        $announcement_info = $this->announcement->find($announcement_id);
+
+
+        $html ='';
+        $html .= "<table class='table table-striped table-border-dashed' id='table1' cellspacing='0' width='100%' frame='box' border='0'>";
+        $html .= "<tbody>";
+        $html .= "<tr>";
+        $html .= "<td class='font-weight-black'>Title : </td>";
+        $html .= "<td><b>".$announcement_info->title."</b></td>";
+        $html .= "</tr>";
+
+        $html .= "<tr>";
+        $html .= "<td class='font-weight-black'>Content: </td>";
+        $html .= "<td>".$announcement_info->content."</td>";
+        $html .= "</tr>";
+
+
+
+        $html .= "</tbody>";
+        $html .= "</table>";
+
+        return  $html;
+
+
+    }
 
 }
