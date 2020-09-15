@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Modules\Mockup\Http\Controllers;
+namespace App\Modules\Readiness\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use App\Modules\Mockup\Repositories\MockupInterface;
 
+use App\Modules\Readiness\Repositories\ReadinessInterface;
 
-class MockupController extends Controller
+class ReadinessController extends Controller
 {
-    protected $mockup;
+    protected $readiness;
     
-    public function __construct(MockupInterface $mockup)
+    public function __construct(ReadinessInterface $readiness)
     {
-        $this->mockup = $mockup;
+        $this->readiness = $readiness;
     }
 
     /**
@@ -24,8 +24,8 @@ class MockupController extends Controller
     public function index(Request $request)
     { 
         $search = $request->all();
-        $data['mockup'] = $this->mockup->findAll($limit= 50,$search);  
-        return view('mockup::mockup.index',$data);
+        $data['readiness'] = $this->readiness->findAll($limit= 50,$search);  
+        return view('readiness::readiness.index',$data);
     }
 
     /**
@@ -35,7 +35,7 @@ class MockupController extends Controller
     public function create()
     {
         $data['is_edit'] = false;
-        return view('mockup::mockup.create',$data);
+        return view('readiness::readiness.create',$data);
     }
 
     /**
@@ -51,7 +51,7 @@ class MockupController extends Controller
          try{
             
              if ($request->hasFile('additional_image')) {
-                $data['additional_image'] = $this->mockup->upload($data['additional_image']);
+                $data['additional_image'] = $this->readiness->upload($data['additional_image']);
             }
 
              if($question_type == 'multiple'){
@@ -60,13 +60,13 @@ class MockupController extends Controller
                  $data['correct_option'] = $data['single_correct_option'];
             }
 
-            $this->mockup->save($data);
+            $this->readiness->save($data);
             alertify()->success('Team Created Successfully');
         }catch(\Throwable $e){
             alertify($e->getMessage())->error();
         }
         
-        return redirect(route('mockup.index'));
+        return redirect(route('readiness.index'));
     }
 
     /**
@@ -76,7 +76,7 @@ class MockupController extends Controller
      */
     public function show($id)
     {
-        return view('mockup::show');
+        return view('readiness::show');
     }
 
     /**
@@ -87,8 +87,8 @@ class MockupController extends Controller
     public function edit($id)
     {
         $data['is_edit'] = true;
-        $data['mockup'] = $this->mockup->find($id);
-        return view('mockup::mockup.edit',$data);
+        $data['readiness'] = $this->readiness->find($id);
+        return view('readiness::readiness.edit',$data);
     }
 
     /**
@@ -105,7 +105,7 @@ class MockupController extends Controller
         try{
             
              if ($request->hasFile('additional_image')) {
-                $data['additional_image'] = $this->mockup->upload($data['additional_image']);
+                $data['additional_image'] = $this->readiness->upload($data['additional_image']);
             }
 
             if($question_type == 'multiple'){
@@ -114,13 +114,13 @@ class MockupController extends Controller
                  $data['correct_option'] = $data['single_correct_option'];
             }
 
-            $this->mockup->update($id,$data);
+            $this->readiness->update($id,$data);
              alertify()->success('Team Updated Successfully');
         }catch(\Throwable $e){
            alertify($e->getMessage())->error();
         }
         
-        return redirect(route('mockup.index'));
+        return redirect(route('readiness.index'));
     }
 
     /**
@@ -131,12 +131,12 @@ class MockupController extends Controller
     public function destroy($id)
     {
         try{
-            $this->mockup->delete($id);
+            $this->readiness->delete($id);
              alertify()->success('Team Deleted Successfully');
         }catch(\Throwable $e){
             alertify($e->getMessage())->error();
         }
-      return redirect(route('mockup.index'));
+      return redirect(route('readiness.index'));
     }
 
 }

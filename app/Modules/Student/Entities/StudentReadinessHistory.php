@@ -2,7 +2,7 @@
 
 namespace App\Modules\Student\Entities;
 
-use App\Modules\Mockup\Entities\Mockup;
+use App\Modules\Readiness\Entities\Readiness;
 use Illuminate\Database\Eloquent\Model;
 
 class StudentReadinessHistory extends Model
@@ -15,8 +15,8 @@ class StudentReadinessHistory extends Model
         'is_correct_answer',
     ];
 
-    public function mockup()
+    public function readiness() 
     {
-        return $this->belongsTo(Mockup::class, 'question_id', 'id');
+        return $this->belongsTo(Readiness::class, 'question_id', 'id');
     }
 }

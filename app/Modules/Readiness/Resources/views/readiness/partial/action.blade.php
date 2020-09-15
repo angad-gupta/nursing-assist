@@ -5,20 +5,20 @@
 
         <div class="col-md-6"> 
             <div class="form-group row">
-                <label class="col-form-label col-lg-4">Select Mockup Week:<span class="text-danger">*</span></label>
+                <label class="col-form-label col-lg-4">Select Readiness:<span class="text-danger">*</span></label>
                     <div class="col-lg-8">
                        <div class="input-group">
                         <span class="input-group-prepend">
                             <span class="input-group-text"><i class="icon-toggle"></i></span>
                         </span>
-                          {!! Form::select('mockup_title',[ 'mockup_test_week_1'=>'Mockup Test Week 1','mockup_test_week_2'=>'Mockup Test Week 2','mockup_test_week_3'=>'Mockup Test Week 3','mockup_test_week_4'=>'Mockup Test Week 4','mockup_test_week_5'=>'Mockup Test Week 5','mockup_test_week_6'=>'Mockup Test Week 6','mockup_test_week_7'=>'Mockup Test Week 7','mockup_test_week_8'=>'Mockup Test Week 8', 'add_practice_test_1'=>'Additional Practice Tests 1', 'add_practice_test_2'=>'Additional Practice Tests 2', 'add_practice_test_3'=>'Additional Practice Tests 3'], $value = null, ['placeholder'=>'Select Mockup Week','id'=>'mockup_title','class'=>'form-control' ]) !!}   
+                          {!! Form::select('readiness_title',[ 'readiness_exam_1'=>'Readiness Exam 1','readiness_exam_2'=>'Readiness Exam 2','readiness_exam_3'=>'Readiness Exam 3'], $value = null, ['placeholder'=>'Select Readiness','id'=>'readiness_title','class'=>'form-control' ]) !!}   
 
                         </div>
                     </div>
             </div>
         </div>
 
-          <div class="col-md-6">
+        <div class="col-md-6">
             <div class="form-group row">
                 <label class="col-form-label col-lg-4">Question Type:<span class="text-danger">*</span></label>
                     <div class="col-lg-8">
@@ -52,14 +52,14 @@
             </div>
         </div>
 
-      
+        
 
     @php
          if($is_edit){
-            $multiple = ($mockup->question_type == 'multiple') ? 'style=display:block;' : 'style=display:none;';
-            $truefalse = ($mockup->question_type == 'true_false') ? 'style=display:block;' : 'style=display:none;';
+            $multiple = ($readiness->question_type == 'multiple') ? 'style=display:block;' : 'style=display:none;';
+            $truefalse = ($readiness->question_type == 'true_false') ? 'style=display:block;' : 'style=display:none;';
 
-            $multiple_value = $mockup->correct_option;
+            $multiple_value = $readiness->correct_option;
         }else{
             $multiple = 'style=display:none;';
             $truefalse = 'style=display:none;';
@@ -93,7 +93,7 @@
                 <div class="col-lg-8 form-group-feedback form-group-feedback-right">
                     @if($is_edit)
                         @php
-                             $image = ($mockup->additional_image) ? asset($mockup->file_full_path).'/'.$mockup->additional_image : asset('admin/image.png');
+                             $image = ($readiness->additional_image) ? asset($readiness->file_full_path).'/'.$readiness->additional_image : asset('admin/image.png');
                         @endphp
 
                         <img id="additional_image" src="{{$image}}" alt="your image" class="preview-image" style="height: 100px;width: auto;" />
@@ -198,9 +198,9 @@
                         @endphp
 
                         @if($is_edit)
-                            @if(isset($mockup) AND ($mockup->question_type == 'multiple'))
+                            @if(isset($readiness) AND ($readiness->question_type == 'multiple'))
                             @php
-                                $correct_val = json_decode($mockup->correct_option);  
+                                $correct_val = json_decode($readiness->correct_option);  
                                 if($correct_val){
                                     $select_1 = (in_array('option_a',$correct_val)) ?  "selected='selected'" : "";
                                     $select_2 = (in_array('option_b',$correct_val)) ?  "selected='selected'" : "";

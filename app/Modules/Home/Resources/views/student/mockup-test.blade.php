@@ -65,7 +65,14 @@
                     <div class="card" style="display: {{ $key == 1 ? '' : 'none' }}" id="question_{{$key}}">
                         <div class="card-header" data-toggle="collapse" data-target="#collapse{{$key}}"
                             aria-expanded="true">
-                            <span class="title">{{$key}}. {{ $question->question }}</span>
+                            <span class="title">{{$key}}. {{ $question->question }}</span><br>
+                            @if($question->additional_image)
+                             @php
+                                $image = asset($question->file_full_path).'/'.$question->additional_image;
+                            @endphp
+
+                                <span class="title"><img src="{{$image}}" height="50%" width="50%"></span>
+                            @endif 
                         </div>
                         <div id="collapse{{$key}}" class="collapse show" data-parent="#accordionExample">
                             <div class="card-body demo-quiz neta-about">

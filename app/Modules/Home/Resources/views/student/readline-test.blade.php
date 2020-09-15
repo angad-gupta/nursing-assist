@@ -27,7 +27,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h2 class="ttl-line">{{ ucfirst(str_replace('_',' ',$readline_title)) }}
+                <h2 class="ttl-line">{{ ucfirst(str_replace('_',' ',$readiness_title)) }}
                 </h2>
                 <p>Dear student,You are about to take a Computer Adaptive Test (CAT). Please make sure that you continue the test undisturbed. 
                     Please allot 4 hours to take the test.No calculators allowed No food and drinks allowed. The computer will ask you if you would like to take a break.</p>
@@ -53,26 +53,33 @@
             </div>
 
             <div class="col-sm-12" style="display:none" id="readine_questions">
-                <h6 class="p-0 mb-0"> <label id="question_number">1</label> out of {{$mockupInfo->count()}}  <p id="time"></p></h6>
+                <h6 class="p-0 mb-0"> <label id="question_number">1</label> out of {{$readinessInfo->count()}}  <p id="time"></p></h6>
                
                     {!! Form::open(['route'=>'readline-question.store','method'=>'POST','id'=>'studentmockup_submit','class'=>'form-horizontal','role'=>'form','files'=> true]) !!}
 
-                    @php $last_key = $mockupInfo->keys()->last(); @endphp
+                    @php $last_key = $readinessInfo->keys()->last(); @endphp
 
-                    @foreach($mockupInfo as $key => $question)
+                    @foreach($readinessInfo as $key => $question)
                     @php $key = $key + 1; @endphp
-                    
+
                     <div class="card" style="display: {{ $key == 1 ? '' : 'none' }}" id="question_{{$key}}">
                         <div class="card-header" data-toggle="collapse" data-target="#collapse{{$key}}"
                             aria-expanded="true">
-                            <span class="title">{{$key}}. {{ $question->question }}</span>
+                            <span class="title">{{$key}}. {{ $question->question }}</span><br>
+                            @if($question->additional_image)
+                             @php
+                                $image = asset($question->file_full_path).'/'.$question->additional_image;
+                            @endphp
+
+                                <span class="title"><img src="{{$image}}" height="50%" width="50%"></span>
+                            @endif 
                         </div>
                         <div id="collapse{{$key}}" class="collapse show" data-parent="#accordionExample">
                             <div class="card-body demo-quiz neta-about">
                                 <div class="">
                                     <div class="row">
                                         {!! Form::hidden('question_id[]', $question->id, ['class'=>'question_id']) !!}
-                                        {!! Form::hidden('title', $readline_title, ['class'=>'title']) !!}
+                                        {!! Form::hidden('title', $readiness_title, ['class'=>'title']) !!}
                                         {!! Form::hidden('question_type[]', $question->question_type, ['class'=>'question_type']) !!}
 
                                         @if($question->question_type == 'multiple')
@@ -181,7 +188,7 @@
 
             var qkey = $(this).attr('data-id');
             var index = qkey - 1;
-            var title = '{{$readline_title}}';
+            var title = '{{$readiness_title}}';
             var question_id = $('.question_id').eq(index).val();
             var question_type = $('.question_type').eq(index).val();
   
@@ -222,7 +229,7 @@
             var new_key = parseInt(qkey, 10) + 1;
 
             var index = qkey - 1;
-            var title = '{{$readline_title}}';
+            var title = '{{$readiness_title}}';
             var question_id = $('.question_id').eq(index).val();
             var question_type = $('.question_type').eq(index).val();
   
@@ -272,7 +279,7 @@
                 type:'GET',
                 url:'{{route("readline-question.saveStartTime")}}',
                 data: {
-                    title: '{{$readline_title}}',
+                    title: '{{$readiness_title}}',
                 },
                 success: function(res) {
                     if(res.status == 1) {

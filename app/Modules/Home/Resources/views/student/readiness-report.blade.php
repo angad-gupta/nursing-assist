@@ -55,12 +55,12 @@
 
 			 <div class="accordion" id="accordionExample">
 
-			 	@foreach($mockup_history as $kys => $mockup)
+			 	@foreach($readiness_history as $kys => $readiness)
 
 			 	@php 
-            	if (preg_match('/[\[\]\'^£$%&*()}{@#~?><>,|=_+¬-]/', $mockup->mockup->correct_option))
+            	if (preg_match('/[\[\]\'^£$%&*()}{@#~?><>,|=_+¬-]/', $readiness->readiness->correct_option)) 
 						{
-							$multipl_ans = json_decode($mockup->mockup->correct_option);
+							$multipl_ans = json_decode($readiness->readiness->correct_option);
                     		$prefix = $option_val = '';
                     		foreach($multipl_ans as $key => $ans){
                     		 	$value = explode("_", $ans);
@@ -71,12 +71,12 @@
                     		}
 
 						}else{
-							$option_val= $mockup->mockup->correct_option; 
+							$option_val= $readiness->readiness->correct_option; 
 						}
 
-				if (preg_match('/[\[\]\'^£$%&*()}{@#~?><>,|=_+¬-]/', $mockup->answer))
+				if (preg_match('/[\[\]\'^£$%&*()}{@#~?><>,|=_+¬-]/', $readiness->answer))
 						{
-							$multipl_my_ans = json_decode($mockup->answer);
+							$multipl_my_ans = json_decode($readiness->answer);
                     		$mprefix = $moption_val = '';
                     		foreach($multipl_my_ans as $key => $myans){
                     		 	$mvalue = explode("_", $myans);
@@ -87,7 +87,7 @@
                     		}
 
 						}else{
-							$moption_val= $mockup->answer; 
+							$moption_val= $readiness->answer; 
 						}	
 
 					$color_status = ($option_val == $moption_val) ? "text-success" : "text-danger";	
@@ -98,7 +98,7 @@
                 <div class="card">
                     <div class="card-header {{ $main_color_status }}" data-toggle="collapse"
                         data-target="#collapse_{{$kys}}" aria-expanded="true">
-                        <span class="title">{{optional($mockup->mockup)->question}}</span>
+                        <span class="title">{{optional($readiness->readiness)->question}}</span>
                     </div>
                     <div id="collapse_{{$kys}}" class="collapse show"
                         data-parent="#accordionExample">
@@ -109,7 +109,7 @@
                             <p>Correct Answer is <span class="text-success"><b>{{ $option_val }}</b></span></a>
                             </p>
                             <p>
-                                <span class="text-success"><b>Reason</b></span>: {!! optional($mockup->mockup)->correct_answer_reason !!}
+                                <span class="text-success"><b>Reason</b></span>: {!! optional($readiness->readiness)->correct_answer_reason !!}
                             </p>
                         </div>
                     </div>

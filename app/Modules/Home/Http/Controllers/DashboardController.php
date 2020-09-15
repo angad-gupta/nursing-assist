@@ -11,6 +11,7 @@ use App\Modules\Quiz\Repositories\QuizInterface;
 use App\Modules\Resource\Repositories\ResourcesInterface;
 use App\Modules\Student\Repositories\StudentInterface;
 use App\Modules\Student\Repositories\StudentMockupInterface;
+use App\Modules\Readiness\Repositories\ReadinessInterface;
 use App\Modules\Student\Repositories\StudentReadinessInterface;
 use App\Modules\Student\Repositories\StudentPracticeInterface;
 use App\Modules\Syllabus\Repositories\SyllabusInterface;
@@ -30,6 +31,7 @@ class DashboardController extends Controller
     protected $syllabus;
     protected $quiz;
     protected $mockup;
+    protected $readiness;
     /**
      * @var ResourcesInterface
      */
@@ -60,6 +62,7 @@ class DashboardController extends Controller
         SyllabusInterface $syllabus,
         QuizInterface $quiz,
         MockupInterface $mockup,
+        ReadinessInterface $readiness,
         ResourcesInterface $resource,
         StudentReadinessInterface $studentReadiness,
         StudentMockupInterface $studentMockup,
@@ -73,6 +76,7 @@ class DashboardController extends Controller
         $this->syllabus = $syllabus;
         $this->quiz = $quiz;
         $this->mockup = $mockup;
+        $this->readiness = $readiness;
         $this->resource = $resource;
         $this->studentReadiness = $studentReadiness;
         $this->studentMockup = $studentMockup;
@@ -155,7 +159,7 @@ class DashboardController extends Controller
         $data['other_course'] = $this->courseinfo->getAll();
         $data['resources'] = $this->resource->findAll();
         //$data['student_mockup'] = $this->student->getStudentMockupResult($id, 20);
-        $data['student_histories'] = $this->student->getAllHistories($id, 20);
+        $data['student_histories'] = $this->student->getAllHistories($id, 20); 
 
         return view('home::student.courses', $data);
     }
@@ -466,13 +470,15 @@ class DashboardController extends Controller
 
     public function readlineQuestion(Request $request)
     {
-        $input = $request->all();
+        $input = $request->all();  
 
-        $readline_title = $input['readline_title'];
-        $mockupInfo = $this->mockup->getRandomQuestion(250, ['readline_title' => $readline_title]);
-        if (sizeof($mockupInfo) > 0) {
-            $data['mockupInfo'] = $mockupInfo;
-            $data['readline_title'] = $readline_title;
+        $readiness_title = $input['readline_title']; 
+
+        $readinessInfo = $this->readiness->getQuestionByTitle($readiness_title, 250);
+
+        if (sizeof($readinessInfo) > 0) {
+            $data['readinessInfo'] = $readinessInfo;
+            $data['readiness_title'] = $readiness_title; 
             return view('home::student.readline-test', $data);
 
         } else {
@@ -525,23 +531,23 @@ class DashboardController extends Controller
 
     public function studentReadinessStore(Request $request)
     {
-        $input = $request->all();
+        $input = $request->all();  
         $title = $input['title'];
         $result_id = $input['result_id'];
 
         try {
             $student_id = Auth::guard('student')->user()->id;
 
-            $mockup_history = $this->studentReadiness->getHistory($student_id, $title);
+            $readiness_history = $this->studentReadiness->getHistory($student_id, $title);
             $correct_answer = $this->studentReadiness->getCorrectAnswer($student_id, $title);
 
-            $total_attempt_question = count($mockup_history);
-            //$total_question = $this->mockup->getTotalQuestionsByTitle($title, date('Y-m-d H:i:s'));
-            $total_question = 250;
+            $total_attempt_question = count($readiness_history);
+
+            $total_question = count($input['question_id']);
             $correctPercent = ($correct_answer / $total_question) * 100;
 
             $data['correct_percent'] = $correct_percent = number_format($correctPercent, 2);
-            $data['mockup_history'] = $mockup_history;
+            $data['readiness_history'] = $readiness_history;
             $data['correct_answer'] = $correct_answer;
             $data['incorrect_answer'] = $total_question - $correct_answer;
 
@@ -664,28 +670,28 @@ class DashboardController extends Controller
             if ($qkey == 1) {
                 $this->studentReadiness->deleteHistory($student_id, $title);
             }
-//dd($answers);
-            $mockup_question = $this->mockup->find($question_id);
-            if ($mockup_question->question_type == 'multiple') {
+
+            $readiness_question = $this->readiness->find($question_id);
+            if ($readiness_question->question_type == 'multiple') {
                 $question_option = json_encode($answers);
             } else {
                 $question_option = $answers;
             }
 
-            $mockupdata['student_id'] = $student_id;
-            $mockupdata['title'] = $title;
-            $mockupdata['question_id'] = $question_id;
-            $mockupdata['answer'] = $question_option;
+            $readinessdata['student_id'] = $student_id;
+            $readinessdata['title'] = $title;
+            $readinessdata['question_id'] = $question_id;
+            $readinessdata['answer'] = $question_option;
 
-            $checkAnswer = $this->mockup->checkCorrectAnswer($question_id, $question_option);
+            $checkAnswer = $this->readiness->checkCorrectAnswer($question_id, $question_option);
 
             if ($checkAnswer > 0) {
-                $mockupdata['is_correct_answer'] = 1;
+                $readinessdata['is_correct_answer'] = 1;
             } else {
-                $mockupdata['is_correct_answer'] = 0;
+                $readinessdata['is_correct_answer'] = 0;
             }
-            //dd($mockupdata);
-            $this->studentReadiness->saveHistory($mockupdata);
+
+            $this->studentReadiness->saveHistory($readinessdata);
 
             return 1;
 

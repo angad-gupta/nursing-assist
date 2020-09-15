@@ -208,6 +208,18 @@
                     </li>
                     @endif   
 
+                    @if($menuRoles->assignedRoles('readiness.index'))
+                    <li class="nav-item">
+                        <a href="{{route('readiness.index')}}"
+                           class="nav-link @if($Route[0]=='readiness') active @endif"
+                           data-popup="tooltip" data-original-title="Readiness Exam Management"
+                           data-placement="right">
+                            <i class="icon-clipboard2"></i>
+                            <span>Readiness Exam Management</span>
+                        </a>
+                    </li>
+                    @endif   
+
                     @if($menuRoles->assignedRoles('contactus.index'))
                     <li class="nav-item">
                         <a href="{{route('contactus.index')}}"

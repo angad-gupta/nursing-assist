@@ -45,7 +45,7 @@
 				<!-- Login form -->
                     {!! Form::open(['route'=>'login-post','method'=>'POST','class'=>'login-form wmin-sm-400','role'=>'form','files' => true]) !!} 
 					<div class="card mb-0 border-top-success" style="border-radius: 40px;background-color: gainsboro;">
-
+						@csrf
 						<div class="card-body">
 							
 							<div>

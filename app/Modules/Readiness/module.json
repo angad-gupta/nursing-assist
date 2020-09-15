@@ -1,0 +1,14 @@
+{
+    "name": "Readiness",
+    "alias": "readiness",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "App\\Modules\\Readiness\\Providers\\ReadinessServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
