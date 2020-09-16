@@ -40,7 +40,7 @@ class EnrolmentRepository implements EnrolmentInterface
                 });
             }
         })
-            ->orderBy($sort['by'], $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+            ->where('status','!=','Approved')->orderBy($sort['by'], $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
 
         return $result;
 
@@ -136,7 +136,7 @@ class EnrolmentRepository implements EnrolmentInterface
             ->latest()->first();
     }
 
-    public function checkCourseIntakeAvailability($courseinfo_id, $intake_month, $students_per_intake = 40)
+    public function checkCourseIntakeAvailability($courseinfo_id, $intake_month, $students_per_intake = 100)
     {
         $total = Enrolment::where('courseinfo_id', $courseinfo_id)
             ->where('status', '!=', 'Disapproved')
@@ -153,6 +153,11 @@ class EnrolmentRepository implements EnrolmentInterface
 
     public function getAllEnrolmentByIntake($intake_date){
         return Enrolment::where('intake_date','=',$intake_date)->get();
+    }
+
+
+    public function findStudentEnrol($student_id){
+         return Enrolment::where('student_id','=',$student_id)->get();
     }
 
 

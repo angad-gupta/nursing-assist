@@ -318,6 +318,18 @@
                     </li>
                     @endif
 
+                    @if($menuRoles->assignedRoles('registration.index'))
+                    <li class="nav-item">
+                        <a href="{{route('registration.index')}}"
+                           class="nav-link @if($Route[0]=='registration') active @endif"
+                           data-popup="tooltip" data-original-title="Registration Management"
+                           data-placement="right">
+                            <i class="icon-profile"></i>
+                            <span>Registration Management</span>
+                        </a>
+                    </li>
+                    @endif
+
 
             </ul>
         </div>

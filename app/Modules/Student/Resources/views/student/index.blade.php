@@ -101,9 +101,11 @@
                 $image = ($value->profile_pic) ? asset($value->file_full_path).'/'.$value->profile_pic : asset('admin/default.png');
                 $latest_enrol = $enrol_repo->getLatestByStudent($value->id);
                 $latest_quiz = $student_quiz->getLatestQuizByStudent($value->id);
+
+                if($latest_enrol){
                 @endphp
                 <tr>
-                    <td>{{$student->firstItem() +$key}}</td>
+                    <td>{{$value->id}}</td>
                     <td><a target="_blank" href="{{ $image }}"><img src="{{ $image }}" style="width: 50px;"></a></td>
                     <td>{{ $value->full_name }}</td>
                     <td>{{ $value->username }}</td>
@@ -152,6 +154,7 @@
                             data-original-title="Delete" data-placement="bottom"><i class="icon-bin"></i></a>
                     </td>
                 </tr>
+                @php } @endphp
                 @endforeach
                 @else
                 <tr>

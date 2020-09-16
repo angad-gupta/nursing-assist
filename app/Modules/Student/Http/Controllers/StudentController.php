@@ -19,7 +19,7 @@ use App\Modules\Home\Emails\SendNetaMail;
 
 class StudentController extends Controller
 {
-    protected $StudentController;
+    protected $student;
     protected $quiz;
     protected $courseinfo;
     /**
@@ -307,7 +307,8 @@ class StudentController extends Controller
         } catch (\Throwable $e) {
             alertify($e->getMessage())->error();
         }
-        return redirect(route('student.index'));
+       return redirect()->back();
+        
     }
 
     /**
