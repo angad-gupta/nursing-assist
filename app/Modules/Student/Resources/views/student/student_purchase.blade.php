@@ -73,7 +73,7 @@
                     <td>{{ date('d M, Y',strtotime($value->created_at)) }}</td>
                     <td>
                         @php
-                        $modal = ($value->moved_to_student == '1') ? '#' : 'modal';
+                        $modal = 'modal';
                         @endphp
 
                         @if($value->amount_left !== '0')

@@ -14,6 +14,9 @@ use Illuminate\Http\Response;
 // Mail
 use Illuminate\Routing\Controller;
 
+use Illuminate\Support\Facades\Mail;
+use App\Modules\Home\Emails\SendNetaMail;
+
 class StudentController extends Controller
 {
     protected $StudentController;
@@ -230,22 +233,22 @@ class StudentController extends Controller
 
     public function courseInstallment(Request $request)
     {
-        $input = $request->all();
+        $input = $request->all(); 
 
-        $amount_paid = $input['amount_paid']; // 1000
+        $amount_paid = $input['amount_paid']; 
 
         $student_id = $input['student_id'];
         $payment_id = $input['payment_id'];
 
         try {
 
-            $studentPuchaseInfo = $this->student->findPurchaseCourse($payment_id);
-            $total_course_fee = $studentPuchaseInfo->total_course_fee;
-            $amount_left = $studentPuchaseInfo->amount_left;
+            $studentPuchaseInfo = $this->student->findPurchaseCourse($payment_id); 
+            $total_course_fee = str_replace(',', '', $studentPuchaseInfo->total_course_fee);  
+            $amount_left = str_replace(',', '', $studentPuchaseInfo->amount_left);
 
-            $amountPaid = $studentPuchaseInfo->amount_paid + $amount_paid;
+            $amountPaid =  (float)$studentPuchaseInfo->amount_paid +  (float)$amount_paid;
 
-            $amt_remaining = $amount_left - $amount_paid;
+            $amt_remaining =  (float)$amount_left -  $amount_paid; 
 
             $status = ($amt_remaining == 0) ? 'Paid' : 'Partially Paid';
 
@@ -257,6 +260,29 @@ class StudentController extends Controller
             );
 
             $this->student->updatePaymentStatus($payment_id, $payment_data);
+
+
+            $student_info = $this->student->find($student_id);
+
+            $email = $student_info->email;
+            $subject = 'Course Installment Payment';
+
+            $emailContent['student_info'] = $student_info;
+            $emailContent['total_course_fee'] = $total_course_fee;
+            $emailContent['amount_paid'] = $amount_paid;
+            $emailContent['amount_left'] = $amt_remaining;
+
+
+        /* ---------------------------------------------------------------
+            Email Send to Announcement Nofitication
+        --------------------------------------------------------------- */
+           $content = view('student::student.partial.email-installment-content',$emailContent)->render();
+
+          Mail::to($email)->send(new SendNetaMail($content, $subject));
+        /* ---------------------------------------------------------------
+            Email Send to  Announcement Nofitication
+        --------------------------------------------------------------- */
+
 
             alertify()->success('Student Payment Updated Successfully');
         } catch (\Throwable $e) {
