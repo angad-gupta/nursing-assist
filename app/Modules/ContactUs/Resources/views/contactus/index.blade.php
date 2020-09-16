@@ -37,6 +37,45 @@
 @stop
 @section('content')
 
+
+
+<div class="card">
+    <div class="bg-warning card-header header-elements-inline border-bottom-0">
+        <h5 class="card-title text-uppercase font-weight-semibold">Filter</h5>
+        <div class="header-elements">
+            <div class="list-icons">
+                <a class="list-icons-item" data-action="collapse"></a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        {!! Form::open(['route' => 'contactus.index', 'method' => 'get']) !!}
+
+        <div class="row">
+
+            <div class="col-md-4">
+                <label class="d-block font-weight-semibold">Select Status:</label>
+                <div class="input-group">
+                {!! Form::select('status',[ 'Pending'=>'Pending','Replied'=>'Replied'], $value = request('status') ?? null, ['placeholder'=>'Select Category','id'=>'status','class'=>'form-control' ]) !!}   
+                </div>
+            </div>
+
+        </div>
+        <div class="d-flex justify-content-end mt-2">
+            <button class="btn bg-primary" type="submit">
+                Search Now
+            </button>
+            <a href="{{ route('contactus.index') }}" data-popup="tooltip" data-placement="top"
+                data-original-title="Refresh Search" class="btn bg-danger ml-2">
+                <i class="icon-spinner9"></i>
+            </a>
+        </div>
+        {!! Form::close() !!}
+    </div>
+</div>
+
+
+
 <div class="card card-body">
     <div class="d-flex justify-content-between">
         <h4>List of Contact Detail</h4>

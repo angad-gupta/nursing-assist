@@ -10,8 +10,12 @@ class ContactUsRepository implements ContactUsInterface
     public function findAll($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1])
     {
          $result =ContactUs::when(array_keys($filter, true), function ($query) use ($filter) {
-        
             
+            if (isset($filter['status'])) {
+                $query->where('status', $filter['status']);
+            }
+
+
         })
             ->orderBy($sort['by'], $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
 
