@@ -20,4 +20,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'permission']], func
     Route::get('contactus/delete/{id}', ['as' => 'contactus.delete', 'uses' => 'ContactUsController@destroy'])->where('id', '[0-9]+');
 
     Route::post('contactus/update-status', ['as' => 'contactus.updateStatus', 'uses' => 'ContactUsController@updateStatus']);
+    
+    Route::post('contactus/reply', ['as' => 'contactus.reply', 'uses' => 'ContactUsController@replyMessage']);
 });

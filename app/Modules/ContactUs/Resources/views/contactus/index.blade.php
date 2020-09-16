@@ -48,6 +48,7 @@
                 <tr class="bg-slate">
                     <th>#</th>
                     <th>Date</th>
+                    <th>Time</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Mobile No.</th>
@@ -62,6 +63,7 @@
                 <tr>
                     <td>{{$contactus->firstItem() +$key}}</td>
                     <td>{{ date('jS M, Y', strtotime($value->created_at)) }}</th>
+                    <td>{{ date('H:i A', strtotime($value->created_at)) }}</th>
                     <td>{{ $value->first_name .' '. $value->last_name }}</td>
                     <td>{{ $value->email }}</td>
                     <td>{{ $value->phone }}</td>
@@ -147,33 +149,49 @@
 </div>
 <!-- /warning modal -->
 
-<!-- Warning modal -->
-<div id="modal_theme_status" class="modal fade" tabindex="-1">
+
+<div id="modal_theme_status" class="modal fade in" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header bg-warning">
-                <h4 class="modal-title">Update Status</h4>
+            <div class="modal-header bg-teal-400">
+                <h5 class="modal-title">Reply Message </h5>
+                <button type="button" class="close" data-dismiss="modal">×</button>
             </div>
+
             <div class="modal-body">
-                {!! Form::open(['route'=>'contactus.updateStatus','method'=>'POST','id'=>'updateStatus_submit','class'=>'form-horizontal','role'=>'form']) !!}
-                <div class="form-group row">
-                    <label class="col-form-label col-lg-3">Status:</label>
-                    <div class="col-lg-9">
-                        {!! Form::select('status',['Replied'=>'Replied'], $value = null, ['id'=>'status','class'=>'form-control']) !!}
-                    </div>
+                 {!! Form::open(['route'=>'contactus.reply', 'method'=>'POST','class'=>'form-horizontal','role'=>'form' ,'files' => true]) !!}
+        
 
-                    {!! Form::hidden('contact_id', '',['class'=>'contact_id']) !!}
+                      {!! Form::hidden('contact_id', '',['class'=>'contact_id']) !!}
+                        <fieldset class="mb-3">
+                            <legend class="text-uppercase font-size-sm font-weight-bold"></legend>
 
-                </div>
-                <div class="text-right">
-                    <button type="submit" class="ml-2 btn bg-pink-600 btn-labeled btn-labeled-left"><b><i
-                                class="icon-database-insert"></i></b> Update</button>
-                </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-3">Reply Message:</label>
+                                <div class="col-lg-9 form-group-feedback form-group-feedback-right">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend">
+                                            <span class="input-group-text"><i class="icon-bubble-lines4"></i></span>
+                                        </span>
+                                        {!! Form::textarea('message', null, ['id'=>'message','placeholder'=>'Enter Reply Message','class'=>'form-control','required']) !!}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-right">
+                                <button type="submit"  class="ml-2 btn bg-pink-600 btn-labeled btn-labeled-left"><b><i class="icon-database-insert"></i></b>Reply</button>
+                            </div>
+
+                        </fieldset>
+
+
+        
                 {!! Form::close() !!}
+
             </div>
         </div>
     </div>
 </div>
-<!-- /warning modal -->
+
 
 @endsection

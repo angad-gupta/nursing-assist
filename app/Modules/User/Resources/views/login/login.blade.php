@@ -83,6 +83,26 @@
                                     &copy; {{date('Y')}}. <a href="javascript:void(0)" class="text-blue-700">NETA CMS</a> by <a href="http://bidhee.com/" target="_blank" class="text-teal">Bidhee Pvt. Ltd</a>
                                 </span>
 
+                                 <div class="list-group-item list-group-divider"></div>
+
+                                <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+											<div style="width: 27%;">
+												<img class="mt-4" src="{{ asset('admin/global/images/bidhee.png')}}" alt="" width="115%" height="75%">
+												
+											</div>
+
+											<div class="text-sm-right mb-0 mt-3 mt-sm-0 ml-auto" >
+												<h6 class="font-weight-semibold">Call for any Support and Training:</h6>
+												<ul class="list list-unstyled mb-0">
+													<li>Bidhee Pvt. Ltd</li>
+													<li>Tel: + 977 1 4104342 (Office) </li>
+													<li>Tel: + 977 1 4495869</li>
+													<li>Web: www.bidhee.com </li>
+													<li>Email: info@bidhee.com</li>
+												</ul>
+											</div>
+										</div>
+
 							</div>
 						</div>
 					</div>

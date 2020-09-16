@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
+use Illuminate\Support\Facades\Mail;
+use App\Modules\Home\Emails\SendNetaMail;
+
 class ContactUsController extends Controller
 {
 
@@ -24,7 +27,7 @@ class ContactUsController extends Controller
     public function index(Request $request)
     {
         $search = $request->all();
-        $data['contactus'] = $this->contactus->findAll($limit = 10, $search);
+        $data['contactus'] = $this->contactus->findAll($limit = 50, $search);
         return view('contactus::contactus.index', $data);
     }
 
@@ -62,6 +65,43 @@ class ContactUsController extends Controller
         } catch (\Throwable $e) {
             alertify($e->getMessage())->error();
         }
+        return redirect(route('contactus.index'));
+    }
+
+    public function replyMessage(Request $request){
+
+        $data = $request->all();
+
+        $contact_id = $data['contact_id'];
+        $message = $data['message'];
+
+        $contactInfo = $this->contactus->find($contact_id);
+
+        $email = $contactInfo->email;
+        $subject = 'Reply From Neta';
+
+        if($email){
+
+            $response['contactInfo'] = $contactInfo;
+            $response['message'] = $message;
+            /* ---------------------------------------------------------------
+                Email Send to Announcement Nofitication
+            --------------------------------------------------------------- */
+               $content = view('contactus::contactus.email-content',$response)->render();
+
+              Mail::to($email)->send(new SendNetaMail($content, $subject));
+            /* ---------------------------------------------------------------
+                Email Send to  Announcement Nofitication
+            --------------------------------------------------------------- */
+
+            $update_data = array(
+
+                'status' => 'Replied'
+            );
+            $this->contactus->update($contact_id, $update_data);
+        }
+
+        alertify()->success('Reply Message Send Successfully');
         return redirect(route('contactus.index'));
     }
 
