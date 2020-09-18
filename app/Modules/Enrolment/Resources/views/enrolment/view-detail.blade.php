@@ -77,5 +77,11 @@
     <td>{{ ($enrolment->payment_status == '1') ? 'Paid' : 'Pending Payment' }}</td>
   </tr>
 
+  <tr>
+    <td class='text-success font-weight-bold'>Agency: </td>
+    <td>{{ optional($enrolment->agent)->agent_name ?? 'None' }}</td>
+  </tr>
+  
+
 </tbody>
 </table>
