@@ -27,4 +27,6 @@ interface EnrolmentInterface
     public function getAllEnrolmentByIntake($intake_date);
     
     public function findStudentEnrol($student_id);
+    
+    public function countStudentEnrol($student_id);
 }

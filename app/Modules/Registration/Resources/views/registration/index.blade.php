@@ -36,9 +36,9 @@
                 @foreach($student as $key => $value)
                 @php 
                 $image = ($value->profile_pic) ? asset($value->file_full_path).'/'.$value->profile_pic : asset('admin/default.png');
-                $is_enrol = $enrol_repo->findStudentEnrol($value->id);
+                $is_enrol = $enrol_repo->countStudentEnrol($value->id);
 
-                if(sizeof($is_enrol) == 0){   
+                if(is_enrol == 0){   
                 @endphp
                     <tr>
                         <td><a target="_blank" href="{{ $image }}"><img src="{{ $image }}" style="width: 50px;"></a></td>
