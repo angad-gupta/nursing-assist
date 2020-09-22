@@ -153,125 +153,7 @@ class EnrolmentController extends Controller
 
             $enrolment = $this->enrolment->save($enrolmentData);
             $enrolment_id = $enrolment->id;
-/* 
-            if ($submit === 'pay_later') {
 
-                $this->enrolment->update($enrolment_id, ['payment_type' => 0]);
-
-                $studentPaymentData = array(
-                    'student_id' => $data['student_id'],
-                    'courseinfo_id' => $data['courseinfo_id'],
-                    'enrolment_id' => $enrolment_id,
-                    'enrolment_payment_id' => null,
-                    'status' => 'Pending',
-                    'moved_to_student' => 0,
-                    'total_course_fee' => $total_course_fee,
-                    'amount_paid' => '0',
-                    'amount_left' => $total_course_fee,
-                );
-
-                $studentpayment = $this->studentpayment->save($studentPaymentData);
-
-                Flash('You have successfully enrolled the course. We will contact you soon.')->success();
-
-            } else { */
-
-                //$amount = Session::put('amount', $courseInfo->course_fee);
-
-                //common wealth function
-             /*    Simplify::$publicKey = env('LIVE_PUBLIC_KEY');
-                Simplify::$privateKey = env('LIVE_PRIVATE_KEY');
-
-                if ($courseInfo->payment_mode != 'one off payment' && $data['payment_type'] == 1) {
-                    $fee_in_cwbank = str_replace(',', '', $total_course_fee) * 0.025 + 1500;
-                    $total_course_fee = str_replace(',', '', $total_course_fee) * 0.025 + 5500;
-                    $description = 'First Installment of ' . $data['course_program_title'] . ' Course Enrolment';
-                } else {
-                    $fee_in_cwbank = str_replace(',', '', $total_course_fee);
-                    $description = 'Full Payment of ' . $data['course_program_title'] . ' Course Enrolment';
-                }
-
-                if (isset($data['simplifyToken']) && $data['simplifyToken'] != '') {
-                    $fee_in_cwbank = 1;
-                    $payment = \Simplify_Payment::createPayment(array(
-                        'reference' => 'enrol_' . $enrolment_id, //optional Custom reference field to be used with outside systems.
-                        'amount' => ($fee_in_cwbank * 100),
-                        'description' => $description,
-                        'currency' => 'AUD',
-                        'token' => $data['simplifyToken'],
-                        'order' => ['customerName' => $data['first_name'] . ' ' . $data['last_name'], 'customerEmail' => $data['email']],
-                    ));
-
-                    if ($payment->paymentStatus == 'APPROVED') {
-
-                        $enrolpaymentData = array(
-                            'enrolment_id' => $enrolment_id,
-                            'transactionID' => $payment->id,
-                            'authCode' => $payment->authCode,
-                            'currency' => $payment->transactionData->currency,
-                            'totalAmount' => $payment->transactionData->amount / 100,
-                            'sucess' => 1);
-
-                        $enrolpayment = $this->enrolpayment->save($enrolpaymentData);
-
-                        if ($data['payment_type'] == 1) {
-                            $studentPaymentData = array(
-                                'student_id' => $data['student_id'],
-                                'courseinfo_id' => $data['courseinfo_id'],
-                                'enrolment_id' => $enrolment_id,
-                                'enrolment_payment_id' => $enrolpayment->id ?? 0,
-                                'status' => 'First Installment Paid',
-                                'moved_to_student' => 0,
-                                'total_course_fee' => $total_course_fee,
-                                'amount_paid' => $fee_in_cwbank,
-                                'amount_left' => ($total_course_fee - $fee_in_cwbank),
-                            );
-                            $studentpayment = $this->studentpayment->save($studentPaymentData);
-
-                            //Installment Payment Storage
-                            $studentPaymentInstallmentData = array(
-                                'student_payment_id' => $studentpayment->id ?? 0,
-                                'enrolment_payment_id' => $enrolpayment->id ?? 0,
-                                'status' => 1,
-                                'installment_amt' => $fee_in_cwbank,
-                            );
-                            $this->studentPaymentInstallment->save($studentPaymentInstallmentData);
-
-                            $this->enrolment->update($enrolment_id, ['payment_status' => 2]);
-
-                            $data['subject'] = 'First Installment Payment Successful';
-                            $data['mail_desc'] = 'You have successfully paid first installment of $' . $fee_in_cwbank . ' with admission fee of 2.5% for ' . $data['course_program_title'] . ' enrolment.';
-
-                        } else {
-                            $studentPaymentData = array(
-                                'student_id' => $data['student_id'],
-                                'courseinfo_id' => $data['courseinfo_id'],
-                                'enrolment_id' => $enrolment_id,
-                                'enrolment_payment_id' => $enrolpayment->id ?? 0,
-                                'status' => 'Paid',
-                                'moved_to_student' => 0,
-                                'total_course_fee' => $total_course_fee,
-                                'amount_paid' => $total_course_fee,
-                                'amount_left' => 0,
-                            );
-                            $studentpayment = $this->studentpayment->save($studentPaymentData);
-
-                            $this->enrolment->update($enrolment_id, ['payment_status' => 1]);
-
-                            $data['subject'] = 'Full Payment Successful';
-                            $data['mail_desc'] = 'You have successfully paid $' . $fee_in_cwbank . ' for ' . $data['course_program_title'] . ' enrolment.';
-
-                        }
-
-                        $data['full_name'] = $student_detail->full_name;
-                        $data['fee_in_cwbank'] = $fee_in_cwbank;
-                        $student_detail->notify(new EnrolmentPayment($data));
-
-                        Flash('You have successfully enrolled the course. We will contact you soon.')->success();
-                    } else {
-                        Flash('Payment Error!')->error();
-                    }
-                } */
 
                 /* ---------------------------------------------------------------
                 Email Send to Student After Registration
@@ -334,8 +216,7 @@ class EnrolmentController extends Controller
                 die();
                 }
                  */
-                // return redirect(route('enrolment.viewUser',['id'=>$enrolment_id]));
-           // }
+               
             return $enrolment_id;
         } catch (\Throwable $e) {
             //Flash($e->getMessage())->success();
@@ -470,6 +351,16 @@ class EnrolmentController extends Controller
                 Simplify::$privateKey = env('LIVE_PRIVATE_KEY');
 
                 if (isset($data['token']) && $data['token'] != '') {
+
+                    $customer_info = \Simplify_Customer::createCustomer(array(
+                        'name' => $full_name,
+                        'email' => $email,
+                        'token' => $data['simplifyToken'],
+                    ));
+    
+                    $customer = json_decode($customer_info);
+                    $customer_id = $customer->id;
+
                     //$installment_amt = 1;
                     $payment_info = \Simplify_Payment::createPayment(array(
                         'reference' => 'enrol_' . $enrolment_id, //optional Custom reference field to be used with outside systems.
@@ -478,6 +369,7 @@ class EnrolmentController extends Controller
                         'currency' => 'AUD',
                         'token' => $data['simplifyToken'],
                         'order' => ['customerName' => $full_name, 'customerEmail' => $email],
+                        'customer' => $customer_id
                     ));
 
                     $payment = json_decode($payment_info); 
@@ -683,6 +575,16 @@ class EnrolmentController extends Controller
 
             //common wealth function
             if (isset($data['token']) && $data['token'] != '') {
+
+                $customer_info = \Simplify_Customer::createCustomer(array(
+                    'name' => $data['first_name'] . ' ' . $data['last_name'],
+                    'email' => $data['email'],
+                    'token' => $data['token'],
+                ));
+
+                $customer = json_decode($customer_info);
+                $customer_id = $customer->id;
+
                 //$fee_in_cwbank = 1;
                 $payment_info = \Simplify_Payment::createPayment(array(
                     'reference' => 'enrol_' . $enrolment_id, //optional Custom reference field to be used with outside systems.
@@ -691,6 +593,7 @@ class EnrolmentController extends Controller
                     'currency' => 'AUD',
                     'token' => $data['token'],
                     'order' => ['customerName' => $data['first_name'] . ' ' . $data['last_name'], 'customerEmail' => $data['email']],
+                    'customer'=> $customer_id
                 ));
                 $payment = json_decode($payment_info);
 /* 
