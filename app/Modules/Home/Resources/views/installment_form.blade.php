@@ -153,6 +153,10 @@
                             last_name:last_name,
                             email:email,
                             token: token,
+                            cc_number: $('#cc-number').val(),
+                            cc_exp_month: $('#cc-exp-month').val(),
+                            cc_exp_year: $('#cc-exp-year').val(),
+                            cc_cvc: $('#cc-cvc').val(),
                             _token: '{{csrf_token()}}'
                         };
 
