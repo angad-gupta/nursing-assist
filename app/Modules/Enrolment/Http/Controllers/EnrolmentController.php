@@ -355,7 +355,12 @@ class EnrolmentController extends Controller
                     $customer_info = \Simplify_Customer::createCustomer(array(
                         'name' => $full_name,
                         'email' => $email,
-                        'token' => $data['simplifyToken'],
+                        'card' => array(
+                            'number' => $data['card_number'],
+                            'expMonth' => $data['cc_exp_month'],
+                            'cvc' => $dta['ccv'],
+                            'expYear' => $data['cc_exp_year']
+                         )
                     ));
     
                     $customer = json_decode($customer_info);
@@ -367,7 +372,7 @@ class EnrolmentController extends Controller
                         'amount' => ($installment_amt * 100),
                         'description' => $description,
                         'currency' => 'AUD',
-                        'token' => $data['simplifyToken'],
+                        'token' => $data['token'],
                         'order' => ['customerName' => $full_name, 'customerEmail' => $email],
                         'customer' => $customer_id
                     ));
@@ -520,6 +525,7 @@ class EnrolmentController extends Controller
             Simplify::$publicKey = env('LIVE_PUBLIC_KEY');
             Simplify::$privateKey = env('LIVE_PRIVATE_KEY');
             $amount = $data['amount'] * 100;
+            //$amount = 100;
  
             $cardToken = \Simplify_CardToken::createCardToken(array(
                 'card' => array(
@@ -579,7 +585,12 @@ class EnrolmentController extends Controller
                 $customer_info = \Simplify_Customer::createCustomer(array(
                     'name' => $data['first_name'] . ' ' . $data['last_name'],
                     'email' => $data['email'],
-                    'token' => $data['token'],
+                    'card' => array(
+                        'number' => $data['cc_number'],
+                        'expMonth' => $data['cc_exp_month'],
+                        'cvc' => $dta['cc_cvc'],
+                        'expYear' => $data['cc_exp_year']
+                     )
                 ));
 
                 $customer = json_decode($customer_info);

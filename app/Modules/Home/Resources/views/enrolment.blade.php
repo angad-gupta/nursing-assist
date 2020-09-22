@@ -114,13 +114,17 @@
     function processPayment() {
         var amount = $('#amount').val();
         //var amount = 1;
-        var currency = 'AUD';         
+        var currency = 'AUD';    
+        var cc_number = $('#cc-number').val();
+        var cc_exp_month = $('#cc-exp-month').val();
+        var cc_exp_year = $('#cc-exp-year').val();
+        var cc_cvc = $('#cc-cvc').val();
 
         var payload = {
-            cc_number: $('#cc-number').val(),
-            cc_exp_month: $('#cc-exp-month').val(),
-            cc_exp_year: $('#cc-exp-year').val(),
-            cc_cvc: $('#cc-cvc').val(),
+            cc_number: cc_number,
+            cc_exp_month: cc_exp_month,
+            cc_exp_year: cc_exp_year,
+            cc_cvc: cc_cvc,
             currency: currency,
             amount: amount,
             _token: '{{csrf_token()}}'
@@ -163,6 +167,10 @@
                             last_name:last_name,
                             email:email,
                             token: token,
+                            cc_number: cc_number,
+                            cc_exp_month: cc_exp_month,
+                            cc_exp_year: cc_exp_year,
+                            cc_cvc: cc_cvc,
                             _token: '{{csrf_token()}}'
                         };
 
@@ -697,9 +705,9 @@
                                                                 </tr>
                                                             </table>
                                                             {!! Form::hidden('enrolment_id',null, ['id' => 'enrolment_id'] ) !!}
+                                                            {!! Form::hidden('amount', 5500, ['id' => 'amount'] ) !!}
                                                             @if($courseinfo->payment_mode != 'one off payment')
-                                                                {{--{!! Form::hidden('amount', 1637.5, ['id' => 'amount'] ) !!}--}}
-                                                                {!! Form::hidden('amount', 1500, ['id' => 'amount'] ) !!}
+                                                            
                                                                 <table class="table" id="installment_payment" style="display:none">
                                                                     <tr>
                                                                         <td>Initial payment</td>
@@ -733,8 +741,6 @@
                                                                         <td class="text-right">$1,500</td>
                                                                     </tr>
                                                                 </table>
-                                                            @else
-                                                                {!! Form::hidden('amount', 5500, ['id' => 'amount'] ) !!}
                                                             @endif
 
                                                            
