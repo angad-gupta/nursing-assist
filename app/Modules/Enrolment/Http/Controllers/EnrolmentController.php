@@ -458,7 +458,7 @@ class EnrolmentController extends Controller
                         }
 
                         $data['full_name'] = $full_name;
-                        $studentInfo->notify(new EnrolmentPayment($data));
+                        //$studentInfo->notify(new EnrolmentPayment($data));
 
                         //Flash('You have successfully paid the installment.')->success();
                         return 1;
@@ -740,7 +740,7 @@ class EnrolmentController extends Controller
 
                     $data['full_name'] = $student_detail->full_name;
                     $data['fee_in_cwbank'] = $fee_in_cwbank; 
-                    $student_detail->notify(new EnrolmentPayment($data));
+                    //$student_detail->notify(new EnrolmentPayment($data));
 
                      /* ---------------------------------------------------------------
                     Email Send to Student After Registration
