@@ -588,7 +588,7 @@ class EnrolmentController extends Controller
                     'card' => array(
                         'number' => $data['cc_number'],
                         'expMonth' => $data['cc_exp_month'],
-                        'cvc' => $dta['cc_cvc'],
+                        'cvc' => $data['cc_cvc'],
                         'expYear' => $data['cc_exp_year']
                      )
                 ));
