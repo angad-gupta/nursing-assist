@@ -129,9 +129,9 @@ class EnrolmentRepository implements EnrolmentInterface
         return $fileName;
     }
 
-    public function getLatestByStudent($student_id)
-    {
-        return Enrolment::where('student_id', $student_id)
+    public function getLatestByStudent($student_id) 
+    { 
+        return Enrolment::where('student_id','=',$student_id)
             ->where('status', '!=', 'Disapproved')
             ->latest()->first();
     }

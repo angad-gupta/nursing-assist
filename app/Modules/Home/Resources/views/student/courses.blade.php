@@ -223,7 +223,7 @@
                         <div class="row my-courses">
                             @php
                                 $readiness_list = array('readiness_exam_1'=>'Readiness Exam 1','readiness_exam_2'=>'Readiness Exam 2',
-                                    'readiness_exam_3'=>'Readiness Exam 3');
+                                    'readiness_exam_3'=>'Readiness Exam 3','readiness_exam_4'=>'Readiness Exam 4','readiness_exam_5'=>'Readiness Exam 5','readiness_exam_6'=>'Readiness Exam 6');
                                 @endphp
 
                                 @foreach($readiness_list as $key => $list)

@@ -29,7 +29,7 @@ class RegistrationController extends Controller
         if (isset($search['sort_by']) && !empty($search['sort_by'])) {
             $sort_by = ['by' => 'full_name', 'sort' => $search['sort_by']];
         }
-        $data['student'] = $this->student->findAll($limit = 100, $search, $sort_by);
+        $data['student'] = $this->student->findAll($limit = null, $search, $sort_by); 
         return view('registration::registration.index',$data);
     }
 

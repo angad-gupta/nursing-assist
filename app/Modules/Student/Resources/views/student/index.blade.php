@@ -92,6 +92,7 @@
                 </tr>
             </thead>
             <tbody>
+               
                 @if($student->total() != 0)
                 @inject('enrol_repo', '\App\Modules\Enrolment\Repositories\EnrolmentRepository')
                 @inject('student_quiz', '\App\Modules\Student\Repositories\StudentRepository')
@@ -99,7 +100,7 @@
 
                 @php
                 $image = ($value->profile_pic) ? asset($value->file_full_path).'/'.$value->profile_pic : asset('admin/default.png');
-                $latest_enrol = $enrol_repo->getLatestByStudent($value->id);
+                $latest_enrol = $enrol_repo->getLatestByStudent($value->id);  
                 $latest_quiz = $student_quiz->getLatestQuizByStudent($value->id);
 
                 if($latest_enrol){
