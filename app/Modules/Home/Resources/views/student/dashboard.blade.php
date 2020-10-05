@@ -176,7 +176,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="">Postal Code</label>
-                                            {!! Form::text('postal_code', $value = null, ['id'=>'postal_code','placeholder'=>'Enter Postal Code' ,'class'=>'form-control numeric']) !!}
+                                            {!! Form::text('postalcode', $value = null, ['id'=>'postal_code','placeholder'=>'Enter Postal Code' ,'class'=>'form-control numeric']) !!}
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
