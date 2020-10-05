@@ -361,7 +361,6 @@
 
             var agent_id = $('#agent').val();
             if(agent_id == 0){
-                alert(agent_id);
                 $('#paylater-btn').hide();
             }else{
                 $('#paylater-btn').show();
