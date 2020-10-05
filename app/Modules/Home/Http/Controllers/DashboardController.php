@@ -532,7 +532,7 @@ class DashboardController extends Controller
 
     public function studentReadinessStore(Request $request)
     {
-        $input = $request->all();  dd($input);
+        $input = $request->all();  
         $title = $input['title'];
         $result_id = $input['result_id'];
 
