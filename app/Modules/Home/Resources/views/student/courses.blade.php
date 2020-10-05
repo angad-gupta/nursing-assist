@@ -51,18 +51,24 @@
                             <a class="nav-link" id="history-tab" data-toggle="tab" href="#history" role="tab"
                                 aria-controls="history" aria-selected="false">Test History</a>
                         </li>
-                    @endif
-                    <li class="nav-item">
-                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
+                        <li class="nav-item">
+                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
                             aria-controls="contact" aria-selected="false">Other Courses</a>
-                    </li>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
+                            aria-controls="contact" aria-selected="false">Available Courses</a>
+                        </li>
+                    @endif
+                    
                 </ul>
 
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <div class="my-courses">
                             <div class="row">
-                                @if($student_course)
+                                 @if(sizeof($student_course)>0)
                                     @foreach($student_course as $key => $my_course_val)
 
                                         @php
@@ -95,6 +101,16 @@
                                         </div>
 
                                     @endforeach
+                                    @else
+
+                                    <div class="col-12">
+                                            <div class="my-courses__list">
+                                                <div class="list-content">
+                                                    <h5>There is no any Course you have Enroll. Please View <b data-popup="tooltip" title="Click on Next Tab Above." data-placement="top">Available Courses</b> and Enroll.</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                 @endif
 
                             </div>

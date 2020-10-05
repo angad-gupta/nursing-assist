@@ -39,7 +39,7 @@
 </section>
 
  @php
-    $image = ($student_profile->profile_pic) ? asset($student_profile->file_full_path).'/'.$student_profile->profile_pic : asset('home/img/nn.png');
+    $image = ($student_profile->profile_pic) ? asset($student_profile->file_full_path).'/'.$student_profile->profile_pic : asset('admin/default.png');
  @endphp
 
 
