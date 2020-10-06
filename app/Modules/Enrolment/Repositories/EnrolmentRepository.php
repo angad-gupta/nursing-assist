@@ -164,5 +164,8 @@ class EnrolmentRepository implements EnrolmentInterface
          return Enrolment::where('student_id','=',$student_id)->count();
     }
 
+    public function getEnrollmentById($student_id,$courseinfo_id){
+        return Enrolment::where('student_id','=',$student_id)->where('courseinfo_id','=',$courseinfo_id)->first();
+    }
 
 }

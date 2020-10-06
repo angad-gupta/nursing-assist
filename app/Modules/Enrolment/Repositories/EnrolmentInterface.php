@@ -29,4 +29,6 @@ interface EnrolmentInterface
     public function findStudentEnrol($student_id);
     
     public function countStudentEnrol($student_id);
+    
+    public function getEnrollmentById($student_id,$courseinfo_id);
 }

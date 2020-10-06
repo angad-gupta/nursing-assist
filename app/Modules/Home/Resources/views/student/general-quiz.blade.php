@@ -144,4 +144,25 @@
 </section>
 
 <section class="section-padding"></section>
+
+<script type="text/javascript">
+    var GLOBAL_NAMESPACE = {};
+
+$(document).ready(function(){
+  GLOBAL_NAMESPACE.value_changed = true;
+});
+
+$('a').bind('click',function (e) {
+    e.preventDefault();
+    if (GLOBAL_NAMESPACE.value_changed){
+        var res = confirm('You have unsaved changes. Do you want to continue?');
+        if(res){
+            window.location.href = $(this).attr('href');
+        }else{
+            console.log('stay on same page...');
+        }
+    }
+});
+</script>
+
 @include('home::layouts.footer')

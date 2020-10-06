@@ -98,7 +98,6 @@
 @yield('scripts')
 
 
-
 <script>
 $('.owl-carousel').owlCarousel({
     loop:true,

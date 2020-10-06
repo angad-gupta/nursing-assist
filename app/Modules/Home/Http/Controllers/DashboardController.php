@@ -98,7 +98,7 @@ class DashboardController extends Controller
         $data['inbox_message'] = $this->message->getInboxMessage($id, $limit = 5);
         $data['student_course'] = $this->student->getStudentCourse($id);
         $data['student_course_purchase'] = $this->student->getStudentPurchase($id);
-        $data['countries'] = $this->employment->getCountries();
+        $data['countries'] = $this->employment->getCountries(); 
  
         if(isset($data['payment']) && $data['payment'] == 'success') {
             Flash('You have successfully enrolled the course. We will contact you soon.')->success();
@@ -159,8 +159,8 @@ class DashboardController extends Controller
         $data['student_course'] = $this->student->getStudentCourse($id);
         $data['other_course'] = $this->courseinfo->getAll();
         $data['resources'] = $this->resource->findAll();
-        //$data['student_mockup'] = $this->student->getStudentMockupResult($id, 20); 
-        $data['student_histories'] = $this->student->getAllHistories($id, 20); 
+        $data['student_id'] = Auth::guard('student')->user()->find($id)->id;
+        $data['student_histories'] = $this->student->getAllHistories($id, 20);  
 
         return view('home::student.courses', $data);
     }

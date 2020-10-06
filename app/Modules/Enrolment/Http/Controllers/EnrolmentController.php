@@ -117,7 +117,16 @@ class EnrolmentController extends Controller
         $data['is_id'] = 1;
         try {
             $student_detail = auth()->guard('student')->user();
-            $data['student_id'] = $student_detail->id;
+            $data['student_id'] = $student_id = $student_detail->id;
+
+            $courseinfo_id = $data['courseinfo_id'];  
+
+            $enrollment_check = $this->enrolment->getEnrollmentById($student_id,$courseinfo_id); 
+
+            if(!is_null($enrollment_check)){  
+                return $enrollment_check->id;
+            }
+        
 
             $enrolmentData = array(
                 'student_id' => $data['student_id'],

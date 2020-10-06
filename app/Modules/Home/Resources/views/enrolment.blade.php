@@ -5,6 +5,27 @@
 @section('scripts')
 <script src="{{asset('js/validation.js')}}"></script>
 <script type="text/javascript" src="https://www.simplify.com/commerce/v1/simplify.js"></script>
+
+<script type="text/javascript">
+    var GLOBAL_NAMESPACE = {};
+
+$(document).ready(function(){
+  GLOBAL_NAMESPACE.value_changed = true;
+});
+
+$('a').bind('click',function (e) {
+    e.preventDefault();
+    if (GLOBAL_NAMESPACE.value_changed){
+        var res = confirm('You have unsaved changes. Do you want to continue?');
+        if(res){
+            window.location.href = $(this).attr('href');
+        }else{
+            console.log('stay on same page...');
+        }
+    }
+});
+</script>
+
 <script type="text/javascript">
    
     $(document).ready(function() {
@@ -577,7 +598,7 @@
                                                                 <label for="">Last Name <span>*</span></label>
                                                                 <input type="text" name="last_name"
                                                                     placeholder="Last Name" class="form-control"
-                                                                    id="last_name" value="{{ $last_name }}>
+                                                                    id="last_name" value="{{ $last_name }}">
                                                                 <span class="text-danger lname_error"></span>
                                                             </div>
                                                         </div>
