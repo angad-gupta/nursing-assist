@@ -120,7 +120,7 @@ class StudentRepository implements StudentInterface
 
         $result = StudentCourse::when(array_keys($filter, true), function ($query) use ($filter) {
 
-        })->where('student_id', '=', $student_id)->orderBy('id', $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+        })->where('student_id', '=', $student_id)->orderBy('id', $sort['sort'])->distinct('courseinfo_id')->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
 
         return $result;
     }

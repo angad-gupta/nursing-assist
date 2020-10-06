@@ -1,7 +1,7 @@
 
 @include('home::layouts.navbar-inner')
 
-<section class="neta-ribbon">
+<section class="neta-ribbon"> 
     <img src="img/cc.jpg" class="img-fluid" alt="">
     <div class="container">
         <div class="row">
@@ -11,7 +11,7 @@
                     <ul class="list-unstyled d-flex">
                         <li> <a href="{{ route('home') }}">Home >> </a></li>
                         <li> <a href="{{ route('student-courses') }}">Courses >></a></li>
-                        <li>Readiness Report</li>
+                        <li>Readiness Exam Report</li>
                     </ul>
                 </div>
             </div>
@@ -21,79 +21,79 @@
 </section>
 
 <section class="neta-enrolment neta-quiz neta-contact  section-padding">
-	<div class="container">
-		<div class="form-card"> 
-			<h2 class="fs-title mb-0">Readiness Exam Result</h2>
-			<p>You have successfully completed the practice test. Below is your result:</p> 
-			<div class="row b-line"> 
-				<div class="col-sm-3 text-center"> 
-					<div class="quiz-score"> 
-						<h2>{{$correct_answer}}</h2> 
-						<span>Correct Answer</span> 
-					</div> 
-				</div>
+    <div class="container">
+        <div class="form-card"> 
+            <h2 class="fs-title mb-0">Readiness Exam Result</h2>
+            <p>You have successfully completed the practice test. Below is your result:</p> 
+            <div class="row b-line"> 
+                <div class="col-sm-3 text-center"> 
+                    <div class="quiz-score"> 
+                        <h2>{{$correct_answer}}</h2> 
+                        <span>Correct Answer</span> 
+                    </div> 
+                </div>
 
-				<div class="col-sm-3 text-center"> 
-					<div class="quiz-score"> 
-						<h2>{{$incorrect_answer}}</h2> 
-						<span>Incorrect Answer</span> 
-					</div> 
-				</div> 
-				
-				<div class="col-sm-4 text-center"> 
-					<div class="quiz-score"> 
-						<h2>{{$correct_percent}} %</h2> 
-						<span>Correct Answer</span> 
-					</div> 
-				</div>
+                <div class="col-sm-3 text-center"> 
+                    <div class="quiz-score"> 
+                        <h2>{{$incorrect_answer}}</h2> 
+                        <span>Incorrect Answer</span> 
+                    </div> 
+                </div> 
+                
+                <div class="col-sm-4 text-center"> 
+                    <div class="quiz-score"> 
+                        <h2>{{$correct_percent}} %</h2> 
+                        <span>Correct Answer</span> 
+                    </div> 
+                </div>
 
-			</div> 
+            </div> 
 
-			<div class="neta-head text-center m-5">
-				<h4 class="mb-0">Here are the answer sheets with Reason</h4>
-			</div>
+            <div class="neta-head text-center m-5">
+                <h4 class="mb-0">Here are the answer sheets with Reason</h4>
+            </div>
 
-			 <div class="accordion" id="accordionExample">
+             <div class="accordion" id="accordionExample">
 
-			 	@foreach($readiness_history as $kys => $readiness)
+                @foreach($readiness_history as $kys => $readiness)
 
-			 	@php 
-            	if (preg_match('/[\[\]\'^£$%&*()}{@#~?><>,|=_+¬-]/', $readiness->readiness->correct_option)) 
-						{
-							$multipl_ans = json_decode($readiness->readiness->correct_option);
-                    		$prefix = $option_val = '';
-                    		foreach($multipl_ans as $key => $ans){
-                    		 	$value = explode("_", $ans);
-                    			$answer_list = $value[0].' '.$value[1];  
+                @php 
+                if (preg_match('/[\[\]\'^£$%&*()}{@#~?><>,|=_+¬-]/', optional($readiness->readiness)->correct_option))
+                        {
+                            $multipl_ans = json_decode(optional($readiness->readiness)->correct_option);
+                            $prefix = $option_val = '';
+                            foreach($multipl_ans as $key => $ans){
+                                $value = explode("_", $ans);
+                                $answer_list = $value[0].' '.$value[1];  
 
-                    			$option_val .= $prefix . ucwords($answer_list);
-								$prefix = ', ';
-                    		}
+                                $option_val .= $prefix . ucwords($answer_list);
+                                $prefix = ', ';
+                            }
 
-						}else{
-							$option_val= $readiness->readiness->correct_option; 
-						}
+                        }else{
+                            $option_val= optional($readiness->readiness)->correct_option; 
+                        }
 
-				if (preg_match('/[\[\]\'^£$%&*()}{@#~?><>,|=_+¬-]/', $readiness->answer))
-						{
-							$multipl_my_ans = json_decode($readiness->answer);
-                    		$mprefix = $moption_val = '';
-                    		foreach($multipl_my_ans as $key => $myans){
-                    		 	$mvalue = explode("_", $myans);
-                    			$manswer_list = $mvalue[0].' '.$mvalue[1];  
+                if (preg_match('/[\[\]\'^£$%&*()}{@#~?><>,|=_+¬-]/', $readiness->answer))
+                        {
+                            $multipl_my_ans = json_decode($readiness->answer);
+                            $mprefix = $moption_val = '';
+                            foreach($multipl_my_ans as $key => $myans){
+                                $mvalue = explode("_", $myans);
+                                $manswer_list = $mvalue[0].' '.$mvalue[1];  
 
-                    			$moption_val .= $mprefix . ucwords($manswer_list);
-								$mprefix = ', ';
-                    		}
+                                $moption_val .= $mprefix . ucwords($manswer_list);
+                                $mprefix = ', ';
+                            }
 
-						}else{
-							$moption_val= $readiness->answer; 
-						}	
+                        }else{
+                            $moption_val= $readiness->answer; 
+                        }   
 
-					$color_status = ($option_val == $moption_val) ? "text-success" : "text-danger";	
-					$main_color_status = ($option_val == $moption_val) ? "bg-success" : "bg-danger";	
+                    $color_status = ($option_val == $moption_val) ? "text-success" : "text-danger"; 
+                    $main_color_status = ($option_val == $moption_val) ? "bg-success" : "bg-danger";    
 
-            	@endphp
+                @endphp
 
                 <div class="card">
                     <div class="card-header {{ $main_color_status }}" data-toggle="collapse"
@@ -104,8 +104,8 @@
                         data-parent="#accordionExample">
                         <div class="card-body">
 
-                        	
-                        	<p>Your Answer is <span class="{{$color_status}}"><b>{{ $moption_val }}</b></span></a>
+                            
+                            <p>Your Answer is <span class="{{$color_status}}"><b>{{ $moption_val }}</b></span></a>
                             <p>Correct Answer is <span class="text-success"><b>{{ $option_val }}</b></span></a>
                             </p>
                             <p>
@@ -118,14 +118,14 @@
                 @endforeach
             </div>
 
-		</div>
+        </div>
 
-	<div class="col-sm-6 neta-about">
-    	 <button class="enrol-cpd" id="show-btn"><a href="{{ route('student-courses') }}">Back To Course</a></button>
- 	</div>
+    <div class="col-sm-6 neta-about">
+         <button class="enrol-cpd" id="show-btn"><a href="{{ route('student-courses') }}">Back To Course</a></button>
+    </div>
 
 
-	</div>
+    </div>
 
 
 </section>

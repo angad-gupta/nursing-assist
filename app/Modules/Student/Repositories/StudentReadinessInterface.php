@@ -20,5 +20,16 @@ interface StudentReadinessInterface
 
     public function getHistory($student_id, $title);
 
-    public function getCorrectAnswer($student_id, $title);
+    public function getCorrectAnswer($student_id, $title); 
+
+
+    public function checkReadinessResult($student_id, $title, $date);
+    
+    public function getWhereQuestionHistory($whereArray);
+
+    public function updateHistory($id, $data);
+
+    public function getCorrectAnswerByResult($readiness_result_id);
+
+
 }

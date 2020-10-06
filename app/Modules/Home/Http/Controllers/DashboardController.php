@@ -159,7 +159,7 @@ class DashboardController extends Controller
         $data['student_course'] = $this->student->getStudentCourse($id);
         $data['other_course'] = $this->courseinfo->getAll();
         $data['resources'] = $this->resource->findAll();
-        //$data['student_mockup'] = $this->student->getStudentMockupResult($id, 20);
+        //$data['student_mockup'] = $this->student->getStudentMockupResult($id, 20); 
         $data['student_histories'] = $this->student->getAllHistories($id, 20); 
 
         return view('home::student.courses', $data);
@@ -532,35 +532,48 @@ class DashboardController extends Controller
 
     public function studentReadinessStore(Request $request)
     {
-        $input = $request->all();  
+
+        $input = $request->all(); 
         $title = $input['title'];
-        $result_id = $input['result_id'];
 
         try {
             $student_id = Auth::guard('student')->user()->id;
 
             $readiness_history = $this->studentReadiness->getHistory($student_id, $title);
-            $correct_answer = $this->studentReadiness->getCorrectAnswer($student_id, $title);
-
-            $total_attempt_question = count($readiness_history);
+            $correct_answer = $this->studentReadiness->getCorrectAnswerByResult($input['readiness_result_id']);
 
             $total_question = count($input['question_id']);
             $correctPercent = ($correct_answer / $total_question) * 100;
-
+           
             $data['correct_percent'] = $correct_percent = number_format($correctPercent, 2);
             $data['readiness_history'] = $readiness_history;
             $data['correct_answer'] = $correct_answer;
             $data['incorrect_answer'] = $total_question - $correct_answer;
 
-            $updateResult = array(
-                'total_question' => $total_question,
-                'total_attempted_question' => $total_attempt_question,
-                'correct_answer' => $correct_answer,
-                'percent' => $correct_percent,
-                'end_time' => date('Y-m-d H:i:s'),
-            );
+            $date = date('Y-m-d');
+            $resultInfo = $this->studentReadiness->checkReadinessResult($student_id, $title, $date); 
+            if (empty($resultInfo)) {
 
-            $this->studentReadiness->update($result_id, $updateResult);
+                $readiness_result = array(
+                    'student_id' => $student_id,
+                    'title' => $title,
+                    'date' => $date,
+                    'total_question' => $total_question,
+                    'total_attempted_question' => $total_question,
+                    'correct_answer' => $correct_answer,
+                    'percent' => $correct_percent,
+                );
+
+                $this->studentReadiness->save($readiness_result);
+            } else {
+                $updateArray = array(
+                    'total_question' => $total_question,
+                    'total_attempted_question' => $total_question,
+                    'correct_answer' => $correct_answer,
+                    'percent' => $correct_percent,
+                );
+                $resultInfo->update($updateArray);
+            }
 
             return view('home::student.readiness-report', $data);
 
@@ -653,11 +666,12 @@ class DashboardController extends Controller
 
     public function ajaxReadinessStore(Request $request)
     {
-        $input = $request->all();
+
+        $input = $request->all();  
         $title = $input['title'];
         $qkey = $input['qkey'];
         $question_id = $input['question_id'];
-
+        unset($input['readiness_result_id']);
         $answers = [];
         if (isset($input['answers']) && !empty($input['answers'])) {
             $answers = $input['answers'];
@@ -668,17 +682,41 @@ class DashboardController extends Controller
         try {
 
             $student_id = Auth::guard('student')->user()->id;
-            if ($qkey == 1) {
-                $this->studentReadiness->deleteHistory($student_id, $title);
-            }
+            $date = date('Y-m-d');
 
-            $readiness_question = $this->readiness->find($question_id);
+            if($qkey == 1) {
+                $readiness_result = array(
+                    'student_id' => $student_id,
+                    'title' => $title,
+                    'date' => date('Y-m-d'),
+                );
+
+                $resultInfo = $this->studentReadiness->save($readiness_result);
+                $result_id = $resultInfo->id;
+            } else {
+                $resultInfo = $this->studentReadiness->checkReadinessResult($student_id, $title, $date);
+                if (empty($resultInfo)) {
+                    $readiness_result = array(
+                        'student_id' => $student_id,
+                        'title' => $title,
+                        'date' => date('Y-m-d'),
+                    );
+ 
+                    $resultInfo = $this->studentReadiness->save($readiness_result);
+                    $result_id = $resultInfo->id;
+                } else {
+                    $result_id = $resultInfo->id;
+                }
+            }
+          
+            $readiness_question = $this->readiness->find($question_id);  
             if ($readiness_question->question_type == 'multiple') {
                 $question_option = json_encode($answers);
             } else {
                 $question_option = $answers;
             }
 
+            $readinessdata['readiness_result_id'] = $result_id;
             $readinessdata['student_id'] = $student_id;
             $readinessdata['title'] = $title;
             $readinessdata['question_id'] = $question_id;
@@ -692,9 +730,23 @@ class DashboardController extends Controller
                 $readinessdata['is_correct_answer'] = 0;
             }
 
-            $this->studentReadiness->saveHistory($readinessdata);
+            $whereArray = [
+                'readiness_result_id' => $result_id,
+                'student_id' => $student_id,
+                'title' => $title,
+                'question_id' => $question_id
+            ];
 
-            return 1;
+           
+
+            $checkQuestionHistory = $this->studentReadiness->getWhereQuestionHistory($whereArray);    
+            if(!empty($checkQuestionHistory)) {
+                $this->studentReadiness->updateHistory($checkQuestionHistory->id, $readinessdata);
+            } else {
+                $this->studentReadiness->saveHistory($readinessdata);
+            }
+            
+            return $result_id;
 
         } catch (\Throwable $e) {
             return 2;
@@ -829,7 +881,7 @@ class DashboardController extends Controller
                         'title' => $title,
                         'date' => date('Y-m-d'),
                     );
-
+ 
                     $resultInfo = $this->studentPractice->save($practice_result);
                     $result_id = $resultInfo->id;
                 } else {

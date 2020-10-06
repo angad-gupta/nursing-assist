@@ -2,7 +2,7 @@
 <style>
 .bootbox.modal {z-index: 9999 !important;}
 #time { float:right; background-color: cyan; font-size:x-large}
-</style>
+</style> 
 
 <section class="neta-ribbon">
     <img src="img/cc.jpg" class="img-fluid" alt="">
