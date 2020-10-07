@@ -78,10 +78,10 @@
     <div class="table-responsive">
         <table class="table table-striped" id="headerTable">
             <thead>
-                <tr class="bg-slate">
+                <tr class="bg-slate"> 
                     <th class="no-sort">#</th>
                     <th class="no-sort">Profile Pic</th>
-                    <th >Full Name</th>
+                    <th>Full Name</th>
                     <th class="no-sort">Username</th>
                     <th class="no-sort">Email Address</th>
                     <th class="no-sort">Intake Month</th>
@@ -108,12 +108,12 @@
                 <tr>
                     <td>{{$value->id}}</td>
                     <td><a target="_blank" href="{{ $image }}"><img src="{{ $image }}" style="width: 50px;"></a></td>
-                    <td>{{ $value->full_name }}</td>
-                    <td>{{ $value->username }}</td>
-                    <td>{{ $value->email }}</td>
-                    <td>{{ !empty($latest_enrol) ? $latest_enrol->intake_date : '-' }}</td>
-                    <td>{{ !empty($latest_enrol) ? optional($latest_enrol->agent)->agent_name : '-' }}</td>
-                    <td>{{ !empty($latest_quiz) ? optional($latest_quiz->courseContentInfo)->lesson_title : '-' }}</td>
+                    <td><a class="text-teal font-weight-semibold" href="{{route('student.profile',['student_id'=>$value->id])}}">{{ $value->full_name }}</a></td>
+                    <td><a class="text-teal font-weight-semibold" href="{{route('student.profile',['student_id'=>$value->id])}}">{{ $value->username }}</a></td>
+                    <td><a class="text-teal font-weight-semibold" href="{{route('student.profile',['student_id'=>$value->id])}}">{{ $value->email }}</a></td>
+                    <td><a class="text-teal font-weight-semibold" href="{{route('student.profile',['student_id'=>$value->id])}}">{{ !empty($latest_enrol) ? $latest_enrol->intake_date : '-' }}</a></td>
+                    <td><a class="text-teal font-weight-semibold" href="{{route('student.profile',['student_id'=>$value->id])}}">{{ !empty($latest_enrol) ? optional($latest_enrol->agent)->agent_name : '-' }}</a></td>
+                    <td><a class="text-teal font-weight-semibold" href="{{route('student.profile',['student_id'=>$value->id])}}">{{ !empty($latest_quiz) ? optional($latest_quiz->courseContentInfo)->lesson_title : '-' }}</a></td>
                     <td
                         class="{{ ($value->active == '1') ? 'text-success font-weight-bold' :'text-danger font-weight-bold' }}">
                         {{ ($value->active == '1') ? 'Active' :'In-Active' }}</td>

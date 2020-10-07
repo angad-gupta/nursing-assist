@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\StudentResetPassword;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Modules\Employment\Entities\country;
+
 
 class Student extends Authenticatable implements CanResetPassword
 {
@@ -22,7 +24,7 @@ class Student extends Authenticatable implements CanResetPassword
         'username',
         'password',
         'email',
-        'last_login',
+        'last_login', 
         'user_type',
         'full_name',
         'gender',
@@ -62,6 +64,11 @@ class Student extends Authenticatable implements CanResetPassword
     public function enrolments()
     {
         return $this->hasMany(Enrolment::class, 'student_id');
+    }
+
+    public function Country()
+    {
+        return $this->belongsTo(country::class, 'country_id', 'id');
     }
 
     public function sendPasswordResetNotification($token)

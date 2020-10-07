@@ -130,7 +130,7 @@
                     <label class="col-form-label col-lg-3">Select Status:</label>
                     <div class="col-lg-9">
                         {!! Form::select('moved_to_student',[ '1'=>'Move To Student','0'=>'Pending'], $value = null,
-                        ['id'=>'moved_to_student','class'=>'form-control','placeholder'=>'--Select Status--']) !!}
+                        ['id'=>'moved_to_student','class'=>'form-control','placeholder'=>'--Select Status--','required']) !!}
                     </div>
 
                     {{ Form::hidden('student_id', '',['class'=>'student_id']) }}
@@ -161,7 +161,7 @@
                 <div class="form-group row">
                     <label class="col-form-label col-lg-3">Amount Paid:</label>
                     <div class="col-lg-9">
-                        {!! Form::text('amount_paid', $value = null, ['id'=>'amount_paid','placeholder'=>'Enter Amount','class'=>'form-control numeric']) !!}
+                        {!! Form::text('amount_paid', $value = null, ['id'=>'amount_paid','placeholder'=>'Enter Amount','class'=>'form-control numeric','required']) !!}
                     </div>
                 </div>
 

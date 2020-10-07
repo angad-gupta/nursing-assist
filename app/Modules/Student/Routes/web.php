@@ -34,4 +34,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'permission']], func
 
     Route::get('student/practice-result', ['as' => 'studentpractice.result', 'uses' => 'StudentController@studentPracticeResult']);
 
+    Route::get('student/profile', ['as' => 'student.profile', 'uses' => 'StudentController@profile']);
+
+
 });
