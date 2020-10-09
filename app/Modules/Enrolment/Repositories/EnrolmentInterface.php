@@ -31,4 +31,6 @@ interface EnrolmentInterface
     public function countStudentEnrol($student_id);
     
     public function getEnrollmentById($student_id,$courseinfo_id);
+
+    public function getMonthById($month_id);
 }

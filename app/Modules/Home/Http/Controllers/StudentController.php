@@ -62,7 +62,7 @@ class StudentController extends Controller
             $data['users'] = $userInfo = Auth::guard('student')->user();  
             $studentName = explode(" ",$userInfo['full_name']);
             $data['first_name'] = ($studentName[0]) ? $studentName[0] : '';
-            $data['last_name'] = ($studentName[1]) ? $studentName[1] : '';
+            $data['last_name'] = (array_key_exists(1, $studentName)) ? $studentName[1] : '';
 
             $data['agents'] = $this->agent->getList();
 

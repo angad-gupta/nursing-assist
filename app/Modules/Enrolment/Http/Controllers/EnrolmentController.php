@@ -126,11 +126,10 @@ class EnrolmentController extends Controller
             if(!is_null($enrollment_check)){  
                 return $enrollment_check->id;
             }
-        
 
             $enrolmentData = array(
-                'student_id' => $data['student_id'],
-                'courseinfo_id' => $data['courseinfo_id'],
+                'student_id' => $student_id,
+                'courseinfo_id' => $data['course_info_id'],
                 'is_eligible_mcq_osce' => $data['is_eligible_mcq_osce'],
                 'is_eligible_att' => $data['is_eligible_att'],
                 'is_eligible_letter_ahpra' => $data['is_eligible_letter_ahpra'],
@@ -139,17 +138,18 @@ class EnrolmentController extends Controller
                 'first_name' => $data['first_name'],
                 'last_name' => $data['last_name'],
                 'street1' => $data['street1'],
-                'street2' => $data['Suburb'],
+                'street2' => $data['suburb'],
                 'city' => $data['city'],
                 'state' => $data['state'],
-                'postalcode' => $data['Post_Code'],
+                'postalcode' => $data['postalcode'],
                 'agents' => $data['agents'],
                 'country' => $data['country'],
                 'email' => $data['email'],
                 'phone' => $data['phone'],
                 'intake_date' => $data['intake_date'],
                 'payment_status' => 0,
-                'payment_type' => $data['payment_type'],
+                'payment_type' => 0,
+                'status' => 'Pending',
             );
 
             if ($request->hasFile('eligible_document')) {
@@ -240,7 +240,7 @@ class EnrolmentController extends Controller
         return redirect(route('student-dashboard'));
     }
 
-    public function redirect($id)
+    public function redirect($id) 
     {
         $id = (int) $id;
         $enrolpayment_info = $this->enrolpayment->with('enrolmentinfo')->where('enrolment_id', $id)->first();
