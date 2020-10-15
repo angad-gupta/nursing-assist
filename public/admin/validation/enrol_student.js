@@ -1,10 +1,6 @@
 $(document).ready(function () {
     $("#enrol_student_submit").validate({
         rules: {
-            eligible_rd: "required",
-            eligible_document: "required",
-            rd: "required",
-            identity_document: "required",
             title: "required",
             first_name: "required",
             last_name: "required",
@@ -17,14 +13,10 @@ $(document).ready(function () {
             phone: "required",
             agents: "required",
             email: "required",
-            course_info_id: "required",
+            course_info_id: "required", 
             intake_date: "required"
         },
         messages: {
-            eligible_rd: "Please Select Eligibility",
-            eligible_document: "Upload Eligibility Document",
-            rd: "Please  Select Identity",
-            identity_document: "Upload Identity Document",
             title: "Please  Enter Title",
             first_name: "Please  Enter First Name",
             last_name: "Please  Enter Last Name",

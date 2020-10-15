@@ -89,13 +89,13 @@
                         <div class="row">
                             <div class="col-md-6"> 
                                 <div class="form-group row">
-                                    <label class="col-form-label col-lg-4">Select Eligibility:<span class="text-danger">*</span></label>
+                                    <label class="col-form-label col-lg-4">Select Eligibility:</label>
                                         <div class="col-lg-8">
                                            <div class="input-group">
                                             <span class="input-group-prepend">
                                                 <span class="input-group-text"><i class="icon-toggle"></i></span>
                                             </span>
-                                               {!! Form::select('eligible_rd',[ 'is_eligible_mcq_osce'=>'I have done self-check through AHPRA that indicates MCQ and OSCE ','is_eligible_att'=>'I hold an Authority to Take (ATT) notification from AHPRA ','is_eligible_letter_ahpra'=>'I have a letter from AHPRA referring me to the OBA '], $value = null, ['placeholder'=>'Select Eligibility','id'=>'eligible_rd','class'=>'form-control','required' ]) !!}   
+                                               {!! Form::select('eligible_rd',[ 'is_eligible_mcq_osce'=>'I have done self-check through AHPRA that indicates MCQ and OSCE ','is_eligible_att'=>'I hold an Authority to Take (ATT) notification from AHPRA ','is_eligible_letter_ahpra'=>'I have a letter from AHPRA referring me to the OBA '], $value = null, ['placeholder'=>'Select Eligibility','id'=>'eligible_rd','class'=>'form-control' ]) !!}   
                                             </div>
                                         </div>
                                 </div>
@@ -103,13 +103,13 @@
 
                               <div class="col-lg-6">
                                 <div class="row">
-                                    <label class="col-form-label col-lg-4">Eligibility Document:<span class="text-danger">*</span></label>
+                                    <label class="col-form-label col-lg-4">Eligibility Document:</label>
                                         <div class="col-lg-8 form-group-feedback form-group-feedback-right">
                                             <div class="input-group">
                                             <span class="input-group-prepend">
                                                 <span class="input-group-text"><i class="icon-book3"></i></span>
                                             </span>
-                                            {!! Form::file('eligible_document', ['id'=>'eligible_document','class'=>'form-control','required']) !!}
+                                            {!! Form::file('eligible_document', ['id'=>'eligible_document','class'=>'form-control']) !!}
                                             </div>
                                         </div>
                                 </div>
@@ -119,13 +119,13 @@
                         <div class="row">
                             <div class="col-md-6"> 
                                 <div class="form-group row">
-                                    <label class="col-form-label col-lg-4">Select Identity:<span class="text-danger">*</span></label>
+                                    <label class="col-form-label col-lg-4">Select Identity:</label>
                                         <div class="col-lg-8">
                                            <div class="input-group">
                                             <span class="input-group-prepend">
                                                 <span class="input-group-text"><i class="icon-toggle"></i></span>
                                             </span>
-                                               {!! Form::select('rd',[ 'is_id'=>'I have provided a copy of valid ID'], $value = null, ['placeholder'=>'Select Identity','id'=>'rd','class'=>'form-control','required' ]) !!}   
+                                               {!! Form::select('rd',[ 'is_id'=>'I have provided a copy of valid ID'], $value = null, ['placeholder'=>'Select Identity','id'=>'rd','class'=>'form-control' ]) !!}   
                                             </div>
                                         </div>
                                 </div>
@@ -133,13 +133,13 @@
 
                               <div class="col-lg-6">
                                 <div class="row">
-                                    <label class="col-form-label col-lg-4">Identity Document:<span class="text-danger">*</span></label>
+                                    <label class="col-form-label col-lg-4">Identity Document:</label>
                                         <div class="col-lg-8 form-group-feedback form-group-feedback-right">
                                             <div class="input-group">
                                             <span class="input-group-prepend">
                                                 <span class="input-group-text"><i class="icon-book3"></i></span>
                                             </span>
-                                            {!! Form::file('identity_document', ['id'=>'identity_document','class'=>'form-control','required']) !!}
+                                            {!! Form::file('identity_document', ['id'=>'identity_document','class'=>'form-control']) !!}
                                             </div>
                                         </div>
                                 </div>

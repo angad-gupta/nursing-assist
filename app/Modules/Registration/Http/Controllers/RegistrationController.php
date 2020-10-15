@@ -76,6 +76,10 @@ class RegistrationController extends Controller
             $data['is_eligible_mcq_osce'] = 0;
             $data['is_eligible_att'] = 0;
             $data['is_eligible_letter_ahpra'] = 1;
+        }else{
+            $data['is_eligible_mcq_osce'] = 0;
+            $data['is_eligible_att'] = 0;
+            $data['is_eligible_letter_ahpra'] = 0;    
         }
 
         $data['is_id'] = 1;
