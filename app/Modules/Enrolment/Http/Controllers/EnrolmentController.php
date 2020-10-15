@@ -126,7 +126,7 @@ class EnrolmentController extends Controller
             if(!is_null($enrollment_check)){  
                 return $enrollment_check->id;
             }
-
+dd($data);
             $enrolmentData = array(
                 'student_id' => $student_id,
                 'courseinfo_id' => $data['course_info_id'],
@@ -151,7 +151,7 @@ class EnrolmentController extends Controller
                 'payment_type' => 0,
                 'status' => 'Pending',
             );
-dd($enrolmentData);
+
             if ($request->hasFile('eligible_document')) {
                 $enrolmentData['eligible_document'] = $this->enrolment->upload($data['eligible_document']);
             }
