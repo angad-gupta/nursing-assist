@@ -122,7 +122,7 @@ class HomeController extends Controller
     public function storeContact(Request $request)
     {
         $data = $request->all();
-
+        dd($data);
         try {
 
             $this->contactus->save($data);
