@@ -98,7 +98,7 @@ class EnrolmentController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->all();
+        $data = $request->all();  dd($data);
 
         if ($data['eligible_rd'] == 'is_eligible_mcq_osce') {
             $data['is_eligible_mcq_osce'] = 1;
@@ -151,7 +151,7 @@ class EnrolmentController extends Controller
                 'payment_type' => 0,
                 'status' => 'Pending',
             );
-dd($enrolmentData);
+
             if ($request->hasFile('eligible_document')) {
                 $enrolmentData['eligible_document'] = $this->enrolment->upload($data['eligible_document']);
             }
