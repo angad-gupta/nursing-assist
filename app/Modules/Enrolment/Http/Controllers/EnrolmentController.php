@@ -98,7 +98,7 @@ class EnrolmentController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->all();  dd($data);
+        $data = $request->all(); 
 
         if ($data['eligible_rd'] == 'is_eligible_mcq_osce') {
             $data['is_eligible_mcq_osce'] = 1;
@@ -121,11 +121,11 @@ class EnrolmentController extends Controller
 
             $courseinfo_id = $data['courseinfo_id'];  
 
-            $enrollment_check = $this->enrolment->getEnrollmentById($student_id,$courseinfo_id); 
+            // $enrollment_check = $this->enrolment->getEnrollmentById($student_id,$courseinfo_id);  dd($enrollment_check);
 
-            if(!is_null($enrollment_check)){  
-                return $enrollment_check->id;
-            }
+            // if(!is_null($enrollment_check)){  
+            //     return $enrollment_check->id;
+            // }
 
             $enrolmentData = array(
                 'student_id' => $student_id,
