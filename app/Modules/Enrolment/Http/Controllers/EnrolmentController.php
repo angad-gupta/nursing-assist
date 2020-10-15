@@ -151,7 +151,7 @@ class EnrolmentController extends Controller
                 'payment_type' => 0,
                 'status' => 'Pending',
             );
-
+dd($enrolmentData);
             if ($request->hasFile('eligible_document')) {
                 $enrolmentData['eligible_document'] = $this->enrolment->upload($data['eligible_document']);
             }
