@@ -7,26 +7,6 @@
 <script type="text/javascript" src="https://www.simplify.com/commerce/v1/simplify.js"></script>
 
 <script type="text/javascript">
-    var GLOBAL_NAMESPACE = {};
-
-$(document).ready(function(){
-  GLOBAL_NAMESPACE.value_changed = true;
-});
-
-$('a').bind('click',function (e) {
-    e.preventDefault();
-    if (GLOBAL_NAMESPACE.value_changed){
-        var res = confirm('You have unsaved changes. Do you want to continue?');
-        if(res){
-            window.location.href = $(this).attr('href');
-        }else{
-            console.log('stay on same page...');
-        }
-    }
-});
-</script>
-
-<script type="text/javascript">
    
     $(document).ready(function() {
         $("#process-payment-btn").on("click", function() {
