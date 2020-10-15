@@ -126,10 +126,10 @@ class EnrolmentController extends Controller
             if(!is_null($enrollment_check)){  
                 return $enrollment_check->id;
             }
-dd($data);
+
             $enrolmentData = array(
                 'student_id' => $student_id,
-                'courseinfo_id' => $data['course_info_id'],
+                'courseinfo_id' => $data['courseinfo_id'],
                 'is_eligible_mcq_osce' => $data['is_eligible_mcq_osce'],
                 'is_eligible_att' => $data['is_eligible_att'],
                 'is_eligible_letter_ahpra' => $data['is_eligible_letter_ahpra'],
@@ -138,10 +138,10 @@ dd($data);
                 'first_name' => $data['first_name'],
                 'last_name' => $data['last_name'],
                 'street1' => $data['street1'],
-                'street2' => $data['suburb'],
+                'street2' => $data['Suburb'],
                 'city' => $data['city'],
                 'state' => $data['state'],
-                'postalcode' => $data['postalcode'],
+                'postalcode' => $data['Post_Code'],
                 'agents' => $data['agents'],
                 'country' => $data['country'],
                 'email' => $data['email'],
