@@ -121,7 +121,7 @@ class EnrolmentController extends Controller
 
             $courseinfo_id = $data['courseinfo_id'];  
 
-            $enrollment_check = $this->enrolment->getEnrollmentById($student_id,$courseinfo_id);  dd($enrollment_check);
+            $enrollment_check = $this->enrolment->getEnrollmentById($student_id,$courseinfo_id);  
 
             if(!is_null($enrollment_check)){  
                 return $enrollment_check->id;
@@ -160,6 +160,7 @@ class EnrolmentController extends Controller
                 $enrolmentData['identity_document'] = $this->enrolment->upload($data['identity_document']);
             }
 
+dd($enrolmentData);
             $enrolment = $this->enrolment->save($enrolmentData);
             $enrolment_id = $enrolment->id;
 
