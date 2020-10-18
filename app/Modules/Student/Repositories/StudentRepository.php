@@ -9,6 +9,7 @@ use App\Modules\Student\Entities\StudentPayment;
 use App\Modules\Student\Entities\StudentQuizHistory;
 use App\Modules\Student\Entities\StudentQuizResult;
 use App\Modules\Student\Entities\StudentPracticeResult;
+use App\Modules\Student\Entities\StudentPaymentHistory;
 use DB;
 
 class StudentRepository implements StudentInterface
@@ -287,4 +288,17 @@ class StudentRepository implements StudentInterface
 
         return $result;
     }
+
+    public function storePaymentHistory($data){  
+        return StudentPaymentHistory::create($data);
+    }
+
+    public function findPaymentHistory($payment_id){  
+        return StudentPaymentHistory::where('student_payment_id','=',$payment_id)->get();
+    }
+
+    public function findStudentPayment($payment_id){  
+        return StudentPayment::find($payment_id);
+    }
+
 }

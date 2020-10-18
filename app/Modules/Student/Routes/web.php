@@ -36,5 +36,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'permission']], func
 
     Route::get('student/profile', ['as' => 'student.profile', 'uses' => 'StudentController@profile']);
 
+    Route::get('student/viewPaymentHistory', ['as' => 'student.viewPaymentHistory', 'uses' => 'StudentController@viewPaymentHistory']);
 
 });

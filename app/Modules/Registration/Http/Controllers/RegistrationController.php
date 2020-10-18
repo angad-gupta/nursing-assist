@@ -125,6 +125,19 @@ class RegistrationController extends Controller
             }
 
             $enrolment = $this->enrolment->save($enrolmentData);
+
+            $full_name = $data['first_name'] .' '.$data['last_name'];
+           
+            $studentData = array(
+                    'email' => $data['email'],
+                    'full_name' => $full_name,
+                    'phone_no' => $data['phone'],
+                    'street_name' => $data['street1'],
+                    'suburb' => $data['suburb'],
+                    'postalcode' => $data['postalcode'],
+                    'state' => $data['state']
+            );
+            $this->student->update($student_id, $studentData);
             
              alertify()->success('Registered Student Moved To Enrolment Successfully');
 

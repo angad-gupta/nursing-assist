@@ -62,4 +62,12 @@ interface StudentInterface
     public function getQuizForCourseInfo($student_id, $courseContentId);
 
     public function getAllHistories($student_id, $limit = null, $filter = []);
+
+
+    public function storePaymentHistory($data);
+
+    public function findPaymentHistory($payment_id);
+    public function findStudentPayment($payment_id);
+
+    
 }

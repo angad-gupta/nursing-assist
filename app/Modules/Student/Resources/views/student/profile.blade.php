@@ -50,11 +50,11 @@
            </figure>
        </div>
 
-       <div class="card-body text-center">
-        <h6 class="font-weight-semibold mb-0">{{ $studentInfo->full_name }}</h6>
+       <div class="card-body text-center mt-4">
+        <h6 class="font-weight-semibold mb-1">{{ $studentInfo->full_name }}</h6>
         <span class="d-block text-muted">{{ $studentInfo->email }}</span>
 
-        <ul class="list-inline list-inline-condensed mt-3 mb-0" style="width: 371px;margin-left: -19px;">
+<!--         <ul class="list-inline list-inline-condensed mt-3 mb-0" style="width: 371px;margin-left: -19px;">
             
             <li class="list-inline-item">
                <a data-toggle="modal" data-target="#modal_vehicle_insurance" class="btn bg-warning text-warning-400 btn-icon rounded-round ml-2" title="My Courses"><i class="text-light-400 icon-package"></i></a>
@@ -85,7 +85,7 @@
                <br>
                <span class="text-purple ml-2">Practise</span>
             </li>
-    </ul>
+    </ul> -->
 </div>
 
 
@@ -260,6 +260,8 @@
                                                     <td>${{ $value->amount_left }}</td>
                                                     <td>{{ date('d M, Y',strtotime($value->created_at)) }}</td>
                                                     <td>
+                                                        <a data-toggle="modal" data-target="#modal_theme_view_info" class="btn bg-primary-400 btn-icon rounded-round view_detail" student_payment_id="{{$value->id}}" data-popup="tooltip" data-original-title="View Payment History Detail" data-placement="bottom"><i class="icon-history"></i></a>
+
                                                         @php
                                                         $modal = 'modal';
                                                         @endphp
@@ -504,6 +506,29 @@
 
 
 <!-- Warning modal -->
+<div id="modal_theme_view_info" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-teal">
+                <h6 class="modal-title">View Student Purchase History Detail</h6>
+            </div>
+
+            <div class="modal-body">
+                <div class="table-responsive result_view_recommend_detail">
+
+                </div><!-- table-responsive -->
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn bg-teal-400" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- warning modal -->
+
+
+<!-- Warning modal -->
 <div id="modal_theme_warning" class="modal fade" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -617,6 +642,24 @@
 
 <script type="text/javascript">
     $('document').ready(function () {
+
+        $('.view_detail').on('click', function () {
+            var student_payment_id = $(this).attr('student_payment_id');
+
+            $.ajax({
+                type: 'GET',
+                url: '/admin/student/viewPaymentHistory',
+                data: {
+                    student_payment_id: student_payment_id
+                },
+
+                success: function (data) {
+                    $('.result_view_recommend_detail').html(data.options);
+                }
+            });
+
+        });
+        
         $('.delete_student').on('click', function () {
             var link = $(this).attr('link');
             $('.get_link').attr('href', link);

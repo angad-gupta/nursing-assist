@@ -259,10 +259,21 @@ class StudentController extends Controller
 
             $status = ($amt_remaining == 0) ? 'Paid' : 'Partially Paid';
 
+            /*Student Payment History*/
+                $history = array(
+                    'student_payment_id' => $payment_id,
+                    'amount_paid' => $amount_paid,
+                    'date' => date('Y-m-d')
+                );
+
+                $this->student->storePaymentHistory($history);
+            /*End of Student Payment History*/
+
+
             $payment_data = array(
 
                 'amount_paid' => $amountPaid,
-                'amount_left' => $amt_remaining,
+                'amount_left' => $amt_remaining, 
                 'status' => $status,
             );
 
@@ -362,4 +373,17 @@ class StudentController extends Controller
         return view('student::student.profile',$data);
 
     }
+
+    public function viewPaymentHistory(Request $request){
+
+        $data = $request->all();
+        $id = $data['student_payment_id'];
+        $paymentInfo  = $this->student->findStudentPayment($id); 
+        $historyDetail = $this->student->findPaymentHistory($id);
+        $data = view('student::student.view-payment-history-detail', compact('historyDetail','paymentInfo'))->render();
+        return response()->json(['options' => $data]);
+
+    }
+
+
 }
