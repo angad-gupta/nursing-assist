@@ -180,8 +180,21 @@
 <script type="text/javascript">
     $(document).ready(function () {
         Clock.start();
-        $('#pause_btn').click(function () { Clock.pause(); });
-        $('#resume_btn').click(function () { Clock.resume(); });
+        $('#pause_btn').click(function () { 
+            Clock.pause();
+            $('.enrol-cpd').hide();
+            });
+        $('#resume_btn').click(function () { 
+              var r = confirm("Are you Sure Want To Resume ?");
+              if (r == true) {
+                $('.enrol-cpd').show();
+                Clock.resume();
+              } else {
+                Clock.pause();
+                $('.enrol-cpd').hide();
+              }
+             
+         });
 
         $('.mockup_submit').on('click', function () {
             $('#loaderImg').show();
@@ -296,23 +309,4 @@
         }
     };
 
-</script>
-<script type="text/javascript">
-    var GLOBAL_NAMESPACE = {};
-
-$(document).ready(function(){
-  GLOBAL_NAMESPACE.value_changed = true;
-});
-
-$('a').bind('click',function (e) {
-    e.preventDefault();
-    if (GLOBAL_NAMESPACE.value_changed){
-        var res = confirm('You have unsaved changes. Do you want to continue?');
-        if(res){
-            window.location.href = $(this).attr('href');
-        }else{
-            console.log('stay on same page...');
-        }
-    }
-});
 </script>
