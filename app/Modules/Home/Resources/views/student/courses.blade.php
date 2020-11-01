@@ -234,7 +234,7 @@
                                                 </div>
                                                 <div class="col-sm-12 col-md-4">
                                                     <div class="downloads"> 
-                                                        <a target="_blank" href="{{asset($value->file_full_path).'/'.$value->source_name}}" ><i class="fa fa-download"></i> Download</a>
+                                                        <a target="_blank" href="{{asset($value->file_full_path).'/'.$value->source_name}}" ><i class="fa fa-eye"></i> View</a>
                                                     </div>
                                                 </div>
                                             </div>
