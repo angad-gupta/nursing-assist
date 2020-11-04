@@ -40,7 +40,7 @@
             @endif
 
             <div class="col-sm-12" id="practice_questions">
-                <h6 class="p-0 mb-0"> <label id="question_number">1</label> out of {{$readinessInfo->count()}}  <p id="time"></p></h6>
+                <h6 class="p-0 mb-0"> <label id="question_number">1</label> out of {{$readinessInfo->count()}}  <p id="time">{{ $time }}</p></h6>
                
                     {!! Form::open(['route'=>'readline-question.store','method'=>'POST','id'=>'studentmockup_submit','class'=>'form-horizontal','role'=>'form']) !!}
 
@@ -219,6 +219,7 @@
             var index = qkey - 1;
             var title = '{{$readiness_title}}';
             var read_result_id = $('.readiness_result_id').val();
+            var time = $('#time').html(); 
             var question_id = $('.question_id').eq(index).val();
             var question_type = $('.question_type').eq(index).val();
   
@@ -236,7 +237,7 @@
             $.ajax({
                 type: 'POST',
                 url: '{{route("readline-question.ajaxStore")}}',
-                data: { title: title, question_id: question_id, answers: ans_array, qkey: qkey, read_result_id:read_result_id, _token: token },
+                data: { title: title, question_id: question_id, answers: ans_array, qkey: qkey, read_result_id:read_result_id,time:time, _token: token },
                 success: function (res) {
                     if(res == 0) {
                         alert('Please provide answer');
@@ -259,18 +260,20 @@
     });
 
     var Clock = {
-        totalSeconds: 0,
 
         start: function () {
-            var self = this;
+            var self = $('#time').html(); 
+            var time = self.split(":");
+             //alert(time[2]);
+             secondCount = time[2]; 
 
             this.interval = setInterval(function () {
-                self.totalSeconds += 1;
+                self.secondCount += 1;
 
                 // Time calculations for days, hours, minutes and seconds
-                var hours = Math.floor(self.totalSeconds / 3600);
-                var minutes = Math.floor(self.totalSeconds / 60 % 60);
-                var seconds = Math.floor(self.totalSeconds % 60);
+                var hours = time[0]; //Math.floor(self.secondCount / 3600);
+                var minutes = time[1]; //Math.floor(self.secondCount / 60 % 60);
+                var seconds = time[2]; //Math.floor(self.secondCount % 60);
                 document.getElementById("time").innerHTML = hours + ":"+ minutes + ":" + seconds;
 
             }, 1000);
