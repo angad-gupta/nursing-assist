@@ -257,23 +257,26 @@
             })
         });
 
+
     });
 
-    var Clock = {
 
+    var actual_time = $('#time').html(); 
+    var rtime = actual_time.split(":");
+    var secondssss = (+rtime[0]) * 60 * 60 + (+rtime[1]) * 60 + (+rtime[2]); 
+
+    var Clock = {
+        totalSeconds: parseInt(secondssss),
         start: function () {
-            var self = $('#time').html(); 
-            var time = self.split(":");
-             //alert(time[2]);
-             secondCount = time[2]; 
+            var self = this;
 
             this.interval = setInterval(function () {
-                self.secondCount += 1;
+                self.totalSeconds += 1;
 
                 // Time calculations for days, hours, minutes and seconds
-                var hours = time[0]; //Math.floor(self.secondCount / 3600);
-                var minutes = time[1]; //Math.floor(self.secondCount / 60 % 60);
-                var seconds = time[2]; //Math.floor(self.secondCount % 60);
+                var hours = Math.floor(self.totalSeconds / 3600);
+                var minutes = Math.floor(self.totalSeconds / 60 % 60);
+                var seconds = Math.floor(self.totalSeconds % 60);
                 document.getElementById("time").innerHTML = hours + ":"+ minutes + ":" + seconds;
 
             }, 1000);
