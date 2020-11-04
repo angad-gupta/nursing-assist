@@ -701,7 +701,7 @@ class DashboardController extends Controller
         $input = $request->all();  
         $title = $input['title'];
         $qkey = $input['qkey'];
-        $read_result_id = $input['read_result_id'];   
+        $read_result_id = (array_key_exists('read_result_id',$input)) ? $input['read_result_id'] : null;   
         $question_id = $input['question_id'];
         // unset($input['readiness_result_id']);
         $answers = [];
