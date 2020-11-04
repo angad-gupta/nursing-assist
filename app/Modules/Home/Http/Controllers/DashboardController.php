@@ -485,7 +485,7 @@ class DashboardController extends Controller
 
             $readlinessAttemptHistory = $this->studentReadiness->getAttemptedQuestion($resultId);
 
-            $qnos = sizeof($readlinessAttemptHistory) + 1;
+            $qnos = sizeof($readlinessAttemptHistory);
 
             $question = array();
             foreach ($readlinessAttemptHistory as $key => $value) {
