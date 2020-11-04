@@ -482,6 +482,7 @@ class DashboardController extends Controller
 
             //Test Is Not Completed
             $resultId = $readliness_history['id'];
+            $time =date('H:i:s',strtotime($readliness_history['start_time']));
 
             $readlinessAttemptHistory = $this->studentReadiness->getAttemptedQuestion($resultId);
 
@@ -499,6 +500,7 @@ class DashboardController extends Controller
 
         }else{
             $qnos = 1;
+            $time = '0:0:0';
             $is_new = FALSE;
             $result_id = '';
             $readinessInfo = $this->readiness->getQuestionByTitle($readiness_title, 250);
@@ -507,6 +509,7 @@ class DashboardController extends Controller
 
         if (sizeof($readinessInfo) > 0) {
             $data['qnos'] = $qnos;
+            $data['time'] = $time;
             $data['is_new'] = $is_new;
             $data['result_id'] = $result_id;
             $data['readinessInfo'] = $readinessInfo;
@@ -698,9 +701,10 @@ class DashboardController extends Controller
     public function ajaxReadinessStore(Request $request)
     {
 
-        $input = $request->all();  
+        $input = $request->all();   
         $title = $input['title'];
         $qkey = $input['qkey'];
+        $time = $input['time'];
         $read_result_id = (array_key_exists('read_result_id',$input)) ? $input['read_result_id'] : null;   
         $question_id = $input['question_id'];
         // unset($input['readiness_result_id']);
@@ -722,8 +726,8 @@ class DashboardController extends Controller
                         'student_id' => $student_id,
                         'title' => $title,
                         'date' => date('Y-m-d'),
+                        'start_time' => date('Y-m-d H:i:s',strtotime($time))
                     );
-
                     $resultInfo = $this->studentReadiness->save($readiness_result);
                     $result_id = $resultInfo->id;
                 } else {
@@ -733,8 +737,9 @@ class DashboardController extends Controller
                             'student_id' => $student_id,
                             'title' => $title,
                             'date' => date('Y-m-d'),
+                            'start_time' => date('Y-m-d H:i:s',strtotime($time))
                         );
-     
+
                         $resultInfo = $this->studentReadiness->save($readiness_result);
                         $result_id = $resultInfo->id;
                     } else {
@@ -743,6 +748,12 @@ class DashboardController extends Controller
                 }
             }else{
                 $result_id = $read_result_id;
+                
+                 $readinessData = array(
+                            'start_time' => date('Y-m-d H:i:s',strtotime($time))
+                        );
+     
+                $this->studentReadiness->update($result_id,$readinessData);
             }
           
             $readiness_question = $this->readiness->find($question_id);  
