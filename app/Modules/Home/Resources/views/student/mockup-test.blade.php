@@ -180,8 +180,21 @@
 <script type="text/javascript">
     $(document).ready(function () {
         Clock.start();
-        $('#pause_btn').click(function () { Clock.pause(); });
-        $('#resume_btn').click(function () { Clock.resume(); });
+        $('#pause_btn').click(function () { 
+            Clock.pause();
+            $('.enrol-cpd').hide();
+            });
+        $('#resume_btn').click(function () { 
+              var r = confirm("Are you Sure Want To Resume ?");
+              if (r == true) {
+                $('.enrol-cpd').show();
+                Clock.resume();
+              } else {
+                Clock.pause();
+                $('.enrol-cpd').hide();
+              }
+             
+         });
 
         $('.mockup_submit').on('click', function () {
             $('#loaderImg').show();

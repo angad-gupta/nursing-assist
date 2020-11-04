@@ -20,5 +20,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','permission']], funct
 
     Route::get('registration/delete/{id}', ['as' => 'registration.delete', 'uses' => 'RegistrationController@destroy'])->where('id', '[0-9]+');
 
+    Route::post('registration/storeEnrollment', ['as' => 'registration.storeEnrollment', 'uses' => 'RegistrationController@storeEnrollment']);
+
          
 });

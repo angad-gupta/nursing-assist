@@ -9,6 +9,7 @@ use App\Modules\Student\Entities\StudentPayment;
 use App\Modules\Student\Entities\StudentQuizHistory;
 use App\Modules\Student\Entities\StudentQuizResult;
 use App\Modules\Student\Entities\StudentPracticeResult;
+use App\Modules\Student\Entities\StudentPaymentHistory;
 use DB;
 
 class StudentRepository implements StudentInterface
@@ -120,7 +121,7 @@ class StudentRepository implements StudentInterface
 
         $result = StudentCourse::when(array_keys($filter, true), function ($query) use ($filter) {
 
-        })->where('student_id', '=', $student_id)->orderBy('id', $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+        })->where('student_id', '=', $student_id)->orderBy('id', $sort['sort'])->distinct('courseinfo_id')->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
 
         return $result;
     }
@@ -287,4 +288,17 @@ class StudentRepository implements StudentInterface
 
         return $result;
     }
+
+    public function storePaymentHistory($data){  
+        return StudentPaymentHistory::create($data);
+    }
+
+    public function findPaymentHistory($payment_id){  
+        return StudentPaymentHistory::where('student_payment_id','=',$payment_id)->get();
+    }
+
+    public function findStudentPayment($payment_id){  
+        return StudentPayment::find($payment_id);
+    }
+
 }

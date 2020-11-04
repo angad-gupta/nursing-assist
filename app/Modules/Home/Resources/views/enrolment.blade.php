@@ -5,6 +5,27 @@
 @section('scripts')
 <script src="{{asset('js/validation.js')}}"></script>
 <script type="text/javascript" src="https://www.simplify.com/commerce/v1/simplify.js"></script>
+
+<script type="text/javascript">
+    var GLOBAL_NAMESPACE = {};
+
+$(document).ready(function(){
+  GLOBAL_NAMESPACE.value_changed = true;
+});
+
+$('a').bind('click',function (e) {
+    e.preventDefault();
+    if (GLOBAL_NAMESPACE.value_changed){
+        var res = confirm('You have unsaved changes. Do you want to continue?');
+        if(res){
+            window.location.href = $(this).attr('href');
+        }else{
+            console.log('stay on same page...');
+        }
+    }
+});
+</script>
+
 <script type="text/javascript">
    
     $(document).ready(function() {
@@ -359,6 +380,13 @@
     $(document).ready(function() {
         $('#detail_form').click(function () {
 
+            var agent_id = $('#agent').val();
+            if(agent_id == 0){
+                $('#paylater-btn').hide();
+            }else{
+                $('#paylater-btn').show();
+            }
+
            if(validateUserInput()) {
             var form = $('form')[0];
                var formData = new FormData(form);
@@ -391,7 +419,6 @@
             }
              
         });
- 
  
         $('#payment_type').on('change', function() {
             var payment_type = $(this).val();
@@ -562,7 +589,7 @@
                                                                 <label for="">First Name<span>*</span></label>
                                                                 <input type="text" name="first_name"
                                                                     placeholder="First Name" class="form-control"
-                                                                    id="first_name">
+                                                                    id="first_name" value="{{ $first_name }}">
                                                                 <span class="text-danger fname_error"></span>
                                                             </div>
                                                         </div>
@@ -571,7 +598,7 @@
                                                                 <label for="">Last Name <span>*</span></label>
                                                                 <input type="text" name="last_name"
                                                                     placeholder="Last Name" class="form-control"
-                                                                    id="last_name">
+                                                                    id="last_name" value="{{ $last_name }}">
                                                                 <span class="text-danger lname_error"></span>
                                                             </div>
                                                         </div>
@@ -579,7 +606,7 @@
                                                             <div class="form-group">
                                                                 <label for="">Street 1<span>*</span></label>
                                                                 <input type="text" name="street1" placeholder="Street 1"
-                                                                    class="form-control" id="street">
+                                                                    class="form-control" id="street" value="{{ ($users) ? $users['street_name'] : '' }}">
                                                                 <span class="text-danger street_error"></span>
                                                             </div>
                                                         </div>
@@ -587,7 +614,7 @@
                                                             <div class="form-group">
                                                                 <label for="">Suburb<span>*</span></label>
                                                                 <input type="text" name="Suburb" placeholder="Suburb"
-                                                                    class="form-control" id="suburb">
+                                                                    class="form-control" id="suburb" value="{{ ($users) ? $users['suburb'] : '' }}">
                                                                 <span class="text-danger suburb_error"></span>
                                                             </div>
                                                         </div>
@@ -603,7 +630,7 @@
                                                             <div class="form-group">
                                                                 <label for="">State<span>*</span></label>
                                                                 <input type="text" name="state" placeholder="State"
-                                                                    class="form-control" id="state">
+                                                                    class="form-control" id="state" value="{{ ($users) ? $users['state'] : '' }}">
                                                                 <span class="text-danger state_error"></span>
                                                             </div>
                                                         </div>
@@ -612,7 +639,7 @@
                                                                 <label for="">Post Code <span>*</span></label>
                                                                 <input type="text" name="Post Code"
                                                                     placeholder="Post Code" class="form-control numeric"
-                                                                    id="post_code">
+                                                                    id="post_code" value="{{ ($users) ? $users['postalcode'] : '' }}">
                                                                 <span class="text-danger postcode_error"></span>
                                                             </div>
                                                         </div>
@@ -658,7 +685,7 @@
                                                             <div class="form-group">
                                                                 <label for="">Email <span>*</span></label>
                                                                 <input type="email" name="email" placeholder="Email"
-                                                                    class="form-control" id="email" required>
+                                                                    class="form-control" id="email" required value="{{ ($users) ? $users['email'] : '' }}">
                                                                 <span class="text-danger email_error"></span>
                                                             </div>
                                                         </div>
@@ -667,7 +694,7 @@
                                                                 <label for="">Contact Number <span>*</span></label>
                                                                 <input type="texts" name="phone"
                                                                     placeholder="Contact Number" class="form-control"
-                                                                    id="phone" pattern=".{10,}"   required title="10 characters minimum">
+                                                                    id="phone" pattern=".{10,}"   required title="10 characters minimum" value="{{ ($users) ? $users['phone_no'] : '' }}">
                                                                 <span class="text-danger phone_error"></span>
                                                             </div>
                                                         </div>
@@ -675,7 +702,7 @@
                                                         <div class="col-sm-12 d-flex enrol-cbx">
                                                             <input type="checkbox" id="term_conditions_agree"
                                                                 required="required">
-                                                            <p>I have read and understood the <a href="{{ route('term-condition')}}">Terms & Conditions</a>, <a href="{{ route('privacy-policy')}}">Privacy Policy</a> and <a href="{{ route('user-agreement')}}">User Agreement of NETA</a></p>
+                                                            <p>I have read and understood the <a target="_blank" href="{{ route('term-condition')}}">Terms & Conditions</a>, <a target="_blank" href="{{ route('privacy-policy')}}">Privacy Policy</a> and <a target="_blank" href="{{ route('user-agreement')}}">User Agreement of NETA</a></p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -837,7 +864,7 @@
                                                     <div class="row justify-content-center">
                                                         <div class="payment-method">
                                                             <h5>Payment Method</h5>
-                                                            <img src="{{ asset('home/img/eway.png') }}" width="100px"
+                                                            <img src="{{ asset('home/img/cwb.jpg') }}" width="100px"
                                                                 alt="">
                                                             <img src="{{ asset('home/img/visaa.png') }}" width="80px"
                                                                 alt="">
@@ -849,8 +876,9 @@
 
                                                         <button class="btn action-button" name="submit_enrol"
                                                             value="payment" id="process-payment-btn">Make Payment</button>
+
                                                         <button class="btn action-button" name="submit_enrol"
-                                                            value="pay_later" id="paylater-btn">Pay to Agent</button>
+                                                            value="pay_later" id="paylater-btn" style="display:none;">Pay to Agent</button>
                                                     </div>
 
                                                     <div class="col-sm-12 neta-about row justify-content-center">

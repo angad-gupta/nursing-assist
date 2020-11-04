@@ -20,17 +20,24 @@
     </div>
 </section>
 
+@php
+    use Illuminate\Support\Facades\Auth;
+@endphp
+
 <section class="neta-about student-hub section-padding">
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
                 @include('flash::message')
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
-                            aria-controls="home" aria-selected="true">My Courses</a>
-                    </li>
+                    
                     @if(sizeof($student_course)>0)
+
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                                aria-controls="home" aria-selected="true">My Courses</a>
+                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link" id="resources-tab" data-toggle="tab" href="#resources" role="tab"
                                 aria-controls="resources" aria-selected="false">Resources</a>
@@ -51,18 +58,28 @@
                             <a class="nav-link" id="history-tab" data-toggle="tab" href="#history" role="tab"
                                 aria-controls="history" aria-selected="false">Test History</a>
                         </li>
-                    @endif
-                    <li class="nav-item">
-                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
+                        <li class="nav-item">
+                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
                             aria-controls="contact" aria-selected="false">Other Courses</a>
-                    </li>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                        <a class="nav-link active" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
+                            aria-controls="contact" aria-selected="false">Available Courses</a>
+                        </li>
+                    @endif
+                    
                 </ul>
 
+
                 <div class="tab-content" id="myTabContent">
+
+                     @if(sizeof($student_course)>0)
+
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <div class="my-courses">
                             <div class="row">
-                                @if($student_course)
+                                 @if(sizeof($student_course)>0)
                                     @foreach($student_course as $key => $my_course_val)
 
                                         @php
@@ -95,6 +112,16 @@
                                         </div>
 
                                     @endforeach
+                                    @else
+
+                                    <div class="col-12">
+                                            <div class="my-courses__list">
+                                                <div class="list-content">
+                                                    <h5>There is no any Course you have Enroll. Please View <b data-popup="tooltip" title="Click on Next Tab Above." data-placement="top">Available Courses</b> and Enroll.</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                 @endif
 
                             </div>
@@ -159,7 +186,6 @@
                         </div>
                     </div>
 
-
                     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                         <div class="my-courses">
                             <div class="row">
@@ -171,8 +197,9 @@
                                         $k = $key+1;
                                         $imgfluid = asset('home/img/c' .$k. '.png');
 
-                                        $total_syllabus =
-                                        App\Modules\CourseContent\Entities\CourseContent::gettotalsyllabus($course_val->id);
+                                        $total_syllabus = App\Modules\CourseContent\Entities\CourseContent::gettotalsyllabus($course_val->id);
+
+                                        $my_courses_check = App\Modules\Student\Entities\StudentCourse::checkStudentCourses($student_id,$course_val->id);
                                         @endphp
 
                                         <div class="col-sm-6 col-md-4 col-lg-3">
@@ -182,8 +209,12 @@
                                                     <h5>{{ $course_val->course_program_title }}</h5>
                                                     <span>{{$total_syllabus}} syllabus</span>
                                                     <p>{!! optional($course_val->courseInfo)->short_content !!} </p>
-                                                    <a class="btn e-btn w-100"
-                                                        href="{{ route('enrolment',['course_info_id'=>$course_val->id]) }}">Enroll</a>
+
+                                                    @if($my_courses_check >0)
+                                                      <a class="btn e-btn w-100" href="javascript:void(0)" style="background-color: #15a815;">Already Enrolled</a>
+                                                    @else
+                                                        <a class="btn e-btn w-100" href="{{ route('enrolment',['course_info_id'=>$course_val->id]) }}">Enroll</a>
+                                                   @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -206,8 +237,8 @@
                                                     <p>{!! $value->description !!} </p>
                                                 </div>
                                                 <div class="col-sm-12 col-md-4">
-                                                    <div class="downloads">
-                                                        <a href="{{asset($value->file_full_path).'/'.$value->source_name}}" download><i class="fa fa-download"></i> Download</a>
+                                                    <div class="downloads"> 
+                                                        <a target="_blank" href="{{asset($value->file_full_path).'/'.$value->source_name}}" ><i class="fa fa-eye"></i> View</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -223,18 +254,24 @@
                         <div class="row my-courses">
                             @php
                                 $readiness_list = array('readiness_exam_1'=>'Readiness Exam 1','readiness_exam_2'=>'Readiness Exam 2',
-                                    'readiness_exam_3'=>'Readiness Exam 3');
+                                    'readiness_exam_3'=>'Readiness Exam 3','readiness_exam_4'=>'Readiness Exam 4','readiness_exam_5'=>'Readiness Exam 5','readiness_exam_6'=>'Readiness Exam 6');
                                 @endphp
 
                                 @foreach($readiness_list as $key => $list)
+
+                                    @php 
+                                        $student_id = Auth::guard('student')->user()->id;
+                                        $testStatus = App\Modules\Student\Entities\StudentReadinessResult::checkTestStatus($student_id,$key);
+                                        $text = ($testStatus) ? 'Resume Test' : 'Take Test';
+                                        $color = ($testStatus) ? "style=background-color:#15a815;" : '';
+                                    @endphp
 
                                     <div class="col-sm-6 col-md-4 col-lg-3">
                                         <div class="my-courses__list">
                                             <div class="list-content">
                                                 <h5>{{$list}}</h5>
                                                 <span>Questions</span>
-                                                <a class="btn e-btn w-100"
-                                                    href="{{ route('readline-question',['readline_title'=>$key]) }}">Take Test</a>
+                                                <a class="btn e-btn w-100" href="{{ route('readline-question',['readline_title'=>$key]) }}" {{$color}}>{{$text}}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -294,6 +331,42 @@
                             </div>                       
                         </div>
                     </div>
+
+                    @else
+                    <div class="tab-pane fade show active" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                        <div class="my-courses">
+                            <div class="row">
+
+                                @if($other_course)
+                                    @foreach($other_course as $key => $course_val)
+
+                                        @php
+                                        $k = $key+1;
+                                        $imgfluid = asset('home/img/c' .$k. '.png');
+
+                                        $total_syllabus =
+                                        App\Modules\CourseContent\Entities\CourseContent::gettotalsyllabus($course_val->id);
+                                        @endphp
+
+                                        <div class="col-sm-6 col-md-4 col-lg-3">
+                                            <div class="my-courses__list">
+                                                <img src="{{ $imgfluid }}" class="img-fluid" alt="">
+                                                <div class="list-content">
+                                                    <h5>{{ $course_val->course_program_title }}</h5>
+                                                    <span>{{$total_syllabus}} syllabus</span>
+                                                    <p>{!! optional($course_val->courseInfo)->short_content !!} </p>
+                                                    <a class="btn e-btn w-100"
+                                                        href="{{ route('enrolment',['course_info_id'=>$course_val->id]) }}">Enroll</a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    @endforeach
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    @endif
 
                 </div>
             </div>

@@ -2,7 +2,7 @@
 <style>
 .bootbox.modal {z-index: 9999 !important;}
 #time { float:right; background-color: cyan; font-size:x-large}
-</style>
+</style> 
 
 <section class="neta-ribbon">
     <img src="img/cc.jpg" class="img-fluid" alt="">
@@ -274,4 +274,23 @@
         }
     };
 
+</script>
+<script type="text/javascript">
+    var GLOBAL_NAMESPACE = {};
+
+$(document).ready(function(){
+  GLOBAL_NAMESPACE.value_changed = true;
+});
+
+$('a').bind('click',function (e) {
+    e.preventDefault();
+    if (GLOBAL_NAMESPACE.value_changed){
+        var res = confirm('You have unsaved changes. Do you want to continue?');
+        if(res){
+            window.location.href = $(this).attr('href');
+        }else{
+            console.log('stay on same page...');
+        }
+    }
+});
 </script>

@@ -8,6 +8,9 @@ use App\Modules\Quiz\Repositories\QuizInterface;
 use App\Modules\Student\Repositories\StudentInterface;
 use App\Modules\Student\Repositories\StudentPaymentInterface;
 use App\Modules\Student\Repositories\StudentPracticeInterface;
+use App\Modules\Enrolment\Repositories\EnrolmentInterface;
+
+
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -19,6 +22,7 @@ use App\Modules\Home\Emails\SendNetaMail;
 
 class StudentController extends Controller
 {
+    protected $enrolment;
     protected $student;
     protected $quiz;
     protected $courseinfo;
@@ -37,11 +41,13 @@ class StudentController extends Controller
 
     public function __construct(
         StudentInterface $student,
+        EnrolmentInterface $enrolment,
         QuizInterface $quiz,
         CourseInfoInterface $courseinfo,
         AgentInterface $agent,
         StudentPaymentInterface $studentPayment,
         StudentPracticeInterface $studentPractice) {
+        $this->enrolment = $enrolment;
         $this->student = $student;
         $this->quiz = $quiz;
         $this->courseinfo = $courseinfo;
@@ -104,7 +110,7 @@ class StudentController extends Controller
             alertify($e->getMessage())->error();
         }
 
-        return redirect(route('student.index'));
+        return redirect()->back();
     }
 
     public function studentCourse(Request $request)
@@ -228,7 +234,8 @@ class StudentController extends Controller
             alertify($e->getMessage())->error();
         }
 
-        return redirect(route('studentpurchase.index', ['student_id' => $student_id]));
+        return redirect()->back();
+        // return redirect(route('studentpurchase.index', ['student_id' => $student_id]));
     }
 
     public function courseInstallment(Request $request)
@@ -252,10 +259,21 @@ class StudentController extends Controller
 
             $status = ($amt_remaining == 0) ? 'Paid' : 'Partially Paid';
 
+            /*Student Payment History*/
+                $history = array(
+                    'student_payment_id' => $payment_id,
+                    'amount_paid' => $amount_paid,
+                    'date' => date('Y-m-d')
+                );
+
+                $this->student->storePaymentHistory($history);
+            /*End of Student Payment History*/
+
+
             $payment_data = array(
 
                 'amount_paid' => $amountPaid,
-                'amount_left' => $amt_remaining,
+                'amount_left' => $amt_remaining, 
                 'status' => $status,
             );
 
@@ -288,8 +306,8 @@ class StudentController extends Controller
         } catch (\Throwable $e) {
             alertify($e->getMessage())->error();
         }
-
-        return redirect(route('studentpurchase.index', ['student_id' => $student_id]));
+        return redirect()->back();
+        // return redirect(route('studentpurchase.index', ['student_id' => $student_id]));
 
     }
 
@@ -333,8 +351,39 @@ class StudentController extends Controller
         $data = $request->all();
         $student_id = $data['student_id'];
 
-        $data['practice_results'] = $this->studentPractice->findAll(20, ['student_id' => $student_id]);
+        $data['practice_results'] = $this->studentPractice->findAll(50, ['student_id' => $student_id]);
 
         return view('student::student.student_practice_result', $data);
     }
+
+     public function profile(Request $request){
+        $input = $request->all();
+        $data['student_id'] = $student_id = $input['student_id'];
+
+        $data['studentInfo'] =  $this->student->find($student_id);
+        $data['enrol_info'] = $this->enrolment->getLatestByStudent($student_id); 
+        $data['quiz_info'] = $this->student->getLatestQuizByStudent($student_id);
+
+        $data['student_courses'] = $this->student->getStudentCourse($student_id);
+        $data['student_purchase'] = $this->student->getStudentPurchase($student_id);
+        $data['student_quiz'] = $this->student->getStudentQuizResult($student_id);
+        $data['student_mockup'] = $this->student->getStudentMockupResult($student_id);
+        $data['practice_results'] = $this->studentPractice->findAll(50, ['student_id' => $student_id]);
+        
+        return view('student::student.profile',$data);
+
+    }
+
+    public function viewPaymentHistory(Request $request){
+
+        $data = $request->all();
+        $id = $data['student_payment_id'];
+        $paymentInfo  = $this->student->findStudentPayment($id); 
+        $historyDetail = $this->student->findPaymentHistory($id);
+        $data = view('student::student.view-payment-history-detail', compact('historyDetail','paymentInfo'))->render();
+        return response()->json(['options' => $data]);
+
+    }
+
+
 }

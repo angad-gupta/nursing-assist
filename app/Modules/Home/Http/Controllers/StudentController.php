@@ -55,9 +55,14 @@ class StudentController extends Controller
 
     public function Enrolment(Request $request)
     {
-        $input = $request->all();
+        $input = $request->all();  
 
         if (Auth::guard('student')->check()) {
+
+            $data['users'] = $userInfo = Auth::guard('student')->user();  
+            $studentName = explode(" ",$userInfo['full_name']);
+            $data['first_name'] = ($studentName[0]) ? $studentName[0] : '';
+            $data['last_name'] = (array_key_exists(1, $studentName)) ? $studentName[1] : '';
 
             $data['agents'] = $this->agent->getList();
 

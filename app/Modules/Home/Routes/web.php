@@ -110,7 +110,7 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth:student']], function
 
     Route::get('practice-question', ['as' => 'practice-question', 'uses' => 'DashboardController@practiceQuestion']);
     Route::post('practice-question/store', ['as' => 'practice-question.store', 'uses' => 'DashboardController@studentPracticeStore']);
-    Route::post('practice-question/ajaxStore', ['as' => 'practice-question.ajaxStore', 'uses' => 'DashboardController@ajaxPracticeStore']);
+    Route::post('practice-question/ajaxStore', ['as' => 'practice-question.ajaxStore', 'uses' => 'DashboardController@ajaxPracticeStore']); 
 
 
     Route::post('studentmockup/ajaxStore', ['as' => 'studentmockup.ajaxStore', 'uses' => 'DashboardController@ajaxQuestionStore']);

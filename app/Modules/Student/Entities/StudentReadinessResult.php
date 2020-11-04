@@ -24,4 +24,8 @@ class StudentReadinessResult extends Model
     {
         return $this->belongsTo(Student::class, 'student_id', 'id');
     }
+
+    public static function checkTestStatus($studentId, $title){
+        return StudentReadinessResult:: where('student_id','=',$studentId)->where('title','=',$title)->whereNull('total_question')->first();
+    }
 }

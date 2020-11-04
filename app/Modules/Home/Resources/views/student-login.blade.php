@@ -52,7 +52,11 @@ $(document).ready(function() {
                 <div class="neta-contact__form">
                     <h4>Login</h4>
                     <p>Please login to your account first</p>
-                    @include('flash::message')
+                    @if($message)
+                        <div class="alert alert-info alert-dismissible">
+                                {{$message}}
+                        </div>
+                    @endif
                      {!! Form::open(['route'=>'student-login-post','method'=>'POST','id'=>'student_submit','class'=>'form-horizontal','role'=>'form']) !!}
                         <div class="row">
                             <div class="col-sm-12">

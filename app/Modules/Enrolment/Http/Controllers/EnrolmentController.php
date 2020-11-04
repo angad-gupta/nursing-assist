@@ -117,10 +117,18 @@ class EnrolmentController extends Controller
         $data['is_id'] = 1;
         try {
             $student_detail = auth()->guard('student')->user();
-            $data['student_id'] = $student_detail->id;
+            $data['student_id'] = $student_id = $student_detail->id;
+
+            $courseinfo_id = $data['courseinfo_id'];  
+
+            $enrollment_check = $this->enrolment->getEnrollmentById($student_id,$courseinfo_id); 
+
+            if(!is_null($enrollment_check)){  
+                return $enrollment_check->id;
+            }
 
             $enrolmentData = array(
-                'student_id' => $data['student_id'],
+                'student_id' => $student_id,
                 'courseinfo_id' => $data['courseinfo_id'],
                 'is_eligible_mcq_osce' => $data['is_eligible_mcq_osce'],
                 'is_eligible_att' => $data['is_eligible_att'],
@@ -140,7 +148,8 @@ class EnrolmentController extends Controller
                 'phone' => $data['phone'],
                 'intake_date' => $data['intake_date'],
                 'payment_status' => 0,
-                'payment_type' => $data['payment_type'],
+                'payment_type' => 0,
+                'status' => 'Pending',
             );
 
             if ($request->hasFile('eligible_document')) {
@@ -231,7 +240,7 @@ class EnrolmentController extends Controller
         return redirect(route('student-dashboard'));
     }
 
-    public function redirect($id)
+    public function redirect($id) 
     {
         $id = (int) $id;
         $enrolpayment_info = $this->enrolpayment->with('enrolmentinfo')->where('enrolment_id', $id)->first();
@@ -407,8 +416,8 @@ class EnrolmentController extends Controller
                         }
 
                         $total_course_fee = $student_payment->total_course_fee;
-                        $amount_left = $student_payment->amount_left - $installment_amt;
-                        $amount_paid = $student_payment->amount_paid + $installment_amt;
+                        $amount_left = (float)$student_payment->amount_left - (float)$installment_amt;
+                        $amount_paid = (float)$student_payment->amount_paid + (float)$installment_amt;  
 
                         $updateStudentPaymentData = array(
                             'enrolment_payment_id' => $enrolpayment->id ?? 0,

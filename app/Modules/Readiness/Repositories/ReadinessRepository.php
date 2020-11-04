@@ -55,13 +55,13 @@ class ReadinessRepository implements ReadinessInterface
         return $team->delete();
     }
 
-    public function getQuestionByTitle($readiness_title, $limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1])
+    public function getQuestionByTitle($readiness_title, $limit = null, $questions =[], $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1])
     {
 
         $result = Readiness::when(array_keys($filter, true), function ($query) use ($filter) {
 
         })
-            ->where('readiness_title', '=', $readiness_title)->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+            ->whereNotIn('id', $questions)->where('readiness_title', '=', $readiness_title)->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
 
 
 

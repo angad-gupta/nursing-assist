@@ -20,7 +20,7 @@ interface StudentPracticeInterface
 
     public function getHistory($student_id, $title);
 
-    public function getCorrectAnswer($student_id, $title);
+    public function getCorrectAnswer($student_id, $title); 
 
     public function checkPracticeResult($student_id, $title, $date);
 

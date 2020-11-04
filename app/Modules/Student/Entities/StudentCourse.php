@@ -23,4 +23,8 @@ class StudentCourse extends Model
     public function courseInfo(){
         return $this->belongsTo(CourseInfo::class,'courseinfo_id','id');
     }
+
+    static function checkStudentCourses($student_id,$courseinfo_id){
+        return StudentCourse::where('student_id', '=', $student_id)->where('courseinfo_id', '=', $courseinfo_id)->count();
+    }
 }

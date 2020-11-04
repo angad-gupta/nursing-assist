@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class StudentReadinessHistory extends Model
 {
     protected $fillable = [
+        
+        'readiness_result_id',
         'student_id',
         'title',
         'question_id',
@@ -20,3 +22,4 @@ class StudentReadinessHistory extends Model
         return $this->belongsTo(Readiness::class, 'question_id', 'id');
     }
 }
+ 

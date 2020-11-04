@@ -58,4 +58,40 @@ class StudentReadinessRepository implements StudentReadinessInterface
     {
         return StudentReadinessHistory::where('student_id', '=', $student_id)->where('title', '=', $title)->where('is_correct_answer', '=', '1')->count();
     }
+
+    public function checkReadinessResult($student_id, $title, $date){
+        return StudentReadinessResult::where('student_id', '=', $student_id)
+            ->where('title', '=', $title)
+            ->where('date', $date)
+            ->orderBy('id', 'DESC')
+            ->first();
+    }
+
+    public function getWhereQuestionHistory($whereArray){
+        return StudentReadinessHistory::where($whereArray)->first();
+    }
+
+    public function updateHistory($id, $data){
+        $result = StudentReadinessResult::find($id);
+        return $result->update($data);
+    }
+
+    public function getCorrectAnswerByResult($readiness_result_id)
+    {
+        return StudentReadinessHistory::where('readiness_result_id', '=', $readiness_result_id)->where('is_correct_answer', '=', '1')->count();
+    }
+
+
+
+    //NEw Features
+    public function getCurrentReadlinessResult($student_id,$title){
+        return StudentReadinessResult:: where('student_id','=',$student_id)->where('title','=',$title)->whereNull('total_question')->first();
+    }
+
+    public function getAttemptedQuestion($id){
+        return StudentReadinessHistory::where('readiness_result_id','=',$id)->get();
+    }
+
+
+
 }

@@ -3,6 +3,7 @@
 namespace App\Modules\Enrolment\Repositories;
 
 use App\Modules\Enrolment\Entities\Enrolment;
+use App\Modules\CourseInfo\Entities\Month;
 use DB;
 
 class EnrolmentRepository implements EnrolmentInterface
@@ -129,9 +130,9 @@ class EnrolmentRepository implements EnrolmentInterface
         return $fileName;
     }
 
-    public function getLatestByStudent($student_id)
-    {
-        return Enrolment::where('student_id', $student_id)
+    public function getLatestByStudent($student_id) 
+    { 
+        return Enrolment::where('student_id','=',$student_id)
             ->where('status', '!=', 'Disapproved')
             ->latest()->first();
     }
@@ -164,5 +165,12 @@ class EnrolmentRepository implements EnrolmentInterface
          return Enrolment::where('student_id','=',$student_id)->count();
     }
 
+    public function getEnrollmentById($student_id,$courseinfo_id){
+        return Enrolment::where('student_id','=',$student_id)->where('courseinfo_id','=',$courseinfo_id)->first();
+    }
+
+    public function getMonthById($month_id){
+        return Month:: find($month_id);
+    }
 
 }

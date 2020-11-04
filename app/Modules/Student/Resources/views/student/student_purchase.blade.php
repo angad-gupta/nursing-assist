@@ -1,6 +1,6 @@
 @extends('admin::layout')
-@section('title')Student Purchase History @stop
-@section('breadcrum')Student Purchase History @stop
+@section('title')Student Purchase @stop
+@section('breadcrum')Student Purchase @stop
 
 @section('script')
 <script src="{{asset('admin/global/js/plugins/tables/datatables/datatables.min.js')}}"></script>
@@ -30,7 +30,7 @@
 
 <div class="card">
     <div class="card-header header-elements-inline">
-        <h5 class="card-title">List of Student Purchase History</h5>
+        <h5 class="card-title">List of Student Purchase</h5>
         <div class="text-right">
 
             <a href="{{ route('student.index') }}" class="btn bg-warning">
@@ -72,6 +72,8 @@
                     <td>${{ $value->amount_left }}</td>
                     <td>{{ date('d M, Y',strtotime($value->created_at)) }}</td>
                     <td>
+
+                        <a data-toggle="modal" data-target="#modal_theme_view_info" class="btn bg-primary-400 btn-icon rounded-round view_detail" student_payment_id="{{$value->id}}" data-popup="tooltip" data-original-title="View Payment History Detail" data-placement="bottom"><i class="icon-history"></i></a>
                         @php
                         $modal = 'modal';
                         @endphp
@@ -102,7 +104,7 @@
                 @endforeach
                 @else
                 <tr>
-                    <td colspan="6">No Student Purchase History Found !!!</td>
+                    <td colspan="6">No Student Purchase Found !!!</td>
                 </tr>
                 @endif
             </tbody>
@@ -117,6 +119,30 @@
     </div>
 </div>
 
+
+<!-- Warning modal -->
+<div id="modal_theme_view_info" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-teal">
+                <h6 class="modal-title">View Student Purchase History Detail</h6>
+            </div>
+
+            <div class="modal-body">
+                <div class="table-responsive result_view_recommend_detail">
+
+                </div><!-- table-responsive -->
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn bg-teal-400" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- warning modal -->
+
+
 <!-- Warning modal -->
 <div id="modal_theme_status" class="modal fade" tabindex="-1">
     <div class="modal-dialog modal-lg">
@@ -130,7 +156,7 @@
                     <label class="col-form-label col-lg-3">Select Status:</label>
                     <div class="col-lg-9">
                         {!! Form::select('moved_to_student',[ '1'=>'Move To Student','0'=>'Pending'], $value = null,
-                        ['id'=>'moved_to_student','class'=>'form-control','placeholder'=>'--Select Status--']) !!}
+                        ['id'=>'moved_to_student','class'=>'form-control','placeholder'=>'--Select Status--','required']) !!}
                     </div>
 
                     {{ Form::hidden('student_id', '',['class'=>'student_id']) }}
@@ -161,7 +187,7 @@
                 <div class="form-group row">
                     <label class="col-form-label col-lg-3">Amount Paid:</label>
                     <div class="col-lg-9">
-                        {!! Form::text('amount_paid', $value = null, ['id'=>'amount_paid','placeholder'=>'Enter Amount','class'=>'form-control numeric']) !!}
+                        {!! Form::text('amount_paid', $value = null, ['id'=>'amount_paid','placeholder'=>'Enter Amount','class'=>'form-control numeric','required']) !!}
                     </div>
                 </div>
 
@@ -199,5 +225,29 @@
     </div>
 </div>
 <!-- /warning modal -->
+
+<script>
+    $(document).ready(function () {
+ 
+        $('.view_detail').on('click', function () {
+            var student_payment_id = $(this).attr('student_payment_id');
+
+            $.ajax({
+                type: 'GET',
+                url: '/admin/student/viewPaymentHistory',
+                data: {
+                    student_payment_id: student_payment_id
+                },
+
+                success: function (data) {
+                    $('.result_view_recommend_detail').html(data.options);
+                }
+            });
+
+        });
+
+    })
+
+</script>
 
 @endsection
