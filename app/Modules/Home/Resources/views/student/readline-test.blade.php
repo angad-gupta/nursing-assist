@@ -21,7 +21,7 @@
 
         </div>
     </div>
-</section>
+</section> 
 
 <section class="neta-enrolment neta-quiz neta-contact  section-padding">
     <div class="container">
@@ -33,6 +33,12 @@
                     Please allot 4 hours to take the test.No calculators allowed No food and drinks allowed. The computer will ask you if you would like to take a break.</p>
             </div>
 
+            @if($is_new)
+                <div class="neta-courses" style="padding-left: 200px;color: #db1515;">
+                    <h5>You have Already Attempted {{$qnos}} Question Answer. Please Complete Remaining Test Questions.</h5>
+                </div>
+            @endif
+
             <div class="col-sm-12" id="practice_questions">
                 <h6 class="p-0 mb-0"> <label id="question_number">1</label> out of {{$readinessInfo->count()}}  <p id="time"></p></h6>
                
@@ -41,7 +47,10 @@
                     @php $last_key = $readinessInfo->keys()->last(); @endphp
 
                     @foreach($readinessInfo as $key => $question)
-                    @php $key = $key + 1; @endphp
+                    @php 
+                        $key = $key + 1; 
+                        $result_id = ($result_id) ? $result_id : null;
+                    @endphp
                     
                     <div class="card" style="display: {{ $key == 1 ? '' : 'none' }}" id="question_{{$key}}">
                         <div class="card-header" data-toggle="collapse" data-target="#collapse{{$key}}"
@@ -62,7 +71,7 @@
                                         {!! Form::hidden('question_id[]', $question->id, ['class'=>'question_id']) !!}
                                         {!! Form::hidden('title', $readiness_title, ['class'=>'title']) !!}
                                         {!! Form::hidden('question_type[]', $question->question_type, ['class'=>'question_type']) !!}
-                                        {!! Form::hidden('readiness_result_id', null, ['class'=>'readiness_result_id']) !!}
+                                        {!! Form::hidden('readiness_result_id', $result_id, ['class'=>'readiness_result_id']) !!}
 
                                         @if($question->question_type == 'multiple')
                                         <div class="col-sm-6">
@@ -209,6 +218,7 @@
 
             var index = qkey - 1;
             var title = '{{$readiness_title}}';
+            var read_result_id = $('.readiness_result_id').val();
             var question_id = $('.question_id').eq(index).val();
             var question_type = $('.question_type').eq(index).val();
   
@@ -226,7 +236,7 @@
             $.ajax({
                 type: 'POST',
                 url: '{{route("readline-question.ajaxStore")}}',
-                data: { title: title, question_id: question_id, answers: ans_array, qkey: qkey, _token: token },
+                data: { title: title, question_id: question_id, answers: ans_array, qkey: qkey, read_result_id:read_result_id, _token: token },
                 success: function (res) {
                     if(res == 0) {
                         alert('Please provide answer');

@@ -20,6 +20,10 @@
     </div>
 </section>
 
+@php
+    use Illuminate\Support\Facades\Auth;
+@endphp
+
 <section class="neta-about student-hub section-padding">
     <div class="container">
         <div class="row">
@@ -255,13 +259,19 @@
 
                                 @foreach($readiness_list as $key => $list)
 
+                                    @php 
+                                        $student_id = Auth::guard('student')->user()->id;
+                                        $testStatus = App\Modules\Student\Entities\StudentReadinessResult::checkTestStatus($student_id,$key);
+                                        $text = ($testStatus) ? 'Resume Test' : 'Take Test';
+                                        $color = ($testStatus) ? "style=background-color:#15a815;" : '';
+                                    @endphp
+
                                     <div class="col-sm-6 col-md-4 col-lg-3">
                                         <div class="my-courses__list">
                                             <div class="list-content">
                                                 <h5>{{$list}}</h5>
                                                 <span>Questions</span>
-                                                <a class="btn e-btn w-100"
-                                                    href="{{ route('readline-question',['readline_title'=>$key]) }}">Take Test</a>
+                                                <a class="btn e-btn w-100" href="{{ route('readline-question',['readline_title'=>$key]) }}" {{$color}}>{{$text}}</a>
                                             </div>
                                         </div>
                                     </div>

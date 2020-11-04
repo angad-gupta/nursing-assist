@@ -467,17 +467,48 @@ class DashboardController extends Controller
         $data['resources'] = $this->resource->findAll(50, $search);
 
         return view('home::student.resources', $data);
-    }
+    } 
 
     public function readlineQuestion(Request $request)
     {
         $input = $request->all();  
 
         $readiness_title = $input['readline_title']; 
+        $student_id = Auth::guard('student')->user()->id;
 
-        $readinessInfo = $this->readiness->getQuestionByTitle($readiness_title, 250);
+        $readliness_history = $this->studentReadiness->getCurrentReadlinessResult($student_id,$readiness_title);
+
+        if($readliness_history){
+
+            //Test Is Not Completed
+            $resultId = $readliness_history['id'];
+
+            $readlinessAttemptHistory = $this->studentReadiness->getAttemptedQuestion($resultId);
+
+            $qnos = sizeof($readlinessAttemptHistory) + 1;
+
+            $question = array();
+            foreach ($readlinessAttemptHistory as $key => $value) {
+               $questionArray = $value['question_id'];
+               array_push($question, $questionArray);
+            }
+
+            $is_new = TRUE;
+            $result_id = $resultId;
+            $readinessInfo = $this->readiness->getQuestionByTitle($readiness_title, 250,$question);            
+
+        }else{
+            $qnos = 1;
+            $is_new = FALSE;
+            $result_id = '';
+            $readinessInfo = $this->readiness->getQuestionByTitle($readiness_title, 250);
+        }
+
 
         if (sizeof($readinessInfo) > 0) {
+            $data['qnos'] = $qnos;
+            $data['is_new'] = $is_new;
+            $data['result_id'] = $result_id;
             $data['readinessInfo'] = $readinessInfo;
             $data['readiness_title'] = $readiness_title; 
             return view('home::student.readline-test', $data);
@@ -670,8 +701,9 @@ class DashboardController extends Controller
         $input = $request->all();  
         $title = $input['title'];
         $qkey = $input['qkey'];
+        $read_result_id = $input['read_result_id'];   
         $question_id = $input['question_id'];
-        unset($input['readiness_result_id']);
+        // unset($input['readiness_result_id']);
         $answers = [];
         if (isset($input['answers']) && !empty($input['answers'])) {
             $answers = $input['answers'];
@@ -684,29 +716,33 @@ class DashboardController extends Controller
             $student_id = Auth::guard('student')->user()->id;
             $date = date('Y-m-d');
 
-            if($qkey == 1) {
-                $readiness_result = array(
-                    'student_id' => $student_id,
-                    'title' => $title,
-                    'date' => date('Y-m-d'),
-                );
-
-                $resultInfo = $this->studentReadiness->save($readiness_result);
-                $result_id = $resultInfo->id;
-            } else {
-                $resultInfo = $this->studentReadiness->checkReadinessResult($student_id, $title, $date);
-                if (empty($resultInfo)) {
+            if($read_result_id == null){    
+                if($qkey == 1) {
                     $readiness_result = array(
                         'student_id' => $student_id,
                         'title' => $title,
                         'date' => date('Y-m-d'),
                     );
- 
+
                     $resultInfo = $this->studentReadiness->save($readiness_result);
                     $result_id = $resultInfo->id;
                 } else {
-                    $result_id = $resultInfo->id;
+                    $resultInfo = $this->studentReadiness->checkReadinessResult($student_id, $title, $date);
+                    if (empty($resultInfo)) {
+                        $readiness_result = array(
+                            'student_id' => $student_id,
+                            'title' => $title,
+                            'date' => date('Y-m-d'),
+                        );
+     
+                        $resultInfo = $this->studentReadiness->save($readiness_result);
+                        $result_id = $resultInfo->id;
+                    } else {
+                        $result_id = $resultInfo->id;
+                    }
                 }
+            }else{
+                $result_id = $read_result_id;
             }
           
             $readiness_question = $this->readiness->find($question_id);  

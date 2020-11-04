@@ -32,4 +32,8 @@ interface StudentReadinessInterface
     public function getCorrectAnswerByResult($readiness_result_id);
 
 
+    //New Features Readliness Resume
+    public function getCurrentReadlinessResult($student_id,$title);
+    public function getAttemptedQuestion($id);
+
 }

@@ -416,8 +416,8 @@ class EnrolmentController extends Controller
                         }
 
                         $total_course_fee = $student_payment->total_course_fee;
-                        $amount_left = $student_payment->amount_left - $installment_amt;
-                        $amount_paid = $student_payment->amount_paid + $installment_amt;
+                        $amount_left = (float)$student_payment->amount_left - (float)$installment_amt;
+                        $amount_paid = (float)$student_payment->amount_paid + (float)$installment_amt;  
 
                         $updateStudentPaymentData = array(
                             'enrolment_payment_id' => $enrolpayment->id ?? 0,

@@ -82,4 +82,16 @@ class StudentReadinessRepository implements StudentReadinessInterface
     }
 
 
+
+    //NEw Features
+    public function getCurrentReadlinessResult($student_id,$title){
+        return StudentReadinessResult:: where('student_id','=',$student_id)->where('title','=',$title)->whereNull('total_question')->first();
+    }
+
+    public function getAttemptedQuestion($id){
+        return StudentReadinessHistory::where('readiness_result_id','=',$id)->get();
+    }
+
+
+
 }

@@ -10,7 +10,7 @@ class BannerRepository implements BannerInterface
     {
         $result =Banner::when(array_keys($filter, true), function ($query) use ($filter) {
            
-        })->orderBy($sort['by'], $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+        })->where('status','=','1')->orderBy($sort['by'], $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
         return $result; 
         
     } 
