@@ -34,8 +34,8 @@
             </div>
 
             @if($is_new)
-                <div class="neta-courses" style="padding-left: 200px;color: #db1515;">
-                    <h5>You have Already Attempted {{$qnos}} Question Answer. Please Complete Remaining Test Questions.</h5>
+                <div class="neta-courses" style="color: #db1515;">
+                    <marquee><h5>You have Already Attempted {{$qnos}} Question Answer. Please Complete Remaining Test Questions.</h5></marquee>
                 </div>
             @endif
 
