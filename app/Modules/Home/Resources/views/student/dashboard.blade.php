@@ -456,8 +456,7 @@
 
 
                                         <div class="col-sm-12 save-btn">
-                                            <button class="btn e-btn mt-3"><a href="#">
-                                            Update Password </a></button>
+                                            <button class="btn e-btn mt-3" type="submit">Update Password</button>
                                         </div>
                                     </div>
                                 </div>

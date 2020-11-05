@@ -166,7 +166,6 @@
 
     	  @if(sizeof($course_info)>0) 
                 @foreach($course_info as $key => $course_enrol)
-                @if($course_enrol->is_course_package == '1')
                     <div class="col-sm-4">
                         <div class="course-enrolment__content m-0">
                             <p>{{$course_enrol->enrol_title }}</p>
@@ -175,7 +174,6 @@
                             <a href="{{ route('enrolment',['course_info_id'=>$course_enrol->id]) }}" class="btn w-100">Enroll</a>
                         </div>
                     </div>
-                @endif
          	@endforeach
          @endif    
  </div>

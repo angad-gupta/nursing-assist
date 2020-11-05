@@ -469,6 +469,22 @@ class DashboardController extends Controller
         return view('home::student.resources', $data);
     } 
 
+    public function studentResourcesView(Request $request)
+    {
+        $input = $request->all();  
+        $resource_id = $input['resources_id'];
+        $data['resources'] = $resouce = $this->resource->find($resource_id); 
+
+        $source_name = $resouce->source_name;
+        if(is_null($source_name)){\
+            Flash('File Not Found.')->error();
+            return redirect(route('student-courses'));
+        }
+
+        return view('home::student.resources-view', $data);
+    } 
+    
+
     public function readlineQuestion(Request $request)
     {
         $input = $request->all();  

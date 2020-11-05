@@ -107,10 +107,10 @@ class StudentController extends Controller
     {
 
         $oldPassword = $request->get('old_password');
-        $newPassword = $request->get('password');
+        $newPassword = $request->get('password');  
 
         $id = Auth::guard('student')->user()->id;
-        $users = Auth::guard('student')->user()->find($id);
+        $users = Auth::guard('student')->user()->find($id);  
 
         if (!(Hash::check($oldPassword, $users->password))) {
             Flash("Old Password Do Not Match !")->error();
@@ -118,11 +118,10 @@ class StudentController extends Controller
         } else {
             $data['password'] = Hash::make($newPassword);
             $this->student->update($id, $data);
-            Flash("Password Successfully Updated. Please Login Again!")->success();
-
+            $data['message'] = "Password Successfully Updated. Please Login Again!";
         }
         Auth::guard('student')->logout();
-        return redirect(route('student-account'));
+        return redirect(route('student-account',$data));
 
     }
 

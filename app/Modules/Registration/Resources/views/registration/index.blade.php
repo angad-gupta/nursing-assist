@@ -10,6 +10,44 @@
 
 @section('content')
 
+<div class="card">
+    <div class="bg-warning card-header header-elements-inline border-bottom-0">
+        <h5 class="card-title text-uppercase font-weight-semibold">Advance Filter</h5>
+        <div class="header-elements">
+            <div class="list-icons">
+                <a class="list-icons-item" data-action="collapse"></a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        {!! Form::open(['route' => 'registration.index', 'method' => 'get']) !!}
+
+        <div class="row">
+            
+            <div class="col-md-4">
+                <label class="d-block font-weight-semibold">Search Keyword:</label>
+                <div class="input-group">
+                {!! Form::text('search_reg_value',  request('search_reg_value') ?? null, ['id'=>'search_reg_value','placeholder'=>'Search by full name,username, email','class'=>'form-control']) !!}
+                </div>
+            </div>
+
+            
+        </div>
+        <div class="d-flex justify-content-end mt-2">
+            <button class="btn bg-primary" type="submit">
+                Search Now
+            </button>
+            <a href="{{ route('registration.index') }}" data-popup="tooltip" data-placement="top"
+                data-original-title="Refresh Search" class="btn bg-danger ml-2">
+                <i class="icon-spinner9"></i>
+            </a>
+        </div>
+        {!! Form::close() !!}
+    </div>
+</div>
+
+
+
 
 <div class="card">
     <div class="card-header header-elements-inline">
@@ -58,8 +96,13 @@
                 </tr>
                 @endif
             </tbody>
-
         </table>
+        
+        <span style="margin: 5px;float: right;">
+            @if($student->total() != 0)
+                 {{ $student->links() }}
+            @endif
+        </span>
 
     </div>
 </div>

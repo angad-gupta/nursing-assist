@@ -33,12 +33,9 @@ class RegistrationController extends Controller
      */
     public function index(Request $request)
     {
-        $search = $request->all();
-        $sort_by = ['by' => 'id', 'sort' => 'DESC'];
-        if (isset($search['sort_by']) && !empty($search['sort_by'])) {
-            $sort_by = ['by' => 'full_name', 'sort' => $search['sort_by']];
-        }
-        $data['student'] = $this->student->findAll($limit = null, $search, $sort_by); 
+        $search = $request->all();  
+
+        $data['student'] = $this->student->findAll($limit = null, $search); 
 
         $data['agents'] = $this->agent->getList();
         $data['courses'] = $this->courseinfo->getList();

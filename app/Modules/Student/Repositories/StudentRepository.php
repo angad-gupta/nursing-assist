@@ -44,6 +44,15 @@ class StudentRepository implements StudentInterface
                     $q->orWhere('phone_no', 'like', '%' . $filter['search_value'] . '%');
                 });
 
+            }           
+
+            if (isset($filter['search_reg_value']) && !empty($filter['search_reg_value'])) {
+                $query->where(function ($q) use ($filter) {
+                    $q->where('full_name', 'like', '%' . $filter['search_reg_value'] . '%');
+                    $q->orWhere('username', 'like', '%' . $filter['search_reg_value'] . '%');
+                    $q->orWhere('email', 'like', '%' . $filter['search_reg_value'] . '%');
+                });
+
             }
 
         })->orderBy($sort['by'], $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));

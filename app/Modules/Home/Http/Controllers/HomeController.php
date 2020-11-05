@@ -74,7 +74,7 @@ class HomeController extends Controller
         $data['we_offer'] = $this->page->getBySlug('we_offer');
         $data['course'] = $this->course->findAll();
         $data['about_neta'] = $this->page->getBySlug('about_us');
-        $data['course_info'] = $this->courseinfo->findAll();
+        $data['course_info'] = $this->courseinfo->findAll(); 
 
         return view('home::index', $data);
     }

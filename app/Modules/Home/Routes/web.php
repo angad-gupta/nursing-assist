@@ -63,7 +63,8 @@ Route::post('enrolment/store', ['as' => 'enrolment.store', 'uses' => 'HomeContro
 Route::get('demo-quiz', ['as' => 'demo-quiz', 'uses' => 'HomeController@demoQuiz']);
 
 // Password reset link request routes...
-Route::get('student/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
+Route::get('student/password/reset', ['as' => 'password.reset', 'uses' => 'Auth\ForgotPasswordController@showLinkRequestForm']);
+
 Route::post('student/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('student.password.email');
 
 // Password reset routes...
@@ -101,6 +102,8 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth:student']], function
     Route::get('course-invoice', ['as' => 'course-invoice', 'uses' => 'DashboardController@studentCourseInvoice']);
 
     Route::get('student-resources', ['as' => 'student-resources', 'uses' => 'DashboardController@studentResources']);
+    
+    Route::get('student-resources-view', ['as' => 'student-resources-view', 'uses' => 'DashboardController@studentResourcesView']);
     
     Route::get('readline-question', ['as' => 'readline-question', 'uses' => 'DashboardController@readlineQuestion']);
     Route::get('readline-question/startTime', ['as' => 'readline-question.saveStartTime', 'uses' => 'DashboardController@saveStartTime']);
