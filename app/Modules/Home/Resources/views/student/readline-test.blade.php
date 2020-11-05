@@ -277,7 +277,7 @@
                 var hours = Math.floor(self.totalSeconds / 3600);
                 var minutes = Math.floor(self.totalSeconds / 60 % 60);
                 var seconds = Math.floor(self.totalSeconds % 60);
-                document.getElementById("time").innerHTML = hours + ":"+ minutes + ":" + seconds;
+                document.getElementById("time").innerHTML = pad(hours, 2) + ":"+ pad(minutes, 2) + ":" + pad(seconds, 2);
 
             }, 1000);
         },
@@ -291,6 +291,11 @@
             if (!this.interval) this.start();
         }
     };
+
+    function pad (str, max) {
+      str = str.toString();
+      return str.length < max ? pad("0" + str, max) : str;
+    }
 
 </script>
 <script type="text/javascript">
