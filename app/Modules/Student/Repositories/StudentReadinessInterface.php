@@ -33,6 +33,9 @@ interface StudentReadinessInterface
 
     public function getCorrectAnswerByResult($readiness_result_id);
 
+    public function findAllHistory($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC']);
+
+
 
     //New Features Readliness Resume
     public function getCurrentReadlinessResult($student_id,$title);
