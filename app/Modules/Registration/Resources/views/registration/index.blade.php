@@ -5,107 +5,65 @@
 @section('script')
 <script src="{{asset('admin/global/js/plugins/tables/datatables/datatables.min.js')}}"></script>
 <script src="{{asset('admin/global/js/plugins/forms/selects/select2.min.js')}}"></script>
+<script src="{{ asset('admin/dt_bidhee.js')}}"></script>
 
 @stop
 
 @section('content')
 
-<div class="card">
-    <div class="bg-warning card-header header-elements-inline border-bottom-0">
-        <h5 class="card-title text-uppercase font-weight-semibold">Advance Filter</h5>
-        <div class="header-elements">
-            <div class="list-icons">
-                <a class="list-icons-item" data-action="collapse"></a>
-            </div>
-        </div>
-    </div>
-    <div class="card-body">
-        {!! Form::open(['route' => 'registration.index', 'method' => 'get']) !!}
+<!-- Striped rows -->
+                <div class="card">
+                    <div class="card-header header-elements-inline">
+                        <h5 class="card-title">List of Registered Student</h5>
+                    </div>
 
-        <div class="row">
-            
-            <div class="col-md-4">
-                <label class="d-block font-weight-semibold">Search Keyword:</label>
-                <div class="input-group">
-                {!! Form::text('search_reg_value',  request('search_reg_value') ?? null, ['id'=>'search_reg_value','placeholder'=>'Search by full name,username, email','class'=>'form-control']) !!}
+                    <table class="table datatable-basic table-striped">
+                        <thead>
+                            <tr class="bg-slate">
+                                <th>Full Name</th>
+                                <th>Username</th>
+                                <th>Email Address</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                              @if($student->total() != 0)
+                                @inject('enrol_repo', '\App\Modules\Enrolment\Repositories\EnrolmentRepository')
+
+                                @foreach($student as $key => $value)
+                                @php 
+                                $image = ($value->profile_pic) ? asset($value->file_full_path).'/'.$value->profile_pic : asset('admin/default.png');
+                                $is_enrol = $enrol_repo->countStudentEnrol($value->id);
+
+
+                         if($is_enrol == 0){   
+                            @endphp
+                                <tr>
+                                    <td>{{ $value->full_name }}</td>
+                                    <td>{{ $value->username }}</td>
+                                    <td>{{ $value->email }}</td>
+                                    <td>
+                                        <a data-toggle="modal" data-target="#modal_enrolment_moved" student_id="{{ $value->id }}"  href="#" class="register_student_id dropdown-item bg-pink-800 text-pink-800"><i class="icon-reading"></i> Move To Enrolment</a>
+                                    </td>
+                                </tr>
+                            @php } @endphp
+
+                            @endforeach
+                            @else
+                            <tr>
+                                <td colspan="4">No Registered Student Found !!!</td>
+                            </tr>
+                            @endif
+
+
+                           
+      
+                        </tbody>
+                    </table>
                 </div>
-            </div>
+                <!-- /striped rows -->
 
-            
-        </div>
-        <div class="d-flex justify-content-end mt-2">
-            <button class="btn bg-primary" type="submit">
-                Search Now
-            </button>
-            <a href="{{ route('registration.index') }}" data-popup="tooltip" data-placement="top"
-                data-original-title="Refresh Search" class="btn bg-danger ml-2">
-                <i class="icon-spinner9"></i>
-            </a>
-        </div>
-        {!! Form::close() !!}
-    </div>
-</div>
-
-
-
-
-<div class="card">
-    <div class="card-header header-elements-inline">
-        <h5 class="card-title">List of Registered Student</h5>
- 
-
-    </div>
-
-    <div class="table-responsive">
-        <table class="table table-striped" id="headerTable">
-            <thead>
-                <tr class="bg-slate">
-                    <th class="no-sort">Profile Pic</th>
-                    <th >Full Name</th>
-                    <th class="no-sort">Username</th>
-                    <th class="no-sort">Email Address</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if($student->total() != 0)
-                @inject('enrol_repo', '\App\Modules\Enrolment\Repositories\EnrolmentRepository')
-
-                @foreach($student as $key => $value)
-                @php 
-                $image = ($value->profile_pic) ? asset($value->file_full_path).'/'.$value->profile_pic : asset('admin/default.png');
-                $is_enrol = $enrol_repo->countStudentEnrol($value->id);
-
-                if($is_enrol == 0){   
-                @endphp
-                    <tr>
-                        <td><a target="_blank" href="{{ $image }}"><img src="{{ $image }}" style="width: 50px;"></a></td>
-                        <td>{{ $value->full_name }}</td>
-                        <td>{{ $value->username }}</td>
-                        <td>{{ $value->email }}</td>
-                        <td>
-                            <button data-toggle="modal" data-target="#modal_enrolment_moved" student_id="{{ $value->id }}" class="register_student_id btn bg-pink-800 btn-labeled btn-labeled-left"><b><i class="icon-reading"></i></b> Move To Enrolment</button>
-                        </td>
-                    </tr>
-                @php } @endphp
-
-                @endforeach
-                @else
-                <tr>
-                    <td colspan="7">No Registered Student Found !!!</td>
-                </tr>
-                @endif
-            </tbody>
-        </table>
-        
-        <span style="margin: 5px;float: right;">
-            @if($student->total() != 0)
-                 {{ $student->links() }}
-            @endif
-        </span>
-
-    </div>
-</div>
 
 
 <div id="modal_enrolment_moved" class="modal fade in" tabindex="-1">
