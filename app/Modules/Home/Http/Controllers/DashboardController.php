@@ -742,16 +742,17 @@ class DashboardController extends Controller
             $date = date('Y-m-d');
 
             if($read_result_id == null){    
-                if($qkey == 1) {
-                    $readiness_result = array(
-                        'student_id' => $student_id,
-                        'title' => $title,
-                        'date' => date('Y-m-d'),
-                        'start_time' => date('Y-m-d H:i:s',strtotime($time))
-                    );
-                    $resultInfo = $this->studentReadiness->save($readiness_result);
-                    $result_id = $resultInfo->id;
-                } else {
+
+                // if($qkey == 1) {
+                //     $readiness_result = array(
+                //         'student_id' => $student_id,
+                //         'title' => $title,
+                //         'date' => date('Y-m-d'),
+                //         'start_time' => date('Y-m-d H:i:s',strtotime($time))
+                //     );
+                //     $resultInfo = $this->studentReadiness->save($readiness_result);
+                //     $result_id = $resultInfo->id;
+                // } else {
                     $resultInfo = $this->studentReadiness->checkReadinessResult($student_id, $title, $date);
                     if (empty($resultInfo)) {
                         $readiness_result = array(
@@ -766,7 +767,7 @@ class DashboardController extends Controller
                     } else {
                         $result_id = $resultInfo->id;
                     }
-                }
+                // }
             }else{
                 $result_id = $read_result_id;
                 
