@@ -10,6 +10,8 @@ use App\Modules\Student\Entities\StudentQuizHistory;
 use App\Modules\Student\Entities\StudentQuizResult;
 use App\Modules\Student\Entities\StudentPracticeResult;
 use App\Modules\Student\Entities\StudentPaymentHistory;
+use App\Modules\Student\Entities\StudentReadinessResult;
+use App\Modules\Student\Entities\StudentReadinessHistory;
 use DB;
 
 class StudentRepository implements StudentInterface
@@ -284,7 +286,12 @@ class StudentRepository implements StudentInterface
 
         })->where('student_id', '=', $student_id)->whereNotNull('percent')->whereNotNull('total_question')->selectRaw('"practice" as type, id, title, date, total_question, correct_answer');
 
+        $readiness_results = StudentReadinessResult::when(array_keys($filter, true), function ($query) use ($filter) {
+
+        })->where('student_id', '=', $student_id)->whereNotNull('percent')->whereNotNull('total_question')->selectRaw('"readiness" as type, id, title, date, total_question, correct_answer');
+
         $unions = $mockup_results->unionAll($practice_results);
+        $unions = $mockup_results->unionAll($readiness_results);
 
         $result = DB::table(DB::raw("({$unions->toSql()}) AS s"))
             ->mergeBindings($unions->getQuery())

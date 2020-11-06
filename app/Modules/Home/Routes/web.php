@@ -120,6 +120,7 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth:student']], function
 
     Route::get('mockup/history/{id}', ['as' => 'mockup.history', 'uses' => 'DashboardController@studentMockupHistory']);
     Route::get('practice/history/{id}', ['as' => 'practice.history', 'uses' => 'DashboardController@studentPracticeHistory']);
+    Route::get('readiness/history/{id}', ['as' => 'readiness.history', 'uses' => 'DashboardController@studentReadinessHistory']);
 
     Route::get('ajax-announcement-detail', ['as' => 'ajax-announcement-detail', 'uses' => 'DashboardController@ajaxAnnouncementDetail']);
 });

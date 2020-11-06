@@ -177,6 +177,8 @@
             var qkey = $(this).attr('data-id');
             var index = qkey - 1;
             var title = '{{$readiness_title}}';
+            var read_result_id = $('.readiness_result_id').val();
+            var time = $('#time').html(); 
             var question_id = $('.question_id').eq(index).val();
             var question_type = $('.question_type').eq(index).val();
   
@@ -194,7 +196,7 @@
             $.ajax({
                 type: 'POST',
                 url: '{{route("readline-question.ajaxStore")}}',
-                data: { title: title, question_id: question_id, answers: ans_array, qkey: qkey, _token: token },
+                data: { title: title, question_id: question_id, answers: ans_array, qkey: qkey, read_result_id:read_result_id,time:time, _token: token },
                 success: function (res) {
                     if(res == 0) {
                         alert('Please provide answer');

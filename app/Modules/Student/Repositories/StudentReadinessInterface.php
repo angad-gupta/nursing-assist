@@ -20,6 +20,8 @@ interface StudentReadinessInterface
 
     public function getHistory($student_id, $title);
 
+    public function getReadinessHistory($readiness_result_id, $student_id);
+
     public function getCorrectAnswer($student_id, $title); 
 
 

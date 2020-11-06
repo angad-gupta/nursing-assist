@@ -300,9 +300,23 @@
                                                 
                                                 @if($student_histories->total() != 0)
                                                     @foreach($student_histories as $key => $value)
+
+                                                    @php
+                                                        if($value->type == 'mockup'){
+                                                            $title = 'Mock Test Week'.' '.substr($value->title, -1);
+                                                        }
+                                                        if($value->type == 'practice'){
+                                                            $title = 'Practice Test'.' '.substr($value->title, -1);
+                                                        }
+                                                        if($value->type == 'readiness'){
+                                                            $title = 'Readiness Test'.' '.substr($value->title, -1);
+                                                        }
+
+
+                                                    @endphp
                                                     <tr>
                                                         <td>{{ $student_histories->firstItem() + $key }}</td>
-                                                        <td>{{ $value->type == 'mockup' ? 'Mock Test Week' : 'Practice Test'}} {{ substr($value->title, -1) }}</td>
+                                                        <td>{{ $title }} </td>
                                                         <td>{{ date('dS M, Y',strtotime($value->date)) }}</td>
                                                         <td>{{$value->total_question}}</td>
                                                         <td>{{$value->correct_answer}}</td>
@@ -310,8 +324,12 @@
                                                             <div class="history-view">
                                                                 @if($value->type == 'mockup')
                                                                     <a href="{{ route('mockup.history', $value->id) }}" class="btn e-btn">View Details</a>
-                                                                @else
+                                                                @endif    
+                                                                @if($value->type == 'practice')
                                                                     <a href="{{ route('practice.history', $value->id) }}" class="btn e-btn">View Details</a>
+                                                                @endif    
+                                                                @if($value->type == 'readiness')
+                                                                    <a href="{{ route('readiness.history', $value->id) }}" class="btn e-btn">View Details</a>
                                                                 @endif
                                                             </div>
                                                         </td>

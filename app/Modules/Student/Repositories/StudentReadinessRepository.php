@@ -54,6 +54,11 @@ class StudentReadinessRepository implements StudentReadinessInterface
         return StudentReadinessHistory::where('student_id', '=', $student_id)->where('title', '=', $title)->get();
     }
 
+    public function getReadinessHistory($readiness_result_id, $student_id){
+        return StudentReadinessHistory::where('readiness_result_id', '=', $readiness_result_id)->where('student_id', '=', $student_id)->get();
+    }
+
+
     public function getCorrectAnswer($student_id, $title)
     {
         return StudentReadinessHistory::where('student_id', '=', $student_id)->where('title', '=', $title)->where('is_correct_answer', '=', '1')->count();
@@ -81,6 +86,20 @@ class StudentReadinessRepository implements StudentReadinessInterface
         return StudentReadinessHistory::where('readiness_result_id', '=', $readiness_result_id)->where('is_correct_answer', '=', '1')->count();
     }
 
+
+   public function findAllHistory($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'])
+    {
+        $result = StudentReadinessHistory::when(array_keys($filter, true), function ($query) use ($filter) {
+
+            if (isset($filter['readiness_result_id']) && !empty($filter['readiness_result_id'])) {
+                $query->where('readiness_result_id', $filter['readiness_result_id']);
+            }
+
+        })->orderBy('id', $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+
+        return $result;
+
+    }
 
 
     //NEw Features
