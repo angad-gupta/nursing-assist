@@ -99,6 +99,9 @@
 
 
 <script>
+
+$('video').attr('controlsList','nodownload');
+
 $('.owl-carousel').owlCarousel({
     loop:true,
     margin:10,
