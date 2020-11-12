@@ -7,9 +7,6 @@
   top: 0 !important; /* move doc up into empty bar space */
 }
 
-.toolbar {
-  display: none !important; /* hide PDF viewer toolbar */
-}
 
 </style>
 
