@@ -23,7 +23,7 @@
                                 <th>Full Name</th>
                                 <th>Username</th>
                                 <th>Email Address</th>
-                                <th class="text-center">Actions</th>
+                                <th class="text-center" colspan="2">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -44,7 +44,11 @@
                                     <td>{{ $value->username }}</td>
                                     <td>{{ $value->email }}</td>
                                     <td>
-                                        <a data-toggle="modal" data-target="#modal_enrolment_moved" student_id="{{ $value->id }}"  href="#" class="register_student_id dropdown-item bg-pink-800 text-pink-800"><i class="icon-reading"></i> Move To Enrolment</a>
+                                        <a data-toggle="modal" data-target="#modal_enrolment_moved" student_id="{{ $value->id }}"  href="#" class="register_student_id dropdown-item bg-success-800 text-success-800"><i class="icon-reading"></i> Move To Enrolment</a>
+                                    </td>
+                                    <td>
+                                         <a data-toggle="modal" data-target="#modal_theme_warning" student_id="{{ $value->id }}"  href="#" class="delete_registration dropdown-item bg-pink-800 text-pink-800" link="{{route('registration.delete',$value->id)}}"><i class="icon-trash"></i> Delete</a>
+
                                     </td>
                                 </tr>
                             @php } @endphp
@@ -64,6 +68,38 @@
                 </div>
                 <!-- /striped rows -->
 
+
+<!-- Warning modal -->
+    <div id="modal_theme_warning" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                 <div class="modal-body">
+                    <center>
+                        <i class="icon-alert text-danger icon-3x"></i>
+                    </center>
+                    <br>
+                    <center>
+                        <h2>Are You Sure Want To Delete ?</h2>
+                        <a class="btn btn-success get_link" href="">Yes, Delete It!</a>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- /warning modal -->
+
+<script type="text/javascript">
+    $('document').ready(function() {
+
+        $('.delete_registration').on('click', function() {
+            var link = $(this).attr('link');
+            $('.get_link').attr('href', link);
+        });
+
+    });
+
+</script>
 
 
 <div id="modal_enrolment_moved" class="modal fade in" tabindex="-1">
