@@ -360,11 +360,13 @@ class StudentController extends Controller
         $input = $request->all();
         $data['student_id'] = $student_id = $input['student_id'];
 
+
+        $data['student_courses'] = $student_courses = $this->student->getStudentCourse($student_id);
         $data['studentInfo'] =  $this->student->find($student_id);
         $data['enrol_info'] = $this->enrolment->getLatestByStudent($student_id); 
         $data['quiz_info'] = $this->student->getLatestQuizByStudent($student_id);
 
-        $data['student_courses'] = $this->student->getStudentCourse($student_id);
+        
         $data['student_purchase'] = $this->student->getStudentPurchase($student_id);
         $data['student_quiz'] = $this->student->getStudentQuizResult($student_id);
         $data['student_mockup'] = $this->student->getStudentMockupResult($student_id);

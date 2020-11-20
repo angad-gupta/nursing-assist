@@ -199,13 +199,14 @@
                                                 @if($student_courses->total() != 0) 
                                                 @foreach($student_courses as $key => $value)
 
+                                             
+
                                                 <tr>
                                                     <td>{{$student_courses->firstItem() +$key}}</td>
                                                     <td>{{ optional($value->studentInfo)->full_name }}</td>
                                                     <td>{{ optional($value->courseInfo)->course_program_title }}</td>
                                                     <td>${{ optional($value->courseInfo)->course_fee }}</td>
-                                                    <td>{{ date('d M, Y',strtotime($value->created_at)) }}</td>
-                                       
+                                                    <td>{{ date('d M, Y',strtotime($value->created_at)) }}</td>                                                
                                                 </tr>
                                                 @endforeach
                                                 @else
@@ -240,13 +241,23 @@
                                                     <th>Amount Paid</th>
                                                     <th>Amount Left</th>
                                                     <th>Date</th>
+                                                    <th>Eligible Doc</th>
+                                                    <th>Identity Doc</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @if($student_purchase->total() != 0)
                                                 @foreach($student_purchase as $key => $value)
+                                                                                                 
+                                                @php  
+                                                 
+                                                $enrolment_id = $value['enrolment_id'];
+                                                $student_doc = App\Modules\Enrolment\Entities\Enrolment::getDocumentById($enrolment_id); 
 
+                                                $eligible_doc = ($student_doc->eligible_document) ? asset($student_doc->file_full_path).'/'.$student_doc->eligible_document : asset('admin/default.png');
+                                                $id_doc = ($student_doc->identity_document) ? asset($student_doc->file_full_path).'/'.$student_doc->identity_document : asset('admin/default.png');
+                                                @endphp
                                                 <tr>
                                                     <td>{{$student_purchase->firstItem() +$key}}</td>
                                                     <td>{{ optional($value->studentInfo)->full_name }}</td>
@@ -259,34 +270,29 @@
                                                     <td>${{ $value->amount_paid }}</td>
                                                     <td>${{ $value->amount_left }}</td>
                                                     <td>{{ date('d M, Y',strtotime($value->created_at)) }}</td>
-                                                    <td>
-                                                        <a data-toggle="modal" data-target="#modal_theme_view_info" class="btn bg-primary-400 btn-icon rounded-round view_detail" student_payment_id="{{$value->id}}" data-popup="tooltip" data-original-title="View Payment History Detail" data-placement="bottom"><i class="icon-history"></i></a>
+                                                    <td><a href="{{$eligible_doc}}" target="_blank"><img height="50px" width="50px"  src="{{ $eligible_doc }}"></a></td>
+                                                    <td><a href="{{$id_doc}}" target="_blank"><img height="50px" width="50px" src="{{$id_doc}}"></a></td>
+                                                    <td class="text-center">
+                                                        <div class="list-icons">
+                                                            <div class="dropdown">
+                                                                <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                                                    <i class="icon-menu9"></i>
+                                                                </a>
 
-                                                        @php
-                                                        $modal = 'modal';
-                                                        @endphp
-
-                                                        @if($value->amount_left !== '0')
-                                                        <a data-toggle="{{$modal}}" data-target="#modal_payment_status"
-                                                            class="btn bg-danger-400 btn-icon rounded-round update_payment_status"
-                                                            student_id="{{ $student_id }}" payment_id="{{$value->id}}" data-popup="tooltip"
-                                                            data-original-title="Course Payment" data-placement="bottom"><i
-                                                                class="icon-color-sampler"></i></a>
-                                                        @endif
-
-                                                        @if($value->moved_to_student == 0)
-                                                        <a data-toggle="{{$modal}}" data-target="#modal_theme_course_student"
-                                                            class="btn bg-success-400 btn-icon rounded-round update_payment_status"
-                                                            student_id="{{ $student_id }}" payment_id="{{$value->id}}" data-popup="tooltip"
-                                                            data-original-title="Course Move Update" data-placement="bottom"><i
-                                                                class="icon-flip-horizontal2"></i></a>
-                                                        @endif
-                                                        <a data-toggle="modal" data-target="#modal_theme_warning"
-                                                            class="btn bg-danger-400 btn-icon rounded-round delete_purchase"
-                                                            link="{{route('studentpurchase.delete', ['id' => $value->id, 'student_id' => $student_id])}}" data-popup="tooltip"
-                                                            data-original-title="Delete" data-placement="bottom"><i class="icon-bin"></i></a>
-
+                                                                <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-158px, 19px, 0px);">
+                                                                    <a data-toggle="modal" data-target="#modal_theme_view_info" student_payment_id="{{$value->id}}" class="dropdown-item view_detail"><i class="icon-history"></i> View Payment History Detail</a>
+                                                                    @if($value->amount_left !== '0')
+                                                                    <a data-toggle="modal" data-target="#modal_payment_status" student_id="{{ $student_id }}" payment_id="{{$value->id}}" class="dropdown-item update_payment_status"><i class="icon-color-sampler"></i> Course Payment</a>
+                                                                    @endif
+                                                                    @if($value->moved_to_student == 0)
+                                                                    <a data-toggle="modal" data-target="#modal_theme_course_student" student_id="{{ $student_id }}" payment_id="{{$value->id}}" class="dropdown-item update_payment_status"><i class="icon-flip-horizontal2"></i> Course Move Update</a>
+                                                                    @endif
+                                                                    <a data-toggle="modal" data-target="#modal_theme_warning" link="{{route('studentpurchase.delete', ['id' => $value->id, 'student_id' => $student_id])}}" class="dropdown-item delete_purchase"><i class="icon-bin"></i> Delete</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </td>
+
 
                                                 </tr>
                                                 @endforeach
@@ -452,7 +458,7 @@
     <!-- End of Left Section -->
 
     <div class="sidebar sidebar-light bg-transparent sidebar-component sidebar-component-right wmin-300 border-0 shadow-0 order-1 order-lg-2 sidebar-expand-md">
-        
+
         <div class="card bg-purple-400">
             <div class="card-header bg-purple header-elements-inline">
                 <h6 class="card-title">Student Status</h6>

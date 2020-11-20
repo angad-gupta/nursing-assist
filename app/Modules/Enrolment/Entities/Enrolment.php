@@ -70,4 +70,8 @@ class Enrolment extends Model
         return $this->belongsTo(Agent::class, 'agents', 'id');
     }
 
+    static function getDocumentById($enrolmentId){
+         return Enrolment::where('id','=',$enrolmentId)->first();
+    }
+
 }
