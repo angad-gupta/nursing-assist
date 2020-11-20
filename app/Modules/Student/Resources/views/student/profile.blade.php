@@ -179,6 +179,7 @@
                                 <li class="nav-item mb-2"><a href="#bottom-justified-tab3" class="nav-link font-weight-semibold text-dark" data-toggle="tab"><i class="icon-presentation mr-2" style="color: #E91E63 !important;"></i>Quiz Result</a></li>
                                 <li class="nav-item mb-2"><a href="#bottom-justified-tab4" class="nav-link font-weight-semibold text-dark" data-toggle="tab"><i class="icon-stack-text mr-2"  style="color: #9c27b0 !important;"></i>Mockup Result</a></li>
                                 <li class="nav-item mb-2"><a href="#bottom-justified-tab5" class="nav-link font-weight-semibold text-dark" data-toggle="tab"><i class="icon-stack-text mr-2"  style="color: #673AB7 !important;"></i>Practise Test Result</a></li>
+                                <li class="nav-item mb-2"><a href="#bottom-justified-tab6" class="nav-link font-weight-semibold text-dark" data-toggle="tab"><i class="icon-stack-text mr-2"  style="color: #B7923A !important;"></i>Readiness Result</a></li>
                             </ul>
 
                             <div class="tab-content">
@@ -250,13 +251,18 @@
                                                 @if($student_purchase->total() != 0)
                                                 @foreach($student_purchase as $key => $value)
                                                                                                  
-                                                @php  
+                                                @php   
                                                  
-                                                $enrolment_id = $value['enrolment_id'];
+                                                $enrolment_id = $value['enrolment_id'];  
                                                 $student_doc = App\Modules\Enrolment\Entities\Enrolment::getDocumentById($enrolment_id); 
 
-                                                $eligible_doc = ($student_doc->eligible_document) ? asset($student_doc->file_full_path).'/'.$student_doc->eligible_document : asset('admin/default.png');
-                                                $id_doc = ($student_doc->identity_document) ? asset($student_doc->file_full_path).'/'.$student_doc->identity_document : asset('admin/default.png');
+                                                if($student_doc){
+                                                    $eligible_doc = ($student_doc->eligible_document) ? asset($student_doc->file_full_path).'/'.$student_doc->eligible_document : asset('admin/image.png');
+                                                    $id_doc = ($student_doc->identity_document) ? asset($student_doc->file_full_path).'/'.$student_doc->identity_document : asset('admin/image.png');
+                                                }else{
+                                                    $eligible_doc = asset('admin/image.png');
+                                                    $id_doc = asset('admin/image.png');
+                                                }
                                                 @endphp
                                                 <tr>
                                                     <td>{{$student_purchase->firstItem() +$key}}</td>
@@ -444,6 +450,51 @@
                                             {{ $practice_results->appends(request()->except('page'))->links()  }}
                                             @endif
                                         </span>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane fade" id="bottom-justified-tab6">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr class="bg-slate">
+                                                    <th>#</th>
+                                                    <th>Full Name</th>
+                                                    <th>Readiness Title</th>
+                                                    <th>Date</th>
+                                                    <th>Total Question</th>
+                                                    <th>Correct Answer</th>
+                                                    <th>Pecentage</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if($student_readiness->total() != 0) 
+                                                @foreach($student_readiness as $key => $value)
+
+                                                <tr>
+                                                    <td>{{$student_readiness->firstItem() +$key}}</td>
+                                                    <td>{{ optional($value->student)->full_name }}</td>
+                                                    <td>{{ ucfirst(str_replace('_',' ',$value->title)) }}</td>
+                                                    <td>{{ date('d M, Y',strtotime($value->date)) }}</td>
+                                                    <td><b>{{$value->total_question}}</b></td>
+                                                    <td class="text-success"><b>{{$value->correct_answer}}</b></td>
+                                                    <td class="text-violet"><b>{{$value->percent}} %</b></td>
+                                                </tr>
+                                                @endforeach
+                                                @else
+                                                <tr>
+                                                    <td colspan="7">No Student Readiness Result Found !!!</td>
+                                                </tr>
+                                                @endif
+                                            </tbody>
+
+                                        </table>
+
+                                        <span style="margin: 5px;float: right;">
+                                            @if($student_readiness->total() != 0)
+                                                {{ $student_readiness->links() }}
+                                            @endif
+                                            </span>
                                     </div>
                                 </div>
 

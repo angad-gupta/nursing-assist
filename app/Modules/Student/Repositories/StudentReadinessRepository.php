@@ -111,6 +111,14 @@ class StudentReadinessRepository implements StudentReadinessInterface
         return StudentReadinessHistory::where('readiness_result_id','=',$id)->get();
     }
 
+    public function getStudentReadinessResult($student_id, $limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]){
+
+        $result = StudentReadinessResult::when(array_keys($filter, true), function ($query) use ($filter) {
+
+        })->where('student_id', '=', $student_id)->whereNotNull('percent')->whereNotNull('total_question')->orderBy('id', $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+
+        return $result;
+    }
 
 
 }

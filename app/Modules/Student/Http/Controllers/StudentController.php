@@ -8,6 +8,7 @@ use App\Modules\Quiz\Repositories\QuizInterface;
 use App\Modules\Student\Repositories\StudentInterface;
 use App\Modules\Student\Repositories\StudentPaymentInterface;
 use App\Modules\Student\Repositories\StudentPracticeInterface;
+use App\Modules\Student\Repositories\StudentReadinessInterface;
 use App\Modules\Enrolment\Repositories\EnrolmentInterface;
 
 
@@ -38,6 +39,7 @@ class StudentController extends Controller
      * @var StudentPracticeInterface
      */
     protected $studentPractice;
+    protected $studentReadiness;
 
     public function __construct(
         StudentInterface $student,
@@ -46,7 +48,8 @@ class StudentController extends Controller
         CourseInfoInterface $courseinfo,
         AgentInterface $agent,
         StudentPaymentInterface $studentPayment,
-        StudentPracticeInterface $studentPractice) {
+        StudentPracticeInterface $studentPractice,
+        StudentReadinessInterface $studentReadiness) {
         $this->enrolment = $enrolment;
         $this->student = $student;
         $this->quiz = $quiz;
@@ -54,6 +57,7 @@ class StudentController extends Controller
         $this->agent = $agent;
         $this->studentPayment = $studentPayment;
         $this->studentPractice = $studentPractice;
+        $this->studentReadiness = $studentReadiness;
     }
     /**
      * Display a listing of the resource.
@@ -370,6 +374,7 @@ class StudentController extends Controller
         $data['student_purchase'] = $this->student->getStudentPurchase($student_id);
         $data['student_quiz'] = $this->student->getStudentQuizResult($student_id);
         $data['student_mockup'] = $this->student->getStudentMockupResult($student_id);
+        $data['student_readiness'] = $this->studentReadiness->getStudentReadinessResult($student_id);
         $data['practice_results'] = $this->studentPractice->findAll(50, ['student_id' => $student_id]);
         
         return view('student::student.profile',$data);

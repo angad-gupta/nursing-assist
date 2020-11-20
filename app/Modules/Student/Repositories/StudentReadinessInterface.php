@@ -41,4 +41,7 @@ interface StudentReadinessInterface
     public function getCurrentReadlinessResult($student_id,$title);
     public function getAttemptedQuestion($id);
 
+    public function getStudentReadinessResult($student_id, $limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
+
+
 }
