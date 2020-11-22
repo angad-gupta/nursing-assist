@@ -74,7 +74,7 @@ class EnrolmentController extends Controller
         $data['agents'] = $this->agent->getList();
         return view('enrolment::enrolment.index', $data);
     }
-
+ 
     public function indexArchive(Request $request)
     {
         $search = $request->all();

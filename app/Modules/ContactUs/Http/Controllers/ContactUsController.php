@@ -73,7 +73,18 @@ class ContactUsController extends Controller
         $data = $request->all();
 
         $contact_id = $data['contact_id'];
+        $status = $data['status'];
         $message = $data['message'];
+
+        if($status == 'Replied'){
+            $update_data = array(
+
+                'status' => 'Replied'
+            );
+            $this->contactus->update($contact_id, $update_data);
+             alertify()->success('Contact Update Successfully');
+             return redirect(route('contactus.index'));
+        }
 
         $contactInfo = $this->contactus->find($contact_id);
 

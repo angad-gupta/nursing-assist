@@ -63,7 +63,7 @@
                     <th>Agent</th>
                     <th>Payment Status</th>
                     <th>Enrollment Status</th>
-                    <th>Action</th>
+                    <!-- <th>Action</th> -->
                 </tr>
             </thead>
             <tbody>
@@ -80,7 +80,7 @@
                         {{ ($value->payment_status == '1') ? 'Paid' :'Payment Pending' }}
                     </td>
                     <td>{{ $value->status }}</td>
-                    <td>
+<!--                     <td>
                         <a data-toggle="modal" data-target="#modal_theme_view_info"
                             class="btn bg-danger-400 btn-icon rounded-round view_detail" enrolment_id="{{$value->id}}"
                             data-popup="tooltip" data-original-title="View Detail" data-placement="bottom"><i
@@ -91,7 +91,7 @@
                             enrolment_id="{{ $value->id}}" data-popup="tooltip" data-original-title="Status Update"
                             data-placement="bottom"><i class="icon-flip-horizontal2"></i></a>
                      
-                    </td>
+                    </td> -->
 
                 </tr>
                 @endforeach
@@ -139,7 +139,7 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header bg-warning">
-                <h4 class="modal-title">Enrolment Status</h4>
+                <h4 class="modal-title">Enrolment Status</h4> 
             </div>
             <div class="modal-body">
                 {!! Form::open(['route'=>'enrolment.updateStatus','method'=>'POST','id'=>'enroll_submit','class'=>'form-horizontal','role'=>'form']) !!}

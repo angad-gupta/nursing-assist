@@ -111,20 +111,12 @@
                    
                     <td>
                         @if($value->status == 'Pending')
-                        <a data-toggle="modal" data-target="#modal_theme_status"
-                            class="btn bg-success-400 btn-icon rounded-round update_status"
-                            contact_id="{{ $value->id }}" data-popup="tooltip"
-                            data-original-title="Status Update" data-placement="bottom"><i
-                                class="icon-flip-horizontal2"></i></a>
+                        <a data-toggle="modal" data-target="#modal_theme_status" class="btn bg-success-400 btn-icon rounded-round update_status" contact_id="{{ $value->id }}" data-popup="tooltip" data-original-title="Status Update" data-placement="bottom"><i class="icon-flip-horizontal2"></i></a>
                         @endif
-                        <a data-toggle="modal" data-target="#modal_theme_view_info"
-                            class="btn bg-warning-400 btn-icon rounded-round view_detail" assessment_id="{{$value->id}}"
-                            data-popup="tooltip" data-original-title="View Detail" data-placement="bottom"><i
-                                class="icon-eye"></i></a>
-                        <a data-toggle="modal" data-target="#modal_theme_warning"
-                            class="btn bg-danger-400 btn-icon rounded-round delete_contact"
-                            link="{{route('contactus.delete',$value->id)}}" data-popup="tooltip"
-                            data-original-title="Delete" data-placement="bottom"><i class="icon-bin"></i></a>
+
+                        <a data-toggle="modal" data-target="#modal_theme_view_info" class="btn bg-warning-400 btn-icon rounded-round view_detail" assessment_id="{{$value->id}}" data-popup="tooltip" data-original-title="View Detail" data-placement="bottom"><i class="icon-eye"></i></a>
+
+                        <a data-toggle="modal" data-target="#modal_theme_warning" class="btn bg-danger-400 btn-icon rounded-round delete_contact" link="{{route('contactus.delete',$value->id)}}" data-popup="tooltip" data-original-title="Delete" data-placement="bottom"><i class="icon-bin"></i></a>
                     </td>
 
                 </tr>
@@ -205,7 +197,21 @@
                         <fieldset class="mb-3">
                             <legend class="text-uppercase font-size-sm font-weight-bold"></legend>
 
+                            
                             <div class="form-group row">
+                                <label class="col-form-label col-lg-3">Update Status:</label>
+                                <div class="col-lg-9 form-group-feedback form-group-feedback-right">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend">
+                                            <span class="input-group-text"><i class="icon-bubble-lines4"></i></span>
+                                        </span>
+                                        {!! Form::select('status',[ 'Replied'=>'Already Replied'], $value = null, ['id'=>'status','class'=>'update_replied_status form-control','placeholder'=>'Select Status']) !!}
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row reply_message">
                                 <label class="col-form-label col-lg-3">Reply Message:</label>
                                 <div class="col-lg-9 form-group-feedback form-group-feedback-right">
                                     <div class="input-group">
@@ -218,7 +224,7 @@
                             </div>
 
                             <div class="text-right">
-                                <button type="submit"  class="ml-2 btn bg-pink-600 btn-labeled btn-labeled-left"><b><i class="icon-database-insert"></i></b>Reply</button>
+                                <button type="submit"  class="submit_naming ml-2 btn bg-pink-600 btn-labeled btn-labeled-left"><b><i class="icon-database-insert"></i></b>Reply</button>
                             </div>
 
                         </fieldset>
@@ -231,6 +237,27 @@
         </div>
     </div>
 </div>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        $(document).on('change','.update_replied_status',function(){
+            var status =$(this).val();
+
+            if(status == 'Replied'){
+                $('.reply_message').hide();
+                $('.submit_naming').html('<b><i class="icon-database-insert"></i></b>Update');
+            }else{
+                $('.reply_message').show();
+                $('.submit_naming').html('<b><i class="icon-database-insert"></i></b>Reply');
+            }
+
+        });
+
+    });
+</script>
 
 
 @endsection

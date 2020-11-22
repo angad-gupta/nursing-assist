@@ -59,7 +59,7 @@
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
-                <tr class="bg-slate">
+                <tr class="bg-slate"> 
                     <th>#</th>
                     <th>Student Name</th>
                     <th>Email</th>
@@ -160,7 +160,7 @@
                     </div>
 
                     {{ Form::hidden('enrolment_id', '',['class'=>'enrolment_id']) }}
-
+                    {!! Form::hidden('archive', '1',['id'=>'archive']) !!}
                 </div>
                 <div class="text-right">
                     <button type="submit" class="ml-2 btn bg-pink-600 btn-labeled btn-labeled-left"><b><i

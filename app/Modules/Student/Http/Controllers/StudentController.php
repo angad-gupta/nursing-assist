@@ -296,13 +296,13 @@ class StudentController extends Controller
 
 
         /* ---------------------------------------------------------------
-            Email Send to Announcement Nofitication
+            Email Send to Installment Nofitication
         --------------------------------------------------------------- */
            $content = view('student::student.partial.email-installment-content',$emailContent)->render();
 
           Mail::to($email)->send(new SendNetaMail($content, $subject));
         /* ---------------------------------------------------------------
-            Email Send to  Announcement Nofitication
+            Email Send to  Installment Nofitication
         --------------------------------------------------------------- */
 
 
