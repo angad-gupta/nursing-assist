@@ -356,8 +356,8 @@ class EnrolmentController extends Controller
                 }
   
                 //common wealth function
-                Simplify::$publicKey = env('LIVE_PUBLIC_KEY');
-                Simplify::$privateKey = env('LIVE_PRIVATE_KEY');
+                Simplify::$publicKey = env('SANDBOX_PUBLIC_KEY');
+                Simplify::$privateKey = env('SANDBOX_PRIVATE_KEY');
 
                 if (isset($data['token']) && $data['token'] != '') {
 
@@ -531,8 +531,8 @@ class EnrolmentController extends Controller
     {
         $data = $request->all();
         try {
-            Simplify::$publicKey = env('LIVE_PUBLIC_KEY');
-            Simplify::$privateKey = env('LIVE_PRIVATE_KEY');
+            Simplify::$publicKey = env('SANDBOX_PUBLIC_KEY');
+            Simplify::$privateKey = env('SANDBOX_PRIVATE_KEY');
             $amount = $data['amount'] * 100;
             //$amount = 100;
  
@@ -560,8 +560,8 @@ class EnrolmentController extends Controller
     {
         $data = $request->all(); //dd($data);
         try {
-            Simplify::$publicKey = env('LIVE_PUBLIC_KEY');
-            Simplify::$privateKey = env('LIVE_PRIVATE_KEY');
+            Simplify::$publicKey = env('SANDBOX_PUBLIC_KEY');
+            Simplify::$privateKey = env('SANDBOX_PRIVATE_KEY');
             
             $amount = $data['amount'] * 100;
             $description = $data['description'];
@@ -580,8 +580,15 @@ class EnrolmentController extends Controller
             if ($courseInfo->payment_mode != 'one off payment' && $data['payment_type'] == 1) {
               /*   $fee_in_cwbank = str_replace(',', '', $total_course_fee) * 0.025 + 1500;
                 $total_course_fee = str_replace(',', '', $total_course_fee) * 0.025 + 5500; */
-                $fee_in_cwbank = 1500;
-                $total_course_fee = 5500;
+
+                if($courseinfo->course_program_title == 'NCLEX') {
+                    $fee_in_cwbank = 1500;
+                    $total_course_fee = 2500;
+                } else  {
+                    $fee_in_cwbank = 1500;
+                    $total_course_fee = 5500;
+                }
+               
                 $description = 'First Installment of ' . $course_program_title . ' Course Enrolment';
             } else {
                 $fee_in_cwbank = str_replace(',', '', $total_course_fee);
@@ -616,73 +623,6 @@ class EnrolmentController extends Controller
                     'customer'=> $customer_id
                 ));
                 $payment = json_decode($payment_info);
-/* 
-                $payment = json_decode('
-                {
-                    "card": {
-                      "id": "GrxMdG79",
-                      "type": "VISA",
-                      "last4": "6292",
-                      "expMonth": 6,
-                      "expYear": 23,
-                      "dateCreated": 1598247693710,
-                      "cardEntryMode": "E_COMMERCE",
-                      "secure3DData": {
-                        "id": "goERxgqB",
-                        "isEnrolled": true,
-                        "acsUrl": "https://www.securesuite.co.uk/cba/tdsecure/opt_in_dispatcher.jsp?VAA=B",
-                        "paReq": "eAFVkttOg0AQhu+b+A6EGO/sLrDQg9M1tHjAKNYeYuIdwtpiytJyKO3bO0tbq3f7/zM7O/PNwu0uXWlbkRdJJge60aa6JmSUxYlcDPT57P66q9/yixbMlrkQ3lREVS44vIiiCBdCS+KBblJq0F7X7DiW3dE5jN2J2HA41uRYsm0COUm8mkfLUJYcwmgz9APOeozamHGUkIrc93iUpWktPrefW0pZD8MHG2SYCh7MJ1M/eNDuvPnInfmvgXYVpusbbTZx/QBIkwNRVsky33NqOUBOAqp8xZdluS76hNR13ZYVji4Xogzb+CQBohKAnLscV6rfAofeJTF33z6+7DqWbC/H9fQp89/fvofe9LnyFwMgKgPisBTcpIilazKN2n1m9C0bSONDmKq2uDv3tEtEQ3HugwNr9ZB7EIYK/DUAuee4mNM4JwVit86kwIqI6PcM5Nz16FGRjkpkyhzDYl2nwyyjZ3TMhnkTUFUSRGVaFFkdBRB1lRzXiUSalaPz7ytctH4AZiW61g==",
-                        "md": "Njg2NzEyRThERDhDNEE3NBC58AMOZfUuz7xUklVG6ipXKGd+vdAFOoI56w4hBxcRDYSojKV0r9Z3IE2mjBeTobPRR7yksGCxC1T6euqDikH1Ahmp/okskgq9scUgC6EPFmTvuBsf26+sgDgd2Mj1rSw=",
-                        "termUrl": "https://www.simplify.com/commerce/secure3d"
-                      },
-                      "indicator": "DEBIT_CARD",
-                      "indicatorSource": "CARD_BIN"
-                    },
-                    "disputed": false,
-                    "amount": 100,
-                    "settlementAmount": 100,
-                    "amountEstimated": false,
-                    "settlementCurrency": "AUD",
-                    "avsCvcMatch": true,
-                    "amountRemaining": 100,
-                    "currency": "AUD",
-                    "description": "3ds test payment",
-                    "refunded": false,
-                    "fraudResults": {
-                      "0": {
-                        "id": "zrA8bx6A",
-                        "fraudulent": false,
-                        "detail": "{\"auto_decision\":\"\",\"voice\":\"\",\"localtime\":\"\",\"country\":\"\",\"ip_region\":\"\",\"mobile_type\":\"\",\"latitude\":\"\",\"ip_country\":\"\",\"rules_count\":0,\"language\":\"\",\"error\":\"\",\"resolution\":\"\",\"cookies\":\"\",\"mobile_forwarder\":\"\",\"ip_org\":\"\",\"score\":1,\"data_collection\":\"\",\"global_decision\":\"A\",\"rules_fired\":[],\"browser\":\"\",\"rule_fired_count\":0,\"fingerprint\":\"\",\"global_rule_count\":0,\"user_agent\":\"\",\"longitude\":\"\",\"transaction_id\":\"5bfee913-4bb6-4b5e-a385-3e7a7ba7e5f5\",\"os\":\"\",\"card_number\":\"\",\"decision\":\"A\",\"mobile\":\"\",\"session_id\":\"3038DA50C4474CF19302672B51FF9272\",\"velocity\":\"\",\"ip_address\":\"\",\"pc_remote\":\"\",\"javascript\":false,\"email_number\":\"\",\"http_timezone\":\"\",\"proxy\":\"\",\"http_country\":\"\",\"ip_city\":\"\",\"device_number\":\"\",\"customerid\":\"b0470060c4194ec18164d2ac6e111a70\",\"flash\":\"\"}",
-                        "score": 1,
-                        "status": "APPROVED",
-                        "dateCreated": 1598247795777,
-                        "lastUpdated": 1598247795777
-                      }
-                    },
-                    "reference": "enrol_1",
-                    "authCode": "644342",
-                    "paymentStatus": "APPROVED",
-                    "dateCreated": 1598247795763,
-                    "createdBy": "SYSTEM",
-                    "paymentDate": 1598247794634,
-                    "id": "7Ed8BkKn",
-                    "transactionData": {
-                      "amount": 100,
-                      "currency": "AUD",
-                      "description": "3ds test payment",
-                      "date": "2020-08-24T05:43:14Z"
-                    },
-                    "transactionDetails": {
-                      "id": "AdRz7dnL",
-                      "data": "{\"acquirer\":{\"batch\":20200824,\"date\":\"0824\",\"id\":\"CBA_S2I\",\"merchantId\":\"353109290899276\",\"settlementDate\":\"2020-08-24\",\"timeZone\":\"+1000\",\"transactionId\":\"460237205946802\"},\"transactionId\":\"P8e5a666f253643d9\",\"orderId\":\"O8e5a666f253643d9\",\"retrievalReferenceNumber\":\"023705249357\",\"secure3dResult\":{\"version\":\"3DS1\",\"veResEnrolled\":\"Y\",\"paResStatus\":\"Y\"},\"authCurrency\":null}"
-                    },
-                    "fee": 0,
-                    "feeCurrency": "AUD",
-                    "refundedFees": 0,
-                    "feeEstimated": false,
-                    "source": "HOSTED_PAYMENTS"
-                  }'); */
-
                   
                 if ($payment->paymentStatus == 'APPROVED') {
 
@@ -749,7 +689,7 @@ class EnrolmentController extends Controller
 
                     $data['full_name'] = $student_detail->full_name;
                     $data['fee_in_cwbank'] = $fee_in_cwbank; 
-                    //$student_detail->notify(new EnrolmentPayment($data));
+                    $student_detail->notify(new EnrolmentPayment($data));
 
                      /* ---------------------------------------------------------------
                     Email Send to Student After Registration

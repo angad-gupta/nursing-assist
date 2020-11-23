@@ -239,10 +239,23 @@
                                         <form action="{{ route('enrolment.installment.pay.store') }}" class="enrolment_form"
                                             method="post" id="msform" enctype="multipart/form-data">
                                             {{ csrf_field() }}
+                                            
+                                            @php 
+                                            if($ins == 2) {
+                                                if($courseinfo->course_program_title == 'NCLEX') {
+                                                    $amount = 1000;
+                                                } else {
+                                                    $amount = 2500;
+                                                }
+                                            } else {
+                                                $amount = ($student_payment->status == 'First Installment Paid' ? 4000 : 1500);
+                                            }
+                                            @endphp
+
                                             {!! Form::hidden('student_payment_id', $id, ['id' => 'student_payment_id']) !!}
                                             {!! Form::hidden('ins', $ins, ['id' => 'ins']) !!}
                                             {!! Form::hidden('enrolment_id', $student_payment->enrolment_id, ['id' => 'enrolment_id'] ) !!}
-                                            {!! Form::hidden('amount', $ins == 2 ? 2500 : ($student_payment->status == 'First Installment Paid' ? 4000 : 1500), ['id' => 'amount'] ) !!}
+                                            {!! Form::hidden('amount', $amount, ['id' => 'amount'] ) !!}
                                             {!! Form::hidden('first_name', optional($student_payment->enrolmentInfo)->first_name, ['id' => 'first_name'] ) !!}
                                             {!! Form::hidden('last_name', optional($student_payment->enrolmentInfo)->last_name, ['id' => 'last_name'] ) !!}
                                             {!! Form::hidden('email', optional($student_payment->enrolmentInfo)->email, ['id' => 'email'] ) !!}
@@ -252,39 +265,62 @@
                                                     <div class="row justify-content-center">
                                                         <div class="col-sm-12">
                                                             <h5>You Order Summary</h5>
+                                                                @if($courseinfo->course_program_title == 'NCLEX')
+                                                                    <table class="table" id="installment_payment" style="display:none">
+                                                                        <tr>
+                                                                            <td>Initial payment</td>
+                                                                            <td class="text-right">$1,500</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Final Payment (28 days after course commencement)
+                                                                            </td>
+                                                                            <td class="text-right">$1,000</td>
+                                                                        </tr>
 
-                                                                <table class="table" id="installment_payment">
-                                                                    <tr>
-                                                                        <td>Initial payment</td>
-                                                                        <td class="text-right">$1,500</td>
-                                                                    </tr>
-                                                                    {{--<tr>
-                                                                        <td>Administration fee(2.5%) applies</td>
-                                                                        <td class="text-right">
-                                                                            2.5% of ${{ $courseinfo->course_fee}} = ${{ str_replace(',', '', $courseinfo->course_fee) * 0.025 }}</td>
-                                                                    </tr>--}}
-                                                                    <tr>
-                                                                        <td>Second Payment (15 days after course commencement)
-                                                                        </td>
-                                                                        <td class="text-right">$2,500</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Final Payment (30 days after course commencement)
-                                                                        </td>
-                                                                        <td class="text-right">$1,500</td>
-                                                                    </tr>
+                                                                        <tr class="total">
+                                                                            <td>Enrol {{ $courseinfo->course_program_title }} Total</td>
+                                                                            <td class="text-right">${{ str_replace(',', '', $courseinfo->course_fee) }}</td>
+                                                                        </tr>
 
-                                                                    <tr class="total">
-                                                                        <td>Enrol {{ $courseinfo->course_program_title }} Total</td>
-                                                                        {{--<td class="text-right">${{ str_replace(',', '', $courseinfo->course_fee) * 0.025  + str_replace(',', '', $courseinfo->course_fee)}}</td>--}}
-                                                                        <td class="text-right">${{ str_replace(',', '', $courseinfo->course_fee) }}</td>
-                                                                    </tr>
+                                                                        <tr class="total">
+                                                                            <td>Final Installment Payment Total</td>
+                                                                            <td class="text-right">$1,000</td>
+                                                                        </tr>
+                                                                    </table>
+                                                                @else
+                                                                    <table class="table" id="installment_payment">
+                                                                        <tr>
+                                                                            <td>Initial payment</td>
+                                                                            <td class="text-right">$1,500</td>
+                                                                        </tr>
+                                                                        {{--<tr>
+                                                                            <td>Administration fee(2.5%) applies</td>
+                                                                            <td class="text-right">
+                                                                                2.5% of ${{ $courseinfo->course_fee}} = ${{ str_replace(',', '', $courseinfo->course_fee) * 0.025 }}</td>
+                                                                        </tr>--}}
+                                                                        <tr>
+                                                                            <td>Second Payment (15 days after course commencement)
+                                                                            </td>
+                                                                            <td class="text-right">$2,500</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Final Payment (30 days after course commencement)
+                                                                            </td>
+                                                                            <td class="text-right">$1,500</td>
+                                                                        </tr>
 
-                                                                    <tr class="total">
-                                                                        <td>{{$ins == 2 ? 'Second' : 'Final' }} Installment Payment Total</td>
-                                                                        <td class="text-right">${{$ins == 2 ? '2,500' : ($student_payment->status == 'First Installment Paid' ? '4,000' : '1,500') }}</td>
-                                                                    </tr>
-                                                                </table>
+                                                                        <tr class="total">
+                                                                            <td>Enrol {{ $courseinfo->course_program_title }} Total</td>
+                                                                            {{--<td class="text-right">${{ str_replace(',', '', $courseinfo->course_fee) * 0.025  + str_replace(',', '', $courseinfo->course_fee)}}</td>--}}
+                                                                            <td class="text-right">${{ str_replace(',', '', $courseinfo->course_fee) }}</td>
+                                                                        </tr>
+
+                                                                        <tr class="total">
+                                                                            <td>{{$ins == 2 ? 'Second' : 'Final' }} Installment Payment Total</td>
+                                                                            <td class="text-right">${{$ins == 2 ? '2,500' : ($student_payment->status == 'First Installment Paid' ? '4,000' : '1,500') }}</td>
+                                                                        </tr>
+                                                                    </table>
+                                                                @endif
                                                            
 
                                                            

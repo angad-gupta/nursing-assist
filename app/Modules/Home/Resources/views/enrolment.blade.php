@@ -430,7 +430,7 @@ $('a').bind('click',function (e) {
             } else {
                 $('#installment_payment').css('display', 'none');
                 $('#full_payment').css('display', '');
-                $('#amount').val(5500);
+                $('#amount').val('{{str_replace(",", "", $courseinfo->course_fee)}}');
             }
         })
 
@@ -732,7 +732,8 @@ $('a').bind('click',function (e) {
                                                                 </tr>
                                                             </table>
                                                             {!! Form::hidden('enrolment_id',null, ['id' => 'enrolment_id'] ) !!}
-                                                            {!! Form::hidden('amount', 5500, ['id' => 'amount'] ) !!}
+                                                            {!! Form::hidden('amount', str_replace(',', '', $courseinfo->course_fee), ['id' => 'amount'] ) !!}
+
                                                             @if($courseinfo->payment_mode != 'one off payment')
                                                                 @if($courseinfo->course_program_title == 'NCLEX')
                                                                     <table class="table" id="installment_payment" style="display:none">
@@ -746,25 +747,18 @@ $('a').bind('click',function (e) {
                                                                                 2.5% of ${{ $courseinfo->course_fee}} = ${{ str_replace(',', '', $courseinfo->course_fee) * 0.025 }}</td>
                                                                         </tr>--}}
                                                                         <tr>
-                                                                            <td>Second Payment (15 days after course commencement)
+                                                                            <td>Final Payment (28 days after course commencement)
                                                                             </td>
-                                                                            <td class="text-right">$2,500</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>Final Payment (30 days after course commencement)
-                                                                            </td>
-                                                                            <td class="text-right">$1,500</td>
+                                                                            <td class="text-right">$1,000</td>
                                                                         </tr>
 
                                                                         <tr class="total">
                                                                             <td>Enrol {{ $courseinfo->course_program_title }} Total</td>
-                                                                            {{--<td class="text-right">${{ str_replace(',', '', $courseinfo->course_fee) * 0.025  + str_replace(',', '', $courseinfo->course_fee)}}</td>--}}
                                                                             <td class="text-right">${{ str_replace(',', '', $courseinfo->course_fee) }}</td>
                                                                         </tr>
 
                                                                         <tr class="total">
                                                                             <td>First Inital Payment Total</td>
-                                                                            {{--<td class="text-right">${{ str_replace(',', '', $courseinfo->course_fee) * 0.025  + 1500}}</td>--}}
                                                                             <td class="text-right">$1,500</td>
                                                                         </tr>
                                                                     </table>
@@ -881,12 +875,13 @@ $('a').bind('click',function (e) {
                                                                                 </select>
                                                                             </div>
                                                                         </div>   
-                                                                        
-                                                                        <div class="col-sm-4">
-                                                                            <div class="form-group">
-                                                                                {!! Form::select('payment_type', ['0'=>'Full Payment', '1'=>'Installment Payment'], null, ['id' => 'payment_type', 'class'=>'form-control']) !!}
+                                                                        @if($courseinfo->payment_mode == 'one off payment')
+                                                                            <div class="col-sm-4">
+                                                                                <div class="form-group">
+                                                                                    {!! Form::select('payment_type', ['0'=>'Full Payment', '1'=>'Installment Payment'], null, ['id' => 'payment_type', 'class'=>'form-control']) !!}
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
+                                                                        @endif
                                                                     </div>
 
                                                                     
