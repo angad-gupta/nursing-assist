@@ -120,7 +120,7 @@
             var first_name = $('#first_name').val();
             var last_name = $('#last_name').val();
             var email = $('#email').val();
-            var description = '{{$ins == 2 ? "Second Installment Payment" : "Final Installment Payment"}}';
+            var description = '{{ $courseinfo->course_program_title == "NCLEX" ? "Final Installment Payment" : ($ins == 2 ? "Second Installment Payment" : "Final Installment Payment")}}';
             var student_payment_id = $('#student_payment_id').val();
             var ins = $('#ins').val();
 
@@ -239,7 +239,7 @@
                                         <form action="{{ route('enrolment.installment.pay.store') }}" class="enrolment_form"
                                             method="post" id="msform" enctype="multipart/form-data">
                                             {{ csrf_field() }}
-                                            
+
                                             @php 
                                             if($ins == 2) {
                                                 if($courseinfo->course_program_title == 'NCLEX') {
