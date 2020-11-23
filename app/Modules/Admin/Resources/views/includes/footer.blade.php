@@ -29,7 +29,7 @@
     $('document').ready(function () {
 
         tinymce.init({
-            selector: ".simple_textarea_description", theme: "modern", width: 620, height: 200,
+            selector: ".simple_textarea_description", theme: "modern", width: 1600, height: 200,
         });
 
         tinymce.init({
@@ -37,7 +37,7 @@
         }); 
 
         tinymce.init({
-            selector: ".simple_full_textarea_description", theme: "modern", width: 1600, height: 600,
+            selector: ".simple_full_textarea_description", theme: "modern", width: 1600, height: 200,
         });
 
 
