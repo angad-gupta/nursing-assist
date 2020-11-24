@@ -1,0 +1,14 @@
+{
+    "name": "Video",
+    "alias": "video",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "App\\Modules\\Video\\Providers\\VideoServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

@@ -249,8 +249,16 @@
 
                     @if($menuRoles->assignedRoles('gallery.index'))
                     <li class="nav-item">
-                        <a href="{{route('gallery.index')}}" class="nav-link @if($Route[0]=='gallery') active @endif" data-popup="tooltip" data-original-title="Blog Management" data-placement="right">
+                        <a href="{{route('gallery.index')}}" class="nav-link @if($Route[0]=='gallery') active @endif" data-popup="tooltip" data-original-title="Gallery Management" data-placement="right">
                             <i class="icon-images2"></i><span>Gallery Management</span>
+                        </a>
+                    </li>
+                    @endif
+
+                    @if($menuRoles->assignedRoles('video.index'))
+                    <li class="nav-item">
+                        <a href="{{route('video.index')}}" class="nav-link @if($Route[0]=='video') active @endif" data-popup="tooltip" data-original-title="Video Management" data-placement="right">
+                            <i class="icon-play"></i><span>Video Management</span>
                         </a>
                     </li>
                     @endif
