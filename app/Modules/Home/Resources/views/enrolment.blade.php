@@ -419,6 +419,19 @@ $('a').bind('click',function (e) {
             }
              
         });
+
+
+        $(document).on('change','#agent',function(){
+            var agentVal = $(this).val();
+            if(agentVal == '999'){
+                $('.other_agent_section').show();
+            }else{
+                $('.other_agent_section').hide();
+            }
+
+        });
+
+
  
         $('#payment_type').on('change', function() {
             var payment_type = $(this).val();
@@ -637,7 +650,7 @@ $('a').bind('click',function (e) {
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
                                                                 <label for="">Post Code <span>*</span></label>
-                                                                <input type="text" name="Post Code"
+                                                                <input type="text" name="Post_Code"
                                                                     placeholder="Post Code" class="form-control numeric"
                                                                     id="post_code" value="{{ ($users) ? $users['postalcode'] : '' }}">
                                                                 <span class="text-danger postcode_error"></span>
@@ -676,8 +689,17 @@ $('a').bind('click',function (e) {
                                                                     @foreach($agents as $key => $agent)
                                                                     <option value="{{$key}}">{{$agent}}</option>
                                                                     @endforeach
+                                                                    <option value="999">Other</option>
                                                                 </select>
                                                                 <span class="text-danger agent_error"></span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6 other_agent_section" style="display: none;">
+                                                            <div class="form-group">
+                                                                <label for="">Other Agent</label>
+                                                                <input type="text" name="other_agent" placeholder="Other Agent"
+                                                                    class="form-control" id="other_agent" value="">
                                                             </div>
                                                         </div>
 

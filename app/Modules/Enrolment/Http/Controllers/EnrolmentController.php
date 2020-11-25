@@ -98,7 +98,7 @@ class EnrolmentController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->all();
+        $data = $request->all(); 
 
         if ($data['eligible_rd'] == 'is_eligible_mcq_osce') {
             $data['is_eligible_mcq_osce'] = 1;
@@ -121,7 +121,7 @@ class EnrolmentController extends Controller
 
             $courseinfo_id = $data['courseinfo_id'];  
 
-            $enrollment_check = $this->enrolment->getEnrollmentById($student_id,$courseinfo_id); 
+            $enrollment_check = $this->enrolment->getEnrollmentById($student_id,$courseinfo_id);  
 
             if(!is_null($enrollment_check)){  
                 return $enrollment_check->id;
@@ -143,6 +143,7 @@ class EnrolmentController extends Controller
                 'state' => $data['state'],
                 'postalcode' => $data['Post_Code'],
                 'agents' => $data['agents'],
+                'other_agent' => $data['other_agent'],
                 'country' => $data['country'],
                 'email' => $data['email'],
                 'phone' => $data['phone'],
@@ -162,7 +163,6 @@ class EnrolmentController extends Controller
 
             $enrolment = $this->enrolment->save($enrolmentData);
             $enrolment_id = $enrolment->id;
-
 
                 /* ---------------------------------------------------------------
                 Email Send to Student After Registration
