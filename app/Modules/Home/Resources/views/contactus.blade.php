@@ -84,10 +84,13 @@
                     <ul class="list-unstyled">
                         <li><span class="material-icons">
                                 call
-                            </span> {{$setting->contact_no1}}</li>
+                            </span> {{$setting->contact_no1}} , {{$setting->contact_no2}}</li>
                         <li><span class="material-icons">
                                 place
                             </span>{{$setting->address1}}</li>
+                        <li><span class="material-icons">
+                                place
+                            </span>{{$setting->address2}}</li>
                         <li><span class="material-icons">
                                 mail
                             </span>Accounts: <p>{{$setting->accounts_email}}</p>
