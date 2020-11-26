@@ -19,6 +19,8 @@ interface StudentPracticeInterface
     public function deleteHistory($student_id, $title);
 
     public function getHistory($student_id, $title);
+    
+    public function getHistoryByPractiseID($id);
 
     public function getCorrectAnswer($student_id, $title); 
 

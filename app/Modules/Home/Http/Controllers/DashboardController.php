@@ -866,7 +866,7 @@ class DashboardController extends Controller
         try {
             $student_id = Auth::guard('student')->user()->id;
 
-            $mockup_history = $this->studentPractice->getHistory($student_id, $title);
+            
             //$correct_answer = $this->studentPractice->getCorrectAnswer($student_id, $title);
             $correct_answer = $this->studentPractice->getCorrectAnswerByResult($input['practice_result_id']);
 
@@ -875,12 +875,13 @@ class DashboardController extends Controller
             $correctPercent = ($correct_answer / $total_question) * 100;
            
             $data['correct_percent'] = $correct_percent = number_format($correctPercent, 2);
-            $data['mockup_history'] = $mockup_history;
             $data['correct_answer'] = $correct_answer;
             $data['incorrect_answer'] = $total_question - $correct_answer;
 
             $date = date('Y-m-d');
             $resultInfo = $this->studentPractice->checkPracticeResult($student_id, $title, $date); 
+            $id = $resultInfo['id'];
+
             if (empty($resultInfo)) {
 
                 $practice_result = array(
@@ -902,7 +903,11 @@ class DashboardController extends Controller
                     'percent' => $correct_percent,
                 );
                 $resultInfo->update($updateArray);
-            }
+            } 
+
+            
+            $practise_history = $this->studentPractice->getHistoryByPractiseID($id);
+            $data['practise_history'] = $practise_history;
 
             return view('home::student.practice-report', $data);
 

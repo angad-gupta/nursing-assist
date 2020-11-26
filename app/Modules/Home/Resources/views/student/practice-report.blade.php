@@ -55,7 +55,7 @@
 
 			 <div class="accordion" id="accordionExample">
 
-			 	@foreach($mockup_history as $kys => $mockup)
+			 	@foreach($practise_history as $kys => $mockup)
 
 			 	@php 
             	if (preg_match('/[\[\]\'^£$%&*()}{@#~?><>,|=_+¬-]/', optional($mockup->mockup)->correct_option))

@@ -78,7 +78,7 @@ class AnnouncementController extends Controller
                        $email = $student_info['email'];
                        $subject = 'Announcement Notification';
 
-                       if($email){ 
+                       if(!is_null($email)){ 
 
                             /* ---------------------------------------------------------------
                                 Email Send to Announcement Nofitication
