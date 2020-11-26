@@ -1,3 +1,5 @@
+<script src="{{asset('admin/global/js/plugins/forms/selects/bootstrap_multiselect.js')}}"></script>
+<script src="{{asset('admin/global/js/demo_pages/form_multiselect.js')}}"></script>
 
 <fieldset class="mb-3">
     <legend class="text-uppercase font-size-sm font-weight-bold"></legend>
@@ -19,6 +21,7 @@
             </div>
         </div>
 
+
         <div class="col-md-6">
             <div class="form-group row">
                 <label class="col-form-label col-lg-3">Intake Date:</label>
@@ -27,7 +30,23 @@
                         <span class="input-group-prepend">
                             <span class="input-group-text"><i class="icon-pencil"></i></span>
                         </span>
-                         {!! Form::select('intake_date',$month, $value = null, ['id'=>'intake_date','class'=>'intake_date form-control']) !!}
+                         <!-- {!! Form::select('intake_date',$month, $value = null, ['id'=>'intake_date','class'=>'intake_date form-control']) !!} -->
+                         <select class="form-control multiselect" name="intake_date[]" multiple='multiple' data-fouc>
+                                    @foreach($month as $key => $value)
+                                        @php
+                                            $select ="";
+                                            if(isset($client)){
+                                            $intake_date = json_decode($client->intake_date);
+                                                if(in_array($key, $intake_date)){
+                                                    $select = "selected='selected'";
+                                                }
+                                            }
+
+                                        @endphp
+                                        <option value="{{$key}}" {{$select}}>{{$value}}</option>
+                                    @endforeach
+                                </select>
+
                         </div>
                     </div>
             </div>

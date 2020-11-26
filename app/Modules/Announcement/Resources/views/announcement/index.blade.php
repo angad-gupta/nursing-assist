@@ -44,7 +44,7 @@
                     
                     <td>
 
-                        <a class="btn bg-teal-400 btn-icon rounded-round" href="{{route('announcement.edit',$value->id)}}" data-popup="tooltip" data-original-title="Edit" data-placement="bottom"><i class="icon-pencil6"></i></a>
+<!--                         <a class="btn bg-teal-400 btn-icon rounded-round" href="{{route('announcement.edit',$value->id)}}" data-popup="tooltip" data-original-title="Edit" data-placement="bottom"><i class="icon-pencil6"></i></a> -->
 
                         <a data-toggle="modal" data-target="#modal_theme_warning" class="btn bg-danger-400 btn-icon rounded-round delete_announcement" link="{{route('announcement.delete',$value->id)}}" data-popup="tooltip" data-original-title="Delete" data-placement="bottom"><i class="icon-bin"></i></a>
                     </td>

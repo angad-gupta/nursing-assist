@@ -152,8 +152,8 @@ class EnrolmentRepository implements EnrolmentInterface
 
     }
 
-    public function getAllEnrolmentByIntake($intake_date){
-        return Enrolment::where('intake_date','=',$intake_date)->get();
+    public function getAllEnrolmentByIntake($intake_date){ 
+        return Enrolment::select('student_id')->whereIn('intake_date', $intake_date)->groupBy('student_id')->get();   
     }
 
 

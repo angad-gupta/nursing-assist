@@ -24,7 +24,7 @@ class AnnouncementController extends Controller
     {
         $this->announcement = $announcement;
         $this->courseinfo = $courseinfo;
-        $this->enrolment = $enrolment;
+        $this->enrolment = $enrolment; 
         $this->student = $student;
     }
 
@@ -59,33 +59,38 @@ class AnnouncementController extends Controller
     {
         $data = $request->all();
 
-        $intake_date = $data['intake_date'];
-        
+        $intake_date = json_encode($data['intake_date']);
+        unset($data['intake_date']);
+        $data['intake_date'] = $intake_date;
+
          try{
 
-            $this->announcement->save($data);
+             $this->announcement->save($data);
 
+            $intakeMonth = json_decode($intake_date);
 
-            $enrollement_info = $this->enrolment->getAllEnrolmentByIntake($intake_date);
+              $enrollement_info = $this->enrolment->getAllEnrolmentByIntake($intakeMonth);  
 
-            foreach ($enrollement_info as $key => $value) {
-                
-                   $student_info = $this->student->find($value->student_id);
+                foreach ($enrollement_info as $key => $value) {
+                     
+                    $student_info = $this->student->find($value['student_id']);
 
-                   $email = $student_info->email;
-                   $subject = 'Announcement Notification';
+                       $email = $student_info['email'];
+                       $subject = 'Announcement Notification';
 
-                /* ---------------------------------------------------------------
-                    Email Send to Announcement Nofitication
-                --------------------------------------------------------------- */
-                   $content = view('announcement::announcement.partial.email-content')->render();
+                       if($email){ 
 
-                  Mail::to($email)->send(new SendNetaMail($content, $subject));
-                /* ---------------------------------------------------------------
-                    Email Send to  Announcement Nofitication
-                --------------------------------------------------------------- */
+                            /* ---------------------------------------------------------------
+                                Email Send to Announcement Nofitication
+                            --------------------------------------------------------------- */
+                               $content = view('announcement::announcement.partial.email-content')->render();
 
-            }
+                              Mail::to($email)->send(new SendNetaMail($content, $subject));
+                            /* ---------------------------------------------------------------
+                                Email Send to  Announcement Nofitication
+                            --------------------------------------------------------------- */
+                    }
+                }
 
             alertify()->success('Announcement Created Successfully');
         }catch(\Throwable $e){
