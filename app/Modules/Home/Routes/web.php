@@ -85,6 +85,8 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth:student']], function
 
     Route::get('student-courses', ['as' => 'student-courses', 'uses' => 'DashboardController@studentCourse']);
 
+    Route::post('oscex-passcode-courses', ['as' => 'oscex-passcode-courses', 'uses' => 'DashboardController@oscexPasscodeCourses']);
+
     Route::get('syllabus-detail', ['as' => 'syllabus-detail', 'uses' => 'DashboardController@syllabusDetail']);
 
     Route::get('lesson-detail', ['as' => 'lesson-detail', 'uses' => 'DashboardController@lessonsDetail']);

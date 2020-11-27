@@ -163,6 +163,22 @@ class DashboardController extends Controller
         $data['student_histories'] = $this->student->getAllHistories($id, 20); 
 
         return view('home::student.courses', $data);
+
+    }
+
+    public function oscexPasscodeCourses(Request $request){
+        $input = $request->all();
+
+        $courseInfoId = $input['courseInfoId'];
+        $passcode = $input['passcode'];
+
+        if($passcode == 'OSCEX2020'){
+            return redirect(route('syllabus-detail',['course_info_id'=>$courseInfoId]));
+        }else{
+             Flash('Entered Passcode Doesnt Match. Please Try Again or Contact Admin For Passcode.')->error();
+            return redirect()->back();
+        }
+
     }
 
     public function syllabusDetail(Request $request)
