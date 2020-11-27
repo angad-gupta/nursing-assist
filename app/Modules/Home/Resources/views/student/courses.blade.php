@@ -427,7 +427,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-teal-400">
-                <h5 class="modal-title">Reply Message </h5>
+                <h5 class="modal-title">OSCEX ACCESS </h5>
                 <button type="button" class="close" data-dismiss="modal">×</button>
             </div>
 
