@@ -175,7 +175,7 @@ class DashboardController extends Controller
         if($passcode == 'OSCEX2020'){
             return redirect(route('syllabus-detail',['course_info_id'=>$courseInfoId]));
         }else{
-             Flash('Entered Passcode Doesnt Match. Please Try Again or Contact Admin For Passcode.')->error();
+             Flash("Entered Passcode Doesn't Match. Please Try Again or Contact Admin For Passcode.")->error();
             return redirect()->back();
         }
 
