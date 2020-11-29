@@ -263,6 +263,14 @@
                     </li>
                     @endif
 
+                    @if($menuRoles->assignedRoles('newsletter.index'))
+                    <li class="nav-item">
+                        <a href="{{route('newsletter.index')}}" class="nav-link @if($Route[0]=='newsletter') active @endif" data-popup="tooltip" data-original-title="Newsletter Management" data-placement="right">
+                            <i class="icon-mailbox"></i><span>Newsletter Management</span>
+                        </a>
+                    </li>
+                    @endif
+
 
             </ul>
         </div>
