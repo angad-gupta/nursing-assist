@@ -69,6 +69,14 @@
                                 <li class="nav-item">
                                	 <a class="nav-link" href="{{ route('student-hub') }}">Learner’s Portal</a>
                                 </li>
+                                <li class="nav-item neta-dropdown">
+	                                <a class="nav-link" href="#">Media</a>
+	                                <ul class="neta-dropdown__menu list-unstyled">
+	                                    <a href="{{ route('blog') }}"><li>Blog</li></a>
+	                                    <!-- <a href="gallery.php"><li>Gallery</li></a>
+	                                    <a href="videos.php"><li>Videos</li></a> -->
+	                                </ul>
+                            	</li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('contact-us') }}">Contact Us</a>
                                 </li>

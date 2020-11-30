@@ -15,6 +15,9 @@ use App\Modules\Page\Repositories\PageInterface;
 use App\Modules\Quiz\Repositories\QuizInterface;
 use App\Modules\Student\Repositories\StudentInterface;
 use App\Modules\Team\Repositories\TeamInterface;
+use App\Modules\Blog\Repositories\BlogInterface;
+
+
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
@@ -37,6 +40,7 @@ class HomeController extends Controller
     protected $faq;
     protected $agent;
     protected $quiz;
+    protected $blog;
 
     public function __construct(
         PageInterface $page,
@@ -49,7 +53,8 @@ class HomeController extends Controller
         StudentInterface $student,
         FAQInterface $faq,
         AgentInterface $agent,
-        QuizInterface $quiz
+        QuizInterface $quiz,
+        BlogInterface $blog
     ) {
         $this->page = $page;
         $this->banner = $banner;
@@ -62,6 +67,7 @@ class HomeController extends Controller
         $this->faq = $faq;
         $this->agent = $agent;
         $this->quiz = $quiz;
+        $this->blog = $blog;
     }
 
     /**
@@ -88,6 +94,26 @@ class HomeController extends Controller
         $data['about_neta'] = $this->page->getBySlug('about_us');
         $data['team'] = $this->team->findAll();
         return view('home::aboutus', $data);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     * @return Response
+     */
+    public function Blog()
+    {
+        $data['blog_info'] = $this->blog->findAllActiveBlog($limit= 12); 
+        return view('home::blog', $data);
+    }
+
+    public function BlogDetail(Request $request){
+        $input = $request->all();
+
+        $blog_id = $input['blog_id'];
+
+        $data['blog_detail'] = $this->blog->find($blog_id);
+
+        return view('home::blog-detal', $data);
     }
 
     /**

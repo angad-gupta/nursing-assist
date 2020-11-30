@@ -17,6 +17,10 @@ Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 
 Route::get('about-us', ['as' => 'about-us', 'uses' => 'HomeController@AboutUs']);
 
+Route::get('blog', ['as' => 'blog', 'uses' => 'HomeController@Blog']);
+
+Route::get('blog-detail', ['as' => 'blog-detail', 'uses' => 'HomeController@BlogDetail']);
+
 Route::get('contact-us', ['as' => 'contact-us', 'uses' => 'HomeController@ContactUs']);
 
 Route::get('faq', ['as' => 'faq', 'uses' => 'HomeController@faq']);
