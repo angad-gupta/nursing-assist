@@ -657,10 +657,10 @@ class DashboardController extends Controller
 
     public function ajaxQuestionStore(Request $request)
     {
-        $input = $request->all();
+        $input = $request->all();  
         $mockup_title = $input['mockup_title'];
         $qkey = $input['qkey'];
-        $question_id = $input['question_id'];
+        $question_id = $input['question_id']; 
 
         $answers = [];
         if (isset($input['answers']) && !empty($input['answers'])) {
@@ -674,7 +674,7 @@ class DashboardController extends Controller
             $student_id = Auth::guard('student')->user()->id;
             $date = date('Y-m-d');
 
-            $resultInfo = $this->studentMockup->checkMockupResult($student_id, $mockup_title, $date);
+            $resultInfo = $this->studentMockup->checkMockupResult($student_id, $mockup_title, $date); 
             if (empty($resultInfo)) {
                 $mockup_result = array(
                     'student_id' => $student_id,
@@ -687,6 +687,7 @@ class DashboardController extends Controller
             } else {
                 $result_id = $resultInfo->id;
             }
+
 
             /*   if ($qkey == 1) {
             $this->student->deleteMockuphistory($student_id, $mockup_title);

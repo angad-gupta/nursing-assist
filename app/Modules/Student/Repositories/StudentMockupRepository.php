@@ -87,9 +87,11 @@ class StudentMockupRepository implements StudentMockupInterface
     public function checkMockupResult($student_id, $title, $date)
     {
         return StudentMockupResult::where('student_id', '=', $student_id)
+            ->whereNull('percent')->whereNull('total_question')
             ->where('mockup_title', '=', $title)
             ->where('date', $date)
             ->first();
+
     }
 
     public function getQuestionHistory($whereArray)
