@@ -81,17 +81,14 @@
 </body>
 
 
-
-
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
 <script src="{{asset('home/new/js/jquery.magnific-popup.min.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-<script src="{{asset('home/js/wow.min.js')}}"></script>
-<script src="{{asset('home/js/v-ticker.js')}}"></script>
+<script src="{{asset('home/new/js/wow.min.js')}}"></script>
+<script src="{{asset('home/new/js/v-ticker.js')}}"></script>
 <script src="{{asset('home/new/js/custom.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
 <script src="{{asset('admin/validation/contactus.js')}}"></script>

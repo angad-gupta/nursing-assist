@@ -16,6 +16,8 @@ use App\Modules\Quiz\Repositories\QuizInterface;
 use App\Modules\Student\Repositories\StudentInterface;
 use App\Modules\Team\Repositories\TeamInterface;
 use App\Modules\Blog\Repositories\BlogInterface;
+use App\Modules\Gallery\Repositories\GalleryInterface;
+use App\Modules\Video\Repositories\VideoInterface;
 
 
 use Illuminate\Http\Request;
@@ -41,6 +43,8 @@ class HomeController extends Controller
     protected $agent;
     protected $quiz;
     protected $blog;
+    protected $gallery;
+    protected $video;
 
     public function __construct(
         PageInterface $page,
@@ -54,7 +58,9 @@ class HomeController extends Controller
         FAQInterface $faq,
         AgentInterface $agent,
         QuizInterface $quiz,
-        BlogInterface $blog
+        BlogInterface $blog,
+        GalleryInterface $gallery,
+        VideoInterface $video
     ) {
         $this->page = $page;
         $this->banner = $banner;
@@ -68,6 +74,8 @@ class HomeController extends Controller
         $this->agent = $agent;
         $this->quiz = $quiz;
         $this->blog = $blog;
+        $this->gallery = $gallery;
+        $this->video = $video;
     }
 
     /**
@@ -113,7 +121,34 @@ class HomeController extends Controller
 
         $data['blog_detail'] = $this->blog->find($blog_id);
 
-        return view('home::blog-detal', $data);
+        return view('home::blog-detail', $data);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     * @return Response
+     */
+    public function Gallery()
+    {
+        $data['album_info'] = $this->gallery->findAllActiveGallery($limit= 12); 
+        return view('home::gallery', $data);
+    }
+
+    public function AlbumDetail(Request $request){
+        $input = $request->all();
+
+        $album_id = $input['album_id'];
+
+        $data['album_detail'] = $this->gallery->find($album_id);
+        $data['album_photos'] = $this->gallery->getGalleryImage($album_id);
+
+        return view('home::gallery-detail', $data);
+    }
+
+    public function Video()
+    {
+        $data['video_info'] = $this->video->findAllActiveVideo($limit= 12); 
+        return view('home::video', $data);
     }
 
     /**

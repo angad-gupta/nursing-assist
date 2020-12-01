@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+	<link href="{{asset('home/new/css/magnific-popup.css')}}" rel="stylesheet">
 	<link href="{{asset('home/css/animate.css')}}" rel="stylesheet">
 	<link href="{{asset('home/css/style.css')}}" rel="stylesheet">
 	<link href="{{asset('home/css/responsive.css')}}" rel="stylesheet">
@@ -73,8 +74,8 @@
 	                                <a class="nav-link" href="#">Media</a>
 	                                <ul class="neta-dropdown__menu list-unstyled">
 	                                    <a href="{{ route('blog') }}"><li>Blog</li></a>
-	                                    <!-- <a href="gallery.php"><li>Gallery</li></a>
-	                                    <a href="videos.php"><li>Videos</li></a> -->
+	                                    <a href="{{ route('gallery') }}"><li>Gallery</li></a>                                    
+	                                    <!-- <a href="{{ route('video') }}"><li>Videos</li></a> -->
 	                                </ul>
                             	</li>
                                 <li class="nav-item">

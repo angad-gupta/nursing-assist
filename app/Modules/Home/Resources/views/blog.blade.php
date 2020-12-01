@@ -26,7 +26,7 @@
             @if($blog_info->total() != 0) 
                 @foreach($blog_info as $key => $value)
                     @php
-                        $image = ($value->blog_image) ? asset($value->file_full_path).'/'.$value->blog_image : asset('admin/default.png');
+                        $image = ($value->blog_image) ? asset($value->file_full_path).'/'.$value->blog_image : asset('admin/image.png');
                     @endphp
                     <div class="col-md-6 col-lg-4">
                         <div class="card neta-blog-card transition border-1 rounded o-h">
