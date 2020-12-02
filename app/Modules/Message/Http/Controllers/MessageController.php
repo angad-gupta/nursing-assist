@@ -10,17 +10,20 @@ use App\Modules\Home\Emails\SendNetaMail;
 
 use App\Modules\Message\Repositories\MessageInterface;
 use App\Modules\Student\Repositories\StudentInterface;
+use App\Modules\EmailLog\Repositories\EmaillogInterface;
 
 class MessageController extends Controller
 {
 
      protected $message;
      protected $student;
-    
-    public function __construct(MessageInterface $message,StudentInterface $student)
+     protected $emailLog;
+
+    public function __construct(MessageInterface $message,StudentInterface $student,EmaillogInterface $emailLog)
     {
         $this->message = $message;
         $this->student = $student;
+        $this->emailLog = $emailLog;
     }
 
     /**
@@ -126,6 +129,14 @@ class MessageController extends Controller
        $content = view('message::message.partial.email-content')->render();
 
       Mail::to($email)->send(new SendNetaMail($content, $subject));
+
+       /*     Email Log Maintaining    */
+            $emaillog['action'] = 'Reply Message Notification';
+            $emaillog['student_id'] = $student_info->id;
+            $emaillog['date'] = date('Y-m-d');
+            $this->emailLog->saveEmaillog($emaillog);
+            /*  End of Email Log Maintaining  */
+
     /* ---------------------------------------------------------------
         Email Send to  Announcement Nofitication
     --------------------------------------------------------------- */

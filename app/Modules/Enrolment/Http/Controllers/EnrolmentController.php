@@ -11,6 +11,8 @@ use App\Modules\Enrolment\Repositories\EnrolmentPaymentInterface;
 use App\Modules\Student\Repositories\StudentInterface;
 use App\Modules\Student\Repositories\StudentPaymentInstallmentInterface;
 use App\Modules\Student\Repositories\StudentPaymentInterface;
+use App\Modules\EmailLog\Repositories\EmaillogInterface;
+
 use App\Notifications\EnrolmentPayment;
 use Eway\Rapid\Client;
 use Illuminate\Http\Request;
@@ -42,6 +44,7 @@ class EnrolmentController extends Controller
      * @var AgentInterface
      */
     protected $agent;
+    protected $emailLog;
 
     public function __construct(
         EnrolmentInterface $enrolment,
@@ -51,6 +54,7 @@ class EnrolmentController extends Controller
         StudentPaymentInterface $studentpayment,
         StudentPaymentInstallmentInterface $studentPaymentInstallment,
         StudentInterface $student,
+        EmaillogInterface $emailLog,
         AgentInterface $agent) {
         $this->enrolment = $enrolment;
         $this->courseinfo = $courseinfo;
@@ -60,6 +64,7 @@ class EnrolmentController extends Controller
         $this->studentPaymentInstallment = $studentPaymentInstallment;
         $this->student = $student;
         $this->agent = $agent;
+        $this->emailLog = $emailLog;
     }
 
     /**
@@ -168,12 +173,18 @@ class EnrolmentController extends Controller
                 Email Send to Student After Registration
                 --------------------------------------------------------------- */
 
-                /*  $email = $student_detail->email;
+                $email = $student_detail->email;
                 $subject = 'Enrolment Successful';
                 $student['name'] = $student_detail->full_name;
                 $content = view('enrolment::enrolment.enrol-register-content', $student)->render();
 
-                Mail::to($email)->send(new SendNetaMail($content, $subject)); */
+                Mail::to($email)->send(new SendNetaMail($content, $subject)); 
+
+                 /*     Email Log Maintaining    */
+                $emaillog['action'] = 'Student Enrol Successful';
+                $emaillog['student_id'] = $student_id;
+                $emaillog['date'] = date('Y-m-d');
+                $this->emailLog->saveEmaillog($emaillog);
 
                 /* ---------------------------------------------------------------
                 Email Send to Student After Registration
@@ -755,12 +766,14 @@ class EnrolmentController extends Controller
                     Email Send to Student After Registration
                     --------------------------------------------------------------- */
 
-                    /*  $email = $student_detail->email;
+                    $email = $student_detail->email; 
                     $subject = 'Enrolment Successful';
                     $student['name'] = $student_detail->full_name;
                     $content = view('enrolment::enrolment.enrol-register-content', $student)->render();
 
-                    Mail::to($email)->send(new SendNetaMail($content, $subject)); */
+                    //Mail::to($email)->send(new SendNetaMail($content, $subject)); 
+
+
 
                     /* ---------------------------------------------------------------
                     Email Send to Student After Registration

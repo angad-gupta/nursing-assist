@@ -75,7 +75,7 @@
 	                                <ul class="neta-dropdown__menu list-unstyled">
 	                                    <a href="{{ route('blog') }}"><li>Blog</li></a>
 	                                    <a href="{{ route('gallery') }}"><li>Gallery</li></a>                                    
-	                                    <!-- <a href="{{ route('video') }}"><li>Videos</li></a> -->
+	                                    <a href="{{ route('video') }}"><li>Videos</li></a>
 	                                </ul>
                             	</li>
                                 <li class="nav-item">

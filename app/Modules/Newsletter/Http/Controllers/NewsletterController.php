@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 
 use App\Modules\Newsletter\Repositories\NewsletterInterface;
 use App\Modules\Student\Repositories\StudentInterface;
+use App\Modules\EmailLog\Repositories\EmaillogInterface;
 
 use Illuminate\Support\Facades\Mail;
 use App\Modules\Home\Emails\SendNetaMail;
@@ -17,11 +18,13 @@ class NewsletterController extends Controller
 
     protected $newsletter;
     protected $student;
+    protected $emailLog;
     
-    public function __construct(NewsletterInterface $newsletter,StudentInterface $student)
+    public function __construct(NewsletterInterface $newsletter,StudentInterface $student,EmaillogInterface $emailLog)
     {
         $this->newsletter = $newsletter;
         $this->student = $student;
+        $this->emailLog = $emailLog;
     }
 
     /**
@@ -108,6 +111,13 @@ class NewsletterController extends Controller
                         usleep(1000000);
 
                 }   
+
+                /*     Email Log Maintaining    */
+                $emaillog['action'] = 'Newsletter Message on Bulk';
+                $emaillog['student_id'] = null;
+                $emaillog['date'] = date('Y-m-d');
+                $this->emailLog->saveEmaillog($emaillog);
+                /*  End of Email Log Maintaining  */
 
             }
 

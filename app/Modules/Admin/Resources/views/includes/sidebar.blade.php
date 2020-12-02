@@ -271,6 +271,14 @@
                     </li>
                     @endif
 
+                    @if($menuRoles->assignedRoles('emaillog.index'))
+                    <li class="nav-item">
+                        <a href="{{route('emaillog.index')}}" class="nav-link @if($Route[0]=='emaillog') active @endif" data-popup="tooltip" data-original-title="Email Log" data-placement="right">
+                            <i class="icon-mailbox"></i><span>Email Log</span>
+                        </a>
+                    </li>
+                    @endif
+
 
             </ul>
         </div>

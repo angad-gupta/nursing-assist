@@ -16,9 +16,9 @@
 			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 				<h5>Media</h5>
 				<ul class="list-unstyled">
-					<a href="#"><li>Podcasts</li> </a>
-					<a href="#"><li>Gallery</li> </a>
-					<a href="#"><li>Videos</li> </a>
+					<a href="{{ route('blog') }}"><li>Blog</li></a>
+                    <a href="{{ route('gallery') }}"><li>Gallery</li></a>
+                    <a href="{{ route('video') }}"><li>Videos</li></a>
 				</ul>
 			</div>
 

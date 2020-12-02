@@ -18,6 +18,7 @@ use App\Modules\Team\Repositories\TeamInterface;
 use App\Modules\Blog\Repositories\BlogInterface;
 use App\Modules\Gallery\Repositories\GalleryInterface;
 use App\Modules\Video\Repositories\VideoInterface;
+use App\Modules\EmailLog\Repositories\EmaillogInterface;
 
 
 use Illuminate\Http\Request;
@@ -45,6 +46,7 @@ class HomeController extends Controller
     protected $blog;
     protected $gallery;
     protected $video;
+    protected $emailLog;
 
     public function __construct(
         PageInterface $page,
@@ -60,7 +62,8 @@ class HomeController extends Controller
         QuizInterface $quiz,
         BlogInterface $blog,
         GalleryInterface $gallery,
-        VideoInterface $video
+        VideoInterface $video,
+        EmaillogInterface $emailLog
     ) {
         $this->page = $page;
         $this->banner = $banner;
@@ -76,6 +79,7 @@ class HomeController extends Controller
         $this->blog = $blog;
         $this->gallery = $gallery;
         $this->video = $video;
+        $this->emailLog = $emailLog;
     }
 
     /**
@@ -334,8 +338,8 @@ class HomeController extends Controller
                 'active' => 1,
             );
 
-            $this->student->save($studentData);
-
+            $studentInfo = $this->student->save($studentData);
+            $student_id = $studentInfo['id'];
             /* ---------------------------------------------------------------
             Email Send to Student After Registration
             --------------------------------------------------------------- */
@@ -345,8 +349,15 @@ class HomeController extends Controller
             $content = view('home::email-register-content')->render();
 
             //if (filter_var( $email, FILTER_VALIDATE_EMAIL )) {
-            //Mail::to($email)->send(new SendNetaMail($content, $subject));
+            Mail::to($email)->send(new SendNetaMail($content, $subject));
             //}
+
+             /*     Email Log Maintaining    */
+            $emaillog['action'] = 'New Student Registration';
+            $emaillog['student_id'] = $student_id;
+            $emaillog['date'] = date('Y-m-d');
+            $this->emailLog->saveEmaillog($emaillog);
+            /*  End of Email Log Maintaining  */
 
             /* ---------------------------------------------------------------
             Email Send to Student After Registration

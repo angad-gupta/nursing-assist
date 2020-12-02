@@ -10,6 +10,7 @@ use App\Modules\Enrolment\Repositories\EnrolmentInterface;
 use App\Modules\Student\Repositories\StudentInterface;
 use App\Modules\Home\Emails\SendNetaMail;
 use App\Modules\Announcement\Repositories\AnnouncementInterface;
+use App\Modules\EmailLog\Repositories\EmaillogInterface;
 
 use Illuminate\Support\Facades\Mail;
 
@@ -19,13 +20,15 @@ class AnnouncementController extends Controller
      protected $courseinfo;
      protected $enrolment;
      protected $student;
+     protected $emailLog;
     
-    public function __construct(AnnouncementInterface $announcement,CourseInfoInterface $courseinfo,EnrolmentInterface $enrolment,StudentInterface $student)
+    public function __construct(AnnouncementInterface $announcement,CourseInfoInterface $courseinfo,EnrolmentInterface $enrolment,StudentInterface $student,EmaillogInterface $emailLog)
     {
         $this->announcement = $announcement;
         $this->courseinfo = $courseinfo;
         $this->enrolment = $enrolment; 
         $this->student = $student;
+        $this->emailLog = $emailLog;
     }
 
     /**
@@ -91,6 +94,14 @@ class AnnouncementController extends Controller
                             --------------------------------------------------------------- */
                     }
                 }
+
+            /*     Email Log Maintaining    */
+            $emaillog['action'] = 'Announcement Notification';
+            $emaillog['student_id'] = null;
+            $emaillog['date'] = date('Y-m-d');
+            $this->emailLog->saveEmaillog($emaillog);
+            /*  End of Email Log Maintaining  */
+
 
             alertify()->success('Announcement Created Successfully');
         }catch(\Throwable $e){
