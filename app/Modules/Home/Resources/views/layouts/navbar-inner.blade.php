@@ -28,7 +28,7 @@
             <div class="row">
                 <div class="col-sm-12 col-md-7col-lg-8 col-xl-8">
                     <div class="top-info__list t-f d-flex align-self-center">
-                         <div class="ml-2"><a href="tel:{{$setting->contact_no1}}"><img src="{{asset('home/img/top-nav/call.svg')}}" alt=""> <span>Tel: {{$setting->contact_no1}}</span></a></div>
+                         <div class="ml-2"><a href="tel:{{$setting->contact_no1}}"><img src="{{asset('home/img/top-nav/call.svg')}}" alt=""> <span>Tel: {{$setting->contact_no1}} (NETA)</span></a></div>
                         <div class="ml-2"><a href="mailto:{{$setting->company_email}}"><img src="{{asset('home/img/top-nav/mail.svg')}}" alt=""> <span>Email:{{$setting->company_email}}</span></a></div>
                     </div>
                 </div>
