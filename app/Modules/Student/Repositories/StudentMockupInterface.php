@@ -28,9 +28,17 @@ interface StudentMockupInterface
 
     public function updateHistory($student_id, $title, $updateData);
 
-    public function checkMockupResult($student_id, $title, $date);
+    public function checkMockupResult($student_id, $title,$date);
 
     public function getQuestionHistory($whereArray);
 
     public function updateQuestionHistory($id, $data);
+
+
+    //New Features Mockup Resume
+    public function getCurrentMockupResult($student_id,$title);
+    public function getAttemptedQuestion($id);
+    public function getStudentMockupResult($student_id, $limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
+
+    
 }

@@ -151,8 +151,12 @@
 
                                 @foreach($mockup_list as $key => $list)
 
-                                    @php
-                                    $total_quesion = App\Modules\Mockup\Entities\Mockup::gettotalQuestion($key);
+                                    @php 
+                                        $total_quesion = App\Modules\Mockup\Entities\Mockup::gettotalQuestion($key);
+                                        $student_id = Auth::guard('student')->user()->id;
+                                        $testStatus = App\Modules\Student\Entities\StudentMockupResult::checkTestStatus($student_id,$key);
+                                        $text = ($testStatus) ? 'Resume Test' : 'Take Test';
+                                        $color = ($testStatus) ? "style=background-color:#15a815;" : '';
                                     @endphp
 
                                     <div class="col-sm-6 col-md-4 col-lg-3">
@@ -160,8 +164,7 @@
                                             <div class="list-content">
                                                 <h5>{{$list}}</h5>
                                                 <span>{{$total_quesion}} Questions</span>
-                                                <a class="btn e-btn w-100"
-                                                    href="{{ route('mockup-question',['mockup_title'=>$key]) }}">Take Test</a>
+                                                <a class="btn e-btn w-100" href="{{ route('mockup-question',['mockup_title'=>$key]) }}" {{$color}}>{{$text}}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -185,8 +188,7 @@
                                             <div class="list-content">
                                                 <h5>{{$list}}</h5>
                                                 <span>{{ $key == 'practice_test_1' ? '25' : ($key == 'practice_test_2' ? '50' : '100') }} Questions</span>
-                                                <a class="btn e-btn w-100"
-                                                    href="{{ route('practice-question',['practice_title'=>$key]) }}">Take Test</a>
+                                                <a class="btn e-btn w-100" href="{{ route('practice-question',['practice_title'=>$key]) }}">Take Test</a>
                                             </div>
                                         </div>
                                     </div>

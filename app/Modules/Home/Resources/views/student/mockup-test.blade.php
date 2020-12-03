@@ -29,21 +29,25 @@
                 <p>Comprehension, Analysis and Application level questions from all categories using the Related
                     Courses. Complete the test in a quiet environment. </p>
                 
+                    @if($is_new)
+                        <div class="neta-courses" style="color: #db1515;">
+                            <marquee><h5>You have Already Attempted {{$qnos}} Question Answer. Please Complete Remaining Test Questions.</h5></marquee>
+                        </div>
+                    @endif
+
                 <div class="card card-body" id="timer_div">
                     
                     <div class="col-sm-12 row ">
                         <div class="col-sm-12 row justify-content-center">
-                            <p id="time" class="text-center"></p>
+                            <p id="time" class="text-center">{{ $time }}</p>
                         </div>
                         <div class="col-sm-12 row justify-content-center">
                             <div class="col-sm-2">
-                                <a id="pause_btn" 
-                                class="btn bg-danger btn-icon rounded-round" data-popup="tooltip">Pause Timer</a>
+                                <a id="pause_btn" class="btn bg-danger btn-icon rounded-round" data-popup="tooltip">Pause Timer</a>
                             
                             </div>
                             <div class="col-sm-2">
-                                <a id="resume_btn" 
-                                    class="btn bg-danger btn-icon rounded-round" data-popup="tooltip" >Resume Timer</a>
+                                <a id="resume_btn" class="btn bg-danger btn-icon rounded-round" data-popup="tooltip" >Resume Timer</a>
                             </div>
                         </div>
                     </div>
@@ -60,7 +64,10 @@
                     @php $last_key = $mockupInfo->keys()->last(); @endphp
 
                     @foreach($mockupInfo as $key => $question)
-                    @php $key = $key + 1; @endphp
+                    @php 
+                        $key = $key + 1; 
+                        $result_id = ($result_id) ? $result_id : null;
+                    @endphp
                     
                     <div class="card" style="display: {{ $key == 1 ? '' : 'none' }}" id="question_{{$key}}">
                         <div class="card-header" data-toggle="collapse" data-target="#collapse{{$key}}"
@@ -81,6 +88,7 @@
                                         {!! Form::hidden('question_id[]', $question->id, ['class'=>'question_id']) !!}
                                         {!! Form::hidden('mockup_title', $mockup_title, ['class'=>'mockup_title']) !!}
                                         {!! Form::hidden('question_type[]', $question->question_type, ['class'=>'question_type']) !!}
+                                        {!! Form::hidden('mockup_result_id', $result_id, ['class'=>'mockup_result_id']) !!}
 
                                         @if($question->question_type == 'multiple')
                                         <div class="col-sm-6">
@@ -180,6 +188,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         Clock.start();
+
         $('#pause_btn').click(function () { 
             Clock.pause();
             $('.enrol-cpd').hide();
@@ -204,6 +213,8 @@
             var qkey = $(this).attr('data-id');
             var index = qkey - 1;
             var mockup_title = $('.mockup_title').val();
+            var mockup_result_id = $('.mockup_result_id').val();
+            var time = $('#time').html(); 
             var question_id = $('.question_id').eq(index).val();
             var question_type = $('.question_type').eq(index).val();
   
@@ -222,19 +233,20 @@
             $.ajax({
                 type: 'POST',
                 url: '{{route("studentmockup.ajaxStore")}}',
-                data: { mockup_title: mockup_title, question_id: question_id, answers: ans_array, qkey: qkey, _token: token },
+                data: { mockup_title: mockup_title, question_id: question_id, answers: ans_array, qkey: qkey, mockup_result_id:mockup_result_id,time:time, _token: token },
                 success: function (res) {
-                    if(res == 1) {
-                        $('#studentmockup_submit').submit();
-                        return true;
-                    } else if(res == 0) {
+                    if(res == 0) {
                         alert('Please provide answer');
                         return false;
-                    } else {
+                    } else if (res == 2) {
                         alert('Saving Answer error!Please try again');
                         return false;
+                    } else {
+                        $('#studentmockup_submit').submit();
+                        return true;
                     }
                 }
+
             }) 
             
         });
@@ -245,6 +257,8 @@
 
             var index = qkey - 1;
             var mockup_title = $('.mockup_title').val();
+            var mockup_result_id = $('.mockup_result_id').val();
+            var time = $('#time').html();
             var question_id = $('.question_id').eq(index).val();
             var question_type = $('.question_type').eq(index).val();
   
@@ -259,31 +273,38 @@
   
             var token = '{{csrf_token()}}';
 
-            $.ajax({
+            $.ajax({ 
                 type: 'POST',
                 url: '{{route("studentmockup.ajaxStore")}}',
-                data: { mockup_title: mockup_title, question_id: question_id, answers: ans_array, qkey: qkey, _token: token },
+                data: { mockup_title: mockup_title, question_id: question_id, answers: ans_array, qkey: qkey,mockup_result_id:mockup_result_id,time:time, _token: token },
                 success: function (res) {
-                    if(res == 1) {
-                       $('#question_'+qkey).css('display', 'none');
-                        $('#question_'+new_key).css('display', 'block');
-                        $('#question_number').text(new_key);
-                        return true;
-                    } else if(res == 0) {
+                    if(res == 0) {
                         alert('Please provide answer');
                         return false;
-                    } else {
+                    } else if(res == 2) {
                         alert('Saving Answer error!Please try again');
                         return false;
+                    } else {
+                         $('#question_'+qkey).css('display', 'none');
+                        $('#question_'+new_key).css('display', 'block');
+                        $('#question_number').text(new_key);
+                        $('.mockup_result_id').val(res);
+                        return true;
                     }
+
                 }
             })
         });
 
     });
 
+
+    var actual_time = $('#time').html(); 
+    var rtime = actual_time.split(":");
+    var secondssss = (+rtime[0]) * 60 * 60 + (+rtime[1]) * 60 + (+rtime[2]); 
+
     var Clock = {
-        totalSeconds: 0,
+        totalSeconds: parseInt(secondssss),
 
         start: function () {
             var self = this;
@@ -295,7 +316,8 @@
                 var hours = Math.floor(self.totalSeconds / 3600);
                 var minutes = Math.floor(self.totalSeconds / 60 % 60);
                 var seconds = Math.floor(self.totalSeconds % 60);
-                document.getElementById("time").innerHTML = hours + ":"+ minutes + ":" + seconds;
+                document.getElementById("time").innerHTML = pad(hours, 2) + ":"+ pad(minutes, 2) + ":" + pad(seconds, 2);
+
             }, 1000);
         },
 
@@ -308,5 +330,10 @@
             if (!this.interval) this.start();
         }
     };
+
+    function pad (str, max) {
+      str = str.toString();
+      return str.length < max ? pad("0" + str, max) : str;
+    }
 
 </script>

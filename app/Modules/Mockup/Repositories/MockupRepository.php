@@ -55,16 +55,17 @@ class MockupRepository implements MockupInterface
         return $team->delete();
     }
 
-    public function getQuestionByTitle($mockup_title, $limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1])
+    public function getQuestionByTitle($mockup_title, $limit = null, $questions =[], $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1])
     {
 
         $result = Mockup::when(array_keys($filter, true), function ($query) use ($filter) {
 
         })
-            ->where('mockup_title', '=', $mockup_title)->inRandomOrder()->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+            ->whereNotIn('id', $questions)->where('mockup_title', '=', $mockup_title)->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
 
         return $result;
     }
+
 
     public function checkCorrectAnswer($question_id, $answer)
     {
