@@ -1,9 +1,6 @@
-@include('home::layouts.navbar-inner')
+
 
 <iframe src="{{asset($resources->file_full_path).'/'.$resources->source_name.'#toolbar=0&navpanes=0'}}" height="100%" width="100%" id="ifr" /> 
-
-@include('home::layouts.footer')
-
 
 
 <style type="text/css">
@@ -26,8 +23,13 @@
 
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript">
-	window.frames["ifr"].contentDocument.oncontextmenu = function(){
-	 return false; 
-	};
+
+	$(document).ready(function(){
+		
+		window.frames["ifr"].contentDocument.oncontextmenu = function(){
+		 return false; 
+		};
+
+	});
 </script>
 
