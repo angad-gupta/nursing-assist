@@ -13,6 +13,6 @@
 </script>
 </head>
 <body bgcolor="#FFFFFF" onload="disableContextMenu();" oncontextmenu="return false">
-<iframe id="fraDisabled" width="528" height="473" src="{{asset($resources->file_full_path).'/'.$resources->source_name.'#toolbar=0&navpanes=0'}}" onload="disableContextMenu();" onMyLoad="disableContextMenu();"></iframe>
+<iframe id="fraDisabled" height="100%" width="100%" src="{{asset($resources->file_full_path).'/'.$resources->source_name.'#toolbar=0&navpanes=0'}}" onload="disableContextMenu();" onMyLoad="disableContextMenu();"></iframe>
 </body>
 </html>
