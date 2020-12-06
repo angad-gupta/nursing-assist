@@ -1,5 +1,4 @@
 
-
 <iframe src="{{asset($resources->file_full_path).'/'.$resources->source_name.'#toolbar=0&navpanes=0'}}" height="100%" width="100%" id="ifr" /> 
 
 
@@ -24,12 +23,11 @@
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript">
 
-	$(document).ready(function(){
-		
-		window.frames["ifr"].contentDocument.oncontextmenu = function(){
-		 return false; 
-		};
+$(document).ready(function(){
+    
+    document.addEventListener("contextmenu", function(e){
+         e.preventDefault();
+    }, false);
 
-	});
+});
 </script>
-

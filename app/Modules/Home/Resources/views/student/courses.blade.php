@@ -469,6 +469,16 @@
 
 @include('home::layouts.footer')
 
+<script type="text/javascript">
+
+$(document).ready(function(){
+    
+    document.addEventListener("contextmenu", function(e){
+         e.preventDefault();
+    }, false);
+
+});
+</script>
 
 <script type="text/javascript">
     $(document).ready(function(){
