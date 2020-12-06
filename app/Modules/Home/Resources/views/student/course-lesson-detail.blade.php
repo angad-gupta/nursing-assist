@@ -222,3 +222,15 @@
 
 <section class="section-padding"></section>
 @include('home::layouts.footer')
+
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+    
+    document.addEventListener("contextmenu", function(e){
+         e.preventDefault();
+    }, false);
+
+});
+</script>
