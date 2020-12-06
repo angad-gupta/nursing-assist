@@ -1,5 +1,5 @@
 
-<iframe src="{{asset($resources->file_full_path).'/'.$resources->source_name.'#toolbar=0&navpanes=0'}}" height="100%" width="100%" id="ifr" onload="injectJS()"/> </iframe>
+<iframe src="{{asset($resources->file_full_path).'/'.$resources->source_name.'#toolbar=0&navpanes=0'}}" height="100%" width="100%" id="myiframe" onload="injectJS()"></iframe>
 
 
 <style type="text/css">
@@ -18,9 +18,10 @@
 </style>
 
 <!-- <embed src="{{asset($resources->file_full_path).'/'.$resources->source_name.'#toolbar=0&navpanes=0&scrollbar=0'}}" height="100%" width="100%" oncontextmenu="return false" > -->
-	
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <script type="text/javascript">
 
 $(document).ready(function(){
