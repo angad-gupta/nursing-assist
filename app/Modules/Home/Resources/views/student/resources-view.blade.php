@@ -1,5 +1,5 @@
 
-<iframe src="{{asset($resources->file_full_path).'/'.$resources->source_name.'#toolbar=0&navpanes=0'}}" height="100%" width="100%" id="ifr" /> 
+<iframe src="{{asset($resources->file_full_path).'/'.$resources->source_name.'#toolbar=0&navpanes=0'}}" height="100%" width="100%" id="ifr" onload="injectJS()"/> </iframe>
 
 
 <style type="text/css">
@@ -18,9 +18,9 @@
 </style>
 
 <!-- <embed src="{{asset($resources->file_full_path).'/'.$resources->source_name.'#toolbar=0&navpanes=0&scrollbar=0'}}" height="100%" width="100%" oncontextmenu="return false" > -->
+	
 
-
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
 <script type="text/javascript">
 
 $(document).ready(function(){
@@ -30,4 +30,13 @@ $(document).ready(function(){
     }, false);
 
 });
+</script>
+
+<script type="text/jscript">
+    function injectJS(){    
+        var frame =  $('iframe');
+        var contents =  frame.contents();
+        var body = contents.find('body').attr("oncontextmenu", "return false");
+        var body = contents.find('body').append('<div>New Div</div>');    
+    }
 </script>
