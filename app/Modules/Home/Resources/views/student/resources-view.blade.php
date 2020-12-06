@@ -32,7 +32,7 @@ $(document).ready(function(){
 });
 </script>
 
-<script type="text/jscript">
+<script type="text/javascript">
     function injectJS(){    
         var frame =  $('iframe');
         var contents =  frame.contents();
