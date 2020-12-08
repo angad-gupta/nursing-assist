@@ -367,8 +367,8 @@ class EnrolmentController extends Controller
                 }
   
                 //common wealth function
-                Simplify::$publicKey = env('SANDBOX_PUBLIC_KEY');
-                Simplify::$privateKey = env('SANDBOX_PRIVATE_KEY');
+                Simplify::$publicKey = env('LIVE_PUBLIC_KEY');
+                Simplify::$privateKey = env('LIVE_PRIVATE_KEY');
 
                 if (isset($data['token']) && $data['token'] != '') {
 
@@ -542,8 +542,8 @@ class EnrolmentController extends Controller
     {
         $data = $request->all();
         try {
-            Simplify::$publicKey = env('SANDBOX_PUBLIC_KEY');
-            Simplify::$privateKey = env('SANDBOX_PRIVATE_KEY');
+            Simplify::$publicKey = env('LIVE_PUBLIC_KEY');
+            Simplify::$privateKey = env('LIVE_PRIVATE_KEY');
             $amount = $data['amount'] * 100;
             //$amount = 100;
  
@@ -571,8 +571,8 @@ class EnrolmentController extends Controller
     {
         $data = $request->all(); //dd($data);
         try {
-            Simplify::$publicKey = env('SANDBOX_PUBLIC_KEY');
-            Simplify::$privateKey = env('SANDBOX_PRIVATE_KEY');
+            Simplify::$publicKey = env('LIVE_PUBLIC_KEY');
+            Simplify::$privateKey = env('LIVE_PRIVATE_KEY');
             
             $amount = $data['amount'] * 100;
             $description = $data['description'];
