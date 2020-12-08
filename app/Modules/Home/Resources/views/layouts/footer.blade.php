@@ -67,7 +67,7 @@
                     <p>Nursing Education & Training Australia acknowledges the Traditional Owners
                         of the country throughout Australia and recognises their continuing connection
                         to land, waters and culture. We pay our respects to Elders past, present and
-                        emerging
+                        emerging.
                     </p>
                     <p>   
                         NCLEX-P ®, NCLEX-RN® are registered trademarks of the National Council of State Boards of
