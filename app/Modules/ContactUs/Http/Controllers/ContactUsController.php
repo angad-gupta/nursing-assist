@@ -3,6 +3,8 @@
 namespace App\Modules\ContactUs\Http\Controllers;
 
 use App\Modules\ContactUs\Repositories\ContactUsInterface;
+use App\Modules\EmailLog\Repositories\EmaillogInterface;
+
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
@@ -14,10 +16,12 @@ class ContactUsController extends Controller
 {
 
     protected $contactus;
+    protected $emailLog;
 
-    public function __construct(ContactUsInterface $contactus)
+    public function __construct(ContactUsInterface $contactus, EmaillogInterface $emailLog)
     {
         $this->contactus = $contactus;
+        $this->emailLog = $emailLog;
     }
 
     /**
@@ -101,6 +105,13 @@ class ContactUsController extends Controller
                $content = view('contactus::contactus.email-content',$response)->render();
 
               Mail::to($email)->send(new SendNetaMail($content, $subject));
+
+            /*     Email Log Maintaining    */
+            $emaillog['action'] = 'Contact Us Reply From NETA To'.$email;
+            $emaillog['student_id'] = null;
+            $emaillog['date'] = date('Y-m-d');
+            $this->emailLog->saveEmaillog($emaillog);
+            /*  End of Email Log Maintaining  */
             /* ---------------------------------------------------------------
                 Email Send to  Announcement Nofitication
             --------------------------------------------------------------- */

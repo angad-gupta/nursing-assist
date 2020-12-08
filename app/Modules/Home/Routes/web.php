@@ -17,6 +17,16 @@ Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 
 Route::get('about-us', ['as' => 'about-us', 'uses' => 'HomeController@AboutUs']);
 
+Route::get('blog', ['as' => 'blog', 'uses' => 'HomeController@Blog']);
+
+Route::get('blog-detail', ['as' => 'blog-detail', 'uses' => 'HomeController@BlogDetail']);
+
+Route::get('gallery', ['as' => 'gallery', 'uses' => 'HomeController@Gallery']);
+
+Route::get('album-detail', ['as' => 'album-detail', 'uses' => 'HomeController@AlbumDetail']);
+
+Route::get('video', ['as' => 'video', 'uses' => 'HomeController@Video']);
+
 Route::get('contact-us', ['as' => 'contact-us', 'uses' => 'HomeController@ContactUs']);
 
 Route::get('faq', ['as' => 'faq', 'uses' => 'HomeController@faq']);
@@ -84,6 +94,8 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth:student']], function
     Route::post('message/send', ['as' => 'message.send', 'uses' => 'DashboardController@sendMessage']);
 
     Route::get('student-courses', ['as' => 'student-courses', 'uses' => 'DashboardController@studentCourse']);
+
+    Route::post('oscex-passcode-courses', ['as' => 'oscex-passcode-courses', 'uses' => 'DashboardController@oscexPasscodeCourses']);
 
     Route::get('syllabus-detail', ['as' => 'syllabus-detail', 'uses' => 'DashboardController@syllabusDetail']);
 

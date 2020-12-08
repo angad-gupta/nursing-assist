@@ -55,8 +55,8 @@ interface StudentInterface
     public function deleteMockuphistory($student_id, $mockup_title);
     public function savemockupHistory($mockupdata);
 
-    public function getmockupHistory($student_id, $mockup_title);
-    public function getmockupcorrectAnswer($student_id, $mockup_title);
+    public function getmockupHistory($mockup_result_id, $student_id);
+    public function getmockupcorrectAnswer($mockup_result_id);
 
     public function getLatestQuizByStudent($student_id);
     public function getQuizForCourseInfo($student_id, $courseContentId);

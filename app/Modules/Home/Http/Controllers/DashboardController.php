@@ -163,6 +163,22 @@ class DashboardController extends Controller
         $data['student_histories'] = $this->student->getAllHistories($id, 20); 
 
         return view('home::student.courses', $data);
+
+    }
+
+    public function oscexPasscodeCourses(Request $request){
+        $input = $request->all();
+
+        $courseInfoId = $input['courseInfoId'];
+        $passcode = $input['passcode'];
+
+        if($passcode == 'OSCEX2020'){
+            return redirect(route('syllabus-detail',['course_info_id'=>$courseInfoId]));
+        }else{
+             Flash("Entered Passcode Doesn't Match. Please Try Again or Contact Admin For Passcode.")->error();
+            return redirect()->back();
+        }
+
     }
 
     public function syllabusDetail(Request $request)
@@ -375,18 +391,50 @@ class DashboardController extends Controller
     {
 
         $input = $request->all();
-
         $mockup_title = $input['mockup_title'];
+        $student_id = Auth::guard('student')->user()->id;
 
-        $mockupInfo = $this->mockup->getQuestionByTitle($mockup_title);
+        $mockup_history = $this->studentMockup->getCurrentMockupResult($student_id,$mockup_title);  
 
-        if (sizeof($mockupInfo) > 0) {
+        if(!is_null($mockup_history)){
 
+            //Test Is Not Completed
+            $resultId = $mockup_history['id'];
+            $time =date('H:i:s',strtotime($mockup_history['start_time']));
+
+            $mockupAttemptHistory = $this->studentMockup->getAttemptedQuestion($resultId);
+
+            $qnos = sizeof($mockupAttemptHistory);
+
+            $question = array();
+            foreach ($mockupAttemptHistory as $key => $value) {
+               $questionArray = $value['question_id'];
+               array_push($question, $questionArray);
+            }
+
+            $is_new = TRUE;
+            $result_id = $resultId;
+            $mockupInfo = $this->mockup->getQuestionByTitle($mockup_title, 250,$question);            
+
+        }else{
+            $qnos = 1;
+            $time = '0:0:0';
+            $is_new = FALSE;
+            $result_id = '';
+            $mockupInfo = $this->mockup->getQuestionByTitle($mockup_title, 250);  
+        }
+
+
+        if (sizeof($mockupInfo) > 0) {  
+            $data['qnos'] = $qnos;
+            $data['time'] = $time;
+            $data['is_new'] = $is_new;
+            $data['result_id'] = $result_id;
             $data['mockupInfo'] = $mockupInfo;
-            $data['mockup_title'] = $mockup_title;
+            $data['mockup_title'] = $mockup_title; 
             return view('home::student.mockup-test', $data);
 
-        } else {
+        }else {
             Flash('No Mockup Question Set. Please Check Later.')->error();
             return redirect(route('student-courses'));
         }
@@ -395,18 +443,20 @@ class DashboardController extends Controller
 
     public function studentmockupStore(Request $request)
     {
-        $input = $request->all(); 
+
+        $input = $request->all();  
 
         $mockup_title = $input['mockup_title'];
+        $mockup_result_id = $input['mockup_result_id'];
         $student_id = Auth::guard('student')->user()->id;
 
         try {
 
-            $mockup_history = $this->student->getmockupHistory($student_id, $mockup_title);
-            $correct_answer = $this->student->getmockupcorrectAnswer($student_id, $mockup_title);
+            $mockup_history = $this->student->getmockupHistory($mockup_result_id, $student_id);
+            $correct_answer = $this->student->getmockupcorrectAnswer($mockup_result_id);
 
-            //$total_question = count($mockup_history);
-            $total_question = $this->mockup->getTotalQuestionsByTitle($mockup_title, date('Y-m-d H:i:s'));
+            $total_question = count($mockup_history);
+            //$total_question = $this->mockup->getTotalQuestionsByTitle($mockup_title, date('Y-m-d H:i:s'));
             $correctPercent = ($correct_answer / $total_question) * 100;
 
             $data['correct_percent'] = $correct_percent = number_format($correctPercent, 2);
@@ -415,26 +465,29 @@ class DashboardController extends Controller
             $data['incorrect_answer'] = $total_question - $correct_answer;
 
             $date = date('Y-m-d');
-            $resultInfo = $this->studentMockup->checkMockupResult($student_id, $mockup_title, $date);
+            $resultInfo = $this->studentMockup->getCurrentMockupResult($student_id, $mockup_title); 
+            // $resultInfo = $this->studentMockup->checkMockupResult($student_id, $mockup_title);
+
             if (empty($resultInfo)) {
 
                 $mockup_result = array(
                     'student_id' => $student_id,
-                    'mockup_title' => $mockup_title,
+                    'mockup_title' => $title,
                     'date' => $date,
                     'total_question' => $total_question,
                     'correct_answer' => $correct_answer,
                     'percent' => $correct_percent,
                 );
 
-                $this->student->saveMockupResult($mockup_result);
-            } else {
+                $this->studentMockup->save($mockup_result);
+            } else {    
                 $updateArray = array(
                     'total_question' => $total_question,
                     'correct_answer' => $correct_answer,
                     'percent' => $correct_percent,
                 );
-                $resultInfo->update($updateArray);
+
+                $this->studentMockup->update($mockup_result_id,$updateArray);
             }
 
             return view('home::student.mockup-report', $data);
@@ -485,7 +538,7 @@ class DashboardController extends Controller
     } 
     
 
-    public function readlineQuestion(Request $request)
+    public function readlineQuestion(Request $request) 
     {
         $input = $request->all();   
 
@@ -641,10 +694,13 @@ class DashboardController extends Controller
 
     public function ajaxQuestionStore(Request $request)
     {
-        $input = $request->all();
+        //Ajax Mockup Question Each Store
+        $input = $request->all();  
         $mockup_title = $input['mockup_title'];
+        $mockup_result_id = (array_key_exists('mockup_result_id',$input)) ? $input['mockup_result_id'] : null;   
         $qkey = $input['qkey'];
-        $question_id = $input['question_id'];
+        $time = $input['time'];
+        $question_id = $input['question_id']; 
 
         $answers = [];
         if (isset($input['answers']) && !empty($input['answers'])) {
@@ -658,24 +714,34 @@ class DashboardController extends Controller
             $student_id = Auth::guard('student')->user()->id;
             $date = date('Y-m-d');
 
-            $resultInfo = $this->studentMockup->checkMockupResult($student_id, $mockup_title, $date);
-            if (empty($resultInfo)) {
-                $mockup_result = array(
-                    'student_id' => $student_id,
-                    'mockup_title' => $mockup_title,
-                    'date' => date('Y-m-d'),
-                );
 
-                $resultInfo = $this->student->saveMockupResult($mockup_result);
-                $result_id = $resultInfo->id;
-            } else {
-                $result_id = $resultInfo->id;
+            if($mockup_result_id == null){    
+
+                $resultInfo = $this->studentMockup->checkMockupResult($student_id, $mockup_title, $date);  
+                if (empty($resultInfo)) {
+                    $mockup_result = array(
+                        'student_id' => $student_id,
+                        'mockup_title' => $mockup_title,
+                        'date' => date('Y-m-d'),
+                        'start_time' => date('Y-m-d H:i:s',strtotime($time))
+                    );
+
+                    $resultInfo = $this->student->saveMockupResult($mockup_result); 
+                    $result_id = $resultInfo->id;
+                } else {
+                    $result_id = $resultInfo->id;
+                }
+            }else{
+                    $result_id = $mockup_result_id;     
+
+                 $mockupData = array(
+                        'start_time' => date('Y-m-d H:i:s',strtotime($time))
+                    );
+     
+                $this->studentMockup->update($result_id,$mockupData);  
             }
 
-            /*   if ($qkey == 1) {
-            $this->student->deleteMockuphistory($student_id, $mockup_title);
-            }
-             */
+
             $mockup_question = $this->mockup->find($question_id);
             if ($mockup_question->question_type == 'multiple') {
                 $question_option = json_encode($answers);
@@ -711,7 +777,7 @@ class DashboardController extends Controller
                 $this->studentMockup->saveHistory($mockupdata);
             }
 
-            return 1;
+            return $result_id;
 
         } catch (\Throwable $e) {
             return 2;
@@ -720,7 +786,8 @@ class DashboardController extends Controller
     }
 
     public function ajaxReadinessStore(Request $request)
-    {
+    { 
+        //Readiness Ajax Store
 
         $input = $request->all();   
         $title = $input['title'];
@@ -866,7 +933,7 @@ class DashboardController extends Controller
         try {
             $student_id = Auth::guard('student')->user()->id;
 
-            $mockup_history = $this->studentPractice->getHistory($student_id, $title);
+            
             //$correct_answer = $this->studentPractice->getCorrectAnswer($student_id, $title);
             $correct_answer = $this->studentPractice->getCorrectAnswerByResult($input['practice_result_id']);
 
@@ -875,12 +942,13 @@ class DashboardController extends Controller
             $correctPercent = ($correct_answer / $total_question) * 100;
            
             $data['correct_percent'] = $correct_percent = number_format($correctPercent, 2);
-            $data['mockup_history'] = $mockup_history;
             $data['correct_answer'] = $correct_answer;
             $data['incorrect_answer'] = $total_question - $correct_answer;
 
             $date = date('Y-m-d');
             $resultInfo = $this->studentPractice->checkPracticeResult($student_id, $title, $date); 
+            $id = $resultInfo['id'];
+
             if (empty($resultInfo)) {
 
                 $practice_result = array(
@@ -902,7 +970,11 @@ class DashboardController extends Controller
                     'percent' => $correct_percent,
                 );
                 $resultInfo->update($updateArray);
-            }
+            } 
+
+            
+            $practise_history = $this->studentPractice->getHistoryByPractiseID($id);
+            $data['practise_history'] = $practise_history;
 
             return view('home::student.practice-report', $data);
 

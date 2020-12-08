@@ -16,7 +16,7 @@ interface MockupInterface
 
     public function delete($id);
     
-    public function getQuestionByTitle($mockup_title,$limit, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1]);
+    public function getQuestionByTitle($readline_title,$limit, $questions = [], $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC'], $status = [0, 1]);
     
     public function checkCorrectAnswer($question_id,$answer);
 

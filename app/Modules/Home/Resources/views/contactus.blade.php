@@ -84,21 +84,24 @@
                     <ul class="list-unstyled">
                         <li><span class="material-icons">
                                 call
-                            </span> {{$setting->contact_no1}}</li>
+                            </span> <a href="tel:{{$setting->contact_no1}}">{{$setting->contact_no1}}</a> , <a href="tel:{{$setting->contact_no2}}">{{$setting->contact_no2}}</a></li>
                         <li><span class="material-icons">
                                 place
                             </span>{{$setting->address1}}</li>
                         <li><span class="material-icons">
+                                place
+                            </span>{{$setting->address2}}</li>
+                        <li><span class="material-icons">
                                 mail
-                            </span>Accounts: <p>{{$setting->accounts_email}}</p>
+                            </span>Accounts: <p><a href="mailto:{{$setting->accounts_email}}">{{$setting->accounts_email}}</a></p>
                         </li>
                         <li><span class="material-icons">
                                 mail
-                            </span>Admissions: <p>{{$setting->admission_email}}</p>
+                            </span>Admissions: <p><a href="mailto:{{$setting->admission_email}}">{{$setting->admission_email}}</a></p>
                         </li>
                         <li><span class="material-icons">
                                 mail
-                            </span>For Information: <p>{{$setting->information_email}}</p>
+                            </span>For Information: <p><a href="mailto:{{$setting->information_email}}">{{$setting->information_email}}</a></p>
                         </li>
                         <li><span>
                         <i class="fa fa-skype" aria-hidden="true"></i>
@@ -107,7 +110,7 @@
 
                         <li><span class="material-icons">
                                 public
-                            </span>Website: <p>{{$setting->website}}</p>
+                            </span>Website: <p><a href="{{$setting->website}}" target="_blank">{{$setting->website}}</a></p>
                         </li>
                     </ul>
                 </div>

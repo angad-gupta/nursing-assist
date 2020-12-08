@@ -2,11 +2,13 @@ $(document).ready(function () {
     $("#video_submit").validate({
         rules: {
             video_title: "required",
-            video_id: "required",
+            status: "required",
+            is_youtube_image: "required"
         },
         messages: {
             video_title: "Enter Video Title",
-            video_id: "Enter Youtube ID",
+            status: "Enter Video Title",
+            is_youtube_image: "Select Is Youtube Image"
         },
         errorElement: "em",
         errorPlacement: function (error, element) {  console.log(element)

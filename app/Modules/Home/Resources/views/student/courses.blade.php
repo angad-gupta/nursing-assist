@@ -88,6 +88,9 @@
 
                                         $total_syllabus =
                                         App\Modules\CourseContent\Entities\CourseContent::gettotalsyllabus($my_course_val->courseinfo_id);
+
+                                        $courseinfo_id = $my_course_val->courseinfo_id;
+
                                         @endphp
 
                                         <div class="col-sm-6 col-md-4 col-lg-3">
@@ -100,12 +103,17 @@
                                                         <p>{!! optional($my_course_val->courseInfo)->short_content !!} </p>
                                                     </div>
                                                     @if($my_course_val->status == 1)
-                                                    <a class="btn e-btn w-100"
-                                                        href="{{ route('syllabus-detail',['course_info_id'=>$my_course_val->courseinfo_id]) }}">View
-                                                        Syllabus</a>
+
+                                                        @if($courseinfo_id == '2')
+
+                                                         <a data-toggle="modal" data-target="#modal_oscex_warning" class="btn e-btn w-100 check_passcode" course_info_id ="{{ $courseinfo_id }}" data-popup="tooltip" data-original-title="Delete" data-placement="bottom">View Syllabus</a>
+
+                                                        @else
+                                                            <a class="btn e-btn w-100" href="{{ route('syllabus-detail',['course_info_id'=>$my_course_val->courseinfo_id]) }}">View Syllabus</a>
+                                                        @endif
+                                                    
                                                     @else
-                                                    <a data-toggle="modal" data-target="#modal_theme_installment"
-                                                        class="btn e-btn w-100 installment_info">View Syllabus</a>
+                                                    <a data-toggle="modal" data-target="#modal_theme_installment" class="btn e-btn w-100 installment_info">View Syllabus</a>
                                                     @endif
                                                 </div>
                                             </div>
@@ -143,8 +151,12 @@
 
                                 @foreach($mockup_list as $key => $list)
 
-                                    @php
-                                    $total_quesion = App\Modules\Mockup\Entities\Mockup::gettotalQuestion($key);
+                                    @php 
+                                        $total_quesion = App\Modules\Mockup\Entities\Mockup::gettotalQuestion($key);
+                                        $student_id = Auth::guard('student')->user()->id;
+                                        $testStatus = App\Modules\Student\Entities\StudentMockupResult::checkTestStatus($student_id,$key);
+                                        $text = ($testStatus) ? 'Resume Test' : 'Take Test';
+                                        $color = ($testStatus) ? "style=background-color:#15a815;" : '';
                                     @endphp
 
                                     <div class="col-sm-6 col-md-4 col-lg-3">
@@ -152,8 +164,7 @@
                                             <div class="list-content">
                                                 <h5>{{$list}}</h5>
                                                 <span>{{$total_quesion}} Questions</span>
-                                                <a class="btn e-btn w-100"
-                                                    href="{{ route('mockup-question',['mockup_title'=>$key]) }}">Take Test</a>
+                                                <a class="btn e-btn w-100" href="{{ route('mockup-question',['mockup_title'=>$key]) }}" {{$color}}>{{$text}}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -177,8 +188,7 @@
                                             <div class="list-content">
                                                 <h5>{{$list}}</h5>
                                                 <span>{{ $key == 'practice_test_1' ? '25' : ($key == 'practice_test_2' ? '50' : '100') }} Questions</span>
-                                                <a class="btn e-btn w-100"
-                                                    href="{{ route('practice-question',['practice_title'=>$key]) }}">Take Test</a>
+                                                <a class="btn e-btn w-100" href="{{ route('practice-question',['practice_title'=>$key]) }}">Take Test</a>
                                             </div>
                                         </div>
                                     </div>
@@ -414,4 +424,67 @@
 </div>
 <!-- /warning modal -->
 
+
+<div id="modal_oscex_warning" class="modal fade in" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-teal-400">
+                <h5 class="modal-title">OSCEX ACCESS </h5>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+
+            <div class="modal-body">
+                 {!! Form::open(['route'=>'oscex-passcode-courses', 'method'=>'POST','class'=>'form-horizontal','role'=>'form' ,'files' => true]) !!}
+        
+
+                      {!! Form::hidden('courseInfoId', '',['class'=>'courseInfoId']) !!}
+                        <fieldset class="mb-3">
+                            <legend class="text-uppercase font-size-sm font-weight-bold"></legend>
+
+                            
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-3">Enter Passcode To Access OSCEX:</label>
+                                <div class="col-lg-9 form-group-feedback form-group-feedback-right">
+                                    <div class="input-group">
+                                    {!! Form::text('passcode', $value = null, ['id'=>'passcode','placeholder'=>'Enter Passcode To Access OSCEX','class'=>'form-control','required']) !!}
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="text-right">
+                                <button type="submit"  class="btn e-btn w-100" style="background-color:#b0117e;color: white;">Submit</button>
+                            </div>
+
+                        </fieldset>
+
+                {!! Form::close() !!}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 @include('home::layouts.footer')
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+    
+    document.addEventListener("contextmenu", function(e){
+         e.preventDefault();
+    }, false);
+
+});
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(document).on('click','.check_passcode',function(){
+            var course_info_id = $(this).attr('course_info_id');
+            $('.courseInfoId').val(course_info_id);
+        });
+    });
+</script>

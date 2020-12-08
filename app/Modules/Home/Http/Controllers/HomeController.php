@@ -15,6 +15,12 @@ use App\Modules\Page\Repositories\PageInterface;
 use App\Modules\Quiz\Repositories\QuizInterface;
 use App\Modules\Student\Repositories\StudentInterface;
 use App\Modules\Team\Repositories\TeamInterface;
+use App\Modules\Blog\Repositories\BlogInterface;
+use App\Modules\Gallery\Repositories\GalleryInterface;
+use App\Modules\Video\Repositories\VideoInterface;
+use App\Modules\EmailLog\Repositories\EmaillogInterface;
+
+
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
@@ -37,6 +43,10 @@ class HomeController extends Controller
     protected $faq;
     protected $agent;
     protected $quiz;
+    protected $blog;
+    protected $gallery;
+    protected $video;
+    protected $emailLog;
 
     public function __construct(
         PageInterface $page,
@@ -49,7 +59,11 @@ class HomeController extends Controller
         StudentInterface $student,
         FAQInterface $faq,
         AgentInterface $agent,
-        QuizInterface $quiz
+        QuizInterface $quiz,
+        BlogInterface $blog,
+        GalleryInterface $gallery,
+        VideoInterface $video,
+        EmaillogInterface $emailLog
     ) {
         $this->page = $page;
         $this->banner = $banner;
@@ -62,6 +76,10 @@ class HomeController extends Controller
         $this->faq = $faq;
         $this->agent = $agent;
         $this->quiz = $quiz;
+        $this->blog = $blog;
+        $this->gallery = $gallery;
+        $this->video = $video;
+        $this->emailLog = $emailLog;
     }
 
     /**
@@ -88,6 +106,53 @@ class HomeController extends Controller
         $data['about_neta'] = $this->page->getBySlug('about_us');
         $data['team'] = $this->team->findAll();
         return view('home::aboutus', $data);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     * @return Response
+     */
+    public function Blog()
+    {
+        $data['blog_info'] = $this->blog->findAllActiveBlog($limit= 12); 
+        return view('home::blog', $data);
+    }
+
+    public function BlogDetail(Request $request){
+        $input = $request->all();
+
+        $blog_id = $input['blog_id'];
+
+        $data['blog_detail'] = $this->blog->find($blog_id);
+
+        return view('home::blog-detail', $data);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     * @return Response
+     */
+    public function Gallery()
+    {
+        $data['album_info'] = $this->gallery->findAllActiveGallery($limit= 12); 
+        return view('home::gallery', $data);
+    }
+
+    public function AlbumDetail(Request $request){
+        $input = $request->all();
+
+        $album_id = $input['album_id'];
+
+        $data['album_detail'] = $this->gallery->find($album_id);
+        $data['album_photos'] = $this->gallery->getGalleryImage($album_id);
+
+        return view('home::gallery-detail', $data);
+    }
+
+    public function Video()
+    {
+        $data['video_info'] = $this->video->findAllActiveVideo($limit= 12); 
+        return view('home::video', $data);
     }
 
     /**
@@ -273,8 +338,8 @@ class HomeController extends Controller
                 'active' => 1,
             );
 
-            $this->student->save($studentData);
-
+            $studentInfo = $this->student->save($studentData);
+            $student_id = $studentInfo['id'];
             /* ---------------------------------------------------------------
             Email Send to Student After Registration
             --------------------------------------------------------------- */
@@ -284,8 +349,15 @@ class HomeController extends Controller
             $content = view('home::email-register-content')->render();
 
             //if (filter_var( $email, FILTER_VALIDATE_EMAIL )) {
-            //Mail::to($email)->send(new SendNetaMail($content, $subject));
+            Mail::to($email)->send(new SendNetaMail($content, $subject));
             //}
+
+             /*     Email Log Maintaining    */
+            $emaillog['action'] = 'New Student Registration';
+            $emaillog['student_id'] = $student_id;
+            $emaillog['date'] = date('Y-m-d');
+            $this->emailLog->saveEmaillog($emaillog);
+            /*  End of Email Log Maintaining  */
 
             /* ---------------------------------------------------------------
             Email Send to Student After Registration

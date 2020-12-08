@@ -15,6 +15,9 @@ class StudentMockupResult extends Model
         'total_question',
         'correct_answer',
         'percent',
+        'start_time',
+        'break_time',
+        'end_time',
 
     ];
 
@@ -26,5 +29,9 @@ class StudentMockupResult extends Model
     public function histories()
     {
         return $this->hasMany(StudentMockupHistory::class, 'mockup_result_id', 'id');
+    }
+
+    public static function checkTestStatus($studentId, $title){
+        return StudentMockupResult:: where('student_id','=',$studentId)->where('mockup_title','=',$title)->whereNull('total_question')->first();
     }
 }

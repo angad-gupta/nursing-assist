@@ -8,11 +8,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-    <link href="{{asset('home/css/animate.css')}}" rel="stylesheet">
-    <link href="{{asset('home/css/style.css')}}" rel="stylesheet">
-    <link href="{{asset('home/css/responsive.css')}}" rel="stylesheet">
-    <link href="{{asset('home/css/custom.css')}}" rel="stylesheet">
-
+    <link href="{{asset('home/new/css/magnific-popup.css')}}" rel="stylesheet">
+    <link href="{{asset('home/new/css/animate.css')}}" rel="stylesheet">
+    <link href="{{asset('home/new/css/style.css')}}" rel="stylesheet">
+    <link href="{{asset('home/new/css/responsive.css')}}" rel="stylesheet">
+    <link href="{{asset('home/new/css/custom.css')}}" rel="stylesheet">
+        @yield('script')
+        
 </head>
 
 
@@ -26,8 +28,8 @@
             <div class="row">
                 <div class="col-sm-12 col-md-7col-lg-8 col-xl-8">
                     <div class="top-info__list t-f d-flex align-self-center">
-                        <div class="ml-2"><a href="#"><img src="img/top-nav/call.svg" alt=""></a> <span>Tel: {{$setting->contact_no1}}</span></div>
-                        <div class="ml-2"><a href="#"><img src="img/top-nav/mail.svg" alt=""></a> <span>Email:{{$setting->company_email}}</span></div>
+                         <div class="ml-2"><a href="tel:{{$setting->contact_no1}}"><img src="{{asset('home/img/top-nav/call.svg')}}" alt=""> <span>Tel: {{$setting->contact_no1}} (NETA)</span></a></div>
+                        <div class="ml-2"><a href="mailto:{{$setting->company_email}}"><img src="{{asset('home/img/top-nav/mail.svg')}}" alt=""> <span>Email:{{$setting->company_email}}</span></a></div>
                     </div>
                 </div>
 
@@ -87,6 +89,14 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('student-hub') }}">Learner’s Portal</a>
+                            </li>
+                            <li class="nav-item neta-dropdown">
+                                <a class="nav-link" href="#">Media</a>
+                                <ul class="neta-dropdown__menu list-unstyled">
+                                    <a href="{{ route('blog') }}"><li>Blog</li></a>
+                                    <a href="{{ route('gallery') }}"><li>Gallery</li></a>
+                                    <a href="{{ route('video') }}"><li>Videos</li></a>
+                                </ul>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('contact-us') }}">Contact Us</a>

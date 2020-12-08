@@ -60,6 +60,11 @@ class StudentPracticeRepository implements StudentPracticeInterface
         return StudentPracticeHistory::where('student_id', '=', $student_id)->where('title', '=', $title)->get();
     }
 
+    public function getHistoryByPractiseID($id)
+    {
+        return StudentPracticeHistory::where('practice_result_id', '=', $id)->get();
+    }
+
     public function getCorrectAnswer($student_id, $title)
     {
         return StudentPracticeHistory::where('student_id', '=', $student_id)->where('title', '=', $title)->where('is_correct_answer', '=', '1')->count();

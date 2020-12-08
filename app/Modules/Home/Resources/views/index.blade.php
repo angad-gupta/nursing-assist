@@ -11,10 +11,11 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-	<link href="{{asset('home/css/animate.css')}}" rel="stylesheet">
-	<link href="{{asset('home/css/style.css')}}" rel="stylesheet">
-	<link href="{{asset('home/css/responsive.css')}}" rel="stylesheet">
-	<link href="{{asset('home/css/custom.css')}}" rel="stylesheet">
+	<link href="{{asset('home/new/css/magnific-popup.css')}}" rel="stylesheet">
+	<link href="{{asset('home/new/css/animate.css')}}" rel="stylesheet">
+	<link href="{{asset('home/new/css/style.css')}}" rel="stylesheet">
+	<link href="{{asset('home/new/css/responsive.css')}}" rel="stylesheet">
+	<link href="{{asset('home/new/css/custom.css')}}" rel="stylesheet">
 	
 </head>
 <body>
@@ -23,6 +24,27 @@
     $setting = App\Modules\Setting\Entities\Setting::getSetting(); 
     $courseInfo = App\Modules\Course\Entities\Course::GetAllCourses();
 @endphp
+
+    <div class="top-nav">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-sm-12 col-md-3">
+                    <div class="top-info__list social-links d-flex align-self-center">
+                        <div class="ml-2"><a href="{{$setting->facebook_link}}"><img src="{{asset('home/img/fb.svg')}}" alt=""></a></div>
+                        <div class="ml-2"><a href="{{$setting->twitter_link}}"><img src="{{asset('home/img/tw.svg')}}" alt=""></a></div>
+                        <div class="ml-2"><a href="{{$setting->instagram_link}}"><img src="{{asset('home/img/ins.svg')}}" alt=""></a></div>
+                        <div class="ml-2"><a href="{{$setting->youtube_link}}"><img src="{{asset('home/img/yt.svg')}}" alt=""></a></div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-9">
+                    <div class="top-info__list t-f d-flex align-self-center justify-content-end">
+                    	 <div class="ml-2"><a href="tel:{{$setting->contact_no1}}"><img src="{{asset('home/img/top-nav/call.svg')}}" alt=""> <span>Tel: {{$setting->contact_no1}} (NETA)</span></a></div>
+                        <div class="ml-2"><a href="mailto:{{$setting->company_email}}"><img src="{{asset('home/img/top-nav/mail.svg')}}" alt=""> <span>Email:{{$setting->company_email}}</span></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
  <header class="header">
         <div class="container">
@@ -69,6 +91,14 @@
                                 <li class="nav-item">
                                	 <a class="nav-link" href="{{ route('student-hub') }}">Learner’s Portal</a>
                                 </li>
+                                <li class="nav-item neta-dropdown">
+	                                <a class="nav-link" href="#">Media</a>
+	                                <ul class="neta-dropdown__menu list-unstyled">
+	                                    <a href="{{ route('blog') }}"><li>Blog</li></a>
+	                                    <a href="{{ route('gallery') }}"><li>Gallery</li></a>                                    
+	                                    <a href="{{ route('video') }}"><li>Videos</li></a>
+	                                </ul>
+                            	</li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('contact-us') }}">Contact Us</a>
                                 </li>
@@ -341,19 +371,18 @@
 </div>
 </section>
 
-<section class="neta-selfcheck wow animated fadeInUp" data-wow-duration=".5s" data-wow-delay=".5s">
-	<div class="container" >
-		<div class="row">
-			<div class="col-sm-12 col-md-12 col-lg-8">
-				<h3>OBA Preparation Class</h3>
-				<p>No documentation needed, no English test. Just self check – for free.To know if you are eligible, commence your self check</p>
-			</div>
-			<div class="col-sm-12 col-md-12 col-lg-4">
-				<a href="https://www.nursingmidwiferyboard.gov.au/Registration-and-Endorsement/International/Completing-the-Self-check.aspx" target="_blank"><button class="btn btn-neta self-check float-right">Self Check</button></a>
-			</div>
-		</div>
-	</div>
+<section class="neta-selfcheck">
+    <div class="container wow animated fadeInUp" data-wow-duration=".5s" data-wow-delay=".5s">
+        <div class="row">
+            <div class="col-sm-8">
+                <h3>OBA Preparation Class</h3>
+                <p>No documentation needed, no English test. Just self check – for free.To know if you are eligible, commence your self check</p>
+            </div>
+            <div class="col-sm-4">
+               <a href="https://www.nursingmidwiferyboard.gov.au/Registration-and-Endorsement/International/Completing-the-Self-check.aspx" target="_blank"><button class="btn btn-neta self-check float-right">Self Check</button></a>
+            </div>
+        </div>
+    </div>
 </section>
-
 
 @include('home::layouts.footer')

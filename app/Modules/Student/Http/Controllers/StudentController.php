@@ -10,6 +10,7 @@ use App\Modules\Student\Repositories\StudentPaymentInterface;
 use App\Modules\Student\Repositories\StudentPracticeInterface;
 use App\Modules\Student\Repositories\StudentReadinessInterface;
 use App\Modules\Enrolment\Repositories\EnrolmentInterface;
+use App\Modules\EmailLog\Repositories\EmaillogInterface;
 
 
 use Illuminate\Http\Request;
@@ -40,6 +41,7 @@ class StudentController extends Controller
      */
     protected $studentPractice;
     protected $studentReadiness;
+    protected $emailLog;
 
     public function __construct(
         StudentInterface $student,
@@ -49,6 +51,7 @@ class StudentController extends Controller
         AgentInterface $agent,
         StudentPaymentInterface $studentPayment,
         StudentPracticeInterface $studentPractice,
+        EmaillogInterface $emailLog,
         StudentReadinessInterface $studentReadiness) {
         $this->enrolment = $enrolment;
         $this->student = $student;
@@ -58,6 +61,7 @@ class StudentController extends Controller
         $this->studentPayment = $studentPayment;
         $this->studentPractice = $studentPractice;
         $this->studentReadiness = $studentReadiness;
+        $this->emailLog = $emailLog;
     }
     /**
      * Display a listing of the resource.
@@ -224,8 +228,16 @@ class StudentController extends Controller
                 $content = view('student::student.partial.email-content')->render();
 
                 //  if (filter_var( $email, FILTER_VALIDATE_EMAIL )) {
-                //Mail::to($email)->send(new SendNetaMail($content, $subject));
+                Mail::to($email)->send(new SendNetaMail($content, $subject));
                 // }
+
+                 /*     Email Log Maintaining    */
+                $emaillog['action'] = 'Student Course Approval';
+                $emaillog['student_id'] = $student_id;
+                $emaillog['date'] = date('Y-m-d');
+                $this->emailLog->saveEmaillog($emaillog);
+                /*  End of Email Log Maintaining  */
+
 
                 /* ---------------------------------------------------------------
             Email Send to Student After Payment success
@@ -301,6 +313,14 @@ class StudentController extends Controller
            $content = view('student::student.partial.email-installment-content',$emailContent)->render();
 
           Mail::to($email)->send(new SendNetaMail($content, $subject));
+
+                /*     Email Log Maintaining    */
+                $emaillog['action'] = 'Course Installment Payment';
+                $emaillog['student_id'] = $student_id;
+                $emaillog['date'] = date('Y-m-d');
+                $this->emailLog->saveEmaillog($emaillog);
+                /*  End of Email Log Maintaining  */
+
         /* ---------------------------------------------------------------
             Email Send to  Installment Nofitication
         --------------------------------------------------------------- */

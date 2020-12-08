@@ -255,14 +255,14 @@ class StudentRepository implements StudentInterface
         return StudentMockupHistory::create($mockupdata);
     }
 
-    public function getmockupHistory($student_id, $mockup_title)
+    public function getmockupHistory($mockup_result_id, $student_id)
     {
-        return StudentMockupHistory::where('student_id', '=', $student_id)->where('mockup_title', '=', $mockup_title)->get();
+        return StudentMockupHistory::where('mockup_result_id', '=', $mockup_result_id)->where('student_id', '=', $student_id)->get();
     }
 
-    public function getmockupcorrectAnswer($student_id, $mockup_title)
+    public function getmockupcorrectAnswer($mockup_result_id)
     {
-        return StudentMockupHistory::where('student_id', '=', $student_id)->where('mockup_title', '=', $mockup_title)->where('is_correct_answer', '=', '1')->count();
+        return StudentMockupHistory::where('mockup_result_id', '=', $mockup_result_id)->where('is_correct_answer', '=', '1')->count();
     }
 
     public function getLatestQuizByStudent($student_id)

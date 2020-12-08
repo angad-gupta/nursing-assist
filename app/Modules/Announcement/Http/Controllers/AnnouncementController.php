@@ -10,6 +10,7 @@ use App\Modules\Enrolment\Repositories\EnrolmentInterface;
 use App\Modules\Student\Repositories\StudentInterface;
 use App\Modules\Home\Emails\SendNetaMail;
 use App\Modules\Announcement\Repositories\AnnouncementInterface;
+use App\Modules\EmailLog\Repositories\EmaillogInterface;
 
 use Illuminate\Support\Facades\Mail;
 
@@ -19,13 +20,15 @@ class AnnouncementController extends Controller
      protected $courseinfo;
      protected $enrolment;
      protected $student;
+     protected $emailLog;
     
-    public function __construct(AnnouncementInterface $announcement,CourseInfoInterface $courseinfo,EnrolmentInterface $enrolment,StudentInterface $student)
+    public function __construct(AnnouncementInterface $announcement,CourseInfoInterface $courseinfo,EnrolmentInterface $enrolment,StudentInterface $student,EmaillogInterface $emailLog)
     {
         $this->announcement = $announcement;
         $this->courseinfo = $courseinfo;
-        $this->enrolment = $enrolment;
+        $this->enrolment = $enrolment; 
         $this->student = $student;
+        $this->emailLog = $emailLog;
     }
 
     /**
@@ -59,33 +62,46 @@ class AnnouncementController extends Controller
     {
         $data = $request->all();
 
-        $intake_date = $data['intake_date'];
-        
+        $intake_date = json_encode($data['intake_date']);
+        unset($data['intake_date']);
+        $data['intake_date'] = $intake_date;
+
          try{
 
-            $this->announcement->save($data);
+             $this->announcement->save($data);
 
+            $intakeMonth = json_decode($intake_date);
 
-            $enrollement_info = $this->enrolment->getAllEnrolmentByIntake($intake_date);
+              $enrollement_info = $this->enrolment->getAllEnrolmentByIntake($intakeMonth);  
 
-            foreach ($enrollement_info as $key => $value) {
-                
-                   $student_info = $this->student->find($value->student_id);
+                foreach ($enrollement_info as $key => $value) {
+                     
+                    $student_info = $this->student->find($value['student_id']);
 
-                   $email = $student_info->email;
-                   $subject = 'Announcement Notification';
+                       $email = $student_info['email'];
+                       $subject = 'Announcement Notification';
 
-                /* ---------------------------------------------------------------
-                    Email Send to Announcement Nofitication
-                --------------------------------------------------------------- */
-                   $content = view('announcement::announcement.partial.email-content')->render();
+                       if(!is_null($email)){ 
 
-                  Mail::to($email)->send(new SendNetaMail($content, $subject));
-                /* ---------------------------------------------------------------
-                    Email Send to  Announcement Nofitication
-                --------------------------------------------------------------- */
+                            /* ---------------------------------------------------------------
+                                Email Send to Announcement Nofitication
+                            --------------------------------------------------------------- */
+                               $content = view('announcement::announcement.partial.email-content')->render();
 
-            }
+                              Mail::to($email)->send(new SendNetaMail($content, $subject));
+                            /* ---------------------------------------------------------------
+                                Email Send to  Announcement Nofitication
+                            --------------------------------------------------------------- */
+                    }
+                }
+
+            /*     Email Log Maintaining    */
+            $emaillog['action'] = 'Announcement Notification';
+            $emaillog['student_id'] = null;
+            $emaillog['date'] = date('Y-m-d');
+            $this->emailLog->saveEmaillog($emaillog);
+            /*  End of Email Log Maintaining  */
+
 
             alertify()->success('Announcement Created Successfully');
         }catch(\Throwable $e){

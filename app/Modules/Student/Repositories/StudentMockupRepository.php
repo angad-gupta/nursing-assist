@@ -83,13 +83,15 @@ class StudentMockupRepository implements StudentMockupInterface
     {
         return StudentMockupHistory::where('student_id', '=', $student_id)->where('mockup_title', '=', $title)->update($updateData);
     }
-
-    public function checkMockupResult($student_id, $title, $date)
+ 
+    public function checkMockupResult($student_id, $title,$date)
     {
-        return StudentMockupResult::where('student_id', '=', $student_id)
-            ->where('mockup_title', '=', $title)
+        return StudentMockupResult:: where('student_id','=',$student_id)
+            ->where('mockup_title','=',$title)
+            ->whereNull('total_question')
             ->where('date', $date)
             ->first();
+
     }
 
     public function getQuestionHistory($whereArray)
@@ -103,6 +105,24 @@ class StudentMockupRepository implements StudentMockupInterface
         return $result->update($data);
     }
 
+
+    //NEw Features
+    public function getCurrentMockupResult($student_id,$title){
+        return StudentMockupResult:: where('student_id','=',$student_id)->where('mockup_title','=',$title)->whereNull('total_question')->first();
+    }
+
+    public function getAttemptedQuestion($id){
+        return StudentMockupHistory::where('mockup_result_id','=',$id)->get();
+    }
+
+    public function getStudentMockupResult($student_id, $limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]){
+
+        $result = StudentMockupResult::when(array_keys($filter, true), function ($query) use ($filter) {
+
+        })->where('student_id', '=', $student_id)->whereNotNull('percent')->whereNotNull('total_question')->orderBy('id', $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+
+        return $result;
+    }
 
 
 }
