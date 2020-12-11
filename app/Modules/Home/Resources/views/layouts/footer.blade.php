@@ -48,15 +48,15 @@
 			</div>
 
 			<div class="col-sm-9">
-				<p class="copyright">{{$setting->company_copyright}}</p>
+				{{-- <p class="copyright">{{$setting->company_copyright}}</p> --}}
 			</div>
 			<div class="col-sm-3">
 				<div class="social-links">
 					<div class="top-info__list d-flex pt-2">
-						<div class="ml-2"><a href="{{$setting->facebook_link}}"><img src="{{asset('home/img/fb.svg')}}" alt=""></a></div>
+						{{-- <div class="ml-2"><a href="{{$setting->facebook_link}}"><img src="{{asset('home/img/fb.svg')}}" alt=""></a></div>
                         <div class="ml-2"><a href="{{$setting->twitter_link}}"><img src="{{asset('home/img/tw.svg')}}" alt=""></a></div>
                         <div class="ml-2"><a href="{{$setting->instagram_link}}"><img src="{{asset('home/img/ins.svg')}}" alt=""></a></div>
-                        <div class="ml-2"><a href="{{$setting->youtube_link}}"><img src="{{asset('home/img/yt.svg')}}" alt=""></a></div>
+                        <div class="ml-2"><a href="{{$setting->youtube_link}}"><img src="{{asset('home/img/yt.svg')}}" alt=""></a></div> --}}
 					</div>
 				</div>
 			</div>
