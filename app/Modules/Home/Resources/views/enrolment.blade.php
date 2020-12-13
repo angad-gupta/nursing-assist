@@ -860,13 +860,14 @@ $('a').bind('click',function (e) {
                                                                                 <label for="">Expiry Date: <span class="text-danger">*</span></label>
                                                                             </div>
                                                                         </div>
-
+                                                                        @if($courseinfo->payment_mode != 'one off payment')
                                                                         <div class ="col-sm-4 ">
                                                                             <div class="form-group">
                                                                                
                                                                                 <label class="d-block font-weight-semibold">Payment Type: <span class="text-danger">*</span></label>
                                                                             </div>
                                                                         </div>
+                                                                        @endif
                                                                     </div>
 
                                                                     <div class="col-sm-10 row">                                                                           
