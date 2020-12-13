@@ -897,7 +897,7 @@ $('a').bind('click',function (e) {
                                                                                 </select>
                                                                             </div>
                                                                         </div>   
-                                                                        @if($courseinfo->payment_mode == 'one off payment')
+                                                                        @if($courseinfo->payment_mode != 'one off payment')
                                                                             <div class="col-sm-4">
                                                                                 <div class="form-group">
                                                                                     {!! Form::select('payment_type', ['0'=>'Full Payment', '1'=>'Installment Payment'], null, ['id' => 'payment_type', 'class'=>'form-control']) !!}
