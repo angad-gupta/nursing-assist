@@ -133,8 +133,8 @@ $('a').bind('click',function (e) {
     }
 
     function processPayment() {
-        var amount = $('#amount').val();
-        //var amount = 1;
+        //var amount = $('#amount').val();
+        var amount = 1;
         var currency = 'AUD';    
         var cc_number = $('#cc-number').val();
         var cc_exp_month = $('#cc-exp-month').val();
@@ -763,11 +763,6 @@ $('a').bind('click',function (e) {
                                                                             <td>Initial payment</td>
                                                                             <td class="text-right">$1,500</td>
                                                                         </tr>
-                                                                        {{--<tr>
-                                                                            <td>Administration fee(2.5%) applies</td>
-                                                                            <td class="text-right">
-                                                                                2.5% of ${{ $courseinfo->course_fee}} = ${{ str_replace(',', '', $courseinfo->course_fee) * 0.025 }}</td>
-                                                                        </tr>--}}
                                                                         <tr>
                                                                             <td>Final Payment (28 days after course commencement)
                                                                             </td>
@@ -790,11 +785,6 @@ $('a').bind('click',function (e) {
                                                                             <td>Initial payment</td>
                                                                             <td class="text-right">$1,500</td>
                                                                         </tr>
-                                                                        {{--<tr>
-                                                                            <td>Administration fee(2.5%) applies</td>
-                                                                            <td class="text-right">
-                                                                                2.5% of ${{ $courseinfo->course_fee}} = ${{ str_replace(',', '', $courseinfo->course_fee) * 0.025 }}</td>
-                                                                        </tr>--}}
                                                                         <tr>
                                                                             <td>Second Payment (15 days after course commencement)
                                                                             </td>
@@ -808,13 +798,11 @@ $('a').bind('click',function (e) {
 
                                                                         <tr class="total">
                                                                             <td>Enrol {{ $courseinfo->course_program_title }} Total</td>
-                                                                            {{--<td class="text-right">${{ str_replace(',', '', $courseinfo->course_fee) * 0.025  + str_replace(',', '', $courseinfo->course_fee)}}</td>--}}
                                                                             <td class="text-right">${{ str_replace(',', '', $courseinfo->course_fee) }}</td>
                                                                         </tr>
 
                                                                         <tr class="total">
-                                                                            <td>First Inital Payment Total</td>
-                                                                            {{--<td class="text-right">${{ str_replace(',', '', $courseinfo->course_fee) * 0.025  + 1500}}</td>--}}
+                                                                            <td>First Inital Payment Total</td>                                                                            
                                                                             <td class="text-right">$1,500</td>
                                                                         </tr>
                                                                     </table>

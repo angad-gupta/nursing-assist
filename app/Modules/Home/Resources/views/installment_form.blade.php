@@ -98,8 +98,8 @@
     }
 
     function processPayment() {
-        var amount = $('#amount').val();
-        //var amount = 1;
+        //var amount = $('#amount').val();
+        var amount = parseInt('{{$ins == 2 ? 2 : 3}}');
         var currency = 'AUD';  
 
         var payload = {
@@ -120,7 +120,8 @@
             var first_name = $('#first_name').val();
             var last_name = $('#last_name').val();
             var email = $('#email').val();
-            var description = '{{ $courseinfo->course_program_title == "NCLEX" ? "Final Installment Payment" : ($ins == 2 ? "Second Installment Payment" : "Final Installment Payment")}}';
+            //var description = '{{ $courseinfo->course_program_title == "NCLEX" ? "Final Installment Payment" : ($ins == 2 ? "Second Installment Payment" : "Final Installment Payment")}}';
+            var description = '{{ $ins == 2 ? "Second Installment Payment" : "Final Installment Payment" }}';
             var student_payment_id = $('#student_payment_id').val();
             var ins = $('#ins').val();
 
@@ -242,11 +243,11 @@
 
                                             @php 
                                             if($ins == 2) {
-                                                if($courseinfo->course_program_title == 'NCLEX') {
+                                                /*if($courseinfo->course_program_title == 'NCLEX') {
                                                     $amount = 1000;
-                                                } else {
+                                                } else {*/
                                                     $amount = 2500;
-                                                }
+                                                //}
                                             } else {
                                                 $amount = ($student_payment->status == 'First Installment Paid' ? 4000 : 1500);
                                             }
@@ -265,7 +266,7 @@
                                                     <div class="row justify-content-center">
                                                         <div class="col-sm-12">
                                                             <h5>You Order Summary</h5>
-                                                                @if($courseinfo->course_program_title == 'NCLEX')
+                                                                {{--@if($courseinfo->course_program_title == 'NCLEX')
                                                                     <table class="table" id="installment_payment" style="display:none">
                                                                         <tr>
                                                                             <td>Initial payment</td>
@@ -287,17 +288,12 @@
                                                                             <td class="text-right">$1,000</td>
                                                                         </tr>
                                                                     </table>
-                                                                @else
+                                                                @else--}}
                                                                     <table class="table" id="installment_payment">
                                                                         <tr>
                                                                             <td>Initial payment</td>
                                                                             <td class="text-right">$1,500</td>
                                                                         </tr>
-                                                                        {{--<tr>
-                                                                            <td>Administration fee(2.5%) applies</td>
-                                                                            <td class="text-right">
-                                                                                2.5% of ${{ $courseinfo->course_fee}} = ${{ str_replace(',', '', $courseinfo->course_fee) * 0.025 }}</td>
-                                                                        </tr>--}}
                                                                         <tr>
                                                                             <td>Second Payment (15 days after course commencement)
                                                                             </td>
@@ -310,8 +306,7 @@
                                                                         </tr>
 
                                                                         <tr class="total">
-                                                                            <td>Enrol {{ $courseinfo->course_program_title }} Total</td>
-                                                                            {{--<td class="text-right">${{ str_replace(',', '', $courseinfo->course_fee) * 0.025  + str_replace(',', '', $courseinfo->course_fee)}}</td>--}}
+                                                                            <td>Enrol {{ $courseinfo->course_program_title }} Total</td>                                                                            
                                                                             <td class="text-right">${{ str_replace(',', '', $courseinfo->course_fee) }}</td>
                                                                         </tr>
 
@@ -320,7 +315,7 @@
                                                                             <td class="text-right">${{$ins == 2 ? '2,500' : ($student_payment->status == 'First Installment Paid' ? '4,000' : '1,500') }}</td>
                                                                         </tr>
                                                                     </table>
-                                                                @endif
+                                                                {{--@endif--}}
                                                            
 
                                                            
