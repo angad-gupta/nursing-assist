@@ -479,7 +479,7 @@ class EnrolmentController extends Controller
                         }
 
                         $data['full_name'] = $full_name;
-                        //$studentInfo->notify(new EnrolmentPayment($data));
+                        $studentInfo->notify(new EnrolmentPayment($data));
 
                         //Flash('You have successfully paid the installment.')->success();
                         return 1;
@@ -707,7 +707,7 @@ class EnrolmentController extends Controller
 
                     $data['full_name'] = $student_detail->full_name;
                     $data['fee_in_cwbank'] = $fee_in_cwbank; 
-                    //$student_detail->notify(new EnrolmentPayment($data));
+                    $student_detail->notify(new EnrolmentPayment($data));
 
                     /* ---------------------------------------------------------------
                     Email Send to Student
@@ -761,13 +761,13 @@ class EnrolmentController extends Controller
 
     public function testSendMail()
     {
-        $studentInfo = $this->student->find(309);
+        $studentInfo = $this->student->find(187);
         $data['full_name'] = $studentInfo->full_name;
         $data['subject'] = $subject = 'test email';
         $data['mail_desc'] = 'test sending email';
-       // $studentInfo->notify(new EnrolmentPayment($data));
+        $studentInfo->notify(new EnrolmentPayment($data));
 
-       $content = view('cron::email-content')->render();
-       Mail::to($studentInfo->email)->send(new SendNetaMail($content, $subject));
+       //$content = view('cron::email-content')->render();
+       //Mail::to($studentInfo->email)->notify(new EnrolmentPayment($data));
     }
 }
