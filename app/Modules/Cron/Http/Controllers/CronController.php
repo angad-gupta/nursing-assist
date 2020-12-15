@@ -65,7 +65,7 @@ class CronController extends Controller
                 $difference = $moved_date->diff($now)->days;
 
                 //second installment mail after 15  days of student move to course
-                //if ($difference == 15 && optional($value->courseInfo)->course_program_title !== 'NCLEX') {
+                if ($difference == 15 && optional($value->courseInfo)->course_program_title !== 'NCLEX') {
 
                     $second_installment_amt = 'A$2,500';
 
@@ -105,10 +105,10 @@ class CronController extends Controller
                         $this->student->updateStudentCourseStatus(['status' => 0], $wherecondition);
 
                     }
-                //}
+                }
 
                 //third installment mail after 30 days of student move to course
-             /*    if ($difference == 30 && optional($value->courseInfo)->course_program_title !== 'NCLEX') {
+                if ($difference == 30 && optional($value->courseInfo)->course_program_title !== 'NCLEX') {
                     $final_installment_amt = 'A$1,500';
 
                     $data['subject'] = 'Final Installment Notification for ' . $course_program_title . ' Course Enrolment';
@@ -147,7 +147,7 @@ class CronController extends Controller
                         $this->student->updateStudentCourseStatus(['status' => 0], $wherecondition);
 
                     }
-                } */
+                }
             }
         }
 
