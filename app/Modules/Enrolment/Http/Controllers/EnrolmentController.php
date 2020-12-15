@@ -593,7 +593,7 @@ class EnrolmentController extends Controller
               /*   $fee_in_cwbank = str_replace(',', '', $total_course_fee) * 0.025 + 1500;
                 $total_course_fee = str_replace(',', '', $total_course_fee) * 0.025 + 5500; */
 
-                if($courseinfo->course_program_title == 'NCLEX') {
+                if($courseInfo->course_program_title == 'NCLEX') {
                     $fee_in_cwbank = 1500;
                     $total_course_fee = 2500;
                 } else  {
