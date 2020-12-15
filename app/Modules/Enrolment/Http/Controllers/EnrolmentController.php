@@ -701,16 +701,16 @@ class EnrolmentController extends Controller
 
                     $data['full_name'] = $student_detail->full_name;
                     $data['fee_in_cwbank'] = $fee_in_cwbank; 
-                    //$student_detail->notify(new EnrolmentPayment($data));
+                    $student_detail->notify(new EnrolmentPayment($data));
 
                      /* ---------------------------------------------------------------
                     Email Send to Student After Registration
                     --------------------------------------------------------------- */
 
-                    $email = $student_detail->email; 
+                 /*    $email = $student_detail->email; 
                     $subject = 'Enrolment Successful';
                     $student['name'] = $student_detail->full_name;
-                    $content = view('enrolment::enrolment.enrol-register-content', $student)->render();
+                    $content = view('enrolment::enrolment.enrol-register-content', $student)->render(); */
 
                     //Mail::to($email)->send(new SendNetaMail($content, $subject)); 
 
