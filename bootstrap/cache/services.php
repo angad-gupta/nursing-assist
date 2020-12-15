@@ -44,7 +44,6 @@
     40 => 'App\\Providers\\RouteServiceProvider',
     41 => 'Collective\\Html\\HtmlServiceProvider',
     42 => 'odannyc\\Alertify\\AlertifyServiceProvider',
-    43 => 'Sichikawa\\LaravelSendgridDriver\\SendgridTransportServiceProvider',
   ),
   'eager' => 
   array (
@@ -75,7 +74,6 @@
     24 => 'App\\Providers\\EventServiceProvider',
     25 => 'App\\Providers\\RouteServiceProvider',
     26 => 'odannyc\\Alertify\\AlertifyServiceProvider',
-    27 => 'Sichikawa\\LaravelSendgridDriver\\SendgridTransportServiceProvider',
   ),
   'deferred' => 
   array (

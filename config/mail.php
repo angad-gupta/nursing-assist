@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'driver' => env('MAIL_DRIVER', 'sendgrid'),
+    'driver' => env('MAIL_DRIVER', 'smtp'),
 
     /*
     |--------------------------------------------------------------------------
@@ -133,9 +133,4 @@ return [
 
     'log_channel' => env('MAIL_LOG_CHANNEL'),
 
-    'mailers' => [
-        'sendgrid' => [
-            'transport' => 'sendgrid',
-        ],
-    ],
 ];

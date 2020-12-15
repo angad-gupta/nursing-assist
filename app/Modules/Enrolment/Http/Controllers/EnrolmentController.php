@@ -12,13 +12,14 @@ use App\Modules\Student\Repositories\StudentInterface;
 use App\Modules\Student\Repositories\StudentPaymentInstallmentInterface;
 use App\Modules\Student\Repositories\StudentPaymentInterface;
 use App\Modules\EmailLog\Repositories\EmaillogInterface;
-
+use App\Modules\Home\Emails\SendNetaMail;
 use App\Notifications\EnrolmentPayment;
 use Eway\Rapid\Client;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Mail;
 
 // Mail
 use Illuminate\Support\Facades\Redirect;
@@ -478,7 +479,7 @@ class EnrolmentController extends Controller
                         }
 
                         $data['full_name'] = $full_name;
-                        $studentInfo->notify(new EnrolmentPayment($data));
+                        //$studentInfo->notify(new EnrolmentPayment($data));
 
                         //Flash('You have successfully paid the installment.')->success();
                         return 1;
@@ -495,7 +496,7 @@ class EnrolmentController extends Controller
             }
 
         } catch (\Throwable $e) {
-            return $e->getMessage();
+            return 0;
         }
             
     }
@@ -758,4 +759,15 @@ class EnrolmentController extends Controller
         return redirect(route('student-dashboard'));
     }
 
+    public function testSendMail()
+    {
+        $studentInfo = $this->student->find(187);
+        $data['full_name'] = $studentInfo->full_name;
+        $data['subject'] = $subject = 'test email';
+        $data['mail_desc'] = 'test sending email';
+       // $studentInfo->notify(new EnrolmentPayment($data));
+
+       $content = view('cron::email-content')->render();
+       Mail::to($studentInfo->email)->send(new SendNetaMail($content, $subject));
+    }
 }
