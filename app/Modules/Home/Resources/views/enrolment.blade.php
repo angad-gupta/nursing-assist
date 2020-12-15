@@ -206,7 +206,7 @@ $('a').bind('click',function (e) {
                          /*        $('.iframe_modal').modal({show:false});
                                 $('.enrolment_form').hide();
                                 $('.simplify-success').modal({show:true}); */
-                                //window.location = "{{route('student-dashboard')}}?payment=success";
+                                window.location = "{{route('student-dashboard')}}?payment=success";
                             }
                             
                         });

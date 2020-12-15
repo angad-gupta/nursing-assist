@@ -706,7 +706,7 @@ class EnrolmentController extends Controller
 
 
                     $data['full_name'] = $student_detail->full_name;
-                    $data['fee_in_cwbank'] = $fee_in_cwbank; 
+                    $data['fee_in_cwbank'] = $fee_in_cwbank;  print_r($data); dd($student_detail);
                     $student_detail->notify(new EnrolmentPayment($data));
 
                     /* ---------------------------------------------------------------
