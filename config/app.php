@@ -179,7 +179,7 @@ return [
     
         Collective\Html\HtmlServiceProvider::class,
         odannyc\Alertify\AlertifyServiceProvider::class,
-
+        Sichikawa\LaravelSendgridDriver\SendgridTransportServiceProvider::class,
 
 
     ],

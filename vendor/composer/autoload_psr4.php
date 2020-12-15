@@ -44,6 +44,7 @@ return array(
     'Symfony\\Bridge\\PsrHttpMessage\\' => array($vendorDir . '/symfony/psr-http-message-bridge'),
     'Swagger\\' => array($vendorDir . '/zircote/swagger-php/src'),
     'Stichoza\\GoogleTranslate\\' => array($vendorDir . '/stichoza/google-translate-php/src'),
+    'Sichikawa\\LaravelSendgridDriver\\' => array($vendorDir . '/s-ichikawa/laravel-sendgrid-driver/src'),
     'Ramsey\\Uuid\\' => array($vendorDir . '/ramsey/uuid/src'),
     'Psy\\' => array($vendorDir . '/psy/psysh/src'),
     'Psr\\SimpleCache\\' => array($vendorDir . '/psr/simple-cache/src'),

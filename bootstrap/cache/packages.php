@@ -118,4 +118,11 @@
       'Module' => 'Nwidart\\Modules\\Facades\\Module',
     ),
   ),
+  's-ichikawa/laravel-sendgrid-driver' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Sichikawa\\LaravelSendgridDriver\\SendgridTransportServiceProvider',
+    ),
+  ),
 );
