@@ -98,8 +98,8 @@
     }
 
     function processPayment() {
-        //var amount = $('#amount').val();
-        var amount = parseInt('{{$ins == 2 ? 2 : 3}}');
+        var amount = $('#amount').val();
+        //var amount = parseInt('{{$ins == 2 ? 2 : 3}}');
         var currency = 'AUD';  
 
         var payload = {

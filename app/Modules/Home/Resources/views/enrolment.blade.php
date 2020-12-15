@@ -133,8 +133,8 @@ $('a').bind('click',function (e) {
     }
 
     function processPayment() {
-        //var amount = $('#amount').val();
-        var amount = 1;
+        var amount = $('#amount').val();
+        //var amount = 1;
         var currency = 'AUD';    
         var cc_number = $('#cc-number').val();
         var cc_exp_month = $('#cc-exp-month').val();
