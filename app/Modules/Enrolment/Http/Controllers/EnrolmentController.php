@@ -761,7 +761,7 @@ class EnrolmentController extends Controller
 
     public function testSendMail()
     {
-        $studentInfo = $this->student->find(187);
+        $studentInfo = $this->student->find(309);
         $data['full_name'] = $studentInfo->full_name;
         $data['subject'] = $subject = 'test email';
         $data['mail_desc'] = 'test sending email';
