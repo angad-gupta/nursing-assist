@@ -892,6 +892,8 @@ $('a').bind('click',function (e) {
                                                                                     {!! Form::select('payment_type', ['0'=>'Full Payment', '1'=>'Installment Payment'], null, ['id' => 'payment_type', 'class'=>'form-control']) !!}
                                                                                 </div>
                                                                             </div>
+                                                                        @else 
+                                                                            {!! Form::hidden('payment_type', 0 , ['id'=>'payment_type']) !!}
                                                                         @endif
                                                                     </div>
 
