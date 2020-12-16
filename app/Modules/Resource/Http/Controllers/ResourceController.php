@@ -96,7 +96,7 @@ class ResourceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->all();
+        $data = $request->all(); 
         try {
 
             if ($request->hasFile('source_name')) {

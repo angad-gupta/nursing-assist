@@ -29,31 +29,36 @@
     </div>
 
     <div class="form-group row">
-        <label class="col-form-label col-lg-3">Status:<span class="text-danger">*</span></label>
-        <div class="col-lg-9">
-            <div class="input-group">
-                <span class="input-group-prepend">
-                    <span class="input-group-text"><i class="icon-sort-numeric-asc"></i></span>
-                </span>
-                {!! Form::select('status',['1'=>'Active','0'=>'In-active'], $value = null,
-                ['id'=>'status','class'=>'form-control' ]) !!}
 
+        <div class="col-lg-6">
+            <div class="row">
+                <label class="col-form-label col-lg-4">Status:<span class="text-danger">*</span></label>
+                    <div class="col-lg-8 form-group-feedback form-group-feedback-right">
+                        <div class="input-group">
+                        <span class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-sort-numeric-asc"></i></span>
+                        </span>
+                       {!! Form::select('status',['1'=>'Active','0'=>'In-active'], $value = null,['id'=>'status','class'=>'form-control' ]) !!}
+                        </div>
+                    </div>
             </div>
         </div>
+        <div class="col-lg-6">
+            <div class="row">
+                <label class="col-form-label col-lg-4">Course Type:<span class="text-danger">*</span></label>
+                    <div class="col-lg-8 form-group-feedback form-group-feedback-right">
+                        <div class="input-group">
+                        <span class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-sort-numeric-asc"></i></span>
+                        </span>
+                       {!! Form::select('course_type',['NCLEX'=>'NCLEX','OSCE'=>'OSCE'], $value = null,['id'=>'course_type','class'=>'form-control' ]) !!}
+                        </div>
+                    </div>
+            </div>
+        </div>
+
     </div>
 
-    {{--<div class="form-group row">
-        <label class="col-form-label col-lg-3">Type:<span class="text-danger">*</span></label>
-        <div class="col-lg-9">
-            <div class="input-group">
-                <span class="input-group-prepend">
-                    <span class="input-group-text"><i class="icon-sort-numeric-asc"></i></span>
-                </span>
-                {!! Form::select('type',[ 'image'=>'Image','video'=>'Video', 'word'=>'Word', 'pdf'=> 'PDF', 'powerpoint'=>'Powerpoint'], $value = null,
-                ['placeholder'=>'Select Type','id'=>'type','class'=>'form-control' ]) !!}
-            </div>
-        </div>
-    </div>--}}
 
     <div class="form-group row">
         <label class="col-form-label col-lg-3">Image/Video/Word/Pdf/Powerpoint:<span class="text-danger">*</span></label>

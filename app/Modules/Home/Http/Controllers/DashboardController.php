@@ -158,7 +158,8 @@ class DashboardController extends Controller
         $id = Auth::guard('student')->user()->id;
         $data['student_course'] = $this->student->getStudentCourse($id);
         $data['other_course'] = $this->courseinfo->getAll();
-        $data['resources'] = $this->resource->findAll();
+        $data['resources_nclex'] = $this->resource->findAllNclex();
+        $data['resources_osce'] = $this->resource->findAllOsce();
         $data['student_id'] = Auth::guard('student')->user()->find($id)->id;
         $data['student_histories'] = $this->student->getAllHistories($id, 20); 
 

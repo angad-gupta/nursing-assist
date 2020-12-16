@@ -24,6 +24,7 @@
                 <tr class="bg-slate">
                     <th>#</th>
                     <th>Title</th>
+                    <th>Course</th>
                     <th>File Type</th>
                     <th>Status</th>
                     <th>Action</th>
@@ -35,6 +36,7 @@
                 <tr>
                     <td>{{$resources->firstItem() +$key}}</td>
                     <td>{{ $value->title }}</td>
+                    <td>{{ $value->course_type }}</td>
                     <td>
                         @if(strpos($value->mime_type, 'image') !== false)
                            Image

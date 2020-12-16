@@ -5,6 +5,8 @@ namespace App\Modules\Resource\Repositories;
 interface ResourcesInterface
 {
     public function findAll($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
+    public function findAllNclex($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
+    public function findAllOsce($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
 
     public function find($id);
 

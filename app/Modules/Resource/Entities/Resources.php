@@ -15,6 +15,7 @@ class Resources extends Model
         'title',
         'description',
         'mime_type',
+        'course_type',
         'source_name',
         'status',
 

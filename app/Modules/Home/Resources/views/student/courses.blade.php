@@ -39,8 +39,12 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" id="resources-tab" data-toggle="tab" href="#resources" role="tab"
-                                aria-controls="resources" aria-selected="false">Resources</a>
+                            <a class="nav-link" id="resources-nclex-tab" data-toggle="tab" href="#resources-nclex" role="tab"
+                                aria-controls="resources-nclex" aria-selected="false">Resources[NCLEX]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="resources-osce-tab" data-toggle="tab" href="#resources-osce" role="tab"
+                                aria-controls="resources-osce" aria-selected="false">Resources[OSCE]</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="practice-tab" data-toggle="tab" href="#practice" role="tab"
@@ -235,10 +239,10 @@
                         </div>
                     </div>
 
-                    <div class="tab-pane fade neta-resources" id="resources" role="tabpanel" aria-labelledby="resources-tab">
+                    <div class="tab-pane fade neta-resources" id="resources-nclex" role="tabpanel" aria-labelledby="resources-nclex-tab">
                         <div class="row">
-                            @if($resources->total() > 0)
-                                @foreach($resources as $key => $value)
+                            @if($resources_nclex->total() > 0)
+                                @foreach($resources_nclex as $key => $value)
                                     <div class="col-sm-12">
                                         <div class="resource-box">
                                             <div class="row">
@@ -257,9 +261,48 @@
 
                                     </div>
                                 @endforeach
+                            @else
+                                <span>No NCLEX Resources Added</span>
                             @endif                           
                         </div>
                     </div>
+
+                    <div class="tab-pane fade neta-resources" id="resources-osce" role="tabpanel" aria-labelledby="resources-osce-tab">
+                        <div class="row">
+                            @if($resources_osce->total() > 0)
+                                @foreach($resources_osce as $key => $value)
+                                    <div class="col-sm-12">
+                                        <div class="resource-box">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-8">
+                                                    <h6>{{ $value->title }}</h6>
+                                                    <p>{!! $value->description !!} </p>
+                                                </div>
+                                                <div class="col-sm-12 col-md-4">
+                                                    <div class="downloads"> 
+                                                        <a target="_blank" href="{{ route('student-resources-view',['resources_id'=>$value->id]) }}" class="btn btn-neta float-right" style="background: #B0117E;color: white;"><b><i class="fa fa-eye"></i></b>View</a>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                @endforeach
+                            @else
+                                 <div class="col-sm-12">
+                                    <div class="resource-box">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-8">
+                                            <span>No OSCE Resources Added</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif                         
+                        </div>
+                    </div>
+
 
                     <div class="tab-pane fade" id="readliness" role="tabpanel" aria-labelledby="contact-tab">
                         <div class="row my-courses">
@@ -469,7 +512,7 @@
 
 @include('home::layouts.footer')
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 
 $(document).ready(function(){
     
@@ -478,7 +521,7 @@ $(document).ready(function(){
     }, false);
 
 });
-</script>
+</script> -->
 
 <script type="text/javascript">
     $(document).ready(function(){

@@ -16,6 +16,30 @@ class ResourcesRepository implements ResourcesInterface
 
         return $result;
 
+    }     
+
+    public function findAllNclex($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1])
+    {
+
+        $result = Resources::when(array_keys($filter, true), function ($query) use ($filter) {
+
+        })
+            ->where('course_type','=','NCLEX')->orderBy($sort['by'], $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+
+        return $result;
+
+    }   
+
+    public function findAllOsce($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1])
+    {
+
+        $result = Resources::when(array_keys($filter, true), function ($query) use ($filter) {
+
+        })
+            ->where('course_type','=','OSCE')->orderBy($sort['by'], $sort['sort'])->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+
+        return $result;
+
     }
 
     public function find($id)
