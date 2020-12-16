@@ -29,13 +29,14 @@
 					<a href="{{ route('about-us') }}"><li>Our Team</li> </a>
 					<a href="{{ route('contact-us') }}"><li>Contact US</li> </a>
 					<a href="{{ route('faq')}}"><li>FAQ's</li> </a>
+					<a href="{{ route('agent')}}"><li>Agents</li> </a>
 				</ul>
 			</div>
 
 			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 				<h5>Legals</h5>
 				<ul class="list-unstyled">
-					<a href="#"><li>My Account</li> </a>
+					<a href="{{ route('student-account') }}"><li>My Account</li> </a>
 					<a href="{{ route('privacy-policy')}}"><li>Privacy & Policy</li> </a>
 					<a href="{{ route('term-condition')}}"><li>Terms & Conditions</li> </a>
 					<a href="{{ route('user-agreement')}}"><li>User Agreement</li> </a>

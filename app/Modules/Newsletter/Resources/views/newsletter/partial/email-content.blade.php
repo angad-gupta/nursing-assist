@@ -4,7 +4,7 @@
                 <img src="{{asset('home/img/logo.png')}}" width="150" alt="" style="margin: 15px;">
             </div>
            
-            <p style="font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px;">{{$message}}</p>
+            <p style="font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px;">{!! $message !!}</p>
 
             <div class="detail" style="margin-bottom: 15px;display:flow-root;clear:both;background:#b30174;color:#fff;padding:20px">
                 <div class="lft" style="float:left">

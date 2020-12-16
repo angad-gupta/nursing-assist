@@ -280,6 +280,15 @@
                     @endif
 
 
+                    @if($menuRoles->assignedRoles('forum.index'))
+                    <li class="nav-item">
+                        <a href="{{route('forum.index')}}" class="nav-link @if($Route[0]=='forum') active @endif" data-popup="tooltip" data-original-title="Forums" data-placement="right">
+                            <i class="icon-bubbles6"></i><span>Forums</span>
+                        </a>
+                    </li>
+                    @endif
+
+
             </ul>
         </div>
         <!-- /main navigation -->

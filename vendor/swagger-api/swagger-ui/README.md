@@ -15,13 +15,15 @@
 **🕰️ Looking for the older version of Swagger UI?** Refer to the [*2.x* branch](https://github.com/swagger-api/swagger-ui/tree/2.x).
 
 
-This repository publishes to three different NPM modules:
+This repository publishes three different NPM modules:
 
 * [swagger-ui](https://www.npmjs.com/package/swagger-ui) is a traditional npm module intended for use in single-page applications that are capable of resolving dependencies (via Webpack, Browserify, etc).
 * [swagger-ui-dist](https://www.npmjs.com/package/swagger-ui-dist) is a dependency-free module that includes everything you need to serve Swagger UI in a server-side project, or a single-page application that can't resolve npm module dependencies.
 * [swagger-ui-react](https://www.npmjs.com/package/swagger-ui-react) is Swagger UI packaged as a React component for use in React applications.
 
 We strongly suggest that you use `swagger-ui` instead of `swagger-ui-dist` if you're building a single-page application, since `swagger-ui-dist` is significantly larger.
+
+If you are looking for plain ol' HTML/JS/CSS, [download the latest release](https://github.com/swagger-api/swagger-ui/releases/latest) and copy the contents of the `/dist` folder to your server.
 
 
 ## Compatibility
@@ -56,6 +58,9 @@ Swagger UI Version | Release Date | OpenAPI Spec compatibility | Notes
 #### Development
 - [Setting up](docs/development/setting-up.md)
 - [Scripts](docs/development/scripts.md)
+
+#### Contributing
+- [Contributing](https://github.com/swagger-api/.github/blob/master/CONTRIBUTING.md)
 
 ##### Integration Tests
 
