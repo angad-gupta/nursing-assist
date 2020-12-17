@@ -12,7 +12,7 @@
                 @php
                  $image = asset('uploads').'/newsletter/'.$attachment;
                 @endphp
-                <a href="{{$image}}" target="_blank"><p style="font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px;">Here is the Newsletter Attachment. Please view for Details :</p></a>
+               <p style="font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px;">Here is the Newsletter  <a href="{{$image}}" target="_blank">Attachment.</a> Please view for Details :</p>
 
             @endif
 
