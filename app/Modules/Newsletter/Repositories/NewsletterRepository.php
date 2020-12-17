@@ -46,6 +46,15 @@ class NewsletterRepository implements NewsletterInterface
         return $result->delete();
     }
 
+    public function upload($file){
+        $imageName = $file->getClientOriginalName();
+        $fileName = date('Y-m-d-h-i-s') . '-' . preg_replace('[ ]', '-', $imageName);
+
+        $file->move(public_path() . Template::FILE_PATH, $fileName);
+
+        return $fileName;
+    }
+
     public function deleteTempleteTo($id){
         $result = TemplateTo::where('template_id','=',$id)->delete();
     }

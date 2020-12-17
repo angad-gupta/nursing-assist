@@ -75,6 +75,10 @@ class NewsletterController extends Controller
 
             );
 
+            if ($request->hasFile('attached_pdf')) {
+                $template_data['attached_pdf'] = $this->newsletter->upload($data['attached_pdf']);
+            }
+
             $templateInfo = $this->newsletter->save($template_data);
             $template_id = $templateInfo['id'];
 

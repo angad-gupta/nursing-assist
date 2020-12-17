@@ -51,6 +51,35 @@
             </div>
         </div>
 
+            <div class="form-group row">
+
+                <div class="col-lg-6">
+                    <div class="row">
+                        <label class="col-form-label col-lg-3">Upload PDF:</label>
+                        <div class="col-lg-9 form-group-feedback form-group-feedback-right">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <span class="input-group-text"><i class="icon-images3"></i></span>
+                                </span>
+                                {!! Form::file('attached_pdf', ['id'=>'attached_pdf','class'=>'form-control']) !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                    <div class="col-lg-6">
+                    <div class="row">
+                         <label class="col-form-label col-lg-3"></label>
+                        <div class="col-lg-9 form-group-feedback form-group-feedback-right">
+                            <img id="attached_pdf" src="{{ asset('admin/pdf.jpg') }}" alt="your image" class="preview-image" style="height: 100px; width: auto;" />
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
 </fieldset>
 
 

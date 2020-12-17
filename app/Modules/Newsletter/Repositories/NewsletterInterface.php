@@ -18,5 +18,7 @@ interface NewsletterInterface
 
     public function delete($id);
 
+    public function upload($file_name);
+
     public function deleteTempleteTo($id);
 }
