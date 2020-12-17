@@ -57,6 +57,7 @@ class NewsletterController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();  
+        $attachment = null;
         
          try{
 
@@ -76,13 +77,12 @@ class NewsletterController extends Controller
             );
 
             if ($request->hasFile('attached_pdf')) {
-                $template_data['attached_pdf'] = $this->newsletter->upload($data['attached_pdf']);
+                $template_data['attached_pdf'] = $attachment = $this->newsletter->upload($data['attached_pdf']);
             }
 
             $templateInfo = $this->newsletter->save($template_data);
             $template_id = $templateInfo['id'];
 
-            if(!is_null($message)){
 
                 foreach ($students as $key => $value) {
                     
@@ -101,6 +101,7 @@ class NewsletterController extends Controller
                     if($email){
 
                             $response['message'] = $message;
+                            $response['attachment'] = $attachment;
                             /* ---------------------------------------------------------------
                                 Email Send to Respective Student Nofitication
                             --------------------------------------------------------------- */
@@ -123,7 +124,6 @@ class NewsletterController extends Controller
                 $this->emailLog->saveEmaillog($emaillog);
                 /*  End of Email Log Maintaining  */
 
-            }
 
             alertify()->success('Template Created Successfully');
         }catch(\Throwable $e){

@@ -13,7 +13,7 @@ const FILE_PATH = '/uploads/newsletter';
 
     	'subject',
     	'message',
-    	'attached_pdf'
+    	'attached_pdf',
     	'status',
     	'send_all',
     	'date'
