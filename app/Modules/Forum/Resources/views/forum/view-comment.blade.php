@@ -1,6 +1,6 @@
 @extends('admin::layout')
-@section('title')Forum @stop
-@section('breadcrum')Forum @stop
+@section('title')Forum Comment @stop
+@section('breadcrum')Forum Comment @stop
 
 @section('script')
 <script src="{{asset('admin/global/js/plugins/tables/datatables/datatables.min.js')}}"></script>
@@ -9,11 +9,19 @@
 
 @section('content') 
 
-<div class="card">
-    <div class="card-header header-elements-inline">
-        <h5 class="card-title">List of Forum</h5>
 
+<div class="card card-body">
+      <div class="d-flex justify-content-between">
+        <h4>List of Forum Comment</h4> 
+      
+        <div class="text-right">
+            <a href="{{ route('forum.index') }}" class="btn bg-warning">
+            <i class="icon-esc"></i> Back to Forum
+            </a>
+        </div>
+        
     </div>
+
 
     <div class="table-responsive">
         <table class="table table-striped">
@@ -23,8 +31,9 @@
                     <th>Forum Title</th>
                     <th>Posted Date</th>
                     <th>Posted By</th>
-                    <th>Is Top Topic ?<th>
-                    <th>Is Featured Topic ?<th>
+                    <th width="30%">Comments</th>
+                    <th>Comemnt By</th>
+                    <th>Comemnt Date</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -35,6 +44,8 @@
                 <tr>
                     <td>{{$forum_comment->firstItem() +$key}}</td>
                      <td>{{ optional($value->forumInfo)->forum_title }}</td>
+                     <td>{{ optional($value->forumInfo)->posted_date }}</td>
+                     <td>{{ optional($value->forumInfo->studentInfo)->full_name }}</td>
                      <td>{{ $value->comment }}</td>
                      <td>{{ optional($value->commentStudentInfo)->full_name }}</td>
                      <td>{{ $value->commented_date }}</td>
@@ -45,7 +56,7 @@
                 @endforeach
                 @else
                 <tr>
-                    <td colspan="7">No Forum Comment Found !!!</td>
+                    <td colspan="8">No Forum Comment Found !!!</td>
                 </tr>
                 @endif
             </tbody>

@@ -75,20 +75,20 @@
                                 <a class="nav-link" href="{{ route('about-us') }}">About Us</a>
                             </li>
                            <li class="nav-item neta-dropdown">
-                                    <a class="nav-link" href="{{ route('course') }}">Courses</a>
-                                    <ul class="neta-dropdown__menu list-unstyled">
-                                        @if($courseInfo)
-                                            @foreach($courseInfo as $key => $courselist)
-                                             <a href="{{ route('course-detail',['course_id'=>$key]) }}"><li>{{ $courselist }}</li></a>
-                                            @endforeach
-                                        @endif
-                                    </ul>
-                                </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('agent') }}">Agents</a>
+                                <a class="nav-link" href="{{ route('course') }}">Courses</a>
+                                <ul class="neta-dropdown__menu list-unstyled">
+                                    @if($courseInfo)
+                                        @foreach($courseInfo as $key => $courselist)
+                                         <a href="{{ route('course-detail',['course_id'=>$key]) }}"><li>{{ $courselist }}</li></a>
+                                        @endforeach
+                                    @endif
+                                </ul>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('student-hub') }}">Learner’s Portal</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('student-forum') }}">Forums</a>
                             </li>
                             <li class="nav-item neta-dropdown">
                                 <a class="nav-link" href="#">Media</a>

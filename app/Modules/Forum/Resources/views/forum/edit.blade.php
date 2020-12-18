@@ -6,7 +6,7 @@
 <!-- Theme JS files -->
 <script src="{{asset('admin/global/js/plugins/forms/styling/uniform.min.js')}}"></script>
 <script src="{{asset('admin/global/js/demo_pages/form_inputs.js')}}"></script>
-<script src="{{ asset('admin/validation/blog.js')}}"></script>
+<script src="{{ asset('admin/validation/forum.js')}}"></script>
 
 <!-- /theme JS files -->
 
@@ -23,9 +23,9 @@
 
     <div class="card-body">
 
-        {!! Form::model($blog_info,['method'=>'PUT','route'=>['blog.update',$blog_info->id],'class'=>'form-horizontal','id'=>'blog_submit','role'=>'form','files'=>true]) !!} 
+        {!! Form::model($forum_info,['method'=>'PUT','route'=>['forum.update',$forum_info->id],'class'=>'form-horizontal','id'=>'forum_submit','role'=>'form','files'=>true]) !!} 
         	
-        	@include('blog::blog.partial.action',['btnType'=>'Update']) 
+        	@include('forum::forum.partial.action',['btnType'=>'Update']) 
         
         {!! Form::close() !!}
     </div>

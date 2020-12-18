@@ -23,8 +23,8 @@
                     <th>Forum Title</th>
                     <th>Posted Date</th>
                     <th>Posted By</th>
-                    <th>Is Top Topic ?<th>
-                    <th>Is Featured Topic ?<th>
+                    <th>Is Top Topic ?</th>
+                    <th>Is Featured Topic ?</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -40,7 +40,9 @@
                     <td class="{{ ($value->is_top_topic == '1') ? 'text-success font-weight-bold' :'text-danger font-weight-bold' }}">{{ ($value->is_top_topic == '1') ? 'Yes' :'No' }}</td>
                     <td class="{{ ($value->is_featured_topic == '1') ? 'text-success font-weight-bold' :'text-danger font-weight-bold' }}">{{ ($value->is_featured_topic == '1') ? 'Yes' :'No' }}</td>
                     <td>
-                         <a class="btn bg-teal-400 btn-icon rounded-round" href="{{route('forum.comment',$value->id)}}" data-popup="tooltip" data-original-title="View Comments" data-placement="bottom"><i class="icon-bubbles4"></i></a>
+                        <a class="btn bg-teal-400 btn-icon rounded-round" href="{{route('forum.comment',$value->id)}}" data-popup="tooltip" data-original-title="View Comments" data-placement="bottom"><i class="icon-bubbles4"></i></a>
+
+                        <a class="btn bg-success-400 btn-icon rounded-round" href="{{route('forum.edit',$value->id)}}" data-popup="tooltip" data-original-title="Edit" data-placement="bottom"><i class="icon-pencil6"></i></a>
 
                         <a data-toggle="modal" data-target="#modal_theme_warning" class="btn bg-danger-400 btn-icon rounded-round delete_forum" link="{{route('forum.delete',$value->id)}}" data-popup="tooltip" data-original-title="Delete" data-placement="bottom"><i class="icon-bin"></i></a>
                     </td>

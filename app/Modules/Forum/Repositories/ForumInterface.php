@@ -8,6 +8,11 @@ interface ForumInterface
     
     public function find($id);
 
+    public function save($data);
+    public function saveComment($data);
+
+    public function update($id,$data);
+
     public function delete($id);
 
     public function getCommentById($id,$limit=null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);

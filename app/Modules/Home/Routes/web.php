@@ -19,6 +19,11 @@ Route::get('about-us', ['as' => 'about-us', 'uses' => 'HomeController@AboutUs'])
 
 Route::get('blog', ['as' => 'blog', 'uses' => 'HomeController@Blog']);
 
+Route::get('student-forum', ['as' => 'student-forum', 'uses' => 'HomeController@studentForum']);
+Route::post('store-forum', ['as' => 'store-forum', 'uses' => 'HomeController@storeForum']);
+Route::get('forum-detail', ['as' => 'forum-detail', 'uses' => 'HomeController@ForumDetail']);
+Route::post('storeForumComment', ['as' => 'storeForumComment', 'uses' => 'HomeController@storeForumComment']);
+
 Route::get('blog-detail', ['as' => 'blog-detail', 'uses' => 'HomeController@BlogDetail']);
 
 Route::get('gallery', ['as' => 'gallery', 'uses' => 'HomeController@Gallery']);

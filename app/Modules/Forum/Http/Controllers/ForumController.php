@@ -29,6 +29,35 @@ class ForumController extends Controller
     }
 
 
+    public function edit($id)
+    {
+        $data['is_edit'] = true;
+        $data['forum_info'] = $this->forum->find($id);
+        return view('forum::forum.edit',$data);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     * @param Request $request
+     * @param int $id
+     * @return Response
+     */
+    public function update(Request $request, $id)
+    {
+       $data = $request->all();
+        
+        try{
+
+            $this->forum->update($id,$data);
+             alertify()->success('Forum Updated Successfully');
+        }catch(\Throwable $e){
+           alertify($e->getMessage())->error();
+        }
+        
+        return redirect(route('forum.index'));
+    }
+
+
     public function ForumComment($id){
         $data['forum_comment'] = $this->forum->getCommentById($id);
         return view('forum::forum.view-comment',$data);

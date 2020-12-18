@@ -19,6 +19,7 @@ use App\Modules\Blog\Repositories\BlogInterface;
 use App\Modules\Gallery\Repositories\GalleryInterface;
 use App\Modules\Video\Repositories\VideoInterface;
 use App\Modules\EmailLog\Repositories\EmaillogInterface;
+use App\Modules\Forum\Repositories\ForumInterface;
 
 
 use Illuminate\Http\Request;
@@ -37,6 +38,7 @@ class HomeController extends Controller
     protected $course;
     protected $courseinfo;
     protected $team;
+    protected $forum;
     protected $contactus;
     protected $enrolment;
     protected $student;
@@ -54,6 +56,7 @@ class HomeController extends Controller
         CourseInterface $course,
         CourseInfoInterface $courseinfo,
         TeamInterface $team,
+        ForumInterface $forum,
         ContactUsInterface $contactus,
         EnrolmentInterface $enrolment,
         StudentInterface $student,
@@ -70,6 +73,7 @@ class HomeController extends Controller
         $this->course = $course;
         $this->courseinfo = $courseinfo;
         $this->team = $team;
+        $this->forum = $forum;
         $this->contactus = $contactus;
         $this->enrolment = $enrolment;
         $this->student = $student;
@@ -106,6 +110,71 @@ class HomeController extends Controller
         $data['about_neta'] = $this->page->getBySlug('about_us');
         $data['team'] = $this->team->findAll();
         return view('home::aboutus', $data);
+    }
+
+    public function studentForum(Request $request){
+
+        if (Auth::guard('student')->check()) {
+            
+            $search = $request->all();  
+            $data['forum_detail']= $this->forum->findAll($limit= 15,$search);  
+            return view('home::forums', $data);
+
+        } else {
+            return redirect(route('student-account'));
+        }
+       
+    }
+
+    public function storeForum(Request $request){
+        $data = $request->all(); 
+        
+         try{
+            $userInfo = Auth::guard('student')->user();   
+
+            $data['posted_by'] = $userInfo['id'];
+            $data['posted_date'] = date('Y-m-d');
+
+            $this->forum->save($data);
+            alertify()->success('Forum Topic Created Successfully');
+        }catch(\Throwable $e){
+            alertify($e->getMessage())->error();
+        }
+        
+        return redirect(route('student-forum'));
+    }
+
+    public function ForumDetail(Request $request){
+
+        $input = $request->all();
+
+        $forum_id = $input['forum_id'];
+
+        $data['forum_detail'] = $this->forum->find($forum_id);
+        $data['forum_comments'] = $this->forum->getCommentById($forum_id,$limit= 15);  
+        $data['forum_id'] = $forum_id;
+
+        return view('home::forum-detail', $data);
+
+    }
+
+    public function storeForumComment(Request $request){
+
+        $input = $request->all();
+        $comment = $input['comment'];
+        $forum_id = $input['forum_id'];
+
+        $userInfo = Auth::guard('student')->user();   
+
+        $data = array(
+            'forum_id' => $forum_id,
+            'comment' => $comment,
+            'commented_by' => $userInfo['id'],
+            'commented_date' => date('Y-m-d')
+        );
+        $this->forum->saveComment($data);
+
+        echo 1;
     }
 
     /**

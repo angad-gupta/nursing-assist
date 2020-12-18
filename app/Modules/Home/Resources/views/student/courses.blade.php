@@ -106,7 +106,7 @@
                                                     <div class="neta-limit">
                                                         <p>{!! optional($my_course_val->courseInfo)->short_content !!} </p>
                                                     </div>
-                                                    @if($my_course_val->status == 1)
+                                                    <!-- @if($my_course_val->status == 1) -->
 
                                                         @if($courseinfo_id == '2')
 
@@ -116,9 +116,9 @@
                                                             <a class="btn e-btn w-100" href="{{ route('syllabus-detail',['course_info_id'=>$my_course_val->courseinfo_id]) }}">View Syllabus</a>
                                                         @endif
                                                     
-                                                    @else
+                                                   <!--  @else
                                                     <a data-toggle="modal" data-target="#modal_theme_installment" class="btn e-btn w-100 installment_info">View Syllabus</a>
-                                                    @endif
+                                                    @endif -->
                                                 </div>
                                             </div>
                                         </div>

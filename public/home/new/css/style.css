@@ -14,7 +14,7 @@ span,
 label,
 input,
 li {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .section-padding {
@@ -23,12 +23,12 @@ li {
 
 span,
 p {
-  font-weight: 400; 
+  font-weight: 400;
 }
 
 .header {
   -webkit-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
   background: transparent !important;
   position: sticky;
   position: -webkit-sticky;
@@ -48,9 +48,9 @@ p {
   width: 100%;
   z-index: 111;
   -webkit-animation: smoothScroll 1s;
-          animation: smoothScroll 1s;
-  -webkit-transition: .5s all;
-  transition: .5s all;
+  animation: smoothScroll 1s;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
   background: #fff !important;
 }
 
@@ -61,27 +61,27 @@ p {
 @-webkit-keyframes smoothScroll {
   0% {
     -webkit-transform: translateY(-20px);
-            transform: translateY(-20px);
+    transform: translateY(-20px);
   }
   100% {
     -webkit-transform: translateY(0);
-            transform: translateY(0);
+    transform: translateY(0);
   }
 }
 
 @keyframes smoothScroll {
   0% {
     -webkit-transform: translateY(-20px);
-            transform: translateY(-20px);
+    transform: translateY(-20px);
   }
   100% {
     -webkit-transform: translateY(0);
-            transform: translateY(0);
+    transform: translateY(0);
   }
 }
 
 .neta-selfcheck .container {
-  background: #B0117E;
+  background: #b0117e;
   padding: 60px;
   color: #fff;
   border-radius: 10px;
@@ -92,15 +92,21 @@ p {
   margin-top: -150px;
 }
 
-
 .neta-selfcheck .btn-neta {
-  background: -webkit-gradient(linear, left top, right top, color-stop(26%, #94519f), color-stop(55%, #343886), color-stop(91%, #009fe1));
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    color-stop(26%, #94519f),
+    color-stop(55%, #343886),
+    color-stop(91%, #009fe1)
+  );
   background: linear-gradient(90deg, #94519f 26%, #343886 55%, #009fe1 91%);
   padding: 12px 35px;
   margin-top: 15px;
   border: 0;
-  -webkit-transition: .5s all;
-  transition: .5s all;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
   background: #fff;
   margin-top: 20px;
 }
@@ -111,7 +117,7 @@ p {
 }
 
 .neta-selfcheck .btn-neta a {
-  color: #B0117E;
+  color: #b0117e;
 }
 
 .neta-selfcheck h3 {
@@ -157,7 +163,7 @@ footer li:hover {
   -webkit-transition: 0.5s all;
   transition: 0.5s all;
   padding-left: 6px;
-  color: #B0117E;
+  color: #b0117e;
 }
 
 footer .copyright {
@@ -173,7 +179,7 @@ footer .social-links img {
 
 footer .social-links img:hover {
   -webkit-transform: translateY(-5px);
-          transform: translateY(-5px);
+  transform: translateY(-5px);
   -webkit-transition: 0.5s all;
   transition: 0.5s all;
 }
@@ -187,7 +193,7 @@ body {
   min-height: 40px;
   padding: 5px 0;
   width: 100%;
-  background: #6E2F9F;
+  background: #6e2f9f;
 }
 
 .top-nav span {
@@ -212,7 +218,7 @@ body {
 
 .top-nav .social-links img:hover {
   -webkit-transform: translateY(-3px);
-          transform: translateY(-3px);
+  transform: translateY(-3px);
   -webkit-transition: 0.5s all;
   transition: 0.5s all;
   cursor: pointer;
@@ -220,7 +226,7 @@ body {
 
 header {
   -webkit-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
   background: #fff;
 }
 
@@ -255,7 +261,7 @@ header .bg-light .nav-item {
 }
 
 header .bg-light .nav-item .active {
-  color: #B0117E !important;
+  color: #b0117e !important;
   position: relative;
 }
 
@@ -266,7 +272,7 @@ header .bg-light .nav-link {
 }
 
 header .bg-light .nav-link:hover {
-  color: #B0117E !important;
+  color: #b0117e !important;
   -webkit-transition: 0.5s all;
   transition: 0.5s all;
 }
@@ -288,8 +294,8 @@ header .bg-light .navbar-brand {
   z-index: 1;
   opacity: 0;
   visibility: hidden;
-  -webkit-transition: .5s all;
-  transition: .5s all;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
   min-width: 150px;
 }
 
@@ -298,8 +304,8 @@ header .bg-light .navbar-brand {
   padding-bottom: 15px;
   color: #000;
   cursor: pointer;
-  -webkit-transition: .5s all;
-  transition: .5s all;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
 }
 
 .neta-dropdown__menu li a {
@@ -307,10 +313,10 @@ header .bg-light .navbar-brand {
 }
 
 .neta-dropdown__menu li:hover {
-  background: #B0117E;
+  background: #b0117e;
   color: #fff;
-  -webkit-transition: .5s all;
-  transition: .5s all;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
 }
 
 .neta-dropdown__menu-item {
@@ -321,8 +327,8 @@ header .bg-light .navbar-brand {
   z-index: 1;
   opacity: 0;
   visibility: hidden;
-  -webkit-transition: .5s all;
-  transition: .5s all;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
   min-width: 150px;
 }
 
@@ -330,27 +336,27 @@ header .bg-light .navbar-brand {
   opacity: 1;
   visibility: visible;
   -webkit-transform: translateX(-10px);
-          transform: translateX(-10px);
-  -webkit-transition: .5s all;
-  transition: .5s all;
+  transform: translateX(-10px);
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
 }
 
 .neta-dropdown__menu:hover__item {
   opacity: 1;
   visibility: visible;
   -webkit-transform: translateX(-10px);
-          transform: translateX(-10px);
-  -webkit-transition: .5s all;
-  transition: .5s all;
+  transform: translateX(-10px);
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
 }
 
 .neta-dropdown:hover .neta-dropdown__menu {
   opacity: 1;
   visibility: visible;
   -webkit-transform: translateY(-10px);
-          transform: translateY(-10px);
-  -webkit-transition: .5s all;
-  transition: .5s all;
+  transform: translateY(-10px);
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
 }
 
 .neta-dropdown .dropdown-last__item {
@@ -361,8 +367,8 @@ header .bg-light .navbar-brand {
   z-index: 1;
   opacity: 0;
   visibility: hidden;
-  -webkit-transition: .5s all;
-  transition: .5s all;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
   min-width: 150px;
 }
 
@@ -370,9 +376,9 @@ header .bg-light .navbar-brand {
   opacity: 1;
   visibility: visible;
   -webkit-transform: translateX(-10px);
-          transform: translateX(-10px);
-  -webkit-transition: .5s all;
-  transition: .5s all;
+  transform: translateX(-10px);
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
 }
 
 .neta-search li {
@@ -446,13 +452,20 @@ header .bg-light .navbar-brand {
 }
 
 .neta-banner .btn-neta {
-  background: -webkit-gradient(linear, left top, right top, color-stop(26%, #94519f), color-stop(55%, #343886), color-stop(91%, #009fe1));
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    color-stop(26%, #94519f),
+    color-stop(55%, #343886),
+    color-stop(91%, #009fe1)
+  );
   background: linear-gradient(90deg, #94519f 26%, #343886 55%, #009fe1 91%);
   padding: 12px 35px;
   margin-top: 15px;
   border: 0;
-  -webkit-transition: .5s all;
-  transition: .5s all;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
 }
 
 .neta-banner .btn-neta a {
@@ -476,8 +489,18 @@ header .bg-light .navbar-brand {
 }
 
 .neta-banner .item .img-fade {
-  background: -webkit-gradient(linear, left top, right top, from(rgba(179, 176, 176, 0.45)), to(rgba(0, 0, 0, 0)));
-  background: linear-gradient(90deg, rgba(179, 176, 176, 0.45), rgba(0, 0, 0, 0));
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(rgba(179, 176, 176, 0.45)),
+    to(rgba(0, 0, 0, 0))
+  );
+  background: linear-gradient(
+    90deg,
+    rgba(179, 176, 176, 0.45),
+    rgba(0, 0, 0, 0)
+  );
   position: absolute;
   top: 0;
   left: 0;
@@ -489,7 +512,7 @@ header .bg-light .navbar-brand {
   height: 100vh;
   width: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .neta-banner .item .neta-play {
@@ -497,8 +520,8 @@ header .bg-light .navbar-brand {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   margin-left: 40px;
 }
 
@@ -515,7 +538,7 @@ header .bg-light .navbar-brand {
 }
 
 .neta-slog {
-  background: url(../../img/gdt.png) center center/cover;
+  background: url(../img/gdt.png) center center/cover;
   min-height: 400px;
 }
 
@@ -543,13 +566,20 @@ header .bg-light .navbar-brand {
 }
 
 .neta-slog .btn-neta {
-  background: -webkit-gradient(linear, left top, right top, color-stop(26%, #94519f), color-stop(55%, #343886), color-stop(91%, #009fe1));
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    color-stop(26%, #94519f),
+    color-stop(55%, #343886),
+    color-stop(91%, #009fe1)
+  );
   background: linear-gradient(90deg, #94519f 26%, #343886 55%, #009fe1 91%);
   padding: 12px 35px;
   margin-top: 15px;
   border: 0;
-  -webkit-transition: .5s all;
-  transition: .5s all;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
   background: #fff;
 }
 
@@ -559,7 +589,7 @@ header .bg-light .navbar-brand {
 }
 
 .neta-slog .btn-neta a {
-  color: #B0117E;
+  color: #b0117e;
 }
 
 .neta-courses__content {
@@ -567,19 +597,26 @@ header .bg-light .navbar-brand {
 }
 
 .neta-courses h5 {
-  border-left: 6px solid #B0117E;
+  border-left: 6px solid #b0117e;
   padding-left: 15px;
   margin-bottom: 30px;
 }
 
 .neta-courses .btn-neta {
-  background: -webkit-gradient(linear, left top, right top, color-stop(26%, #94519f), color-stop(55%, #343886), color-stop(91%, #009fe1));
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    color-stop(26%, #94519f),
+    color-stop(55%, #343886),
+    color-stop(91%, #009fe1)
+  );
   background: linear-gradient(90deg, #94519f 26%, #343886 55%, #009fe1 91%);
   padding: 12px 35px;
   margin-top: 15px;
   border: 0;
-  -webkit-transition: .5s all;
-  transition: .5s all;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
 }
 
 .neta-courses .btn-neta a {
@@ -592,7 +629,7 @@ header .bg-light .navbar-brand {
 }
 
 .neta-courses .course-img::after {
-  content: url("../../img/blob.png");
+  content: url("../img/blob.png");
   position: absolute;
   right: -55px;
   top: 50px;
@@ -603,7 +640,7 @@ header .bg-light .navbar-brand {
   width: 100%;
   height: 300px;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .neta-courses .course-img-rev {
@@ -611,7 +648,7 @@ header .bg-light .navbar-brand {
 }
 
 .neta-courses .course-img-rev::after {
-  content: url("../../img/blob.png");
+  content: url("../img/blob.png");
   position: absolute;
   left: -55px;
   top: 50px;
@@ -636,7 +673,7 @@ header .bg-light .navbar-brand {
 
 .neta-career__content:hover .career-bg img {
   -webkit-transform: scale(1.2);
-          transform: scale(1.2);
+  transform: scale(1.2);
   -webkit-transition: 0.5s all;
   transition: 0.5s all;
 }
@@ -661,9 +698,15 @@ header .bg-light .navbar-brand {
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: .8;
+  opacity: 0.8;
   border-radius: 4px;
-  background: -webkit-gradient(linear, left top, right top, color-stop(30%, #2c109e), to(#00a8ae));
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    color-stop(30%, #2c109e),
+    to(#00a8ae)
+  );
   background: linear-gradient(to right, #2c109e 30%, #00a8ae);
 }
 
@@ -673,9 +716,15 @@ header .bg-light .navbar-brand {
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: .8;
+  opacity: 0.8;
   border-radius: 4px;
-  background: -webkit-gradient(linear, left top, right top, color-stop(30%, #00ecb4), to(#01cf38));
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    color-stop(30%, #00ecb4),
+    to(#01cf38)
+  );
   background: linear-gradient(to right, #00ecb4 30%, #01cf38);
 }
 
@@ -685,9 +734,15 @@ header .bg-light .navbar-brand {
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: .8;
+  opacity: 0.8;
   border-radius: 4px;
-  background: -webkit-gradient(linear, left top, right top, color-stop(30%, #93009e), to(#8815c9));
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    color-stop(30%, #93009e),
+    to(#8815c9)
+  );
   background: linear-gradient(to right, #93009e 30%, #8815c9);
 }
 
@@ -706,7 +761,7 @@ header .bg-light .navbar-brand {
 }
 
 .neta-download {
-  background: url(../../img/dl.png) center center/cover;
+  background: url(../img/dl.png) center center/cover;
   min-height: 155px;
 }
 
@@ -718,13 +773,20 @@ header .bg-light .navbar-brand {
 }
 
 .neta-download .btn-neta {
-  background: -webkit-gradient(linear, left top, right top, color-stop(26%, #94519f), color-stop(55%, #343886), color-stop(91%, #009fe1));
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    color-stop(26%, #94519f),
+    color-stop(55%, #343886),
+    color-stop(91%, #009fe1)
+  );
   background: linear-gradient(90deg, #94519f 26%, #343886 55%, #009fe1 91%);
   padding: 12px 35px;
   margin-top: 15px;
   border: 0;
-  -webkit-transition: .5s all;
-  transition: .5s all;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
   background: #fff;
   margin-top: 55px;
 }
@@ -735,11 +797,11 @@ header .bg-light .navbar-brand {
 }
 
 .neta-download .btn-neta a {
-  color: #B0117E;
+  color: #b0117e;
 }
 
 .neta-demo {
-  background: url("../../img/adm.png") center center/cover fixed !important;
+  background: url("../img/adm.png") center center/cover fixed !important;
 }
 
 .neta-ribbon {
@@ -752,12 +814,12 @@ header .bg-light .navbar-brand {
   height: 200px;
   width: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .neta-ribbon::after {
   content: "";
-  background: #6E2F9F;
+  background: #6e2f9f;
   width: 100%;
   height: 100%;
   position: absolute;
@@ -783,8 +845,8 @@ header .bg-light .navbar-brand {
 }
 
 .neta-about .ttl-line:after {
-  content: '';
-  background: #6E2F9F;
+  content: "";
+  background: #6e2f9f;
   position: absolute;
   bottom: -15px;
   width: 50px;
@@ -811,7 +873,7 @@ header .bg-light .navbar-brand {
 }
 
 .neta-about .enrol-cpd:hover {
-  background: #6E2F9F;
+  background: #6e2f9f;
   -webkit-transition: 0.5s all;
   transition: 0.5s all;
 }
@@ -822,8 +884,8 @@ header .bg-light .navbar-brand {
 }
 
 .neta-team .ttl-line:after {
-  content: '';
-  background: #6E2F9F;
+  content: "";
+  background: #6e2f9f;
   position: absolute;
   bottom: -15px;
   width: 50px;
@@ -847,14 +909,14 @@ header .bg-light .navbar-brand {
 
 .neta-team__box:hover figcaption {
   -webkit-transform: translateY(-15px);
-          transform: translateY(-15px);
+  transform: translateY(-15px);
   -webkit-transition: 0.5s all;
   transition: 0.5s all;
 }
 
 .neta-team__box:hover img {
   -webkit-transform: scale(1.05);
-          transform: scale(1.05);
+  transform: scale(1.05);
   -webkit-transition: 0.5s all;
   transition: 0.5s all;
 }
@@ -863,7 +925,7 @@ header .bg-light .navbar-brand {
   width: 100%;
   height: 400px;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-radius: 4px;
   -webkit-transition: 0.5s all;
   transition: 0.5s all;
@@ -873,7 +935,14 @@ header .bg-light .navbar-brand {
   position: absolute;
   top: 0;
   left: 0;
-  background: -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(70%), to(rgba(14, 13, 13, 0.9)));
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(transparent),
+    color-stop(70%),
+    to(rgba(14, 13, 13, 0.9))
+  );
   background: linear-gradient(transparent, 70%, rgba(14, 13, 13, 0.9));
   width: 100%;
   height: 100%;
@@ -903,8 +972,8 @@ header .bg-light .navbar-brand {
 }
 
 .neta-contact .ttl-line:after {
-  content: '';
-  background: #6E2F9F;
+  content: "";
+  background: #6e2f9f;
   position: absolute;
   bottom: -15px;
   width: 50px;
@@ -920,7 +989,7 @@ header .bg-light .navbar-brand {
 }
 
 .neta-contact span {
-  color: #B0117E;
+  color: #b0117e;
   padding-right: 20px;
 }
 
@@ -971,13 +1040,20 @@ header .bg-light .navbar-brand {
 }
 
 .neta-contact form .btn-neta {
-  background: -webkit-gradient(linear, left top, right top, color-stop(26%, #94519f), color-stop(55%, #343886), color-stop(91%, #009fe1));
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    color-stop(26%, #94519f),
+    color-stop(55%, #343886),
+    color-stop(91%, #009fe1)
+  );
   background: linear-gradient(90deg, #94519f 26%, #343886 55%, #009fe1 91%);
   padding: 12px 35px;
   margin-top: 15px;
   border: 0;
-  -webkit-transition: .5s all;
-  transition: .5s all;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
 }
 
 .neta-contact form .btn-neta a {
@@ -999,7 +1075,7 @@ header .bg-light .navbar-brand {
 }
 
 .courses-wrap .neta-email {
-  color: #B0117E;
+  color: #b0117e;
 }
 
 .courses-wrap .course-iframe {
@@ -1061,7 +1137,7 @@ header .bg-light .navbar-brand {
 }
 
 .courses-wrap .course-summary {
-  background: url("../../img/cs.png") center center/cover;
+  background: url("../img/cs.png") center center/cover;
   border-radius: 4px;
   padding: 30px;
   color: #fff;
@@ -1101,7 +1177,7 @@ header .bg-light .navbar-brand {
 
 .courses-wrap .course-summary .ttl-line:after {
   content: "";
-  background: #B0117E;
+  background: #b0117e;
 }
 
 .courses-wrap .course-enrolment__content {
@@ -1114,7 +1190,7 @@ header .bg-light .navbar-brand {
 }
 
 .courses-wrap .course-enrolment__content p {
-  color: #B0117E;
+  color: #b0117e;
   font-weight: 500;
   font-size: 14px;
 }
@@ -1130,7 +1206,7 @@ header .bg-light .navbar-brand {
 }
 
 .courses-wrap .course-enrolment__content .btn {
-  background: #B0117E;
+  background: #b0117e;
   margin-top: 30px;
   -webkit-transition: 0.5s all;
   transition: 0.5s all;
@@ -1141,7 +1217,7 @@ header .bg-light .navbar-brand {
 }
 
 .courses-wrap .course-enrolment__content .btn:hover {
-  background: #6E2F9F;
+  background: #6e2f9f;
   -webkit-transition: 0.5s all;
   transition: 0.5s all;
 }
@@ -1170,7 +1246,7 @@ header .bg-light .navbar-brand {
   height: 220px;
   width: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .courses-wrap .intake-date__content ul {
@@ -1197,7 +1273,7 @@ header .bg-light .navbar-brand {
 }
 
 .courses-wrap .intake-date__content .btn {
-  background: #B0117E;
+  background: #b0117e;
   margin-top: 30px;
   -webkit-transition: 0.5s all;
   transition: 0.5s all;
@@ -1208,7 +1284,7 @@ header .bg-light .navbar-brand {
 }
 
 .courses-wrap .intake-date__content .btn:hover {
-  background: #6E2F9F;
+  background: #6e2f9f;
   -webkit-transition: 0.5s all;
   transition: 0.5s all;
 }
@@ -1218,7 +1294,7 @@ header .bg-light .navbar-brand {
 }
 
 .courses-wrap .c-blt h6 {
-  color: #B0117E;
+  color: #b0117e;
 }
 
 .courses-wrap .c-blt li {
@@ -1226,7 +1302,7 @@ header .bg-light .navbar-brand {
 }
 
 .courses-wrap .c-blt li:before {
-  content: url(../../img/tick.svg);
+  content: url(../img/tick.svg);
   position: relative;
   top: 5px;
   margin-right: 20px;
@@ -1243,7 +1319,7 @@ header .bg-light .navbar-brand {
   width: 100%;
   height: 180px;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .neta-catlog figcaption {
@@ -1264,7 +1340,7 @@ header .bg-light .navbar-brand {
 }
 
 .neta-catlog .btn {
-  background: #B0117E;
+  background: #b0117e;
   margin-top: 30px;
   -webkit-transition: 0.5s all;
   transition: 0.5s all;
@@ -1275,7 +1351,7 @@ header .bg-light .navbar-brand {
 }
 
 .neta-catlog .btn:hover {
-  background: #6E2F9F;
+  background: #6e2f9f;
   -webkit-transition: 0.5s all;
   transition: 0.5s all;
 }
@@ -1323,7 +1399,7 @@ header .bg-light .navbar-brand {
 }
 
 .neta-dashboard .profile-tab .neta-field .save-btn .btn {
-  background: #B0117E;
+  background: #b0117e;
   margin-top: 30px;
   -webkit-transition: 0.5s all;
   transition: 0.5s all;
@@ -1334,7 +1410,7 @@ header .bg-light .navbar-brand {
 }
 
 .neta-dashboard .profile-tab .neta-field .save-btn .btn:hover {
-  background: #6E2F9F;
+  background: #6e2f9f;
   -webkit-transition: 0.5s all;
   transition: 0.5s all;
 }
@@ -1355,7 +1431,7 @@ header .bg-light .navbar-brand {
   position: relative;
   top: 7px;
   margin-right: 10px;
-  color: #B0117E;
+  color: #b0117e;
 }
 
 .neta-dashboard .profile-tab .nav-link {
@@ -1378,7 +1454,7 @@ header .bg-light .navbar-brand {
 }
 
 .neta-dashboard .profile-tab .nav-link.active {
-  background: #B0117E;
+  background: #b0117e;
   border-radius: 0;
   color: #fff;
 }
@@ -1410,7 +1486,7 @@ header .bg-light .navbar-brand {
   width: 142px;
   height: 142px;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-radius: 50%;
   margin-top: 20px;
   position: relative;
@@ -1421,7 +1497,7 @@ header .bg-light .navbar-brand {
 }
 
 .neta-dashboard .profile-tab .ed-profile input:after {
-  content: url("../../img/camera.svg");
+  content: url("../img/camera.svg");
   position: absolute;
   z-index: 1;
   visibility: visible;
@@ -1455,7 +1531,7 @@ header .bg-light .navbar-brand {
 
 .neta-dashboard .tp-list__desc span {
   font-size: 14px;
-  color: #B0117E;
+  color: #b0117e;
 }
 
 .neta-dashboard .tp-list__desc a {
@@ -1467,7 +1543,7 @@ header .bg-light .navbar-brand {
   width: 100%;
   border-radius: 4px;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .neta-dashboard .change-password ul {
@@ -1494,7 +1570,7 @@ header .bg-light .navbar-brand {
   height: 80px;
   border-radius: 50%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   margin-bottom: 10px;
 }
 
@@ -1505,7 +1581,7 @@ header .bg-light .navbar-brand {
 }
 
 .neta-quiz .btn {
-  background: #B0117E;
+  background: #b0117e;
   margin-top: 30px;
   -webkit-transition: 0.5s all;
   transition: 0.5s all;
@@ -1516,7 +1592,7 @@ header .bg-light .navbar-brand {
 }
 
 .neta-quiz .btn:hover {
-  background: #6E2F9F;
+  background: #6e2f9f;
   -webkit-transition: 0.5s all;
   transition: 0.5s all;
 }
@@ -1531,13 +1607,13 @@ header .bg-light .navbar-brand {
 
 .neta-quiz .d-btn {
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   padding: 0 20px;
 }
 
 .neta-quiz .fs-title {
-  color: #B0117E;
+  color: #b0117e;
 }
 
 .neta-quiz p {
@@ -1560,11 +1636,11 @@ header .bg-light .navbar-brand {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   border-radius: 4px;
 }
 
@@ -1598,7 +1674,7 @@ header .bg-light .navbar-brand {
 }
 
 .neta-agent__content h5 {
-  color: #B0117E;
+  color: #b0117e;
   border-bottom: 1px solid #dedede;
   padding-bottom: 15px;
   font-size: 18px;
@@ -1653,8 +1729,8 @@ header .bg-light .navbar-brand {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
 }
 
 .neta-invoice .pay-box ul {
@@ -1762,7 +1838,7 @@ a {
 }
 
 .nx-detail h6 {
-  color: #B0117E;
+  color: #b0117e;
 }
 
 .nx-detail span {
@@ -1774,7 +1850,7 @@ a {
 }
 
 .nx-detail .btn {
-  background: #B0117E;
+  background: #b0117e;
   margin-top: 30px;
   -webkit-transition: 0.5s all;
   transition: 0.5s all;
@@ -1785,7 +1861,7 @@ a {
 }
 
 .nx-detail .btn:hover {
-  background: #6E2F9F;
+  background: #6e2f9f;
   -webkit-transition: 0.5s all;
   transition: 0.5s all;
 }
@@ -1796,11 +1872,11 @@ a {
 
 .nx-detail .course-day li {
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   -webkit-box-align: baseline;
-      -ms-flex-align: baseline;
-          align-items: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
 }
 
 .nx-detail .course-day li:nth-last-child(1) {
@@ -1820,7 +1896,7 @@ a {
 }
 
 .neta-fees h5 span {
-  color: #B0117E;
+  color: #b0117e;
   font-size: 30px;
   padding-left: 10px;
   font-weight: 600;
@@ -1838,7 +1914,7 @@ a {
   font-weight: 600;
   font-size: 16px;
   padding-top: 10px;
-  color: #B0117E;
+  color: #b0117e;
 }
 
 .neta-bullet ul {
@@ -1873,7 +1949,7 @@ a {
 .neta-pplan table {
   background: #fff;
   -webkit-box-shadow: 0 0 20px #efefef;
-          box-shadow: 0 0 20px #efefef;
+  box-shadow: 0 0 20px #efefef;
 }
 
 .my-courses {
@@ -1890,12 +1966,12 @@ a {
 }
 
 .my-courses__list:hover {
-  background: #B0117E;
+  background: #b0117e;
   -webkit-transition: 0.5s all;
   transition: 0.5s all;
   color: #fff;
   -webkit-transform: translateY(-5px);
-          transform: translateY(-5px);
+  transform: translateY(-5px);
 }
 
 .my-courses__list:hover a {
@@ -1924,7 +2000,7 @@ a {
 }
 
 .my-courses__list .btn {
-  background: #B0117E;
+  background: #b0117e;
   margin-top: 30px;
   -webkit-transition: 0.5s all;
   transition: 0.5s all;
@@ -1935,7 +2011,7 @@ a {
 }
 
 .my-courses__list .btn:hover {
-  background: #6E2F9F;
+  background: #6e2f9f;
   -webkit-transition: 0.5s all;
   transition: 0.5s all;
 }
@@ -1990,8 +2066,8 @@ a {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 }
 
 .neta-payment ul li {
@@ -2003,7 +2079,8 @@ a {
   border: 0;
 }
 
-.neta-payment .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+.neta-payment
+  .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
   width: 220px;
   margin-right: 20px;
 }
@@ -2041,7 +2118,7 @@ a {
 }
 
 #grad1 .btn {
-  background: #B0117E;
+  background: #b0117e;
   margin-top: 30px;
   -webkit-transition: 0.5s all;
   transition: 0.5s all;
@@ -2052,7 +2129,7 @@ a {
 }
 
 #grad1 .btn:hover {
-  background: #6E2F9F;
+  background: #6e2f9f;
   -webkit-transition: 0.5s all;
   transition: 0.5s all;
 }
@@ -2121,7 +2198,7 @@ a {
 }
 
 .neta-lesson .btn {
-  background: #B0117E;
+  background: #b0117e;
   margin-top: 30px;
   -webkit-transition: 0.5s all;
   transition: 0.5s all;
@@ -2132,7 +2209,7 @@ a {
 }
 
 .neta-lesson .btn:hover {
-  background: #6E2F9F;
+  background: #6e2f9f;
   -webkit-transition: 0.5s all;
   transition: 0.5s all;
 }
@@ -2151,7 +2228,7 @@ a {
 }
 
 .neta-user .user li:hover {
-  color: #B0117E;
+  color: #b0117e;
 }
 
 .neta-user .user ul {
@@ -2161,7 +2238,7 @@ a {
   position: absolute;
   left: -120px;
   -webkit-box-shadow: 0 0 5px #dedede;
-          box-shadow: 0 0 5px #dedede;
+  box-shadow: 0 0 5px #dedede;
   background: #fff;
   z-index: 1;
   bottom: -110px;
@@ -2180,12 +2257,13 @@ a {
   opacity: 1;
   visibility: visible;
   -webkit-transform: translateY(-5px);
-          transform: translateY(-5px);
+  transform: translateY(-5px);
   -webkit-transition: 0.5s all;
   transition: 0.5s all;
 }
 
-.neta-user .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+.neta-user
+  .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
   width: 220px;
   margin-right: 20px;
 }
@@ -2199,7 +2277,7 @@ a {
 }
 
 .neta-resources h6 {
-  color: #B0117E;
+  color: #b0117e;
 }
 
 .neta-resources .resource-box {
@@ -2325,7 +2403,9 @@ a.neta-gallery__card:hover {
   color: #333;
 }
 
-.blog-content dl, ol, ul {
+.blog-content dl,
+ol,
+ul {
   padding-left: 30px;
 }
 
@@ -2335,4 +2415,131 @@ a.neta-gallery__card:hover {
 
 .blog-block {
   background-color: #fff;
+}
+
+.neta-forum-tags ul li a {
+  background-color: #fff;
+  padding: 10px 16px;
+  margin-right: 20px;
+  display: block;
+}
+
+.neta-forum-item {
+
+  padding: 24px;
+  background-color: #fff;
+  margin-top: 30px;
+}
+
+.neta-forum-item p {
+  color: #333;
+  font-size: 15px;
+  margin-bottom: 0;
+}
+
+.entry-meta span {
+  display: inline-block;
+  margin-right: 20px;
+  font-size: 14px;
+  color: #888;
+}
+.entry-meta span i {
+  padding-right: 4px;
+}
+
+.neta-forum-dtl-block {
+  background-color: #fff;
+}
+
+.neta-forum-detail {
+  padding: 24px;
+  border-bottom: 1px solid #ececec;
+  background-color: #fff;
+}
+
+.forum-user {
+  margin-bottom: 20px;
+}
+
+.forum-user img {
+  width: 60px;
+  height: 60px;
+  border-radius: 500rem;
+  object-fit: cover;
+}
+
+.forum-user-content h5 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #444;
+}
+
+.forum-user-content span {
+  font-size: 14px;
+  color: #888;
+}
+
+.neta-forum-detail p {
+  margin-bottom: 0;
+  color: #555;
+}
+
+.neta-team-img img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+}
+
+.neta-team-card {
+  text-align: center;
+  margin-bottom: 30px !important;
+}
+
+.neta-team-card span {
+  color: #999;
+  font-size: 14px;
+}
+
+.neta-team-card a {
+  color: #888 !important;
+}
+
+.neta-team-desc {
+  margin-top: 16px;
+}
+
+.neta-team-desc svg {
+  fill: #888;
+}
+
+.neta-team-desc .card {
+  color: #666;
+}
+
+.testimonial-item_img img {
+  width: 120px !important;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto;
+}
+
+.testimonial-item {
+  box-shadow: 0 0 14px 3px #f1f1f1;
+  margin: 10px;
+}
+
+.testimonial-item p {
+  color: #666;
+}
+
+.team-testimonial {
+  background-color: #fff;
+  padding-top: 50px;
+  padding-bottom: 30px;
+}
+
+.team-testimonial .owl-dots,
+.neta-team .owl-dots {
+  display: block !important;
 }

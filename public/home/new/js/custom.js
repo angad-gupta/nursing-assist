@@ -104,3 +104,37 @@ $(document).ready(function(){
     $(".demo-ans").addClass('wow animated slideInUp');
     $(".demo-ans").toggle();
   });
+
+  $(".testimonial").owlCarousel({
+    loop: true,
+    margin: 20,
+    smartSpeed: 1400,
+    autoplay: true,
+    nav: false,
+    dots: true,
+    responsive:{
+        0:{
+            items:1
+        },
+        1000:{
+            items:2
+        }
+    }
+});
+
+$(".team").owlCarousel({
+  loop: true,
+  margin: 20,
+  smartSpeed: 1400,
+  autoplay: true,
+  nav: false,
+  dots: true,
+  responsive:{
+      0:{
+          items:1
+      },
+      1000:{
+          items:4
+      }
+  }
+});

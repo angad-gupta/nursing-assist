@@ -22,7 +22,11 @@ class ForumComment extends Model
         return $this->belongsTo(Forum::class, 'forum_id', 'id');
     }
 
-        public function commentStudentInfo(){
+    public function commentStudentInfo(){
         return $this->belongsTo(Student::class,'commented_by','id');
+    }
+
+    public static function countComment($forum_id){
+        return  ForumComment::where('forum_id','=',$forum_id)->count();
     }
 }

@@ -86,10 +86,10 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('agent') }}">Agents</a>
+                               	 <a class="nav-link" href="{{ route('student-hub') }}">Learner’s Portal</a>
                                 </li>
                                 <li class="nav-item">
-                               	 <a class="nav-link" href="{{ route('student-hub') }}">Learner’s Portal</a>
+                                    <a class="nav-link" href="{{ route('student-forum') }}">Forums</a>
                                 </li>
                                 <li class="nav-item neta-dropdown">
 	                                <a class="nav-link" href="#">Media</a>
