@@ -112,7 +112,7 @@
     <legend class="text-uppercase font-size-sm font-weight-bold">Multiple Choice Option</legend>
 
  <div class="row">
-    <div class="col-lg-3">
+    <div class="col-lg-4">
         <div class="row">
             <label class="col-form-label col-lg-3">Option A:</label>
             <div class="col-lg-9 form-group-feedback form-group-feedback-right">
@@ -127,7 +127,7 @@
         </div>
     </div>
 
-    <div class="col-lg-3">
+    <div class="col-lg-4">
         <div class="row">
             <label class="col-form-label col-lg-3">Option B:</label>
             <div class="col-lg-9 form-group-feedback form-group-feedback-right">
@@ -142,7 +142,7 @@
         </div>
     </div>
 
-    <div class="col-lg-3">
+    <div class="col-lg-4">
         <div class="row">
             <label class="col-form-label col-lg-3">Option C:</label>
             <div class="col-lg-9 form-group-feedback form-group-feedback-right">
@@ -157,7 +157,7 @@
         </div>
     </div>
 
-    <div class="col-lg-3">
+    <div class="col-lg-4 mt-2">
         <div class="row">
             <label class="col-form-label col-lg-3">Option D:</label>
             <div class="col-lg-9 form-group-feedback form-group-feedback-right">
@@ -167,6 +167,34 @@
                         </span>
                     </span>
                     {!! Form::text('option_4', $value = null, ['id'=>'option_4','placeholder'=>'Enter Option D','class'=>'form-control']) !!}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 mt-2">
+        <div class="row">
+            <label class="col-form-label col-lg-3">Option E:</label>
+            <div class="col-lg-9 form-group-feedback form-group-feedback-right">
+                <div class="input-group">
+                    <span class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-list2"></i>
+                        </span>
+                    </span>
+                    {!! Form::text('option_5', $value = null, ['id'=>'option_5','placeholder'=>'Enter Option E','class'=>'form-control']) !!}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 mt-2">
+        <div class="row">
+            <label class="col-form-label col-lg-3">Option F:</label>
+            <div class="col-lg-9 form-group-feedback form-group-feedback-right">
+                <div class="input-group">
+                    <span class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-list2"></i>
+                        </span>
+                    </span>
+                    {!! Form::text('option_6', $value = 'All of the above', ['id'=>'option_6','placeholder'=>'Enter Option F','class'=>'form-control']) !!}
                 </div>
             </div>
         </div>
@@ -195,6 +223,8 @@
                         $select_2 = "";
                         $select_3 = "";
                         $select_4 = "";
+                        $select_5 = "";
+                        $select_6 = "";
                         @endphp
 
                         @if($is_edit)
@@ -206,6 +236,8 @@
                                     $select_2 = (in_array('option_b',$correct_val)) ?  "selected='selected'" : "";
                                     $select_3 = (in_array('option_c',$correct_val)) ?  "selected='selected'" : "";
                                     $select_4 = (in_array('option_d',$correct_val)) ?  "selected='selected'" : "";
+                                    $select_5 = (in_array('option_e',$correct_val)) ?  "selected='selected'" : "";
+                                    $select_6 = (in_array('option_f',$correct_val)) ?  "selected='selected'" : "";
                                 }
                             @endphp
                             @endif
@@ -216,6 +248,8 @@
                             <option value="option_b" {{$select_2}}>Option B</option>
                             <option value="option_c" {{$select_3}}>Option C</option>
                             <option value="option_d" {{$select_4}}>Option D</option>
+                            <option value="option_e" {{$select_5}}>Option E</option>
+                            <option value="option_f" {{$select_6}}>Option F</option>
                         </select>
                         </div>
                     </div>

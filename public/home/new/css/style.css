@@ -428,7 +428,7 @@ header .bg-light .navbar-brand {
 }
 
 .neta-banner .owl-next span::before {
-  content: url(../img/left.svg);
+  content: url(../../img/left.svg);
 }
 
 .neta-banner .owl-prev span {
@@ -439,7 +439,7 @@ header .bg-light .navbar-brand {
 }
 
 .neta-banner .owl-prev span::before {
-  content: url(../img/arrow.svg);
+  content: url(../../img/arrow.svg);
 }
 
 .neta-banner .banner-content {
@@ -538,7 +538,7 @@ header .bg-light .navbar-brand {
 }
 
 .neta-slog {
-  background: url(../img/gdt.png) center center/cover;
+  background: url(../../img/gdt.png) center center/cover; 
   min-height: 400px;
 }
 
@@ -629,7 +629,7 @@ header .bg-light .navbar-brand {
 }
 
 .neta-courses .course-img::after {
-  content: url("../img/blob.png");
+  content: url("../../img/blob.png");
   position: absolute;
   right: -55px;
   top: 50px;
@@ -648,7 +648,7 @@ header .bg-light .navbar-brand {
 }
 
 .neta-courses .course-img-rev::after {
-  content: url("../img/blob.png");
+  content: url("../../img/blob.png");
   position: absolute;
   left: -55px;
   top: 50px;
@@ -761,7 +761,7 @@ header .bg-light .navbar-brand {
 }
 
 .neta-download {
-  background: url(../img/dl.png) center center/cover;
+  background: url(../../img/dl.png) center center/cover;
   min-height: 155px;
 }
 
@@ -801,7 +801,7 @@ header .bg-light .navbar-brand {
 }
 
 .neta-demo {
-  background: url("../img/adm.png") center center/cover fixed !important;
+  background: url("../../img/adm.png") center center/cover fixed !important;
 }
 
 .neta-ribbon {
@@ -1302,7 +1302,7 @@ header .bg-light .navbar-brand {
 }
 
 .courses-wrap .c-blt li:before {
-  content: url(../img/tick.svg);
+  content: url(../../img/tick.svg);
   position: relative;
   top: 5px;
   margin-right: 20px;
@@ -1497,7 +1497,7 @@ header .bg-light .navbar-brand {
 }
 
 .neta-dashboard .profile-tab .ed-profile input:after {
-  content: url("../img/camera.svg");
+  content: url("../../img/camera.svg");
   position: absolute;
   z-index: 1;
   visibility: visible;

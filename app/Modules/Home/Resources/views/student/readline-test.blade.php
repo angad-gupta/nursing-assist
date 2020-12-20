@@ -106,6 +106,22 @@
                                                 </label>
                                             </div>
                                         </div>
+                                        <div class="col-sm-6">
+                                            <div class="e-input">
+                                                <input type="checkbox" name="question_option_{{$key}}[]"
+                                                    value="option_e" class="question_option"/>
+                                                <label for="">E. {{ $question->option_5 }}
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="e-input">
+                                                <input type="checkbox" name="question_option_{{$key}}[]"
+                                                    value="option_f" class="question_option"/>
+                                                <label for="">F. {{ $question->option_6 }}
+                                                </label>
+                                            </div>
+                                        </div>
 
                                         @else
 

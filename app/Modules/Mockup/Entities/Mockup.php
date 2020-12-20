@@ -18,6 +18,8 @@ class Mockup extends Model
         'option_2',
         'option_3',
         'option_4',
+        'option_5',
+        'option_6',
     	'correct_option', 
         'correct_answer_reason'
 
