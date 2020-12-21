@@ -29,9 +29,7 @@
             <div class="col-sm-12">
                 <div class="my-courses">
                     <h2 class="ttl-line">All syllabus</h2>
-                    <!-- @if($courseInfo->status == 0)
-                        <p>Please pay remaining installment to access the syllabus! You might have received an email regarding the installments.</p>
-                    @else -->
+
                         <p>Find All Syllabus related to your Courses.</p>
                         <div class="row">
 
@@ -56,7 +54,7 @@
                                 @endforeach
                             @endif
                         </div>
-                    <!-- @endif -->
+
                 </div>
             </div>
 
