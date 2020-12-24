@@ -1,0 +1,14 @@
+{
+    "name": "WhatOurStudentSay",
+    "alias": "whatourstudentsay",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "App\\Modules\\WhatOurStudentSay\\Providers\\WhatOurStudentSayServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

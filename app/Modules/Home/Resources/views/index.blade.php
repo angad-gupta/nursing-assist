@@ -69,9 +69,13 @@
                                 <li class="nav-item">
                                     <a class="nav-link active" href="{{ route('home') }}">Home</a>
                                 </li>
-                                <li class="nav-item">
+                                 <li class="nav-item neta-dropdown">
                                     <a class="nav-link" href="{{ route('about-us') }}">About Us</a>
+                                    <ul class="neta-dropdown__menu list-unstyled">
+                                        <a href="{{ route('team') }}"><li>Our Team</li></a>    
+                                    </ul>
                                 </li>
+
                                 <li class="nav-item neta-dropdown">
                                     <a class="nav-link" href="{{ route('course') }}">Courses</a>
                                     <ul class="neta-dropdown__menu list-unstyled">
@@ -185,6 +189,42 @@
 		</div>
 	</div>
 </section>
+
+
+<section class="team-testimonial">
+    <div class=" container">
+        <div class="neta-head text-center mb-3">
+            <h4 class="mb-0">What Our Students Say</h4>
+            <p>Find out why our students enjoy being part of the Nursing Education & Training Australia ?</p>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="owl-carousel owl-theme testimonial">
+
+                @if(sizeof($student_say)>0) 
+                    @foreach($student_say as $key => $student_val)
+                    @php
+                        $image = ($student_val->profile_pic) ? asset($student_val->file_full_path).'/'.$student_val->profile_pic : '';
+                    @endphp
+                    <div class="item">
+                        <div class="card">
+                            <div class="card-body text-center testimonial-item">
+                                <p class="mb-0">{!! $student_val->message !!}</p>
+                                <div class="testimonial-item_img mt-4 mb-3"><img src="{{$image}}" alt=""></div>
+                                <h5>{{$student_val->student_name }}</h5>
+                                <p>{{$student_val->designation }}</p>
+                            </div> 
+                        </div>
+                    </div>
+                    @endforeach
+                @endif  
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 
  <section class="courses-wrap neta-fees">
     <div class=" container course-enrolment mb-5">

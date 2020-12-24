@@ -194,7 +194,7 @@
                         <span class="input-group-text"><i class="icon-list2"></i>
                         </span>
                     </span>
-                    {!! Form::text('option_6', $value = 'All of the above', ['id'=>'option_6','placeholder'=>'Enter Option F','class'=>'form-control']) !!}
+                    {!! Form::text('option_6', $value = null, ['id'=>'option_6','placeholder'=>'Enter Option F','class'=>'form-control']) !!}
                 </div>
             </div>
         </div>

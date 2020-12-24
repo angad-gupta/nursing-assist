@@ -1,0 +1,25 @@
+{
+    "name": "nwidart/whatourstudentsay",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "App\\Modules\\WhatOurStudentSay\\Providers\\WhatOurStudentSayServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\Modules\\WhatOurStudentSay\\": ""
+        }
+    }
+}

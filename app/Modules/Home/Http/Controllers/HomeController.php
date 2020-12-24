@@ -20,6 +20,7 @@ use App\Modules\Gallery\Repositories\GalleryInterface;
 use App\Modules\Video\Repositories\VideoInterface;
 use App\Modules\EmailLog\Repositories\EmaillogInterface;
 use App\Modules\Forum\Repositories\ForumInterface;
+use App\Modules\WhatOurStudentSay\Repositories\WhatOurStudentSayInterface;
 
 
 use Illuminate\Http\Request;
@@ -49,6 +50,7 @@ class HomeController extends Controller
     protected $gallery;
     protected $video;
     protected $emailLog;
+    protected $whatourstudentsay;
 
     public function __construct(
         PageInterface $page,
@@ -66,7 +68,8 @@ class HomeController extends Controller
         BlogInterface $blog,
         GalleryInterface $gallery,
         VideoInterface $video,
-        EmaillogInterface $emailLog
+        EmaillogInterface $emailLog,
+        WhatOurStudentSayInterface $whatourstudentsay
     ) {
         $this->page = $page;
         $this->banner = $banner;
@@ -84,6 +87,7 @@ class HomeController extends Controller
         $this->gallery = $gallery;
         $this->video = $video;
         $this->emailLog = $emailLog;
+        $this->whatourstudentsay = $whatourstudentsay;
     }
 
     /**
@@ -93,6 +97,7 @@ class HomeController extends Controller
     public function index()
     {
         $data['banner'] = $this->banner->findAll();
+        $data['student_say'] = $this->whatourstudentsay->findAll();  
         $data['we_offer'] = $this->page->getBySlug('we_offer');
         $data['course'] = $this->course->findAll();
         $data['about_neta'] = $this->page->getBySlug('about_us');
@@ -126,9 +131,19 @@ class HomeController extends Controller
 
         if (Auth::guard('student')->check()) {
             
-            $search = $request->all();  
-            $data['forum_detail']= $this->forum->findAll($limit= 15,$search);  
-            return view('home::forums', $data);
+            //Check Whether Student Enrol Or Not
+            $userInfo = Auth::guard('student')->user(); 
+            $student_check = $this->student->find($userInfo['id']); 
+            if($student_check){
+
+                $search = $request->all();  
+                $data['forum_detail']= $this->forum->findAll($limit= 15,$search);  
+                return view('home::forums', $data);
+
+            }else{
+                 Flash('To Access Forum, You need to Enrol Any Courses.Thank You !!!')->error();
+                return redirect(route('student-dashboard'));
+            }
 
         } else {
             return redirect(route('student-account'));

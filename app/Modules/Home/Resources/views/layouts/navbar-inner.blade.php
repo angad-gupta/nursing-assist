@@ -71,9 +71,12 @@
                             <li class="nav-item">
                                 <a class="nav-link active" href="{{ route('home') }}">Home</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('about-us') }}">About Us</a>
-                            </li>
+                            <li class="nav-item neta-dropdown">
+                                    <a class="nav-link" href="{{ route('about-us') }}">About Us</a>
+                                    <ul class="neta-dropdown__menu list-unstyled">
+                                        <a href="{{ route('team') }}"><li>Our Team</li></a>    
+                                    </ul>
+                                </li>
                            <li class="nav-item neta-dropdown">
                                 <a class="nav-link" href="{{ route('course') }}">Courses</a>
                                 <ul class="neta-dropdown__menu list-unstyled">

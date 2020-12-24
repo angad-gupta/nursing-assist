@@ -288,6 +288,14 @@
                     </li>
                     @endif
 
+                    @if($menuRoles->assignedRoles('whatourstudentsay.index'))
+                    <li class="nav-item">
+                        <a href="{{route('whatourstudentsay.index')}}" class="nav-link @if($Route[0]=='whatourstudentsay') active @endif" data-popup="tooltip" data-original-title="What Our Student Say" data-placement="right">
+                            <i class="icon-bubbles4"></i><span>What Our Student Say</span>
+                        </a>
+                    </li>
+                    @endif
+
 
             </ul>
         </div>
