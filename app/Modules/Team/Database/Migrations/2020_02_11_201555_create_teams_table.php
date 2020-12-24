@@ -19,6 +19,7 @@ class CreateTeamsTable extends Migration
             $table->string('member_name')->nullable();
             $table->text('profile_pic')->nullable();
             $table->string('designation')->nullable();
+            $table->text('about_me')->nullable();
 
             $table->timestamps();
         });

@@ -73,6 +73,20 @@
                     </div>
         </div>
 
+            <div class="form-group row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <label class="col-form-label col-lg-1">About Me:</label>
+                        <div class="col-lg-11 form-group-feedback form-group-feedback-right">
+                            <div class="input-group">
+                                 {!! Form::textarea('about_me', null, ['id' => 'about_me','placeholder'=>'Enter About Me Message', 'class' =>'form-control simple_textarea_description']) !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
             
 </fieldset>
 

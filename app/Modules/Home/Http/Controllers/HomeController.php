@@ -110,6 +110,16 @@ class HomeController extends Controller
         $data['about_neta'] = $this->page->getBySlug('about_us');
         $data['team'] = $this->team->findAll();
         return view('home::aboutus', $data);
+    }   
+
+     /**
+     * Show the form for creating a new resource.
+     * @return Response
+     */
+    public function Team()
+    {
+        $data['team'] = $this->team->findAll();
+        return view('home::teams', $data);
     }
 
     public function studentForum(Request $request){

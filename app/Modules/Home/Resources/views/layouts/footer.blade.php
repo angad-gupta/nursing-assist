@@ -26,7 +26,7 @@
 				<h5>Company</h5>
 				<ul class="list-unstyled">
 					<a href="{{ route('about-us') }}"><li>About Us</li> </a>
-					<a href="{{ route('about-us') }}"><li>Our Team</li> </a>
+					<a href="{{ route('team') }}"><li>Our Team</li> </a>
 					<a href="{{ route('contact-us') }}"><li>Contact US</li> </a>
 					<a href="{{ route('faq')}}"><li>FAQ's</li> </a>
 					<a href="{{ route('agent')}}"><li>Agents</li> </a>

@@ -39,7 +39,7 @@
 </div>
 </section>
 
-<!-- <section class="neta-team section-padding">
+<section class="neta-team section-padding">
     <div class="container">
         <h2 class="ttl-line">Our Team </h2>
         <div class="row">
@@ -69,7 +69,7 @@
 
         </div>
     </div>
-</section> -->
+</section>
 
 <section class="section-padding"></section>
 

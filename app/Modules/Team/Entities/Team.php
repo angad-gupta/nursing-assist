@@ -12,7 +12,8 @@ class Team extends Model
 
     	'member_name',
     	'profile_pic',
-    	'designation'
+    	'designation',
+        'about_me'
 
     ];
 
