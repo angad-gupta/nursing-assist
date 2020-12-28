@@ -8,7 +8,7 @@
 <script src="{{asset('admin/global/js/demo_pages/form_inputs.js')}}"></script>
 <script src="{{asset('admin/validation/team.js')}}"></script>
 
-<!-- /theme JS files -->
+<!-- /theme JS files --> 
 
 @stop @section('content')
 
