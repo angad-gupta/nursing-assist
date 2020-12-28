@@ -343,6 +343,8 @@
                                 <h5 class="mb-0">Announcement</h5>
                                 <p>See all the Announcement form Eductors</p>
 
+                                @if($student_course->total() != 0)
+
                                 <div class="tp-list">
                                     <div class="row">
                                         <div class="col-sm-12">
@@ -376,6 +378,10 @@
                                     </div>
                                     </div>
                                 </div><!-- tp-list -->
+                                @else
+                                <h5 class="mb-0" style="color: #b0117e;">Sorry, You have To Enrol Atleast One Course To Access Annoucement.</h5>
+                                <p></p>
+                                @endif
  
 
 
