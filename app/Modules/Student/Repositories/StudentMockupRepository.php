@@ -125,4 +125,8 @@ class StudentMockupRepository implements StudentMockupInterface
     }
 
 
+    public function CountMockupTest($from_date,$to_date){
+        return StudentMockupResult::where('date','>=',$from_date)->where('date','<=',$to_date)->count();
+    }
+
 }

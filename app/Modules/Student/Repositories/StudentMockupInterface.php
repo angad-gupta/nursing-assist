@@ -40,5 +40,6 @@ interface StudentMockupInterface
     public function getAttemptedQuestion($id);
     public function getStudentMockupResult($student_id, $limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
 
+    public function CountMockupTest($from_date,$to_date);
     
 }

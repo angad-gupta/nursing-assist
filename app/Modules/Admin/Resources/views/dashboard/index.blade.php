@@ -3,7 +3,7 @@
 @section('breadcrum')Dashboard @stop
 @section('content')
 
-
+ 
     <!-- Main content -->
     <div class="content-wrapper">
         <div class="row">
@@ -249,6 +249,69 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+
+             <script type="text/javascript" src="{{ asset('admin/previousstudentTest.js') }}"></script>
+             <script type="text/javascript" src="{{ asset('admin/currentstudentTest.js') }}"></script>
+                    <!-- Zoom option -->
+                        <div class="row">
+
+                            <div class="col-6">
+                                    <div class="card bd-card bd-equal-height">
+                                      <div class="card-header header-elements-inline border-bottom-0 bg-teal">
+                                        <h5 class="card-title text-uppercase font-weight-black">Last Month Test Summary</h5>
+                                      </div>
+
+                                      <div class="bgm-reminder pl-3 pr-3 mt-4">
+                                        <div id="accordion-default" class="bd-media-list">
+
+
+                                                  <!-- Pie arc with legend -->
+                                            <div class="card card-body text-center">
+                                              <h6 class="font-weight-semibold mb-0 mt-1">Test in {{$last_month}}</h6>
+
+                                              <input type="hidden" name="LastReadinessTestData" value="{{ $LastReadinessTestData }}">
+                                              <input type="hidden" name="LastPracticeTestData" value="{{ $LastPracticeTestData }}">
+                                              <input type="hidden" name="LastMockupTestData" value="{{ $LastMockupTestData }}">
+
+                                              <div class="svg-center" id="last_month_test_pie_basic"></div>
+                                            </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="card bd-card bd-equal-height">
+                                  <div class="card-header header-elements-inline border-bottom-0 bg-pink">
+                                    <h5 class="card-title text-uppercase font-weight-black">This Month Test Report</h5>
+                                  </div>
+
+                                  <div class="bgm-reminder pl-3 pr-3 mt-4">
+                                    <div id="accordion-default" class="bd-media-list">
+
+
+                                              <!-- Pie arc with legend -->
+                                        <div class="card card-body text-center">
+                                          <h6 class="font-weight-semibold mb-0 mt-1">Test in {{$this_month}}</h6>
+
+                                          <input type="hidden" name="CurrentReadinessTestData" value="{{ $CurrentReadinessTestData }}">
+                                          <input type="hidden" name="CurrentPracticeTestData" value="{{ $CurrentPracticeTestData }}">
+                                          <input type="hidden" name="CurrentMockupTestData" value="{{ $CurrentMockupTestData }}">
+
+                                          <div class="svg-center" id="this_month_test_pie_basic"></div>
+                                        </div>
+                                   </div>
+                                </div>
+                             </div>
+                        </div>
+
+                    </div>
+                        <!-- /zoom option -->
+
+
+            <div class="row">
                 <div class="col-md-12">
                     <div class="card bd-card">
                         <div class="card-header header-elements-inline">
