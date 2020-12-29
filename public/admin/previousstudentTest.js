@@ -1,5 +1,5 @@
   // Pie arc with legend
-  var _pieArcWithLegend = function(element, size) {
+  var _pieArcWithLegendPrevious = function(element, size) {
     if (typeof d3 == 'undefined') {
       console.warn('Warning - d3.min.js is not loaded.');
       return;
@@ -253,5 +253,5 @@
 
 
         $(document).ready( function () {
-         _pieArcWithLegend("#last_month_test_pie_basic", 170);
+         _pieArcWithLegendPrevious("#last_month_test_pie_basic", 170);
        });
