@@ -26,6 +26,4 @@ interface ReadinessInterface
 
     public function upload($file_name);
 
-    public function CountReadinessTest($from_date,$to_date);
-
 }
