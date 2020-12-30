@@ -121,4 +121,9 @@ class StudentReadinessRepository implements StudentReadinessInterface
     }
 
 
+    public function CountReadinessTest($from_date,$to_date){
+        return StudentReadinessResult::where('date','>=',$from_date)->where('date','<=',$to_date)->count();
+    }
+
+
 }

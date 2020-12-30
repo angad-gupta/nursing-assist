@@ -102,5 +102,4 @@ class ReadinessRepository implements ReadinessInterface
         return $fileName;
     }
 
-
 }

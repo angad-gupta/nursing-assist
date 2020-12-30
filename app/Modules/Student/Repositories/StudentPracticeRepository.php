@@ -109,4 +109,9 @@ class StudentPracticeRepository implements StudentPracticeInterface
         return StudentPracticeHistory::where('practice_result_id', '=', $practice_result_id)->where('is_correct_answer', '=', '1')->count();
     }
 
+
+    public function CountPracticeTest($from_date,$to_date){
+        return StudentPracticeResult::where('date','>=',$from_date)->where('date','<=',$to_date)->count();
+    }
+
 }

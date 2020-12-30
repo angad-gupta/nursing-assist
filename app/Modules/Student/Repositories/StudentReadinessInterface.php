@@ -44,4 +44,6 @@ interface StudentReadinessInterface
     public function getStudentReadinessResult($student_id, $limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
 
 
+    public function CountReadinessTest($from_date,$to_date);
+
 }

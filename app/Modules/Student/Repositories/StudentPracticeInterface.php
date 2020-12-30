@@ -33,4 +33,6 @@ interface StudentPracticeInterface
     public function findAllHistory($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'ASC']);
 
     public function getCorrectAnswerByResult($practice_result_id);
+
+    public function CountPracticeTest($from_date,$to_date);
 }
