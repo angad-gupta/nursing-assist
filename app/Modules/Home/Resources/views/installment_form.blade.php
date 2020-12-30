@@ -246,10 +246,12 @@
                                                 /*if($courseinfo->course_program_title == 'NCLEX') {
                                                     $amount = 1000;
                                                 } else {*/
-                                                    $amount = 2500;
+                                                    //$amount = 2500;
+                                                    $amount = 1500;
                                                 //}
                                             } else {
-                                                $amount = ($student_payment->status == 'First Installment Paid' ? 4000 : 1500);
+                                                //$amount = ($student_payment->status == 'First Installment Paid' ? 4000 : 1500);
+                                                $amount = ($student_payment->status == 'First Installment Paid' ? 4000 : 2500);
                                             }
                                             @endphp
 
@@ -297,12 +299,12 @@
                                                                         <tr>
                                                                             <td>Second Payment (15 days after course commencement)
                                                                             </td>
-                                                                            <td class="text-right">$2,500</td>
+                                                                            <td class="text-right">$1,500</td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Final Payment (30 days after course commencement)
                                                                             </td>
-                                                                            <td class="text-right">$1,500</td>
+                                                                            <td class="text-right">$2,500</td>
                                                                         </tr>
 
                                                                         <tr class="total">
@@ -312,7 +314,8 @@
 
                                                                         <tr class="total">
                                                                             <td>{{$ins == 2 ? 'Second' : 'Final' }} Installment Payment Total</td>
-                                                                            <td class="text-right">${{$ins == 2 ? '2,500' : ($student_payment->status == 'First Installment Paid' ? '4,000' : '1,500') }}</td>
+                                                                            {{--<td class="text-right">${{$ins == 2 ? '2,500' : ($student_payment->status == 'First Installment Paid' ? '4,000' : '1,500') }}</td>--}}
+                                                                            <td class="text-right">${{$ins == 2 ? '1,500' : ($student_payment->status == 'First Installment Paid' ? '4,000' : '2,500') }}</td>
                                                                         </tr>
                                                                     </table>
                                                                 {{--@endif--}}

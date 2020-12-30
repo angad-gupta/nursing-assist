@@ -788,12 +788,12 @@ $('a').bind('click',function (e) {
                                                                         <tr>
                                                                             <td>Second Payment (15 days after course commencement)
                                                                             </td>
-                                                                            <td class="text-right">$2,500</td>
+                                                                            <td class="text-right">$1,500</td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Final Payment (30 days after course commencement)
                                                                             </td>
-                                                                            <td class="text-right">$1,500</td>
+                                                                            <td class="text-right">$2,500</td>
                                                                         </tr>
 
                                                                         <tr class="total">
