@@ -47,8 +47,8 @@ $(document).ready(function() {
 
 <section class="neta-login neta-contact section-padding">
     <div class="container">
-        <div class="row justify-content-center align-items-center">
-            <div class="col-sm-6">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
                 <div class="neta-contact__form">
                     <h4>Login</h4>
                     <p>Please login to your account first</p>

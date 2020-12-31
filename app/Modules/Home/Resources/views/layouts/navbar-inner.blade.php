@@ -48,90 +48,148 @@
         </div>
     </div>
 
-<header class="header-two">
-    <div class="container">
-        <div class="row">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="col-md-3 col-lg-2">
-                     @if($setting != null && $setting->company_logo != null)
-                         <a class="navbar-brand" href="{{ route('home') }}"><img src="{{asset('uploads/setting/'.$setting->company_logo)}}" alt="" class="img-fluid"></a>
-                    @else
-                        <a class="navbar-brand" href="{{ route('home') }}"><img src="{{asset('home/img/logo.png')}}" alt="" class="img-fluid"></a>
-                    @endif
 
-                </div>
-                <div class="col-sm-12 col-md-12 col-lg-9">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse"
-                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse float-right" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="{{ route('home') }}">Home</a>
-                            </li>
-                            <li class="nav-item neta-dropdown">
-                                    <a class="nav-link" href="{{ route('about-us') }}">About Us</a>
-                                    <ul class="neta-dropdown__menu list-unstyled">
-                                        <a href="{{ route('team') }}"><li>Our Team</li></a>    
-                                    </ul>
-                                </li>
-                           <li class="nav-item neta-dropdown">
-                                <a class="nav-link" href="{{ route('course') }}">Courses</a>
-                                <ul class="neta-dropdown__menu list-unstyled">
-                                    @if($courseInfo)
-                                        @foreach($courseInfo as $key => $courselist)
-                                         <a href="{{ route('course-detail',['course_id'=>$key]) }}"><li>{{ $courselist }}</li></a>
-                                        @endforeach
-                                    @endif
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('student-hub') }}">Learner’s Portal</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('student-forum') }}">Forums</a>
-                            </li>
-                            <li class="nav-item neta-dropdown">
-                                <a class="nav-link" href="#">Media</a>
-                                <ul class="neta-dropdown__menu list-unstyled">
-                                    <a href="{{ route('blog') }}"><li>Blog</li></a>
-                                    <a href="{{ route('gallery') }}"><li>Gallery</li></a>
-                                    <a href="{{ route('video') }}"><li>Videos</li></a>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('contact-us') }}">Contact Us</a>
-                            </li>
 
-                        </ul>
+     <header class="header">
+        <div class="container">
+            <div class="row">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="col-md-3 col-lg-3">
+                            @if($setting != null && $setting->company_logo != null)
+                                <a class="navbar-brand" href="{{ route('home') }}"><img src="{{asset('uploads/setting/'.$setting->company_logo)}}" alt="" class="img-fluid"></a>
+                            @else
+                                <a class="navbar-brand" href="{{ route('home') }}"><img src="{{asset('home/img/logo.png')}}" alt="" class="img-fluid"></a>
+                            @endif
+                    </div>
+                    <div class="col-md-9 col-lg-9 d-flex align-items-center justify-content-end">
+                        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                              <ul class="navbar-nav mr-auto">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="{{ route('home') }}">Home</a>
+                                    </li>
+                                    <li class="nav-item neta-dropdown">
+                                            <a class="nav-link" href="{{ route('about-us') }}">About Us</a>
+                                            <ul class="neta-dropdown__menu list-unstyled">
+                                                <a href="{{ route('team') }}"><li>Our Team</li></a>    
+                                            </ul>
+                                        </li>
+                                   <li class="nav-item neta-dropdown">
+                                        <a class="nav-link" href="{{ route('course') }}">Courses</a>
+                                        <ul class="neta-dropdown__menu list-unstyled">
+                                            @if($courseInfo)
+                                                @foreach($courseInfo as $key => $courselist)
+                                                 <a href="{{ route('course-detail',['course_id'=>$key]) }}"><li>{{ $courselist }}</li></a>
+                                                @endforeach
+                                            @endif
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('student-hub') }}">Learner’s Portal</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('student-forum') }}">Forums</a>
+                                    </li>
+                                    <li class="nav-item neta-dropdown">
+                                        <a class="nav-link" href="#">Media</a>
+                                        <ul class="neta-dropdown__menu list-unstyled">
+                                            <a href="{{ route('blog') }}"><li>Blog</li></a>
+                                            <a href="{{ route('gallery') }}"><li>Gallery</li></a>
+                                            <a href="{{ route('video') }}"><li>Videos</li></a>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('contact-us') }}">Contact Us</a>
+                                    </li>
+
+                                </ul>
+                        </div>
+
+                        <div class="d-flex align-items-center justify-content-end">
+                            <div class="hamburger-menu" id="mobile-trigger">
+                                <svg viewBox="0 -53 384 384" xmlns="http://www.w3.org/2000/svg"><path d="M368 154.668H16c-8.832 0-16-7.168-16-16s7.168-16 16-16h352c8.832 0 16 7.168 16 16s-7.168 16-16 16zm0 0M368 32H16C7.168 32 0 24.832 0 16S7.168 0 16 0h352c8.832 0 16 7.168 16 16s-7.168 16-16 16zm0 0M368 277.332H16c-8.832 0-16-7.168-16-16s7.168-16 16-16h352c8.832 0 16 7.168 16 16s-7.168 16-16 16zm0 0"/></svg>
+                            </div>
+                        
+
+                        <div class="ecm-search col-sm-12 col-md-1">
+                            <ul class="list-unstyled d-flex mt-3 float-right neta-user">
+                                <a href="{{ route('student-account') }}">
+                                    <li class="user"><img src="{{asset('home/img/user.svg')}}" alt="">
+                                        <ul class="list-unstyled">
+                                             @php
+                                                use Illuminate\Support\Facades\Auth;
+                                            @endphp
+
+                                            @if(Auth::guard('student')->check())
+                                                <ul class="list-unstyled">
+                                                    <a href="{{ route('student-account') }}"><li>My Account</li></a>
+                                                    <a href="{{ route('student-logout') }}"><li>Sign Out</li></a>
+                                                </ul>
+                                            @endif
+                                        </ul>
+                                    </li>
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+    </header>
+
+    <div class="sidenav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('home') }}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('about-us') }}">About Us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="">Courses</a>
+                <div class="dropdown">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-3">
+                            <ul class="list-unstyled">
+                                @if($courseInfo)
+                                    @foreach($courseInfo as $key => $courselist)
+                                    <li><a href="{{ route('course-detail',['course_id'=>$key]) }}">{{ $courselist }}</a></li>
+                                    @endforeach
+                                @endif
+                            </ul>
+                        </div>
                     </div>
                 </div>
-
-                <div class="neta-icn col-sm-12 col-md-1">
-                    <ul class="list-unstyled d-flex mt-3 float-right neta-user">
-                        <a href="{{ route('student-account') }}">
-                            <li class="user"><img src="{{asset('home/img/user.svg')}}" alt="">
-                                @php
-                                    use Illuminate\Support\Facades\Auth;
-                                @endphp
-
-                                @if(Auth::guard('student')->check())
-                                    <ul class="list-unstyled">
-                                        <a href="{{ route('student-account') }}"><li>My Account</li></a>
-                                        <a href="{{ route('student-logout') }}"><li>Sign Out</li></a>
-                                    </ul>
-                                @endif
-
-                            </li>
-                        </a>
-                    </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('student-hub') }}">Learner's Portal</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('student-forum') }}">Forums</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="">Media</a>
+                <div class="dropdown">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-3">
+                            <ul class="list-unstyled">
+                                <li><a href="{{ route('blog') }}">Blog</a><li>
+                                <li><a href="{{ route('gallery') }}">Gallery</a><li>
+                                <li><a href="{{ route('video') }}">Videos</a><li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('contact-us') }}">Contact Us</a>
+            </li>
 
-
-            </nav>
+        </ul>
+        <div class="mt-3">
+            <div><span><b>Tel:</b> {{$setting->contact_no1}} (NETA)</span></div>
+            <div><b>Email:</b> {{$setting->company_email}}</span></div>
+            <div><span><b>Location:</b> {{$setting->address1}}</span></div>
         </div>
     </div>
-
-</header>
+    <div class="body-overlay"></div>
