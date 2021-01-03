@@ -538,7 +538,7 @@ header .bg-light .navbar-brand {
 }
 
 .neta-slog {
-  background: url(../../img/gdt.png) center center/cover; 
+  background: url(../../img/gdt.png) center center/cover;
   min-height: 400px;
 }
 
@@ -767,7 +767,7 @@ header .bg-light .navbar-brand {
 
 .neta-download p {
   color: #fff;
-  padding-top: 65px;
+  margin-bottom: 0;
   font-size: 18px;
   font-weight: 500;
 }
@@ -783,12 +783,10 @@ header .bg-light .navbar-brand {
   );
   background: linear-gradient(90deg, #94519f 26%, #343886 55%, #009fe1 91%);
   padding: 12px 35px;
-  margin-top: 15px;
   border: 0;
   -webkit-transition: 0.5s all;
   transition: 0.5s all;
   background: #fff;
-  margin-top: 55px;
 }
 
 .neta-download .btn-neta a {
@@ -1137,7 +1135,7 @@ header .bg-light .navbar-brand {
 }
 
 .courses-wrap .course-summary {
-  background: url("../img/cs.png") center center/cover;
+  background: url("../../img/cs.png") center center/cover;
   border-radius: 4px;
   padding: 30px;
   color: #fff;
@@ -1497,7 +1495,7 @@ header .bg-light .navbar-brand {
 }
 
 .neta-dashboard .profile-tab .ed-profile input:after {
-  content: url("../../img/camera.svg");
+  content: url("../img/camera.svg");
   position: absolute;
   z-index: 1;
   visibility: visible;
@@ -1796,10 +1794,6 @@ a {
 
 .navbar-brand img {
   width: 180px;
-}
-
-#vticker {
-  width: 600px !important;
 }
 
 .neta-enrolment li {
@@ -2283,8 +2277,8 @@ a {
 .neta-resources .resource-box {
   background: white;
   padding: 15px;
-  margin: 15px;
   border-radius: 4px;
+  margin-bottom: 30px;
 }
 
 .neta-resources .downloads {
@@ -2312,6 +2306,7 @@ a {
 
 .neta-blog-card {
   margin-bottom: 30px !important;
+  padding: 0 !important;
 }
 
 .neta-blog-img,
@@ -2542,4 +2537,8 @@ ul {
 .team-testimonial .owl-dots,
 .neta-team .owl-dots {
   display: block !important;
+}
+
+.nav-tabs {
+  margin-bottom: 30px;
 }

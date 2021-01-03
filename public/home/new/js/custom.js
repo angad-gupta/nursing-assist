@@ -1,6 +1,26 @@
 
 $(document).ready(function(){
 
+
+
+// mobile-menu
+    jQuery("#mobile-trigger").click(function () {
+        jQuery(".sidenav").addClass("active");
+    });
+
+    jQuery(".sidenav .cancel").on("click", function () {
+        jQuery(".sidenav").removeClass("active");
+    });
+
+    jQuery("#mobile-trigger").on("click", function () {
+        jQuery(".body-overlay").fadeIn();
+    });
+
+    jQuery(".body-overlay").on("click", function () {
+        jQuery(".body-overlay").fadeOut();
+        jQuery(".sidenav").removeClass("active");
+    });
+
     $(".image-popup").magnificPopup({
         type: "image",
         removalDelay: 300,

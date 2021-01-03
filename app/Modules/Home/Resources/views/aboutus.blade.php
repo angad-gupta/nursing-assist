@@ -4,7 +4,7 @@
     <img src="{{asset('home/img/cc.jpg')}}" class="img-fluid" alt="">
     <div class="container">
         <div class="row">
-            <div class="neta-ribbon__content">
+            <div class="neta-ribbon__content"> 
                 <div class="col-sm-12">
             <h1 class="mb-0">About Us</h1>
             <ul class="list-unstyled d-flex">
@@ -21,7 +21,7 @@
 <section class="neta-about section-padding">
 <div class="container">
     <div class="row">
-        <div class="col-sm-7">
+        <div class="col-md-12 col-lg-7">
             <h2 class="ttl-line">Welcome to <br>Nurse Education & Training Australia
                 </h2>
                 <div class="neta-bullet"> {!! ($about_neta) ? $about_neta['description'] : '' !!}</div>   
@@ -31,7 +31,7 @@
             $image = ($about_neta->image) ? asset($about_neta->file_full_path).'/'.$about_neta->image : '';
         @endphp
 
-        <div class="col-sm-5">
+        <div class="col-md-12 col-lg-5">
             <img src=" {{$image}} " class="img-fluid" alt="">
         </div>
         
