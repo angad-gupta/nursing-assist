@@ -3,16 +3,16 @@
 namespace App\Modules\Cron\Http\Controllers;
 
 use App\Modules\CourseInfo\Repositories\CourseInfoInterface;
+use App\Modules\Student\Entities\StudentMockupResult;
 use App\Modules\Student\Repositories\StudentInterface;
-use App\Modules\Student\Repositories\StudentPaymentInterface;
 //use App\Modules\Student\Entities\StudentMockupHistory;
-use App\Modules\Student\Entities\StudentMockupResult; 
-use App\Modules\Student\Repositories\StudentMockupInterface; 
+use App\Modules\Student\Repositories\StudentMockupInterface;
+use App\Modules\Student\Repositories\StudentPaymentInterface;
 use App\Notifications\EnrolmentInstallmentPayment;
 use Carbon\Carbon;
+use DB;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use DB;
 
 class CronController extends Controller
 {
@@ -64,6 +64,18 @@ class CronController extends Controller
                 $now = Carbon::now();
                 $difference = $moved_date->diff($now)->days;
 
+                //second installment pre notification mail after 13  days of student move to course
+                if ($difference == 13 && optional($value->courseInfo)->course_program_title !== 'NCLEX') {
+
+                    $second_installment_amt = 'A$2,500';
+
+                    $data['subject'] = 'Second Installment Pre-Notification for ' . $course_program_title . ' Course Enrolment';
+                    $data['mail_desc'] = 'Please pay second installment amount of ' . $second_installment_amt . ' for ' . $course_program_title . ' course enrolment continuation after 2 days.';
+                    $data['pay_url'] = route('enrolment.installment.pay', ['id' => $student_payment_id, 'ins' => 2]);
+
+                    $studentInfo->notify(new EnrolmentInstallmentPayment($data));
+                }
+
                 //second installment mail after 15  days of student move to course
                 if ($difference == 15 && optional($value->courseInfo)->course_program_title !== 'NCLEX') {
 
@@ -105,6 +117,17 @@ class CronController extends Controller
                         $this->student->updateStudentCourseStatus(['status' => 0], $wherecondition);
 
                     }
+                }
+
+                //third installment pre notification mail after 13  days of student move to course
+                if ($difference == 28 && optional($value->courseInfo)->course_program_title !== 'NCLEX') {
+                    $final_installment_amt = 'A$1,500';
+
+                    $data['subject'] = 'Final Installment Pre-Notification for ' . $course_program_title . ' Course Enrolment';
+                    $data['mail_desc'] = 'Please pay final installment amount of ' . $final_installment_amt . ' for ' . $course_program_title . ' course enrolment continuation after 2 days.';
+                    $data['pay_url'] = route('enrolment.installment.pay', ['id' => $student_payment_id, 'ins' => 3]);
+
+                    $studentInfo->notify(new EnrolmentInstallmentPayment($data));
                 }
 
                 //third installment mail after 30 days of student move to course
@@ -155,26 +178,26 @@ class CronController extends Controller
 
     public function updateStudentMockupHistory()
     {
-       /*  $result = DB::table('student_mockup_histories as h')
-            ->join('student_mockup_results as r', function($join)
-            {
-                $join->on('r.student_id', '=', 'h.student_id');
-                $join->on('r.mockup_title','=', 'h.mockup_title');
-            })
-            ->orderBy('id', 'desc')
-            ->get(); dd($result->count()); */
+        /*  $result = DB::table('student_mockup_histories as h')
+        ->join('student_mockup_results as r', function($join)
+        {
+        $join->on('r.student_id', '=', 'h.student_id');
+        $join->on('r.mockup_title','=', 'h.mockup_title');
+        })
+        ->orderBy('id', 'desc')
+        ->get(); dd($result->count()); */
 
-        $result  = StudentMockupResult::select(DB::raw('max(id) as result_id'), 'student_id', 'mockup_title')
-            ->groupBy('student_id','mockup_title')
+        $result = StudentMockupResult::select(DB::raw('max(id) as result_id'), 'student_id', 'mockup_title')
+            ->groupBy('student_id', 'mockup_title')
             ->get();
-        if($result->count() > 0) {
+        if ($result->count() > 0) {
             foreach ($result as $value) {
-                $this->studentMockup->updateHistory($value->student_id, $value->mockup_title, ['mockup_result_id'=> $value->result_id]);
+                $this->studentMockup->updateHistory($value->student_id, $value->mockup_title, ['mockup_result_id' => $value->result_id]);
             }
         }
     }
 
-      /**
+    /**
      * Send nclex final installment mail reminder
      * @return Response
      */
