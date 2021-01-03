@@ -104,18 +104,17 @@
                                 </ul>
                         </div>
 
-                        <div class="d-flex align-items-center justify-content-end">
+            
+
+                       <div class="d-flex align-items-center justify-content-end">
                             <div class="hamburger-menu" id="mobile-trigger">
                                 <svg viewBox="0 -53 384 384" xmlns="http://www.w3.org/2000/svg"><path d="M368 154.668H16c-8.832 0-16-7.168-16-16s7.168-16 16-16h352c8.832 0 16 7.168 16 16s-7.168 16-16 16zm0 0M368 32H16C7.168 32 0 24.832 0 16S7.168 0 16 0h352c8.832 0 16 7.168 16 16s-7.168 16-16 16zm0 0M368 277.332H16c-8.832 0-16-7.168-16-16s7.168-16 16-16h352c8.832 0 16 7.168 16 16s-7.168 16-16 16zm0 0"/></svg>
                             </div>
-                        
-
-                        <div class="ecm-search col-sm-12 col-md-1">
-                            <ul class="list-unstyled d-flex mt-3 float-right neta-user">
-                                <a href="{{ route('student-account') }}">
-                                    <li class="user"><img src="{{asset('home/img/user.svg')}}" alt="">
-                                        <ul class="list-unstyled">
-                                             @php
+                            <div class="ecm-search ml-4">
+                                <ul class="list-unstyled d-flex mt-3 float-right neta-user">
+                                    <a href="{{ route('student-account') }}">
+                                        <li class="user"><img src="{{asset('home/img/user.svg')}}" alt="">
+                                           @php
                                                 use Illuminate\Support\Facades\Auth;
                                             @endphp
 
@@ -125,11 +124,12 @@
                                                     <a href="{{ route('student-logout') }}"><li>Sign Out</li></a>
                                                 </ul>
                                             @endif
-                                        </ul>
-                                    </li>
-                                </a>
-                            </ul>
+                                        </li>
+                                    </a>
+                                </ul>
+                            </div>
                         </div>
+
                     </div>
                 </nav>
             </div>
