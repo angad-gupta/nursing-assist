@@ -19,6 +19,18 @@
  <script src="{{ asset('admin/global/js/plugins/uploaders/fileinput/fileinput.min.js')}}"></script>
 <script src="{{ asset('admin/global/js/demo_pages/uploader_bootstrap.js')}}"></script>
 
+
+<script type="text/javascript">
+    $('document').ready(function () {
+        $('.add_coursestart_status').on('click', function() {
+            var student_id = $(this).attr('student_id');
+            var payment_id = $(this).attr('payment_id');
+            $('.student_id').val(student_id);
+            $('.payment_id').val(payment_id);
+        })
+
+    });
+</script>
 @stop
 
 @section('content') 
@@ -244,6 +256,7 @@
                                                     <th>Date</th>
                                                     <th>Eligible Doc</th>
                                                     <th>Identity Doc</th>
+                                                    <th>Course Start Date</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -278,6 +291,7 @@
                                                     <td>{{ date('d M, Y',strtotime($value->created_at)) }}</td>
                                                     <td><a href="{{$eligible_doc}}" target="_blank"><img height="50px" width="50px"  src="{{ $eligible_doc }}"></a></td>
                                                     <td><a href="{{$id_doc}}" target="_blank"><img height="50px" width="50px" src="{{$id_doc}}"></a></td>
+                                                    <td>{{ !empty($value->course_start_date) ? date('d M, Y',strtotime($value->course_start_date)) : '-' }}</td>
                                                     <td class="text-center">
                                                         <div class="list-icons">
                                                             <div class="dropdown">
@@ -289,6 +303,9 @@
                                                                     <a data-toggle="modal" data-target="#modal_theme_view_info" student_payment_id="{{$value->id}}" class="dropdown-item view_detail"><i class="icon-history"></i> View Payment History Detail</a>
                                                                     @if($value->amount_left !== '0')
                                                                     <a data-toggle="modal" data-target="#modal_payment_status" student_id="{{ $student_id }}" payment_id="{{$value->id}}" class="dropdown-item update_payment_status"><i class="icon-color-sampler"></i> Course Payment</a>
+                                                                    @endif
+                                                                    @if(empty($value->course_start_date)) 
+                                                                        <a data-toggle="modal" data-target="#modal_coursestart_status" student_id="{{ $student_id }}" payment_id="{{$value->id}}" class="dropdown-item add_coursestart_status"><i class="icon-color-sampler"></i> Add Course Start Date</a>
                                                                     @endif
                                                                     @if($value->moved_to_student == 0)
                                                                     <a data-toggle="modal" data-target="#modal_theme_course_student" student_id="{{ $student_id }}" payment_id="{{$value->id}}" class="dropdown-item update_payment_status"><i class="icon-flip-horizontal2"></i> Course Move Update</a>
@@ -689,6 +706,37 @@
                 <div class="text-right">
                     <button type="submit" class="ml-2 btn bg-pink-600 btn-labeled btn-labeled-left"><b><i
                                 class="icon-database-insert"></i></b> Update</button>
+                </div>
+                {!! Form::close() !!}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /warning modal -->
+
+
+<!-- Warning modal -->
+<div id="modal_coursestart_status" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-warning">
+                <h4 class="modal-title">Add Course Start Date</h4>
+            </div>
+            <div class="modal-body">
+                {!! Form::open(['route'=>'student.saveCourseDate','method'=>'POST','id'=>'coursedate_submit','class'=>'form-horizontal','role'=>'form']) !!}
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-3">Course Start Date: <span class="text-danger">*</span></label>
+                    <div class="col-lg-9">
+                        {!! Form::text('course_start_date', $value = null, ['id'=>'course_start_date','placeholder'=>'Enter Course Start Date','class'=>'form-control daterange-single','required']) !!}
+                    </div>
+                </div>
+
+                {{ Form::hidden('student_id', '',['class'=>'student_id']) }}
+                {{ Form::hidden('payment_id', '',['class'=>'payment_id']) }}
+
+                <div class="text-right">
+                    <button type="submit" class="ml-2 btn bg-pink-600 btn-labeled btn-labeled-left"><b><i
+                                class="icon-database-insert"></i></b> Save</button>
                 </div>
                 {!! Form::close() !!}
             </div>

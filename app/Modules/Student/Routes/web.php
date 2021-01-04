@@ -38,4 +38,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'permission']], func
 
     Route::get('student/viewPaymentHistory', ['as' => 'student.viewPaymentHistory', 'uses' => 'StudentController@viewPaymentHistory']);
 
+    Route::post('student/add-course-date', ['as' => 'student.saveCourseDate', 'uses' => 'StudentController@saveCourseDate']);
 });

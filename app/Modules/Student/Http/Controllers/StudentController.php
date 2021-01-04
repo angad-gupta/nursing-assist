@@ -11,6 +11,7 @@ use App\Modules\Student\Repositories\StudentPracticeInterface;
 use App\Modules\Student\Repositories\StudentReadinessInterface;
 use App\Modules\Enrolment\Repositories\EnrolmentInterface;
 use App\Modules\EmailLog\Repositories\EmaillogInterface;
+use App\Notifications\EnrolmentInstallmentPayment;
 
 
 use Illuminate\Http\Request;
@@ -181,45 +182,65 @@ class StudentController extends Controller
 
             $this->student->updatePaymentStatus($payment_id, $studentSData);
 
-            if ($moved_to_student == '1') {
+            $studentPuchaseInfo = $this->student->findPurchaseCourse($payment_id);
 
-                $studentPuchaseInfo = $this->student->findPurchaseCourse($payment_id);
+            $course_info_id = $studentPuchaseInfo->courseinfo_id;
+            $courseInfo = $this->courseinfo->find($course_info_id);
+            $is_package = $courseInfo->is_course_package;
 
-                $course_info_id = $studentPuchaseInfo->courseinfo_id;
-                $courseInfo = $this->courseinfo->find($course_info_id);
-                $is_package = $courseInfo->is_course_package;
+            if ($is_package == 1) {
+                $course_id = $courseInfo->course_id;
+                $course_package = $this->courseinfo->getCoursePackage($course_id, $course_info_id);
 
-                if ($is_package == 1) {
-                    $course_id = $courseInfo->course_id;
-                    $course_package = $this->courseinfo->getCoursePackage($course_id, $course_info_id);
+                foreach ($course_package as $key => $pack_val) {
 
-                    foreach ($course_package as $key => $pack_val) {
+                    $courseData = array(
+                        'student_id' => $student_id,
+                        'courseinfo_id' => $pack_val->id,
+                    );
 
-                        $courseData = array(
-                            'student_id' => $student_id,
-                            'courseinfo_id' => $pack_val->id,
-                        );
-
+                    $check_stu_course = $this->student->getStudentCourseInfo($courseData);
+                    if(!empty($check_stu_course)) {
+                        if ($moved_to_student == '1') {
+                            $this->student->updateStudentCourseStatus(['status' => 1], $courseData);
+                        } else {
+                            $this->student->updateStudentCourseStatus(['status' => 0], $courseData);
+                        }
+                    } else {
                         $this->student->storeStudentCourse($courseData);
                     }
 
-                } else {
-
-                    $courseData = array(
-                        'student_id' => $studentPuchaseInfo->student_id,
-                        'courseinfo_id' => $studentPuchaseInfo->courseinfo_id,
-                    );
-
-                    $this->student->storeStudentCourse($courseData);
-
+                   
                 }
+
+            } else {
+
+                $courseData = array(
+                    'student_id' => $studentPuchaseInfo->student_id,
+                    'courseinfo_id' => $studentPuchaseInfo->courseinfo_id,
+                );
+
+                $check_stu_course = $this->student->getStudentCourseInfo($courseData);
+                if(!empty($check_stu_course)) {
+                    if ($moved_to_student == '1') {
+                        $this->student->updateStudentCourseStatus(['status' => 1], $courseData);
+                    } else {
+                        $this->student->updateStudentCourseStatus(['status' => 0], $courseData);
+                    }
+                } else {
+                    $this->student->storeStudentCourse($courseData);
+                }
+
+            }
+
+            $data['studentInfo'] = $studentInfo = $this->student->find($student_id);
+            $email = $studentInfo->email;
+
+            if ($moved_to_student == '1') {
 
                 /* ---------------------------------------------------------------
                 Email Send to Student After Payment success
                 --------------------------------------------------------------- */
-
-                $data['studentInfo'] = $studentInfo = $this->student->find($student_id);
-                $email = $studentInfo->email;
 
                 $subject = 'Course Approval Successfully.';
 
@@ -243,6 +264,29 @@ class StudentController extends Controller
             Email Send to Student After Payment success
             --------------------------------------------------------------- */
 
+            } else {
+
+                if($studentPuchaseInfo->status=='First Installment Paid') {
+                    $ins = 2;
+                } elseif($studentPuchaseInfo>status == 'Second Installment Paid') {
+                    $ins = 3;
+                } else {
+                    $ins = 3;
+                }
+
+                $data['full_name'] = $studentInfo->full_name;
+                $data['subject'] = 'Grace Period Expired Notification for ' . $courseInfo->course_program_title . ' Course Enrolment';
+                $data['mail_desc'] = 'Your grace period for course has expired. Please make payment for ' . $courseInfo->course_program_title . ' course enrolment continuation.';
+                $data['pay_url'] = route('enrolment.installment.pay', ['id' => $payment_id, 'ins' => $ins]);
+
+                $studentInfo->notify(new EnrolmentInstallmentPayment($data));
+
+                /*     Email Log Maintaining    */
+                $emaillog['action'] = 'Pending Payment';
+                $emaillog['student_id'] = $student_id;
+                $emaillog['date'] = date('Y-m-d');
+                $this->emailLog->saveEmaillog($emaillog);
+                /*  End of Email Log Maintaining  */
             }
 
             alertify()->success('Student Payment Status Updated Successfully');
@@ -412,5 +456,16 @@ class StudentController extends Controller
 
     }
 
+    public function saveCourseDate(Request $request)
+    {
+        $all = $request->all();
+        try {
+            $this->studentPayment->update($all['payment_id'], ['course_start_date' => $all['course_start_date']]);
+            alertify()->success('Course Start Date Added Successfully!');
+        } catch(\Throwable $t) {
+            alertify()->error($t->getMessage());
+        }
+        return redirect()->back();
+    }
 
 }

@@ -5,6 +5,8 @@
 @section('script')
 <script src="{{asset('admin/global/js/plugins/tables/datatables/datatables.min.js')}}"></script>
 <script src="{{asset('admin/global/js/plugins/forms/selects/select2.min.js')}}"></script>
+<script src="{{ asset('admin/global/js/plugins/pickers/daterangepicker.js')}}"></script>
+<script src="{{ asset('admin/global/js/demo_pages/picker_date.js')}}"></script>
 
 <script type="text/javascript">
     $('document').ready(function () {
@@ -15,6 +17,13 @@
             $('.student_id').val(student_id);
             $('.payment_id').val(payment_id);
         });
+
+        $('.add_coursestart_status').on('click', function() {
+            var student_id = $(this).attr('student_id');
+            var payment_id = $(this).attr('payment_id');
+            $('.student_id').val(student_id);
+            $('.payment_id').val(payment_id);
+        })
 
         $('.delete_purchase').on('click', function () {
             var link = $(this).attr('link');
@@ -52,6 +61,7 @@
                     <th>Amount Paid</th>
                     <th>Amount Left</th>
                     <th>Date</th>
+                    <th>Course Start Date</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -71,6 +81,7 @@
                     <td>${{ $value->amount_paid }}</td>
                     <td>${{ $value->amount_left }}</td>
                     <td>{{ date('d M, Y',strtotime($value->created_at)) }}</td>
+                    <td>{{ !empty($value->course_start_date) ? date('d M, Y',strtotime($value->course_start_date)) : '-' }}</td>
                     <td>
 
                         <a data-toggle="modal" data-target="#modal_theme_view_info" class="btn bg-primary-400 btn-icon rounded-round view_detail" student_payment_id="{{$value->id}}" data-popup="tooltip" data-original-title="View Payment History Detail" data-placement="bottom"><i class="icon-history"></i></a>
@@ -86,12 +97,16 @@
                                 class="icon-color-sampler"></i></a>
                         @endif
 
-                        @if($value->moved_to_student == 0)
                         <a data-toggle="{{$modal}}" data-target="#modal_theme_status"
                             class="btn bg-success-400 btn-icon rounded-round update_status"
                             student_id="{{ $student_id }}" payment_id="{{$value->id}}" data-popup="tooltip"
                             data-original-title="Course Move Update" data-placement="bottom"><i
                                 class="icon-flip-horizontal2"></i></a>
+                        
+                        @if(empty($value->course_start_date)) 
+                            <a data-toggle="modal" data-target="#modal_coursestart_status" student_id="{{ $student_id }}" payment_id="{{$value->id}}"  data-popup="tooltip"
+                            data-original-title=" Add Course Start Date" data-placement="bottom"
+                            class="btn bg-info-400 btn-icon rounded-round add_coursestart_status"><i class="icon-calendar22"></i></a>
                         @endif
                         <a data-toggle="modal" data-target="#modal_theme_warning"
                             class="btn bg-danger-400 btn-icon rounded-round delete_purchase"
@@ -220,6 +235,37 @@
                     <a class="btn btn-success get_link" href="">Yes, Delete It!</a>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                 </center>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /warning modal -->
+
+
+<!-- Warning modal -->
+<div id="modal_coursestart_status" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-warning">
+                <h4 class="modal-title">Add Course Start Date</h4>
+            </div>
+            <div class="modal-body">
+                {!! Form::open(['route'=>'student.saveCourseDate','method'=>'POST','id'=>'coursedate_submit','class'=>'form-horizontal','role'=>'form']) !!}
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-3">Course Start Date: <span class="text-danger">*</span></label>
+                    <div class="col-lg-9">
+                        {!! Form::text('course_start_date', $value = null, ['id'=>'course_start_date','placeholder'=>'Enter Course Start Date','class'=>'form-control daterange-single','required']) !!}
+                    </div>
+                </div>
+
+                {{ Form::hidden('student_id', '',['class'=>'student_id']) }}
+                {{ Form::hidden('payment_id', '',['class'=>'payment_id']) }}
+
+                <div class="text-right">
+                    <button type="submit" class="ml-2 btn bg-pink-600 btn-labeled btn-labeled-left"><b><i
+                                class="icon-database-insert"></i></b> Save</button>
+                </div>
+                {!! Form::close() !!}
             </div>
         </div>
     </div>
