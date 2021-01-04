@@ -56,19 +56,24 @@ class CronController extends Controller
                 $studentInfo = optional($value->studentInfo);
                 $data['full_name'] = $studentInfo->full_name;
                 $course_info_id = $value->courseinfo_id;
-                $student_id = $value->student_id;
+               // $student_id = $value->student_id;
+               $student_id = 187;
                 $student_payment_id = $value->id;
 
                 //difference in days
-                if(!empty($value->course_start_date)) {
-                    $moved_date = new Carbon($value->course_start_date);
-                    $now = Carbon::now();
-                    $difference = $moved_date->diff($now)->days;
-
+                if(!empty($value->course_start_date) ) {
+                    $difference = 0;
+                    if($value->course_start_date <= date('Y-m-d')) {
+                        $moved_date = new Carbon($value->course_start_date);
+                        $now = Carbon::now();
+                        $difference = $moved_date->diff($now)->days;
+                        
+                    }
+                   
                     //second installment pre notification mail after 13  days of student move to course
-                    if ($difference == 13 && optional($value->courseInfo)->course_program_title !== 'NCLEX') {
+                    if ($difference == 13) {
 
-                        if(date('Y-m-d') >= '2020-12-31') {
+                        if(date('Y-m-d') >= '2020-01-31') {
                             $second_installment_amt = 'A$1,500';
                         } else {
                             $second_installment_amt =  'A$2,500';
@@ -82,9 +87,9 @@ class CronController extends Controller
                     }
 
                     //second installment mail after 15  days of student move to course
-                    if ($difference == 15 && optional($value->courseInfo)->course_program_title !== 'NCLEX') {
+                    if ($difference == 15) { 
 
-                        if(date('Y-m-d') >= '2020-12-31') {
+                        if(date('Y-m-d') >= '2020-01-31') {
                             $second_installment_amt = 'A$1,500';
                         } else {
                             $second_installment_amt =  'A$2,500';
@@ -129,9 +134,9 @@ class CronController extends Controller
                     }
 
                     //third installment pre notification mail after 13  days of student move to course
-                    if ($difference == 28 && optional($value->courseInfo)->course_program_title !== 'NCLEX') {
+                    if ($difference == 28) {
 
-                        if(date('Y-m-d') >= '2020-12-31') {
+                        if(date('Y-m-d') >= '2020-01-31') {
                             $final_installment_amt = 'A$2,500';
                         } else {
                             $final_installment_amt =  'A$1,500';
@@ -145,8 +150,8 @@ class CronController extends Controller
                     }
 
                     //third installment mail after 30 days of student move to course
-                    if ($difference == 30 && optional($value->courseInfo)->course_program_title !== 'NCLEX') {
-                        if(date('Y-m-d') >= '2020-12-31') {
+                    if ($difference == 30 ) {
+                        if(date('Y-m-d') >= '2020-01-31') {
                             $final_installment_amt = 'A$2,500';
                         } else {
                             $final_installment_amt =  'A$1,500';

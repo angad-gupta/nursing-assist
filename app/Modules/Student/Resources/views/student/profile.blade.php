@@ -305,7 +305,7 @@
                                                                     <a data-toggle="modal" data-target="#modal_payment_status" student_id="{{ $student_id }}" payment_id="{{$value->id}}" class="dropdown-item update_payment_status"><i class="icon-color-sampler"></i> Course Payment</a>
                                                                     @endif
                                                                     @if(empty($value->course_start_date)) 
-                                                                        <a data-toggle="modal" data-target="#modal_coursestart_status" student_id="{{ $student_id }}" payment_id="{{$value->id}}" class="dropdown-item add_coursestart_status"><i class="icon-color-sampler"></i> Add Course Start Date</a>
+                                                                        <a data-toggle="modal" data-target="#modal_coursestart_status" student_id="{{ $student_id }}" payment_id="{{$value->id}}" class="dropdown-item add_coursestart_status"><i class="icon-calendar22"></i> Add Course Start Date</a>
                                                                     @endif
                                                                     @if($value->moved_to_student == 0)
                                                                     <a data-toggle="modal" data-target="#modal_theme_course_student" student_id="{{ $student_id }}" payment_id="{{$value->id}}" class="dropdown-item update_payment_status"><i class="icon-flip-horizontal2"></i> Course Move Update</a>

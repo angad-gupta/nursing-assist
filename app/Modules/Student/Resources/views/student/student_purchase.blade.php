@@ -24,7 +24,7 @@
             $('.student_id').val(student_id);
             $('.payment_id').val(payment_id);
         })
-
+        
         $('.delete_purchase').on('click', function () {
             var link = $(this).attr('link');
             $('.get_link').attr('href', link);
@@ -97,12 +97,13 @@
                                 class="icon-color-sampler"></i></a>
                         @endif
 
+                        @if($value->moved_to_student == 0)
                         <a data-toggle="{{$modal}}" data-target="#modal_theme_status"
                             class="btn bg-success-400 btn-icon rounded-round update_status"
                             student_id="{{ $student_id }}" payment_id="{{$value->id}}" data-popup="tooltip"
                             data-original-title="Course Move Update" data-placement="bottom"><i
                                 class="icon-flip-horizontal2"></i></a>
-                        
+                        @endif
                         @if(empty($value->course_start_date)) 
                             <a data-toggle="modal" data-target="#modal_coursestart_status" student_id="{{ $student_id }}" payment_id="{{$value->id}}"  data-popup="tooltip"
                             data-original-title=" Add Course Start Date" data-placement="bottom"
