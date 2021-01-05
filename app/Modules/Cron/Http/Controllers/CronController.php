@@ -71,7 +71,7 @@ class CronController extends Controller
                     }
                    
                     //second installment pre notification mail after 13  days of student move to course
-                    if ($difference == 13) {
+                    if ($difference == 21 || $difference == 26) {
 
                         if(date('Y-m-d') >= '2020-01-31') {
                             $second_installment_amt = 'A$1,500';
@@ -87,7 +87,7 @@ class CronController extends Controller
                     }
 
                     //second installment mail after 15  days of student move to course
-                    if ($difference == 15) { 
+                    if ($difference == 28) { 
 
                         if(date('Y-m-d') >= '2020-01-31') {
                             $second_installment_amt = 'A$1,500';
@@ -134,7 +134,7 @@ class CronController extends Controller
                     }
 
                     //third installment pre notification mail after 13  days of student move to course
-                    if ($difference == 28) {
+                    /* if ($difference == 28) {
 
                         if(date('Y-m-d') >= '2020-01-31') {
                             $final_installment_amt = 'A$2,500';
@@ -148,9 +148,9 @@ class CronController extends Controller
 
                         $studentInfo->notify(new EnrolmentInstallmentPayment($data));
                     }
-
+ */
                     //third installment mail after 30 days of student move to course
-                    if ($difference == 30 ) {
+/*                     if ($difference == 30 ) {
                         if(date('Y-m-d') >= '2020-01-31') {
                             $final_installment_amt = 'A$2,500';
                         } else {
@@ -193,7 +193,7 @@ class CronController extends Controller
                             $this->student->updateStudentCourseStatus(['status' => 0], $wherecondition);
 
                         }
-                    }
+                    } */
                 }
             }
         }
