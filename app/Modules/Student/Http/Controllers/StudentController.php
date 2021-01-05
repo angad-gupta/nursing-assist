@@ -224,7 +224,7 @@ class StudentController extends Controller
                 if(!empty($check_stu_course)) {
                     if ($moved_to_student == '1') {
                         $this->student->updateStudentCourseStatus(['status' => 1], $courseData);
-                    } else {
+                    } else { echo "fdsaffdsfsf";exit;
                         $this->student->updateStudentCourseStatus(['status' => 0], $courseData);
                     }
                 } else {
@@ -268,7 +268,7 @@ class StudentController extends Controller
 
                 if($studentPuchaseInfo->status=='First Installment Paid') {
                     $ins = 2;
-                } elseif($studentPuchaseInfo>status == 'Second Installment Paid') {
+                } elseif($studentPuchaseInfo->status == 'Second Installment Paid') {
                     $ins = 3;
                 } else {
                     $ins = 3;
