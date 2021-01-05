@@ -46,7 +46,8 @@ class EnrolmentInstallmentPayment extends Notification
             ->subject($this->data['subject'])
             ->line($this->data['mail_desc'])
             ->action('Pay Now', $this->data['pay_url'])
-            ->line('Thank you!');
+            ->line('Thank you!')
+            ->cc('accounts@nursingeta.com');
     }
 
     /**

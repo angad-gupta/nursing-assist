@@ -69,7 +69,7 @@ class CronController extends Controller
                         $difference = $moved_date->diff($now)->days;
                         
                     }
-                   
+
                     //second installment pre notification mail after 13  days of student move to course
                     if ($difference == 21 || $difference == 26) {
 

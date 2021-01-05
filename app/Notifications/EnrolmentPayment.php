@@ -46,7 +46,8 @@ class EnrolmentPayment extends Notification
             ->subject($this->data['subject'])
             ->line($this->data['mail_desc'])
             ->action('My Courses', route('student-hub'))
-            ->line('Thank you for enrolling!');
+            ->line('Thank you for enrolling!')
+            ->cc('accounts@nursingeta.com');
     }
 
     /**
