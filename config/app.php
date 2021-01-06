@@ -179,7 +179,7 @@ return [
     
         Collective\Html\HtmlServiceProvider::class,
         odannyc\Alertify\AlertifyServiceProvider::class,
-
+        Barryvdh\DomPDF\ServiceProvider::class,
 
 
     ],
@@ -235,6 +235,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Alertify' => odannyc\Alertify\Alertify::class,
         'Carbon' => 'Carbon\Carbon',
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];

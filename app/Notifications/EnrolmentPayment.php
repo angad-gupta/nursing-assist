@@ -5,6 +5,7 @@ namespace App\Notifications;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use PDF;
 
 class EnrolmentPayment extends Notification
 {
@@ -41,13 +42,16 @@ class EnrolmentPayment extends Notification
      */
     public function toMail($notifiable)
     {
+        $pdf = PDF::loadView('enrolment::mail.invoice', $data);
+
         return (new MailMessage)
             ->greeting('Dear ' . $this->data['full_name'])
             ->subject($this->data['subject'])
             ->line($this->data['mail_desc'])
             ->action('My Courses', route('student-hub'))
             ->line('Thank you for enrolling!')
-            ->cc('accounts@nursingeta.com');
+            ->cc('accounts@nursingeta.com')
+            ->attachData($pdf->output(), 'invoice_oba_' . date('Y-m-d') . '.pdf');
     }
 
     /**
