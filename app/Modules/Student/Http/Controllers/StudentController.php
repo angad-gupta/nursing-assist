@@ -468,4 +468,16 @@ class StudentController extends Controller
         return redirect()->back();
     }
 
+    public function saveThirdInstallmentDate(Request $request)
+    {
+        $all = $request->all();
+        try {
+            $this->studentPayment->update($all['payment_id'], ['final_installment_date' => $all['final_installment_date']]);
+            alertify()->success('Third Installment Date Added Successfully!');
+        } catch(\Throwable $t) {
+            alertify()->error($t->getMessage());
+        }
+        return redirect()->back();
+    }
+
 }

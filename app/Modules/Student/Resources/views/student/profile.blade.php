@@ -29,6 +29,13 @@
             $('.payment_id').val(payment_id);
         })
 
+        $('.add_third_installment_status').on('click', function() {
+            var student_id = $(this).attr('student_id');
+            var payment_id = $(this).attr('payment_id');
+            $('.student_id').val(student_id);
+            $('.payment_id').val(payment_id);
+        })
+
     });
 </script>
 @stop
@@ -306,6 +313,10 @@
                                                                     @endif
                                                                     @if(empty($value->course_start_date)) 
                                                                         <a data-toggle="modal" data-target="#modal_coursestart_status" student_id="{{ $student_id }}" payment_id="{{$value->id}}" class="dropdown-item add_coursestart_status"><i class="icon-calendar22"></i> Add Course Start Date</a>
+                                                                    @endif
+                                                                    @if($value->status == 'Second Installment Paid' && empty($value->final_installment_date)) 
+                                                                        <a data-toggle="modal" data-target="#modal_third_installment_status" student_id="{{ $student_id }}" payment_id="{{$value->id}}"  
+                                                                        class="dropdown-item add_third_installment_status"><i class="icon-calendar52"> Add Third Installment Date</i></a>
                                                                     @endif
                                                                     @if($value->moved_to_student == 0)
                                                                     <a data-toggle="modal" data-target="#modal_theme_course_student" student_id="{{ $student_id }}" payment_id="{{$value->id}}" class="dropdown-item update_payment_status"><i class="icon-flip-horizontal2"></i> Course Move Update</a>
@@ -728,6 +739,36 @@
                     <label class="col-form-label col-lg-3">Course Start Date: <span class="text-danger">*</span></label>
                     <div class="col-lg-9">
                         {!! Form::text('course_start_date', $value = null, ['id'=>'course_start_date','placeholder'=>'Enter Course Start Date','class'=>'form-control daterange-single','required']) !!}
+                    </div>
+                </div>
+
+                {{ Form::hidden('student_id', '',['class'=>'student_id']) }}
+                {{ Form::hidden('payment_id', '',['class'=>'payment_id']) }}
+
+                <div class="text-right">
+                    <button type="submit" class="ml-2 btn bg-pink-600 btn-labeled btn-labeled-left"><b><i
+                                class="icon-database-insert"></i></b> Save</button>
+                </div>
+                {!! Form::close() !!}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /warning modal -->
+
+<!-- Warning modal -->
+<div id="modal_third_installment_status" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-warning">
+                <h4 class="modal-title">Add Third Installment Date</h4>
+            </div>
+            <div class="modal-body">
+                {!! Form::open(['route'=>'student.saveThirdInstallmentDate','method'=>'POST','id'=>'coursedate_submit','class'=>'form-horizontal','role'=>'form']) !!}
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-3">Third Installment Date: <span class="text-danger">*</span></label>
+                    <div class="col-lg-9">
+                        {!! Form::text('final_installment_date', $value = null, ['id'=>'final_installment_date','placeholder'=>'Enter Final Installment Date','class'=>'form-control daterange-single','required']) !!}
                     </div>
                 </div>
 

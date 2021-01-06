@@ -24,7 +24,8 @@ class StudentPayment extends Model
         'amount_paid',
         'amount_left',
         'moved_date',
-        'course_start_date'
+        'course_start_date',
+        'final_installment_date'
     ];
 
     public function studentInfo()
