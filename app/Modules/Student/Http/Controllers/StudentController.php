@@ -224,7 +224,7 @@ class StudentController extends Controller
                 if(!empty($check_stu_course)) {
                     if ($moved_to_student == '1') {
                         $this->student->updateStudentCourseStatus(['status' => 1], $courseData);
-                    } else { echo "fdsaffdsfsf";exit;
+                    } else {
                         $this->student->updateStudentCourseStatus(['status' => 0], $courseData);
                     }
                 } else {

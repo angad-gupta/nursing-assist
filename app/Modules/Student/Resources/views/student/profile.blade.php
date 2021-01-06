@@ -264,6 +264,7 @@
                                                     <th>Eligible Doc</th>
                                                     <th>Identity Doc</th>
                                                     <th>Course Start Date</th>
+                                                    <th>Third Installment Date</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -299,6 +300,7 @@
                                                     <td><a href="{{$eligible_doc}}" target="_blank"><img height="50px" width="50px"  src="{{ $eligible_doc }}"></a></td>
                                                     <td><a href="{{$id_doc}}" target="_blank"><img height="50px" width="50px" src="{{$id_doc}}"></a></td>
                                                     <td>{{ !empty($value->course_start_date) ? date('d M, Y',strtotime($value->course_start_date)) : '-' }}</td>
+                                                    <td>{{ !empty($value->final_installment_date) ? date('d M, Y',strtotime($value->final_installment_date)) : '-' }}</td>
                                                     <td class="text-center">
                                                         <div class="list-icons">
                                                             <div class="dropdown">
