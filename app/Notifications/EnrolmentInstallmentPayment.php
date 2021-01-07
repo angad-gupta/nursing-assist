@@ -41,8 +41,8 @@ class EnrolmentInstallmentPayment extends Notification
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
-    { //dd($this->data);
-        $pdf = PDF::loadView('enrolment::mail.invoice', $this->data);
+    {
+        //$pdf = PDF::loadView('enrolment::mail.invoice', $this->data);
 
         return (new MailMessage)
             ->greeting('Dear ' . $this->data['full_name'])
@@ -50,8 +50,8 @@ class EnrolmentInstallmentPayment extends Notification
             ->line($this->data['mail_desc'])
             ->action('Pay Now', $this->data['pay_url'])
             ->line('Thank you!')
-            //->cc('accounts@nursingeta.com')
-            ->attachData($pdf->output(), 'invoice_oba_' . date('Y-m-d') . '.pdf');
+            ->cc('accounts@nursingeta.com');
+            //->attachData($pdf->output(), 'invoice_'.$this->data['course_program_title'].'_' . date('Y-m-d') . '.pdf');
     }
 
     /**

@@ -52,7 +52,10 @@ class CronController extends Controller
         if ($payments->count() > 0) {
             foreach ($payments as $value) {
                 $data['payment_info'] = $value;
-                $course_program_title = optional($value->courseInfo)->course_program_title;
+                $data['course_info'] =  optional($value->courseInfo);
+                $data['enrolment_info'] = optional($value->enrolmentInfo);
+
+                $data['course_program_title'] = $course_program_title = optional($value->courseInfo)->course_program_title;
                 $data['student_info'] = $studentInfo = optional($value->studentInfo);
                 $data['full_name'] = $studentInfo->full_name;
                 $course_info_id = $value->courseinfo_id;

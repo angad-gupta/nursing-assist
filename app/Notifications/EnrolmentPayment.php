@@ -51,7 +51,7 @@ class EnrolmentPayment extends Notification
             ->action('My Courses', route('student-hub'))
             ->line('Thank you for enrolling!')
             ->cc('accounts@nursingeta.com')
-            ->attachData($pdf->output(), 'invoice_oba_' . date('Y-m-d') . '.pdf');
+            ->attachData($pdf->output(), 'invoice_'.$this->data['course_program_title'].'_' . date('Y-m-d') . '.pdf');
     }
 
     /**

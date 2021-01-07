@@ -348,7 +348,9 @@ class EnrolmentController extends Controller
             $description = $data['description'];
             $enrolment_id = $data['enrolment_id'];
  */
-            $student_payment = $this->studentpayment->find($data['student_payment_id']); 
+            $data['payment_info'] = $student_payment = $this->studentpayment->find($data['student_payment_id']); 
+            $data['course_info'] =  optional($student_payment->courseInfo);
+            $data['enrolment_info'] = optional($student_payment->enrolmentInfo);
             if (!empty($student_payment)) {
 
                 $studentInfo = optional($student_payment->studentInfo);
@@ -356,7 +358,7 @@ class EnrolmentController extends Controller
                 $full_name = $studentInfo->full_name;
                 $email = $studentInfo->email;
                 $enrolment_id = $student_payment->enrolment_id;
-                $course_program_title = optional($student_payment->courseInfo)->course_program_title;
+                $data['course_program_title'] =  $course_program_title = optional($student_payment->courseInfo)->course_program_title;
                 $course_info_id = $student_payment->courseinfo_id;
 
                 if ($data['ins'] == 2) {
@@ -590,13 +592,13 @@ class EnrolmentController extends Controller
             $description = $data['description'];
             $enrolment_id = $data['enrolment_id'];
 
-            $enrolmentInfo = $this->enrolment->find($enrolment_id);
+            $data['enrolment_info'] = $enrolmentInfo = $this->enrolment->find($enrolment_id);
             $data['courseinfo_id'] = $enrolmentInfo->courseinfo_id;
 
             $student_detail = auth()->guard('student')->user();
             $data['student_id'] = $student_detail->id;
 
-            $courseInfo = $this->courseinfo->find($enrolmentInfo->courseinfo_id);
+            $data['course_info'] = $courseInfo = $this->courseinfo->find($enrolmentInfo->courseinfo_id);
             $data['total_course_fee'] = $total_course_fee = $courseInfo->course_fee;
             $data['course_program_title'] = $course_program_title = $courseInfo->course_program_title; 
 
@@ -672,7 +674,7 @@ class EnrolmentController extends Controller
                             'amount_paid' => $fee_in_cwbank,
                             'amount_left' => ($total_course_fee - $fee_in_cwbank),
                         );
-                        $studentpayment = $this->studentpayment->save($studentPaymentData);
+                        $data['payment_info'] = $studentpayment = $this->studentpayment->save($studentPaymentData);
 
                         //Installment Payment Storage
                         $studentPaymentInstallmentData = array(
@@ -701,7 +703,7 @@ class EnrolmentController extends Controller
                             'amount_paid' => $total_course_fee,
                             'amount_left' => 0,
                         ); 
-                        $studentpayment = $this->studentpayment->save($studentPaymentData);
+                        $data['payment_info'] = $studentpayment = $this->studentpayment->save($studentPaymentData);
 
                         $this->enrolment->update($enrolment_id, ['payment_status' => 1]);
 
