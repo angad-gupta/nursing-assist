@@ -476,7 +476,9 @@ class EnrolmentController extends Controller
                                     'courseinfo_id' => $pack_val->id,
                                 );
 
-                                $this->student->updateStudentCourseStatus(['status' => 1], $wherecondition);
+                                if ($pack_val->course_program_title == 'NCLEX' || ($pack_val->course_program_title == 'OSCE' && $data['ins'] == 3) ) {
+                                    $this->student->updateStudentCourseStatus(['status' => 1], $wherecondition);
+                                }
                             }
 
                         } else {

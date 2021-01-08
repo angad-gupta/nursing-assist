@@ -201,7 +201,8 @@ class StudentController extends Controller
 
                     $check_stu_course = $this->student->getStudentCourseInfo($courseData);
                     if(!empty($check_stu_course)) {
-                        if ($moved_to_student == '1') {
+                        if (($moved_to_student == '1' && $pack_val->course_program_title == 'NCLEX') || ($moved_to_student == '1' && $pack_val->course_program_title == 'OSCE' 
+                        && ($studentPuchaseInfo->status == 'Third Installment Paid' || $studentPuchaseInfo->status == 'Paid')) ) {
                             $this->student->updateStudentCourseStatus(['status' => 1], $courseData);
                         } else {
                             $this->student->updateStudentCourseStatus(['status' => 0], $courseData);
