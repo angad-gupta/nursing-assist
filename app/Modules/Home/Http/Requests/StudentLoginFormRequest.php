@@ -17,10 +17,11 @@ class StudentLoginFormRequest extends FormRequest
         { 
             return [
                 'username' => 'required',
-                'full_name' => 'required',
+                'first_name' => 'required',
+                'last_name' => 'required',
                 'email' => 'required|unique:students',
-                'password' => 'required|min:6|same:c_password',
-                'c_password' => 'min:6',
+                'password' => 'required|min:8|same:c_password',
+                'c_password' => 'min:8',
             ];
         }
     }

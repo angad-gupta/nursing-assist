@@ -41,7 +41,6 @@
                         <div class="row">
                               @if(sizeof($course_info)>0)
                                 @foreach($course_info as $key => $enroll_val) 
-                                 @if($enroll_val->is_course_package == '1')
                                     <div class="col-sm-4">
                                         <div class="course-enrolment__content">
                                             <p>{{$enroll_val->enrol_title }}</p>
@@ -50,50 +49,13 @@
                                             <a class="btn w-100" href="{{ route('enrolment',['course_info_id'=>$enroll_val->id]) }}">Enroll</a>
                                         </div>
                                     </div>
-                                @endif
                              @endforeach
                             @endif
 
                         </div>
                     </div>
 
-                    @if(isset($course_info) && $course_info->count() > 1)
-                        <div class="intake-date b-line">
-                            <h6 class="mb-4">Intake Dates</h6>
-                            
-                            @foreach($course_info as $key => $courseInfo)
-                                @if($courseInfo->is_course_package == '0')
 
-                                    <div class="intake-date__content">
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <img src="{{asset('home/img/abt.png')}}" class="img-fluid" alt="">
-                                            </div>
-                                            <div class="col-sm-8 pt-4">
-                                                <a href="{{ route('course-info-detail',['courseinfo_id'=>$courseInfo->id]) }}"><h4>{{$courseInfo->course_intake_title}}</h4></a>
-                                                <p>Online and Live Teleconferences</p>
-                                                <ul class="list-unstyled">
-
-
-                                                    @if(sizeof($courseInfo->courseIntake)>0)
-                                                        @foreach($courseInfo->courseIntake as $key => $courseInfoIntake)
-                                                            <li>
-                                                                <p>{{optional($courseInfoIntake->month)->name}}</p>
-                                                                <span>{{$courseInfoIntake->intake_date}}</span>
-                                                            </li>
-                                                        @endforeach
-                                                    @endif
-
-                                                </ul>
-                                                <!-- <a  class="btn e-btn w-25 mt-1" href="{{ route('enrolment',['course_info_id'=>$courseInfo->id]) }}">Enroll Now</a> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endif
-
-                            @endforeach                        
-                        </div>
-                    @endif
                 </div>
             </div>
 

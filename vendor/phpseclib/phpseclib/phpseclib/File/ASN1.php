@@ -790,7 +790,7 @@ class ASN1
      *
      * @param string $source
      * @param string $mapping
-     * @param array $special
+     * @param int $idx
      * @return string
      * @access public
      */
@@ -806,7 +806,6 @@ class ASN1
      * @param string $source
      * @param string $mapping
      * @param int $idx
-     * @param array $special
      * @return string
      * @access private
      */
@@ -1162,7 +1161,7 @@ class ASN1
      * Called by _encode_der()
      *
      * @access private
-     * @param string $source
+     * @param string $content
      * @return string
      */
     function _encodeOID($source)

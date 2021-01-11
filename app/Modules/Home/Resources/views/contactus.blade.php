@@ -82,23 +82,22 @@
                 <div class="neta-contact__form">
                     <h2 class="ttl-line">Address</h2>
                     <ul class="list-unstyled">
-                        <li><span class="material-icons">
+                        <li>
+                            <span class="material-icons">
                                 call
-                            </span> <a href="tel:{{$setting->contact_no1}}">{{$setting->contact_no1}}</a> , <a href="tel:{{$setting->contact_no2}}">{{$setting->contact_no2}}</a></li>
+                            </span><a href="tel:{{$setting->contact_no2}}">{{$setting->contact_no2}}</a>
+                        </li>
+                        <li>
+                            <span class="material-icons">
+                                call
+                            </span><a href="tel:{{$setting->contact_no2}}">{{$setting->contact_no2}}</a>
+                        </li>
                         <li><span class="material-icons">
                                 place
                             </span>{{$setting->address1}}</li>
                         <li><span class="material-icons">
                                 place
                             </span>{{$setting->address2}}</li>
-                        <li><span class="material-icons">
-                                mail
-                            </span>Accounts: <p><a href="mailto:{{$setting->accounts_email}}">{{$setting->accounts_email}}</a></p>
-                        </li>
-                        <li><span class="material-icons">
-                                mail
-                            </span>Admissions: <p><a href="mailto:{{$setting->admission_email}}">{{$setting->admission_email}}</a></p>
-                        </li>
                         <li><span class="material-icons">
                                 mail
                             </span>For Information: <p><a href="mailto:{{$setting->information_email}}">{{$setting->information_email}}</a></p>

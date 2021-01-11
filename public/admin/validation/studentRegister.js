@@ -2,7 +2,8 @@ $(document).ready(function () {
     $("#studentRegister_submit").validate({
         rules: {
             username: "required",
-            full_name: "required",
+            first_name: "required",
+            last_name: "required",
             email: "required",
             password: {
                 required: true,
@@ -16,15 +17,16 @@ $(document).ready(function () {
         },
         messages: {
             username: "Enter Username",
-            full_name: "Enter Full Name",
+            first_name: "Enter First Name",
+            last_name: "Enter Last Name",
             email: "Enter Email",
             password: {
                 required: "Enter Password",
-                minlength: "Minimum 6 characters",
+                minlength: "Minimum 8 characters",
             },
             c_password: {
                 required: "Enter Confirm Password",
-                minlength: "Minimum 6 Characters",
+                minlength: "Minimum 8 Characters",
                 equalTo: "Must be equals to password"
             },
         },

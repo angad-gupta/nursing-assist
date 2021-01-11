@@ -243,7 +243,7 @@ class BigInteger
      * ?>
      * </code>
      *
-     * @param int|string|resource $x base-10 number or base-$base number if $base set.
+     * @param $x base-10 number or base-$base number if $base set.
      * @param int $base
      * @return \phpseclib\Math\BigInteger
      * @access public
@@ -1994,7 +1994,7 @@ class BigInteger
      *
      * @see self::_slidingWindow()
      * @access private
-     * @param \phpseclib\Math\BigInteger $n
+     * @param \phpseclib\Math\BigInteger
      * @return \phpseclib\Math\BigInteger
      */
     function _mod2($n)
@@ -2688,7 +2688,7 @@ class BigInteger
      * Note how the same comparison operator is used.  If you want to test for equality, use $x->equals($y).
      *
      * @param \phpseclib\Math\BigInteger $y
-     * @return int that is < 0 if $this is less than $y; > 0 if $this is greater than $y, and 0 if they are equal.
+     * @return int < 0 if $this is less than $y; > 0 if $this is greater than $y, and 0 if they are equal.
      * @access public
      * @see self::equals()
      * @internal Could return $this->subtract($x), but that's not as fast as what we do do.
@@ -3090,7 +3090,7 @@ class BigInteger
      *
      * Byte length is equal to $length. Uses \phpseclib\Crypt\Random if it's loaded and mt_rand if it's not.
      *
-     * @param int $size
+     * @param int $length
      * @return \phpseclib\Math\BigInteger
      * @access private
      */
@@ -3557,7 +3557,7 @@ class BigInteger
      *
      * Removes leading zeros and truncates (if necessary) to maintain the appropriate precision
      *
-     * @param \phpseclib\Math\BigInteger $result
+     * @param \phpseclib\Math\BigInteger
      * @return \phpseclib\Math\BigInteger
      * @see self::_trim()
      * @access private
@@ -3634,8 +3634,8 @@ class BigInteger
     /**
      * Array Repeat
      *
-     * @param array $input
-     * @param mixed $multiplier
+     * @param $input Array
+     * @param $multiplier mixed
      * @return array
      * @access private
      */
@@ -3649,8 +3649,8 @@ class BigInteger
      *
      * Shifts binary strings $shift bits, essentially multiplying by 2**$shift.
      *
-     * @param string $x (by reference)
-     * @param int $shift
+     * @param $x String
+     * @param $shift Integer
      * @return string
      * @access private
      */
@@ -3678,8 +3678,8 @@ class BigInteger
      *
      * Shifts binary strings $shift bits, essentially dividing by 2**$shift and returning the remainder.
      *
-     * @param string $x (by referenc)
-     * @param int $shift
+     * @param $x String
+     * @param $shift Integer
      * @return string
      * @access private
      */

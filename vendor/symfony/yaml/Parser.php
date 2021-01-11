@@ -23,8 +23,8 @@ use Symfony\Component\Yaml\Tag\TaggedValue;
  */
 class Parser
 {
-    public const TAG_PATTERN = '(?P<tag>![\w!.\/:-]+)';
-    public const BLOCK_SCALAR_HEADER_PATTERN = '(?P<separator>\||>)(?P<modifiers>\+|\-|\d+|\+\d+|\-\d+|\d+\+|\d+\-)?(?P<comments> +#.*)?';
+    const TAG_PATTERN = '(?P<tag>![\w!.\/:-]+)';
+    const BLOCK_SCALAR_HEADER_PATTERN = '(?P<separator>\||>)(?P<modifiers>\+|\-|\d+|\+\d+|\-\d+|\d+\+|\d+\-)?(?P<comments> +#.*)?';
 
     private $filename;
     private $offset = 0;
@@ -741,11 +741,11 @@ class Parser
 
         try {
             if ('' !== $value && '{' === $value[0]) {
-                $cursor = \strlen(rtrim($this->currentLine)) - \strlen(rtrim($value));
+                $cursor = \strlen($this->currentLine) - \strlen($value);
 
                 return Inline::parse($this->lexInlineMapping($cursor), $flags, $this->refs);
             } elseif ('' !== $value && '[' === $value[0]) {
-                $cursor = \strlen(rtrim($this->currentLine)) - \strlen(rtrim($value));
+                $cursor = \strlen($this->currentLine) - \strlen($value);
 
                 return Inline::parse($this->lexInlineSequence($cursor), $flags, $this->refs);
             }
@@ -753,10 +753,10 @@ class Parser
             switch ($value[0] ?? '') {
                 case '"':
                 case "'":
-                    $cursor = \strlen(rtrim($this->currentLine)) - \strlen(rtrim($value));
+                    $cursor = \strlen($this->currentLine) - \strlen($value);
                     $parsedValue = Inline::parse($this->lexInlineQuotedString($cursor), $flags, $this->refs);
 
-                    if (isset($this->currentLine[$cursor]) && preg_replace('/\s*(#.*)?$/A', '', substr($this->currentLine, $cursor))) {
+                    if (isset($this->currentLine[$cursor]) && preg_replace('/\s*#.*$/A', '', substr($this->currentLine, $cursor))) {
                         throw new ParseException(sprintf('Unexpected characters near "%s".', substr($this->currentLine, $cursor)));
                     }
 
@@ -1170,9 +1170,7 @@ class Parser
             for (; \strlen($this->currentLine) > $cursor; ++$cursor) {
                 switch ($this->currentLine[$cursor]) {
                     case '\\':
-                        if ("'" === $quotation) {
-                            $value .= '\\';
-                        } elseif (isset($this->currentLine[++$cursor])) {
+                        if (isset($this->currentLine[++$cursor])) {
                             $value .= '\\'.$this->currentLine[$cursor];
                         }
 

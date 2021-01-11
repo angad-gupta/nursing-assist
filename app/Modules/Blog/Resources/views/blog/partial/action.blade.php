@@ -6,14 +6,14 @@
             <div class="form-group row">
                 <div class="col-lg-12">
                     <div class="row">
-                        <label class="col-form-label col-lg-3">Blog Title:<span class="text-danger">*</span></label>
+                        <label class="col-form-label col-lg-3">News Title:<span class="text-danger">*</span></label>
                         <div class="col-lg-9 form-group-feedback form-group-feedback-right">
                             <div class="input-group">
                                 <span class="input-group-prepend">
                                     <span class="input-group-text"><i class="icon-hat"></i>
                                     </span>
                                 </span>
-                                {!! Form::text('title', $value = null, ['id'=>'title','placeholder'=>'Enter Blog Title','class'=>'form-control']) !!}
+                                {!! Form::text('title', $value = null, ['id'=>'title','placeholder'=>'Enter News Title','class'=>'form-control']) !!}
                             </div>
                         </div>
                     </div>
@@ -23,10 +23,10 @@
             <div class="form-group row">
                 <div class="col-lg-12">
                     <div class="row">
-                        <label class="col-form-label col-lg-3">Blog Sub Content:<span class="text-danger">*</span></label>
+                        <label class="col-form-label col-lg-3">News Sub Content:<span class="text-danger">*</span></label>
                         <div class="col-lg-9 form-group-feedback form-group-feedback-right">
                             <div class="input-group">
-                                {!! Form::textarea('sub_content', null, ['id' => 'sub_content','placeholder'=>'Enter Blog Sub Content', 'class' =>'form-control simple_textarea_description']) !!}
+                                {!! Form::textarea('sub_content', null, ['id' => 'sub_content','placeholder'=>'Enter News Sub Content', 'class' =>'form-control simple_textarea_description']) !!}
                             </div>
                         </div>
                     </div>
@@ -36,10 +36,10 @@
             <div class="form-group row">
                 <div class="col-lg-12">
                     <div class="row">
-                        <label class="col-form-label col-lg-3">Blog Content:<span class="text-danger">*</span></label>
+                        <label class="col-form-label col-lg-3">News Content:<span class="text-danger">*</span></label>
                         <div class="col-lg-9 form-group-feedback form-group-feedback-right">
                             <div class="input-group">
-                                {!! Form::textarea('content', null, ['id' => 'content','placeholder'=>'Enter Blog Content', 'class' =>'form-control textarea_description']) !!}
+                                {!! Form::textarea('content', null, ['id' => 'content','placeholder'=>'Enter News Content', 'class' =>'form-control textarea_description']) !!}
                             </div>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
 
                 <div class="col-lg-6">
                     <div class="row">
-                        <label class="col-form-label col-lg-3">Blog Image:</label>
+                        <label class="col-form-label col-lg-3">News Image:</label>
                         <div class="col-lg-9 form-group-feedback form-group-feedback-right">
                             <div class="input-group">
                                 <span class="input-group-prepend">
@@ -122,7 +122,7 @@
                     </center>
                     <br>
                     <center>
-                        <h4 class="text-purple">Blog Image Size is Greater Than 3Mb. Please Upload Below 1Mb.</h4>
+                        <h4 class="text-purple">News Image Size is Greater Than 3Mb. Please Upload Below 1Mb.</h4>
                         <button type="button" class="btn btn-success" data-dismiss="modal">Thank You !!!</button>
                     </center>
                 </div>

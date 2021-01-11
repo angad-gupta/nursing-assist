@@ -421,11 +421,29 @@ class HomeController extends Controller
         $input = $request->all();
         $email = $input['email'];
 
+        $first_name = $input['first_name'];
+        $middle_name = $input['middle_name'];
+        $last_name = $input['last_name'];
+
+        $password = $input['password'];
+        // Validate password strength
+        $uppercase = preg_match('@[A-Z]@', $password);  
+        $lowercase = preg_match('@[a-z]@', $password);
+        $number    = preg_match('@[0-9]@', $password);  
+        $specialChars = preg_match('@[^\w]@', $password);
+
+        if(($uppercase == '0') || ($lowercase== '0') || ($number== '0') || ($specialChars== '0') || strlen($password) < 8) {
+            $pwdStrength['message'] =  'Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.';
+            return redirect(route('student.register', $pwdStrength));
+        }
+
+        $full_name = $first_name .' '. $middle_name .' '. $last_name;
+
         try {
 
             $studentData = array(
                 'username' => $input['username'],
-                'full_name' => $input['full_name'],
+                'full_name' => $full_name,
                 'email' => $input['email'],
                 'password' => bcrypt($input['password']),
                 'user_type' => 'student',

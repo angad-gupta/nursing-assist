@@ -26,8 +26,8 @@ use Symfony\Component\Routing\RouteCompiler;
  */
 class XmlFileLoader extends FileLoader
 {
-    public const NAMESPACE_URI = 'http://symfony.com/schema/routing';
-    public const SCHEME_PATH = '/schema/routing/routing-1.0.xsd';
+    const NAMESPACE_URI = 'http://symfony.com/schema/routing';
+    const SCHEME_PATH = '/schema/routing/routing-1.0.xsd';
 
     /**
      * Loads an XML file.

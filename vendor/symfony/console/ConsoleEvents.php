@@ -25,7 +25,7 @@ final class ConsoleEvents
      *
      * @Event("Symfony\Component\Console\Event\ConsoleCommandEvent")
      */
-    public const COMMAND = 'console.command';
+    const COMMAND = 'console.command';
 
     /**
      * The TERMINATE event allows you to attach listeners after a command is
@@ -33,7 +33,7 @@ final class ConsoleEvents
      *
      * @Event("Symfony\Component\Console\Event\ConsoleTerminateEvent")
      */
-    public const TERMINATE = 'console.terminate';
+    const TERMINATE = 'console.terminate';
 
     /**
      * The ERROR event occurs when an uncaught exception or error appears.
@@ -43,5 +43,5 @@ final class ConsoleEvents
      *
      * @Event("Symfony\Component\Console\Event\ConsoleErrorEvent")
      */
-    public const ERROR = 'console.error';
+    const ERROR = 'console.error';
 }

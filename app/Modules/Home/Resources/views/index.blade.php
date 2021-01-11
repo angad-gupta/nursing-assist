@@ -83,6 +83,9 @@
                                         <a class="nav-link" href="{{ route('student-hub') }}">Learner’s Portal</a>
                                     </li>
                                     <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('faq') }}">FAQs</a>
+                                    </li>
+                                    <li class="nav-item">
                                         <a class="nav-link" href="{{ route('student-forum') }}">Forums</a>
                                     </li>
                                     <li class="nav-item neta-dropdown">
@@ -245,7 +248,7 @@
                         </ul>
                       </div>
                      <p>It is the work that we do every day that makes us superheroes.</p> 
-                     <p>What is your Superhero?</p>
+                     <p>What is your Superpower?</p>
                      <button class="btn btn-neta"><a href="{{ route('course') }}">Find More</a></button>
                  </div>
              </div>
@@ -309,7 +312,7 @@
                     </div>
          	@endforeach
          @endif    
- </div>
+ </div> 
 </div>
 </section>
 

@@ -537,7 +537,7 @@ class RSA
      * @access public
      * @param int $bits
      * @param int $timeout
-     * @param array $partial
+     * @param array $p
      */
     function createKey($bits = 1024, $timeout = false, $partial = array())
     {
@@ -716,12 +716,7 @@ class RSA
      *
      * @access private
      * @see self::setPrivateKeyFormat()
-     * @param Math_BigInteger $n
-     * @param Math_BigInteger $e
-     * @param Math_BigInteger $d
-     * @param array<int,Math_BigInteger> $primes
-     * @param array<int,Math_BigInteger> $exponents
-     * @param array<int,Math_BigInteger> $coefficients
+     * @param string $RSAPrivateKey
      * @return string
      */
     function _convertPrivateKey($n, $e, $d, $primes, $exponents, $coefficients)
@@ -1002,9 +997,8 @@ class RSA
      *
      * @access private
      * @see self::setPublicKeyFormat()
-     * @param Math_BigInteger $n
-     * @param Math_BigInteger $e
-     * @return string|array<string,Math_BigInteger>
+     * @param string $RSAPrivateKey
+     * @return string
      */
     function _convertPublicKey($n, $e)
     {
@@ -1886,6 +1880,7 @@ class RSA
      *
      * @see self::getPublicKey()
      * @access public
+     * @param string $key
      * @param int $type optional
      */
     function getPublicKey($type = self::PUBLIC_FORMAT_PKCS8)
@@ -1943,6 +1938,7 @@ class RSA
      *
      * @see self::getPublicKey()
      * @access public
+     * @param string $key
      * @param int $type optional
      * @return mixed
      */
@@ -1967,7 +1963,8 @@ class RSA
      *
      * @see self::getPrivateKey()
      * @access private
-     * @param int $mode optional
+     * @param string $key
+     * @param int $type optional
      */
     function _getPrivatePublicKey($mode = self::PUBLIC_FORMAT_PKCS8)
     {
@@ -2184,7 +2181,7 @@ class RSA
      *    of the hash function Hash) and 0.
      *
      * @access public
-     * @param int $sLen
+     * @param int $format
      */
     function setSaltLength($sLen)
     {
@@ -2217,7 +2214,7 @@ class RSA
      * See {@link http://tools.ietf.org/html/rfc3447#section-4.2 RFC3447#section-4.2}.
      *
      * @access private
-     * @param int|string|resource $x
+     * @param string $x
      * @return \phpseclib\Math\BigInteger
      */
     function _os2ip($x)
@@ -2444,7 +2441,7 @@ class RSA
      *
      * @access private
      * @param string $mgfSeed
-     * @param int $maskLen
+     * @param int $mgfLen
      * @return string
      */
     function _mgf1($mgfSeed, $maskLen)
@@ -2953,7 +2950,6 @@ class RSA
      *
      * @access private
      * @param string $m
-     * @param string $s
      * @return string
      */
     function _rsassa_pkcs1_v1_5_verify($m, $s)
@@ -3094,7 +3090,7 @@ class RSA
      *
      * @see self::encrypt()
      * @access public
-     * @param string $ciphertext
+     * @param string $plaintext
      * @return string
      */
     function decrypt($ciphertext)

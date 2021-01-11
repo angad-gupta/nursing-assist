@@ -1,6 +1,6 @@
 @extends('admin::layout')
-@section('title')Blog @stop 
-@section('breadcrum')Create Blog @stop
+@section('title')News Blog @stop 
+@section('breadcrum')Create News Blog @stop
 
 @section('script')
 <!-- Theme JS files -->
@@ -15,7 +15,7 @@
 <!-- Form inputs -->
 <div class="card">
     <div class="card-header header-elements-inline">
-        <h5 class="card-title">Create Blog</h5>
+        <h5 class="card-title">Create News Blog</h5>
         <div class="header-elements">
 
         </div>

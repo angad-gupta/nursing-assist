@@ -1,6 +1,6 @@
 @extends('admin::layout')
-@section('title')Blog @stop
-@section('breadcrum')Blog @stop
+@section('title')News Blog @stop
+@section('breadcrum')News Blog @stop
 
 @section('script')
 <script src="{{asset('admin/global/js/plugins/tables/datatables/datatables.min.js')}}"></script>
@@ -12,13 +12,13 @@
 
  <div class="card">
         <div class="card-header bg-purple-400 header-elements-inline">
-            <a href="{{ route('blog.create') }}" class="btn bg-success-600 btn-labeled btn-labeled-left" style="float: left"><b><i class="icon-pen-plus"></i></b> Add Blog</a>
+            <a href="{{ route('blog.create') }}" class="btn bg-success-600 btn-labeled btn-labeled-left" style="float: left"><b><i class="icon-pen-plus"></i></b> Add News Blog</a>
         </div>
     </div>
 
 <div class="card">
     <div class="card-header header-elements-inline">
-        <h5 class="card-title">List of Blog</h5>
+        <h5 class="card-title">List of News Blog</h5>
 
     </div>
 
@@ -58,7 +58,7 @@
                 @endforeach
                 @else
                 <tr>
-                    <td colspan="6">No Blog Found !!!</td>
+                    <td colspan="6">No News Blog Found !!!</td>
                 </tr>
                 @endif
             </tbody>
