@@ -135,6 +135,16 @@ class StudentRepository implements StudentInterface
         })->where('student_id', '=', $student_id)->orderBy('id', $sort['sort'])->distinct('courseinfo_id')->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
 
         return $result;
+    }    
+
+    public function getStudentOsceCourse($student_id, $limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1])
+    {
+
+        $result = StudentCourse::when(array_keys($filter, true), function ($query) use ($filter) {
+
+        })->where('student_id', '=', $student_id)->where('courseinfo_id', '=', '2')->orderBy('id', $sort['sort'])->distinct('courseinfo_id')->paginate($limit ? $limit : env('DEF_PAGE_LIMIT', 9999));
+
+        return $result;
     }
 
     public function getStudentPurchase($student_id, $limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1])

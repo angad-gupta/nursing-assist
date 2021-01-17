@@ -69,7 +69,7 @@
                 <div class="neta-contact">
                     <div class="neta-contact__form form" style="margin-top: 30px;">
                         <h2 class="ttl-line" style="font-size: 24px;">Create a New Topic</h2>
-                        <p>Want to get in touch? We'd love to hear from you. Here's how you can reach us...</p>
+                        <p>Let's have a discussion</p>
 
                          {!! Form::open(['route'=>'store-forum','method'=>'POST','name'=>'newsletter_form','id'=>'newsletter_submit','class'=>'form-horizontal','role'=>'form','files' => true]) !!}
                             <div class="row">

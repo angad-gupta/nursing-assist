@@ -269,6 +269,8 @@
 
                     <div class="tab-pane fade neta-resources" id="resources-osce" role="tabpanel" aria-labelledby="resources-osce-tab">
                         <div class="row">
+
+                        @if($student_osce_course->total() >0)
                             @if($resources_osce->total() > 0)
                                 @foreach($resources_osce as $key => $value)
                                     <div class="col-sm-12">
@@ -299,7 +301,19 @@
                                     </div>
                                 </div>
                             </div>
-                            @endif                         
+                            @endif    
+                        @else
+                            <div class="col-sm-12">
+                                    <div class="resource-box">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-8">
+                                            <span>Sorry, You have not Enrol OSCE Course.Please Enrol to Access.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
                         </div>
                     </div>
 

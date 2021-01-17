@@ -156,6 +156,7 @@ class DashboardController extends Controller
     public function studentCourse()
     {
         $id = Auth::guard('student')->user()->id;
+        $data['student_osce_course'] = $this->student->getStudentOsceCourse($id);
         $data['student_course'] = $this->student->getStudentCourse($id);
         $data['other_course'] = $this->courseinfo->getAll();
         $data['resources_nclex'] = $this->resource->findAllNclex();
