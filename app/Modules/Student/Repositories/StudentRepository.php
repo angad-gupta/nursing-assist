@@ -93,6 +93,24 @@ class StudentRepository implements StudentInterface
         return Student::withTrashed()->find($id);
     }
 
+    public function randomCode($length){
+        $alphabet = "abcdefghijklmnopqrstuwxyz$%*+-\|&!`~@_:ABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";    
+        $pass = array(); //remember to declare $pass as an array
+        $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+        for ($i = 0; $i < $length; $i++) {
+            $n = rand(0, $alphaLength);
+            $pass[] = $alphabet[$n];
+        }
+        return implode($pass); //turn the array into a string
+
+    }
+
+
+    public function findByCode($code)
+    {
+        return Student::where('activation_code','=',$code)->first();
+    }
+
     public function getList()
     {
         $team = Student::pluck('company_name', 'id');

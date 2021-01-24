@@ -10,6 +10,10 @@ interface StudentInterface
 
     public function find($id);
 
+    public function randomCode($length);
+
+    public function findByCode($code);
+
     public function getList();
 
     public function save($data);

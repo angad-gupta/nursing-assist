@@ -439,6 +439,8 @@ class HomeController extends Controller
 
         $full_name = $first_name .' '. $middle_name .' '. $last_name;
 
+        $activation_code = $this->student->randomCode(10);
+
         try {
 
             $studentData = array(
@@ -447,7 +449,8 @@ class HomeController extends Controller
                 'email' => $input['email'],
                 'password' => bcrypt($input['password']),
                 'user_type' => 'student',
-                'active' => 1,
+                'active' => 0,
+                'activation_code' => $activation_code
             );
 
             $studentInfo = $this->student->save($studentData);
@@ -456,9 +459,9 @@ class HomeController extends Controller
             Email Send to Student After Registration
             --------------------------------------------------------------- */
 
-            $subject = 'Register Successfully.';
-
-            $content = view('home::email-register-content')->render();
+            $subject = 'Account Activation.';
+            $code['activation_code'] = $activation_code;
+            $content = view('home::email-register-content', $code)->render();
 
             //if (filter_var( $email, FILTER_VALIDATE_EMAIL )) {
             Mail::to($email)->send(new SendNetaMail($content, $subject));
@@ -475,12 +478,46 @@ class HomeController extends Controller
             Email Send to Student After Registration
             --------------------------------------------------------------- */
 
-            $registerStudent['message'] = 'You have registered Successfully.';
+            $registerStudent['message'] = 'Please Check Mail for Activation Code To Access.';
         } catch (\Throwable $e) {
             $registerStudent['message'] = 'Something Wrong With Message';
         }
 
         return redirect(route('student-account', $registerStudent));
+    }
+
+
+    public function studentAccountActivate(Request $request){
+
+        $input = $request->all();
+
+        $code = $input['code'];
+
+        $studentInfo = $this->student->findByCode($code);
+
+        if($studentInfo){
+
+        $studentId = $studentInfo->id;
+        $activation_code = $studentInfo->activation_code;
+
+            if($activation_code){
+                $registerStudent['message'] = 'Already Activated.Please Login Directly using your Credential. ';
+            }else{
+                $updateData = array(
+                     'active' => 1
+                );
+
+                $this->student->update($studentId,$updateData);
+
+                $registerStudent['message'] = 'Congratulation ! You have Activated your Account Successfully. ';
+            }
+        }else{
+
+            $registerStudent['message'] = 'Activation Code doesn\'t match.Please Try Again.';
+        }
+        
+        return redirect(route('student-account', $registerStudent));
+
     }
 
     public function resources()

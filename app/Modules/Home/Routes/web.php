@@ -62,6 +62,8 @@ Route::get('student/register', ['as' => 'student.register', 'uses' => 'HomeContr
 
 Route::post('student-register/store', ['as' => 'student-register.store', 'uses' => 'HomeController@studentRegister']);
 
+Route::get('student-account-activate', ['as' => 'student-account-activate', 'uses' => 'HomeController@studentAccountActivate']);
+
 Route::post('student-login', ['as' => 'student-login-post', 'uses' => 'StudentController@studentAuthenticate']);
 
 Route::get('student-logout', ['as' => 'student-logout', 'uses' => 'StudentController@studentLogout']);

@@ -6,7 +6,9 @@
             <p style="font-family: sans-serif;padding-left: 20px;padding-top: 20px;font-weight:400;text-align:left;margin:0;font-size: 20px;">Dear Future NETA Student</p>
             <p style="text-align: center;font-family: sans-serif;width: 500px;margin: auto;padding-top: 20px;font-size: 14px;">Thank you for your registration.</p>
 
+             <p style="font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px;">To activate your account please click the button below to verify your email address:</p>
 
+             <p style="font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px;"><a href="{{ route('student-account-activate',['code'=>$activation_code]) }}">Activate Account</a> 
 
             <p style="font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px;">Nursing Education and Training Australia (NETA) is an education provider for the Outcome Based Assessment (NCLEX and OSCE) preparation class for overseas nurses. We also extend education support to first year RNs in Australia. NETA provides Continuing Professional Development Courses to registered nurses as part of the requirements of yearly AHPRA registration.</p>
 
