@@ -161,6 +161,11 @@ function check_pass()
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group">
+                                  <span><b>Note:</b> Password should be at least <b>8 characters in length</b> and should include at least <b>one upper case letter, one number, and one special character.</b></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
                                     <label for="">Password</label>
                                     <input type="password" placeholder="Enter Password" class="form-control" id="rpassword" name="password" >
                                     <span toggle="#rpassword" class="fa fa-fw fa-eye field-icon toggle-password"></span>
