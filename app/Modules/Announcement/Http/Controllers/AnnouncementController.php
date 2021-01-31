@@ -66,6 +66,8 @@ class AnnouncementController extends Controller
         unset($data['intake_date']);
         $data['intake_date'] = $intake_date;
 
+        $annoucemnt_title = $data['title'];
+
          try{
 
              $this->announcement->save($data);
@@ -79,7 +81,7 @@ class AnnouncementController extends Controller
                     $student_info = $this->student->find($value['student_id']);
 
                        $email = $student_info['email'];
-                       $subject = 'Announcement Notification';
+                       $subject = $annoucemnt_title;
 
                        if(!is_null($email)){ 
 

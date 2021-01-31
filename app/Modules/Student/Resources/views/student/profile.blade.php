@@ -160,10 +160,12 @@
                                 <td class='text-dark font-weight-black'>Intake Month :</td>
                                 <td width="20%">{{ !empty($enrol_info) ? $enrol_info->intake_date : '-' }}</td>
                             </tr>
-
+                            @php 
+                            $agent_name = (!empty($enrol_info) AND ($enrol_info->agents == '999')) ? optional($enrol_info->agent)->other_agent : optional($enrol_info->agent)->agent_name;
+                            @endphp
                             <tr>
                                 <td class='text-dark font-weight-black'>Agency : </td>
-                                <td width="20%">{{ !empty($enrol_info) ? optional($enrol_info->agent)->agent_name : '-' }}</td>
+                                <td width="20%">{{ $agent_name }}</td>
                                 <td class='text-dark font-weight-black'>Practice Lesson Title :</td>
                                 <td width="20%">{{ !empty($quiz_info) ? optional($quiz_info->courseContentInfo)->lesson_title : '-' }}</td>
                                 <td class='text-dark font-weight-black'>Status :</td>

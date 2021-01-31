@@ -29,7 +29,7 @@ class CourseInfoDatabaseSeeder extends Seeder
             ['name' => 'September', 'code' => 'Sept.'],
             ['name' => 'October', 'code' => 'Oct.'],
             ['name' => 'November', 'code' => 'Nov.'],
-            ['name' => 'December', 'code' => 'Dec.'],
+            ['name' => 'December', 'code' => 'Dec.']
         ];
         
        

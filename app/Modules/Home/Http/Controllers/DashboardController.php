@@ -162,7 +162,7 @@ class DashboardController extends Controller
         $data['resources_nclex'] = $this->resource->findAllNclex();
         $data['resources_osce'] = $this->resource->findAllOsce();
         $data['student_id'] = Auth::guard('student')->user()->find($id)->id;
-        $data['student_histories'] = $this->student->getAllHistories($id, 20); 
+        $data['student_histories'] = $this->student->getAllHistories($id); 
 
         return view('home::student.courses', $data);
 
