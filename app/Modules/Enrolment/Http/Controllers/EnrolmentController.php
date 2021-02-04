@@ -734,7 +734,7 @@ class EnrolmentController extends Controller
             } 
 
         } catch (\Throwable $e) { 
-            return $e->getMessage();
+            return 0;
         }
     }
 
