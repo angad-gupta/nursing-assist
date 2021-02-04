@@ -260,7 +260,7 @@
  </section>
 
 
-<section class="team-testimonial">
+ <section class="team-testimonial">
     <div class=" container">
         <div class="neta-head text-center mb-3">
             <h4 class="mb-0">What Our Students Say</h4>
@@ -270,15 +270,17 @@
             <div class="col-12">
                 <div class="owl-carousel owl-theme testimonial">
 
-                @if(sizeof($student_say)>0) 
+                    @if(sizeof($student_say)>0) 
                     @foreach($student_say as $key => $student_val)
                     @php
                         $image = ($student_val->profile_pic) ? asset($student_val->file_full_path).'/'.$student_val->profile_pic : '';
+                        $short_message = substr(strip_tags($student_val->message),0,300);
                     @endphp
                     <div class="item">
                         <div class="card">
                             <div class="card-body text-center testimonial-item">
-                                <p class="mb-0">{!! $student_val->message !!}</p>
+                                <p class="mb-0 testimonial_desc">"{{$short_message}}..."</p>
+                                <a href="#" class="pt-2 d-block" data-toggle="modal" data-target="#exampleModal">See More</a>
                                 <div class="testimonial-item_img mt-4 mb-3"><img src="{{$image}}" alt=""></div>
                                 <h5>{{$student_val->student_name }}</h5>
                                 <p>{{$student_val->designation }}</p>
@@ -286,7 +288,7 @@
                         </div>
                     </div>
                     @endforeach
-                @endif  
+                    @endif 
 
                 </div>
             </div>
@@ -294,6 +296,18 @@
     </div>
 </section>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">{!! $student_val->message !!}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
  <section class="courses-wrap neta-fees">
     <div class=" container course-enrolment mb-5">

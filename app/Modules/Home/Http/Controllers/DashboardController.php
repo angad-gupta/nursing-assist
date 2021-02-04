@@ -256,7 +256,8 @@ class DashboardController extends Controller
         $lessonInfo = $this->coursecontent->find($courseContentId);
 
         $checkQuiz = $this->student->getQuizForCourseInfo($student_id, $courseContentId);
-        if (!empty($checkQuiz) && $checkQuiz->percent >= 80) {
+        // if (!empty($checkQuiz) && $checkQuiz->percent >= 80) {
+        if (!empty($checkQuiz)) {
             Flash('Practise Test Already Taken.Please Proceed Next Course.')->success();
             return redirect(route('syllabus-detail', ['course_info_id' => $lessonInfo->course_info_id]));
         }
@@ -275,15 +276,15 @@ class DashboardController extends Controller
                 if (!is_null($previous_quiz_result)) {
                     $pervious_quiz_percent = $previous_quiz_result->percent;
                     $previous_quiz_id = $previous_quiz_result->id;
-                    if ($pervious_quiz_percent < 80) {
+                    // if ($pervious_quiz_percent < 80) {
 
-                        $this->student->deletePreviousQuizResult($previous_quiz_id);
-                        $this->student->deletePreviousQuizHistory($student_id, $course_info_id, $previous_course_content_id);
+                    //     $this->student->deletePreviousQuizResult($previous_quiz_id);
+                    //     $this->student->deletePreviousQuizHistory($student_id, $course_info_id, $previous_course_content_id);
 
-                        Flash('You have to score atleast 80% from previous Quiz.Pleast Retake Practice Test Again')->success();
-                        return redirect(route('syllabus-detail', ['course_info_id' => $lessonInfo->course_info_id]));
+                    //     Flash('You have to score atleast 80% from previous Quiz.Pleast Retake Practice Test Again')->success();
+                    //     return redirect(route('syllabus-detail', ['course_info_id' => $lessonInfo->course_info_id]));
 
-                    }
+                    // }
 
                 } else {
                     Flash('You haven\'t taken previous Lesson Practice Test.')->success();
@@ -319,7 +320,8 @@ class DashboardController extends Controller
         $this->student->clearOldQuizHistory($student_id, $course_content_id);
 
         $checkQuiz = $this->student->getQuizForCourseInfo($student_id, $course_content_id);
-        if (!empty($checkQuiz) && $checkQuiz->percent >= 80) {
+        // if (!empty($checkQuiz) && $checkQuiz->percent >= 80) {
+        if (!empty($checkQuiz)) {
             Flash('Practise Test Already Taken.Please Proceed Next Course.')->success();
             return redirect(route('syllabus-detail', ['course_info_id' => $courseinfo_id]));
         }

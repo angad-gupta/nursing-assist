@@ -1,8 +1,6 @@
 
 $(document).ready(function(){
 
-
-
 // mobile-menu
     jQuery("#mobile-trigger").click(function () {
         jQuery(".sidenav").addClass("active");
