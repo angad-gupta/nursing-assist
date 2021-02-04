@@ -334,16 +334,16 @@
 </section>
 
 
+
 <section class="neta-download section-padding neta-demo">
-	<div class="demo-fade"></div>
     <div class="container">
-        <div class="row">
+        <div class="row align-items-center">
             <div class="col-sm-8">
-                <p>Take a demo quiz to experience the learning from NETA.</p>
+               <p>Take a demo quiz to experience the learning from NETA.</p>
                 <span style="color:white">The demo is intended for a trial quiz only and not all features of the course are available. To obtain full access, you will need to enrol to our classes.</span>
             </div>
             <div class="col-sm-4 d-flex justify-content-center justify-content-md-end">
-               <a href="{{ route('demo-quiz') }}" class="btn btn-neta">Take a Demo</a>
+                <button class="btn btn-neta"><a href="{{ route('demo-quiz') }}">Take a Demo Quiz</a></button>
             </div>
         </div>
     </div>
