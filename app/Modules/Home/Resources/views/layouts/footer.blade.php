@@ -96,6 +96,16 @@
 <script src="{{asset('admin/validation/enrolment.js')}}"></script>
 <script src="{{asset('admin/validation/student-register.js')}}"></script>
 
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.show_all_msg').on('click',function(){ 
+            var message = $(this).attr('my_message'); 
+            // $('.popup_message').html('');
+            $('.popup_message').html(message);
+        });
+    });
+</script>
+
 <script>
 
 $('video').attr('controlsList','nodownload');

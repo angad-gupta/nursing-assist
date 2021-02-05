@@ -280,7 +280,7 @@
                         <div class="card">
                             <div class="card-body text-center testimonial-item">
                                 <p class="mb-0 testimonial_desc">"{{$short_message}}..."</p>
-                                <a href="#" class="pt-2 d-block" data-toggle="modal" data-target="#exampleModal">See More</a>
+                                <a href="#" class="pt-2 d-block show_all_msg" my_message="{{$student_val->message}}" data-toggle="modal" data-target="#exampleModal">See More</a>
                                 <div class="testimonial-item_img mt-4 mb-3"><img src="{{$image}}" alt=""></div>
                                 <h5>{{$student_val->student_name }}</h5>
                                 <p>{{$student_val->designation }}</p>
@@ -296,11 +296,13 @@
     </div>
 </section>
 
+
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-body">{!! $student_val->message !!}
+      <div class="modal-body popup_message">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -308,6 +310,8 @@
     </div>
   </div>
 </div>
+
+
 
  <section class="courses-wrap neta-fees">
     <div class=" container course-enrolment mb-5">
