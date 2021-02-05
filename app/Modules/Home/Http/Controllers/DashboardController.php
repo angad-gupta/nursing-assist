@@ -262,20 +262,20 @@ class DashboardController extends Controller
             return redirect(route('syllabus-detail', ['course_info_id' => $lessonInfo->course_info_id]));
         }
 
-        $sort_order = $lessonInfo->sort_order;
-        $previous_order = ($lessonInfo->sort_order > 1) ? $sort_order - 1 : $sort_order;
-        $previousCourseontentInfo = $this->coursecontent->getPreviousData($course_info_id, $syllabus_id, $previous_order);
+        // $sort_order = $lessonInfo->sort_order;
+        // $previous_order = ($lessonInfo->sort_order > 1) ? $sort_order - 1 : $sort_order;
+        // $previousCourseontentInfo = $this->coursecontent->getPreviousData($course_info_id, $syllabus_id, $previous_order);
 
-        $previous_course_content_id = $previousCourseontentInfo->id;
+        // $previous_course_content_id = $previousCourseontentInfo->id;
 
-        if ($previousCourseontentInfo->is_related_to_quiz == '1') {
-            $previous_quiz_result = $this->student->previousQuizData($student_id, $previous_course_content_id);
+        // if ($previousCourseontentInfo->is_related_to_quiz == '1') {
+        //     $previous_quiz_result = $this->student->previousQuizData($student_id, $previous_course_content_id);
 
-            if ($previous_course_content_id != $courseContentId) {
+        //     if ($previous_course_content_id != $courseContentId) {
 
-                if (!is_null($previous_quiz_result)) {
-                    $pervious_quiz_percent = $previous_quiz_result->percent;
-                    $previous_quiz_id = $previous_quiz_result->id;
+        //         if (!is_null($previous_quiz_result)) {
+        //             $pervious_quiz_percent = $previous_quiz_result->percent;
+        //             $previous_quiz_id = $previous_quiz_result->id;
                     // if ($pervious_quiz_percent < 80) {
 
                     //     $this->student->deletePreviousQuizResult($previous_quiz_id);
@@ -286,13 +286,13 @@ class DashboardController extends Controller
 
                     // }
 
-                } else {
-                    Flash('You haven\'t taken previous Lesson Practice Test.')->success();
-                    return redirect(route('syllabus-detail', ['course_info_id' => $lessonInfo->course_info_id]));
-                }
-            }
+        //         } else {
+        //             Flash('You haven\'t taken previous Lesson Practice Test.')->success();
+        //             return redirect(route('syllabus-detail', ['course_info_id' => $lessonInfo->course_info_id]));
+        //         }
+        //     }
 
-        }
+        // }
 
         $data['general_quiz'] = $this->quiz->getGeneralById($courseContentId, 10);
         $data['courseinfoId'] = $lessonInfo->course_info_id;
