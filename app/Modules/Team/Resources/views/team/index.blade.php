@@ -31,6 +31,7 @@
                     <th>Image</th>
                     <th>Team Name</th>
                     <th>Designation</th>
+                    <th>Sort Order</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -46,6 +47,7 @@
                     <td><a target="_blank" href="{{ $image }}"><img src="{{ $image }}" style="width: 50px;"></a></td>
                     <td>{{ $value->member_name }}</td>
                     <td>{{ $value->designation }}</td>
+                    <td>{{ $value->sort_order }}</td>
                     <td>
 
                         <a class="btn bg-teal-400 btn-icon rounded-round" href="{{route('team.edit',$value->id)}}" data-popup="tooltip" data-original-title="Edit" data-placement="bottom"><i class="icon-pencil6"></i></a>

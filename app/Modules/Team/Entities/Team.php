@@ -13,7 +13,8 @@ class Team extends Model
     	'member_name',
     	'profile_pic',
     	'designation',
-        'about_me'
+        'about_me',
+        'sort_order'
 
     ];
 

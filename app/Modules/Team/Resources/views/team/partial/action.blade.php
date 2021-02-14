@@ -74,7 +74,7 @@
         </div>
 
             <div class="form-group row">
-                <div class="col-lg-12">
+                <div class="col-lg-6">
                     <div class="row">
                         <label class="col-form-label col-lg-1">About Me:</label>
                         <div class="col-lg-11 form-group-feedback form-group-feedback-right">
@@ -84,10 +84,23 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-lg-6">
+                    <div class="row">
+                        <label class="col-form-label col-lg-3">Sort Order:</label>
+                        <div class="col-lg-9 form-group-feedback form-group-feedback-right">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <span class="input-group-text"><i class="icon-images3"></i></span>
+                                </span>
+                                {!! Form::text('sort_order', $value = null, ['id'=>'sort_order','placeholder'=>'Set Sort Order','class'=>'numeric form-control']) !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-
-
-            
+  
 </fieldset>
 
 
