@@ -5,7 +5,7 @@
             </div>
             <p style="font-family: sans-serif;padding-left: 20px;padding-top: 20px;font-weight:400;text-align:left;margin:0;font-size: 20px;">Dear Student,</p>
          
-            <p style="font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px;">Please Check Inbox Message in Student Dashboard Send By Neta Team.</p>
+            <p style="font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px;">Please check your inbox in the Student Dashboard. A message has been sent to you from NETA.</p>
 
             <div class="detail" style="margin-bottom: 15px;display:flow-root;clear:both;background:#b30174;color:#fff;padding:20px">
                 <div class="lft" style="float:left">

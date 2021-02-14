@@ -257,10 +257,10 @@ class DashboardController extends Controller
 
         $checkQuiz = $this->student->getQuizForCourseInfo($student_id, $courseContentId);
         // if (!empty($checkQuiz) && $checkQuiz->percent >= 80) {
-        if (!empty($checkQuiz)) {
-            Flash('Practise Test Already Taken.Please Proceed Next Course.')->success();
-            return redirect(route('syllabus-detail', ['course_info_id' => $lessonInfo->course_info_id]));
-        }
+        // if (!empty($checkQuiz)) {
+        //     Flash('Practise Test Already Taken.Please Proceed Next Course.')->success();
+        //     return redirect(route('syllabus-detail', ['course_info_id' => $lessonInfo->course_info_id]));
+        // }
 
         // $sort_order = $lessonInfo->sort_order;
         // $previous_order = ($lessonInfo->sort_order > 1) ? $sort_order - 1 : $sort_order;
@@ -321,10 +321,10 @@ class DashboardController extends Controller
 
         $checkQuiz = $this->student->getQuizForCourseInfo($student_id, $course_content_id);
         // if (!empty($checkQuiz) && $checkQuiz->percent >= 80) {
-        if (!empty($checkQuiz)) {
-            Flash('Practise Test Already Taken.Please Proceed Next Course.')->success();
-            return redirect(route('syllabus-detail', ['course_info_id' => $courseinfo_id]));
-        }
+        // if (!empty($checkQuiz)) {
+        //     Flash('Practise Test Already Taken.Please Proceed Next Course.')->success();
+        //     return redirect(route('syllabus-detail', ['course_info_id' => $courseinfo_id]));
+        // }
 
         if (!array_key_exists('question_option_1', $input)) {
             Flash('Are you Serious with your Test ? Please Choose your Answer.')->error();
