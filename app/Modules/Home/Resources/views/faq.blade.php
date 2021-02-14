@@ -40,7 +40,7 @@
                                 </div> 
                                 <div id="collapse{{$key}}" class="collapse {{ $collapse_show }}" data-parent="#accordionExample">
                                     <div class="card-body">
-                                      <p>A. {{ $faq_val->answer }}</p>
+                                      <p>A. {!! $faq_val->answer !!}</p>
                                     </div>
                                 </div>
                             </div>
