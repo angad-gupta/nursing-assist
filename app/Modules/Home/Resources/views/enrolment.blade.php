@@ -691,7 +691,7 @@ $('a').bind('click',function (e) {
                                                                     @endforeach
                                                                     <option value="999">Other</option>
                                                                 </select>
-                                                                <span class="text-danger agent_error"></span>
+                                                                <p style="color: green;font-size: small;">If you are reffered by an agent or any other person,you must mention upon application,this can not be changed in the future.</p>
                                                             </div>
                                                         </div>
 
