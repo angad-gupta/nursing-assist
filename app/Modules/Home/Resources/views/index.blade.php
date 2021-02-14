@@ -483,14 +483,16 @@
 						</p>
 						<a class="btn btn-neta" href="{{ route('about-us') }}">Learn More</a>
 					</div>
-					<div class="col-md-12 col-lg-5 offset-0 offset-lg-1">
-						<div class="course-img wow animated fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">
-							<iframe width="100%" height="300" src="https://www.youtube.com/embed/ZBXfkINlRF0"
-							frameborder="0"
-							allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-							allowfullscreen></iframe>
-						</div>
-					</div>
+                    @if($about_neta['youtube_id'])
+    					<div class="col-md-12 col-lg-5 offset-0 offset-lg-1">
+    						<div class="course-img wow animated fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">
+    							<iframe width="100%" height="300" src="https://www.youtube.com/embed/{{$about_neta['youtube_id']}}"
+    							frameborder="0"
+    							allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+    							allowfullscreen></iframe>
+    						</div>
+    					</div>
+                    @endif
 				</div>
 			</div>
 		</div>

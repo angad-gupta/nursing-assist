@@ -91,6 +91,20 @@
                     </div>
                 </div>
 
+               <div class="col-lg-6">
+                    <div class="row">
+                        <label class="col-form-label col-lg-3">YouTube ID:</label>
+                        <div class="col-lg-9 form-group-feedback form-group-feedback-right">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <span class="input-group-text"><i class="icon-play"></i></span>
+                                </span>
+                                    {!! Form::text('youtube_id', $value = null, ['id'=>'youtube_id','class'=>'form-control']) !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
          </div>
         
 </fieldset>

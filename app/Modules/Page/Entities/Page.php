@@ -15,7 +15,8 @@ class Page extends Model
         'short_content',
     	'slug',
     	'image',
-    	'description'
+    	'description',
+        'youtube_id'
 
     ];
 
