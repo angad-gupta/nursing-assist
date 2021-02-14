@@ -85,7 +85,7 @@
                         <li>
                             <span class="material-icons">
                                 call
-                            </span><a href="tel:{{$setting->contact_no2}}">{{$setting->contact_no2}}</a>
+                            </span><a href="tel:{{$setting->contact_no1}}">{{$setting->contact_no1}}</a> 
                         </li>
                         <li>
                             <span class="material-icons">
