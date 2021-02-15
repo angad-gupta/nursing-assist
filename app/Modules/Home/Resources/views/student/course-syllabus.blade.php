@@ -55,7 +55,21 @@
                                 </div>
                                 @endforeach
                             @endif
-                        </div>
+                       
+
+
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                <div class="my-courses__list">
+                                    <div class="list-content">
+                                        <a href="{{ route('resouces-detail',['course_info_id'=>$course_info_id,'course_type'=>$course_name]) }}">
+                                        <h5>Resources[{{$course_name}}]</h5>
+                                        <span>View Resources</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>    
                     @endif
                 </div>
             </div>

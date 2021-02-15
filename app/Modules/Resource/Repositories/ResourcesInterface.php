@@ -8,6 +8,8 @@ interface ResourcesInterface
     public function findAllNclex($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
     public function findAllOsce($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
 
+    public function findByCourseInfoType($coursetype,$limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1]);
+
     public function find($id);
 
     public function save($data);

@@ -192,12 +192,27 @@ class DashboardController extends Controller
         $condition = ['student_id' => $id, 'courseinfo_id' => $course_info_id];
         $data['courseInfo'] = $this->student->getStudentCourseInfo($condition);
 
-        $data['syllabus_info'] = $this->coursecontent->getAllCourses($course_info_id); 
+        $data['syllabus_info'] = $this->coursecontent->getAllCourses($course_info_id);  
         $data['course_info_id'] = $course_info_id;
+
+        //Resources Info
+         $data['course_name'] = ($course_info_id == '1') ? 'NCLEX' : 'OSCE';
 
         return view('home::student.course-syllabus', $data);
 
     }
+
+    public function resoucesDetail(Request $request){
+         $input = $request->all();
+         $courseType = $input['course_type'];
+         $data['course_info_id'] = $course_info_id = $input['course_info_id'];
+
+         $data['course_name'] = ($course_info_id == '1') ? 'NCLEX' : 'OSCE'; 
+         $data['resources'] = $this->resource->findByCourseInfoType($courseType);
+
+          return view('home::student.resources-list', $data);
+    }
+
 
     public function lessonsDetail(Request $request)
     {
