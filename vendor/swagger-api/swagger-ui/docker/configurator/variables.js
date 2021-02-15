@@ -79,10 +79,6 @@ const standardVariables = {
     type: "string",
     name: "oauth2RedirectUrl"
   },
-  PERSIST_AUTHORIZATION: {
-    type: "boolean",
-    name: "persistAuthorization"
-  },
   SHOW_MUTATED_REQUEST: {
     type: "boolean",
     name: "showMutatedRequest"
