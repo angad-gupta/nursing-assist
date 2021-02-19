@@ -106,12 +106,6 @@ class ContactUsController extends Controller
 
               Mail::to($email)->send(new SendNetaMail($content, $subject));
 
-            /*     Email Log Maintaining    */
-            $emaillog['action'] = 'Contact Us Reply From NETA To'.$email;
-            $emaillog['student_id'] = null;
-            $emaillog['date'] = date('Y-m-d');
-            $this->emailLog->saveEmaillog($emaillog);
-            /*  End of Email Log Maintaining  */
             /* ---------------------------------------------------------------
                 Email Send to  Announcement Nofitication
             --------------------------------------------------------------- */

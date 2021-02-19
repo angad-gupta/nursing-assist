@@ -201,6 +201,7 @@
                                 <li class="nav-item mb-2"><a href="#bottom-justified-tab4" class="nav-link font-weight-semibold text-dark" data-toggle="tab"><i class="icon-stack-text mr-2"  style="color: #9c27b0 !important;"></i>Mockup Result</a></li>
                                 <li class="nav-item mb-2"><a href="#bottom-justified-tab5" class="nav-link font-weight-semibold text-dark" data-toggle="tab"><i class="icon-stack-text mr-2"  style="color: #673AB7 !important;"></i>Practise Test Result</a></li>
                                 <li class="nav-item mb-2"><a href="#bottom-justified-tab6" class="nav-link font-weight-semibold text-dark" data-toggle="tab"><i class="icon-stack-text mr-2"  style="color: #B7923A !important;"></i>Readiness Result</a></li>
+                                <li class="nav-item mb-2"><a href="#bottom-justified-tab7" class="nav-link font-weight-semibold text-dark" data-toggle="tab"><i class="icon-stack-text mr-2"  style="color: #43BB50 !important;"></i>Email Log</a></li>
                             </ul>
 
                             <div class="tab-content">
@@ -530,6 +531,45 @@
                                     </div>
                                 </div>
 
+                                <div class="tab-pane fade" id="bottom-justified-tab7">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr class="bg-slate">
+                                                    <th>#</th>
+                                                    <th>Date</th>
+                                                    <th>Action</th>
+                                                    <th>Content</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if($email_log->total() != 0) 
+                                                @foreach($email_log as $key => $value)
+
+                                                <tr>
+                                                    <td>{{$email_log->firstItem() +$key}}</td>
+                                                    <td>{{ date('d M, Y',strtotime($value->date)) }}</td>
+                                                    <td><b>{{$value->action}}</b></td>
+                                                    <td><a data-toggle="modal" data-target="#modal_theme_view_info" class="btn bg-danger-400 btn-icon rounded-round view_email_detail" email_log_id="{{$value->id}}" data-popup="tooltip" data-original-title="View Content" data-placement="bottom"><i class="icon-eye"></i></a></td>
+                                                </tr>
+                                                @endforeach
+                                                @else
+                                                <tr>
+                                                    <td colspan="4">No Student Email Log Found !!!</td>
+                                                </tr>
+                                                @endif
+                                            </tbody>
+
+                                        </table>
+
+                                        <span style="margin: 5px;float: right;">
+                                            @if($email_log->total() != 0)
+                                                {{ $email_log->links() }}
+                                            @endif
+                                            </span>
+                                    </div>
+                                </div>
+
                             </div>
 
                         </div>
@@ -539,6 +579,48 @@
         </div>
     </div>
     <!-- End of Left Section -->
+
+<!-- Warning modal -->
+<div id="modal_theme_view_info" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-full">
+        <div class="modal-content">
+            <div class="modal-header bg-teal">
+                <h6 class="modal-title">View Email Content</h6>
+            </div>
+
+            <div class="modal-body">
+                <div class="table-responsive result_view_email_detail">
+
+                </div><!-- table-responsive -->
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn bg-teal-400" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- warning modal -->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.view_email_detail').on('click', function () {
+            var email_log_id = $(this).attr('email_log_id');
+            $.ajax({
+                type: 'GET',
+                // dataType: 'HTML',
+                url: '/admin/student/viewEmailContent',
+                data: {
+                    id: email_log_id
+                },
+                success: function (data) {
+                    $('.result_view_email_detail').html(data.options);
+                }
+            });
+        });
+
+    })
+</script>
 
     <div class="sidebar sidebar-light bg-transparent sidebar-component sidebar-component-right wmin-300 border-0 shadow-0 order-1 order-lg-2 sidebar-expand-md">
 

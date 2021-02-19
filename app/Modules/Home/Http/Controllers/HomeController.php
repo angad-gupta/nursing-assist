@@ -453,7 +453,7 @@ class HomeController extends Controller
                 'activation_code' => $activation_code
             );
 
-            $studentInfo = $this->student->save($studentData);
+            $studentInfo = $this->student->save($studentData); 
             $student_id = $studentInfo['id'];
             /* ---------------------------------------------------------------
             Email Send to Student After Registration
@@ -470,6 +470,7 @@ class HomeController extends Controller
              /*     Email Log Maintaining    */
             $emaillog['action'] = 'New Student Registration';
             $emaillog['student_id'] = $student_id;
+            $emaillog['content'] = $content;
             $emaillog['date'] = date('Y-m-d');
             $this->emailLog->saveEmaillog($emaillog);
             /*  End of Email Log Maintaining  */

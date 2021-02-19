@@ -309,7 +309,7 @@ class DashboardController extends Controller
 
         // }
 
-        $data['general_quiz'] = $this->quiz->getGeneralById($courseContentId, 10);
+        $data['general_quiz'] = $this->quiz->getGeneralById($courseContentId);
         $data['courseinfoId'] = $lessonInfo->course_info_id;
         $data['course_content_id'] = $courseContentId;
 

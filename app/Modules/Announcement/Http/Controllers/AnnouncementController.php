@@ -97,13 +97,6 @@ class AnnouncementController extends Controller
                     }
                 }
 
-            /*     Email Log Maintaining    */
-            $emaillog['action'] = 'Announcement Notification';
-            $emaillog['student_id'] = null;
-            $emaillog['date'] = date('Y-m-d');
-            $this->emailLog->saveEmaillog($emaillog);
-            /*  End of Email Log Maintaining  */
-
 
             alertify()->success('Announcement Created Successfully');
         }catch(\Throwable $e){

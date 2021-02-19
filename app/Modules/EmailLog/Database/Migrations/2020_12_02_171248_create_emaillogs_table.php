@@ -18,6 +18,7 @@ class CreateEmaillogsTable extends Migration
 
             $table->text('action')->nullable();
             $table->integer('student_id')->nullable();
+            $table->longText('content')->nullable();
             $table->date('date')->nullable();
 
             $table->timestamps();
