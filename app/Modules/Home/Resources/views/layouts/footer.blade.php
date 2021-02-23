@@ -82,9 +82,6 @@
 </body>
 
 
-<script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/374caff64def399e7f58683d6/c9c59ed0ed4768eb47618d903.js");</script>
-
-
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
@@ -98,6 +95,10 @@
 <script src="{{asset('admin/validation/contactus.js')}}"></script>
 <script src="{{asset('admin/validation/enrolment.js')}}"></script>
 <script src="{{asset('admin/validation/student-register.js')}}"></script>
+
+
+<script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/374caff64def399e7f58683d6/c9c59ed0ed4768eb47618d903.js");</script>
+
 
 <script type="text/javascript">
     $(document).ready(function(){
