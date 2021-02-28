@@ -651,7 +651,7 @@ class EnrolmentController extends Controller
                     'customer'=> $customer_id
                 ));      
                 $payment = json_decode($payment_info);
-                dd($payment);
+                //dd($payment);
                 if ($payment->paymentStatus == 'APPROVED') {
 
                     $enrolpaymentData = array(
@@ -734,8 +734,8 @@ class EnrolmentController extends Controller
                 }
             } 
 
-        } catch (\Exception $e) {  dd($e);exit;
-            return $e->getMessage();
+        } catch (\Exception $e) {  //dd($e);exit;
+            return 0;
         }
     }
 
