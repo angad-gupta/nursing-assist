@@ -38,7 +38,7 @@ $('a').bind('click',function (e) {
             $('#process-payment-btn').prepend('<i class="icon-spinner4 spinner"></i>');
             // Generate a card token & handle the response
             SimplifyCommerce.generateToken({
-                key: "lvpb_MGQzNTNiMjctYzdhZC00MDk1LWFkYTctZmFhMDQ4OTdjMjkz", //public key
+                key: "lvpb_ZjAyNDYyYmUtZDIwYS00YzUzLTg1YjUtYzkzYzUwNjg5ZTE4", //public key
                 card: {
                     name: $('#card_holder_name').val(),
                     number: $("#cc-number").val(),
@@ -134,7 +134,7 @@ $('a').bind('click',function (e) {
 
     function processPayment() {
         var amount = $('#amount').val();
-        //var amount = 1;
+        //var amount = 100;
         var currency = 'AUD';    
         var cc_number = $('#cc-number').val();
         var cc_exp_month = $('#cc-exp-month').val();
@@ -152,7 +152,7 @@ $('a').bind('click',function (e) {
         };
 
         $.post('{{route("enrolment.3ds.pay")}}', payload, function (res) {
-            var response = JSON.parse(res);
+            var response = JSON.parse(res); console.log(res);
             var token = response.id;
             
             var enrolment_id = $('#enrolment_id').val();
@@ -206,7 +206,7 @@ $('a').bind('click',function (e) {
                          /*        $('.iframe_modal').modal({show:false});
                                 $('.enrolment_form').hide();
                                 $('.simplify-success').modal({show:true}); */
-                                window.location = "{{route('student-dashboard')}}?payment=success";
+                               // window.location = "{{route('student-dashboard')}}?payment=success";
                             }
                             
                         });

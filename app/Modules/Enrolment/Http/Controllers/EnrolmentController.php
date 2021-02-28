@@ -588,9 +588,9 @@ class EnrolmentController extends Controller
         try {
             Simplify::$publicKey = env('LIVE_PUBLIC_KEY');
             Simplify::$privateKey = env('LIVE_PRIVATE_KEY');
-            
+      
             $amount = $data['amount'] * 100;
-            //$amount = 100;
+           // $amount = 100;
             $description = $data['description'];
             $enrolment_id = $data['enrolment_id'];
 
@@ -635,11 +635,11 @@ class EnrolmentController extends Controller
                         'expYear' => $data['cc_exp_year']
                      )
                 ));
-
+            
                 $customer = json_decode($customer_info);
                 $customer_id = $customer->id;
 
-                //$fee_in_cwbank = 1;
+                //$fee_in_cwbank = 1; 
                 $payment_info = \Simplify_Payment::createPayment(array(
                     'reference' => 'enrol_' . $enrolment_id, //optional Custom reference field to be used with outside systems.
                     'amount' => ($fee_in_cwbank * 100),
@@ -648,9 +648,9 @@ class EnrolmentController extends Controller
                     'token' => $data['token'],
                     'order' => ['customerName' => $data['first_name'] . ' ' . $data['last_name'], 'customerEmail' => $data['email']],
                     'customer'=> $customer_id
-                ));
+                ));      
                 $payment = json_decode($payment_info);
-                  
+                dd($payment);
                 if ($payment->paymentStatus == 'APPROVED') {
 
                     $enrolpaymentData = array(
@@ -733,8 +733,8 @@ class EnrolmentController extends Controller
                 }
             } 
 
-        } catch (\Throwable $e) { 
-            return 0;
+        } catch (\Exception $e) {  dd($e);exit;
+            return $e->getMessage();
         }
     }
 
