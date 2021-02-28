@@ -186,9 +186,11 @@
 
         </ul>
         <div class="mt-3">
-            <div><span><b>Tel:</b> {{$setting->contact_no1}} (NETA)</span></div>
+            <div><span><b>Tel 1:</b> {{$setting->contact_no1}} (NETA)</span></div>
+            <div><span><b>Tel 2:</b> {{$setting->contact_no2}}</span></div>
             <div><b>Email:</b> {{$setting->company_email}}</span></div>
-            <div><span><b>Location:</b> {{$setting->address1}}</span></div>
+            <div><span><b>Location 1:</b> {{$setting->address1}}</span></div>
+            <div><span><b>Location 2:</b> {{$setting->address2}}</span></div>
         </div>
     </div>
     <div class="body-overlay"></div>

@@ -184,6 +184,7 @@ class EnrolmentController extends Controller
                  /*     Email Log Maintaining    */
                 $emaillog['action'] = 'Student Enrol Successful';
                 $emaillog['student_id'] = $student_id;
+                $emaillog['content'] = $content;
                 $emaillog['date'] = date('Y-m-d');
                 $this->emailLog->saveEmaillog($emaillog);
 

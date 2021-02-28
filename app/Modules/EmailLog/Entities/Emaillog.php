@@ -11,6 +11,7 @@ class Emaillog extends Model
 
     	'action',
     	'student_id', 
+    	'content',
     	'date'
 
     ];

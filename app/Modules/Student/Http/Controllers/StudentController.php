@@ -256,6 +256,7 @@ class StudentController extends Controller
                  /*     Email Log Maintaining    */
                 $emaillog['action'] = 'Student Course Approval';
                 $emaillog['student_id'] = $student_id;
+                $emaillog['content'] = $content;
                 $emaillog['date'] = date('Y-m-d');
                 $this->emailLog->saveEmaillog($emaillog);
                 /*  End of Email Log Maintaining  */
@@ -285,6 +286,7 @@ class StudentController extends Controller
                 /*     Email Log Maintaining    */
                 $emaillog['action'] = 'Pending Payment';
                 $emaillog['student_id'] = $student_id;
+                $emaillog['content'] = $data['mail_desc'];
                 $emaillog['date'] = date('Y-m-d');
                 $this->emailLog->saveEmaillog($emaillog);
                 /*  End of Email Log Maintaining  */
@@ -362,6 +364,7 @@ class StudentController extends Controller
                 /*     Email Log Maintaining    */
                 $emaillog['action'] = 'Course Installment Payment';
                 $emaillog['student_id'] = $student_id;
+                $emaillog['content'] = $content;
                 $emaillog['date'] = date('Y-m-d');
                 $this->emailLog->saveEmaillog($emaillog);
                 /*  End of Email Log Maintaining  */
@@ -435,6 +438,7 @@ class StudentController extends Controller
         $data['enrol_info'] = $this->enrolment->getLatestByStudent($student_id); 
         $data['quiz_info'] = $this->student->getLatestQuizByStudent($student_id);
 
+        $data['email_log'] = $this->emailLog->getEmailLogById($student_id);
         
         $data['student_purchase'] = $this->student->getStudentPurchase($student_id);
         $data['student_quiz'] = $this->student->getStudentQuizResult($student_id);
@@ -445,6 +449,15 @@ class StudentController extends Controller
         return view('student::student.profile',$data);
 
     }
+
+    public function viewEmailContent(Request $request){
+        $data = $request->all();
+        $id = (array_key_exists('id', $data)) ? $data['id'] : '';
+        $emaillog = $this->emailLog->find($id);
+        $data = view('student::student.view-email-content', compact('emaillog'))->render();
+        return response()->json(['options' => $data]);
+    }
+
 
     public function viewPaymentHistory(Request $request){
 

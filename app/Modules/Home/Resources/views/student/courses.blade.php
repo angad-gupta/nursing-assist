@@ -38,14 +38,14 @@
                                 aria-controls="home" aria-selected="true">My Courses</a>
                         </li>
 
-                        <li class="nav-item">
+   <!--                      <li class="nav-item">
                             <a class="nav-link" id="resources-nclex-tab" data-toggle="tab" href="#resources-nclex" role="tab"
                                 aria-controls="resources-nclex" aria-selected="false">Resources[NCLEX]</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="resources-osce-tab" data-toggle="tab" href="#resources-osce" role="tab"
                                 aria-controls="resources-osce" aria-selected="false">Resources[OSCE]</a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
                             <a class="nav-link" id="practice-tab" data-toggle="tab" href="#practice" role="tab"
                                 aria-controls="practice" aria-selected="false">Practice Test</a>
@@ -91,7 +91,7 @@
                                         $imgfluid = asset('home/img/c' .$k. '.png');
 
                                         $total_syllabus =
-                                        App\Modules\CourseContent\Entities\CourseContent::gettotalsyllabus($my_course_val->courseinfo_id);
+                                        App\Modules\CourseContent\Entities\CourseContent::gettotalsyllabus($my_course_val->courseinfo_id); 
 
                                         $courseinfo_id = $my_course_val->courseinfo_id;
 
@@ -102,7 +102,7 @@
                                                 <img src="{{ $imgfluid }}" class="img-fluid" alt="">
                                                 <div class="list-content">
                                                     <h5>{{ optional($my_course_val->courseInfo)->course_program_title }}</h5>
-                                                    <span>{{$total_syllabus}} syllabus</span>
+                                                    <span>{{$total_syllabus}} Lessons</span>
                                                     <div class="neta-limit">
                                                         <p>{!! optional($my_course_val->courseInfo)->short_content !!} </p>
                                                     </div>
@@ -238,7 +238,7 @@
                             </div>
                         </div>
                     </div>
-
+<!-- 
                     <div class="tab-pane fade neta-resources" id="resources-nclex" role="tabpanel" aria-labelledby="resources-nclex-tab">
                         <div class="row">
                             @if($resources_nclex->total() > 0)
@@ -265,9 +265,9 @@
                                 <span>No NCLEX Resources Added</span>
                             @endif                           
                         </div>
-                    </div>
+                    </div> -->
 
-                    <div class="tab-pane fade neta-resources" id="resources-osce" role="tabpanel" aria-labelledby="resources-osce-tab">
+    <!--                 <div class="tab-pane fade neta-resources" id="resources-osce" role="tabpanel" aria-labelledby="resources-osce-tab">
                         <div class="row">
 
                         @if($student_osce_course->total() >0)
@@ -315,7 +315,7 @@
                         @endif
 
                         </div>
-                    </div>
+                    </div> -->
 
 
                     <div class="tab-pane fade" id="readliness" role="tabpanel" aria-labelledby="contact-tab">
