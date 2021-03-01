@@ -42,7 +42,7 @@ class EnrolmentInstallmentPayment extends Notification
      */
     public function toMail($notifiable)
     {
-        //$pdf = PDF::loadView('enrolment::mail.invoice', $this->data);
+        $pdf = PDF::loadView('enrolment::mail.invoice', $this->data);
 
         return (new MailMessage)
             ->greeting('Dear ' . $this->data['full_name'])
