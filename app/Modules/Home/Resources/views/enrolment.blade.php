@@ -133,8 +133,8 @@ $('a').bind('click',function (e) {
     }
 
     function processPayment() {
-        var amount = $('#amount').val();
-        //var amount = 100;
+        //var amount = $('#amount').val();
+        var amount = 100;
         var currency = 'AUD';    
         var cc_number = $('#cc-number').val();
         var cc_exp_month = $('#cc-exp-month').val();
@@ -206,7 +206,7 @@ $('a').bind('click',function (e) {
                          /*        $('.iframe_modal').modal({show:false});
                                 $('.enrolment_form').hide();
                                 $('.simplify-success').modal({show:true}); */
-                                window.location = "{{route('student-dashboard')}}?payment=success";
+                                //window.location = "{{route('student-dashboard')}}?payment=success";
                             }
                             
                         });
