@@ -560,8 +560,8 @@ class EnrolmentController extends Controller
         try {
             Simplify::$publicKey = env('LIVE_PUBLIC_KEY');
             Simplify::$privateKey = env('LIVE_PRIVATE_KEY');
-            //$amount = $data['amount'] * 100;
-            $amount = 100;
+            $amount = $data['amount'] * 100;
+            //$amount = 100;
  
             $cardToken = \Simplify_CardToken::createCardToken(array(
                 'card' => array(
@@ -590,8 +590,8 @@ class EnrolmentController extends Controller
             Simplify::$publicKey = env('LIVE_PUBLIC_KEY');
             Simplify::$privateKey = env('LIVE_PRIVATE_KEY');
       
-            //$amount = $data['amount'] * 100;
-            $amount = 100;
+            $amount = $data['amount'] * 100;
+           // $amount = 100;
             $description = $data['description'];
             $enrolment_id = $data['enrolment_id'];
 
@@ -640,7 +640,7 @@ class EnrolmentController extends Controller
                 $customer = json_decode($customer_info);
                 $customer_id = $customer->id;
 
-                $fee_in_cwbank = 1; 
+                //$fee_in_cwbank = 1; 
                 $payment_info = \Simplify_Payment::createPayment(array(
                     'reference' => 'enrol_' . $enrolment_id, //optional Custom reference field to be used with outside systems.
                     'amount' => ($fee_in_cwbank * 100),
