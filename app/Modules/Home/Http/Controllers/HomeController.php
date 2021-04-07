@@ -96,13 +96,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+      
         $data['banner'] = $this->banner->findAll();
         $data['student_say'] = $this->whatourstudentsay->findAll();  
         $data['we_offer'] = $this->page->getBySlug('we_offer');
         $data['course'] = $this->course->findAll();
         $data['about_neta'] = $this->page->getBySlug('about_us');
         $data['course_info'] = $this->courseinfo->findAll(); 
-
         return view('home::index', $data);
     }
 
