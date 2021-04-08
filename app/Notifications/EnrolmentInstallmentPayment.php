@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use PDF;
+use App\Modules\Enrolment\Entities\InvoiceLog;
 
 class EnrolmentInstallmentPayment extends Notification
 {
@@ -44,6 +45,19 @@ class EnrolmentInstallmentPayment extends Notification
     {
         $pdf = PDF::loadView('enrolment::mail.invoice', $this->data);
 
+        //$invoice_name = 'invoice_'.$this->data['course_program_title'].'_' . date('Y-m-d') . '.pdf';
+
+  /*       $invoice_log = InvoiceLog::create([
+            'enrolment_id' => $this->data['enrolment_id'],
+            'student_id' => $this->data['student_id'],
+            'full_name' => $this->data['full_name'],
+            'subject' => $this->data['subject'],
+            'description' => $this->data['mail_desc'],
+            'redirect_url' => $this->data['pay_url'],
+            'end_line' => 'Thank you!',
+            'invoice_file' => $invoice_name,
+        ]); */
+
         return (new MailMessage)
             ->greeting('Dear ' . $this->data['full_name'])
             ->subject($this->data['subject'])
@@ -51,7 +65,7 @@ class EnrolmentInstallmentPayment extends Notification
             ->action('Pay Now', $this->data['pay_url'])
             ->line('Thank you!')
             ->cc('accounts@nursingeta.com');
-            //->attachData($pdf->output(), 'invoice_'.$this->data['course_program_title'].'_' . date('Y-m-d') . '.pdf');
+            //->attachData($pdf->output(), $invoice_name);
     }
 
     /**

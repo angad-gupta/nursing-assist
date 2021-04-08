@@ -355,10 +355,10 @@ class EnrolmentController extends Controller
             if (!empty($student_payment)) {
 
                 $studentInfo = optional($student_payment->studentInfo);
-                $student_id = $student_payment->student_id;
+                $data['student_id'] = $student_id = $student_payment->student_id;
                 $full_name = $studentInfo->full_name;
                 $email = $studentInfo->email;
-                $enrolment_id = $student_payment->enrolment_id;
+                $data['enrolment_id'] = $enrolment_id = $student_payment->enrolment_id;
                 $data['course_program_title'] =  $course_program_title = optional($student_payment->courseInfo)->course_program_title;
                 $course_info_id = $student_payment->courseinfo_id;
 

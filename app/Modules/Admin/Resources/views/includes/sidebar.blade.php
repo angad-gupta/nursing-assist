@@ -189,6 +189,14 @@
                     </li>
                     @endif
 
+                    @if($menuRoles->assignedRoles('invoice.logs'))
+                    <li class="nav-item">
+                        <a href="{{route('invoice.logs')}}" class="nav-link @if($Route[0]=='invoice') active @endif" data-popup="tooltip" data-original-title="Invoice History" data-placement="right">
+                            <i class="icon-profile"></i><span>Invoice History</span>
+                        </a>
+                    </li>
+                    @endif
+
                     @if($menuRoles->assignedRoles('course.index'))
                     <li class="nav-item">
                         <a href="{{route('course.index')}}" class="nav-link @if($Route[0]=='course') active @endif" data-popup="tooltip" data-original-title="Course Management" data-placement="right">
