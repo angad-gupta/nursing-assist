@@ -79,10 +79,6 @@ const standardVariables = {
     type: "string",
     name: "oauth2RedirectUrl"
   },
-  PERSIST_AUTHORIZATION: {
-    type: "boolean",
-    name: "persistAuthorization"
-  },
   SHOW_MUTATED_REQUEST: {
     type: "boolean",
     name: "showMutatedRequest"
@@ -90,10 +86,6 @@ const standardVariables = {
   SUPPORTED_SUBMIT_METHODS: {
     type: "array",
     name: "supportedSubmitMethods"
-  },
-  TRY_IT_OUT_ENABLED: {
-    type: "boolean",
-    name: "tryItOutEnabled"
   },
   VALIDATOR_URL: {
     type: "string",

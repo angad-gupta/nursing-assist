@@ -110,7 +110,7 @@ final class ProgressBar
             self::$formatters = self::initPlaceholderFormatters();
         }
 
-        return self::$formatters[$name] ?? null;
+        return isset(self::$formatters[$name]) ? self::$formatters[$name] : null;
     }
 
     /**
@@ -143,7 +143,7 @@ final class ProgressBar
             self::$formats = self::initFormats();
         }
 
-        return self::$formats[$name] ?? null;
+        return isset(self::$formats[$name]) ? self::$formats[$name] : null;
     }
 
     /**
@@ -441,15 +441,8 @@ final class ProgressBar
         if ($this->overwrite) {
             if (null !== $this->previousMessage) {
                 if ($this->output instanceof ConsoleSectionOutput) {
-                    $messageLines = explode("\n", $message);
-                    $lineCount = \count($messageLines);
-                    foreach ($messageLines as $messageLine) {
-                        $messageLineLength = Helper::strlenWithoutDecoration($this->output->getFormatter(), $messageLine);
-                        if ($messageLineLength > $this->terminal->getWidth()) {
-                            $lineCount += floor($messageLineLength / $this->terminal->getWidth());
-                        }
-                    }
-                    $this->output->clear($lineCount);
+                    $lines = floor(Helper::strlen($message) / $this->terminal->getWidth()) + $this->formatLineCount + 1;
+                    $this->output->clear($lines);
                 } else {
                     // Erase previous lines
                     if ($this->formatLineCount > 0) {

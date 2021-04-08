@@ -56,10 +56,8 @@ export default class OperationSummary extends PureComponent {
     const OperationSummaryPath = getComponent("OperationSummaryPath")
     const JumpToPath = getComponent("JumpToPath", true)
 
-    const hasSecurity = security && !!security.count()
-    const securityIsOptional = hasSecurity && security.size === 1 && security.first().isEmpty()
-    const allowAnonymous = !hasSecurity || securityIsOptional
     return (
+
       <div className={`opblock-summary opblock-summary-${method}`} onClick={toggleShown} >
         <OperationSummaryMethod method={method} />
         <OperationSummaryPath getComponent={getComponent} operationProps={operationProps} specPath={specPath} />
@@ -73,7 +71,7 @@ export default class OperationSummary extends PureComponent {
         {displayOperationId && (originalOperationId || operationId) ? <span className="opblock-summary-operation-id">{originalOperationId || operationId}</span> : null}
 
         {
-          allowAnonymous ? null :
+          (!security || !security.count()) ? null :
             <AuthorizeOperationBtn
               isAuthorized={isAuthorized}
               onClick={() => {

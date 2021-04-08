@@ -130,16 +130,14 @@ export default class Response extends React.Component {
 
     // Goal: find an example value for `sampleResponse`
     if(isOAS3) {
-      sampleSchema = activeMediaType.get("schema")?.toJS()
+      sampleSchema = activeMediaType.get("schema", Map({})).toJS()
       if(examplesForMediaType) {
         const targetExamplesKey = this.getTargetExamplesKey()
-        const targetExample = examplesForMediaType
+        mediaTypeExample = examplesForMediaType
           .get(targetExamplesKey, Map({}))
-        const getMediaTypeExample = (targetExample) =>
-          targetExample.get("value")
-        mediaTypeExample = getMediaTypeExample(targetExample)
+          .get("value")
         if(mediaTypeExample === undefined) {
-          mediaTypeExample = getMediaTypeExample(examplesForMediaType.values().next().value)
+          mediaTypeExample = examplesForMediaType.values().next().value
         }
         shouldOverrideSchemaExample = true
       } else if(activeMediaType.get("example") !== undefined) {
@@ -197,7 +195,6 @@ export default class Response extends React.Component {
                       : Seq()
                   }
                   onChange={this._onContentTypeChange}
-                  ariaLabel="Media Type"
                 />
                 {controlsAcceptHeader ? (
                   <small className="response-control-media-type__accept-message">

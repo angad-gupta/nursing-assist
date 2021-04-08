@@ -133,12 +133,7 @@ export default class ParamBody extends PureComponent {
           }
           <label htmlFor="">
             <span>Parameter content type</span>
-            <ContentType 
-              value={ consumesValue } 
-              contentTypes={ consumes } 
-              onChange={onChangeConsumes} 
-              className="body-param-content-type" 
-              ariaLabel="Parameter content type" />
+            <ContentType value={ consumesValue } contentTypes={ consumes } onChange={onChangeConsumes} className="body-param-content-type" />
           </label>
         </div>
 

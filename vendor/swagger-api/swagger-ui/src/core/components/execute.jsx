@@ -11,8 +11,7 @@ export default class Execute extends Component {
     method: PropTypes.string.isRequired,
     oas3Selectors: PropTypes.object.isRequired,
     oas3Actions: PropTypes.object.isRequired,
-    onExecute: PropTypes.func,
-    disabled: PropTypes.bool
+    onExecute: PropTypes.func
   }
 
   handleValidateParameters = () => {
@@ -25,7 +24,7 @@ export default class Execute extends Component {
     let { path, method, specSelectors, oas3Selectors, oas3Actions } = this.props
     let validationErrors = {
       missingBodyValue: false,
-      missingRequiredKeys: []
+      missingRequiredKeys: [] 
     }
     // context: reset errors, then (re)validate
     oas3Actions.clearRequestBodyValidateError({ path, method })
@@ -93,9 +92,8 @@ export default class Execute extends Component {
   onChangeProducesWrapper = ( val ) => this.props.specActions.changeProducesValue([this.props.path, this.props.method], val)
 
   render(){
-    const { disabled } = this.props
     return (
-        <button className="btn execute opblock-control__btn" onClick={ this.onClick } disabled={disabled}>
+        <button className="btn execute opblock-control__btn" onClick={ this.onClick }>
           Execute
         </button>
     )

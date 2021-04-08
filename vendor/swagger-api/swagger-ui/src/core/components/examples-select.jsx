@@ -109,7 +109,6 @@ export default class ExamplesSelect extends React.PureComponent {
           ) : null
         }
         <select
-          className="examples-select-element"
           onChange={this._onDomSelect}
           value={
             isModifiedValueAvailable && isValueModified

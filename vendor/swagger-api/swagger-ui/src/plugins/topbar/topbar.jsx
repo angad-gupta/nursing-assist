@@ -8,8 +8,7 @@ import {parseSearch, serializeSearch} from "../../core/utils"
 export default class Topbar extends React.Component {
 
   static propTypes = {
-    layoutActions: PropTypes.object.isRequired,
-    authActions: PropTypes.object.isRequired
+    layoutActions: PropTypes.object.isRequired
   }
 
   constructor(props, context) {
@@ -26,19 +25,7 @@ export default class Topbar extends React.Component {
     this.setState({url: value})
   }
 
-  flushAuthData() {
-    const { persistAuthorization } = this.props.getConfigs()
-    if (persistAuthorization)
-    {
-      return
-    }
-    this.props.authActions.restoreAuthorization({
-      authorized: {}
-    })
-  }
-
   loadSpec = (url) => {
-    this.flushAuthData()
     this.props.specActions.updateUrl(url)
     this.props.specActions.download(url)
   }
@@ -120,7 +107,7 @@ export default class Topbar extends React.Component {
     const classNames = ["download-url-input"]
     if (isFailed) classNames.push("failed")
     if (isLoading) classNames.push("loading")
-
+    
     const { urls } = getConfigs()
     let control = []
     let formOnSubmit = null
