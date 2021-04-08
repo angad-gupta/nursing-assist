@@ -34,29 +34,53 @@
                         </div>
                     @endif
                     <p>Want to get in touch? We'd love to hear from you. Here's how you can reach us...</p>
-
+                   @php
+                        $user = Auth::guard('student')->user();
+                        if($user){
+                        $user_fullname = $user->full_name;
+                        $arr =  explode(" ", $user_fullname);
+                        $user_firstname = $arr[0];
+                        $user_lastname = $arr[1];
+                        }
+                   @endphp
+              
                      {!! Form::open(['route'=>'contactus.store','method'=>'POST','id'=>'contactus_submit','class'=>'form-horizontal','role'=>'form','files' => true]) !!}
 
                         <div class="row">
                             <div class="col-sm-6">
-                                <div class="form-group">                            
-                                    {!! Form::text('first_name', $value = null, ['id'=>'first_name','placeholder'=>'Enter First Name','class'=>'form-control']) !!}
-
+                                <div class="form-group">   
+                                    @auth('student')                        
+                                    {!! Form::text('first_name', $value = $user_firstname , ['id'=>'first_name','placeholder'=>'Enter First Name','class'=>'form-control']) !!}
+                                    @else
+                                    {!! Form::text('first_name', $value = $value = null, ['id'=>'first_name','placeholder'=>'Enter First Name','class'=>'form-control']) !!}
+                                    @endauth
                                   </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
+                                    @auth('student')  
+                                    {!! Form::text('last_name', $value = $user_lastname , ['id'=>'last_name','placeholder'=>'Enter Last Name','class'=>'form-control']) !!}
+                                    @else
                                     {!! Form::text('last_name', $value = null, ['id'=>'last_name','placeholder'=>'Enter Last Name','class'=>'form-control']) !!}
-                                  </div>
+                                    @endauth
+                                </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
+                                    @auth('student')  
+                                    {!! Form::email('email', $value = $user->email, ['id'=>'email','placeholder'=>'Enter Address','class'=>'form-control']) !!}
+                                    @else
                                     {!! Form::email('email', $value = null, ['id'=>'email','placeholder'=>'Enter Address','class'=>'form-control']) !!}
+                                    @endauth
                                   </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
+                                    @auth('student') 
+                                    {!! Form::text('phone', $value = $user->phone_no, ['id'=>'phone','placeholder'=>'Enter Phone','class'=>'form-control']) !!}
+                                    @else
                                     {!! Form::text('phone', $value = null, ['id'=>'phone','placeholder'=>'Enter Phone','class'=>'form-control']) !!}
+                                    @endauth
                                   </div>
                             </div>
                             <div class="col-sm-12">
@@ -71,7 +95,7 @@
                                   </div>
                             </div>
                             <div class="col-sm-4">
-                                <button type="submit" class="btn btn-neta">Submit</button>
+                                <button type="submit" class="btn btn-neta" style="color:white;">Submit</button>
                             </div>
                         </div>
                     {!! Form::close() !!}

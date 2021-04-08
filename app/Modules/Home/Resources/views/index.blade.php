@@ -23,7 +23,7 @@
 @php
     $setting = App\Modules\Setting\Entities\Setting::getSetting(); 
     $courseInfo = App\Modules\Course\Entities\Course::GetAllCourses();
-    // dd('asdf');
+
 @endphp
 
     <div class="top-nav">

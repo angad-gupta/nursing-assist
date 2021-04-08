@@ -26,20 +26,20 @@ $(document).ready(function () {
             element.parents(".col-lg-9").addClass("form-group-feedback");
 
             if (element.prop("type") === "checkbox") {
-                error.insertAfter(element.parent("label"));
+                error.insertBefore(element.parent("label"));
             } else {
-                error.insertAfter(element.parent());
+                error.insertBefore(element.parent());
             }
 
             // Add the span element, if doesn't exists, and apply the icon classes to it.
             if (!element.parent().parent().next("div")[0]) {
-                $("<div class='form-control-feedback'><i class='icon-cross2 text-danger'></i></div>").insertAfter(element);
+                $("<div class='form-control-feedback'><i class='icon-cross2 text-danger'></i></div>").insertBefore(element);
             }
         },
         success: function (label, element) { console.log(element);
             // Add the span element, if doesn't exists, and apply the icon classes to it.
                 if (!$(element).next("div")[0]) { 
-                $("<div class='form-control-feedback'><i class='icon-checkmark4 text-success'></i></div>").insertAfter($(element));
+                $("<div class='form-control-feedback'><i class='icon-checkmark4 text-success'></i></div>").insertBefore($(element));
             }
         },
         highlight: function (element, errorClass, validClass) {  

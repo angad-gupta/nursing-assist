@@ -140,7 +140,7 @@ class MessageController extends Controller
     /* ---------------------------------------------------------------
         Email Send to  Announcement Nofitication
     --------------------------------------------------------------- */
-     alertify()->success('Message Reply To Stdent Successfully');
+     alertify()->success('Message Reply To Student Successfully');
      return redirect(route('message.index'));
 
     }
