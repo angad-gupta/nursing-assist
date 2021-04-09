@@ -23,6 +23,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'permission']], func
     Route::post('enrolment/update-status', ['as' => 'enrolment.updateStatus', 'uses' => 'EnrolmentController@updateStatus']);
 
     Route::get('invoice/logs', ['as' => 'invoice.logs', 'uses' => 'InvoiceController@index']);
+    Route::get('invoice/send/{id}', ['as' => 'invoice.send', 'uses' => 'InvoiceController@sendInvoice']);
 
 });
 

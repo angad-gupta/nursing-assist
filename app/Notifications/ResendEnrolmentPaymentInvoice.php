@@ -3,12 +3,13 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\MailMessage;
 use PDF;
 use App\Modules\Enrolment\Entities\InvoiceLog;
 
-class EnrolmentPayment extends Notification
+class ResendEnrolmentPaymentInvoice extends Notification
 {
     use Queueable;
 
@@ -43,32 +44,16 @@ class EnrolmentPayment extends Notification
      */
     public function toMail($notifiable)
     {
-        $pdf = PDF::loadView('enrolment::mail.invoice', $this->data);
-
-        $invoice_name = 'invoice_'.$this->data['course_program_title'].'_' . date('Y-m-d') . '.pdf';
-
-        $invoice_log = InvoiceLog::create([
-            'enrolment_id' => $this->data['enrolment_id'],
-            'student_id' => $this->data['student_id'],
-            'full_name' => $this->data['full_name'],
-            'subject' => $this->data['subject'],
-            'description' => $this->data['mail_desc'],
-            'redirect_url' => route('student-hub'),
-            'end_line' => 'Thank you for enrolling!',
-            'invoice_file' => $invoice_name,
-            'status' => 1,
-        ]);
+        InvoiceLog::where('id',$this->data['id'])->update(['status' => 1]);
 
         return (new MailMessage)
             ->greeting('Dear ' . $this->data['full_name'])
             ->subject($this->data['subject'])
-            ->line($this->data['mail_desc'])
-            ->action('My Courses', route('student-hub'))
+            ->line($this->data['description'])
+            ->action('My Courses',$this->data['redirect_url'])
             ->line('Thank you for enrolling!')
-            ->cc('accounts@nursingeta.com')
-            ->attachData($pdf->output(), $invoice_name);
-
-            //$invoice_log->update(['status' => 1]);
+           // ->cc('accounts@nursingeta.com')
+            ->attach(public_path('invoices/'.$this->data['invoice_file']));
     }
 
     /**

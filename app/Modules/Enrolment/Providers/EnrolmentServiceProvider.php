@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Factory;
 use App\Modules\Enrolment\Repositories\EnrolmentInterface;
 use App\Modules\Enrolment\Repositories\EnrolmentRepository;
 
+use App\Modules\Enrolment\Repositories\InvoiceLogInterface;
+use App\Modules\Enrolment\Repositories\InvoiceLogRepository;
+
 use App\Modules\Enrolment\Repositories\EnrolmentPaymentInterface;
 use App\Modules\Enrolment\Repositories\EnrolmentPaymentRepository;
 
@@ -44,12 +47,20 @@ class EnrolmentServiceProvider extends ServiceProvider
         $this->app->register(RouteServiceProvider::class);
         $this->enrolmentRegister();
         $this->enrolmentpaymentRegister();
+        $this->invoiceLogRegister();
     }
 
     public function enrolmentRegister(){
         $this->app->bind(
             EnrolmentInterface::class,
             EnrolmentRepository::class
+        );
+    }
+
+    public function invoiceLogRegister(){
+        $this->app->bind(
+            InvoiceLogInterface::class,
+            InvoiceLogRepository::class
         );
     }
 

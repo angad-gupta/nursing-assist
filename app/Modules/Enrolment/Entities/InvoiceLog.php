@@ -15,7 +15,7 @@ class InvoiceLog extends Model
         'redirect_url',
         'end_line',
         'invoice_file',
-        'mail_success',
+        'status',
         
     ];
 }
