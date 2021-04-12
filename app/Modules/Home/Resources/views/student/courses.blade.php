@@ -111,10 +111,10 @@
 
                                                         @if($courseinfo_id == '2')
 
-                                                         <a data-toggle="modal" data-target="#modal_oscex_warning" class="btn e-btn w-100 check_passcode" course_info_id ="{{ $courseinfo_id }}" data-popup="tooltip" data-original-title="Delete" data-placement="bottom">View Syllabus</a>
+                                                         <a data-toggle="modal" data-target="#modal_oscex_warning" class="btn e-btn w-100 check_passcode" course_info_id ="{{ $courseinfo_id }}" data-popup="tooltip" data-original-title="Delete" data-placement="bottom">View </a>
 
                                                         @else
-                                                            <a class="btn e-btn w-100" href="{{ route('syllabus-detail',['course_info_id'=>$my_course_val->courseinfo_id]) }}">View Syllabus</a>
+                                                            <a class="btn e-btn w-100" href="{{ route('syllabus-detail',['course_info_id'=>$my_course_val->courseinfo_id]) }}">View </a>
                                                         @endif
                                                     
                                                    <!--  @else
