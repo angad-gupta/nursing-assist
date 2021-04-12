@@ -38,15 +38,16 @@
                                 aria-controls="home" aria-selected="true">My Courses</a>
                         </li>
 
-   <!--                      <li class="nav-item">
+                     {{-- <li class="nav-item">
                             <a class="nav-link" id="resources-nclex-tab" data-toggle="tab" href="#resources-nclex" role="tab"
                                 aria-controls="resources-nclex" aria-selected="false">Resources[NCLEX]</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="resources-osce-tab" data-toggle="tab" href="#resources-osce" role="tab"
                                 aria-controls="resources-osce" aria-selected="false">Resources[OSCE]</a>
-                        </li> -->
-                        <li class="nav-item">
+                        </li>  --}}
+                        
+                        {{-- <li class="nav-item">
                             <a class="nav-link" id="practice-tab" data-toggle="tab" href="#practice" role="tab"
                                 aria-controls="practice" aria-selected="false">Practice Test</a>
                         </li>
@@ -61,7 +62,7 @@
                         <li class="nav-item">
                             <a class="nav-link" id="history-tab" data-toggle="tab" href="#history" role="tab"
                                 aria-controls="history" aria-selected="false">Test History</a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
                             <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
                             aria-controls="contact" aria-selected="false">Other Courses</a>

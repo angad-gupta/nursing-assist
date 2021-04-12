@@ -80,7 +80,7 @@
                     <td>{{ optional($value->student)->email }}</td>
                     <td>{{ optional($value->student)->phone_no }}</td>
                     <td>{{ $value->intake_date }}</td>
-                    <td>{{ optional($value->agent)->agent_name ?? 'None' }}</td>
+                    <td>{{ optional($value->agent)->agent_name ?? $value->other_agent }}</td>
                     <td class="{{ ($value->payment_status == '1') ? 'text-success font-weight-bold' :'text-danger font-weight-bold' }}">
                         {{ ($value->payment_status == '1') ? 'Paid' :'Payment Pending' }}
                     </td>

@@ -34,6 +34,20 @@
             window.location.href = url;
         })
 
+        $('#latest_sort_by').on('change', function () {
+            var sort_by = $(this).val(); 
+
+            var url = window.location.href;    
+            if (url.indexOf('?') > -1){
+                var href = new URL(url);
+                href.searchParams.set('sort_by', sort_by);
+                url =href.toString();
+            }else{
+                url += '?latest_sort_by='+sort_by
+            }
+            window.location.href = url;
+        })
+
         {{--$('#headerTable').DataTable( {
             //"sorting": true,
             "filter":false,
@@ -68,6 +82,7 @@
 
             <div class="form-group row">
                 <div class="input-group">
+                    {!! Form::select('sort_by', ['updated_at' => 'Latest Student Enrollment'], request('latest_sort_by') ?? null, ['id'=>'latest_sort_by','placeholder'=>'Filter Latest','class'=>'form-control']) !!}
                     {!! Form::select('sort_by', ['asc' => 'A-Z', 'desc' => 'Z-A'], request('sort_by') ?? null, ['id'=>'sort_by','placeholder'=>'Sort Full Name By','class'=>'form-control']) !!}
                 </div>
             </div>
@@ -104,8 +119,8 @@
                 $latest_quiz = $student_quiz->getLatestQuizByStudent($value->id);
 
                 if($latest_enrol){
-
-                $agent_name = ($latest_enrol->agents == '999') ? optional($latest_enrol->agent)->other_agent : optional($latest_enrol->agent)->agent_name;
+                $agent_name = ($latest_enrol->agents == '999') ? ($latest_enrol->other_agent) : optional($latest_enrol->agent)->agent_name;
+                
 
                 @endphp
                 <tr> 
@@ -114,7 +129,7 @@
                     <td><a class="text-teal font-weight-semibold" href="{{route('student.profile',['student_id'=>$value->id])}}">{{ $value->full_name }}</a></td>
                     <td><a class="text-teal font-weight-semibold" href="{{route('student.profile',['student_id'=>$value->id])}}">{{ $value->username }}</a></td>
                     <td><a class="text-teal font-weight-semibold" href="{{route('student.profile',['student_id'=>$value->id])}}">{{ $value->email }}</a></td>
-                    <td><a class="text-teal font-weight-semibold" href="{{route('student.profile',['student_id'=>$value->id])}}">{{ !empty($latest_enrol) ? $latest_enrol->intake_date : '-' }}</a></td>
+                    <td><a class="text-teal font-weight-semibold" href="{{route('student.profile',['student_id'=>$value->id])}}">{{ !empty($latest_enrol) ? $latest_enrol->intake_date : '-' }} </a></td>
                     <td><a class="text-teal font-weight-semibold" href="{{route('student.profile',['student_id'=>$value->id])}}">{{ $agent_name }}</a></td>
                     <td><a class="text-teal font-weight-semibold" href="{{route('student.profile',['student_id'=>$value->id])}}">{{ !empty($latest_quiz) ? optional($latest_quiz->courseContentInfo)->lesson_title : '-' }}</a></td>
                     <td

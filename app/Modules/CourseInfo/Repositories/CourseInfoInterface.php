@@ -33,6 +33,7 @@ interface CourseInfoInterface
     public function upload($file);
 
     public function getMonth();
+    public function getYear();
     public function getIntakeMonth();
 
     public function getCourseInfoByCourse($id);

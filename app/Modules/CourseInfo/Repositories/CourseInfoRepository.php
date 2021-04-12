@@ -7,6 +7,8 @@ use App\Modules\CourseInfo\Entities\CourseIntake;
 use App\Modules\CourseInfo\Entities\CourseModeOfDelivery;
 use App\Modules\CourseInfo\Entities\CourseStructure;
 use App\Modules\CourseInfo\Entities\Month;
+use App\Modules\Enrolment\Entities\Enrolment;
+use DB;
 
 class CourseInfoRepository implements CourseInfoInterface
 {
@@ -102,6 +104,14 @@ class CourseInfoRepository implements CourseInfoInterface
     {
         $result = Month::pluck('name', 'id');
         return $result;
+    } 
+
+    public function getYear()
+    {
+        $result = Enrolment::select(DB::raw('YEAR(created_at) as year'))->distinct()->get();
+        $years = $result->pluck('year','year');
+        return $years;
+        
     } 
 
     public function getIntakeMonth()

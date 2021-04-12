@@ -71,12 +71,24 @@ class StudentController extends Controller
     public function index(Request $request)
     {
         $search = $request->all();
+        // dd($search);
         $sort_by = ['by' => 'id', 'sort' => 'DESC'];
+        
         if (isset($search['sort_by']) && !empty($search['sort_by'])) {
             $sort_by = ['by' => 'full_name', 'sort' => $search['sort_by']];
         }
 
+        if (isset($search['latest_sort_by']) && !empty($search['latest_sort_by'])) {
+            $sort_by = ['by' => $search['latest_sort_by'], 'sort' => 'DESC'];
+        }
+
+        if (isset($search['sort_by']) && !empty($search['sort_by']) && isset($search['latest_sort_by']) && !empty($search['latest_sort_by'])) {
+            $sort_by = ['by' => 'full_name', 'sort' => $search['sort_by']];
+        }
+
+
         $data['student'] = $this->student->findAll($limit = 50, $search, $sort_by);
+        $data['years'] = $this->courseinfo->getYear();
         $data['months'] = $this->courseinfo->getMonths();
         $data['agents'] = $this->agent->getList();
 

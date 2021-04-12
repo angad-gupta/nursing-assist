@@ -13,22 +13,32 @@ use App\Modules\Student\Entities\StudentPaymentHistory;
 use App\Modules\Student\Entities\StudentReadinessResult;
 use App\Modules\Student\Entities\StudentReadinessHistory;
 use DB;
+use Carbon\Carbon;
 
 class StudentRepository implements StudentInterface
 {
 
     public function findAll($limit = null, $filter = [], $sort = ['by' => 'id', 'sort' => 'DESC'], $status = [0, 1])
     {
+ 
         $result = Student::when(array_keys($filter), function ($query) use ($filter) {
 
             if (isset($filter['active'])) {
                 $query->where('active', $filter['active']);
             }
 
-            if (isset($filter['intake_date']) && !empty($filter['intake_date'])) {
+            if ( isset($filter['intake_year']) ) {
                 $query->whereHas('enrolments', function ($qry) use ($filter) {
+                    $qry->where(DB::raw('DATE_FORMAT(created_at,"%Y")'), "=", $filter['intake_year']);
+                   
+                });
+            }
+
+            if (isset($filter['intake_date']) && isset($filter['intake_year']) ) {
+                $query->whereHas('enrolments', function ($qry) use ($filter) {
+                    $qry->where(DB::raw('DATE_FORMAT(created_at,"%Y")'), "=", $filter['intake_year']);
                     $qry->where('intake_date', $filter['intake_date']);
-                    $qry->where(DB::raw('DATE_FORMAT(created_at,"%Y")'), ">=", date('Y'));
+                   
                 });
             }
 
@@ -343,6 +353,13 @@ class StudentRepository implements StudentInterface
 
     public function findStudentPayment($payment_id){  
         return StudentPayment::find($payment_id);
+    }
+
+    public function updateStudent($id){
+        $now = Carbon::now()->format('Y-m-d H:i:s');
+        $student = Student::findorFail($id);
+        $student->updated_at = $now;
+        return $student->save();
     }
 
 }

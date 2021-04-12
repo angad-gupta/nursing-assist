@@ -161,7 +161,7 @@
                                 <td width="20%">{{ !empty($enrol_info) ? $enrol_info->intake_date : '-' }}</td>
                             </tr>
                             @php 
-                            $agent_name = (!empty($enrol_info) AND ($enrol_info->agents == '999')) ? optional($enrol_info->agent)->other_agent : optional($enrol_info->agent)->agent_name;
+                            $agent_name = (!empty($enrol_info) AND ($enrol_info->agents == '999')) ? ($enrol_info->other_agent) : optional($enrol_info->agent)->agent_name;
                             @endphp
                             <tr>
                                 <td class='text-dark font-weight-black'>Agency : </td>

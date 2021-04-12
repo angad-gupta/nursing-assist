@@ -742,7 +742,8 @@ class EnrolmentController extends Controller
 
     public function payLaterStore(Request $request)
     {
-        $data = $request->all(); //dd($data);
+        $data = $request->all(); 
+        // dd($data);
         try {
             $student_detail = auth()->guard('student')->user();
 
@@ -764,6 +765,7 @@ class EnrolmentController extends Controller
             );
 
             $studentpayment = $this->studentpayment->save($studentPaymentData);
+            $this->student->updateStudent($student_detail->id);
 
             Flash('You have successfully enrolled the course. We will contact you soon.')->success();
 
