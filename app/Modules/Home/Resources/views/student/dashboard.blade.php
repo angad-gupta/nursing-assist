@@ -218,6 +218,26 @@
 
                             <div class="tab-pane fade" id="v-pills-book" role="tabpanel" aria-labelledby="v-pills-book-tab">
                                 <h5>My Courses</h5>
+                              
+                                @inject('enrolment', '\App\Modules\Enrolment\Repositories\EnrolmentRepository')
+
+                                @php
+                                    use Illuminate\Support\Facades\Auth;
+                                    $pending_enrolments = $enrolment->findPendingEnrolment(Auth::user()->id);
+                                @endphp
+
+
+                                @if(sizeof($pending_enrolments) > 0)
+                                @foreach($pending_enrolments as $pending_enrolment)
+                                <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+                                    Your <strong>{{$pending_enrolment->Courseinfo->course_program_title}}</strong> course is under verification which is enrolled on <strong>{{ $pending_enrolment->created_at->format('d M Y')}}</strong>. You will have <strong>Full Access</strong> once you have been verified. Thank you for your patience.
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                @endforeach
+                                @endif
+
                                 <div style="text-align:center;"><a target="_blank" class="btn sac-btn" href="{{ route('student-courses') }}">See Available Courses</a></div>
                                 <div class="tp-list">
                                     <div class="row">

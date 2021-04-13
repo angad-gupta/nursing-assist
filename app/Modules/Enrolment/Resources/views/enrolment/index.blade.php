@@ -78,9 +78,9 @@
                     <td>{{$enrolment->firstItem() +$key}}</td>
                     <td>{{ optional($value->student)->full_name }}</td>
                     <td>{{ optional($value->student)->email }}</td>
-                    <td>{{ optional($value->student)->phone_no }}</td>
+                    <td>{{ $value->phone }}</td>
                     <td>{{ $value->intake_date }}</td>
-                    <td>{{ optional($value->agent)->agent_name ?? $value->other_agent }}</td>
+                    <td>{{ optional($value->agent)->agent_name ?? $value->other_agent }}  @if(empty($value->other_agent)) None @endif</td>
                     <td class="{{ ($value->payment_status == '1') ? 'text-success font-weight-bold' :'text-danger font-weight-bold' }}">
                         {{ ($value->payment_status == '1') ? 'Paid' :'Payment Pending' }}
                     </td>

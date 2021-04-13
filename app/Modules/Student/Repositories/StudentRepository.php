@@ -27,14 +27,24 @@ class StudentRepository implements StudentInterface
                 $query->where('active', $filter['active']);
             }
 
-            if ( isset($filter['intake_year']) ) {
+            if ( isset($filter['intake_year']) && !empty($filter['intake_year']) && empty($filter['intake_date'])) {
+                // dd('1');
                 $query->whereHas('enrolments', function ($qry) use ($filter) {
                     $qry->where(DB::raw('DATE_FORMAT(created_at,"%Y")'), "=", $filter['intake_year']);
                    
                 });
             }
 
-            if (isset($filter['intake_date']) && isset($filter['intake_year']) ) {
+            if (isset($filter['intake_date']) && !empty($filter['intake_date']) && empty($filter['intake_year'])) {
+                // dd('2');
+                $query->whereHas('enrolments', function ($qry) use ($filter) {
+                    $qry->where('intake_date', $filter['intake_date']);
+                   
+                });
+            }
+
+            if (isset($filter['intake_date']) && !empty($filter['intake_date']) && isset($filter['intake_year']) &&!empty($filter['intake_year']) ) {
+                // dd('3');
                 $query->whereHas('enrolments', function ($qry) use ($filter) {
                     $qry->where(DB::raw('DATE_FORMAT(created_at,"%Y")'), "=", $filter['intake_year']);
                     $qry->where('intake_date', $filter['intake_date']);

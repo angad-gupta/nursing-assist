@@ -92,6 +92,17 @@ class EnrolmentRepository implements EnrolmentInterface
         return Enrolment::withTrashed()->find($id);
     }
 
+
+    public function findPendingEnrolment($id)
+    {
+     return Enrolment::where('student_id','=',$id)->where('status','=','Pending')->get();
+    }
+
+    public function findApprovedEnrolment($id)
+    {
+     return Enrolment::where('student_id','=',$id)->where('status','=','Approved')->orderBy('id','DESC')->first();
+    }
+
     public function getList()
     {
         $result = Enrolment::pluck('first_name', 'id');

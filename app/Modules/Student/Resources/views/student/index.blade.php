@@ -129,7 +129,7 @@
                     <td><a class="text-teal font-weight-semibold" href="{{route('student.profile',['student_id'=>$value->id])}}">{{ $value->full_name }}</a></td>
                     <td><a class="text-teal font-weight-semibold" href="{{route('student.profile',['student_id'=>$value->id])}}">{{ $value->username }}</a></td>
                     <td><a class="text-teal font-weight-semibold" href="{{route('student.profile',['student_id'=>$value->id])}}">{{ $value->email }}</a></td>
-                    <td><a class="text-teal font-weight-semibold" href="{{route('student.profile',['student_id'=>$value->id])}}">{{ !empty($latest_enrol) ? $latest_enrol->intake_date : '-' }} </a></td>
+                    <td><a class="text-teal font-weight-semibold" href="{{route('student.profile',['student_id'=>$value->id])}}">{{ !empty($latest_enrol) ? $latest_enrol->intake_date : '-' }}/{{$latest_enrol->created_at->format('Y')}} </a></td>
                     <td><a class="text-teal font-weight-semibold" href="{{route('student.profile',['student_id'=>$value->id])}}">{{ $agent_name }}</a></td>
                     <td><a class="text-teal font-weight-semibold" href="{{route('student.profile',['student_id'=>$value->id])}}">{{ !empty($latest_quiz) ? optional($latest_quiz->courseContentInfo)->lesson_title : '-' }}</a></td>
                     <td
