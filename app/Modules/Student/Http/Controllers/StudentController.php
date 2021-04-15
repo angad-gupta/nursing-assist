@@ -87,7 +87,7 @@ class StudentController extends Controller
         }
 
 
-        $data['student'] = $this->student->findAll($limit = 50, $search, $sort_by);
+        $data['student'] = $this->student->findAll($limit = 50, $search, $sort_by, $status = 1);
         $data['years'] = $this->courseinfo->getYear();
         $data['months'] = $this->courseinfo->getMonths();
         $data['agents'] = $this->agent->getList();
@@ -118,11 +118,11 @@ class StudentController extends Controller
                 'active' => $input['active'],
             );
 
-            if(isset($input['archive']) && $input['archive'] == 1 && $input['active'] == 1) {
-                $studentData['deleted_at'] = null;
-            } elseif($input['active'] == 0) {
-                $studentData['deleted_at'] = date('Y-m-d H:i:s');
-            }
+            // if(isset($input['archive']) && $input['archive'] == 1 && $input['active'] == 1) {
+            //     $studentData['deleted_at'] = null;
+            // } elseif($input['active'] == 0) {
+            //     $studentData['deleted_at'] = date('Y-m-d H:i:s');
+            // }
 
             $this->student->update($student_id, $studentData);
 
