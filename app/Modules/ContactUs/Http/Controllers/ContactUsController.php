@@ -82,9 +82,10 @@ class ContactUsController extends Controller
 
         if($status == 'Replied'){
             $update_data = array(
-
+                'reply_message' =>  $message,
                 'status' => 'Replied'
             );
+            dd($update_data);
             $this->contactus->update($contact_id, $update_data);
              alertify()->success('Contact Update Successfully');
              return redirect(route('contactus.index'));
@@ -111,7 +112,7 @@ class ContactUsController extends Controller
             --------------------------------------------------------------- */
 
             $update_data = array(
-
+                'reply_message' =>  $message,
                 'status' => 'Replied'
             );
             $this->contactus->update($contact_id, $update_data);

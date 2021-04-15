@@ -282,7 +282,7 @@
                     <div class="item">
                         <div class="card">
                             <div class="card-body text-center testimonial-item">
-                                <p class="mb-0 testimonial_desc">"{{$short_message}}..."</p>
+                                <p class="mb-0 testimonial_desc">"{!!$short_message!!}..."</p>
                                 <a href="#" class="pt-2 d-block show_all_msg" my_message="{{$student_val->message}}" data-toggle="modal" data-target="#exampleModal">See More</a>
                                 <div class="testimonial-item_img mt-4 mb-3"><img src="{{$image}}" alt=""></div>
                                 <h5>{{$student_val->student_name }}</h5>
@@ -479,7 +479,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12 neta-courses__content">
-				<dov class="row">
+				<div class="row">
 					<div class="col-md-12 col-lg-6">
 						<h5 class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">About NETA</h5>
 						<p class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".75s">{!! ($about_neta) ? $about_neta['short_content'] : '' !!}

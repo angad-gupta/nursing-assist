@@ -20,6 +20,7 @@ class ContactUs extends Model
         'enquiry_about',
         'message',
         'status',
+        'reply_message',
 
     ];
 }

@@ -76,8 +76,11 @@ class EnrolmentController extends Controller
     {
         $search = $request->all();
         //$search['active'] = 1;
+
         $data['enrolment'] = $this->enrolment->findAll($limit = 50, $search);
         $data['agents'] = $this->agent->getList();
+        $data['years'] = $this->courseinfo->getYear();
+        $data['months'] = $this->courseinfo->getMonths();
         return view('enrolment::enrolment.index', $data);
     }
  

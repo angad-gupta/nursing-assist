@@ -1,4 +1,4 @@
-<table class='table table-striped mb30' id='table1' cellspacing='0' width='100%' frame='box'>
+<table class='table table-striped mb30' id='table1' cellspacing='0' width='100%' >
   <thead>
    <tr>
     <th></th>
@@ -24,8 +24,16 @@
     <td>{{ $contactus->phone }}</td>
     <td class='text-success font-weight-bold'>Enquiry : </td>
     <td>{{ $contactus->enquiry_about }}</td>
+
+  </tr>
+
+  <tr>
     <td class='text-success font-weight-bold'>Message : </td>
     <td>{{ $contactus->message }}</td>
+  </tr>
+  <tr>
+  <td class='text-warning font-weight-bold'>Replied Message : </td>
+  <td>{{ $contactus->reply_message }}</td>
   </tr>
 
 </tbody>

@@ -83,6 +83,7 @@ class StudentController extends Controller
 
     public function studentAuthenticate(Request $request)
     {
+  
         $data = $request->all('email', 'password', 'source', 'course_info_id'); 
 
         if (Auth::guard('student')->attempt(['email' => $data['email'], 'password' => $data['password'], 'active' => 1])) {

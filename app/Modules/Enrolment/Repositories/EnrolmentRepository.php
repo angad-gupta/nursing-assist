@@ -19,6 +19,19 @@ class EnrolmentRepository implements EnrolmentInterface
                     $query->where('status', 'Disapproved');
                 }
             }
+
+            if ( isset($filter['intake_year']) && !empty($filter['intake_year']) && empty($filter['intake_date'])) {
+                $query->where(DB::raw('DATE_FORMAT(created_at,"%Y")'), "=", $filter['intake_year']);
+            }
+
+            if (isset($filter['intake_date']) && !empty($filter['intake_date']) && empty($filter['intake_year'])) {
+                $query->where('intake_date', $filter['intake_date']);
+            }
+
+            if (isset($filter['intake_date']) && !empty($filter['intake_date']) && isset($filter['intake_year']) &&!empty($filter['intake_year']) ) {
+                $query->where(DB::raw('DATE_FORMAT(created_at,"%Y")'), "=", $filter['intake_year']);
+                $query->where('intake_date', $filter['intake_date']);
+            }
             
 
             if (isset($filter['status']) && !empty($filter['status'])) {

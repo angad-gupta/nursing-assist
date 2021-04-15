@@ -122,14 +122,14 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="">Gender</label>
-                                            {!! Form::select('gender',['male'=>'Male','female'=>'Female','other'=>'Other'], $value = null, ['id'=>'gender','class'=>'form-control selectpicker', 'placeholder'=>'Select Gender' ]) !!}    
+                                            {!! Form::select('gender',['male'=>'Male','female'=>'Female','other'=>'Other'], $value = null, ['id'=>'gender','class'=>'edit_gender form-control ', 'placeholder'=>'Select Gender','disabled' ]) !!}    
                                         </div>
                                     </div>
 
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                         <label for="">Date of Birth</label>
-                                            {!! Form::text('dob', $value = null, ['id'=>'tdatepicker4','placeholder'=>'Enter DOB','class'=>'form-control daterange-single','readonly']) !!}
+                                            {!! Form::text('dob', $value = null, ['id'=>'tdatepicker4','placeholder'=>'Enter DOB','class'=>'edit_dob form-control daterange-single','disabled']) !!}
                                         </div>
                                     </div>
 
@@ -220,10 +220,12 @@
                                 <h5>My Courses</h5>
                               
                                 @inject('enrolment', '\App\Modules\Enrolment\Repositories\EnrolmentRepository')
-
+                                @inject('student_payment', '\App\Modules\Student\Repositories\StudentRepository')
                                 @php
                                     use Illuminate\Support\Facades\Auth;
+                                    $student_payments = $student_payment->getStudentPurchase(Auth::user()->id);
                                     $pending_enrolments = $enrolment->findPendingEnrolment(Auth::user()->id);
+                                    $approved_enrolment = $enrolment->findApprovedEnrolment(Auth::user()->id);
                                 @endphp
 
 
@@ -238,7 +240,22 @@
                                 @endforeach
                                 @endif
 
-                                <div style="text-align:center;"><a target="_blank" class="btn sac-btn" href="{{ route('student-courses') }}">See Available Courses</a></div>
+                                @if(!(sizeof($pending_enrolments)) > 0)
+                                @if(sizeof($student_payments) > 0)
+                                    @foreach($student_payments as $student_payment)
+                                    @if($student_payment->status == 'Pending')
+                                    <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                                        You have due payment remaining in  <strong>{{$student_payment->Courseinfo->course_program_title}}</strong> course. Please pay your fees as soon as possible.
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    @endif
+                                    @endforeach
+                                @endif
+@endif
+
+                                <div style="text-align:center;"><a target="_blank" class="btn sac-btn" href="{{ route('student-courses') }}" style="background: #b0117e; color:white;">See Available Courses</a></div>
                                 <div class="tp-list">
                                     <div class="row">
                                         <div class="col-sm-12">
@@ -558,6 +575,8 @@
 
             $('.edit_content').attr('readonly', false); 
             $('.edit_select').attr('disabled', false); 
+            $('.edit_dob').attr('disabled', false); 
+            $('.edit_gender').attr('disabled', false); 
             $('.edit_content').removeClass('text-grey'); 
             $('.edit_content').addClass('text-dark'); 
             $('.edit_account').hide();
