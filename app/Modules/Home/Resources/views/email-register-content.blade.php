@@ -3,30 +3,28 @@
             <div class="logo" style="background:#fff">
                 <img src="{{asset('home/img/logo.png')}}" width="150" alt="" style="margin: 15px;">
             </div>
-            <p style="font-family: sans-serif;padding-left: 20px;padding-top: 20px;font-weight:400;text-align:left;margin:0;font-size: 20px;">Dear Future NETA Student</p>
-            <p style="text-align: center;font-family: sans-serif;width: 500px;margin: auto;padding-top: 20px;font-size: 14px;">Thank you for your registration.</p>
+            <p style="font-family: sans-serif;padding-left: 20px;padding-top: 20px;font-weight:400;text-align:left;margin:0;font-size: 20px;">Dear {{$name}}</p>
 
-             <p style="font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px;">To activate your account please click the button below to verify your email address:</p>
+             <p style="font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding: 20px;">Welcome to Nursing Education & Training Australia (NETA). Thank you for your registration. To start
+                enrolling for a course, please verify your email address via this link </p>
 
-             <p style="font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px;"><a href="{{ route('student-account-activate',['code'=>$activation_code]) }}">Activate Account</a> 
-
-            <p style="font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px;">Nursing Education and Training Australia (NETA) is an education provider for the Outcome Based Assessment (NCLEX and OSCE) preparation class for overseas nurses. We also extend education support to first year RNs in Australia. NETA provides Continuing Professional Development Courses to registered nurses as part of the requirements of yearly AHPRA registration.</p>
-
-            <p style="font-family: sans-serif;padding-top: 20px;font-size: 14px;padding-left: 20px;">For full information of our course, we invite you to visit our <a href="{{ route('course') }}">website - courses.</a></p>
-
-            <p style="font-family: sans-serif;padding-top: 20px;font-size: 14px;padding-left: 20px;">Once again, thank you for choosing NETA.</p>
+             <p style="font-family: sans-serif;padding-top: 20px;text-align: center;font-size: 20px;padding: 20px;"><a href="{{ route('student-account-activate',['code'=>$activation_code]) }}">Activate Account</a> 
 
             <div class="detail" style="margin-bottom: 30px;display:flow-root;clear:both;background:#b30174;color:#fff;padding:20px 0px 10px">
                 <div class="lft" style="float:left">
                     <p style="text-align: left;font-family: sans-serif;margin-left: 15px;font-size: 14px;font-weight: 600;margin-bottom: 5px;">Kind Regards,</p>
-                    <span style="text-align: left;font-family: sans-serif;margin-left: 15px;font-size: 14px;">The Team at NETA</span>
-                    <a href="mailto:info@nursingeta.com" style="display:block;font-family: sans-serif;padding-left: 15px;padding-top:5px;color:#fff">info@nursingeta.com</a>
-                    <a href="www.nursingeta.com" style="display:block;font-family: sans-serif;padding-left: 15px;padding-top:5px;color:#fff">www.nursingeta.com</a>
-                </div>
+                    <p style="text-align: left;font-family: sans-serif;margin-left: 15px;font-size: 14px;">Nursing Education & Training Australia (NETA)</p>
+                    <p style="text-align: left;font-family: sans-serif;margin-left: 15px;font-size: 14px;">Sydney Office: Suite 605, Level 6, 379-383 Pitt Street, Sydney NSW 2000</p>
+                    <p style="text-align: left;font-family: sans-serif;margin-left: 15px;font-size: 14px;">Melbourne: 208/430 Little Collins Street, Melbourne VIC 3000</p>
+                    <p style="text-align: left;font-family: sans-serif;margin-left: 15px;font-size: 14px;">Wagga Wagga Office: Suite 4, 63 Baylis Street, Wagga Wagga NSW 2650</p>
+                    <p style="text-align: left;font-family: sans-serif;margin-left: 15px;font-size: 14px;">
+                        General enquiries : <a href="mailto:info@nursingeta.com" style="font-family: sans-serif;color:#fff">info@nursingeta.com</a> | 
+                        <a href="www.nursingeta.com" style="font-family: sans-serif;color:#fff">www.nursingeta.com</a>
+                    </p>
 
-                <div class="lft" style="float:right;padding-right:15px">
-                    <p style="text-align: left;font-family: sans-serif;margin-left: 15px;font-size: 14px;font-weight: 600;margin-bottom: 5px;">Contact Details</p>
-                    <span style="text-align: left;font-family: sans-serif;margin-left: 15px;font-size: 14px;">+61 432 430 170</span>
+                    <p style="text-align: left;font-family: sans-serif;margin-left: 15px;font-size: 14px;">
+                        P:1300 00 6382 | M: 0432 430 170
+                    </p>
 
                 </div>
             </div>

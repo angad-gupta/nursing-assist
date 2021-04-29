@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="icon" href="https://nursingeta.com/LP/public/LPDesign/img/logoneta.svg" type="image/svg+xml" sizes="16x16">
     <link href="{{asset('home/new/css/magnific-popup.css')}}" rel="stylesheet">
     <link href="{{asset('home/new/css/animate.css')}}" rel="stylesheet">
     <link href="{{asset('home/new/css/style.css')}}" rel="stylesheet">

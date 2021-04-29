@@ -107,6 +107,7 @@ class EnrolmentController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request);
         $data = $request->all(); 
 
         if ($data['eligible_rd'] == 'is_eligible_mcq_osce') {
@@ -178,14 +179,15 @@ class EnrolmentController extends Controller
                 --------------------------------------------------------------- */
 
                 $email = $student_detail->email;
-                $subject = 'Enrolment Successful';
+                $subject = 'Course Enrollment Successful';
                 $student['name'] = $student_detail->full_name;
+                $student['courseinfo_id'] = $courseinfo_id;
                 $content = view('enrolment::enrolment.enrol-register-content', $student)->render();
 
                 Mail::to($email)->send(new SendNetaMail($content, $subject)); 
 
                  /*     Email Log Maintaining    */
-                $emaillog['action'] = 'Student Enrol Successful';
+                $emaillog['action'] = 'Course Enrollment Successful';
                 $emaillog['student_id'] = $student_id;
                 $emaillog['content'] = $content;
                 $emaillog['date'] = date('Y-m-d');
@@ -328,12 +330,63 @@ class EnrolmentController extends Controller
 
     public function updateStatus(Request $request)
     {
+        // dd($request->all());
+
         $data = $request->all();
+        // dd($data['enrolment_id']);
+        $enrolment = $this->enrolment->find($data['enrolment_id']);
+        $email = $enrolment->email;
+        // dd($enrolment);
+        $courseinfo = $this->courseinfo->find($enrolment->courseinfo_id);
+        $courseinfo_id = $courseinfo->id;
+        // dd($courseinfo_id);
         try {
             if (isset($data['archive']) && $data['archive'] == 1 && ($data['status'] == 'Pending' || $data['status'] == 'Approved')) {
                 $data['deleted_at'] = null;
+
+                    /* ---------------------------------------------------------------
+                        Email Send to Student After Student Enrollment
+                    --------------------------------------------------------------- */
+
+                    $subject = 'Student Enrollment.';
+                    $student['name'] = $enrolment->first_name .' '. $enrolment->last_name;
+                    $student['courseinfo_id'] = $courseinfo_id;
+                    // dd($student['name']);
+                    $content = view('enrolment::enrolment.enrol-move-to-student-content', $student)->render();
+
+                    //if (filter_var( $email, FILTER_VALIDATE_EMAIL )) {
+                    Mail::to($email)->send(new SendNetaMail($content, $subject));
+
+                    /*     Email Log Maintaining    */
+                    $emaillog['action'] = 'Student Enrollment';
+                    $emaillog['student_id'] = $enrolment->student_id;
+                    $emaillog['content'] = $content;
+                    $emaillog['date'] = date('Y-m-d');
+                    $this->emailLog->saveEmaillog($emaillog);
+                    /*  End of Email Log Maintaining  */
+
+                    /* ---------------------------------------------------------------
+                    Email Send to Student After  Student Enrollment
+                    --------------------------------------------------------------- */
+
             } else {
                 $data['deleted_at'] = date('Y-m-d H:i:s');
+                  /* ---------------------------------------------------------------
+                        Email Send to Student After Disapprove Student Enrollment
+                    --------------------------------------------------------------- */
+
+                    $subject = 'Disapprove Student Enrollment.';
+                    $student['name'] = $enrolment->first_name .' '. $enrolment->last_name;
+                    $student['courseinfo_id'] = $courseinfo_id;
+                    // dd($student['name']);
+                    $content = view('enrolment::enrolment.enrol-disapprove-student-content', $student)->render();
+
+                    //if (filter_var( $email, FILTER_VALIDATE_EMAIL )) {
+                    Mail::to($email)->send(new SendNetaMail($content, $subject));
+                    /* ---------------------------------------------------------------
+                    Email Send to Student After Disapprove Student Enrollment
+                    --------------------------------------------------------------- */
+
             }
 
             $this->enrolment->update($data['enrolment_id'], $data);

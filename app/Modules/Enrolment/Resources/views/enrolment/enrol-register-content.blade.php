@@ -1,3 +1,19 @@
+
+{{-- NCLEX TEMPLATE --}}
+@if($courseinfo_id == 1)
+ from NCLEX
+
+ {{-- OSCE TEMPLATE --}}
+@elseif($courseinfo_id == 2)
+from OSCE
+
+ {{-- OBA TEMPLATE --}}
+@elseif($courseinfo_id == 4)
+from OBA
+
+
+@else
+
 <div class="email-wrap" style="width: 1050px;min-height:600px;margin:15px auto;background: #dedede;">
     <div class="email-box" style="width: 700px;min-height:600px;margin:auto;display:block;background: #ffff;">
         <div class="logo" style="background:#fff">
@@ -37,3 +53,5 @@ PsEz0koVzAQjdyMwSnV6FzdUq2H</p>
 
     </div>
 </div>
+
+@endif
