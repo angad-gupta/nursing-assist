@@ -3,12 +3,13 @@
             <div class="logo" style="background:#fff">
                 <img src="{{asset('home/img/logo.png')}}" width="150" alt="" style="margin: 15px;">
             </div>
+
             <p style="font-family: sans-serif;padding-left: 20px;padding-top: 20px;font-weight:400;text-align:left;margin:0;font-size: 20px;">Dear {{$name}}</p>
 
-             <p style="font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding: 20px;">Welcome to Nursing Education & Training Australia (NETA). Thank you for your registration. To start
+             <p style="font-family: sans-serif;text-align: justify;font-size: 14px;padding: 10px;">Welcome to Nursing Education & Training Australia (NETA). Thank you for your registration. To start
                 enrolling for a course, please verify your email address via this link </p>
 
-             <p style="font-family: sans-serif;padding-top: 20px;text-align: center;font-size: 20px;padding: 20px;"><a href="{{ route('student-account-activate',['code'=>$activation_code]) }}">Activate Account</a> 
+             <p style="font-family: sans-serif;text-align: center;font-size: 20px;padding: 10px;"><a href="{{ route('student-account-activate',['code'=>$activation_code]) }}">Activate Account</a> 
 
             <div class="detail" style="margin-bottom: 30px;display:flow-root;clear:both;background:#b30174;color:#fff;padding:20px 0px 10px">
                 <div class="lft" style="float:left">
@@ -29,7 +30,7 @@
                 </div>
             </div>
             
-            <p style="text-align: center;font-family: sans-serif;margin-left: 15px;font-size: 12px;padding: 15px 0;">© Nursingeta {{ date('Y') }} All rights reserved | <a href="www.nursingeta.com">nursingeta.com</a> |</p>
+            <p style="text-align: center;font-family: sans-serif;margin-left: 15px;font-size: 12px;padding: 15px 0;">© Nursingeta {{ date('Y') }} All rights reserved | <a href="www.nursingeta.com">www.nursingeta.com</a> |</p>
 
 
         </div>
