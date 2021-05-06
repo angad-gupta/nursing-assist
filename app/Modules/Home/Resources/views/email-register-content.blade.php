@@ -4,7 +4,7 @@
                 <img src="{{asset('home/img/logo.png')}}" width="150" alt="" style="margin: 15px;">
             </div>
 
-            <p style="font-family: sans-serif;padding-left: 20px;padding-top: 20px;font-weight:400;text-align:left;margin:0;font-size: 20px;">Dear {{$name}}</p>
+            <p style="font-family: sans-serif;padding-left: 20px;padding-top: 20px;font-weight:400;text-align:left;margin:0;font-size: 20px;">Dear {{$name}},</p>
 
              <p style="font-family: sans-serif;text-align: justify;font-size: 14px;padding: 10px;">Welcome to Nursing Education & Training Australia (NETA). Thank you for your registration. To start
                 enrolling for a course, please verify your email address via this link </p>

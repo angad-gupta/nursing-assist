@@ -5,7 +5,7 @@
         <div class="logo">
             <img src="{{asset('home/img/logo.png')}}" width="150" alt="" style="margin: 15px;">
         </div>
-        <p style="font-family: sans-serif;padding-left: 20px;padding-top: 20px;font-weight:400;text-align:left;margin:0;font-size: 20px;">Dear {{$name}}</p>
+        <p style="font-family: sans-serif;padding-left: 20px;padding-top: 20px;font-weight:400;text-align:left;margin:0;font-size: 20px;">Dear {{$name}},</p>
         
         <p style="font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px; padding-right:20px;">Thank you for your application for NCLEX Preparation Class. After careful consideration of your documents, we are unable to progress your application. Please contact the office for more information & for the process of your refund.</p>
 
@@ -32,7 +32,7 @@
         <div class="logo">
             <img src="{{asset('home/img/logo.png')}}" width="150" alt="" style="margin: 15px;">
         </div>
-        <p style="font-family: sans-serif;padding-left: 20px;padding-top: 20px;font-weight:400;text-align:left;margin:0;font-size: 20px;">Dear {{$name}}</p>
+        <p style="font-family: sans-serif;padding-left: 20px;padding-top: 20px;font-weight:400;text-align:left;margin:0;font-size: 20px;">Dear {{$name}},</p>
         
         <p style="font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px; padding-right:20px;">Thank you for your application for NCLEX and OSCE (OBA Package) Preparation Class. After careful consideration of your documents, we are unable to progress your application. Please contact the office for more information &amp; for the process of your refund.</p>
 
@@ -59,7 +59,7 @@
         <div class="logo">
             <img src="{{asset('home/img/logo.png')}}" width="150" alt="" style="margin: 15px;">
         </div>
-        <p style="font-family: sans-serif;padding-left: 20px;padding-top: 20px;font-weight:400;text-align:left;margin:0;font-size: 20px;">Dear {{$name}}</p>
+        <p style="font-family: sans-serif;padding-left: 20px;padding-top: 20px;font-weight:400;text-align:left;margin:0;font-size: 20px;">Dear {{$name}},</p>
         
         <p style="font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px; padding-right:20px;">Thank you for your application for NCLEX and OSCE (OBA Package) Preparation Class. After careful consideration of your documents, we are unable to progress your application. Please contact the office for more information &amp; for the process of your refund.</p>
 

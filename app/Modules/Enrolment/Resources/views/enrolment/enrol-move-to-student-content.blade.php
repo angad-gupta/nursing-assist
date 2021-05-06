@@ -5,9 +5,9 @@
         <div class="logo">
             <img src="{{asset('home/img/logo.png')}}" width="150" alt="" style="margin: 15px;">
         </div>
-        <p style="font-family: sans-serif;padding-left: 20px;padding-top: 20px;font-weight:400;text-align:left;margin:0;font-size: 20px;">Dear {{$name}}</p>
+        <p style="font-family: sans-serif;padding-left: 20px;padding-top: 20px;font-weight:400;text-align:left;margin:0;font-size: 20px;">Dear {{$name}},</p>
         
-        <p style="font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px; padding-right:20px;">Congratulations, you have been enrolled successfully to Nursing Education & Training Australia (NETA) NCLEX Preparation Course. Please note that this course is available for you for the next 6 months.</p>
+        <p style="font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px; padding-right:20px;"><strong>Congratulations,</strong> you have been enrolled successfully to Nursing Education & Training Australia (NETA) NCLEX Preparation Course. Please note that this course is available for you for the next 6 months.</p>
         
         <p style="font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px; padding-right:20px;">As you take the first step in becoming a Registered Nurse in Australia, we would like to ensure that you get the most out of your virtual education. <strong>Please read this email carefully as it contains important information about the classes.</strong></p>
         
@@ -225,9 +225,9 @@
         <div class="logo">
             <img src="{{asset('home/img/logo.png')}}" width="150" alt="" style="margin: 15px;">
         </div>
-        <p style="font-family: sans-serif;padding-left: 20px;padding-top: 20px;font-weight:400;text-align:left;margin:0;font-size: 20px;">Dear {{$name}}</p>
+        <p style="font-family: sans-serif;padding-left: 20px;padding-top: 20px;font-weight:400;text-align:left;margin:0;font-size: 20px;">Dear {{$name}},</p>
     
-        <p style="font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px; padding-right:20px;">Congratulations for successfully enrolling to the OSCE Preparation Class. Please read this email carefully as it contains important information about the classes.</p>
+        <p style="font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px; padding-right:20px;"><strong>Congratulations,</strong> for successfully enrolling to the OSCE Preparation Class. Please read this email carefully as it contains important information about the classes.</p>
         <p style="font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px; padding-right:20px;">The education team will send you the details of your OSCE Class Schedule. Please use the link below to join your class Monday-Friday for 2 weeks between 6pm-8pm. Please note that you have a 6 months access to the course and it is essential that you contact your Course Coordinator at <a href="mailto:education@nursingeta.com">education@nursingeta.com</a> for the next available online classes. Alternatively, the schedule of online classes can be found on our website.</p>
         <p style="font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px; padding-right:20px;">Zoom link: <a href="https://zoom.us/j/96836765798">https://zoom.us/j/96836765798</a></p>
 
@@ -362,9 +362,9 @@
         <div class="logo">
             <img src="{{asset('home/img/logo.png')}}" width="150" alt="" style="margin: 15px;">
         </div>
-        <p style="font-family: sans-serif;padding-left: 20px;padding-top: 20px;font-weight:400;text-align:left;margin:0;font-size: 20px;">Dear {{$name}}</p>
+        <p style="font-family: sans-serif;padding-left: 20px;padding-top: 20px;font-weight:400;text-align:left;margin:0;font-size: 20px;">Dear {{$name}},</p>
         
-        <p style="font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px; padding-right:20px;">Congratulations, you have been enrolled successfully to Nursing Education & Training Australia (NETA) <strong>NCLEX and OSCE (OBA Package) Preparation Course</strong>. Please note that NCLEX Preparation is available for you in the next 6 months. Your OSCE Preparation Course and access will commence after completing the MCQ examination. </p>
+        <p style="font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px; padding-right:20px;"><strong>Congratulations,</strong> you have been enrolled successfully to Nursing Education & Training Australia (NETA) <strong>NCLEX and OSCE (OBA Package) Preparation Course</strong>. Please note that NCLEX Preparation is available for you in the next 6 months. Your OSCE Preparation Course and access will commence after completing the MCQ examination. </p>
         <p style="font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px; padding-right:20px;">Please note that the information below is for your NCLEX Preparation and the education team will be in contact with you for OSCE Preparation once you have cleared NCLEX.</p>
         <p style="font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px; padding-right:20px;">As you take the first step in becoming a Registered Nurse in Australia, we would like to ensure that you get the most out of your virtual education. <strong>Please read this email carefully as it contains important information about the classes.</strong> </p>
         <h5 style="font-family: sans-serif; font-size:16px; font-weight:600; padding-left: 20px; padding-right:20px; margin-bottom:0">Orientation:</h5>

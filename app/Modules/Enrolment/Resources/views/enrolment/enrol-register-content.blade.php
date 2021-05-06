@@ -6,11 +6,11 @@
         <div class="logo" style="">
             <img src="{{asset('home/img/logo.png')}}" width="150" alt="" style="margin: 15px;">
         </div>
-        <p style="color:black;font-family: sans-serif;padding-left: 20px;padding-top: 20px;font-weight:400;text-align:left;margin:0;font-size: 20px;">Dear {{$name}}</p>
+        <p style="color:black;font-family: sans-serif;padding-left: 20px;padding-top: 20px;font-weight:400;text-align:left;margin:0;font-size: 20px;">Dear {{$name}},</p>
         
         <p style="color:black;font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px; padding-right:20px;">Thank you for your application for enrolment with Nursing Education & Training Australia (NETA) – NCLEX Preparation Course. Our admissions team will now verify your documents. This may take 2-3 business days to process. The outcome of your application for enrolment will be sent to you by email, <strong>hence it is essential that you regularly check your inbox or spam folder</strong>.</p>
 
-        <p style="color:black;font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px; padding-right:20px;">If you would like to keep yourself updated with NETA’s program, test taker’s testimonies, information sessions on different nursing topics and more, you are invited to follow us on <a href="#">Facebook</a> and <a href="#">Instagram</a>. You can also view more information in our website at <a href="www.nursingeta.com">www.nursingeta.com</a></p>
+        <p style="color:black;font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px; padding-right:20px;">If you would like to keep yourself updated with NETA’s program, test taker’s testimonies, information sessions on different nursing topics and more, you are invited to follow us on <a href="https://www.facebook.com/nursingeta/">Facebook</a> and <a href="https://www.instagram.com/neta.oba/?hl=en">Instagram</a>. You can also view more information in our website at <a href="www.nursingeta.com">www.nursingeta.com</a></p>
         
         <p style="color:black;font-family: sans-serif;padding-top: 20px;font-size: 14px; padding-left: 20px; padding-right:20px;">If you would like to speak to our team, please see our contact details below. </p>
         
@@ -38,11 +38,11 @@
         <div class="logo">
             <img src="{{asset('home/img/logo.png')}}" width="150" alt="" style="margin: 15px;">
         </div>
-        <p style="color:black;font-family: sans-serif;padding-left: 20px;padding-top: 20px;font-weight:400;text-align:left;margin:0;font-size: 20px;">Dear {{$name}}</p>
+        <p style="color:black;font-family: sans-serif;padding-left: 20px;padding-top: 20px;font-weight:400;text-align:left;margin:0;font-size: 20px;">Dear {{$name}},</p>
 
         <p style="color:black;font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px; padding-right:20px;">Thank you for your application for enrolment with Nursing Education &amp; Training Australia (NETA) – OSCE Preparation Course. Our admissions team will now verify your documents. This may take 2-3 business days to process. The outcome of your application for enrolment will be sent to you by email, <strong>hence it is essential that you regularly check your inbox or spam folder</strong>.</p>
         
-        <p style="color:black;font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px; padding-right:20px;">If you would like to keep yourself updated with NETA’s program, test taker’s testimonies, information sessions on different nursing topics and more, you are invited to follow us on <a href="#">Facebook</a> and <a href="#">Instagram</a>. You can also view more information in our website at <a href="www.nursingeta.com">www.nursingeta.com</a></p>
+        <p style="color:black;font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px; padding-right:20px;">If you would like to keep yourself updated with NETA’s program, test taker’s testimonies, information sessions on different nursing topics and more, you are invited to follow us on <a href="https://www.facebook.com/nursingeta/">Facebook</a> and <a href="https://www.instagram.com/neta.oba/?hl=en">Instagram</a>. You can also view more information in our website at <a href="www.nursingeta.com">www.nursingeta.com</a></p>
         
         <p style="color:black;font-family: sans-serif;padding-top: 20px;font-size: 14px; padding-left: 20px; padding-right:20px;">If you would like to speak to our team, please see our contact details below. </p>
         
@@ -71,13 +71,13 @@
             <img src="{{asset('home/img/logo.png')}}" width="150" alt="" style="margin: 15px;">
         </div>
         
-        <p style="color:black;font-family: sans-serif;padding-left: 20px;padding-top: 20px;font-weight:400;text-align:left;margin:0;font-size: 20px;">Dear {{$name}}</p>
+        <p style="color:black;font-family: sans-serif;padding-left: 20px;padding-top: 20px;font-weight:400;text-align:left;margin:0;font-size: 20px;">Dear {{$name}},</p>
         
         <p style="color:black;font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px; padding-right:20px;">Thank you for your application for enrolment with Nursing Education &amp; Training Australia (NETA) –<br/>
             Outcome Based Assessment (OBA) Preparation Course. Our admissions team will now verify your
             documents. This may take 2-3 business days to process. The outcome of your application for enrolment
             will be sent to you by email, <strong>hence it is essential that you regularly check your inbox or spam folder</strong>.</p>
-        <p style="color:black;font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px; padding-right:20px;">If you would like to keep yourself updated with NETA’s program, test taker’s testimonies, information sessions on different nursing topics and more, you are invited to follow us on <a href="#">Facebook</a> and <a href="#">Instagram</a>. You can also view more information in our website at <a href="www.nursingeta.com">www.nursingeta.com</a></p>
+        <p style="color:black;font-family: sans-serif;padding-top: 20px;text-align: justify;font-size: 14px;padding-left: 20px; padding-right:20px;">If you would like to keep yourself updated with NETA’s program, test taker’s testimonies, information sessions on different nursing topics and more, you are invited to follow us on <a href="https://www.facebook.com/nursingeta/">Facebook</a> and <a href="https://www.instagram.com/neta.oba/?hl=en">Instagram</a>. You can also view more information in our website at <a href="www.nursingeta.com">www.nursingeta.com</a></p>
 
         <p style="color:black;font-family: sans-serif;padding-top: 20px;font-size: 14px; padding-left: 20px; padding-right:20px;">If you would like to speak to our team, please see our contact details below. </p>
 
@@ -106,7 +106,7 @@
         <div class="logo" style="background:#fff">
             <img src="{{asset('home/img/logo.png')}}" width="150" alt="" style="margin: 15px;">
         </div>
-        <p style="font-family: sans-serif;padding-left: 20px;padding-top: 20px;font-weight:400;text-align:left;margin:0;font-size: 20px;">Dear {{$name}}</p>
+        <p style="font-family: sans-serif;padding-left: 20px;padding-top: 20px;font-weight:400;text-align:left;margin:0;font-size: 20px;">Dear {{$name}},</p>
         <p style="text-align: center;font-family: sans-serif;width: 500px;margin: auto;padding-top: 20px;font-size: 14px;">Thank you for your application for the OBA Class Preparation.</p>
 
 

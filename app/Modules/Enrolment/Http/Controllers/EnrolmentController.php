@@ -348,7 +348,7 @@ class EnrolmentController extends Controller
                         Email Send to Student After Student Enrollment
                     --------------------------------------------------------------- */
 
-                    $subject = 'Student Enrollment.';
+                    $subject = 'Student Enrollment Successful.';
                     $student['name'] = $enrolment->first_name .' '. $enrolment->last_name;
                     $student['courseinfo_id'] = $courseinfo_id;
                     // dd($student['name']);
@@ -358,7 +358,7 @@ class EnrolmentController extends Controller
                     Mail::to($email)->send(new SendNetaMail($content, $subject));
 
                     /*     Email Log Maintaining    */
-                    $emaillog['action'] = 'Student Enrollment';
+                    $emaillog['action'] = 'Student Enrollment Successful';
                     $emaillog['student_id'] = $enrolment->student_id;
                     $emaillog['content'] = $content;
                     $emaillog['date'] = date('Y-m-d');
@@ -375,7 +375,7 @@ class EnrolmentController extends Controller
                         Email Send to Student After Disapprove Student Enrollment
                     --------------------------------------------------------------- */
 
-                    $subject = 'Disapprove Student Enrollment.';
+                    $subject = 'Disapprove Student Enrollment';
                     $student['name'] = $enrolment->first_name .' '. $enrolment->last_name;
                     $student['courseinfo_id'] = $courseinfo_id;
                     // dd($student['name']);
