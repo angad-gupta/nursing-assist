@@ -330,16 +330,15 @@ class EnrolmentController extends Controller
 
     public function updateStatus(Request $request)
     {
-        // dd($request->all());
 
         $data = $request->all();
-        // dd($data['enrolment_id']);
+  
         $enrolment = $this->enrolment->find($data['enrolment_id']);
         $email = $enrolment->email;
-        // dd($enrolment);
+    
         $courseinfo = $this->courseinfo->find($enrolment->courseinfo_id);
         $courseinfo_id = $courseinfo->id;
-        // dd($courseinfo_id);
+   
         try {
             if (isset($data['archive']) && $data['archive'] == 1 && ($data['status'] == 'Pending' || $data['status'] == 'Approved')) {
                 $data['deleted_at'] = null;
@@ -351,7 +350,7 @@ class EnrolmentController extends Controller
                     $subject = 'Student Enrollment Successful.';
                     $student['name'] = $enrolment->first_name .' '. $enrolment->last_name;
                     $student['courseinfo_id'] = $courseinfo_id;
-                    // dd($student['name']);
+               
                     $content = view('enrolment::enrolment.enrol-move-to-student-content', $student)->render();
 
                     //if (filter_var( $email, FILTER_VALIDATE_EMAIL )) {
