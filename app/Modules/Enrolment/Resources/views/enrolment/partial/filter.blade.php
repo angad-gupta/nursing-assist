@@ -26,6 +26,24 @@
                 </div>
             </div>
 
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-6">
+                    <label class="d-block font-weight-semibold">Intake Year :</label>
+                    <div class="input-group">    
+                    {!! Form::select('intake_year', $years, request('intake_year') ?? null, ['id'=>'intake_year','placeholder'=>'Select Intake Year','class'=>'form-control']) !!}
+                    </div>
+                    </div>
+          
+                    <div class="col-md-6">
+                    <label class="d-block font-weight-semibold">Intake Month :</label>
+                    <div class="input-group">
+                    {!! Form::select('intake_date', $months, request('intake_date') ?? null, ['id'=>'intake_date','placeholder'=>'Select Intake Month','class'=>'form-control']) !!}
+                    </div>
+                    </div>
+                </div>
+            </div>
+
             
         </div>
         <div class="d-flex justify-content-end mt-2">

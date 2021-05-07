@@ -24,6 +24,43 @@
     use Illuminate\Support\Facades\Auth;
 @endphp
 
+@inject('enrolment', '\App\Modules\Enrolment\Repositories\EnrolmentRepository')
+@inject('student_payment', '\App\Modules\Student\Repositories\StudentRepository')
+
+@php
+    $student_payments = $student_payment->getStudentPurchase(Auth::user()->id);
+    $pending_enrolments = $enrolment->findPendingEnrolment(Auth::user()->id);
+    $approved_enrolment = $enrolment->findApprovedEnrolment(Auth::user()->id);
+@endphp
+
+
+@if(sizeof($pending_enrolments) > 0)
+@foreach($pending_enrolments as $pending_enrolment)
+<div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+    Your <strong>{{$pending_enrolment->Courseinfo->course_program_title}}</strong> course is under verification which is enrolled on <strong>{{ $pending_enrolment->created_at->format('d M Y')}}</strong>. You will have <strong>Full Access</strong> once you have been verified. Thank you for your patience.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+@endforeach
+@endif
+
+
+@if(!(sizeof($pending_enrolments)) > 0)
+    @if(sizeof($student_payments) > 0)
+        @foreach($student_payments as $student_payment)
+        @if($student_payment->status == 'Pending')
+        <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+             You have due payment remaining in  <strong>{{$student_payment->Courseinfo->course_program_title}}</strong> course. Please pay your fees as soon as possible.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @endif
+        @endforeach
+    @endif
+@endif
+
 <section class="neta-about student-hub section-padding">
     <div class="container">
         <div class="row">
@@ -38,15 +75,16 @@
                                 aria-controls="home" aria-selected="true">My Courses</a>
                         </li>
 
-   <!--                      <li class="nav-item">
+                     {{-- <li class="nav-item">
                             <a class="nav-link" id="resources-nclex-tab" data-toggle="tab" href="#resources-nclex" role="tab"
                                 aria-controls="resources-nclex" aria-selected="false">Resources[NCLEX]</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="resources-osce-tab" data-toggle="tab" href="#resources-osce" role="tab"
                                 aria-controls="resources-osce" aria-selected="false">Resources[OSCE]</a>
-                        </li> -->
-                        <li class="nav-item">
+                        </li>  --}}
+                        
+                        {{-- <li class="nav-item">
                             <a class="nav-link" id="practice-tab" data-toggle="tab" href="#practice" role="tab"
                                 aria-controls="practice" aria-selected="false">Practice Test</a>
                         </li>
@@ -61,7 +99,7 @@
                         <li class="nav-item">
                             <a class="nav-link" id="history-tab" data-toggle="tab" href="#history" role="tab"
                                 aria-controls="history" aria-selected="false">Test History</a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
                             <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
                             aria-controls="contact" aria-selected="false">Other Courses</a>
@@ -110,10 +148,10 @@
 
                                                         @if($courseinfo_id == '2')
 
-                                                         <a data-toggle="modal" data-target="#modal_oscex_warning" class="btn e-btn w-100 check_passcode" course_info_id ="{{ $courseinfo_id }}" data-popup="tooltip" data-original-title="Delete" data-placement="bottom">View Syllabus</a>
+                                                         <a data-toggle="modal" data-target="#modal_oscex_warning" class="btn e-btn w-100 check_passcode" course_info_id ="{{ $courseinfo_id }}" data-popup="tooltip" data-original-title="Delete" data-placement="bottom">View </a>
 
                                                         @else
-                                                            <a class="btn e-btn w-100" href="{{ route('syllabus-detail',['course_info_id'=>$my_course_val->courseinfo_id]) }}">View Syllabus</a>
+                                                            <a class="btn e-btn w-100" href="{{ route('syllabus-detail',['course_info_id'=>$my_course_val->courseinfo_id]) }}">View </a>
                                                         @endif
                                                     
                                                    <!--  @else

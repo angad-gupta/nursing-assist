@@ -697,7 +697,7 @@ $('a').bind('click',function (e) {
 
                                                         <div class="col-sm-6 other_agent_section" style="display: none;">
                                                             <div class="form-group">
-                                                                <label for="">Other Agent</label>
+                                                                <label for="">Other Agent <span>*</span> </label>
                                                                 <input type="text" name="other_agent" placeholder="Other Agent"
                                                                     class="form-control" id="other_agent" value="">
                                                             </div>

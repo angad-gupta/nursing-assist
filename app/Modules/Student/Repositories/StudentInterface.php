@@ -74,5 +74,7 @@ interface StudentInterface
     public function findPaymentHistory($payment_id);
     public function findStudentPayment($payment_id);
 
+    public function updateStudent($id);
+
     
 }

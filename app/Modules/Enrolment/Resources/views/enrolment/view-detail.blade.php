@@ -79,7 +79,7 @@
 
   <tr>
     <td class='text-success font-weight-bold'>Agency: </td>
-    <td>{{ optional($enrolment->agent)->agent_name ?? 'None' }}</td>
+    <td>{{ optional($enrolment->agent)->agent_name ?? $enrolment->other_agent }}</td>
   </tr>
   
 

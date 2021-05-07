@@ -10,7 +10,8 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="icon" href="https://nursingeta.com/LP/public/LPDesign/img/logoneta.svg" type="image/svg+xml" sizes="16x16">
 	<link href="{{asset('home/new/css/magnific-popup.css')}}" rel="stylesheet">
 	<link href="{{asset('home/new/css/animate.css')}}" rel="stylesheet">
 	<link href="{{asset('home/new/css/style.css')}}" rel="stylesheet">
@@ -282,7 +283,7 @@
                     <div class="item">
                         <div class="card">
                             <div class="card-body text-center testimonial-item">
-                                <p class="mb-0 testimonial_desc">"{{$short_message}}..."</p>
+                                <p class="mb-0 testimonial_desc">"{!!$short_message!!}..."</p>
                                 <a href="#" class="pt-2 d-block show_all_msg" my_message="{{$student_val->message}}" data-toggle="modal" data-target="#exampleModal">See More</a>
                                 <div class="testimonial-item_img mt-4 mb-3"><img src="{{$image}}" alt=""></div>
                                 <h5>{{$student_val->student_name }}</h5>
@@ -479,7 +480,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12 neta-courses__content">
-				<dov class="row">
+				<div class="row">
 					<div class="col-md-12 col-lg-6">
 						<h5 class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">About NETA</h5>
 						<p class="wow animated fadeInUp" data-wow-duration="1s" data-wow-delay=".75s">{!! ($about_neta) ? $about_neta['short_content'] : '' !!}

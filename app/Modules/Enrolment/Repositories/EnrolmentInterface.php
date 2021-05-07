@@ -8,6 +8,10 @@ interface EnrolmentInterface
 
     public function find($id);
 
+    public function findPendingEnrolment($id);
+
+    public function findApprovedEnrolment($id);
+
     public function getList();
 
     public function save($data);
@@ -33,4 +37,5 @@ interface EnrolmentInterface
     public function getEnrollmentById($student_id,$courseinfo_id);
 
     public function getMonthById($month_id);
+
 }

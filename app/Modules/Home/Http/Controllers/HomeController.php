@@ -461,6 +461,7 @@ class HomeController extends Controller
 
             $subject = 'Account Activation.';
             $code['activation_code'] = $activation_code;
+            $code['name'] = $full_name;
             $content = view('home::email-register-content', $code)->render();
 
             //if (filter_var( $email, FILTER_VALIDATE_EMAIL )) {

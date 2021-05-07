@@ -16,6 +16,8 @@ class Student extends Authenticatable implements CanResetPassword
     use Notifiable;
 
     use SoftDeletes;
+
+    protected $guard = 'student';
     
     const FILE_PATH = '/uploads/student/';
 

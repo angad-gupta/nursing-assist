@@ -19,6 +19,19 @@ class EnrolmentRepository implements EnrolmentInterface
                     $query->where('status', 'Disapproved');
                 }
             }
+
+            if ( isset($filter['intake_year']) && !empty($filter['intake_year']) && empty($filter['intake_date'])) {
+                $query->where(DB::raw('DATE_FORMAT(created_at,"%Y")'), "=", $filter['intake_year']);
+            }
+
+            if (isset($filter['intake_date']) && !empty($filter['intake_date']) && empty($filter['intake_year'])) {
+                $query->where('intake_date', $filter['intake_date']);
+            }
+
+            if (isset($filter['intake_date']) && !empty($filter['intake_date']) && isset($filter['intake_year']) &&!empty($filter['intake_year']) ) {
+                $query->where(DB::raw('DATE_FORMAT(created_at,"%Y")'), "=", $filter['intake_year']);
+                $query->where('intake_date', $filter['intake_date']);
+            }
             
 
             if (isset($filter['status']) && !empty($filter['status'])) {
@@ -90,6 +103,17 @@ class EnrolmentRepository implements EnrolmentInterface
     public function find($id)
     {
         return Enrolment::withTrashed()->find($id);
+    }
+
+
+    public function findPendingEnrolment($id)
+    {
+     return Enrolment::where('student_id','=',$id)->where('status','=','Pending')->get();
+    }
+
+    public function findApprovedEnrolment($id)
+    {
+     return Enrolment::where('student_id','=',$id)->where('status','=','Approved')->orderBy('id','DESC')->first();
     }
 
     public function getList()

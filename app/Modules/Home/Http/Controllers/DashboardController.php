@@ -187,6 +187,15 @@ class DashboardController extends Controller
     {
         $input = $request->all();
         $id = Auth::guard('student')->user()->id;
+
+        $data['student_osce_course'] = $this->student->getStudentOsceCourse($id);
+        $data['student_course'] = $this->student->getStudentCourse($id);
+        $data['other_course'] = $this->courseinfo->getAll();
+        $data['resources_nclex'] = $this->resource->findAllNclex();
+        $data['resources_osce'] = $this->resource->findAllOsce();
+        $data['student_id'] = Auth::guard('student')->user()->find($id)->id;
+        $data['student_histories'] = $this->student->getAllHistories($id); 
+
         $course_info_id = $input['course_info_id'];
 
         $condition = ['student_id' => $id, 'courseinfo_id' => $course_info_id];
@@ -410,6 +419,7 @@ class DashboardController extends Controller
     {
 
         $input = $request->all();
+        $data['course_info_id'] = $input['course_info_id'];
         $mockup_title = $input['mockup_title'];
         $student_id = Auth::guard('student')->user()->id;
 
@@ -455,7 +465,7 @@ class DashboardController extends Controller
 
         }else {
             Flash('No Mockup Question Set. Please Check Later.')->error();
-            return redirect(route('student-courses'));
+            return redirect(route('syllabus-detail', $data));
         }
 
     }
@@ -561,6 +571,7 @@ class DashboardController extends Controller
     {
         $input = $request->all();   
 
+        $data['course_info_id'] = $input['course_info_id'];
         $readiness_title = $input['readline_title']; 
         $student_id = Auth::guard('student')->user()->id;
 
@@ -606,7 +617,7 @@ class DashboardController extends Controller
 
         } else {
             Flash('No Readline Question Set. Please Check Later.')->error();
-            return redirect(route('student-courses'));
+            return redirect(route('syllabus-detail', $data));
         }
 
     }
@@ -927,8 +938,9 @@ class DashboardController extends Controller
 
     public function practiceQuestion(Request $request)
     {
+     
         $input = $request->all();
-
+        $data['course_info_id'] = $input['course_info_id'];
         $practice_title = $input['practice_title'];
         $total_questions = ($practice_title == 'practice_test_1' ? '25' : ($practice_title == 'practice_test_2' ? '50' : '100'));
         $mockupInfo = $this->mockup->getRandomQuestion($total_questions, ['practice_title' => $practice_title]);
@@ -939,7 +951,7 @@ class DashboardController extends Controller
 
         } else {
             Flash('No Practice Question Set. Please Check Later.')->error();
-            return redirect(route('student-courses'));
+            return redirect(route('syllabus-detail', $data));
         }
 
     }

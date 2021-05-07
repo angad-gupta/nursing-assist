@@ -215,7 +215,7 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="mr-3">
                                                     <a href="#" class="btn bg-primary-400 rounded-round btn-icon btn-sm">
-                                                        <span class="letter-icon">{{ substr(optional($value->student)->full_name,0,1) }}</span>
+                                                        <span class="letter-icon">{{ substr(optional($value->student)->full_name,0,1) }} </span>
                                                     </a>
                                                 </div>
                                                 <div>
@@ -224,9 +224,9 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>{{ optional($value->student)->phone_no }}</td>
+                                        <td>{{ $value->phone }}</td>
                                         <td>{{ $value->intake_date }}</td>
-                                        <td>{{ optional($value->agent)->agent_name ?? 'None' }}</td>
+                                        <td>{{ optional($value->agent)->agent_name ?? $value->other_agent}} @if(empty($value->other_agent)) None @endif</td>
                                         <td class="{{ ($value->payment_status == '1') ? 'text-success font-weight-bold' :'text-danger font-weight-bold' }}">
                                             {{ ($value->payment_status == '1') ? 'Paid' :'Payment Pending' }}
                                         </td>
