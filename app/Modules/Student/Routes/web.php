@@ -20,6 +20,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'permission']], func
     Route::put('student/update/{id}', ['as' => 'student.update', 'uses' => 'StudentController@update'])->where('id', '[0-9]+');
 
     Route::get('student/delete/{id}', ['as' => 'student.delete', 'uses' => 'StudentController@destroy'])->where('id', '[0-9]+');
+    Route::get('student/force-delete/{id}', ['as' => 'student.force-delete', 'uses' => 'StudentController@destroyForce'])->where('id', '[0-9]+');
     Route::post('student/status', ['as' => 'student.status', 'uses' => 'StudentController@status']);
 
     Route::get('studentcourse', ['as' => 'studentcourse.index', 'uses' => 'StudentController@studentCourse']);

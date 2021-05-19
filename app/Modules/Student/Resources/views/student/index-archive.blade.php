@@ -98,6 +98,13 @@
                             class="btn bg-success-400 btn-icon rounded-round update_status" student_id="{{ $value->id}}"
                             data-popup="tooltip" data-original-title="Status Update" data-placement="bottom"><i
                                 class="icon-flip-horizontal2"></i></a>
+
+                        <a data-toggle="modal" data-target="#modal_theme_warning"
+                        class="btn bg-danger-400 btn-icon rounded-round delete_student"
+                        link="{{route('student.force-delete',$value->id)}}" data-popup="tooltip"
+                        data-original-title="Force Delete" data-placement="bottom"><i class="icon-bin"></i></a>
+                        
+                    
                     </td>
                 </tr>
                 @endforeach
@@ -131,7 +138,7 @@
                 <div class="form-group row">
                     <label class="col-form-label col-lg-3">Select Status:</label>
                     <div class="col-lg-9">
-                        {!! Form::select('active',[ '0'=>'In-Active','1'=>'Active'], $value = null,
+                        {!! Form::select('active',[ '1'=>'Active'], $value = null,
                         ['id'=>'active','class'=>'form-control']) !!}
                     </div>
 
@@ -150,6 +157,35 @@
 </div>
 <!-- /warning modal -->
 
+<!-- Warning modal -->
+<div id="modal_theme_warning" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <center>
+                    <i class="icon-alert text-danger icon-3x"></i>
+                </center>
+                <br>
+                <center>
+                    <h2>Are You Sure Want To Delete ?</h2>
+                    <a class="btn btn-success get_link" href="">Yes, Delete It!</a>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- /warning modal -->
+
+<script type="text/javascript">
+    $('document').ready(function () {
+
+        $('.delete_student').on('click', function () {
+            var link = $(this).attr('link');
+            $('.get_link').attr('href', link);
+        });
+
+    });
+</script>
 
 @endsection

@@ -21,6 +21,7 @@ interface StudentInterface
     public function update($id, $data);
 
     public function delete($id);
+    public function permanentDelete($id);
 
     public function upload($file);
 
