@@ -154,6 +154,11 @@ class StudentRepository implements StudentInterface
         return $Student->delete();
     }
 
+    public function permanentDelete($id)
+    {
+        return Student::where('id','=',$id)->onlyTrashed()->forceDelete();
+    }
+
     public function upload($file)
     {
 

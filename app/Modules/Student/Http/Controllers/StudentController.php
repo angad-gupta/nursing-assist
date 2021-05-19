@@ -402,10 +402,25 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
+   
         try {
             $this->student->update($id, ['active' => 0]);
             $this->student->delete($id);
             alertify()->success('Student Deleted Successfully');
+        } catch (\Throwable $e) {
+            alertify($e->getMessage())->error();
+        }
+       return redirect()->back();
+        
+    }
+
+    public function destroyForce($id)
+    {
+   
+        try {
+    
+            $this->student->permanentDelete($id);
+            alertify()->success('Student Force Deleted Successfully');
         } catch (\Throwable $e) {
             alertify($e->getMessage())->error();
         }
