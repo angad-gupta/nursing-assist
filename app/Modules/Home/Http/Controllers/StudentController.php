@@ -97,11 +97,13 @@ class StudentController extends Controller
             } else {
                 return redirect()->intended(route('student-dashboard'));
             }
-        } if (Auth::guard('student')->attempt(['email' => $data['email'], 'password' => $data['password'], 'active' => 0])) {
-            Auth::guard('student')->logout();
-            $logindata['message'] = "Your account has been temporarily blocked. Please contact administration for further details.";
-            return redirect(route('student-account',$logindata));
         }
+        
+        // if (Auth::guard('student')->attempt(['email' => $data['email'], 'password' => $data['password'], 'active' => 0])) {
+        //     Auth::guard('student')->logout();
+        //     $logindata['message'] = "Your account has been temporarily blocked. Please contact administration for further details.";
+        //     return redirect(route('student-account',$logindata));
+        // }
         else {
             // Flash('Invalid Credentials')->warning();
             $logindata['message'] = "You have Enter Wrong Email or Password. Please Try Again !";

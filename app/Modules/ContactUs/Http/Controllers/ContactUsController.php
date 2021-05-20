@@ -85,7 +85,7 @@ class ContactUsController extends Controller
                 'reply_message' =>  $message,
                 'status' => 'Replied'
             );
-            dd($update_data);
+            // dd($update_data);
             $this->contactus->update($contact_id, $update_data);
              alertify()->success('Contact Update Successfully');
              return redirect(route('contactus.index'));
