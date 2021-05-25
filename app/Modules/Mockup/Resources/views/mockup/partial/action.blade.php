@@ -5,13 +5,14 @@
 
         <div class="col-md-6"> 
             <div class="form-group row">
-                <label class="col-form-label col-lg-4">Select Mockup Week:<span class="text-danger">*</span></label>
+                <label class="col-form-label col-lg-4">Select Mockup:<span class="text-danger">*</span></label>
                     <div class="col-lg-8">
                        <div class="input-group">
                         <span class="input-group-prepend">
                             <span class="input-group-text"><i class="icon-toggle"></i></span>
                         </span>
-                          {!! Form::select('mockup_title',[ 'mockup_test_week_1'=>'Mockup Test Week 1','mockup_test_week_2'=>'Mockup Test Week 2','mockup_test_week_3'=>'Mockup Test Week 3','mockup_test_week_4'=>'Mockup Test Week 4','mockup_test_week_5'=>'Mockup Test Week 5','mockup_test_week_6'=>'Mockup Test Week 6','mockup_test_week_7'=>'Mockup Test Week 7','mockup_test_week_8'=>'Mockup Test Week 8', 'add_practice_test_1'=>'Additional Practice Tests 1', 'add_practice_test_2'=>'Additional Practice Tests 2', 'add_practice_test_3'=>'Additional Practice Tests 3'], $value = null, ['placeholder'=>'Select Mockup Week','id'=>'mockup_title','class'=>'form-control' ]) !!}   
+                          {{-- {!! Form::select('mockup_title',[ 'mockup_test_week_1'=>'Mockup Test Week 1','mockup_test_week_2'=>'Mockup Test Week 2','mockup_test_week_3'=>'Mockup Test Week 3','mockup_test_week_4'=>'Mockup Test Week 4','mockup_test_week_5'=>'Mockup Test Week 5','mockup_test_week_6'=>'Mockup Test Week 6','mockup_test_week_7'=>'Mockup Test Week 7','mockup_test_week_8'=>'Mockup Test Week 8', 'add_practice_test_1'=>'Additional Practice Tests 1', 'add_practice_test_2'=>'Additional Practice Tests 2', 'add_practice_test_3'=>'Additional Practice Tests 3'], $value = null, ['placeholder'=>'Select Mockup Week','id'=>'mockup_title','class'=>'form-control' ]) !!}    --}}
+                          {!! Form::select('mockup_title',[ 'mockup_test_week_1'=>'Mockup Test 1','mockup_test_week_2'=>'Mockup Test 2','mockup_test_week_3'=>'Mockup Test 3','mockup_test_week_4'=>'Mockup Test 4','mockup_test_week_5'=>'Mockup Test 5','mockup_test_week_6'=>'Mockup Test 6','mockup_test_week_7'=>'Mockup Test 7','mockup_test_week_8'=>'Mockup Test 8', 'add_practice_test_1'=>'Mockup Test 9', 'add_practice_test_2'=>'Mockup Test 10', 'add_practice_test_3'=>'Mockup Test 11','management_of_care' =>'Management of Care','safety_and_infection_control' =>'Safety and Infection Control','health_promotion_and_maintenance' =>'Health Promotion and Maintenance','psychosocial_integrity'=>'Psychosocial Integrity','basic_care_and_comfort'=>'Basic Care and Comfort','pharmacological_and_parenteral_therapies'=>'Pharmacological and Parenteral Therapies','reduction_of_risk_potential'=>'Reduction of Risk Potential','physiological_adaptation'=>'Physiological Adaptation'], $value = null, ['placeholder'=>'Select Mockup','id'=>'mockup_title','class'=>'form-control' ]) !!}   
 
                         </div>
                     </div>
