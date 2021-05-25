@@ -11,7 +11,7 @@
                         <span class="input-group-prepend">
                             <span class="input-group-text"><i class="icon-toggle"></i></span>
                         </span>
-                          {!! Form::select('readiness_title',[ 'readiness_exam_1'=>'Readiness Exam 1','readiness_exam_2'=>'Readiness Exam 2','readiness_exam_3'=>'Readiness Exam 3','readiness_exam_4'=>'Readiness Exam 4','readiness_exam_5'=>'Readiness Exam 5','readiness_exam_6'=>'Readiness Exam 6'], $value = null, ['placeholder'=>'Select Readiness','id'=>'readiness_title','class'=>'form-control' ]) !!}   
+                          {!! Form::select('readiness_title',[ 'readiness_exam_1'=>'Readiness Exam 1','readiness_exam_2'=>'Readiness Exam 2','readiness_exam_3'=>'Readiness Exam 3','readiness_exam_4'=>'Readiness Exam 4','readiness_exam_5'=>'Readiness Exam 5','readiness_exam_6'=>'Readiness Exam 6','management_of_care'=>'Management of Care','safety_and_infection_control'=>'Safety and Infection Control','health_promotion_and_maintenance'=>'Health Promotion and Maintenance','psychosocial_integrity'=>'Psychosocial Integrity','basic_care_and_comfort'=>'Basic Care and Comfort','pharmacological_and_parenteral_therapies'=>'Pharmacological and Parenteral Therapies','reduction_of_risk_potential'=>'Reduction of Risk Potential','physiological_adaptation'=>'Physiological Adaptation'], $value = null, ['placeholder'=>'Select Readiness','id'=>'readiness_title','class'=>'form-control' ]) !!}   
 
                         </div>
                     </div>

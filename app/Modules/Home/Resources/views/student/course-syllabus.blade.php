@@ -105,12 +105,16 @@
                            <div class="row">
 
                                @php
-                               $mockup_list = array('mockup_test_week_1'=>'Mock Test Week 1','mockup_test_week_2'=>'Mock Test Week 2',
-                                   'mockup_test_week_3'=>'Mock Test Week 3','mockup_test_week_4'=>'Mock Test Week 4',
-                                   'mockup_test_week_5'=>'Mock Test Week 5','mockup_test_week_6'=>'Mock Test Week 6',
-                                   'mockup_test_week_7'=>'Mock Test Week 7','mockup_test_week_8'=>'Mock Test Week 8',
-                                   'add_practice_test_1'=>'Additional Practice Tests 1', 'add_practice_test_2'=>'Additional Practice Tests 2', 
-                                   'add_practice_test_3'=>'Additional Practice Tests 3');
+                               $mockup_list = array('mockup_test_week_1'=>'Mock Test 1','mockup_test_week_2'=>'Mock Test 2',
+                                   'mockup_test_week_3'=>'Mock Test 3','mockup_test_week_4'=>'Mock Test 4',
+                                   'mockup_test_week_5'=>'Mock Test 5','mockup_test_week_6'=>'Mock Test 6',
+                                   'mockup_test_week_7'=>'Mock Test 7','mockup_test_week_8'=>'Mock Test 8',
+                                   'add_practice_test_1'=>'Mock Test 9', 'add_practice_test_2'=>'Mock Test 10', 
+                                   'add_practice_test_3'=>'Mock Test 11','management_of_care'=>'Management of Care',
+                                   'safety_and_infection_control'=>'Safety and Infection Control','health_promotion_and_maintenance'=>'Health Promotion and Maintenance',
+                                   'psychosocial_integrity'=>'Psychosocial Integrity','basic_care_and_comfort'=>'Basic Care and Comfort',
+                                   'pharmacological_and_parenteral_therapies'=>'Pharmacological and Parenteral Therapies','reduction_of_risk_potential'=>'Reduction of Risk Potential',
+                                   'physiological_adaptation'=>'Physiological Adaptation');
                                @endphp
 
                                @foreach($mockup_list as $key => $list)
@@ -282,7 +286,12 @@
                        <div class="row my-courses">
                            @php
                                $readiness_list = array('readiness_exam_1'=>'Readiness Exam 1','readiness_exam_2'=>'Readiness Exam 2',
-                                   'readiness_exam_3'=>'Readiness Exam 3','readiness_exam_4'=>'Readiness Exam 4','readiness_exam_5'=>'Readiness Exam 5','readiness_exam_6'=>'Readiness Exam 6');
+                                   'readiness_exam_3'=>'Readiness Exam 3','readiness_exam_4'=>'Readiness Exam 4','readiness_exam_5'=>'Readiness Exam 5','readiness_exam_6'=>'Readiness Exam 6',
+                                   'management_of_care'=>'Management of Care',
+                                   'safety_and_infection_control'=>'Safety and Infection Control','health_promotion_and_maintenance'=>'Health Promotion and Maintenance',
+                                   'psychosocial_integrity'=>'Psychosocial Integrity','basic_care_and_comfort'=>'Basic Care and Comfort',
+                                   'pharmacological_and_parenteral_therapies'=>'Pharmacological and Parenteral Therapies','reduction_of_risk_potential'=>'Reduction of Risk Potential',
+                                   'physiological_adaptation'=>'Physiological Adaptation');
                                @endphp
 
                                @foreach($readiness_list as $key => $list)
