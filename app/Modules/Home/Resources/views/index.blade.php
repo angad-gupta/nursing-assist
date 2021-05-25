@@ -48,7 +48,7 @@
         </div>
     </div>
 
-  <header class="header">test dev
+  <header class="header">
         <div class="container">
             <div class="row">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
