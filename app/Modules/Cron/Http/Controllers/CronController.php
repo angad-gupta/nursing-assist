@@ -76,10 +76,10 @@ class CronController extends Controller
                     //second installment pre notification mail after 13  days of student move to course
                     if ($difference == 21 || $difference == 26) {
 
-                        if (date('Y-m-d') >= '2020-01-31') {
-                            $second_installment_amt = 'A$1,500';
+                        if (date('Y-m-d') >= '2020-05-31') {
+                            $second_installment_amt = 'A$500';
                         } else {
-                            $second_installment_amt = 'A$2,500';
+                            $second_installment_amt = 'A$1,500';
                         }
 
                         $data['subject'] = 'Second Installment Pre-Notification for ' . $course_program_title . ' Course Enrolment';
@@ -92,10 +92,10 @@ class CronController extends Controller
                     //second installment mail after 15  days of student move to course
                     if ($difference == 28) {
 
-                        if (date('Y-m-d') >= '2020-01-31') {
-                            $second_installment_amt = 'A$1,500';
+                        if (date('Y-m-d') >= '2020-05-31') {
+                            $second_installment_amt = 'A$500';
                         } else {
-                            $second_installment_amt = 'A$2,500';
+                            $second_installment_amt = 'A$1,500';
                         }
 
                         $data['subject'] = 'Second Installment Notification for ' . $course_program_title . ' Course Enrolment';
@@ -314,10 +314,10 @@ class CronController extends Controller
                 if (!empty($value->final_installment_date) && $value->final_installment_date == date('Y-m-d')) {
                     //third installment mail after 30 days of student move to course
 
-                    if (date('Y-m-d') >= '2020-01-31') {
-                        $final_installment_amt = 'A$2,500';
+                    if (date('Y-m-d') >= '2020-05-31') {
+                        $final_installment_amt = 'A$3,000';
                     } else {
-                        $final_installment_amt = 'A$1,500';
+                        $final_installment_amt = 'A$2,500';
                     }
 
                     $data['subject'] = 'Final Installment Notification for ' . $course_program_title . ' Course Enrolment';

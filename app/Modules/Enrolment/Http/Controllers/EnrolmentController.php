@@ -418,18 +418,18 @@ class EnrolmentController extends Controller
                 $course_info_id = $student_payment->courseinfo_id;
 
                 if ($data['ins'] == 2) {
-                    if(date('Y-m-d') >= '2020-12-31') {
-                        $installment_amt = 1500;
+                    if(date('Y-m-d') >= '2020-05-31') {
+                        $installment_amt = 500;
                     } else {
-                        $installment_amt = 2500;
+                        $installment_amt = 1500;
                     }
                   
                     $description = 'Second Installment of ' . $course_program_title . ' Course Enrolment';
                 } elseif ($data['ins'] == 3) {
-                    if(date('Y-m-d') >= '2020-12-31') {
-                        $installment_amt = $student_payment->status == 'First Installment Paid' ? 4000 : 2500;
+                    if(date('Y-m-d') >= '2020-05-31') {
+                        $installment_amt = $student_payment->status == 'First Installment Paid' ? 3500 : 3000;
                     } else {
-                        $installment_amt = $student_payment->status == 'First Installment Paid' ? 4000 : 1500;
+                        $installment_amt = $student_payment->status == 'First Installment Paid' ? 4000 : 2500;
                     }
                     
                     $description = 'Final Installment of ' . $course_program_title . ' Course Enrolment';
@@ -669,7 +669,7 @@ class EnrolmentController extends Controller
                     $total_course_fee = 2500;
                 } else  {
                     $fee_in_cwbank = 1500;
-                    $total_course_fee = 5500;
+                    $total_course_fee = 5000;
                 }
                
                 $description = 'First Installment of ' . $course_program_title . ' Course Enrolment';

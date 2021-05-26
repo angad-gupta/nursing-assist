@@ -247,11 +247,11 @@
                                                     $amount = 1000;
                                                 } else {*/
                                                     //$amount = 2500;
-                                                    $amount = 1500;
+                                                    $amount = 500;
                                                 //}
                                             } else {
                                                 //$amount = ($student_payment->status == 'First Installment Paid' ? 4000 : 1500);
-                                                $amount = ($student_payment->status == 'First Installment Paid' ? 4000 : 2500);
+                                                $amount = ($student_payment->status == 'First Installment Paid' ? 3500 : 3000);
                                             }
                                             @endphp
 
